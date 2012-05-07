@@ -66,36 +66,39 @@ var theCenter = {
       title: 'Center',
       minHeight: 80,
 
-      items: [cw = Ext.create('Ext.Window', {
-        xtype: 'window',
-        closable: false,
-        minimizable: true,
-        title: 'Constrained Window',
-        height: 200,
-        width: 400,
-        constrain: true,
-        html: 'I am in a Container',
-        itemId: 'center-window',
-        minimize: function() {
-          this.floatParent.down('button#toggleCw').toggle();
-        }
-      })], // invisible items (a hidden window) for the center center panel
+      items: [
+        cw = Ext.create ('Ext.Window', {
+          xtype: 'window',
+          closable: false,
+          minimizable: true,
+          title: 'Constrained Window',
+          height: 200,
+          width: 400,
+          constrain: true,
+          html: 'I am in a Container',
+          itemId: 'center-window',
+          minimize: function() {
+            this.floatParent.down('button#toggleCw').toggle();
+          }
+        })
+      ], // invisible items (a hidden window) for the center center panel
       dockedItems: [
         {
           xtype: 'toolbar',
           dock: 'bottom',
-          items: ['Text followed by a spacer',
-            ' ', {
+          items: [
+            'Text followed by a spacer', ' ', {
               itemId: 'toggleCw',
               text: 'Constrained Window',
               enableToggle: true,
               toggleHandler: function() {
                 cw.setVisible(!cw.isVisible());
               }
-            }]
+            }
+          ] // EO items
         }
-      ]
-    },
+      ] // EO dockedItems
+    } /* ,
     { // minipanel south /////////////////////////////
       region: 'south',
       height: 100,
@@ -104,7 +107,7 @@ var theCenter = {
       title: 'Splitter above me',
       minHeight: 60,
       html: 'center south (center down)'
-    }
+    } */
   ]
 }
 
@@ -120,7 +123,7 @@ var tabsSearch = {
     {
       title: 'Search',
       bodyPadding: 10,
-      html : 'A simple panel? on tab'  
+      html: 'A simple panel? on tab' 
     },
     {
       title: 'Retrieve',
@@ -224,26 +227,28 @@ Ext.onReady(function() {
     items: [
       {
         region: 'north',
-        collapsible: true,
-        title: 'North',
-        split: true,
+//        collapsible: true,
+//        title: 'North',
+//        split: true,
         height: 100,
         minHeight: 60,
-        html: 'north'
+        split: false
+//        border: false
+//        html: 'north'
       },
       {
         region: 'west',
         collapsible: true,
-        title: 'Starts at width 30%',
+        title: 'Mission control',
         split: true,
-        width: '30%',
+        width: '20%',
         minWidth: 300,
         minHeight: 140,
 //            html: 'west<br>I am floatable',
         layout: 'border',
         items: theWestItems
       },
-      theCenter,
+      theCenter
 //      theEast,
 //      theSouth
     ]

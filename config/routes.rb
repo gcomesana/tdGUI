@@ -1,4 +1,10 @@
 TdGUI::Application.routes.draw do
+
+  get "thrashcan/start"
+  get "thrashcan/run"
+  get "thrashcan/test"
+
+
   get "home/index"
 
   # The priority is based upon order of creation:

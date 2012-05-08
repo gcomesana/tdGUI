@@ -25,6 +25,33 @@ this.callParent(arguments);
   initComponent: function () {
   	var me = this
 console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
+/*
+    var mainPanel = Ext.create ('Ext.panel.Panel', {
+      title: 'Search',
+      renderTo: Ext.getBody(),
+      width: 400,
+      height: 200,
+
+      items: [this.createLabel(), {
+//          title: 'Search',
+          frameHeader: false,
+          bodyPadding: 5,
+          padding: '5 10 10 10', // padding for this panel
+          layout: 'column',
+//          style: 'background-color: lightblue;',
+
+          items: [{
+              xtype: 'tdgui-conceptwiki-protein-lookup',
+              columnWidth: .85
+            }, {
+              xtype: 'button',
+              text: ' GO ',
+              columnWidth: .15
+          }] // EO items
+
+      }]
+    })
+
 
 // aquí van los tabs
 		var tabsSearch = {
@@ -36,37 +63,88 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       },
 
       items: [
-        {
-          title: 'Search',
-          bodyPadding: 10,
-          padding: '5 10 10 10',
-          layout: {
-            type: 'hbox',
-            align: 'stretch',
-            pack: 'start'
-          },
-          style: 'background-color: lightblue;',
-// TODO no se dispone bien la caja/combo y el botón :-S
-					items: [
-						{
-							xtype: 'tdgui-conceptwiki-protein-lookup',
-						}, {
-							xtype: 'button',
-							text: ' GO ',
-						}
-          ] // EO items
-        },
-        {
+          this.createSearchTab(), {
           title: 'Retrieve',
           html : 'Another one'
-
-        }
-      ] // EO items
+      }] // EO items
     } // EO tabsSearch
-
-    me.items = [tabsSearch]
+*/
+    me.items = [this.createTabs()]
     me.callParent (arguments)
+  },
+
+
+  createLabel: function () {
+    this.exampleLabel = Ext.create ('Ext.form.Label', {
+      text: 'Click on me!!!',
+      margin: '0 0 0 15',
+
+      listeners: {
+        'afterrender': function (thisCmp, objOpts) {
+          var lbEl = thisCmp.getEl()
+          lbEl.on ('click', function() {
+            console.info ('label clicked with '+arguments.length+' arguments')
+          })
+        }
+      }
+    })
+
+    return this.exampleLabel
+  },
+
+
+  createSearchTab: function () {
+    this.searchTab = Ext.create ('Ext.panel.Panel', {
+      title: 'Search',
+      renderTo: Ext.getBody(),
+      width: 400,
+      height: 200,
+
+      items: [this.createLabel(), {
+//          title: 'Search',
+        frameHeader: false,
+        bodyPadding: 5,
+        padding: '5 10 10 10', // padding for this panel
+        layout: 'column',
+//          style: 'background-color: lightblue;',
+
+        items: [{
+            xtype: 'tdgui-conceptwiki-protein-lookup',
+            columnWidth: .85
+          }, {
+            xtype: 'button',
+            text: ' GO ',
+            columnWidth: .15
+        }] // EO items
+
+      }]
+    })
+
+    return this.searchTab
+  },
+
+
+
+  createTabs: function () {
+    this.tabsSearch = Ext.create ('Ext.tab.Panel', {
+      xtype: 'tabpanel',
+      activeTab: 0,
+      border: false,
+      defaults: {
+        border: false
+      },
+
+      items: [
+          this.createSearchTab(), {
+          title: 'Retrieve',
+          html : 'Another one'
+      }] // EO items
+    }) // EO tabsSearch
+
+    return this.tabsSearch
+
   }
 
-//  items: theWestItems
+
+// items: theWestItems
 })

@@ -10,7 +10,7 @@ Ext.create('Ext.app.Application', {
 
   // Define all the controllers that should initialize at boot up of your application
   controllers: [
-
+    'SearchPanel'
   ],
 
   autoCreateViewport: true,

@@ -6,11 +6,16 @@ Ext.define ('TDGUI.view.panels.west.SearchPanel', {
 
 //	region: 'west',
   collapsible: true,
-  title: 'Mission control',
+  title: 'Search center',
   split: true,
   width: '20%',
   minWidth: 300,
   minHeight: 200,
+  border: false,
+
+  defaults: {
+    border: false
+  },
 //            html: 'west<br>I am floatable',
 /*
 Example snippet:
@@ -25,72 +30,42 @@ this.callParent(arguments);
   initComponent: function () {
   	var me = this
 console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
-/*
-    var mainPanel = Ext.create ('Ext.panel.Panel', {
-      title: 'Search',
-      renderTo: Ext.getBody(),
-      width: 400,
-      height: 200,
-
-      items: [this.createLabel(), {
-//          title: 'Search',
-          frameHeader: false,
-          bodyPadding: 5,
-          padding: '5 10 10 10', // padding for this panel
-          layout: 'column',
-//          style: 'background-color: lightblue;',
-
-          items: [{
-              xtype: 'tdgui-conceptwiki-protein-lookup',
-              columnWidth: .85
-            }, {
-              xtype: 'button',
-              text: ' GO ',
-              columnWidth: .15
-          }] // EO items
-
-      }]
-    })
 
 
-// aquí van los tabs
-		var tabsSearch = {
-      xtype: 'tabpanel',
-      activeTab: 0,
-      border: false,
-      defaults: {
-        border: false
-      },
-
-      items: [
-          this.createSearchTab(), {
-          title: 'Retrieve',
-          html : 'Another one'
-      }] // EO items
-    } // EO tabsSearch
-*/
     me.items = [this.createTabs()]
     me.callParent (arguments)
-  },
+  }, // EO initComponent
 
 
+
+
+// METHODS TO CREATE COMPONENTS ////////////////////////////////////////////////////
   createLabel: function () {
     this.exampleLabel = Ext.create ('Ext.form.Label', {
-      text: 'Click on me!!!',
-      margin: '0 0 0 15',
+      text: 'Click for examples!!!',
+      margin: 10,
 
       listeners: {
         'afterrender': function (thisCmp, objOpts) {
+
           var lbEl = thisCmp.getEl()
           lbEl.on ('click', function() {
-            console.info ('label clicked with '+arguments.length+' arguments')
+            thisCmp.fireEvent ('click', thisCmp)
           })
         }
+      },
+
+      initComponent: function () {
+        this.addEvents ('click')
+
+        this.callParent (arguments)
       }
     })
+//    this.exampleLabel.addEvents ('click')
 
     return this.exampleLabel
   },
+
 
 
   createSearchTab: function () {
@@ -99,6 +74,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       renderTo: Ext.getBody(),
       width: 400,
       height: 200,
+      bodyPadding: '15 0 10 0',
 
       items: [this.createLabel(), {
 //          title: 'Search',
@@ -127,12 +103,8 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
   createTabs: function () {
     this.tabsSearch = Ext.create ('Ext.tab.Panel', {
-      xtype: 'tabpanel',
       activeTab: 0,
-      border: false,
-      defaults: {
-        border: false
-      },
+      width: '100%',
 
       items: [
           this.createSearchTab(), {

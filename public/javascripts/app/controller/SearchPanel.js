@@ -1,3 +1,4 @@
+
 Ext.define('TDGUI.controller.SearchPanel', {
 	extend: 'Ext.app.Controller',
 //	models: ['Target'],
@@ -24,6 +25,8 @@ Ext.define('TDGUI.controller.SearchPanel', {
 			selector: 'tabpanel > panel > label'
 	}],
 
+
+
 	init: function() {
 
 console.info ('SearchPanel controller initializing... ')
@@ -36,7 +39,7 @@ console.info ('SearchPanel controller initializing... ')
 			},
 
 			'tdgui-west-search label': {
-				click: this.labelClick
+				click: this.labelClick // a window, tooltip or whatever has to be raised with ex
 			},
 
 			'tdgui-conceptwiki-protein-lookup': {

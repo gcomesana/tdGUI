@@ -1,24 +1,69 @@
+
 TdGUI::Application.routes.draw do
 
+  get "home/index"
+  get "home/test"
+
+=begin
   get "thrashcan/start"
   get "thrashcan/run"
   get "thrashcan/test"
 
+  get "thrashcan/ping_json/:inParam"  => "thrashcan#ping_json"
+  get "thrashcan/ping/:query"  => "thrashcan#ping"
+=end
 
-  get "home/index"
+# Below not working without the part after => (which is the :controllers)
+#  get "thrashcan/ping_json/:inParam" # => "thrashcan#ping_json"
+
+  resources :thrashcan do
+    collection do
+      get :ping
+      get 'ping_json'
+      get 'test'
+    end
+  end
+
+
+
+  resources :concept_wiki_api_calls do
+    collection do
+      get :protein_lookup
+      get :compound_lookup
+    end
+  end
+
+
+=begin
+    resources :thrashcan do
+      collection do
+        get :ping
+        get :ping_json
+        get :test
+#        get :concept_name_lookup
+      end
+    end
+=end
+  root :to => "home#index"
+
+# TODO Montar la caja de texto para atacar el proteinLookup
+# TODO implica poner primero los controladores y hacer tests!!!!!
+
+# TODO (Later) Intentar integrar los widgets de la gente ésta...
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
+  # Keep in mind you can assign values other than :controllers and :action
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)
 
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
+  # Sample resource route (maps HTTP verbs to controllers actions automatically):
   #   resources :products
 
   # Sample resource route with options:
@@ -60,16 +105,11 @@ TdGUI::Application.routes.draw do
 
   # See how all your routes lay out with "rake routes"
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id(.:format)))'
+  # This is a legacy wild controllers route that's not recommended for RESTful applications.
+  # Note: This route will make all actions in every controllers accessible via GET requests.
+  # match ':controllers(/:action(/:id(.:format)))'
 
-  root :to => "home#index"
-
-# TODO Montar la caja de texto para atacar el proteinLookup
-# TODO implica poner primero los controladores y hacer tests!!!!!
-
-# TODO (Later) Intentar integrar los widgets de la gente ésta...
+#  match ':thrashcan/:ping' => 'thrashcan#ping'
 
 
 end

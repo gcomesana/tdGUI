@@ -13,11 +13,11 @@ If you are unsure which license is appropriate for your use, please contact the 
 
 */
 /**
- * Books controller
+ * Books controllers
  * Used to manage books; showing the first book, showing a spefied book, loading books, and showing their
  * related views
  */
-Ext.define('Books.controller.Books', {
+Ext.define('Books.controllers.Books', {
     extend: 'Ext.app.Controller',
     
     models: ['Book'],

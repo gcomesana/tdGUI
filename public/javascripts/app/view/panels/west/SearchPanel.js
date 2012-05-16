@@ -2,7 +2,9 @@
 Ext.define ('TDGUI.view.panels.west.SearchPanel', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.tdgui-west-search',
-	requires: ['TDGUI.view.dropdowns.tdgui.ConceptWikiProteinLookup'],
+	requires: ['TDGUI.view.dropdowns.tdgui.ConceptWikiProteinLookup',
+             'TDGUI.view.common.Textarea',
+             'TDGUI.view.panels.PanelButtons'],
 
 //	region: 'west',
   collapsible: true,
@@ -71,7 +73,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
   createSearchTab: function () {
     this.searchTab = Ext.create ('Ext.panel.Panel', {
       title: 'Search',
-      renderTo: Ext.getBody(),
+//      renderTo: Ext.getBody(),
       width: 400,
       height: 200,
       bodyPadding: '15 0 10 0',
@@ -101,20 +103,57 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
 
 
-  createTabs: function () {
-    this.tabsSearch = Ext.create ('Ext.tab.Panel', {
-      activeTab: 0,
-      width: '100%',
+  createTextarea: function () {
+    this.textareaCode = Ext.widget ('tdgui-textarea', {
+      anchor: '100% 80%',
+      value: 'Q13362\nP12345\nP0AEN3\nP0AEN2\nP0AEN1',
+      disabled: true
+    })
+
+    return this.textareaCode
+  },
+
+
+
+  createRetrievingTab: function () {
+    var me = this
+    this.retrievingTab = Ext.create ('Ext.panel.Panel', {
+      title: 'Retrieve',
+//      width: 400,
+      height: 200,
+      padding: '15 10 10 10',
+      layout: 'anchor',
 
       items: [
-          this.createSearchTab(), {
+        this.createTextarea(),
+        me.retrievingButtons = Ext.widget ('tdgui-panelbuttons', {
+          anchor: '100%'
+        })
+      ]
+    })
+
+    return this.retrievingTab
+  },
+
+
+
+  createTabs: function () {
+    this.tabsSearch = Ext.create ('Ext.tab.Panel', {
+      activeTab: 1,
+      width: '100%',
+//      width: 400,
+
+      items: [
+        this.createSearchTab(),
+        this.createRetrievingTab()
+        /*
+        {
           title: 'Retrieve',
           html : 'Another one'
-      }] // EO items
+      }*/] // EO items
     }) // EO tabsSearch
 
     return this.tabsSearch
-
   }
 
 

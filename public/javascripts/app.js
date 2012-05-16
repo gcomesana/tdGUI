@@ -4,13 +4,15 @@
 
 Ext.Loader.setConfig({enabled:true});
 Ext.create('Ext.app.Application', {
+// Ext.Application ({
   name: 'TDGUI',
 
   appFolder: 'javascripts/app',
 
-  // Define all the controllers that should initialize at boot up of your application
+// Define all the controllers that should initialize at boot up of your application
+
   controllers: [
-    'SearchPanel'
+    'TDGUI.controller.SearchPanel' // not working in rails3 if not qualified
   ],
 
   autoCreateViewport: true,

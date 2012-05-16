@@ -40,3 +40,7 @@ group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
 end
+
+group :test, :development do
+  gem "rspec-rails", "~> 2.10"
+end

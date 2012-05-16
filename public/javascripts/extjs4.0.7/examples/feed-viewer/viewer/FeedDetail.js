@@ -80,7 +80,7 @@ Ext.define('FeedViewer.FeedDetail', {
     },
 
     /**
-     * Creates top controller toolbar.
+     * Creates top controllers toolbar.
      * @private
      * @return {Ext.toolbar.Toolbar} toolbar
      */

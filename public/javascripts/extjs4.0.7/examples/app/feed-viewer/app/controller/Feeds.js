@@ -12,7 +12,7 @@ This file may be used under the terms of the GNU General Public License version 
 If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
 
 */
-Ext.define('FV.controller.Feeds', {
+Ext.define('FV.controllers.Feeds', {
     extend: 'Ext.app.Controller',
 
     stores: ['Feeds', 'Articles'],

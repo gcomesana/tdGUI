@@ -39681,7 +39681,7 @@ Ext.define('Ext.app.Application', {
         }
 
         for (i = 0; i < ln; i++) {
-            requires.push(this.getModuleClassName(controllers[i], 'controller'));
+            requires.push(this.getModuleClassName(controllers[i], 'controllers'));
         }
 
         Ext.require(requires);
@@ -39736,7 +39736,7 @@ Ext.define('Ext.app.Application', {
         var controller = this.controllers.get(name);
 
         if (!controller) {
-            controller = Ext.create(this.getModuleClassName(name, 'controller'), {
+            controller = Ext.create(this.getModuleClassName(name, 'controllers'), {
                 application: this,
                 id: name
             });

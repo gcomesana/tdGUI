@@ -1,4 +1,6 @@
 
+// TODO try to figure out how to display several entries result!!!!
+// TODO !!! transfer the changes made on master branch to develop, and work on develop!!!
 Ext.define ('TDGUI.view.panels.west.SearchPanel', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.tdgui-west-search',

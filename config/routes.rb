@@ -16,6 +16,7 @@ TdGUI::Application.routes.draw do
 # Below not working without the part after => (which is the :controllers)
 #  get "thrashcan/ping_json/:inParam" # => "thrashcan#ping_json"
 
+
   resources :thrashcan do
     collection do
       get :ping
@@ -48,8 +49,6 @@ TdGUI::Application.routes.draw do
 
 # TODO Montar la caja de texto para atacar el proteinLookup
 # TODO implica poner primero los controladores y hacer tests!!!!!
-
-# TODO (Later) Intentar integrar los widgets de la gente ésta...
 
 
   # The priority is based upon order of creation:

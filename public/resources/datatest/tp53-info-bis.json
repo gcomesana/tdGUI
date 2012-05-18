@@ -1,0 +1,83 @@
+{
+	"ops_records": [{
+		"target_name": "Cellular tumor antigen p53 (Homo sapiens)",
+		"target_type": "PROTEIN",
+		"description": "Cellular tumor antigen p53",
+		"organism": "Homo sapiens",
+		"keywords": "3D-structure; Acetylation; Activator; Alternative splicing; Apoptosis; Cell cycle; Complete proteome; Cytoplasm; Disease mutation; DNA-binding; Endoplasmic reticulum; Glycoprotein; Host-virus interaction; Isopeptide bond; Li-Fraumeni syndrome; Metal-binding; Methylation; Nucleus; Phosphoprotein; Polymorphism; Transcription; Transcription regulation; Tumor suppressor; Ubl conjugation; Zinc",
+		"synonyms": "Cellular tumor antigen p53; Tumor suppressor p53; Phosphoprotein p53; Antigen NY-CO-13"
+	}],
+	"totalCount": 1,
+	"metaData": {
+		"fields": [{
+			"name": "target_name",
+			"type": "auto"
+		}, {
+			"name": "target_type",
+			"type": "auto"
+		}, {
+			"name": "description",
+			"type": "auto"
+		}, {
+			"name": "organism",
+			"type": "auto"
+		}, {
+			"name": "keywords",
+			"type": "auto"
+		}, {
+			"name": "synonyms",
+			"type": "auto"
+		}],
+		"root": "ops_records"
+	},
+	"columns": [{
+		"text": "Target name",
+		"dataIndex": "target_name",
+		"hidden": false,
+		"filter": {
+			"type": "string"
+		},
+		"width": 150
+	}, {
+		"text": "Target type",
+		"dataIndex": "target_type",
+		"hidden": false,
+		"filter": {
+			"type": "string"
+		},
+		"width": 150
+	}, {
+		"text": "Description",
+		"dataIndex": "description",
+		"hidden": false,
+		"filter": {
+			"type": "string"
+		},
+		"width": 150
+	}, {
+		"text": "Organism",
+		"dataIndex": "organism",
+		"hidden": false,
+		"filter": {
+			"type": "string"
+		},
+		"width": 150
+	}, {
+		"text": "Keywords",
+		"dataIndex": "keywords",
+		"hidden": false,
+		"filter": {
+			"type": "string"
+		},
+		"width": 150
+	}, {
+		"text": "Synonyms",
+		"dataIndex": "synonyms",
+		"hidden": false,
+		"filter": {
+			"type": "string"
+		},
+		"width": 150
+	}],
+	"success": true
+}

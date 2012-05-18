@@ -1,0 +1,2 @@
+module TdguiproxyHelper
+end

@@ -1,0 +1,2 @@
+class TdguiProxyController < ApplicationController
+end

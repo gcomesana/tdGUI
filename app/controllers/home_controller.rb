@@ -1,12 +1,12 @@
 class HomeController < ApplicationController
-
+=begin
   before_filter :setup
   private
   def setup
 puts "HomeController.setup"
     @now = DateTime.current.to_s
   end
-
+=end
   public
   def index
     now = DateTime.current.to_s

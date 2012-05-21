@@ -5,10 +5,13 @@ class ConceptWikiApiCall
   include ActiveModel::Validations
   extend ActiveModel::Naming
 
-   CONCEPT_WIKI_API_SEARCH_URL = "http://staging.conceptwiki.org/web-ws/concept/search/"
-   CONCEPT_WIKI_API_GET_URL = "http://staging.conceptwiki.org/web-ws/concept/search/get"
-   CONCEPT_WIKI_API_BY_TAG_URL = "http://staging.conceptwiki.org/web-ws/concept/search/byTag"
-   CONCEPT_WIKI_API_FOR_URL_URL = "http://staging.conceptwiki.org/web-ws/concept/search/forUrl"
+  CONCEPT_WIKI_API_SEARCH_URL = "http://staging.conceptwiki.org/web-ws/concept/search/"
+  CONCEPT_WIKI_API_GET_URL = "http://staging.conceptwiki.org/web-ws/concept/search/get"
+  CONCEPT_WIKI_API_BY_TAG_URL = "http://staging.conceptwiki.org/web-ws/concept/search/byTag"
+  CONCEPT_WIKI_API_FOR_URL_URL = "http://staging.conceptwiki.org/web-ws/concept/search/forUrl"
+
+
+
   
   def initialize()
      # For timing the transaction   
@@ -23,7 +26,9 @@ class ConceptWikiApiCall
      @limit = 30
      @offset = 0
      @results = nil
-     @parsed_results = nil     
+     @parsed_results = nil
+
+		@endpointMap = []
   end
   
   def success
@@ -107,6 +112,7 @@ class ConceptWikiApiCall
      options[:q] = substring.strip # + '*'
      options[:uuid] =  tag_uuid
      url = URI.parse(CONCEPT_WIKI_API_BY_TAG_URL)
+#		 url = checkEndpoints()
      results = request(url, options)
      if results == [] then # no concept found
         puts "No concept found!"
@@ -175,7 +181,35 @@ class ConceptWikiApiCall
      options[:q] = substring
      url = URI.parse(CONCEPT_WIKI_API_FOR_URL_URL)
      result = request(url, options)
-  end
+	end
+
+
+
+
+	def checkConceptWiki
+	# check to see if endpoint is responding
+	#		api_method = 'proteinInfo'
+	#		prot_uri = 'http://chem2bio2rdf.org/chembl/resource/chembl_targets/12261'
+			prot_uri = CONCEPT_WIKI_API_SEARCH_URL
+			options = Hash.new
+			options[:limit] =  1
+			options[:offset] = 0
+			options[:q] = 'tp53' # default test
+
+			url = URI.parse(prot_uri)
+	#		 url = checkEndpoints()
+	  	result = request(url, options)
+
+			if result == nil || result.length == 0
+				false
+			else
+				true
+			end
+	end
+
+
+
+
   private
   def request(url, options)
      puts "\nIssues call to ConceptWiki API \"#{p url}\" with options: \"#{p options}\"\n"
@@ -225,5 +259,5 @@ puts "response body:\n#{@response.body}\n"
   end
 
 
-      
+
 end

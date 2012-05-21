@@ -1,6 +1,8 @@
 
 # TODO try to include a helper to be accessed from the controller
 # TODO or, use a new module by including it in here
+
+
 class ApplicationController < ActionController::Base
 	include ApplicationHelper
   protect_from_forgery
@@ -15,6 +17,9 @@ class ApplicationController < ActionController::Base
 		puts "query params: #{request.query_parameters.inspect}"
 
 		puts "@template???: #{@template.inspect}"
+
+#		test # method from ApplicationHelper
+
 	end
 
 
@@ -26,3 +31,4 @@ class ApplicationController < ActionController::Base
 =end
 
 end
+

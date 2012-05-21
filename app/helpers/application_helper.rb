@@ -1,6 +1,9 @@
 module ApplicationHelper
 
-	def foo
-		puts "foo helper"
+	def test
+		puts "ApplicationHelper.test"
 	end
+
+
+
 end

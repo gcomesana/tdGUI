@@ -65,8 +65,6 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
         this.callParent (arguments)
       }
     })
-//    this.exampleLabel.addEvents ('click')
-
     return this.exampleLabel
   },
 

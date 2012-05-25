@@ -23,7 +23,10 @@ Ext.define('TDGUI.controller.SearchPanel', {
 		}, {
 			ref: 'examplesLabel',
 			selector: 'tabpanel > panel > label'
-	}],
+	  }, {
+      ref: 'accTextarea',
+      selector: 'tabpanel > panel > tdgui-textarea'
+  }],
 
 
 
@@ -34,6 +37,7 @@ console.info ('SearchPanel controller initializing... ')
 			'TargetByNameForm button[action=query_target_by_name]': {
 				click: this.submitQuery
 			},
+
 			'TargetByNameForm conceptWikiProteinLookup': {
 				select: this.enableSubmit
 			},
@@ -44,7 +48,11 @@ console.info ('SearchPanel controller initializing... ')
 
 			'tdgui-conceptwiki-protein-lookup': {
 				focus: this.clickLookup
-			}
+			},
+
+      'tdgui-textarea': {
+        click: this.textareaClick
+      }
 		});
 	},
 
@@ -58,10 +66,14 @@ console.info ('SearchPanel controller initializing... ')
 	},
 
 	labelClick: function () {
-		console.info ('SearchPanel.controller: got click event from label')
+		console.info ('SearchPanel.controller: got click event from label '+this.getExamplesLabel())
 //						this.getExamplesLabel().setText ('Its ok'))
 	},
 
+// TODO primero, de todas formas, que con los valores que hay se le dé al botón y recuperar los datos
+  textareaClick: function () {
+    console.info ('click event on textarea with content: '+this.getAccTextarea().getValue())
+  },
 
 	enableSubmit: function() {
 		var form = this.getFormView();

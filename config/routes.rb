@@ -31,6 +31,7 @@ TdGUI::Application.routes.draw do
     collection do
       get :protein_lookup
       get :compound_lookup
+			get :test
     end
   end
 

@@ -37,5 +37,8 @@ class ConceptWikiApiCallsController < ApplicationController
       render :json => results.to_json, :layout => false
   end
   
-  
+  def test
+		render :json => {"code" => 200}.to_json, :layout => false
+	end
+
 end

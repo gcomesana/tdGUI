@@ -3,7 +3,7 @@ Ext.define('TDGUI.controller.SearchPanel', {
 	extend: 'Ext.app.Controller',
 //	models: ['Target'],
 //	stores: ['Targets'],
-	views: ['panels.west.SearchPanel'],
+	views: ['panels.west.SearchPanel', 'panels.BorderCenter'],
 
 	/*refs: [{
 		ref: 'targetPanel',
@@ -24,6 +24,9 @@ Ext.define('TDGUI.controller.SearchPanel', {
 			ref: 'examplesLabel',
 			selector: 'tabpanel > panel > label'
 	  }, {
+      ref: 'contentPanel',
+      selector: 'viewport > tdgui-border-center'
+    }, {
       ref: 'accTextarea',
       selector: 'tabpanel > panel > tdgui-textarea'
   }],
@@ -52,7 +55,13 @@ console.info ('SearchPanel controller initializing... ')
 
       'tdgui-textarea': {
         click: this.textareaClick
+      },
+
+      'tdgui-panelbuttons > toolbar > button': { // see buttons on Panel
+        click: this.retrieveBtnClick
       }
+
+
 		});
 	},
 
@@ -65,12 +74,43 @@ console.info ('SearchPanel controller initializing... ')
 		console.info ('just onAfterRender')
 	},
 
+
+  retrieveBtnClick: function (btn, ev, opts) {
+    var txtArea = btn.up ('tdgui-west-search').down ('tdgui-textarea')
+    var uniprotIds = txtArea.getRawValue().split('\n').join(',')
+
+
+    var me = this
+    Ext.Ajax.request({
+      url: '/tdgui_proxy/multiple_entries_retrieval',
+      params: {
+      },
+
+      success: function(response){
+        var text = response.responseText
+console.info ("Got: "+text)
+        var testPanel = Ext.widget ('panel', {
+          title: 'Test Request',
+          html: text,
+          closable: true
+        })
+        me.getContentPanel().add (testPanel)
+          // process server response here
+      }
+  });
+
+// lo de abajo mejor iria en un método todo junto...
+
+
+
+  },
+
 	labelClick: function () {
 		console.info ('SearchPanel.controller: got click event from label '+this.getExamplesLabel())
 //						this.getExamplesLabel().setText ('Its ok'))
 	},
 
-// TODO primero, de todas formas, que con los valores que hay se le dé al botón y recuperar los datos
+
   textareaClick: function () {
     console.info ('click event on textarea with content: '+this.getAccTextarea().getValue())
   },

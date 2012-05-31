@@ -26,6 +26,13 @@ TdGUI::Application.routes.draw do
   end
 
 
+	resources :tdgui_proxy do
+		collection do
+			get :test
+			get :multiple_entries_retrieval
+		end
+	end
+
 
   resources :concept_wiki_api_calls do
     collection do

@@ -18,10 +18,10 @@ Ext.define('TDGUI.controller.SearchPanel', {
 	}],*/
 
 	refs: [{
-			ref: 'protLookup',
+			ref: 'protLookup', // I get this.getProtLookup ()
 			selector: 'tabpanel > panel > tdgui-conceptwiki-protein-lookup'
 		}, {
-			ref: 'examplesLabel',
+			ref: 'examplesLabel', // I get this.getExamplesLabel
 			selector: 'tabpanel > panel > label'
 	  }, {
       ref: 'contentPanel',
@@ -79,16 +79,23 @@ console.info ('SearchPanel controller initializing... ')
     var txtArea = btn.up ('tdgui-west-search').down ('tdgui-textarea')
     var uniprotIds = txtArea.getRawValue().split('\n').join(',')
 
-
     var me = this
+
+    Ext.History.add('!p=MultiTarget&u=' + uniprotIds);
+
+    if (btn.getId() == 'panelBtnLeft')
+      txtArea.setValue('')
+
     Ext.Ajax.request({
-      url: '/tdgui_proxy/multiple_entries_retrieval',
+      url: 'tdgui_proxy/multiple_entries_retrieval',
+      method: 'GET',
       params: {
+        entries: uniprotIds
       },
 
       success: function(response){
         var text = response.responseText
-console.info ("Got: "+text)
+// console.info ("Got: "+text)
         var testPanel = Ext.widget ('panel', {
           title: 'Test Request',
           html: text,
@@ -97,13 +104,12 @@ console.info ("Got: "+text)
         me.getContentPanel().add (testPanel)
           // process server response here
       }
-  });
+    });
 
 // lo de abajo mejor iria en un método todo junto...
 
-
-
   },
+
 
 	labelClick: function () {
 		console.info ('SearchPanel.controller: got click event from label '+this.getExamplesLabel())
@@ -115,11 +121,13 @@ console.info ("Got: "+text)
     console.info ('click event on textarea with content: '+this.getAccTextarea().getValue())
   },
 
+
 	enableSubmit: function() {
 		var form = this.getFormView();
 		var button = this.getSubmitButton();
 		button.enable();
 	},
+
 
 	submitQuery: function(button) {
 		button.disable();

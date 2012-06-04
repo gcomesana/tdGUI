@@ -129,7 +129,9 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       items: [
         this.createTextarea(),
         me.retrievingButtons = Ext.widget ('tdgui-panelbuttons', {
-          anchor: '100%'
+          anchor: '100%',
+          rightButtonName: ' GO ',
+          leftButtonName: 'Reset'
         })
       ]
     })

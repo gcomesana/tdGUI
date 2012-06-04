@@ -2,9 +2,6 @@
 
 
 
-
-
-
 Ext.define('TDGUI.view.Viewport', {
   extend: 'Ext.container.Viewport',
   alias: 'widget.tdgui-viewport',
@@ -29,6 +26,12 @@ Ext.define('TDGUI.view.Viewport', {
 console.info ("Viewport.initComponent starting...")
     var me = this
 
+/**
+    Ext.History.init()
+    Ext.History.on('change', function (token) {
+      this.fireEvent ('historyAdded', token)
+    })
+*/
 /*
 /////////////////////////////////////////////////////// PANEL COMPONENTS //////
     var theCenter = {

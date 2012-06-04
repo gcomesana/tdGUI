@@ -13,7 +13,7 @@ Ext.define ('TDGUI.view.panels.BorderCenter', {
   listeners: {
    afterrender: {
      fn: function (comp, opts) {
-       this.initGrid(comp, opts)
+//       this.initGrid(comp, opts)
      }
    }
   },
@@ -54,7 +54,9 @@ console.info ("Initializing panels.BorderCenter comp...")
       ], // invisible items (a hidden window) for the center center panel
 */
 
-      items: [this.createGrid()],
+      items: [
+//        this.createGrid()
+      ],
 
 
       dockedItems: [{

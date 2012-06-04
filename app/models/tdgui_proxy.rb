@@ -27,6 +27,10 @@ class TdguiProxy
 # @return a hash with the proper format to be converted into json
 	def get_multiple_entries (entries)
 
+		if entries.nil? then
+			return "{}"
+		end
+
 puts "get_multiple_entries: #{entries}"
 #		q_string = entries[:uniprotIds].join(',')
 		q_string = entries

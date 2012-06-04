@@ -24,11 +24,18 @@ Ext.define ('TDGUI.view.panels.BorderCenter', {
 console.info ("Initializing panels.BorderCenter comp...")
 
 	  me.items = [{
-
+      xtype: 'panel',
       region: 'center',
 //      html: 'center center (center up)',
       title: 'Center',
       minHeight: 80,
+
+// This layout is ultimately needed to get scroolbars on the gridpanel...
+// achieved it by the flex property
+      layout: {
+        type:'vbox',
+        align:'stretch'
+      },
 /*
       items: [cw = Ext.create ('Ext.Window', { // TODO delete when disturbing
           xtype: 'window',
@@ -64,6 +71,7 @@ console.info ("Initializing panels.BorderCenter comp...")
           }
         ] // EO items
       }] // EO dockedItems
+
     } /* ,
     { // minipanel south /////////////////////////////
       region: 'south',
@@ -82,11 +90,13 @@ console.info ("Initializing panels.BorderCenter comp...")
 
   createGrid: function () {
     var theGrid = Ext.widget ('dynamicgrid3', {
-      title: 'Testing DynamicGrid',
+      title: 'Testis DynamicGrid',
       gridBaseTitle: 'gridBaseTitle????',
       margin: '5 5 5 5',
-      border: '1 1 1 1',
-      readUrl: 'resources/datatest/uniprotxml-single.json'
+//      border: '1 1 1 1',
+      flex: 1,
+//      readUrl: 'resources/datatest/yaut.json'
+      readUrl: 'tdgui_proxy/multiple_entries_retrieval?entries=Q13362,P0AEN2,P0AEN3'
     })
 
     return theGrid
@@ -94,7 +104,7 @@ console.info ("Initializing panels.BorderCenter comp...")
 
 
 
-  setAndFillGrid:function (this_gridview, success) {
+  setAndFillGrid: function (this_gridview, success) {
     if (success === false) {
       Ext.MessageBox.show({
         title:'Error',
@@ -121,7 +131,7 @@ console.info ("Initializing panels.BorderCenter comp...")
           this_gridview.down('#sdfDownloadProxy_id').enable();
         }
       });
-      this_gridview.reconfigure(dynamicgridStore, columns);
+      this_gridview.reconfigure (dynamicgridStore, columns);
       this_gridview.recordsLoaded = dynamicgridStore.data.length;
       if (this_gridview.recordsLoaded == 0) {
         this_gridview.setTitle(this_gridview.gridBaseTitle + ' - No records found within OPS for this search!');

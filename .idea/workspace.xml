@@ -2,15 +2,15 @@
 <project version="4">
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/public/index.html.old" />
-    <bookmark url="file://$PROJECT_DIR$/public/resources/datatest/dgrid3-structure.json" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac4d959b-7041-4845-b29b-39d7db68b813" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/resources/datatest/uniprotxml-single.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/tdgui_proxy.rb" afterPath="$PROJECT_DIR$/app/models/tdgui_proxy.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app.js" afterPath="$PROJECT_DIR$/public/javascripts/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/controller/SearchPanel.js" afterPath="$PROJECT_DIR$/public/javascripts/app/controller/SearchPanel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/controller/Viewport.js" afterPath="$PROJECT_DIR$/public/javascripts/app/controller/Viewport.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/controller/grid/DynamicGrid.js" afterPath="$PROJECT_DIR$/public/javascripts/app/controller/grid/DynamicGrid.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/BorderCenter.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/BorderCenter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/borderbis.js" afterPath="$PROJECT_DIR$/public/javascripts/borderbis.js" />
     </list>
     <ignored path="tdGUI.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,19 +32,55 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="tdgui_proxy.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/tdgui_proxy.rb">
+      <file leaf-file-name="BorderCenter.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/BorderCenter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="176" column="18" selection-start="6312" selection-end="6312" vertical-scroll-proportion="0.0">
+            <state line="4" column="17" selection-start="92" selection-end="111" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="yaut.json" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/resources/datatest/yaut.json">
+      <file leaf-file-name="SearchPanel.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/SearchPanel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="177" column="1" selection-start="4323" selection-end="4323" vertical-scroll-proportion="2.645081">
+            <state line="85" column="24" selection-start="1847" selection-end="1847" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MultiTarget.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/MultiTarget.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="66" selection-start="412" selection-end="412" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DynamicGrid.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/grid/DynamicGrid.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="147" column="0" selection-start="4433" selection-end="4433" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Viewport.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/Viewport.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="226" column="36" selection-start="5211" selection-end="5211" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Viewport.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/Viewport.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="47" column="39" selection-start="952" selection-end="952" vertical-scroll-proportion="0.34827146">
               <folding />
             </state>
           </provider>
@@ -66,22 +102,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/public/resources/datatest/dgrid3-structure.json.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/model/DynamicGrid.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/store/DynamicGrid.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/controller/SearchPanel.js" />
-        <option value="$PROJECT_DIR$/app/helpers/tdgui_proxy_helper.rb" />
-        <option value="$PROJECT_DIR$/app/models/concept_wiki_api_call.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/tdgui_proxy_controller.rb" />
-        <option value="$PROJECT_DIR$/public/resources/datatest/uniprotxml-single.json" />
         <option value="$PROJECT_DIR$/public/resources/datatest/uniprotxml-3.json" />
         <option value="$PROJECT_DIR$/public/resources/datatest/uniprot-single-x3-orig.json" />
         <option value="$PROJECT_DIR$/public/resources/datatest/uniprot-single-x3.json" />
         <option value="$PROJECT_DIR$/public/resources/datatest/uniprot-single-x1.json" />
-        <option value="$PROJECT_DIR$/app/models/tdgui_proxy.rb" />
         <option value="$PROJECT_DIR$/public/resources/datatest/yaut.json" />
+        <option value="$PROJECT_DIR$/app/models/tdgui_proxy.rb" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/PanelButtons.js" />
+        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/Viewport.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/BorderCenter.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/controller/SearchPanel.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/MultiTarget.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/controller/grid/DynamicGrid.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/controller/Viewport.js" />
       </list>
     </option>
   </component>
@@ -93,7 +129,7 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="102" />
+    <option name="x" value="115" />
     <option name="y" value="22" />
     <option name="width" value="1341" />
     <option name="height" value="940" />
@@ -362,11 +398,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="panels" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="west" />
+              <option name="myItemId" value="grid" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -458,6 +490,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -487,6 +549,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layouts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -521,28 +609,6 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="helpers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
@@ -552,14 +618,14 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="options.lastSelected" value="preferences.sourceCode.JavaScript" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.Scope Based" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="RakeTaksPopup.undocumentedIncluded" value="false" />
-    <property name="DefaultHtmlFileTemplate" value="Html" />
     <property name="RailsGeneratorsPopup.hiddenIncluded" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="DefaultHtmlFileTemplate" value="Html" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -865,6 +931,15 @@
         <option name="RakeTask" enabled="false" />
       </method>
     </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Remote">
+      <JSRemoteDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSRemoteDebuggerConfigurationSettings>
+      <method>
+        <option name="RakeTask" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="CucumberRunConfigurationType" factoryName="Cucumber">
       <predefined_log_file id="RUBY_CUCUMBER" enabled="true" />
       <module name="" />
@@ -896,15 +971,6 @@
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="CUCUMBER_RUNNER_PATH" VALUE="" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_RUNNER" VALUE="false" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="SETTINGS_VERSION" VALUE="2" />
-      <method>
-        <option name="RakeTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Remote">
-      <JSRemoteDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" />
-      </JSRemoteDebuggerConfigurationSettings>
       <method>
         <option name="RakeTask" enabled="false" />
       </method>
@@ -1078,6 +1144,9 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value="SHOW_INHERITED" />
+  </component>
   <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
@@ -1105,14 +1174,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="102" y="22" width="1341" height="940" extended-state="0" />
+    <frame x="115" y="22" width="1341" height="940" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24787645" sideWeight="0.76512456" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25637066" sideWeight="0.76512456" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25250965" sideWeight="0.76512456" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25559846" sideWeight="0.76512456" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28825623" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
@@ -1189,76 +1258,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="21" selection-start="1913" selection-end="1913" vertical-scroll-proportion="0.2689913" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/helpers/tdgui_proxy_helper.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="22" selection-start="31" selection-end="31" vertical-scroll-proportion="0.075566754" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/SearchPanel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="24" selection-start="2089" selection-end="2089" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/endpoints_proxy.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.8284251">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="70" selection-start="753" selection-end="753" vertical-scroll-proportion="0.53777206" />
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/ruby/gems/1.9.1/gems/activesupport-3.1.3/lib/active_support/descendants_tracker.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="13" selection-start="331" selection-end="331" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/concept_wiki_api_call.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="234" column="65" selection-start="6009" selection-end="6009" vertical-scroll-proportion="0.01494396" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/tdgui_proxy_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="16" selection-start="729" selection-end="753" vertical-scroll-proportion="0.28393525" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/resources/datatest/uniprot-single-x1.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="8" selection-start="1535" selection-end="1535" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/resources/datatest/uniprot-single-x3.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="45" selection-start="2016" selection-end="2016" vertical-scroll-proportion="-0.21046077">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/resources/datatest/uniprot-single-x3-orig.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="145" column="1" selection-start="7961" selection-end="7961" vertical-scroll-proportion="1.8069738">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/tdgui_proxy.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="176" column="18" selection-start="6312" selection-end="6312" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/resources/datatest/uniprotxml-single.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="453" column="31" selection-start="14879" selection-end="14879" vertical-scroll-proportion="0.45330012" />
@@ -1266,21 +1265,89 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/resources/datatest/uniprotxml-single.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="10" selection-start="3655" selection-end="3655" vertical-scroll-proportion="0.4321295">
+        <state line="56" column="10" selection-start="3655" selection-end="3655" vertical-scroll-proportion="0.4321295" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/resources/datatest/yaut.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="60" selection-start="1223" selection-end="1223" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="70" selection-start="753" selection-end="753" vertical-scroll-proportion="0.5379826" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/PanelButtons.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="0" selection-start="301" selection-end="301" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/application.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="7" selection-start="1182" selection-end="1182" vertical-scroll-proportion="0.52781373" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/tdgui_proxy.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="55" selection-start="281" selection-end="281" vertical-scroll-proportion="0.23047376" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="27" selection-start="454" selection-end="454" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/BorderCenter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="105" column="50" selection-start="2483" selection-end="2483" vertical-scroll-proportion="0.6351183">
+        <state line="4" column="17" selection-start="92" selection-end="111" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/resources/datatest/yaut.json">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="177" column="1" selection-start="4323" selection-end="4323" vertical-scroll-proportion="2.645081">
+        <state line="133" column="0" selection-start="3106" selection-end="3106" vertical-scroll-proportion="2.043534">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/grid/DynamicGrid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="147" column="0" selection-start="4433" selection-end="4433" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/SearchPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="85" column="24" selection-start="1847" selection-end="1847" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/Viewport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="226" column="36" selection-start="5211" selection-end="5211" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/MultiTarget.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="66" selection-start="412" selection-end="412" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/Viewport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="39" selection-start="952" selection-end="952" vertical-scroll-proportion="0.34827146">
           <folding />
         </state>
       </provider>

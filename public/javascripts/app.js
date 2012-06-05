@@ -16,7 +16,9 @@ Ext.create('Ext.app.Application', {
 // Define all the controllers that should initialize at boot up of your application
 
   controllers: [
-    'TDGUI.controller.SearchPanel' // not working in rails3 if not qualified
+    'TDGUI.controller.SearchPanel', // not working in rails3 if not qualified
+    'TDGUI.controller.Viewport',
+    'TDGUI.controller.grid.DynamicGrid'
   ],
 
   autoCreateViewport: true,
@@ -25,6 +27,8 @@ Ext.create('Ext.app.Application', {
     console.info("Starting TDGUI...")
 
     Ext.QuickTips.init();
+
+    Ext.History.init()
 
 //    Ext.history.init()
 

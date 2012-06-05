@@ -108,7 +108,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
     this.textareaCode = Ext.widget ('tdgui-textarea', {
       anchor: '100% 80%',
       value: 'Q13362\nP12345\nP0AEN3\nP0AEN2\nP0AEN1',
-      disabled: true
+//      disabled: true
     })
 
     return this.textareaCode

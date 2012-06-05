@@ -54,7 +54,8 @@ console.info ('SearchPanel controller initializing... ')
 			},
 
       'tdgui-textarea': {
-        click: this.textareaClick
+        click: this.textareaClick,
+        afterrender: this.checkTxt
       },
 
       'tdgui-panelbuttons > toolbar > button': { // see buttons on Panel
@@ -120,6 +121,10 @@ console.info ('SearchPanel controller initializing... ')
     console.info ('click event on textarea with content: '+this.getAccTextarea().getValue())
   },
 
+
+  checkTxt: function (comp, opts) {
+    console.info ('fucking textarea: disabled?'+ comp.isDisabled())
+  },
 
 	enableSubmit: function() {
 		var form = this.getFormView();

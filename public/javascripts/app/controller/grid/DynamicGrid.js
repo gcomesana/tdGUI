@@ -15,15 +15,15 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
   ],
 
 
-  init:function () {
-    this.control({
-      'dynamicgrid3':{
-        afterrender:function (comp, opts) {
-          console.info("***=> DynamicGrid controller: afterrender...")
+  init: function () {
+    this.control ({
+      'dynamicgrid3': {
+        afterrender: function (comp, opts) {
+console.info("***=> DynamicGrid controller: afterrender...")
           this.initGrid(comp, opts)
         },
 
-        itemdblclick:function (view, record, item, index, e, opts) {
+        itemdblclick: function (view, record, item, index, e, opts) {
           if (record.data.csid_uri !== undefined) {
             var csid = record.data.csid_uri.match(/http:\/\/rdf.chemspider.com\/(\d+)/)[1];
             if (parseInt(csid) >= 1) {
@@ -230,8 +230,8 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
     this.setAndFillGrid(grid_view, success);
 //    form.doLayout();
 //    button.enable();
-    grid_view.doLayout();
-    grid_view.doComponentLayout();
+//    grid_view.doLayout();
+//    grid_view.doComponentLayout();
 //    form.setLoading(false);
   },
 

@@ -4,7 +4,6 @@ Ext.define ("TDGUI.view.common.Textarea", {
   alias: 'widget.tdgui-textarea',
 
   fieldLabel: '',
-  disabled: true,
 
   listeners: {
     afterrender: {

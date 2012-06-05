@@ -1,37 +1,3 @@
-/*########################################################################################
- #
- #  Copyright H. Lundbeck A/S
- #  This file is part of LSP4All.
- #
- #  LSP4All is free software; you can redistribute it and/or modify
- #  it under the terms of the GNU General Public License as published by
- #  the Free Software Foundation; either version 2 of the License, or (at
- #  your option) any later version.
- #
- #  LSP4All IS MADE AVAILABLE FOR DISTRIBUTION WITHOUT ANY FORM OF WARRANTY TO THE
- #  EXTENT PERMITTED BY APPLICABLE LAW.  THE COPYRIGHT HOLDER PROVIDES THE PROGRAM \"AS IS\"
- #  WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT
- #  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- #  PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM LIES
- #  WITH THE USER.  SHOULD THE PROGRAM PROVE DEFECTIVE IN ANY WAY, THE USER ASSUMES THE
- #  COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION. THE COPYRIGHT HOLDER IS NOT
- #  RESPONSIBLE FOR ANY AMENDMENT, MODIFICATION OR OTHER ENHANCEMENT MADE TO THE PROGRAM
- #  BY ANY USER WHO REDISTRIBUTES THE PROGRAM SO AMENDED, MODIFIED OR ENHANCED.
- #
- #  IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING WILL THE
- #  COPYRIGHT HOLDER BE LIABLE TO ANY USER FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL,
- #  INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE
- #  PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE
- #  OR LOSSES SUSTAINED BY THE USER OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO
- #  OPERATE WITH ANY OTHER PROGRAMS), EVEN IF SUCH HOLDER HAS BEEN ADVISED OF THE
- #  POSSIBILITY OF SUCH DAMAGES.
- #
- #  You should have received a copy of the GNU General Public License
- #  along with this program; if not, write to the Free Software
- #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
- #
- ########################################################################################*/
-
 Ext.define('TDGUI.controller.grid.DynamicGrid', {
   extend:'Ext.app.Controller',
 
@@ -48,9 +14,15 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
     }
   ],
 
-  init: function () {
+
+  init:function () {
     this.control({
       'dynamicgrid3':{
+        afterrender:function (comp, opts) {
+          console.info("***=> DynamicGrid controller: afterrender...")
+          this.initGrid(comp, opts)
+        },
+
         itemdblclick:function (view, record, item, index, e, opts) {
           if (record.data.csid_uri !== undefined) {
             var csid = record.data.csid_uri.match(/http:\/\/rdf.chemspider.com\/(\d+)/)[1];
@@ -65,24 +37,25 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
 //                    console.log('itemcontextmenu');
           this.getGridView().showMenu(eventObject.getX(), eventObject.getY(), record);
         }
+
       }, // EO dynamicgrid3
 
       'dynamicgrid3 toolbar #sdfDownloadProxy_id':{
-        click: this.prepSDFile
+        click:this.prepSDFile
       }
     })
   },
 
 
-  onLaunch: function () {
+  onLaunch:function () {
   },
 
 
-  testThis: function (args) {
+  testThis:function (args) {
   },
 
 
-  addNextRecords: function (this_gridview, extraParams) {
+  addNextRecords:function (this_gridview, extraParams) {
     this_gridview.down('#sdfDownloadProxy_id').setText('Prepare SD-file download');
     this_gridview.down('#sdfDownload_id').disable();
 
@@ -133,7 +106,60 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
   },
 
 
-  setAndFillGrid: function (this_gridview, success) {
+  /**
+   * Initialize the grid mostly on regards to the grid's store
+   * @param comp
+   * @param opts the options to configure the proxy to set up the grid. It should
+   * be something like { actionMethods: { read: 'GET' }, api-read: 'urlread', params: {param1:val1, param2: val2}}
+   */
+  initGrid:function (comp, opts) {
+
+    var me = this
+
+    var defOpts = {
+      actionMethods:{
+        read:"GET"
+      },
+      apiread:comp.readUrl,
+      params:{
+        offset:0,
+        limit:50
+      }
+    }
+
+// mix the props in the case opts does not have all properties
+    for (props in opts)
+      for (attrs in defOpts)
+        if (props == attrs) defOpts[attrs] = opts[props];
+
+    opts = defOpts
+
+//    var grid_view = this.query('dynamicgrid3')[0]
+    /*
+     this.store.proxy.actionMethods = {read:'GET'};
+     this.store.proxy.api.read = grid_view.readUrl;
+     this.store.proxy.params = {offset:0, limit:100};
+     this.store.on('load', this.storeLoadComplete, this);
+     */
+    comp.store.proxy.actionMethods = opts.actionMethods;
+    comp.store.proxy.api.read = opts.apiread;
+    comp.store.proxy.params = opts.params;
+    comp.store.on('load', this.storeLoadComplete, this);
+    comp.store.proxy.extraParams = comp.queryParams
+//    comp.store.proxy.extraParams = {entries: 'Q13362,P12345,P0AEN3,P0AEN2,P0AEN1'}
+
+    comp.store.load()
+  },
+
+
+  /**
+   * Sets the grid features, like columns and filters, and fill it with the data
+   * proviede by the store associated to the grid
+   * @param this_gridview, a reference to the grid component (could be just this)
+   * @param success, true if request to backend was successful; false otherwise
+   * @return {Boolean}
+   */
+  setAndFillGrid:function (this_gridview, success) {
     if (success === false) {
       Ext.MessageBox.show({
         title:'Error',
@@ -145,10 +171,8 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
       return false;
     }
 
+//    this_gridview.down('#sdfDownloadProxy_id').setText('Prepare SD-file download');
 
-    this_gridview.down('#sdfDownloadProxy_id').setText('Prepare SD-file download');
-
-    var this_controller = this;
     var dynamicgridStore = this_gridview.store;
     if (typeof(dynamicgridStore.proxy.reader.jsonData.columns) === 'object') {
       var columns = [];
@@ -162,7 +186,6 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
           this_gridview.down('#sdfDownloadProxy_id').enable();
         }
       });
-
       this_gridview.reconfigure(dynamicgridStore, columns);
       this_gridview.recordsLoaded = dynamicgridStore.data.length;
       if (this_gridview.recordsLoaded == 0) {
@@ -190,7 +213,30 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
   },
 
 
-  prepSDFile2: function (sdf_prep_button) {
+  /**
+   * This is a callback method on response to the load event on the store of the grid
+   * @param store                                                                   x
+   * @param records
+   * @param success
+   */
+  storeLoadComplete: function (store, records, success) {
+//    var controller = this.getController('LSP.controller.grids.DynamicGrid');
+
+    var grid_view = this.getGridView();
+//    var form = this.getFormView();
+//    var button = this.getSubmitButton();
+
+//    var grid_view = this.down("dynamicgrid3")
+    this.setAndFillGrid(grid_view, success);
+//    form.doLayout();
+//    button.enable();
+    grid_view.doLayout();
+    grid_view.doComponentLayout();
+//    form.setLoading(false);
+  },
+
+
+  prepSDFile2:function (sdf_prep_button) {
     var gridview = sdf_prep_button.up('dynamicgrid3');
     var grid_store = gridview.store;
     var items = grid_store.data.items;
@@ -237,7 +283,7 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
   },
 
 
-  prepSDFile: function (sdf_prep_button) {
+  prepSDFile:function (sdf_prep_button) {
     var gridview = sdf_prep_button.up('dynamicgrid3');
     var grid_store = gridview.store;
     var items = grid_store.data.items;
@@ -283,7 +329,7 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
   },
 
 
-  updateSDFStatus: function (button, store) {
+  updateSDFStatus:function (button, store) {
     var items = store.data.items;
     var item_count = items.length;
     var missing_count = 0;
@@ -302,7 +348,7 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
   },
 
 
-  getMolfile: function (csid, row_idxs, grid_store, sdf_prep_button) {
+  getMolfile:function (csid, row_idxs, grid_store, sdf_prep_button) {
     var me = this;
     var compoundStore = Ext.create('CS.store.Compound');
     var idx_len = row_idxs.length;

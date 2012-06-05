@@ -66,13 +66,12 @@ console.info ('SearchPanel controller initializing... ')
 	},
 
 
+
 	clickLookup: function () {
 		console.info ('*** focus on lookup')
 	},
 
-	onAfterRender: function () {
-		console.info ('just onAfterRender')
-	},
+
 
 
   retrieveBtnClick: function (btn, ev, opts) {
@@ -81,11 +80,12 @@ console.info ('SearchPanel controller initializing... ')
 
     var me = this
 
-    Ext.History.add('!p=MultiTarget&u=' + uniprotIds);
-
     if (btn.getId() == 'panelBtnLeft')
       txtArea.setValue('')
+    else
+      Ext.History.add('!xt=tdgui-multitargetpanel&qp=' + uniprotIds);
 
+/*
     Ext.Ajax.request({
       url: 'tdgui_proxy/multiple_entries_retrieval',
       method: 'GET',
@@ -105,8 +105,7 @@ console.info ('SearchPanel controller initializing... ')
           // process server response here
       }
     });
-
-// lo de abajo mejor iria en un método todo junto...
+*/
 
   },
 

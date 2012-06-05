@@ -3,7 +3,7 @@
 Ext.define ('TDGUI.view.panels.BorderCenter', {
 	extend: 'Ext.tab.Panel',
 	alias: 'widget.tdgui-border-center',
-  requires: ['TDGUI.view.grid.DynamicGrid3'],
+//  requires: ['TDGUI.view.grid.DynamicGrid3'],
 
 	region: 'center',
   layout: 'border',
@@ -13,6 +13,9 @@ Ext.define ('TDGUI.view.panels.BorderCenter', {
   listeners: {
    afterrender: {
      fn: function (comp, opts) {
+       opts.extraParams = {
+         entries: 'Q13362,P0AEN2,P0AEN3'
+       }
 //       this.initGrid(comp, opts)
      }
    }
@@ -21,7 +24,7 @@ Ext.define ('TDGUI.view.panels.BorderCenter', {
 
   initComponent: function () {
   	var me = this
-console.info ("Initializing panels.BorderCenter comp...")
+console.info ("Initializing panels.BorderCenter comp..." + this.nombre)
 
 	  me.items = [{
       xtype: 'panel',
@@ -55,7 +58,7 @@ console.info ("Initializing panels.BorderCenter comp...")
 */
 
       items: [
-//        this.createGrid()
+//        this.theGrid = this.createGrid()
       ],
 
 
@@ -98,7 +101,8 @@ console.info ("Initializing panels.BorderCenter comp...")
 //      border: '1 1 1 1',
       flex: 1,
 //      readUrl: 'resources/datatest/yaut.json'
-      readUrl: 'tdgui_proxy/multiple_entries_retrieval?entries=Q13362,P0AEN2,P0AEN3'
+//      readUrl: 'tdgui_proxy/multiple_entries_retrieval?entries=Q13362,P0AEN2,P0AEN3'
+      readUrl: 'tdgui_proxy/multiple_entries_retrieval'
     })
 
     return theGrid
@@ -126,6 +130,7 @@ console.info ("Initializing panels.BorderCenter comp...")
       if (this_gridview.rowNumberer) {
         columns.push(Ext.create('Ext.grid.RowNumberer', {width:40}));
       }
+
       Ext.each(dynamicgridStore.proxy.reader.jsonData.columns, function (column) {
         columns.push(column);
         if (column.text == 'csid_uri') {
@@ -133,6 +138,7 @@ console.info ("Initializing panels.BorderCenter comp...")
           this_gridview.down('#sdfDownloadProxy_id').enable();
         }
       });
+
       this_gridview.reconfigure (dynamicgridStore, columns);
       this_gridview.recordsLoaded = dynamicgridStore.data.length;
       if (this_gridview.recordsLoaded == 0) {
@@ -195,6 +201,7 @@ console.info ("Initializing panels.BorderCenter comp...")
     grid_view.store.proxy.actionMethods = {read:'GET'};
     grid_view.store.proxy.api.read = grid_view.readUrl;
     grid_view.store.proxy.params = {offset:0, limit:100};
+    grid_view.store.proxy.extraParams = opts.extraParams,
     grid_view.store.on('load', this.storeLoadComplete, this);
 
     grid_view.store.load()

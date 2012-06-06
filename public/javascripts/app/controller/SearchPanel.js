@@ -55,7 +55,7 @@ console.info ('SearchPanel controller initializing... ')
 
       'tdgui-textarea': {
         click: this.textareaClick,
-        afterrender: this.checkTxt
+//        afterrender: this.checkTxt
       },
 
       'tdgui-panelbuttons > toolbar > button': { // see buttons on Panel
@@ -118,7 +118,7 @@ console.info ('SearchPanel controller initializing... ')
 
 
   textareaClick: function () {
-    console.info ('click event on textarea with content: '+this.getAccTextarea().getValue())
+//    console.info ('click event on textarea with content: '+this.getAccTextarea().getValue())
   },
 
 

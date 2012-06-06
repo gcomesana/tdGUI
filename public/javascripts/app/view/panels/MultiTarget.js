@@ -36,17 +36,19 @@ Ext.define ('TDGUI.view.panels.MultiTarget', {
   createGrid: function (config) {
     config = config || {
       title: 'Multiple target results',
-      gridBaseTitle: 'gridBaseTitle????',
+      gridBaseTitle: 'gridBaseTitle',
       margin: '5 5 5 5',
 //      border: '1 1 1 1',
       flex: 1, // needed to fit all container
 //      readUrl: 'resources/datatest/yaut.json'
 //      readUrl: 'tdgui_proxy/multiple_entries_retrieval?entries=Q13362,P0AEN2,P0AEN3'
       readUrl: 'tdgui_proxy/multiple_entries_retrieval',
-      queryParams: this.gridParams
+      queryParams: this.gridParams,
+//      id: 'dyngrid'+(new Date()).getMilliseconds(),
+//      itemId: 'dyngrid'+(new Date()).getMilliseconds()
     }
 
-    var theGrid = Ext.widget ('dynamicgrid3', config)
+    var theGrid = Ext.create ('widget.dynamicgrid3', config)
 
     return theGrid
   }

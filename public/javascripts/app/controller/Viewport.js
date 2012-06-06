@@ -7,8 +7,11 @@ Ext.define ("TDGUI.controller.Viewport", {
   stores: [],
 
   refs: [{
-    ref: 'contentTabs',
-    selector: 'tdgui-viewport > tdgui-border-center'
+      ref: 'contentTabs',
+      selector: 'tdgui-viewport > tdgui-border-center'
+    }, {
+      ref: 'multitarget',
+      selector: 'tdgui-multitargetpanel'
   }
   ],
 
@@ -20,7 +23,6 @@ Ext.define ("TDGUI.controller.Viewport", {
     Ext.History.init()
 
     Ext.History.on('change', function (token) {
-console.info ('inside the History event handler')
        if (token) {
           me.handleHistoryToken(token);
        }
@@ -29,8 +31,14 @@ console.info ('inside the History event handler')
     this.control({
       'tdgui-viewport': {
         historyAdded: this.handleHistoryToken
+      },
+/*
+      'tdgui-multitargetpanel': {
+        afterrender: function (comp, opts) {
+          console.info ('afterrender multitarget: '+comp.getId())
+        }
       }
-
+*/
     })
   },
 
@@ -40,17 +48,16 @@ console.info ('inside the History event handler')
 
 
   handleHistoryToken: function (token) {
-console.info ('*** CREATING NEW COMP @ Viewport controller.handleHistoryToken + '+token)
-
     var tabsPanel = this.getContentTabs()
     var tokenObj = this.parseHistoryToken(token)
     var xtype = tokenObj.xt
-    var multiTarget = Ext.widget (xtype, {
+
+    var multiTarget = Ext.createByAlias ('widget.'+xtype, {
       closable: true,
       gridParams: {entries: tokenObj.qp},
-      title: "Multiple targets"
+      title: "Multiple targets",
     })
-
+// console.info ('*** Viewport controller.handleHistoryToken + '+multiTarget.getId())
     tabsPanel.add (multiTarget)
     tabsPanel.suspendEvents(false)
     tabsPanel.setActiveTab(multiTarget)

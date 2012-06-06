@@ -19,7 +19,7 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
     this.control ({
       'dynamicgrid3': {
         afterrender: function (comp, opts) {
-console.info("***=> DynamicGrid controller: afterrender...")
+// console.info("***=> DynamicGrid controller: afterrender..."+comp.getId())
           this.initGrid(comp, opts)
         },
 
@@ -112,7 +112,7 @@ console.info("***=> DynamicGrid controller: afterrender...")
    * @param opts the options to configure the proxy to set up the grid. It should
    * be something like { actionMethods: { read: 'GET' }, api-read: 'urlread', params: {param1:val1, param2: val2}}
    */
-  initGrid:function (comp, opts) {
+  initGrid: function (comp, opts) {
 
     var me = this
 
@@ -141,10 +141,11 @@ console.info("***=> DynamicGrid controller: afterrender...")
      this.store.proxy.params = {offset:0, limit:100};
      this.store.on('load', this.storeLoadComplete, this);
      */
+// grid store configuration through its proxy
     comp.store.proxy.actionMethods = opts.actionMethods;
     comp.store.proxy.api.read = opts.apiread;
     comp.store.proxy.params = opts.params;
-    comp.store.on('load', this.storeLoadComplete, this);
+    comp.store.on('load', this.setAndFillGrid, comp);
     comp.store.proxy.extraParams = comp.queryParams
 //    comp.store.proxy.extraParams = {entries: 'Q13362,P12345,P0AEN3,P0AEN2,P0AEN1'}
 
@@ -159,7 +160,9 @@ console.info("***=> DynamicGrid controller: afterrender...")
    * @param success, true if request to backend was successful; false otherwise
    * @return {Boolean}
    */
-  setAndFillGrid:function (this_gridview, success) {
+  setAndFillGrid: function (store, records, success) { // scope: grid instance
+    var this_gridview = this
+
     if (success === false) {
       Ext.MessageBox.show({
         title:'Error',
@@ -174,11 +177,12 @@ console.info("***=> DynamicGrid controller: afterrender...")
 //    this_gridview.down('#sdfDownloadProxy_id').setText('Prepare SD-file download');
 
     var dynamicgridStore = this_gridview.store;
-    if (typeof(dynamicgridStore.proxy.reader.jsonData.columns) === 'object') {
+    if (typeof (dynamicgridStore.proxy.reader.jsonData.columns) === 'object') {
       var columns = [];
-      if (this_gridview.rowNumberer) {
-        columns.push(Ext.create('Ext.grid.RowNumberer', {width:40}));
-      }
+
+      if (this_gridview.rowNumberer)
+        columns.push(Ext.create ('Ext.grid.RowNumberer', {width:40}));
+
       Ext.each(dynamicgridStore.proxy.reader.jsonData.columns, function (column) {
         columns.push(column);
         if (column.text == 'csid_uri') {
@@ -186,6 +190,7 @@ console.info("***=> DynamicGrid controller: afterrender...")
           this_gridview.down('#sdfDownloadProxy_id').enable();
         }
       });
+
       this_gridview.reconfigure(dynamicgridStore, columns);
       this_gridview.recordsLoaded = dynamicgridStore.data.length;
       if (this_gridview.recordsLoaded == 0) {
@@ -209,32 +214,35 @@ console.info("***=> DynamicGrid controller: afterrender...")
         }
       }
 
-    }
+    } // EO if (typeof(...))
   },
 
 
-  /**
-   * This is a callback method on response to the load event on the store of the grid
-   * @param store                                                                   x
-   * @param records
-   * @param success
-   */
+/*
+ * This is a callback method on response to the load event on the store of the grid
+ * The scope of this method is the component (grid), not the controller!!!
+ * @param store
+ * @param records
+ * @param success
+ *
   storeLoadComplete: function (store, records, success) {
 //    var controller = this.getController('LSP.controller.grids.DynamicGrid');
 
-    var grid_view = this.getGridView();
+//    var controller = this.getController('TDGUI.controller.grid.DynamicGrid')
+    var grid_view = this // .getGridView(); // no vale
+console.info ('storeLoadComplete grid_view: '+this.getId())
 //    var form = this.getFormView();
 //    var button = this.getSubmitButton();
 
 //    var grid_view = this.down("dynamicgrid3")
-    this.setAndFillGrid(grid_view, success);
+    controller.setAndFillGrid(grid_view, success);
 //    form.doLayout();
 //    button.enable();
-//    grid_view.doLayout();
-//    grid_view.doComponentLayout();
+    grid_view.doLayout();
+    grid_view.doComponentLayout();
 //    form.setLoading(false);
   },
-
+*/
 
   prepSDFile2:function (sdf_prep_button) {
     var gridview = sdf_prep_button.up('dynamicgrid3');

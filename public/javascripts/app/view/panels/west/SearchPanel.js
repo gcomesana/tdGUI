@@ -89,11 +89,13 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
         items: [{
             xtype: 'tdgui-conceptwiki-protein-lookup',
-            columnWidth: .85
+            columnWidth: .85,
+            enableKeyEvents: true
           }, {
             xtype: 'button',
             text: ' GO ',
-            columnWidth: .15
+            columnWidth: .15,
+            action: 'query-protein-info'
         }] // EO items
 
       }]

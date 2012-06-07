@@ -7,12 +7,13 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
 
   models:['DynamicGrid'],
 
-  refs:[
-    {
+  refs:[{
       ref:'gridView',
       selector:'dynamicgrid3'
-    }
-  ],
+    }, {
+      ref: 'multitargetGrid',
+      selector: 'tdgui-multitargetpanel dynamicgrid3'
+  }],
 
 
   init: function () {
@@ -22,8 +23,9 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
 // console.info("***=> DynamicGrid controller: afterrender..."+comp.getId())
           this.initGrid(comp, opts)
         },
-
+/*
         itemdblclick: function (view, record, item, index, e, opts) {
+console.info ("item double clicked!!!")
           if (record.data.csid_uri !== undefined) {
             var csid = record.data.csid_uri.match(/http:\/\/rdf.chemspider.com\/(\d+)/)[1];
             if (parseInt(csid) >= 1) {
@@ -31,7 +33,7 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
             }
           }
         },
-
+*/
         itemcontextmenu:function (view, record, itemHTMLElement, index, eventObject, eOpts) {
           eventObject.preventDefault();
 //                    console.log('itemcontextmenu');

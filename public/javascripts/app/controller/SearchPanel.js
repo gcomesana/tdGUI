@@ -19,7 +19,7 @@ Ext.define('TDGUI.controller.SearchPanel', {
 
 	refs: [{
 			ref: 'protLookup', // I get this.getProtLookup ()
-			selector: 'tabpanel > panel > tdgui-conceptwiki-protein-lookup'
+			selector: 'tabpanel > panel tdgui-conceptwiki-protein-lookup'
 		}, {
 			ref: 'examplesLabel', // I get this.getExamplesLabel
 			selector: 'tabpanel > panel > label'
@@ -50,7 +50,8 @@ console.info ('SearchPanel controller initializing... ')
 			},
 
 			'tdgui-conceptwiki-protein-lookup': {
-				focus: this.clickLookup
+				focus: this.clickLookup,
+        keyup: this.keepKeyup
 			},
 
       'tdgui-textarea': {
@@ -58,10 +59,14 @@ console.info ('SearchPanel controller initializing... ')
 //        afterrender: this.checkTxt
       },
 
-      'tdgui-panelbuttons > toolbar > button': { // see buttons on Panel
+      'tdgui-west-search > tabpanel > panel > tdgui-panelbuttons > toolbar > button': { // see buttons on Panel
         click: this.retrieveBtnClick
-      }
+      },
 
+//      'tdgui-west-search > tabpanel > panel button[action=query-protein-info]': {
+      'tdgui-west-search button[action=query-protein-info]': {
+        click: this.clickGoProteinInfo
+      }
 
 		});
 	},
@@ -72,6 +77,11 @@ console.info ('SearchPanel controller initializing... ')
 		console.info ('*** focus on lookup')
 	},
 
+
+
+  keepKeyup: function (comp, ev, opts) {
+    comp.inputString = ev.target.value
+  },
 
 
 
@@ -108,6 +118,17 @@ console.info ('SearchPanel controller initializing... ')
     });
 */
 
+  },
+
+
+
+  clickGoProteinInfo: function (btn, ev, opts) {
+    var conceptLookup = this.getProtLookup ()
+    var selOption = conceptLookup.getValue()
+    if (selOption != null && selOption != "")
+      console.info ('button clicked for: '+selOption)
+
+    Ext.History.add ('!xt=tdgui-targetinfopanel&qp='+selOption)
   },
 
 

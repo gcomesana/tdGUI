@@ -5,15 +5,17 @@
  */
 
 
-Ext.define('LSP.view.target_by_name.TargetPanel', {
+Ext.define('TDGUI.view.panels.TargetInfo', {
 	extend: 'Ext.panel.Panel',
-	alias: 'widget.TargetPanel',
-
+	alias: 'widget.tdgui-targetinfopanel',
+  
 	title: 'Target Info',
 	anchor: '100% 100%',
 	autoScroll: true,
 	bodyPadding: '10px',
 	layout: 'anchor',
+
+  targetInfoStore: null,
 //	style: 'background-color: #fff000;',
 
 	initComponent: function() {
@@ -153,8 +155,11 @@ Ext.define('LSP.view.target_by_name.TargetPanel', {
 			value: 'message here'
 		}];
 
-		var store = Ext.data.StoreManager.lookup('Targets');
-		store.addListener('load', this.showData, this);
+//		var store = Ext.data.StoreManager.lookup('Targets');
+    var store = Ext.create ('TDGUI.store.Targets')
+    this.targetInfoStore = store
+//		store.addListener('load', this.showData, this);
+    this.targetInfoStore.addListener('load', this.showData, this)
 		this.callParent(arguments);
 	},
 	// EO initComponent
@@ -186,23 +191,32 @@ Ext.define('LSP.view.target_by_name.TargetPanel', {
 				msg.setVisible(false);
 				this.setValues(store.first());
 				dp.setVisible(true);
-			} else {
-				this.showMessage('No records found within OPS for this search');
 			}
-		} else {
-			this.showMessage('Server did not respond');
+      else
+				this.showMessage('No records found within OPS for this search');
+
 		}
-		this.endLoading();
-		var searchButton = Ext.ComponentQuery.query('#TargetByNameSubmit_id')[0].enable();
+    else
+			this.showMessage('Server did not respond');
+
+    this.endLoading();
+var targetInfos = Ext.ComponentQuery.query('tdgui-targetinfopanel')
+console.info ("targetinfos length: "+targetInfos.length)
+
+//		var searchButton = Ext.ComponentQuery.query('#TargetByNameSubmit_id')[0].enable();
 	},
 
-	clearDomBelow: function(domElement) {
+
+
+  clearDomBelow: function(domElement) {
 		if (domElement.hasChildNodes()) {
 			while (domElement.childNodes.length > 0) {
 				domElement.removeChild(domElement.firstChild);
 			}
 		}
 	},
+
+
 
 	addKeywords: function(keywords) {
 		var bits = keywords.split('; ');
@@ -222,6 +236,7 @@ Ext.define('LSP.view.target_by_name.TargetPanel', {
 		}, this);
 		keywordDisplayField.show();
 	},
+
 
 	addOrganism: function(organism) {
 		var organismDisplayField = this.down('#organism');
@@ -334,11 +349,13 @@ Ext.define('LSP.view.target_by_name.TargetPanel', {
 		this.doLayout();
 	},
 
+
 	startLoading: function() {
 		this.setLoading(true);
 	},
 
-	endLoading: function() {
+
+  endLoading: function() {
 		this.setLoading(false);
 	}
 

@@ -40,7 +40,15 @@ TdGUI::Application.routes.draw do
       get :compound_lookup
 			get :test
     end
-  end
+	end
+
+
+	resources :core_api_calls do
+		collection do
+			post :protein_info
+			get :test
+		end
+	end
 
 
 =begin

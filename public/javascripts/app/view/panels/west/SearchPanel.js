@@ -89,11 +89,13 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
         items: [{
             xtype: 'tdgui-conceptwiki-protein-lookup',
-            columnWidth: .85
+            columnWidth: .85,
+            enableKeyEvents: true
           }, {
             xtype: 'button',
             text: ' GO ',
-            columnWidth: .15
+            columnWidth: .15,
+            action: 'query-protein-info'
         }] // EO items
 
       }]
@@ -108,7 +110,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
     this.textareaCode = Ext.widget ('tdgui-textarea', {
       anchor: '100% 80%',
       value: 'Q13362\nP12345\nP0AEN3\nP0AEN2\nP0AEN1',
-      disabled: true
+//      disabled: true
     })
 
     return this.textareaCode

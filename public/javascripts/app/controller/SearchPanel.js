@@ -19,7 +19,7 @@ Ext.define('TDGUI.controller.SearchPanel', {
 
 	refs: [{
 			ref: 'protLookup', // I get this.getProtLookup ()
-			selector: 'tabpanel > panel > tdgui-conceptwiki-protein-lookup'
+			selector: 'tabpanel > panel tdgui-conceptwiki-protein-lookup'
 		}, {
 			ref: 'examplesLabel', // I get this.getExamplesLabel
 			selector: 'tabpanel > panel > label'
@@ -50,17 +50,23 @@ console.info ('SearchPanel controller initializing... ')
 			},
 
 			'tdgui-conceptwiki-protein-lookup': {
-				focus: this.clickLookup
+				focus: this.clickLookup,
+        keyup: this.keepKeyup
 			},
 
       'tdgui-textarea': {
-        click: this.textareaClick
+        click: this.textareaClick,
+//        afterrender: this.checkTxt
       },
 
-      'tdgui-panelbuttons > toolbar > button': { // see buttons on Panel
+      'tdgui-west-search > tabpanel > panel > tdgui-panelbuttons > toolbar > button': { // see buttons on Panel
         click: this.retrieveBtnClick
-      }
+      },
 
+//      'tdgui-west-search > tabpanel > panel button[action=query-protein-info]': {
+      'tdgui-west-search button[action=query-protein-info]': {
+        click: this.clickGoProteinInfo
+      }
 
 		});
 	},
@@ -71,6 +77,11 @@ console.info ('SearchPanel controller initializing... ')
 		console.info ('*** focus on lookup')
 	},
 
+
+
+  keepKeyup: function (comp, ev, opts) {
+    comp.inputString = ev.target.value
+  },
 
 
 
@@ -110,6 +121,17 @@ console.info ('SearchPanel controller initializing... ')
   },
 
 
+
+  clickGoProteinInfo: function (btn, ev, opts) {
+    var conceptLookup = this.getProtLookup ()
+    var selOption = conceptLookup.getValue()
+    if (selOption != null && selOption != "")
+      console.info ('button clicked for: '+selOption)
+
+    Ext.History.add ('!xt=tdgui-targetinfopanel&qp='+selOption)
+  },
+
+
 	labelClick: function () {
 		console.info ('SearchPanel.controller: got click event from label '+this.getExamplesLabel())
 //						this.getExamplesLabel().setText ('Its ok'))
@@ -117,9 +139,13 @@ console.info ('SearchPanel controller initializing... ')
 
 
   textareaClick: function () {
-    console.info ('click event on textarea with content: '+this.getAccTextarea().getValue())
+//    console.info ('click event on textarea with content: '+this.getAccTextarea().getValue())
   },
 
+
+  checkTxt: function (comp, opts) {
+    console.info ('fucking textarea: disabled?'+ comp.isDisabled())
+  },
 
 	enableSubmit: function() {
 		var form = this.getFormView();

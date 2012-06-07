@@ -18,7 +18,9 @@ Ext.create('Ext.app.Application', {
   controllers: [
     'TDGUI.controller.SearchPanel', // not working in rails3 if not qualified
     'TDGUI.controller.Viewport',
-    'TDGUI.controller.grid.DynamicGrid'
+    'TDGUI.controller.grid.DynamicGrid',
+    'TDGUI.controller.panels.MultiTarget',
+    'TDGUI.controller.panels.TargetInfo'
   ],
 
   autoCreateViewport: true,

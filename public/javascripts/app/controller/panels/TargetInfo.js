@@ -23,7 +23,7 @@ console.info ("Initializing TargetInfo controller...")
   },
 
 
-  initTargetInfoPanel:function (comp, opts) {
+  initTargetInfoPanel: function (comp, opts) {
 //    var store = this.getTargetsStore();
     var store = comp.targetInfoStore
     var tokenObjQp = comp.queryParam

@@ -58,6 +58,11 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 						itemId: 'target_name',
 						fieldCls: 'target-title'
 					}, {
+            xtype:'button',
+            text:'Pharmacology Data',
+            itemId:'pharmTargetButton',
+            cls:'target-pharm-button'
+          }, {
 						xtype: 'displayfield',
 						anchor: '100%',
 						itemId: 'target_type',
@@ -155,6 +160,9 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 			value: 'message here'
 		}];
 
+// *** Store initialization:
+// Mind the name of the fields in the store are the same than the names of the
+// displayfields in here!!!!
 //		var store = Ext.data.StoreManager.lookup('Targets');
     var store = Ext.create ('TDGUI.store.Targets')
     this.targetInfoStore = store
@@ -311,7 +319,20 @@ console.info ("targetinfos length: "+targetInfos.length)
 		this.resetAllFields();
 		var td = target.data;
 
-		for (var prop in td) {
+// Pharmacology data button initialization
+    var targetName = this.down ('#target_name').getRawValue()
+    var pharmButton = this.down('#pharmTargetButton');
+    pharmButton.hide();
+    pharmButton.setHandler(function () {
+// console.info('pharmButton.setHandler -> !xt=tdgui-pharmbytargetpanel&qp=' + target.store.proxy.extraParams.protein_uri)
+        var historyParams = '!xt=tdgui-pharmbytargetpanel&qp=' + target.store.proxy.extraParams.protein_uri
+        historyParams += '&tg=' + targetName
+        Ext.History.add(historyParams)
+      }
+    );
+    pharmButton.show();
+
+    for (var prop in td) {
 			if (td.hasOwnProperty(prop)) {
 				//                console.log(prop);
 				this.setFieldValue(prop, td[prop]);

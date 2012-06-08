@@ -20,7 +20,6 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
     this.control ({
       'dynamicgrid3': {
         afterrender: function (comp, opts) {
-// console.info("***=> DynamicGrid controller: afterrender..."+comp.getId())
           this.initGrid(comp, opts)
         },
 /*
@@ -117,12 +116,13 @@ console.info ("item double clicked!!!")
   initGrid: function (comp, opts) {
 
     var me = this
+    var compActionMethods = comp.storeActionMethods
+    var theActionMethods =
+      (compActionMethods === undefined || compActionMethods == null)? {read: "GET"}: compActionMethods
 
     var defOpts = {
-      actionMethods:{
-        read:"GET"
-      },
-      apiread:comp.readUrl,
+      actionMethods: theActionMethods,
+      apiread: comp.readUrl,
       params:{
         offset:0,
         limit:50
@@ -187,10 +187,12 @@ console.info ("item double clicked!!!")
 
       Ext.each(dynamicgridStore.proxy.reader.jsonData.columns, function (column) {
         columns.push(column);
+        /*
         if (column.text == 'csid_uri') {
           this_gridview.csid_column = true;
           this_gridview.down('#sdfDownloadProxy_id').enable();
         }
+        */
       });
 
       this_gridview.reconfigure(dynamicgridStore, columns);

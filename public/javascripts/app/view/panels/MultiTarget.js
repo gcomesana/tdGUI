@@ -36,7 +36,7 @@ Ext.define ('TDGUI.view.panels.MultiTarget', {
   createGrid: function (config) {
     config = config || {
       title: 'Multiple target results',
-      gridBaseTitle: 'gridBaseTitle',
+      gridBaseTitle: 'Group targets features',
       margin: '5 5 5 5',
 //      border: '1 1 1 1',
       flex: 1, // needed to fit all container

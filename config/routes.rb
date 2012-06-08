@@ -46,6 +46,7 @@ TdGUI::Application.routes.draw do
 	resources :core_api_calls do
 		collection do
 			post :protein_info
+			post :pharm_by_protein_name
 			get :test
 		end
 	end

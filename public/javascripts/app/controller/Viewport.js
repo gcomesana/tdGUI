@@ -3,7 +3,7 @@
 Ext.define ("TDGUI.controller.Viewport", {
   extend: 'Ext.app.Controller',
 
-  views: ['Viewport', 'panels.BorderCenter', 'panels.MultiTarget'],
+  views: ['Viewport', 'panels.BorderCenter', 'panels.MultiTarget', 'panels.PharmByTarget'],
   stores: ['Targets'],
   models: ['Target'],
 
@@ -73,6 +73,16 @@ Ext.define ("TDGUI.controller.Viewport", {
 //          this.getFormView().setLoading(true);
           store.load();
         }    */
+        break
+
+      case 'tdgui-pharmbytargetpanel':
+console.info ("raising Pharm By Target panel")
+        newPanel = Ext.createByAlias('widget.'+xtype, {
+          closeable: true,
+          gridParams: { protein_uri: tokenObj.qp },
+          targetName: tokenObj.tg,
+          title: "Pharmacology for "+tokenObj.tg
+        })
         break
 
     }

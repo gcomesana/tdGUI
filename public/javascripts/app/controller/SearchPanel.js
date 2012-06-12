@@ -63,8 +63,8 @@ console.info ('SearchPanel controller initializing... ')
         click: this.retrieveBtnClick
       },
 
-//      'tdgui-west-search > tabpanel > panel button[action=query-protein-info]': {
-      'tdgui-west-search button[action=query-protein-info]': {
+      'tdgui-west-search > tabpanel > panel button[action=query-protein-info]': {
+//      'tdgui-west-search button[action=query-protein-info]': {
         click: this.clickGoProteinInfo
       }
 

@@ -9,8 +9,8 @@
   <%= stylesheet_link_tag '/javascripts/extjs4.0.7/resources/css/ext-all.css' %>
 
   <% if ENV['RAILS_ENV'] != 'production' %>
-    <%#= javascript_include_tag '/ext/ext-all-debug.js' %>
-    <%= javascript_include_tag "extjs4.0.7/bootstrap.js" %>
+    <%= javascript_include_tag 'extjs4.0.7/ext-all-debug.js' %>
+    <%#= javascript_include_tag "extjs4.0.7/bootstrap.js" %>
     <%#= javascript_include_tag 'prototype.js' %>
     <%# = javascript_include_tag "borderbis" %>
     <%= javascript_include_tag 'app.js' %>

@@ -2,7 +2,8 @@
 require 'spec_helper'
 # require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 require 'JSON'
-
+require 'nokogiri'
+require 'open-uri'
 
 describe "Behaviour of EndpointsProxy" do
 
@@ -54,7 +55,7 @@ puts "proteinLookup endpoint: #{EndpointsProxy.getEndpoint}"
 puts "Endpoints checked: #{EndpointsProxy.getEndpointsChecked}"
 
 		EndpointsProxy.getEndpointsChecked.should be > 0
-		coreApiAlive.should be_false
+		coreApiAlive.should be_true
 
 puts "Endpoint used: #{EndpointsProxy.getEndpoint}"
 	end
@@ -81,6 +82,50 @@ puts "Endpoint used: #{EndpointsProxy.getEndpoint}"
 puts "json_str: #{json_str}"
 	end
 
+
+
+
+#
+# Parsing of uniprot entry
+#
+	describe "uniprot entry parsing and formatting" do
+
+		before(:all) do
+#			myfile = File.new("public/resources/datatest/Q13362.xml", "r")
+#			myfile = File.new("public/resources/datatest/P29876.xml", "r")
+			myfile = File.new("public/resources/datatest/P78257.xml", "r")
+			myfile.should_not be_nil
+
+			@xmlContent = ''
+			while line = myfile.gets
+#				line = line.gsub(/"*</, "&lt;").gsub(/"*>./, "&gt;")
+				@xmlContent += line
+			end
+			@xmlContent.length.should be > 0
+		end
+
+		it "should parse the content" do
+		  result = EndpointsProxy.buildup_uniprot_info(@xmlContent)
+			result.should be_a Hash
+
+			result[:target_type].should == 'PROTEIN'
+			result[:sequence].should_not be_nil
+			result[:numberOfResidues].to_i.should be > 10
+
+#			result[:location].should exist
+#			result[:location].should be_kind_of String
+#			result[:pdbIdPage].should exist
+
+		end
+
+
+=begin
+		it "buildup_uniprot_info should return a hash" do
+			build_up = EndpointsProxy.buildup_uniprot_info(@xmlContent)
+			build_up.should_not be_empty
+		end
+=end
+	end
 
 
 

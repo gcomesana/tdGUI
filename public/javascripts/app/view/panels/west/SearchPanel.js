@@ -77,7 +77,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       width: 400,
       height: 200,
       bodyPadding: '15 0 10 0',
-      closable: true,
+//      closable: true,
 
       items: [this.createLabel(), {
 //          title: 'Search',
@@ -126,7 +126,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       height: 200,
       padding: '15 10 10 10',
       layout: 'anchor',
-      closable: true,
+//      closable: true,
 
       items: [
         this.createTextarea(),

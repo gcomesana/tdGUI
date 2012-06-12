@@ -140,7 +140,7 @@ puts "Filling columns..."
 			org_sci = ent.elements.collect ("organism/name[@type='scientific']") { |orgName| orgName.text }
 #			entryHash['organismSciName'] = org_sci[0].nil? ? '': org_sci[0]
 
-			org_comm = ent.elements.collect ("organism/name[@type='commong']") { |orgName| orgName.text }
+			org_comm = ent.elements.collect ("organism/name[@type='common']") { |orgName| orgName.text }
 #			entryHash['organism_comm_name'] = org_comm[0].nil? ? '': org_comm[0]
 
 			func_comment = ent.elements.collect ("comment[@type='function']/text") { |comment| comment.text }

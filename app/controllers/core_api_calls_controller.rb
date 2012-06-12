@@ -121,6 +121,7 @@ class CoreApiCallsController < ApplicationController
     options[:offset] = params[:offset]
     api_call = CoreApiCall.new
     results = api_call.request( api_method, options)
+puts "protein_info results: #{results}"
     render :json => ResultsFormatter.construct_column_objects(results).to_json, :layout => false
   end
 

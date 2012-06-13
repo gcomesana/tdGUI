@@ -53,7 +53,8 @@ class CoreApiCall
 
 
 	def request(api_method, options)
-puts ("\n*** api_method: #{api_method} & options: #{options.to_s} ***\n")
+puts ("coreAPi.request(#{api_method.to_s}, opts=#{options.to_s})")
+=begin
 		@method = api_method
 		if @method.nil? then
 			raise "No method API method selected! Please specify a OPS coreAPI method"
@@ -79,6 +80,7 @@ puts ("\n*** api_method: #{api_method} & options: #{options.to_s} ***\n")
 		# Tweak headers, removing this will default to application/x-www-form-urlencoded
 		request["Content-Type"] = "application/json"
 		request.form_data = options
+# puts ("[*** coreAPI request] response = EndpointsProxy.make_request(#{api_method.to_s}, #{options.to_s})")
 
 		response = nil
 		start_time = Time.now
@@ -95,6 +97,10 @@ puts ("\n*** api_method: #{api_method} & options: #{options.to_s} ***\n")
 		@query_time = Time.now - start_time
 
 		puts "Call took #{@query_time} seconds"
+=end
+
+		response = EndpointsProxy.make_request(api_method, options)
+# below would be EndpointsProxy.make_request ('proteinInfo', {protein_uri:...} )
 #		response = EndpointsProxy.make_request(api_method, options)
 		status = case response.code.to_i
 							 when 100..199 then
@@ -104,6 +110,9 @@ puts ("\n*** api_method: #{api_method} & options: #{options.to_s} ***\n")
 							 when 200 then #HTTPOK =>  Success
 								 @success = true
 								 parsed_response = CoreApiResponseParser.parse_response(response)
+								 if parsed_response.instance_of?(Hash)
+									 return [parsed_response]
+								 end
 								 @results = Array.new
 								 parsed_response.each do |solution|
 									 rdf = solution.to_hash

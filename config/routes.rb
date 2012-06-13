@@ -48,6 +48,7 @@ TdGUI::Application.routes.draw do
 			post :protein_info
 			post :pharm_by_protein_name
 			get :test
+			get :check
 		end
 	end
 

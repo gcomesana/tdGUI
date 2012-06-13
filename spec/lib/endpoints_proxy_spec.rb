@@ -41,7 +41,7 @@ describe "Behaviour of EndpointsProxy" do
 		result = EndpointsProxy.autocheck.should be_true
 		result = EndpointsProxy.checkConceptAPI.should be_true
 
-puts "proteinLookup endpoint: #{EndpointsProxy.getEndpoint}"
+puts "proteinLookup endpoint: #{EndpointsProxy.get_endpoint}"
 
 	end
 
@@ -49,7 +49,7 @@ puts "proteinLookup endpoint: #{EndpointsProxy.getEndpoint}"
 
 	it "module check coreApi should ping back" do
 		result = EndpointsProxy.autocheck.should be_true
-		coreApiAlive = EndpointsProxy.checkCoreAPI
+		coreApiAlive = EndpointsProxy.check_coreAPI
 
 #		EndpointsProxy.myProxy.should be_nil
 puts "Endpoints checked: #{EndpointsProxy.getEndpointsChecked}"
@@ -57,14 +57,14 @@ puts "Endpoints checked: #{EndpointsProxy.getEndpointsChecked}"
 		EndpointsProxy.getEndpointsChecked.should be > 0
 		coreApiAlive.should be_true
 
-puts "Endpoint used: #{EndpointsProxy.getEndpoint}"
+puts "Endpoint used: #{EndpointsProxy.get_endpoint}"
 	end
 
 
 	it "make_request should get a response" do
 		EndpointsProxy.autocheck.should be_true
 		EndpointsProxy.checkConceptAPI.should be_true
-		EndpointsProxy.getEndpoint.should_not eq(@url)
+		EndpointsProxy.get_endpoint.should_not eq(@url)
 
 		res = EndpointsProxy.make_request(@url, @options)
 		res.should_not be_nil
@@ -104,6 +104,7 @@ puts "json_str: #{json_str}"
 			@xmlContent.length.should be > 0
 		end
 
+
 		it "should parse the content" do
 		  result = EndpointsProxy.buildup_uniprot_info(@xmlContent)
 			result.should be_a Hash
@@ -118,6 +119,24 @@ puts "json_str: #{json_str}"
 
 		end
 
+	end
+
+	describe "coreAPI call through proxy" do
+
+		before(:all) do
+			@ca_url_or_api = 'proteinInfo'
+			@ca_opts = {:uri=>"<http://www.conceptwiki.org/concept/979f02c6-3986-44d6-b5e8-308e89210c8d>",
+									:limit=>"25", :offset=>0, :method=>"proteinInfo"}
+		end
+
+
+		it "should call coreAPI and return something" do
+			result = EndpointsProxy.make_request(@ca_url_or_api, @ca_opts)
+			result.should_not be_nil
+
+			result.should be_kind_of String
+		end
+	end
 
 =begin
 		it "buildup_uniprot_info should return a hash" do
@@ -125,42 +144,8 @@ puts "json_str: #{json_str}"
 			build_up.should_not be_empty
 		end
 =end
-	end
 
 
 
-
-
-
-=begin
-	it "should produce a hash" do
-		xml = '<?xml version="1.0" encoding="UTF-8"?>
-		<deeply>
-			<nested>
-				<xml>
-					<users>
-						<user ref="1">
-							<usrid>1</usrid>
-							<name>Ed Spencer</name>
-							<email>ed@sencha.com</email>
-						</user>
-						<user ref="2">
-							<usrid>2</usrid>
-							<name>Abe Elias</name>
-							<email>abe@sencha.com</email>
-						</user>
-					</users>
-				</xml>
-			</nested>
-		</deeply>'
-
-		myHash = Hash.from_xml(xml)
-		myJson = myHash.to_json
-
-		puts "#{myHash}"
-		puts "#{myJson}"
-
-	end
-=end
 
 end

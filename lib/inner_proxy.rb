@@ -124,10 +124,11 @@ class InnerProxy
 			end
 #  break alive if alive != -1 && alive != -2 && alive != -3
 		end # EO loop on endopoints
-
+=begin
 		if alive == 0
 			@endpoint_ready = @urlMap[CORE_API_URL_83]
 		end
+=end
 		alive > 0 ? true : false
 	end
 
@@ -224,7 +225,15 @@ class InnerProxy
 		pdbs = main_entry.css("dbReference[type='PDB']").collect { |pdb|
 			pdb
 		}
-		if pdbs.empty? == false
+		pdbNodeMalformed = false
+		pdbs.each { |node|
+			resolution = node.css("property[type='resolution']")
+			if resolution.nil? || resolution.length == 0 then
+				pdbNodeMalformed = true
+				break
+			end
+		}
+		if pdbs.empty? == false && pdbNodeMalformed == false
 # sort by value resolution to get the element with lowes resolution value
 			pdbs = pdbs.sort_by{ |node|
 				node.css("property[type='resolution']").first['value']

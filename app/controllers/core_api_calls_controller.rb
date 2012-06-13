@@ -48,7 +48,7 @@ class CoreApiCallsController < ApplicationController
     render :json => ResultsFormatter.construct_column_objects(results).to_json, :layout => false
   end
 =end
-  
+
   
   # Main search for pharmacology by compound name. The input parameter is the cmpd_url returned by cmdp_name_lookup
   def pharm_by_compound_name(cmpd_uri = params[:compound_uri])
@@ -121,8 +121,11 @@ class CoreApiCallsController < ApplicationController
     options[:offset] = params[:offset]
     api_call = CoreApiCall.new
     results = api_call.request( api_method, options)
-puts "protein_info results: #{results}"
-    render :json => ResultsFormatter.construct_column_objects(results).to_json, :layout => false
+		if results.nil? then
+		  render :json => {:success => false}.to_json, :layout => false
+		else
+    	render :json => ResultsFormatter.construct_column_objects(results).to_json, :layout => false
+		end
   end
 
   # check to see if endpoint is responding

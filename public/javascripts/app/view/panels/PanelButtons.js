@@ -28,7 +28,7 @@ Ext.define ('TDGUI.view.panels.PanelButtons', {
     this.buttons = [{
         xtype: 'button',
         text: btnLeft,
-        id: 'panelBtnLeft'
+        id: 'panelBtnLeft',
       }, {
         xtype: 'button',
         text: btnRight,

@@ -48,11 +48,11 @@ describe CoreApiCallsController do
 		get :protein_info, :protein_uri => @uniprot_uri
 		json_resp = JSON.parse(response.body)
 
+puts "**==> uniprot protein_info: #{response.body}"
 		json_resp['ops_records'].should_not be_nil
 		json_resp['ops_records'].should be_kind_of Array
 		json_resp['totalCount'].should be > 0
 
-#		puts "**==> uniprot protein_info: #{response.body}"
 	end
 
 =begin

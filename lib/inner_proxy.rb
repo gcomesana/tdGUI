@@ -3,6 +3,11 @@ require 'rexml/document'
 require 'nokogiri'
 require 'uri'
 
+
+#
+# This proxy is a kind of helper class to the tdgui_proxy in order to
+# give support to requests either to uniprot or coreAPI
+#
 class InnerProxy
 	include REXML
 
@@ -301,7 +306,7 @@ class InnerProxy
 
 	private
 # request (addrs, opts)
-# Make a simple http request and returns the response code
+# Make a simple http POST request and returns the response code
 	def request (addrs, opts)
 =begin
 			uri = URI.parse (addrs)

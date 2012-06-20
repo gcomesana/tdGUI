@@ -461,6 +461,7 @@ puts query_str
       options[:offset] = params[:offset]
       api_call = CoreApiCall.new
       results = api_call.request( api_method, options)
+puts "results.length: #{results.length} -> #{results.to_s}\n"
       results.each do |record|
   puts record.inspect  #NB Some proteins to NOT have a real uri! just "http://identifiers.org/#/WikiPathways/Other/" or similar
       end

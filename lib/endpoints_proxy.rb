@@ -121,16 +121,16 @@ public
 # if the source is the concept wiki api call model, it should be a uri
 # @param opts, the options to pass to the request
 	def self.make_request (url_or_method, opts)
+# puts ("make_request (#{url_or_method.to_s}, opts=#{opts.to_s})")
 # first, decode url_or_method param
-puts ("make_request (#{url_or_method.to_s}, opts=#{opts.to_s})")
 		uri_parts = url_or_method.scan(URI_REGEX)[0]
 		is_uri = !uri_parts[0].nil? && !uri_parts[1].nil? && !uri_parts[2].nil?
 
-#		if is_uri
+# conceptWiki part
 		if is_uri || url_or_method.include?(@myProxy.conceptWikiEP) then # conceptAPI
 			ep_alive = checkConceptAPI()
 			ep_ready = get_endpoint()
-			ep_ready = 'http://www.uniprot.org/uniprot/?format=tab&columns=id,protein%20names,citation,comments,genes&sort=score'
+#			ep_ready = 'http://www.uniprot.org/uniprot/?format=tab&columns=id,protein%20names,citation,comments,genes&sort=score'
 
 			if ep_alive && url_or_method.include?(ep_ready) then # conceptAPI will be called
 				url = URI.parse(url_or_method)
@@ -153,18 +153,16 @@ puts "EndpointsProxy.make_request: #{ep_ready}"
 
 # coreAPI part
 #		elsif url.include? @myProxy.coreApiEP then # coreAPI on
-		else # so far, url_or_method should be something like 'proteinInfo', 'compoundPharma'
+		else # url_or_method should be something like 'proteinInfo', 'compoundPharma', 'sparql'
 			ep_alive = check_coreAPI()
 			ep_ready = get_endpoint() # ep_alive ? get_endpoint(): nil
 
-# for test purposes
+# for test purposes, as coreAPI use to be alive at testing time
 			if !opts[:uri].nil?
 				if opts[:uri].scan(/uniprot/).empty? == false
 					ep_alive = false
 				end
 			end
-
-
 
 #			if url.include? ep_ready then # coreAPI will be used
 			if ep_alive then
@@ -180,29 +178,11 @@ puts "EndpointsProxy.make_request: #{ep_ready}"
 					puts "Timeout after #{query_time} seconds"
 					raise Timeout::Error
 				end
-#				resutsHash = buildup_uniprot_info(response.body)
-=begin
-				if response.code.to_i == 200 then
-					success = true
-					parsed_response = CoreApiResponseParser.parse_response(response)
-					results = Array.new
-					parsed_response.each do |solution|
-						rdf = solution.to_hash
-						rdf.each { |key, value| rdf[key] = value.to_s }
-						results.push(rdf)
-					end
-				else
-					results = nil
-				end
-
-				json_resp = ResultsFormatter.construct_column_objects(results).to_json
-			  json_resp
-=end
 				return response
 
 			else # no endpoint is alive => we resort to uniprot
 				ep_ready = opts[:uri].scan(/[^<].*[^>]/)[0]+'.xml'
-puts "EndpointsProxy.make_request: #{ep_ready}"
+# puts "EndpointsProxy.make_request: #{ep_ready}"
 				url = URI.parse(ep_ready)
 
 				req = Net::HTTP::Get.new(url.request_uri)

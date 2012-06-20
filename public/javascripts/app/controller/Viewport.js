@@ -85,6 +85,11 @@ console.info ("raising Pharm By Target panel")
         })
         break
 
+      case 'tdgui-interactiontargetpanel':
+console.info ("raising interactions for Target panel")
+
+        break
+
     }
 /*
     var multiTarget = Ext.createByAlias ('widget.'+xtype, {

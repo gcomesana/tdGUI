@@ -24,4 +24,16 @@ class TdguiProxyController < ApplicationController
 		render :json => json_entries, :layout => false
 	end
 
+
+
+
+	def interactions_retrieval (target_id = params[:target])
+		stringdb_proxy = TdguiProxy.new
+
+		return '{}' unless target_id != nil && target_id != ''
+		graph = stringdb_proxy.get_target_interactions(target_id)
+
+		render :json => graph.to_json, :layout => false
+	end
+
 end

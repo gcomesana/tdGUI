@@ -63,6 +63,16 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
             itemId:'pharmTargetButton',
             cls:'target-pharm-button'
           }, {
+            xtype:'button',
+            text:'Interaction Data',
+            itemId:'stringdbTargetButton',
+            cls:'target-pharm-button'
+          }, {
+            xtype:'button',
+            text:'Pathway Data',
+            itemId:'pathwayTargetButton',
+            cls:'target-pharm-button'
+          }, {
 						xtype: 'displayfield',
 						anchor: '100%',
 						itemId: 'target_type',
@@ -315,6 +325,11 @@ console.info ("targetinfos length: "+targetInfos.length)
 	},
 
 
+/**
+ * Set the target info data on the panel info and, in addition, sets the handler
+ * for the pharma button (BAD: it should be on the controller)
+ * @param target, the very first record retrieved with target info data
+ */
 	setValues: function(target) {
 		this.resetAllFields();
 		var td = target.data;
@@ -325,11 +340,11 @@ console.info ("targetinfos length: "+targetInfos.length)
     pharmButton.hide();
     pharmButton.setHandler(function () {
 // console.info('pharmButton.setHandler -> !xt=tdgui-pharmbytargetpanel&qp=' + target.store.proxy.extraParams.protein_uri)
-        var historyParams = '!xt=tdgui-pharmbytargetpanel&qp=' + target.store.proxy.extraParams.protein_uri
-        historyParams += '&tg=' + targetName
-        Ext.History.add(historyParams)
-      }
-    );
+      var historyParams = '!xt=tdgui-pharmbytargetpanel&qp=' +
+            target.store.proxy.extraParams.protein_uri
+      historyParams += '&tg=' + targetName
+      Ext.History.add(historyParams)
+    });
     pharmButton.show();
 
     for (var prop in td) {

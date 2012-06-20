@@ -30,6 +30,7 @@ TdGUI::Application.routes.draw do
 		collection do
 			get :test
 			get :multiple_entries_retrieval
+			get :interactions_retrieval
 		end
 	end
 
@@ -47,7 +48,11 @@ TdGUI::Application.routes.draw do
 		collection do
 			post :protein_info
 			post :pharm_by_protein_name
+			get :wiki_pathway_protein_lookup
+			get :wiki_pathways_by_protein
+
 			get :test
+			get :check
 		end
 	end
 
@@ -64,8 +69,6 @@ TdGUI::Application.routes.draw do
 =end
   root :to => "home#index"
 
-# TODO Montar la caja de texto para atacar el proteinLookup
-# TODO implica poner primero los controladores y hacer tests!!!!!
 
 
   # The priority is based upon order of creation:

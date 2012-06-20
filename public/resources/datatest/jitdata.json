@@ -1,0 +1,519 @@
+var myJson = [{
+  "data": {
+    "$color": "#2404ED",
+    "$type": "circle",
+    "$dim": 7,
+    "type": "protein",
+    "node_desc": "protein phosphatase 2 (formerly 2A), catalytic subunit, alpha isoform; PP2A can modulate the activity of phosphorylase B kinase casein kinase 2, mitogen-stimulated S6 kinase, and MAP-2 kinase. Can dephosphorylate SV40 large T antigen and p53. Dephosphorylates SV40 large T antigen, preferentially on serine residues 120, 123, 677, and perhaps 679. The C subunit was most active, followed by the AC form, which was more active than the ABC form, and activity of all three forms was strongly stimulated by manganese, and to a lesser extent by magnesium. Dephosphorylation by the AC form, but no [...] "
+  },
+  "adjacencies": [],
+  "id": "13",
+  "name": "PPP2CA"
+}, {
+  "data": {
+    "$color": "#128EC9",
+    "$type": "circle",
+    "$dim": 7,
+    "type": "protein",
+    "node_desc": "protein phosphatase 2, regulatory subunit B', gamma isoform; The B regulatory subunit might modulate substrate selectivity and catalytic activity, and also might direct the localization of the catalytic enzyme to a particular subcellular compartment"
+  },
+  "adjacencies": [{
+    "nodeFrom": "12",
+    "nodeTo": "13",
+    "data": {
+      "$color": "white",
+      "$lineWidth": 3
+    },
+    "interactionData": {
+      "experimentRef": "0",
+      "confidenceVal": "0.999",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "12",
+    "nodeTo": "13",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "6",
+      "confidenceVal": "0.9",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "12",
+    "nodeTo": "13",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "5",
+      "confidenceVal": "0.999",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }],
+  "id": "12",
+  "name": "PPP2R5C"
+}, {
+  "data": {
+    "$color": "#AEFA54",
+    "$type": "circle",
+    "$dim": 7,
+    "type": "protein",
+    "node_desc": "protein phosphatase 2 (formerly 2A), regulatory subunit A, alpha isoform; The PR65 subunit of protein phosphatase 2A serves as a scaffolding molecule to coordinate the assembly of the catalytic subunit and a variable regulatory B subunit"
+  },
+  "adjacencies": [{
+    "nodeFrom": "11",
+    "nodeTo": "13",
+    "data": {
+      "$color": "white",
+      "$lineWidth": 3
+    },
+    "interactionData": {
+      "experimentRef": "0",
+      "confidenceVal": "0.999",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "11",
+    "nodeTo": "13",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "6",
+      "confidenceVal": "0.9",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "11",
+    "nodeTo": "13",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "5",
+      "confidenceVal": "0.999",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "11",
+    "nodeTo": "12",
+    "data": {
+      "$color": "white",
+      "$lineWidth": 3
+    },
+    "interactionData": {
+      "experimentRef": "0",
+      "confidenceVal": "0.999",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "11",
+    "nodeTo": "12",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "6",
+      "confidenceVal": "0.9",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "11",
+    "nodeTo": "12",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "5",
+      "confidenceVal": "0.999",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }],
+  "id": "11",
+  "name": "PPP2R1A"
+}, {
+  "data": {
+    "$color": "#62ACE4",
+    "$type": "circle",
+    "$dim": 7,
+    "type": "protein",
+    "node_desc": "protein phosphatase 2 (formerly 2A), regulatory subunit A, beta isoform; The PR65 subunit of protein phosphatase 2A serves as a scaffolding molecule to coordinate the assembly of the catalytic subunit and a variable regulatory B subunit"
+  },
+  "adjacencies": [{
+    "nodeFrom": "10",
+    "nodeTo": "13",
+    "data": {
+      "$color": "white",
+      "$lineWidth": 2
+    },
+    "interactionData": {
+      "experimentRef": "0",
+      "confidenceVal": "0.999",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "10",
+    "nodeTo": "13",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "5",
+      "confidenceVal": "0.999",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "10",
+    "nodeTo": "12",
+    "data": {
+      "$color": "white",
+      "$lineWidth": 2
+    },
+    "interactionData": {
+      "experimentRef": "0",
+      "confidenceVal": "0.965",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "10",
+    "nodeTo": "12",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "5",
+      "confidenceVal": "0.965",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }],
+  "id": "10",
+  "name": "PPP2R1B"
+}, {
+  "data": {
+    "$color": "#110D95",
+    "$type": "circle",
+    "$dim": 7,
+    "type": "protein",
+    "node_desc": "shugoshin-like 1 (S. pombe); Plays a central role in chromosome cohesion during mitosis by preventing premature dissociation of cohesin complex from centromeres after prophase, when most of cohesin complex dissociates from chromosomes arms. May act by preventing phosphorylation of the STAG2 subunit of cohesin complex at the centromere, ensuring cohesin persistence at centromere until cohesin cleavage by ESPL1/separase at anaphase"
+  },
+  "adjacencies": [{
+    "nodeFrom": "9",
+    "nodeTo": "12",
+    "data": {
+      "$color": "white",
+      "$lineWidth": 3
+    },
+    "interactionData": {
+      "experimentRef": "0",
+      "confidenceVal": "0.989",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "9",
+    "nodeTo": "12",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "6",
+      "confidenceVal": "0.8",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "9",
+    "nodeTo": "12",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "5",
+      "confidenceVal": "0.953",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "9",
+    "nodeTo": "13",
+    "data": {
+      "$color": "white",
+      "$lineWidth": 3
+    },
+    "interactionData": {
+      "experimentRef": "0",
+      "confidenceVal": "0.999",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "9",
+    "nodeTo": "13",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "6",
+      "confidenceVal": "0.8",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "9",
+    "nodeTo": "13",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "5",
+      "confidenceVal": "0.997",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "9",
+    "nodeTo": "11",
+    "data": {
+      "$color": "white",
+      "$lineWidth": 3
+    },
+    "interactionData": {
+      "experimentRef": "0",
+      "confidenceVal": "0.996",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "9",
+    "nodeTo": "11",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "6",
+      "confidenceVal": "0.9",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "9",
+    "nodeTo": "11",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "5",
+      "confidenceVal": "0.971",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }],
+  "id": "9",
+  "name": "SGOL1"
+}, {
+  "data": {
+    "$color": "#725BE0",
+    "$type": "circle",
+    "$dim": 7,
+    "type": "protein",
+    "node_desc": "protein phosphatase 2 (formerly 2A), catalytic subunit, beta isoform; PP2A can modulate the activity of phosphorylase B kinase casein kinase 2, mitogen-stimulated S6 kinase, and MAP-2 kinase. Can dephosphorylate SV40 large T antigen and p53. Dephosphorylates SV40 large T antigen, preferentially on serine residues 120, 123, 677, and perhaps 679. The C subunit was most active, followed by the AC form, which was more active than the ABC form, and activity of all three forms was strongly stimulated by manganese, and to a lesser extent by magnesium. Dephosphorylation by the AC form, but not [...] "
+  },
+  "adjacencies": [{
+    "nodeFrom": "8",
+    "nodeTo": "9",
+    "data": {
+      "$color": "white",
+      "$lineWidth": 3
+    },
+    "interactionData": {
+      "experimentRef": "0",
+      "confidenceVal": "0.993",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "8",
+    "nodeTo": "9",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "6",
+      "confidenceVal": "0.8",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "8",
+    "nodeTo": "9",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "5",
+      "confidenceVal": "0.971",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "8",
+    "nodeTo": "11",
+    "data": {
+      "$color": "white",
+      "$lineWidth": 3
+    },
+    "interactionData": {
+      "experimentRef": "0",
+      "confidenceVal": "0.999",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "8",
+    "nodeTo": "11",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "6",
+      "confidenceVal": "0.9",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "8",
+    "nodeTo": "11",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "5",
+      "confidenceVal": "0.998",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "8",
+    "nodeTo": "10",
+    "data": {
+      "$color": "white",
+      "$lineWidth": 2
+    },
+    "interactionData": {
+      "experimentRef": "0",
+      "confidenceVal": "0.972",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "8",
+    "nodeTo": "10",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "5",
+      "confidenceVal": "0.972",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "8",
+    "nodeTo": "13",
+    "data": {
+      "$color": "white",
+      "$lineWidth": 3
+    },
+    "interactionData": {
+      "experimentRef": "0",
+      "confidenceVal": "0.904",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "8",
+    "nodeTo": "13",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "6",
+      "confidenceVal": "0.9",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "8",
+    "nodeTo": "13",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "5",
+      "confidenceVal": "0.101",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "8",
+    "nodeTo": "12",
+    "data": {
+      "$color": "white",
+      "$lineWidth": 3
+    },
+    "interactionData": {
+      "experimentRef": "0",
+      "confidenceVal": "0.993",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "8",
+    "nodeTo": "12",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "6",
+      "confidenceVal": "0.9",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }, {
+    "nodeFrom": "8",
+    "nodeTo": "12",
+    "data": {
+      "$color": "white"
+    },
+    "interactionData": {
+      "experimentRef": "5",
+      "confidenceVal": "0.938",
+      "conf_desc": "estimated likelihood of predicted functional association being true positive"
+    }
+  }],
+  "id": "8",
+  "name": "PPP2CB"
+}]
+
+experiments = {"experiments": [{
+    "id": "exprmnt7",
+    "type": "automated_textmining",
+    "detection": "predictive text mining",
+    "desc": "Unsupervised, automated mining of biomedical texts: analysis of protein-protein co-mentioning"
+  }, {
+    "id": "exprmnt6",
+    "type": "knowledge datamining",
+    "detection": "experimental knowledge based",
+    "desc": "Import of protein-protein association information from curated knowledge databases"
+  }, {
+    "id": "exprmnt5",
+    "type": "experimental_interaction_data",
+    "detection": "experimental knowledge based",
+    "desc": "Global analysis of protein-protein interaction data, obtained from the literature and from large-scale datasets (BIND database)"
+  }, {
+    "id": "exprmnt4",
+    "type": "gene_coexpression",
+    "detection": "other/not applicable",
+    "desc": "Combined analysis of available microarray data, co-expression analysis"
+  }, {
+    "id": "exprmnt3",
+    "type": "gene_cooccurence",
+    "detection": "sequence based phylogenetic profile",
+    "desc": "Analysis of presence/absence patterns of genes in genomes: functional partners co-occur"
+  }, {
+    "id": "exprmnt2",
+    "type": "gene_fusion_events",
+    "detection": "domain fusion",
+    "desc": "Detection of gene fusion events: functional linkage inferred for the separate components in other genomes"
+  }, {
+    "id": "exprmnt1",
+    "type": "",
+    "detection": "gene neighborhoods",
+    "desc": ""
+  }, {
+    "id": "exprmnt0",
+    "type": "combined_confidence",
+    "detection": "other/not applicable",
+    "desc": "Probabilistic, benchmarked integration of all evidence types: combined confidence score of predicted functional association (range 0.0 to 1.0)"
+  }]
+}

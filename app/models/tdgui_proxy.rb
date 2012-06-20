@@ -2,7 +2,9 @@ require 'rexml/document'
 require 'net/http'
 require 'uri'
 
-
+#
+# It does requests to endpoints different than coreAPI endpoints
+#
 class TdguiProxy
 	include ActiveModel::Validations
 	include EndpointsProxy
@@ -12,10 +14,23 @@ class TdguiProxy
 
 	DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch/uniprotkb/xxxx/uniprotxml'
 
-
 # Constructor
 	def initialize
 		@parsed_results = nil
+
+	end
+
+
+
+
+	def get_target_interactions(target_id)
+
+		if target_id.nil? || target_id.empty? then
+			nil
+		else
+			string_proxy = StringDbProxy.new
+			target_graph = string_proxy.get_interaction_graph(target_id)
+		end
 
 	end
 
@@ -62,7 +77,14 @@ puts "get_multiple_entries: #{entries}"
 
 	end
 
-# TODO bring the json to the table (dynamicgrid3) and add more things upon query with christian
+
+	def get_interactions (qtarget)
+
+
+
+	end
+
+
 
 
 	private
@@ -140,7 +162,7 @@ puts "Filling columns..."
 			org_sci = ent.elements.collect ("organism/name[@type='scientific']") { |orgName| orgName.text }
 #			entryHash['organismSciName'] = org_sci[0].nil? ? '': org_sci[0]
 
-			org_comm = ent.elements.collect ("organism/name[@type='commong']") { |orgName| orgName.text }
+			org_comm = ent.elements.collect ("organism/name[@type='common']") { |orgName| orgName.text }
 #			entryHash['organism_comm_name'] = org_comm[0].nil? ? '': org_comm[0]
 
 			func_comment = ent.elements.collect ("comment[@type='function']/text") { |comment| comment.text }
@@ -197,7 +219,11 @@ private
 	end
 
 
-
+#
+# This method does a get request to an uri
+# @param url, the target url
+# @param options, parameters and other options for the request
+# @return the object response
 	def request(url, options)
 		my_url = URI.parse(url)
 

@@ -30,7 +30,8 @@ describe ConceptWikiApiCall do
 
 
 	it "make_request should return a valid Ruby Array" do
-		res = @conceptWiki.request(@url, @opts)
+#		res = @conceptWiki.request(@url, @opts)
+		res = @conceptWiki.search_by_tag(@opts[:uuid],@opts[:q],@opts)
 		res.should be_kind_of Array
 puts "#{res}"
 	end

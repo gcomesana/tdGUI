@@ -92,7 +92,9 @@ console.info ("raising interactions for Target panel")
           fdDivName: 'xperimental-div',
           target_id: 'Q13362'
         })
+        newPanel.initGraph(newPanel)
         break
+
 
     }
 /*

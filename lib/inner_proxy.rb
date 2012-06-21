@@ -118,22 +118,26 @@ class InnerProxy
 		alive = 0
 		@coreEndpointsChecked = 0
 		@coreApiEndpoints.each do |endpoint|
+			begin
 			Timeout::timeout (TIMEOUT) do
 				alive = request(endpoint, options)
 				@coreEndpointsChecked += 1
+			end
+			rescue Timeout::Error => e
+				alive = 0
 			end
 
 			if alive > 0 then
 				@endpoint_ready = endpoint # any of them from 83 to 87
 				break
 			end
-#  break alive if alive != -1 && alive != -2 && alive != -3
 		end # EO loop on endopoints
 =begin
 		if alive == 0
 			@endpoint_ready = @urlMap[CORE_API_URL_83]
 		end
 =end
+
 		alive > 0 ? true : false
 	end
 

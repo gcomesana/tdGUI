@@ -3,7 +3,8 @@
 Ext.define ("TDGUI.controller.Viewport", {
   extend: 'Ext.app.Controller',
 
-  views: ['Viewport', 'panels.BorderCenter', 'panels.MultiTarget', 'panels.PharmByTarget'],
+  views: ['Viewport', 'panels.BorderCenter', 'panels.MultiTarget',
+    'panels.PharmByTarget', 'panels.Interactions'],
   stores: ['Targets'],
   models: ['Target'],
 
@@ -87,7 +88,10 @@ console.info ("raising Pharm By Target panel")
 
       case 'tdgui-interactiontargetpanel':
 console.info ("raising interactions for Target panel")
-
+        newPanel = Ext.createByAlias ('widget.'+xtype, {
+          fdDivName: 'xperimental-div',
+          target_id: 'Q13362'
+        })
         break
 
     }

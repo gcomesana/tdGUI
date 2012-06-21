@@ -5,6 +5,25 @@
 
 // Default confiration for the ForceDirect graph initialization
 // TODO estos cfgs hay que meterlos en una clase...
+
+var labelType
+(function() {
+  var ua = navigator.userAgent,
+    iStuff = ua.match(/iPhone/i) || ua.match(/iPad/i),
+    typeOfCanvas = typeof HTMLCanvasElement,
+    nativeCanvasSupport = (typeOfCanvas == 'object' || typeOfCanvas == 'function'),
+    textSupport = nativeCanvasSupport && (typeof document.createElement('canvas').getContext('2d').fillText == 'function');
+  //I'm setting this based on the fact that ExCanvas provides text support for IE
+  //and that as of today iPhone/iPad current text support is lame
+  labelType = (!nativeCanvasSupport || (textSupport && !iStuff)) ? 'Native' : 'HTML';
+  nativeTextSupport = labelType == 'Native';
+  useGradients = nativeCanvasSupport;
+  animate = !(iStuff || !nativeCanvasSupport);
+  console.info('auto-caller function!!!')
+})();
+
+
+
 var defaultFDCfg = {
   // id of the visualization container
   injectInto: 'infovis-div',
@@ -144,7 +163,7 @@ var computeCfg = {
 //      var aNode = fd.graph.getNode('12')
 //      var pos = aNode.getPos()
 
-    fd.animate({
+    this.fd.animate({
       modes: ['linear'],
       transition: $jit.Trans.Elastic.easeOut,
       duration: 2500
@@ -208,7 +227,8 @@ Ext.define('TDGUI.view.panels.Interactions', {
 
 
     Ext.Ajax.request({
-      url: 'tdgui_proxy/interactions_retrieval',
+//      url: 'tdgui_proxy/interactions_retrieval',
+      url: 'resources/datatest/full-jit.json',
       method: 'GET',
       params: {
         target: me.target_id
@@ -232,14 +252,35 @@ Ext.define('TDGUI.view.panels.Interactions', {
 
   startupGraph: function (jsonData) {
     var divVis = Ext.get('infovis-div')
+    var me = this
     //        divVis.insertHtml ('afterBegin', '<p>Kgallon</p>')
 
     if (this.fdDivName != 'infovis-div')
       this.fdCfg.injectInto = this.fdDivName
 
-    fd = new $jit.ForceDirected(defaultFDCfg)
-    fd.loadJSON(jsonData)
-    fd.computeIncremental(computeCfg)
+    this.fd = new $jit.ForceDirected(defaultFDCfg)
+    jsonObj = Ext.JSON.decode(jsonData)
+    this.fd.loadJSON(jsonObj)
+    this.fd.computeIncremental({
+      iter: 40,
+      property: 'end',
+
+      onStep: function(perc) {
+        console.info (perc + '% loaded...');
+      },
+
+      onComplete: function() {
+        console.info('graph pre-processing done');
+    //      var aNode = fd.graph.getNode('12')
+    //      var pos = aNode.getPos()
+
+        me.fd.animate({
+          modes: ['linear'],
+          transition: $jit.Trans.Elastic.easeOut,
+          duration: 2500
+        })
+      } // EO onComplete
+    })
 
   },
 
@@ -259,7 +300,7 @@ Ext.define('TDGUI.view.panels.Interactions', {
         fd.computeIncremental(computeCfg)
 
   */
-        var canvasEl = fd.canvas.getElement()
+//        var canvasEl = fd.canvas.getElement()
         console.info('EO afterrender')
 
       }

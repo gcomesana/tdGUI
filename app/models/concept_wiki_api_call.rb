@@ -232,12 +232,12 @@ class ConceptWikiApiCall
 		moduleOk
 	end
 
-#	private
+private
 	def request(url, options)
-		puts "\nIssues call to ConceptWiki API \"#{p url}\" with options: \"#{p options}\"\n"
+#		puts "\nIssues call to ConceptWiki API \"#{p url}\" with options: \"#{p options}\"\n"
 
-#		endpoint_ok = EndpointsProxy.checkConceptAPI
-#		url = endpoint_ok ? url: EndpointsProxy.getEndpoint
+		endpoint_ok = EndpointsProxy.checkConceptAPI
+		url = endpoint_ok ? url: EndpointsProxy.getEndpoint
 
 		puts "got endpoint: #{url}"
 #		url = URI.parse(url)

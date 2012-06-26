@@ -1,0 +1,342 @@
+
+/*
+.x-btn span.ok				{ background-image: url(../images/icons/silk/tick.png) !important; }
+.x-btn span.cancel			{ background-image: url(../images/icons/silk/cross.png) !important; }
+.x-btn span.add				{ background-image: url(../images/icons/silk/add.png) !important; }
+.x-btn span.delete			{ background-image: url(../images/icons/silk/delete.png) !important; }
+.x-btn span.download		{ background-image: url(../images/icons/silk/arrow_down.png) !important; }
+.x-btn span.download2		{ background-image: url(../images/icons/silk/package_down.png) !important; }
+.x-btn span.upload			{ background-image: url(../images/icons/silk/arrow_up.png) !important; }
+.x-btn span.search			{ background-image: url(../images/icons/silk/magnifier.png) !important; }
+.x-btn span.find			{ background-image: url(../images/icons/silk/find.png) !important; }
+.x-btn span.first			{ background-image: url(../images/icons/silk/resultset_first.png) !important; }
+.x-btn span.prev			{ background-image: url(../images/icons/silk/resultset_previous.png) !important; }
+.x-btn span.next			{ background-image: url(../images/icons/silk/resultset_next.png) !important; }
+.x-btn span.last			{ background-image: url(../images/icons/silk/resultset_last.png) !important; }
+.x-btn span.play			{ background-image: url(../images/icons/silk/play_blue.png) !important; }
+.x-btn span.pause			{ background-image: url(../images/icons/silk/pause_blue.png) !important; }
+.x-btn span.rewind			{ background-image: url(../images/icons/silk/rewind_blue.png) !important; }
+.x-btn span.forward			{ background-image: url(../images/icons/silk/forward_blue.png) !important; }
+.x-btn span.stop			{ background-image: url(../images/icons/silk/stop_blue.png) !important; }
+.x-btn span.reload			{ background-image: url(../images/icons/silk/reload.png) !important; }
+.x-btn span.sync			{ background-image: url(../images/icons/silk/arrow_refresh.png) !important; }
+.x-btn span.save			{ background-image: url(../images/icons/silk/disk.png) !important; }
+.x-btn span.email			{ background-image: url(../images/icons/silk/email.png) !important; }
+.x-btn span.print			{ background-image: url(../images/icons/silk/printer.png) !important; }
+.x-btn span.heart			{ background-image: url(../images/icons/silk/heart.png) !important; }
+.x-btn span.like			{ background-image: url(../images/icons/silk/thumb_up.png) !important; }
+.x-btn span.dislike			{ background-image: url(../images/icons/silk/thumb_down.png) !important; }
+.x-btn span.accept			{ background-image: url(../images/icons/silk/accept.png) !important; }
+.x-btn span.decline			{ background-image: url(../images/icons/silk/decline.png) !important; }
+.x-btn span.help			{ background-image: url(../images/icons/silk/help.png) !important; }
+.x-btn span.home			{ background-image: url(../images/icons/silk/house.png) !important; }
+.x-btn span.info			{ background-image: url(../images/icons/silk/information.png) !important; }
+.x-btn span.cut				{ background-image: url(../images/icons/silk/cut.png) !important; }
+.x-btn span.copy			{ background-image: url(../images/icons/silk/page_white_copy.png) !important; }
+.x-btn span.paste			{ background-image: url(../images/icons/silk/paste_plain.png) !important; }
+.x-btn span.erase			{ background-image: url(../images/icons/silk/erase.png) !important; }
+.x-btn span.undo			{ background-image: url(../images/icons/silk/arrow_undo.png) !important; }
+.x-btn span.redo			{ background-image: url(../images/icons/silk/arrow_redo.png) !important; }
+.x-btn span.edit			{ background-image: url(../images/icons/silk/pencil.png) !important; }
+.x-btn span.calendar		{ background-image: url(../images/icons/silk/date.png) !important; }
+.x-btn span.user			{ background-image: url(../images/icons/silk/user.png) !important; }
+.x-btn span.settings		{ background-image: url(../images/icons/silk/cog.png) !important; }
+.x-btn span.cart			{ background-image: url(../images/icons/silk/cart.png) !important; }
+.x-btn span.wand			{ background-image: url(../images/icons/silk/wand.png) !important; }
+.x-btn span.wrench			{ background-image: url(../images/icons/silk/wrench.png) !important; }
+.x-btn span.page			{ background-image: url(../images/icons/silk/page.png) !important; }
+*/
+.x-btn-s-button-toolbar-small,
+.x-btn-s-button-toolbar-medium,
+.x-btn-s-button-toolbar-large
+{
+	position: relative;
+/*	background-image: url(../images/skins/simple/awesome-overlay-sprite.png); */
+	background-repeat: repeat-x;
+	background-position: 0 0;
+	background-color: #333; /* Default */
+
+	/* IE only stuff */
+	_background-image: none;
+
+	border-color: transparent;
+
+	/* Cross browser inline block hack - http://blog.mozilla.com/webdev/2009/02/20/cross-browser-inline-block/ */
+	display: -moz-inline-stack;
+	display: inline-block;
+	vertical-align: middle;
+	*display: inline !important;
+	position: relative;
+
+	/* Force hasLayout in IE */
+	zoom: 1;
+
+	/* Disable text selection (Firefox only)*/
+	-moz-user-select: none;
+}
+
+.x-btn-s-button-toolbar-small
+{
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+	box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+
+	/* height: 22px; */
+	margin: 2px 0 2px 0;
+	padding: 1px 7px 2px 4px;
+}
+
+.x-btn-s-button-toolbar-medium
+{
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+	box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+
+	/* height: 26px; */
+	margin: 3px 0 3px 0;
+	padding: 4px 6px 6px 6px;
+}
+
+.x-btn-s-button-toolbar-large
+{
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+	box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+
+	/* height: 30px; */
+	margin: 5px 0 5px 0;
+	padding: 5px 8px 4px 6px;
+}
+
+.x-btn-s-button-toolbar-small .x-btn-inner,
+.x-btn-s-button-toolbar-medium .x-btn-inner,
+.x-btn-s-button-toolbar-large .x-btn-inner
+{
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	font: bold 10px "Helvetica Neue", Helvetica, Arial, clean, sans-serif !important;
+	text-decoration: none !important;
+	background: none;
+	border: none;
+	white-space: nowrap;
+	cursor: pointer;
+	user-select: none;
+	-moz-user-select: none;
+	color: #fff !important;
+
+	/* Special effects */
+	text-shadow: 0 -1px 1px rgba(0,0,0,0.25), -2px 0 1px rgba(0,0,0,0.25);
+
+	/* Fix extra width padding in IE */
+	_width: 0;
+	overflow: visible;
+}
+
+.x-btn-s-button-toolbar-small .x-btn-inner
+{
+	padding-top: 3px;
+	font: bold 10px "Helvetica Neue", Helvetica, Arial, clean, sans-serif !important;
+}
+
+.x-btn-s-button-toolbar-medium .x-btn-inner
+{
+	padding-top: 1px;
+	font: bold 12px "Helvetica Neue", Helvetica, Arial, clean, sans-serif !important;
+}
+
+.x-btn-s-button-toolbar-large .x-btn-inner
+{
+	padding-top: 1px;
+	font: bold 14px "Helvetica Neue", Helvetica, Arial, clean, sans-serif !important;
+}
+
+.x-btn-s-button-toolbar-small-icon-text-right button,
+.x-btn-s-button-toolbar-small-icon-text-right .x-btn-inner,
+.x-btn-s-button-toolbar-small-icon-text-left button,
+.x-btn-s-button-toolbar-small-icon-text-left .x-btn-inner,
+.x-btn-s-button-toolbar-small-icon button,
+.x-btn-s-button-toolbar-small-icon .x-btn-inner,
+.x-btn-s-button-toolbar-small-noicon button,
+.x-btn-s-button-toolbar-small-noicon .x-btn-inner
+{
+	height: 18px;
+	line-height: 16px;
+}
+
+.x-btn-s-button-toolbar-medium-icon-text-right button,
+.x-btn-s-button-toolbar-medium-icon-text-right .x-btn-inner,
+.x-btn-s-button-toolbar-medium-icon-text-left button,
+.x-btn-s-button-toolbar-medium-icon-text-left .x-btn-inner,
+.x-btn-s-button-toolbar-medium-icon button,
+.x-btn-s-button-toolbar-medium-icon .x-btn-inner,
+.x-btn-s-button-toolbar-medium-noicon button,
+.x-btn-s-button-toolbar-medium-noicon .x-btn-inner
+{
+	height: 16px;
+	line-height: 16px;
+}
+
+.x-btn-s-button-toolbar-large-icon-text-right button,
+.x-btn-s-button-toolbar-large-icon-text-right .x-btn-inner,
+.x-btn-s-button-toolbar-large-icon-text-left button,
+.x-btn-s-button-toolbar-large-icon-text-left .x-btn-inner,
+.x-btn-s-button-toolbar-large-icon button,
+.x-btn-s-button-toolbar-large-icon .x-btn-inner,
+.x-btn-s-button-toolbar-large-noicon button,
+.x-btn-s-button-toolbar-large-noicon .x-btn-inner
+{
+	height: 20px;
+	line-height: 20px;
+}
+
+.x-btn-s-button-toolbar-small-icon-text-right .x-btn-inner,
+.x-btn-s-button-toolbar-medium-icon-text-right .x-btn-inner,
+.x-btn-s-button-toolbar-large-icon-text-right .x-btn-inner
+{
+	padding-left: 4px;
+	padding-right: 20px !important;
+}
+
+.x-btn-icon-text-right .x-btn-icon
+{
+    background-position: right center;
+}
+
+.x-btn-s-button-toolbar-small-icon-text-left .x-btn-inner,
+.x-btn-s-button-toolbar-medium-icon-text-left .x-btn-inner,
+.x-btn-s-button-toolbar-large-icon-text-left .x-btn-inner
+{
+	padding-left: 20px !important;
+}
+
+.x-btn-s-button-toolbar-small-icon-text-right .x-btn-icon,
+.x-btn-s-button-toolbar-small-icon-text-left .x-btn-icon
+{
+	top: 2px;
+}
+
+.x-btn-s-button-toolbar-medium-icon-text-right .x-btn-icon,
+.x-btn-s-button-toolbar-medium-icon-text-left .x-btn-icon
+{
+	top: 1px;
+}
+
+.x-btn-s-button-toolbar-large-icon-text-right .x-btn-icon,
+.x-btn-s-button-toolbar-large-icon-text-left .x-btn-icon
+{
+	top: 2px;
+}
+
+.x-btn-s-button-toolbar-small-icon-text-left .x-btn-icon,
+.x-btn-s-button-toolbar-medium-icon-text-left .x-btn-icon,
+.x-btn-s-button-toolbar-large-icon-text-left .x-btn-icon
+{
+	width: 16px;
+	height: 16px;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-repeat: no-repeat;
+}
+
+.x-btn-s-button-toolbar-small-icon-text-right .x-btn-icon,
+.x-btn-s-button-toolbar-medium-icon-text-right .x-btn-icon,
+.x-btn-s-button-toolbar-large-icon-text-right .x-btn-icon
+{
+	width: 16px;
+	height: 16px;
+	left: auto;
+	bottom: 0;
+	right: 0;
+	background-repeat: no-repeat;
+}
+
+.x-btn-s-button-toolbar-small-over,
+.x-btn-s-button-toolbar-medium-over,
+.x-btn-s-button-toolbar-large-over
+{
+	background-position: 0 -50px;
+}
+
+.x-btn-s-button-toolbar-small-focus,
+.x-btn-s-button-toolbar-medium-focus,
+.x-btn-s-button-toolbar-large-focus
+{
+	background-position: 0 -50px;
+}
+
+/* When pressed (clicked or toggled down) use the overlay to darken the color and remove the shadow */
+.x-btn-s-button-toolbar-small-pressed,
+.x-btn-s-button-toolbar-medium-pressed,
+.x-btn-s-button-toolbar-large-pressed
+{
+/*	background-image: url(../images/skins/simple/pressed-overlay-sprite.png); */
+	/* -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.7); */
+	/* Unfortunately, Safari doesn't support inset yet */
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	text-shadow: 0 0;
+
+	/* IE only stuff
+	border-bottom: 0\9;
+	border-top: 1px solid #666\9;
+	*/
+}
+
+.x-btn-s-button-toolbar-small-pressed .x-btn-inner,
+.x-btn-s-button-toolbar-medium-pressed .x-btn-inner,
+.x-btn-s-button-toolbar-large-pressed .x-btn-inner
+{
+	text-shadow: 0 0;
+}
+
+/* Show the button as disabled */
+.x-btn-s-button-toolbar-small.x-disabled,
+.x-btn-s-button-toolbar-medium.x-disabled,
+.x-btn-s-button-toolbar-large.x-disabled
+{
+	background-image: none;
+	background-color: #777 !important;
+	text-shadow: none;
+}
+
+/* Make sure nothing changes when the mouse moves over a disabled button */
+.x-btn-s-button-toolbar-small-over.x-disabled,
+.x-btn-s-button-toolbar-medium-over.x-disabled,
+.x-btn-s-button-toolbar-large-over.x-disabled,
+.x-btn-s-button-toolbar-small-focus.x-disabled,
+.x-btn-s-button-toolbar-medium-focus.x-disabled,
+.x-btn-s-button-toolbar-large-focus.x-disabled,
+.x-btn-s-button-toolbar-small-pressed.x-disabled,
+.x-btn-s-button-toolbar-medium-pressed.x-disabled,
+.x-btn-s-button-toolbar-large-pressed.x-disabled
+{
+	-moz-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Simple button colors */
+.s-black			{ background-color: #333; }
+.s-red				{ background-color: #a90118; }
+.s-orange			{ background-color: #ff8a00; }
+.s-yellow			{ background-color: #ffb515; }
+.s-green			{ background-color: #59a901; }
+.s-darkgreen		{ background-color: #398901; }
+.s-blue				{ background-color: #015ea9; }
+.s-teal				{ background-color: #2daebf; }
+.s-magenta			{ background-color: #a9014b; }
+.s-purple			{ background-color: #9d01a9; }

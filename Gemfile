@@ -13,6 +13,7 @@ gem 'pg'
 gem 'rdf'
 gem 'sparql-client'
 
+gem 'nokogiri', '~> 1.5.4'
 
 # Gems used only for assets and not required
 # in production environments by default.

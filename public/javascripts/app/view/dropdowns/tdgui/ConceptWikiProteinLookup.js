@@ -14,7 +14,7 @@ Ext.define ('TDGUI.view.dropdowns.tdgui.ConceptWikiProteinLookup', {
 
 	margin: '0 5 0 0',
 	fieldLabel: '',
-	width: undefined
-
-	
+	width: undefined,
+  inputString: '',
+  allowBlank: false
 })

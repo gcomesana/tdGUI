@@ -1,0 +1,108 @@
+{
+  "ops-records":[
+    {
+      "id":1,
+      "accesions":["Q13362", "B5BUA5", "Q14391", "Q15060"],
+      "keywords":["3D-structure", "Alternative splicing", "Centromere", "Chromosome", "Complete proteome", "Nucleus", "Phosphoprotein", "Polymorphism", "Reference proteome"],
+      "gene":["genePrimary", "geneSynonim"],
+      "proteinFullName":"Serine/threonine-protein phosphatase 2A 56 kDa regulatory subunit gamma isoform",
+      "sequence":{
+        "length":661,
+        "mass":6654,
+        "seq":"MLTCNKAGSRMVVDAANSNGPFQPVVLLHIRDVPPADQEKLFIQKLRQCCVLFDFVSDPLSDLKWKEVKRAALSEMVEYITHNRNVITEPIYPEVVHMFAVNMFRTLPPSSNPTGAEFDPEEDEPTLEAAWPHLQLVYEFFLRFLESPDFQPNIAKKYIDQKFVLQLLELFDSEDPRERDFLKTTLHRIYGKFLGLRAYIRKQINNIFYRFIYETEHHNGIAELLEILGSIINGFALPLKEEHKIFLLKVLLPLHKVKSLSVYHPQLAYCVVQFLEKDSTLTEPVVMALLKYWPKTHSPKEVMFLNELEEILDVIEPSEFVKIMEPLFRQLAKCVSSPHFQVAERALYYWNNEYIMSLISDNAAKILPIMFPSLYRNSKTHWNKTIHGLIYNALKLFMEMNQKLFDDCTQQFKAEKLKEKLKMKEREEAWVKIENLAKANPQYTVYSQASTMSIPVAMETDGPLFEDVQMLRKTVKDEAHQAQKDPKKDRPLARRKSELPQDPHTKKALEAHCRADELASQDGR"
+      },
+      "function":"The B regulatory subunit might modulate substrate selectivity and catalytic activity, and also might direct the localization of the catalytic enzyme to a particular subcellular compartment. The PP2A-PPP2R5C holoenzyme may specifically dephosphorylate and activate TP53 and play a role in DNA damage-induced inhibition of cell proliferation. PP2A-PPP2R5C may also regulate the ERK signaling pathway through ERK dephosphorylation.",
+
+      "references":18,
+      "pdbImg":"<img width=\"250\" height=\"250\" src=\"http://www.rcsb.org/pdb/images/1ott_bio_1_r_250.jpg?bioNum=2\">"
+    },
+    {
+      "id":2,
+      "accesions":["Q13362", "B5BUA5", "Q14391", "Q15060"],
+      "keywords":["3D-structure", "Alternative splicing", "Centromere", "Chromosome", "Complete proteome", "Nucleus", "Phosphoprotein", "Polymorphism", "Reference proteome"],
+      "gene":["genePrimary", "geneSynonim"],
+      "proteinFullName":"Serine/threonine-protein phosphatase 2A 56 kDa regulatory subunit gamma isoform",
+      "sequence":{
+        "length":661,
+        "mass":6654,
+        "seq":"MLTCNKAGSRMVVDAANSNGPFQPVVLLHIRDVPPADQEKLFIQKLRQCCVLFDFVSDPLSDLKWKEVKRAALSEMVEYITHNRNVITEPIYPEVVHMFAVNMFRTLPPSSNPTGAEFDPEEDEPTLEAAWPHLQLVYEFFLRFLESPDFQPNIAKKYIDQKFVLQLLELFDSEDPRERDFLKTTLHRIYGKFLGLRAYIRKQINNIFYRFIYETEHHNGIAELLEILGSIINGFALPLKEEHKIFLLKVLLPLHKVKSLSVYHPQLAYCVVQFLEKDSTLTEPVVMALLKYWPKTHSPKEVMFLNELEEILDVIEPSEFVKIMEPLFRQLAKCVSSPHFQVAERALYYWNNEYIMSLISDNAAKILPIMFPSLYRNSKTHWNKTIHGLIYNALKLFMEMNQKLFDDCTQQFKAEKLKEKLKMKEREEAWVKIENLAKANPQYTVYSQASTMSIPVAMETDGPLFEDVQMLRKTVKDEAHQAQKDPKKDRPLARRKSELPQDPHTKKALEAHCRADELASQDGR"
+      },
+      "function":"The B regulatory subunit might modulate substrate selectivity and catalytic activity, and also might direct the localization of the catalytic enzyme to a particular subcellular compartment. The PP2A-PPP2R5C holoenzyme may specifically dephosphorylate and activate TP53 and play a role in DNA damage-induced inhibition of cell proliferation. PP2A-PPP2R5C may also regulate the ERK signaling pathway through ERK dephosphorylation.",
+
+      "references":18,
+      "pdbImg":"<img width=\"250\" height=\"250\" src=\"http://www.rcsb.org/pdb/images/1ott_bio_1_r_250.jpg?bioNum=2\">"
+    }
+  ],
+  "totalCount":2,
+  "success":true,
+  "metaData": {
+  		"fields": [{
+  			"name": "id",
+  			"type": "auto"
+  		}, {
+  			"name": "accessions",
+  			"type": "auto"
+  		}, {
+  			"name": "keywords",
+  			"type": "auto"
+  		}, {
+  			"name": "gene",
+  			"type": "auto"
+  		}, {
+  			"name": "proteinFullName",
+  			"type": "auto"
+  		}, {
+  			"name": "sequence",
+  			"type": "auto"
+  		}, {
+  			"name": "function",
+  			"type": "auto"
+  		}, {
+  			"name": "references",
+  			"type": "auto"
+  		}, {
+  			"name": "pdbImg",
+  			"type": "auto"
+  		}],
+  		"root": "ops-records"
+  	},
+  "columns":[{
+      "text":"Accessions",
+      "dataIndex":"accesions",
+      "hidden":false,
+      "filter":{
+        "type":"string"
+      },
+      "width":200,
+      "xtype": "templatecolumn",
+      "tpl": "<tpl for=\"gene\">{.}<br/></tpl>"
+
+    },
+    {
+      "text":"Target name",
+      "dataIndex":"proteinFullName",
+      "hidden":false,
+      "filter":{
+        "type":"string"
+      },
+      "width":150
+    }, {
+      "text":"PDB Image",
+      "dataIndex":"pdbImg",
+      "hidden":false,
+      "filter":{
+        "type":"string"
+      },
+      "width":250
+    }, {
+      "text":"Sequence",
+      "dataIndex":"sequence",
+      "hidden":false,
+      "filter":{
+        "type":"int"
+      },
+      "width":150,
+      "xtype":"templatecolumn",
+      "tpl":"Length: {sequence.length}. Mass: <b>{sequence.mass}</b><br/>{sequence.seq}"
+  }]
+}

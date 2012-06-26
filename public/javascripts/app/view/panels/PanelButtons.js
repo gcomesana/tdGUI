@@ -14,12 +14,28 @@ Ext.define ('TDGUI.view.panels.PanelButtons', {
     margin: '0 0 0 5'
   },
 
-  buttons: [{
-      xtype: 'button',
-      text: 'Left'
-    }, {
-      xtype: 'button',
-      text: 'Right'
-  }]
+  rightButtonName: '',
+  leftButtonName : '',
+
+
+  initComponent: function () {
+    var me = this
+    var btnLeft = 'Left', btnRight = 'Right'
+
+    btnRight = this.rightButtonName == null || this.rightButtonName == '' ? btnRight: this.rightButtonName
+    btnLeft = this.leftButtonName == null || this.leftButtonName == '' ? btnLeft: this.leftButtonName
+
+    this.buttons = [{
+        xtype: 'button',
+        text: btnLeft,
+        id: 'panelBtnLeft',
+      }, {
+        xtype: 'button',
+        text: btnRight,
+        id: 'panelBtnRight'
+    }]
+
+    me.callParent (arguments)
+  }
 
 })

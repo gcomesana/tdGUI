@@ -8,12 +8,13 @@
 Ext.define('LSP.view.target_by_name.TargetPanel', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.TargetPanel',
-	title: 'Target Data',
+
+	title: 'Target Info',
 	anchor: '100% 100%',
 	autoScroll: true,
 	bodyPadding: '10px',
 	layout: 'anchor',
-	style: 'background-color: #fff000;',
+//	style: 'background-color: #fff000;',
 
 	initComponent: function() {
 		this.items = [{
@@ -25,7 +26,6 @@ Ext.define('LSP.view.target_by_name.TargetPanel', {
 			bodyPadding: '10px',
 			cls: 'target-data-panel',
 			hidden: true,
-
 
 			items: [{
 				xtype: 'panel',

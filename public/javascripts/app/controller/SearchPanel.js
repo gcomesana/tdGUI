@@ -3,7 +3,7 @@ Ext.define('TDGUI.controller.SearchPanel', {
 	extend: 'Ext.app.Controller',
 //	models: ['Target'],
 //	stores: ['Targets'],
-	views: ['panels.west.SearchPanel'],
+	views: ['panels.west.SearchPanel', 'panels.BorderCenter'],
 
 	/*refs: [{
 		ref: 'targetPanel',
@@ -18,12 +18,21 @@ Ext.define('TDGUI.controller.SearchPanel', {
 	}],*/
 
 	refs: [{
-			ref: 'protLookup',
-			selector: 'tabpanel > panel > tdgui-conceptwiki-protein-lookup'
+			ref: 'protLookup', // I get this.getProtLookup ()
+			selector: 'panel tdgui-conceptwiki-protein-lookup' // proteinLookup combo
 		}, {
-			ref: 'examplesLabel',
-			selector: 'tabpanel > panel > label'
-	}],
+			ref: 'examplesLabel', // I get this.getExamplesLabel
+			selector: 'tdgui-west-panel > panel > label' // label over the proteinLookup combo
+	  }, {
+      ref: 'contentPanel',
+      selector: 'viewport > tdgui-border-center' // the content area
+    }, {
+      ref: 'btnProteinLookup',
+      selector: 'viewport > panel > panel > button'
+    }, {
+      ref: 'accTextarea', // accessions textarea
+      selector: 'panel > tdgui-textarea'
+  }],
 
 
 
@@ -34,6 +43,7 @@ console.info ('SearchPanel controller initializing... ')
 			'TargetByNameForm button[action=query_target_by_name]': {
 				click: this.submitQuery
 			},
+
 			'TargetByNameForm conceptWikiProteinLookup': {
 				select: this.enableSubmit
 			},
@@ -43,31 +53,110 @@ console.info ('SearchPanel controller initializing... ')
 			},
 
 			'tdgui-conceptwiki-protein-lookup': {
-				focus: this.clickLookup
-			}
+				focus: this.clickLookup,
+        keyup: this.keepKeyup
+			},
+
+      'tdgui-textarea': {
+        click: this.textareaClick
+//        afterrender: this.checkTxt
+      },
+
+      'tdgui-west-search > tabpanel > panel > tdgui-panelbuttons > toolbar > button': { // see buttons on Panel
+        click: this.retrieveBtnClick
+      },
+
+      'tdgui-west-search > panel button[action=query-protein-info]': {
+//      'tdgui-west-search button[action=query-protein-info]': {
+        click: this.clickGoProteinInfo
+      }
+
 		});
 	},
+
 
 
 	clickLookup: function () {
 		console.info ('*** focus on lookup')
 	},
 
-	onAfterRender: function () {
-		console.info ('just onAfterRender')
-	},
+
+
+  keepKeyup: function (comp, ev, opts) {
+    comp.inputString = ev.target.value
+  },
+
+
+
+  retrieveBtnClick: function (btn, ev, opts) {
+    var txtArea = btn.up ('tdgui-west-search').down ('tdgui-textarea')
+    var uniprotIds = txtArea.getRawValue().split('\n').join(',')
+
+    var me = this
+
+    if (btn.getId() == 'panelBtnLeft')
+      txtArea.setValue('')
+    else
+      Ext.History.add('!xt=tdgui-multitargetpanel&qp=' + uniprotIds);
+
+/*
+    Ext.Ajax.request({
+      url: 'tdgui_proxy/multiple_entries_retrieval',
+      method: 'GET',
+      params: {
+        entries: uniprotIds
+      },
+
+      success: function(response){
+        var text = response.responseText
+// console.info ("Got: "+text)
+        var testPanel = Ext.widget ('panel', {
+          title: 'Test Request',
+          html: text,
+          closable: true
+        })
+        me.getContentPanel().add (testPanel)
+          // process server response here
+      }
+    });
+*/
+
+  },
+
+
+
+  clickGoProteinInfo: function (btn, ev, opts) {
+    var conceptLookup = this.getProtLookup ()
+    var selOption = conceptLookup.getValue()
+    if (selOption != null && selOption != "") {
+      console.info ('button clicked for: '+selOption)
+    }
+
+    Ext.History.add ('!xt=tdgui-targetinfopanel&qp='+selOption)
+  },
+
 
 	labelClick: function () {
-		console.info ('SearchPanel.controller: got click event from label')
+		console.info ('SearchPanel.controller: got click event from label '+this.getExamplesLabel())
 //						this.getExamplesLabel().setText ('Its ok'))
 	},
 
+
+  textareaClick: function () {
+//    console.info ('click event on textarea with content: '+this.getAccTextarea().getValue())
+  },
+
+
+  checkTxt: function (comp, opts) {
+    console.info ('fucking textarea: disabled?'+ comp.isDisabled())
+  },
 
 	enableSubmit: function() {
 		var form = this.getFormView();
 		var button = this.getSubmitButton();
 		button.enable();
 	},
+
 
 	submitQuery: function(button) {
 		button.disable();

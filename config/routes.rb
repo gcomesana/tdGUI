@@ -26,6 +26,14 @@ TdGUI::Application.routes.draw do
   end
 
 
+	resources :tdgui_proxy do
+		collection do
+			get :test
+			get :multiple_entries_retrieval
+			get :interactions_retrieval
+		end
+	end
+
 
   resources :concept_wiki_api_calls do
     collection do
@@ -33,7 +41,20 @@ TdGUI::Application.routes.draw do
       get :compound_lookup
 			get :test
     end
-  end
+	end
+
+
+	resources :core_api_calls do
+		collection do
+			post :protein_info
+			post :pharm_by_protein_name
+			get :wiki_pathway_protein_lookup
+			get :wiki_pathways_by_protein
+
+			get :test
+			get :check
+		end
+	end
 
 
 =begin
@@ -48,8 +69,6 @@ TdGUI::Application.routes.draw do
 =end
   root :to => "home#index"
 
-# TODO Montar la caja de texto para atacar el proteinLookup
-# TODO implica poner primero los controladores y hacer tests!!!!!
 
 
   # The priority is based upon order of creation:

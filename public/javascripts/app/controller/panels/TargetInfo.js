@@ -34,10 +34,13 @@ console.info ("Initializing TargetInfo controller...")
 
     var theStore = this.getTargetinfopanel().targetInfoStore
     var targetName = this.getTargetinfopanel().down('#target_name').getRawValue()
-    var historyParams = '!xt=tdgui-interactiontargetpanel&qp=' +
+    var historyParams = '!xt=tdgui-graphdatapanel&qp=' +
                 theStore.proxy.extraParams.protein_uri+
                 '&tg='+targetName
-    console.info ('clicked for: '+historyParams)
+
+    Ext.History.add (historyParams)
+
+//    console.info ('clicked for: '+historyParams)
   },
 
   initTargetInfoPanel: function (comp, opts) {

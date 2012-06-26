@@ -6,11 +6,11 @@ Ext.Loader.setConfig({
   enabled:true,
   disableCaching:false
 });
+
 // Ext.Ajax.disableCaching = false
 Ext.create('Ext.app.Application', {
 // Ext.Application ({
   name: 'TDGUI',
-
   appFolder: 'javascripts/app',
 
 // Define all the controllers that should initialize at boot up of your application

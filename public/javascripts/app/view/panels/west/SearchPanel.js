@@ -1,6 +1,5 @@
 
-// TODO try to figure out how to display several entries result!!!!
-// TODO !!! transfer the changes made on master branch to develop, and work on develop!!!
+
 Ext.define ('TDGUI.view.panels.west.SearchPanel', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.tdgui-west-search',
@@ -35,8 +34,8 @@ this.callParent(arguments);
   	var me = this
 console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
-
-    me.items = [this.createTabs()]
+//    me.items = [this.createTabs()]
+    me.items = [this.createSearchTab(), this.createRetrievingTab()]
     me.callParent (arguments)
   }, // EO initComponent
 
@@ -72,17 +71,20 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
   createSearchTab: function () {
     this.searchTab = Ext.create ('Ext.panel.Panel', {
-      title: 'Search',
+//      title: 'Search',
 //      renderTo: Ext.getBody(),
-      width: 400,
-      height: 200,
+//      width: 400,
+//      height: 200,
       bodyPadding: '15 0 10 0',
+      border: false,
+
 //      closable: true,
 
       items: [this.createLabel(), {
 //          title: 'Search',
         frameHeader: false,
-        bodyPadding: 5,
+        border: false,
+//        bodyPadding: 5,
         padding: '5 10 10 10', // padding for this panel
         layout: 'column',
 //          style: 'background-color: lightblue;',
@@ -95,7 +97,8 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
             xtype: 'button',
             text: ' GO ',
             columnWidth: .15,
-            action: 'query-protein-info'
+            action: 'query-protein-info',
+//            disabled: false
         }] // EO items
 
       }]
@@ -103,6 +106,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
     return this.searchTab
   },
+
 
 
 
@@ -121,11 +125,13 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
   createRetrievingTab: function () {
     var me = this
     this.retrievingTab = Ext.create ('Ext.panel.Panel', {
-      title: 'Retrieve',
+//      title: 'Retrieve',
 //      width: 400,
       height: 200,
       padding: '15 10 10 10',
       layout: 'anchor',
+      frameHeader: false,
+      border: false,
 //      closable: true,
 
       items: [
@@ -143,6 +149,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
 
 
+// NOT used currently, as all search boxes are place on a single panel
   createTabs: function () {
     this.tabsSearch = Ext.create ('Ext.tab.Panel', {
       activeTab: 1,

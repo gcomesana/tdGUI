@@ -105,8 +105,8 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 					}, {
 						xtype: 'displayfield',
 						anchor: '100%',
-						itemId: 'cellularLocation',
-						fieldLabel: 'Cellular Location',
+						itemId: 'cellularLocations',
+						fieldLabel: 'Cellular Location(s)',
 						cls: 'target-field-label'
 					}, {
 						xtype: 'displayfield',
@@ -237,7 +237,7 @@ console.info ("targetinfos length: "+targetInfos.length)
 
 
 	addKeywords: function(keywords) {
-		var bits = keywords.split('; ');
+		var bits = keywords.split(', ');
 		var keywordDisplayField = this.down('#keywords');
 		var bodyEl = keywordDisplayField.bodyEl;
 		var domElem = bodyEl.dom;
@@ -247,11 +247,13 @@ console.info ("targetinfos length: "+targetInfos.length)
 			cls: 'keyword',
 			html: '{kw}'
 		});
+		
 		Ext.each(bits, function(keyword) {
 			tpl.append(bodyEl, {
 				kw: keyword
 			});
 		}, this);
+
 		keywordDisplayField.show();
 	},
 
@@ -273,7 +275,7 @@ console.info ("targetinfos length: "+targetInfos.length)
 	},
 
 	addSynonyms: function(synonyms) {
-		var bits = synonyms.split('; ');
+		var bits = synonyms.split(', ');
 		var synonymsField = this.down('#synonyms');
 		var bodyEl = synonymsField.bodyEl;
 		var domElem = bodyEl.dom;

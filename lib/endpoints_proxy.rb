@@ -128,6 +128,7 @@ public
 
 # conceptWiki part
 		if is_uri || url_or_method.include?(@myProxy.conceptWikiEP) then # conceptAPI
+puts "Attacking conceptWiki part"
 			ep_alive = checkConceptAPI()
 			ep_ready = get_endpoint()
 #			ep_ready = 'http://www.uniprot.org/uniprot/?format=tab&columns=id,protein%20names,citation,comments,genes&sort=score'
@@ -154,6 +155,7 @@ puts "EndpointsProxy.make_request: #{ep_ready}"
 # coreAPI part
 #		elsif url.include? @myProxy.coreApiEP then # coreAPI on
 		else # url_or_method should be something like 'proteinInfo', 'compoundPharma', 'sparql'
+puts "Attacking coreApi part..."
 			ep_alive = check_coreAPI()
 			ep_ready = get_endpoint() # ep_alive ? get_endpoint(): nil
 

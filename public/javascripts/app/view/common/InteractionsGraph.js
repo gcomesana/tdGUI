@@ -57,25 +57,28 @@ var computeCfg = {
 
 /**
  * Interactions
- * This component define a panel with a jit ForceDirecte graph embedded
+ * This component define a panel with a jit ForceDirected graph embedded
  * Use:
  * Ext.widget ('tdgui-interactiontargetpanel', {
  *  fdDivName: 'newName'
  * })
  *
  * The ForceDirected graph itself is initialized after render, as the necessary
- * div to bear the graph has exists when the graph is to be drawed
+ * div to bear the graph has exists when the graph is to be drawed.
+ * The component is a panel as we need a panel as container for the JIT graph
  *
  * Dependencies:
  * - jit.js
  * - jit.css -> necessary for correct positioning
  */
-Ext.define('TDGUI.view.panels.Interactions', {
+Ext.define('TDGUI.view.common.InteractionsGraph', {
   extend:'Ext.panel.Panel',
-  alias:'widget.tdgui-interactiontargetpanel',
+  alias:'widget.tdgui-interactionsgraph-panel',
 
-  title:'Interactions Network',
+//  title:'Interactions Network',
   html:'<div id="infovis-div"></div>',
+  border: false,
+
   // Config options to add the ForceDirected graph
   fd: undefined, // the graph
   fdCfg: {}, // the graph constructor config object
@@ -85,8 +88,10 @@ Ext.define('TDGUI.view.panels.Interactions', {
   interactionData: {},
   target_id: '',
 
-  //  height: 600,
+  nodeClickHandler: undefined,
+  edgeClickHandler: undefined,
 
+  //  height: 600,
 
   initComponent: function () {
     var me = this
@@ -97,10 +102,10 @@ Ext.define('TDGUI.view.panels.Interactions', {
       var newRule = '#' + this.fdDivName + ' {' + cssRuleText + '}'
       var newCSS = Ext.util.CSS.createStyleSheet(newRule, this.fdDivName + "-css")
 
-      this.html = '<div id="' + this.fdDivName + '" style="height:100%;background-color:darkgray;">Graphx</div>'
+      this.html = '<div id="' + this.fdDivName + '" style="height:100%;background-color:white;">Graphx</div>'
     }
     else
-      this.html = '<div id="infovis-div" style="background-color:darkgray;">Graph</div>'
+      this.html = '<div id="infovis-div" style="background-color:white;">Graph</div>'
 
 /*
     Ext.Ajax.request({
@@ -132,6 +137,15 @@ Ext.define('TDGUI.view.panels.Interactions', {
     var me = this
 
 
+    /**
+     * This is a private method to set the graph features by default.
+     * It is only call from the initGraph function, so it is implemented mostly
+     * like a closure, a private function for initGraph method
+     * @param fdInstance, the ACTUAL INSTANCE of the JIT graph. This is necessary
+     * as the actual instance is referenced from some event callback methods in
+     * order to perform actions on the graph
+     * @return {Object}
+     */
     setInstanceGraph = function (fdInstance) {
       var defaultFDCfg = {
         fdGraph: null, // this is a reference to the graph
@@ -168,7 +182,8 @@ Ext.define('TDGUI.view.panels.Interactions', {
           type: labelType,
           //Native or HTML
           size: 10,
-          style: 'bold'
+          style: 'bold',
+          color: 'darkblue'
         },
 
         //Add Tips
@@ -209,7 +224,10 @@ Ext.define('TDGUI.view.panels.Interactions', {
             $jit.util.event.stop(e); //stop default touchmove event
             this.onDragMove(node, eventInfo, e);
           },
-          //Add also a click handler to nodes
+
+          onClick: me.nodeClickHandler
+          // Add also a click handler to nodes
+          /*
           onClick: function(node) {
             if (!node) return;
             // Build the right column relations list.
@@ -223,6 +241,7 @@ Ext.define('TDGUI.view.panels.Interactions', {
       //        $jit.id('inner-details').innerHTML = html + list.join("</li><li>") + "</li></ul>";
       //        $('inner-details').html(html + list.join("</li><li>") + "</li></ul>");
           }
+          */
         },
 
         //Number of iterations for the FD algorithm
@@ -260,8 +279,7 @@ Ext.define('TDGUI.view.panels.Interactions', {
       } // EO fd $jit.ForceDirected
 
       return defaultFDCfg
-
-    }
+    } // EO setInstanceGraph
 
 
 
@@ -283,12 +301,15 @@ Ext.define('TDGUI.view.panels.Interactions', {
       }
     })
 
-
-  },
-
+  }, // EO initGraph
 
 
 
+  /**
+   * Starts up the graph on its div component by setting the data and run the
+   * methods to render the graph.
+   * @param jsonData, the data which is to feed the graph
+   */
   startupGraph: function (jsonData) {
     var divVis = Ext.get('infovis-div')
     var me = this

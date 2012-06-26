@@ -34,7 +34,7 @@ console.info ("Initializing TargetInfo controller...")
 
     var theStore = this.getTargetinfopanel().targetInfoStore
     var targetName = this.getTargetinfopanel().down('#target_name').getRawValue()
-    var historyParams = '!xt=tdgui-interactiontargetpanel&qp=' +
+    var historyParams = '!xt=tdgui-graphdatapanel&qp=' +
                 theStore.proxy.extraParams.protein_uri+
                 '&tg='+targetName
 

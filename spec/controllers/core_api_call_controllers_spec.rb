@@ -25,11 +25,13 @@ describe CoreApiCallsController do
 
 	end
 
+
+=begin
 	it "should make a test" do
 		get :test
 		JSON.parse(response.body).should be_kind_of Hash
 	end
-
+=end
 
 
 	it "should make a request to coreApi for proteinInfo" do
@@ -54,6 +56,26 @@ puts "**==> uniprot protein_info: #{response.body}"
 		json_resp['totalCount'].should be > 0
 
 	end
+
+
+	it "should make a request either coreApi or uniprot" do
+		get :check
+
+		resp_hash = JSON.parse(reponse.body)
+		status = resp_hash[:success]
+
+		status.should be_kind_of Boolean
+
+		if status == true then
+			# coreApi req
+
+		else
+			# uniprot req
+		end
+
+
+	end
+
 
 =begin
 	it "should response a valid JSON" do

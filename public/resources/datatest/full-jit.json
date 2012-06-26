@@ -1,6 +1,6 @@
 [{
 	"data": {
-		"$color": "#8CDD41",
+		"$color": "#317484",
 		"$type": "circle",
 		"$dim": 7,
 		"type": "protein",
@@ -11,74 +11,18 @@
 	"name": "PPP2CA"
 }, {
 	"data": {
-		"$color": "#E92951",
-		"$type": "circle",
-		"$dim": 7,
-		"type": "protein",
-		"node_desc": "protein phosphatase 2A activator, regulatory subunit 4; Reversibly stimulates the variable phosphotyrosyl phosphatase activity of PP2A core heterodimer in presence of ATP and Mg(2+) (in vitro)"
-	},
-	"adjacencies": [{
-		"nodeFrom": "12",
-		"nodeTo": "13",
-		"data": {
-			"$color": "white",
-			"$lineWidth": 4
-		},
-		"interactionData": {
-			"experimentRef": "0",
-			"confidenceVal": "0.999",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "12",
-		"nodeTo": "13",
-		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "7",
-			"confidenceVal": "0.937",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "12",
-		"nodeTo": "13",
-		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "6",
-			"confidenceVal": "0.9",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "12",
-		"nodeTo": "13",
-		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "5",
-			"confidenceVal": "0.949",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}],
-	"id": "12",
-	"name": "PPP2R4"
-}, {
-	"data": {
-		"$color": "#CD2513",
+		"$color": "#13B4A2",
 		"$type": "circle",
 		"$dim": 7,
 		"type": "protein",
 		"node_desc": "protein phosphatase 2, regulatory subunit B', gamma isoform; The B regulatory subunit might modulate substrate selectivity and catalytic activity, and also might direct the localization of the catalytic enzyme to a particular subcellular compartment"
 	},
 	"adjacencies": [{
-		"nodeFrom": "11",
+		"nodeFrom": "12",
 		"nodeTo": "13",
 		"data": {
-			"$color": "white",
-			"$lineWidth": 4
+			"$color": "#13B4A2",
+			"$lineWidth": 3
 		},
 		"interactionData": {
 			"experimentRef": "0",
@@ -86,21 +30,10 @@
 			"conf_desc": "estimated likelihood of predicted functional association being true positive"
 		}
 	}, {
-		"nodeFrom": "11",
+		"nodeFrom": "12",
 		"nodeTo": "13",
 		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "7",
-			"confidenceVal": "0.411",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "11",
-		"nodeTo": "13",
-		"data": {
-			"$color": "white"
+			"$color": "#13B4A2"
 		},
 		"interactionData": {
 			"experimentRef": "6",
@@ -108,134 +41,33 @@
 			"conf_desc": "estimated likelihood of predicted functional association being true positive"
 		}
 	}, {
-		"nodeFrom": "11",
+		"nodeFrom": "12",
 		"nodeTo": "13",
 		"data": {
-			"$color": "white"
+			"$color": "#13B4A2"
 		},
 		"interactionData": {
 			"experimentRef": "5",
 			"confidenceVal": "0.999",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "11",
-		"nodeTo": "12",
-		"data": {
-			"$color": "white",
-			"$lineWidth": 4
-		},
-		"interactionData": {
-			"experimentRef": "0",
-			"confidenceVal": "0.99",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "11",
-		"nodeTo": "12",
-		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "7",
-			"confidenceVal": "0.91",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "11",
-		"nodeTo": "12",
-		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "6",
-			"confidenceVal": "0.9",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "11",
-		"nodeTo": "12",
-		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "5",
-			"confidenceVal": "0.084",
 			"conf_desc": "estimated likelihood of predicted functional association being true positive"
 		}
 	}],
-	"id": "11",
+	"id": "12",
 	"name": "PPP2R5C"
 }, {
 	"data": {
-		"$color": "#5E6ABD",
+		"$color": "#65DA74",
 		"$type": "circle",
 		"$dim": 7,
 		"type": "protein",
 		"node_desc": "protein phosphatase 2 (formerly 2A), regulatory subunit A, alpha isoform; The PR65 subunit of protein phosphatase 2A serves as a scaffolding molecule to coordinate the assembly of the catalytic subunit and a variable regulatory B subunit"
 	},
 	"adjacencies": [{
-		"nodeFrom": "10",
-		"nodeTo": "12",
-		"data": {
-			"$color": "white",
-			"$lineWidth": 5
-		},
-		"interactionData": {
-			"experimentRef": "0",
-			"confidenceVal": "0.995",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "10",
-		"nodeTo": "12",
-		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "7",
-			"confidenceVal": "0.917",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "10",
-		"nodeTo": "12",
-		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "6",
-			"confidenceVal": "0.9",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "10",
-		"nodeTo": "12",
-		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "5",
-			"confidenceVal": "0.334",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "10",
-		"nodeTo": "12",
-		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "4",
-			"confidenceVal": "0.277",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "10",
+		"nodeFrom": "11",
 		"nodeTo": "13",
 		"data": {
-			"$color": "white",
-			"$lineWidth": 4
+			"$color": "#65DA74",
+			"$lineWidth": 3
 		},
 		"interactionData": {
 			"experimentRef": "0",
@@ -243,21 +75,10 @@
 			"conf_desc": "estimated likelihood of predicted functional association being true positive"
 		}
 	}, {
-		"nodeFrom": "10",
+		"nodeFrom": "11",
 		"nodeTo": "13",
 		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "7",
-			"confidenceVal": "0.924",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "10",
-		"nodeTo": "13",
-		"data": {
-			"$color": "white"
+			"$color": "#65DA74"
 		},
 		"interactionData": {
 			"experimentRef": "6",
@@ -265,10 +86,10 @@
 			"conf_desc": "estimated likelihood of predicted functional association being true positive"
 		}
 	}, {
-		"nodeFrom": "10",
+		"nodeFrom": "11",
 		"nodeTo": "13",
 		"data": {
-			"$color": "white"
+			"$color": "#65DA74"
 		},
 		"interactionData": {
 			"experimentRef": "5",
@@ -276,11 +97,11 @@
 			"conf_desc": "estimated likelihood of predicted functional association being true positive"
 		}
 	}, {
-		"nodeFrom": "10",
-		"nodeTo": "11",
+		"nodeFrom": "11",
+		"nodeTo": "12",
 		"data": {
-			"$color": "white",
-			"$lineWidth": 4
+			"$color": "#65DA74",
+			"$lineWidth": 3
 		},
 		"interactionData": {
 			"experimentRef": "0",
@@ -288,21 +109,10 @@
 			"conf_desc": "estimated likelihood of predicted functional association being true positive"
 		}
 	}, {
-		"nodeFrom": "10",
-		"nodeTo": "11",
+		"nodeFrom": "11",
+		"nodeTo": "12",
 		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "7",
-			"confidenceVal": "0.284",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "10",
-		"nodeTo": "11",
-		"data": {
-			"$color": "white"
+			"$color": "#65DA74"
 		},
 		"interactionData": {
 			"experimentRef": "6",
@@ -310,10 +120,10 @@
 			"conf_desc": "estimated likelihood of predicted functional association being true positive"
 		}
 	}, {
-		"nodeFrom": "10",
-		"nodeTo": "11",
+		"nodeFrom": "11",
+		"nodeTo": "12",
 		"data": {
-			"$color": "white"
+			"$color": "#65DA74"
 		},
 		"interactionData": {
 			"experimentRef": "5",
@@ -321,11 +131,68 @@
 			"conf_desc": "estimated likelihood of predicted functional association being true positive"
 		}
 	}],
-	"id": "10",
+	"id": "11",
 	"name": "PPP2R1A"
 }, {
 	"data": {
-		"$color": "#D52036",
+		"$color": "#1D8B6B",
+		"$type": "circle",
+		"$dim": 7,
+		"type": "protein",
+		"node_desc": "protein phosphatase 2 (formerly 2A), regulatory subunit A, beta isoform; The PR65 subunit of protein phosphatase 2A serves as a scaffolding molecule to coordinate the assembly of the catalytic subunit and a variable regulatory B subunit"
+	},
+	"adjacencies": [{
+		"nodeFrom": "10",
+		"nodeTo": "13",
+		"data": {
+			"$color": "#1D8B6B",
+			"$lineWidth": 2
+		},
+		"interactionData": {
+			"experimentRef": "0",
+			"confidenceVal": "0.999",
+			"conf_desc": "estimated likelihood of predicted functional association being true positive"
+		}
+	}, {
+		"nodeFrom": "10",
+		"nodeTo": "13",
+		"data": {
+			"$color": "#1D8B6B"
+		},
+		"interactionData": {
+			"experimentRef": "5",
+			"confidenceVal": "0.999",
+			"conf_desc": "estimated likelihood of predicted functional association being true positive"
+		}
+	}, {
+		"nodeFrom": "10",
+		"nodeTo": "12",
+		"data": {
+			"$color": "#1D8B6B",
+			"$lineWidth": 2
+		},
+		"interactionData": {
+			"experimentRef": "0",
+			"confidenceVal": "0.965",
+			"conf_desc": "estimated likelihood of predicted functional association being true positive"
+		}
+	}, {
+		"nodeFrom": "10",
+		"nodeTo": "12",
+		"data": {
+			"$color": "#1D8B6B"
+		},
+		"interactionData": {
+			"experimentRef": "5",
+			"confidenceVal": "0.965",
+			"conf_desc": "estimated likelihood of predicted functional association being true positive"
+		}
+	}],
+	"id": "10",
+	"name": "PPP2R1B"
+}, {
+	"data": {
+		"$color": "#9E0BBD",
 		"$type": "circle",
 		"$dim": 7,
 		"type": "protein",
@@ -333,32 +200,21 @@
 	},
 	"adjacencies": [{
 		"nodeFrom": "9",
-		"nodeTo": "11",
+		"nodeTo": "12",
 		"data": {
-			"$color": "white",
-			"$lineWidth": 4
+			"$color": "#9E0BBD",
+			"$lineWidth": 3
 		},
 		"interactionData": {
 			"experimentRef": "0",
-			"confidenceVal": "0.992",
+			"confidenceVal": "0.989",
 			"conf_desc": "estimated likelihood of predicted functional association being true positive"
 		}
 	}, {
 		"nodeFrom": "9",
-		"nodeTo": "11",
+		"nodeTo": "12",
 		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "7",
-			"confidenceVal": "0.266",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "9",
-		"nodeTo": "11",
-		"data": {
-			"$color": "white"
+			"$color": "#9E0BBD"
 		},
 		"interactionData": {
 			"experimentRef": "6",
@@ -367,9 +223,9 @@
 		}
 	}, {
 		"nodeFrom": "9",
-		"nodeTo": "11",
+		"nodeTo": "12",
 		"data": {
-			"$color": "white"
+			"$color": "#9E0BBD"
 		},
 		"interactionData": {
 			"experimentRef": "5",
@@ -380,8 +236,8 @@
 		"nodeFrom": "9",
 		"nodeTo": "13",
 		"data": {
-			"$color": "white",
-			"$lineWidth": 4
+			"$color": "#9E0BBD",
+			"$lineWidth": 3
 		},
 		"interactionData": {
 			"experimentRef": "0",
@@ -392,18 +248,7 @@
 		"nodeFrom": "9",
 		"nodeTo": "13",
 		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "7",
-			"confidenceVal": "0.431",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "9",
-		"nodeTo": "13",
-		"data": {
-			"$color": "white"
+			"$color": "#9E0BBD"
 		},
 		"interactionData": {
 			"experimentRef": "6",
@@ -414,7 +259,7 @@
 		"nodeFrom": "9",
 		"nodeTo": "13",
 		"data": {
-			"$color": "white"
+			"$color": "#9E0BBD"
 		},
 		"interactionData": {
 			"experimentRef": "5",
@@ -423,9 +268,9 @@
 		}
 	}, {
 		"nodeFrom": "9",
-		"nodeTo": "10",
+		"nodeTo": "11",
 		"data": {
-			"$color": "white",
+			"$color": "#9E0BBD",
 			"$lineWidth": 3
 		},
 		"interactionData": {
@@ -435,9 +280,9 @@
 		}
 	}, {
 		"nodeFrom": "9",
-		"nodeTo": "10",
+		"nodeTo": "11",
 		"data": {
-			"$color": "white"
+			"$color": "#9E0BBD"
 		},
 		"interactionData": {
 			"experimentRef": "6",
@@ -446,36 +291,13 @@
 		}
 	}, {
 		"nodeFrom": "9",
-		"nodeTo": "10",
+		"nodeTo": "11",
 		"data": {
-			"$color": "white"
+			"$color": "#9E0BBD"
 		},
 		"interactionData": {
 			"experimentRef": "5",
 			"confidenceVal": "0.971",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "9",
-		"nodeTo": "12",
-		"data": {
-			"$color": "white",
-			"$lineWidth": 2
-		},
-		"interactionData": {
-			"experimentRef": "0",
-			"confidenceVal": "0.972",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "9",
-		"nodeTo": "12",
-		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "7",
-			"confidenceVal": "0.972",
 			"conf_desc": "estimated likelihood of predicted functional association being true positive"
 		}
 	}],
@@ -483,7 +305,7 @@
 	"name": "SGOL1"
 }, {
 	"data": {
-		"$color": "#990753",
+		"$color": "#8744F9",
 		"$type": "circle",
 		"$dim": 7,
 		"type": "protein",
@@ -491,77 +313,21 @@
 	},
 	"adjacencies": [{
 		"nodeFrom": "8",
-		"nodeTo": "12",
+		"nodeTo": "9",
 		"data": {
-			"$color": "white",
-			"$lineWidth": 4
+			"$color": "#8744F9",
+			"$lineWidth": 3
 		},
 		"interactionData": {
 			"experimentRef": "0",
-			"confidenceVal": "0.97",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "8",
-		"nodeTo": "12",
-		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "7",
-			"confidenceVal": "0.665",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "8",
-		"nodeTo": "12",
-		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "6",
-			"confidenceVal": "0.9",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "8",
-		"nodeTo": "12",
-		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "5",
-			"confidenceVal": "0.239",
+			"confidenceVal": "0.993",
 			"conf_desc": "estimated likelihood of predicted functional association being true positive"
 		}
 	}, {
 		"nodeFrom": "8",
 		"nodeTo": "9",
 		"data": {
-			"$color": "white",
-			"$lineWidth": 4
-		},
-		"interactionData": {
-			"experimentRef": "0",
-			"confidenceVal": "0.995",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "8",
-		"nodeTo": "9",
-		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "7",
-			"confidenceVal": "0.266",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "8",
-		"nodeTo": "9",
-		"data": {
-			"$color": "white"
+			"$color": "#8744F9"
 		},
 		"interactionData": {
 			"experimentRef": "6",
@@ -572,7 +338,7 @@
 		"nodeFrom": "8",
 		"nodeTo": "9",
 		"data": {
-			"$color": "white"
+			"$color": "#8744F9"
 		},
 		"interactionData": {
 			"experimentRef": "5",
@@ -581,10 +347,10 @@
 		}
 	}, {
 		"nodeFrom": "8",
-		"nodeTo": "10",
+		"nodeTo": "11",
 		"data": {
-			"$color": "white",
-			"$lineWidth": 4
+			"$color": "#8744F9",
+			"$lineWidth": 3
 		},
 		"interactionData": {
 			"experimentRef": "0",
@@ -593,20 +359,9 @@
 		}
 	}, {
 		"nodeFrom": "8",
-		"nodeTo": "10",
+		"nodeTo": "11",
 		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "7",
-			"confidenceVal": "0.707",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "8",
-		"nodeTo": "10",
-		"data": {
-			"$color": "white"
+			"$color": "#8744F9"
 		},
 		"interactionData": {
 			"experimentRef": "6",
@@ -615,9 +370,9 @@
 		}
 	}, {
 		"nodeFrom": "8",
-		"nodeTo": "10",
+		"nodeTo": "11",
 		"data": {
-			"$color": "white"
+			"$color": "#8744F9"
 		},
 		"interactionData": {
 			"experimentRef": "5",
@@ -626,32 +381,44 @@
 		}
 	}, {
 		"nodeFrom": "8",
-		"nodeTo": "13",
+		"nodeTo": "10",
 		"data": {
-			"$color": "white",
-			"$lineWidth": 5
+			"$color": "#8744F9",
+			"$lineWidth": 2
 		},
 		"interactionData": {
 			"experimentRef": "0",
-			"confidenceVal": "0.907",
+			"confidenceVal": "0.972",
 			"conf_desc": "estimated likelihood of predicted functional association being true positive"
 		}
 	}, {
 		"nodeFrom": "8",
-		"nodeTo": "13",
+		"nodeTo": "10",
 		"data": {
-			"$color": "white"
+			"$color": "#8744F9"
 		},
 		"interactionData": {
-			"experimentRef": "7",
-			"confidenceVal": "0.812",
+			"experimentRef": "5",
+			"confidenceVal": "0.972",
 			"conf_desc": "estimated likelihood of predicted functional association being true positive"
 		}
 	}, {
 		"nodeFrom": "8",
 		"nodeTo": "13",
 		"data": {
-			"$color": "white"
+			"$color": "#8744F9",
+			"$lineWidth": 3
+		},
+		"interactionData": {
+			"experimentRef": "0",
+			"confidenceVal": "0.904",
+			"conf_desc": "estimated likelihood of predicted functional association being true positive"
+		}
+	}, {
+		"nodeFrom": "8",
+		"nodeTo": "13",
+		"data": {
+			"$color": "#8744F9"
 		},
 		"interactionData": {
 			"experimentRef": "6",
@@ -662,7 +429,7 @@
 		"nodeFrom": "8",
 		"nodeTo": "13",
 		"data": {
-			"$color": "white"
+			"$color": "#8744F9"
 		},
 		"interactionData": {
 			"experimentRef": "5",
@@ -671,43 +438,21 @@
 		}
 	}, {
 		"nodeFrom": "8",
-		"nodeTo": "13",
+		"nodeTo": "12",
 		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "3",
-			"confidenceVal": "0.525",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "8",
-		"nodeTo": "11",
-		"data": {
-			"$color": "white",
-			"$lineWidth": 4
+			"$color": "#8744F9",
+			"$lineWidth": 3
 		},
 		"interactionData": {
 			"experimentRef": "0",
-			"confidenceVal": "0.994",
+			"confidenceVal": "0.993",
 			"conf_desc": "estimated likelihood of predicted functional association being true positive"
 		}
 	}, {
 		"nodeFrom": "8",
-		"nodeTo": "11",
+		"nodeTo": "12",
 		"data": {
-			"$color": "white"
-		},
-		"interactionData": {
-			"experimentRef": "7",
-			"confidenceVal": "0.259",
-			"conf_desc": "estimated likelihood of predicted functional association being true positive"
-		}
-	}, {
-		"nodeFrom": "8",
-		"nodeTo": "11",
-		"data": {
-			"$color": "white"
+			"$color": "#8744F9"
 		},
 		"interactionData": {
 			"experimentRef": "6",
@@ -716,9 +461,9 @@
 		}
 	}, {
 		"nodeFrom": "8",
-		"nodeTo": "11",
+		"nodeTo": "12",
 		"data": {
-			"$color": "white"
+			"$color": "#8744F9"
 		},
 		"interactionData": {
 			"experimentRef": "5",

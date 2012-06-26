@@ -13,11 +13,11 @@ class InnerProxy
 
 	private
 # Suppossed endpoints for coreApi
-	CORE_API_URL_83 = "http://ops.few.vu.nl:9183/opsapi"
-	CORE_API_URL_84 = "http://ops.few.vu.nl:9184/opsapi"
-	CORE_API_URL_85 = "http://ops.few.vu.nl:9185/opsapi"
-	CORE_API_URL_86 = "http://ops.few.vu.nl:9186/opsapi"
-	CORE_API_URL_87 = "http://ops.few.vu.nl:9187/opsapi"
+	CORE_API_URL_83 = "http://ops.few.vu.nl:8183/opsapi"
+	CORE_API_URL_84 = "http://ops.few.vu.nl:8184/opsapi"
+	CORE_API_URL_85 = "http://ops.few.vu.nl:8185/opsapi"
+	CORE_API_URL_86 = "http://ops.few.vu.nl:8186/opsapi"
+	CORE_API_URL_87 = "http://ops.few.vu.nl:8187/opsapi"
 
 # URL for conceptwiki
 	CONCEPT_WIKI_API_SEARCH_URL = "http://staging.conceptwiki.org/web-ws/concept/search/"

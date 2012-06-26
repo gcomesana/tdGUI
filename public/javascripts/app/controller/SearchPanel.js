@@ -19,16 +19,19 @@ Ext.define('TDGUI.controller.SearchPanel', {
 
 	refs: [{
 			ref: 'protLookup', // I get this.getProtLookup ()
-			selector: 'tabpanel > panel tdgui-conceptwiki-protein-lookup'
+			selector: 'panel tdgui-conceptwiki-protein-lookup' // proteinLookup combo
 		}, {
 			ref: 'examplesLabel', // I get this.getExamplesLabel
-			selector: 'tabpanel > panel > label'
+			selector: 'tdgui-west-panel > panel > label' // label over the proteinLookup combo
 	  }, {
       ref: 'contentPanel',
-      selector: 'viewport > tdgui-border-center'
+      selector: 'viewport > tdgui-border-center' // the content area
     }, {
-      ref: 'accTextarea',
-      selector: 'tabpanel > panel > tdgui-textarea'
+      ref: 'btnProteinLookup',
+      selector: 'viewport > panel > panel > button'
+    }, {
+      ref: 'accTextarea', // accessions textarea
+      selector: 'panel > tdgui-textarea'
   }],
 
 
@@ -55,7 +58,7 @@ console.info ('SearchPanel controller initializing... ')
 			},
 
       'tdgui-textarea': {
-        click: this.textareaClick,
+        click: this.textareaClick
 //        afterrender: this.checkTxt
       },
 
@@ -63,7 +66,7 @@ console.info ('SearchPanel controller initializing... ')
         click: this.retrieveBtnClick
       },
 
-      'tdgui-west-search > tabpanel > panel button[action=query-protein-info]': {
+      'tdgui-west-search > panel button[action=query-protein-info]': {
 //      'tdgui-west-search button[action=query-protein-info]': {
         click: this.clickGoProteinInfo
       }
@@ -125,8 +128,9 @@ console.info ('SearchPanel controller initializing... ')
   clickGoProteinInfo: function (btn, ev, opts) {
     var conceptLookup = this.getProtLookup ()
     var selOption = conceptLookup.getValue()
-    if (selOption != null && selOption != "")
+    if (selOption != null && selOption != "") {
       console.info ('button clicked for: '+selOption)
+    }
 
     Ext.History.add ('!xt=tdgui-targetinfopanel&qp='+selOption)
   },

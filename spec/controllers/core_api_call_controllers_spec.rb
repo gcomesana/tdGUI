@@ -58,19 +58,19 @@ puts "**==> uniprot protein_info: #{response.body}"
 	end
 
 
-	it "should make a request either coreApi or uniprot" do
+	it "should make a checkCoreApi before proteinLookup" do
 		get :check
 
-		resp_hash = JSON.parse(reponse.body)
+		resp_hash = JSON.parse(response.body)
 		status = resp_hash[:success]
-
-		status.should be_kind_of Boolean
 
 		if status == true then
 			# coreApi req
+			puts 'call coreApi req as at least one endpoint is alive'
 
 		else
 			# uniprot req
+			puts 'call uniprot req as no endpoint is alive'
 		end
 
 

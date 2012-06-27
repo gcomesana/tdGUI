@@ -97,13 +97,25 @@ public
 	end
 
 
-	def self.get_endpoint
-		@myProxy.coreEndpointReady
+	def self.get_core_endpoint
+		@myProxy.core_endpoint_ready
+	end
+
+
+	def self.get_concept_endpoint
+		status = @myProxy.checkCoreAPI
+
+		status ? @myProxy.conceptwiki_ep: @myProxy.concept_uniprot_ep
+	end
+
+
+	def self.get_uniprot_concept_endpoint
+		@myProxy.concept_uniprot_ep
 	end
 
 
 	def self.getEndpointsChecked
-		@myProxy.coreEndpointsChecked
+		@myProxy.core_endpoints_checked
 	end
 
 
@@ -114,23 +126,28 @@ public
 
 
 # make_request
-# Make a request to the proper url by checking and setting the right endpoints
-# in advance to make the request
+# Make a request to coreAPI or cconceptwiki or alternative uniprot endpoints
+# depending on the url_or_method parameter.
+# The check for endpoints for conceptWiki and coreApi were performed in advance
+# in the model class (for conceptWiki).
+#
 # @param url_or_method, this parameter is different depending on the source. If
 # the source is coreAPI model, it will be the action to call (the api_method);
 # if the source is the concept wiki api call model, it should be a uri
 # @param opts, the options to pass to the request
 	def self.make_request (url_or_method, opts)
 # puts ("make_request (#{url_or_method.to_s}, opts=#{opts.to_s})")
+
 # first, decode url_or_method param
 		uri_parts = url_or_method.scan(URI_REGEX)[0]
 		is_uri = !uri_parts[0].nil? && !uri_parts[1].nil? && !uri_parts[2].nil?
 
 # conceptWiki part
-		if is_uri || url_or_method.include?(@myProxy.conceptWikiEP) then # conceptAPI
+		if is_uri || url_or_method.include?(@myProxy.conceptwiki_ep) then # conceptAPI
 puts "Attacking conceptWiki part"
-			ep_alive = checkConceptAPI()
-			ep_ready = get_endpoint()
+# don't check endpoints for conceptwiki as they were checked concept_wiki_api_call
+			ep_alive = check_coreAPI()
+			ep_ready = get_concept_endpoint()
 #			ep_ready = 'http://www.uniprot.org/uniprot/?format=tab&columns=id,protein%20names,citation,comments,genes&sort=score'
 
 			if ep_alive && url_or_method.include?(ep_ready) then # conceptAPI will be called
@@ -157,7 +174,7 @@ puts "EndpointsProxy.make_request: #{ep_ready}"
 		else # url_or_method should be something like 'proteinInfo', 'compoundPharma', 'sparql'
 puts "Attacking coreApi part..."
 			ep_alive = check_coreAPI()
-			ep_ready = get_endpoint() # ep_alive ? get_endpoint(): nil
+			ep_ready = get_core_endpoint() # ep_alive ? get_endpoint(): nil
 
 # for test purposes, as coreAPI use to be alive at testing time
 			if !opts[:uri].nil?
@@ -166,7 +183,7 @@ puts "Attacking coreApi part..."
 				end
 			end
 
-#			if url.include? ep_ready then # coreAPI will be used
+puts "EndpointsProxy.make_request: #{ep_alive} -> #{ep_ready ? ep_ready: 'no endpoint'}"
 			if ep_alive then
 				req = build_coreapi_req(url_or_method, opts, ep_ready)
 				start_time = Time.now
@@ -184,9 +201,8 @@ puts "Attacking coreApi part..."
 
 			else # no endpoint is alive => we resort to uniprot
 				ep_ready = opts[:uri].scan(/[^<].*[^>]/)[0]+'.xml'
-# puts "EndpointsProxy.make_request: #{ep_ready}"
-				url = URI.parse(ep_ready)
 
+				url = URI.parse(ep_ready)
 				req = Net::HTTP::Get.new(url.request_uri)
 				res = Net::HTTP.start(url.host, url.port) {|http|
 					http.request(req)
@@ -195,34 +211,9 @@ puts "Attacking coreApi part..."
 				res
 
 			end
-=begin
-			if url.include? ep_ready then
-				uri = URI.parse(url)
-				http = Net::HTTP.new(uri.host, uri.port)
-				nil
-			end
-=end
 		end
 
 
 	end
-
-
-
-
-=begin
-#		url = 'http://www.uniprot.org/uniprot/'
-		options = {
-			:query => 'organism:9606+AND+some'
-#			'format' => 'tab',
-#			'columns' => "id,protein%20names,citation,comments,genes"
-		}
-=end
-
-=begin
-	class InnerProxy
-	...
-	end
-=end
 
 end

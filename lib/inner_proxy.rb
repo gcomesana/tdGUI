@@ -24,8 +24,8 @@ class InnerProxy
 
 	TIMEOUT = 1.5 # arbitrary timeout to ping endpoints
 
-	UNIPROT_PROTEIN_LOOKUP = 'http://www.uniprot.org/uniprot/?query=organism:9606+AND+xxxx&format=tab&columns=id,protein%20names,citation,comments,genes&sort=score'
-	UNIPROT_PROTEIN_LOOKUP_SHORT = 'http://www.uniprot.org/uniprot/?format=tab&columns=id,protein%20names,citation,comments,genes&sort=score'
+	UNIPROT_PROTEIN_LOOKUP = 'http://www.uniprot.org/uniprot/?query=organism:9606+AND+xxxx&format=tab&columns=id,protein%20names,citation,comments,genes&sort=score&limit=25'
+	UNIPROT_PROTEIN_LOOKUP_SHORT = 'http://www.uniprot.org/uniprot/?format=tab&columns=id,protein%20names,citation,comments,genes&sort=score&limit=25'
 	UNIPROT_PROTEIN_INFO ='http://www.uniprot.org/'
 
 	URL_FETCH_ENTRY = 'http://www.uniprot.org/uniprot/'
@@ -33,8 +33,11 @@ class InnerProxy
 
 	public
 	def initialize ()
-		@coreApiEndpoints = [CORE_API_URL_83, CORE_API_URL_84, CORE_API_URL_85,
-												 CORE_API_URL_86, CORE_API_URL_87]
+		@coreApiEndpoints =[CORE_API_URL_83]
+
+#		@coreApiEndpoints = [CORE_API_URL_83, CORE_API_URL_84, CORE_API_URL_85,
+#												 CORE_API_URL_86, CORE_API_URL_87]
+
 		@coreApi_method = 'proteinInfo'
 		@coreApi_uri = 'http://chem2bio2rdf.org/chembl/resource/chembl_targets/12261'
 		@endpoint_ready = nil
@@ -52,23 +55,30 @@ class InnerProxy
 	end
 
 
-	def coreEndpointReady
+	def core_endpoint_ready
 		@endpoint_ready
 #		UNIPROT_PROTEIN_LOOKUP_SHORT
 	end
 
 
-	def coreEndpointsChecked
+	def core_endpoints_checked
 		@coreEndpointsChecked
 	end
 
 
 # conceptWikiEP
 # Returns the concept wiki search URI
-	def conceptWikiEP
+	def conceptwiki_ep
 		CONCEPT_WIKI_API_SEARCH_URL
 	end
 
+
+
+# concept_uniprot_ep
+# returns the uniprot url used to get entries based on a term (ej. brca2)
+	def concept_uniprot_ep
+		@urlMap[CONCEPT_WIKI_API_SEARCH_URL]
+	end
 
 # coreApiEP
 # Returns one of the five supposed coreAPI endpoints. All of them are similar except for the port
@@ -107,7 +117,10 @@ class InnerProxy
 # EO checkConcept...
 
 
-
+# Check the core api by requesting the CORE_API_URLs to see if anyone of them replies
+# If so, the method returns true and the endpoint_ready member is set to the
+# first endpoint in replying
+# Otherwise, the method returns nil and en endpoint_ready is reset to nil
 	def checkCoreAPI ()
 		options = Hash.new
 		options[:uri] = '<' + @coreApi_uri + '>'
@@ -116,6 +129,7 @@ class InnerProxy
 		options[:method] = @coreApi_method
 
 		alive = 0
+		@endpoint_ready = nil
 		@coreEndpointsChecked = 0
 		@coreApiEndpoints.each do |endpoint|
 			begin
@@ -128,6 +142,7 @@ class InnerProxy
 			end
 
 			if alive > 0 then
+puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '#{@coreApi_method}'\n"
 				@endpoint_ready = endpoint # any of them from 83 to 87
 				break
 			end
@@ -187,7 +202,7 @@ class InnerProxy
 :synonyms=>"Alpha-2C adrenergic receptor; Alpha-2C adrenoreceptor; Alpha-2C adrenoceptor; Alpha-2 adrenergic receptor subtype C4",
 :organism=>"Homo sapiens",
 :keywords=>"Cell membrane; Complete proteome; Disulfide bond; G-protein coupled receptor; Glycoprotein; Membrane; Phosphoprotein; Polymorphism; Receptor; Transducer; Transmembrane",
-:cellularLocation=>"multi-passMembraneProtein",
+:cellularLocations=>"multi-passMembraneProtein",
 :molecularWeight=>"49523",
 :numberOfResidues=>"469",
 :pdbIdPage=>"http://www.pdb.org/pdb/explore/explore.do?structureId=1HOF",
@@ -296,8 +311,8 @@ class InnerProxy
 		hash_result[:synonyms] = synonyms.join('; ')
 		hash_result[:organism] = organism[0]
 		hash_result[:keywords] = keywords.join('; ')
-		hash_result[:cellular_location] = location.join('; ')
-		hash_result[:molecularWieght] = molWeight
+		hash_result[:cellularLocations] = location.join('; ')
+		hash_result[:molecularWeight] = molWeight
 		hash_result[:numberOfResidues] = seqLength
 		hash_result[:sequence] = seq
 		hash_result[:specificFunction] = function.join('; ')

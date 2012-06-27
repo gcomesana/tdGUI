@@ -41,7 +41,7 @@ describe "Behaviour of EndpointsProxy" do
 		result = EndpointsProxy.autocheck.should be_true
 		result = EndpointsProxy.checkConceptAPI.should be_true
 
-puts "proteinLookup endpoint: #{EndpointsProxy.get_endpoint}"
+puts "proteinLookup endpoint: #{EndpointsProxy.get_core_endpoint}"
 
 	end
 
@@ -57,14 +57,14 @@ puts "Endpoints checked: #{EndpointsProxy.getEndpointsChecked}"
 		EndpointsProxy.getEndpointsChecked.should be > 0
 		coreApiAlive.should be_true
 
-puts "Endpoint used: #{EndpointsProxy.get_endpoint}"
+puts "Endpoint used: #{EndpointsProxy.get_core_endpoint}"
 	end
 
 
 	it "make_request should get a response" do
 		EndpointsProxy.autocheck.should be_true
 		EndpointsProxy.checkConceptAPI.should be_true
-		EndpointsProxy.get_endpoint.should_not eq(@url)
+		EndpointsProxy.get_core_endpoint.should_not eq(@url)
 
 		res = EndpointsProxy.make_request(@url, @options)
 		res.should_not be_nil

@@ -189,7 +189,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 			field.hide();
 		}, this);
 		var img = this.down('#target_image');
-		img.setSrc('/images/target_placeholder.png');
+		img.setSrc('images/target_placeholder.png');
 		this.doLayout();
 	},
 
@@ -237,7 +237,7 @@ console.info ("targetinfos length: "+targetInfos.length)
 
 
 	addKeywords: function(keywords) {
-		var bits = keywords.split(', ');
+		var bits = keywords.split('; ');
 		var keywordDisplayField = this.down('#keywords');
 		var bodyEl = keywordDisplayField.bodyEl;
 		var domElem = bodyEl.dom;
@@ -275,7 +275,7 @@ console.info ("targetinfos length: "+targetInfos.length)
 	},
 
 	addSynonyms: function(synonyms) {
-		var bits = synonyms.split(', ');
+		var bits = synonyms.split('; ');
 		var synonymsField = this.down('#synonyms');
 		var bodyEl = synonymsField.bodyEl;
 		var domElem = bodyEl.dom;
@@ -296,6 +296,9 @@ console.info ("targetinfos length: "+targetInfos.length)
 	addPDBImage: function(pdbIdPage) {
 		//example http://www.pdb.org/pdb/explore/explore.do?structureId=1HOF
 		//        http://www.rcsb.org/pdb/images/1HOF_asr_r_250.jpg
+    if (pdbIdPage.length == 0)
+      return
+
 		var stringURL = new String(pdbIdPage);
 		var img = this.down('#target_image');
 		var pdbID = stringURL.substr(stringURL.lastIndexOf('=') + 1);
@@ -319,10 +322,13 @@ console.info ("targetinfos length: "+targetInfos.length)
 		} else if (fieldId == 'pdbIdPage') {
 			this.addPDBImage(value);
 		} else {
-			//            console.log('standard field');
+console.log('standard field: '+fieldId+' -> '+value);
 			var field = this.down('#' + fieldId);
-			field.setValue(value);
-			field.show();
+			if (field != null) {
+        field.setValue(value);
+        field.show();
+      }
+
 		}
 	},
 
@@ -337,16 +343,23 @@ console.info ("targetinfos length: "+targetInfos.length)
 		var td = target.data;
 
 // Pharmacology data button initialization
-    var targetName = this.down ('#target_name').getRawValue()
     var pharmButton = this.down('#pharmTargetButton');
-    pharmButton.hide();
-    pharmButton.setHandler(function () {
-// console.info('pharmButton.setHandler -> !xt=tdgui-pharmbytargetpanel&qp=' + target.store.proxy.extraParams.protein_uri)
-      var historyParams = '!xt=tdgui-pharmbytargetpanel&qp=' +
-            target.store.proxy.extraParams.protein_uri
-      historyParams += '&tg=' + targetName
-      Ext.History.add(historyParams)
-    });
+    var protein_uri = target.store.proxy.extraParams.protein_uri
+    if (protein_uri.indexOf("uniprot") == -1) {
+      var targetName = this.down ('#target_name').getRawValue()
+
+      pharmButton.hide();
+      pharmButton.setHandler(function () {
+  // console.info('pharmButton.setHandler -> !xt=tdgui-pharmbytargetpanel&qp=' + target.store.proxy.extraParams.protein_uri)
+        var historyParams = '!xt=tdgui-pharmbytargetpanel&qp=' +
+              target.store.proxy.extraParams.protein_uri
+        historyParams += '&tg=' + targetName
+        Ext.History.add(historyParams)
+      });
+    }
+    else
+      pharmButton.disable()
+
     pharmButton.show();
 
     for (var prop in td) {

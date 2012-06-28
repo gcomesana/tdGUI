@@ -17,6 +17,7 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
     margin:'5 5 5 5'
   },
   graphDivId:'divgraph',
+  closable: true,
 
 
   initComponent:function () {
@@ -45,7 +46,10 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
             buttons: [{
               xtype: 'button',
               text: 'Add',
-              tooltip: 'Add this node to the <b>multiple targets</b> list'
+              tooltip: 'Add this node to the <b>multiple targets</b> list',
+              handler: function (btn, evObj) {
+                me.addNodeToList (node)
+              }
             }, {
               xtype: 'button',
               text: 'Close'
@@ -71,6 +75,16 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
     graphPanel.initGraph(graphPanel)
 
     this.callParent(arguments)
+  }, // EO initComponent
+
+
+  addNodeToList: function (aNode) {
+    var txtArea = Ext.ComponentQuery.query('viewport > panel > panel > panel > textarea')[0]
+console.info ('got textarea...')
+
+    var txtValues = txtArea.getRawValue()
+    txtValues += '\n'+aNode.name
+    txtArea.setRawValue(txtValues)
   }
 
 }) // EO GraphDataPanel

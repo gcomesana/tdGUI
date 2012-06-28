@@ -134,8 +134,8 @@ class InnerProxy
 		@coreApiEndpoints.each do |endpoint|
 			begin
 			Timeout::timeout (TIMEOUT) do
+				@coreEndpointsChecked += 1 # checkpoint will be checked no matter it is dead or alive
 				alive = request(endpoint, options)
-				@coreEndpointsChecked += 1
 			end
 			rescue Timeout::Error => e
 				alive = 0

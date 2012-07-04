@@ -247,12 +247,14 @@ console.info ("targetinfos length: "+targetInfos.length)
 			cls: 'keyword',
 			html: '{kw}'
 		});
-		
-		Ext.each(bits, function(keyword) {
-			tpl.append(bodyEl, {
-				kw: keyword
-			});
-		}, this);
+
+    if (bits.length > 0) {
+      Ext.each(bits, function(keyword) {
+        tpl.append(bodyEl, {
+          kw: keyword
+        });
+      }, this);
+    }
 
 		keywordDisplayField.show();
 	},
@@ -312,16 +314,22 @@ console.info ("targetinfos length: "+targetInfos.length)
 	setFieldValue: function(fieldId, value) {
 		if (fieldId == 'synonyms') {
 			//            console.log('synonyms');
-			this.addSynonyms(value);
-		} else if (fieldId == 'keywords') {
+      if (value.length > 0)
+			  this.addSynonyms(value);
+		}
+    else if (fieldId == 'keywords') {
 			//            console.log('keywords');
-			this.addKeywords(value);
-		} else if (fieldId == 'organism') {
+      if (value.length > 0)
+			  this.addKeywords(value);
+		}
+    else if (fieldId == 'organism') {
 			//            console.log('organism');
 			this.addOrganism(value);
-		} else if (fieldId == 'pdbIdPage') {
+		}
+    else if (fieldId == 'pdbIdPage') {
 			this.addPDBImage(value);
-		} else {
+		}
+    else {
 console.log('standard field: '+fieldId+' -> '+value);
 			var field = this.down('#' + fieldId);
 			if (field != null) {

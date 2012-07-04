@@ -17,7 +17,6 @@
  *    buttons: [bnt1, btn2, ...]
  * })
  *
- *
  */
 Ext.define('TDGUI.view.common.DisplayInfoDlg', {
 	extend: 'Ext.window.Window',
@@ -32,8 +31,25 @@ Ext.define('TDGUI.view.common.DisplayInfoDlg', {
   	this.title = this.data.nodename
   	var displayWidth = this.width-15
 
+    Ext.Ajax.request({
+      url: 'resources/datatest/intact-full.json',
+      method: 'GET',
+      params: {
+        target: me.target_id
+      },
+
+      success: function(response, opts) {
+        me.fdCfg = setInstanceGraph (thisInstance)
+        me.startupGraph(response.responseText, thisInstance)
+      },
+
+// TODO check the erro control here!!! Graph has not be displayed and err message raised
+      failure: function(response, opts) {
+          console.log('server-side failure with status code ' + response.status);
+      }
+    })
   	var displayArea = Ext.create ('TDGUI.view.common.panels.TextImagePanel', {
-  		data: me.data,
+  		data: me.data, // data is {nodename: ..., numconnections: ...}
   		tpl: me.tpl,
 //  		autoScroll: true
 //  		imagePath: 'resources/images/4e99_bio_r_500.jpg',

@@ -284,7 +284,8 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 
 
     Ext.Ajax.request({
-      url: 'resources/datatest/full-jit.json',
+//      url: 'resources/datatest/full-jit.json',
+      url: 'resources/datatest/intact-full.json',
       method: 'GET',
       params: {
         target: me.target_id

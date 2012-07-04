@@ -1,6 +1,8 @@
 /**
- * Panel to support both the InteractionsGraph panel along with a panel to set
- * the nodes selected to perform a multitarget search on them
+ * Panel to support the InteractionsPanel and a window which is raised upon clicking
+ * a node.
+ * The window shows a bit of informatio about the entity represented by the node and it
+ * is based on a template plus the data which is to be showed.
  */
 Ext.define('TDGUI.view.panels.GraphDataPanel', {
   extend:'Ext.panel.Panel',
@@ -41,7 +43,8 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
           )
 
           var myWin = Ext.create ('TDGUI.view.common.DisplayInfoDlg', {
-            data: {nodename: node.name, nodedesc: node.data.node_desc, numconnections: list.length},
+//            data: {nodename: node.name, nodedesc: node.data.node_desc, numconnections: list.length},
+            data: {nodename: node.name, numconnections: list.length},
             tpl: mytpl,
             buttons: [{
               xtype: 'button',
@@ -69,9 +72,10 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
       value:undefined
     })
 
-*/    this.items = [
-        graphPanel
-      ]
+*/
+    this.items = [
+      graphPanel
+    ]
     graphPanel.initGraph(graphPanel)
 
     this.callParent(arguments)

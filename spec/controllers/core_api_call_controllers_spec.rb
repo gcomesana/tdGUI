@@ -6,7 +6,7 @@ describe CoreApiCallsController do
 	before (:all) do
 		@api_method = 'proteinInfo'
 
-		@coreApi_opts = {:uri=>"http://www.conceptwiki.org/concept/979f02c6-3986-44d6-b5e8-308e89210c8d",
+		@coreApi_opts = {:uri=>"http://www.conceptwiki.org/concept/70dafe2f-2a08-43f7-b337-7e31fb1d67a8",
 						 :limit=>"25", :offset=>0, :method=>"proteinInfo"}
 		@uniprot_opts = {:uri=>"<http://www.uniprot.org/uniprot/P08913>",
 										 :limit=>"25", :offset=>nil} #, :method=>"proteinInfo"}

@@ -6,6 +6,7 @@
  */
 Ext.define ('TDGUI.view.common.panels.TextImagePanel', {
 	extend: 'Ext.panel.Panel',
+  alias: 'widget.tdgui-textimagepanel',
 
 	layout: {
 		type: 'hbox',
@@ -15,6 +16,8 @@ Ext.define ('TDGUI.view.common.panels.TextImagePanel', {
 	imagePath: 'images/target_placeholder.png',
 	tpl: undefined,
 	data: undefined,
+
+  targetStore: null,
 
 //	height: 150,
 	bodyPadding: '2 2 2 2',
@@ -42,6 +45,33 @@ Ext.define ('TDGUI.view.common.panels.TextImagePanel', {
 		this.tpl = undefined
 		this.data = undefined
 
+    var store = Ext.create ('TDGUI.store.Targets')
+    this.targetStore = store // store loaded afterrender on controller
+    this.targetStore.addListener('load', this.showData, this)
+
 		this.callParent (arguments)
-	}
+	},
+
+
+
+  showData: function(store, records, succesful) {
+    if (succesful) {
+      if (records.length > 0) {
+        var numConn = this.data.numconnections
+        var targetRec = store.first()
+        var targetData = targetRec.data
+
+        var data = {
+          nodename: targetData['target_name'],
+          nodedesc: targetData['description'],
+          numconnections: numConn
+        }
+
+        this.data = data
+        var displayField = this.items[0]
+        this.tpl.overwrite(displayField.bodyEl, this.data)
+      }
+    }
+  }
+
 })

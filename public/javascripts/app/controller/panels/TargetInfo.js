@@ -45,6 +45,7 @@ console.info ("Initializing TargetInfo controller...")
 
   initTargetInfoPanel: function (comp, opts) {
 //    var store = this.getTargetsStore();
+    comp.startLoading()
     var store = comp.targetInfoStore
     var tokenObjQp = comp.queryParam
     if (tokenObjQp != store.proxy.extraParams.protein_uri) {

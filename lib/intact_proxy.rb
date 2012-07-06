@@ -6,10 +6,10 @@ require 'cgi'
 require 'nokogiri'
 require 'JSON'
 
-class StringDbProxy
+class IntactProxy
 
 	STRING_DB_URL = 'http://string-db.org/api/psi-mi/interactions?identifier=xxxx&required_score=900&limit=5&network_flavor=confidence'
-
+	INTACT_URL = 'http://www.ebi.ac.uk/Tools/webservices/psicquic/intact/webservices/current/search/query/xxxx?format=xml25&species=9606'
 
 	def initialize
 		@edges_counter = Hash.new
@@ -23,7 +23,7 @@ class StringDbProxy
 
 #		xmlFile = File.new('../data/q13362-stringdb-interactions.xml') # psi-mi xml file
 
-		myuri = STRING_DB_URL.gsub(/xxxx/, target_id)
+		myuri = INTACT_URL.gsub(/xxxx/, target_id)
 		psimiResp = request(myuri, {})
 		xmlDoc = Nokogiri::XML(psimiResp.body)
 
@@ -200,7 +200,7 @@ private
 		} # EO nodes.each
 
 		graph_cfg << {:experiments => experiments}
-		puts "graph_cfg:\n"
+#		puts "graph_cfg:\n"
 #		puts "\n#{graph_cfg.to_json}"
 
 		graph_cfg
@@ -227,6 +227,7 @@ private
 # @return the object response
 #
 	def request(url, options)
+puts "IntactProxy.request (#{url}, #{options.inspect})\n"
 		my_url = URI.parse(url)
 
 		req = Net::HTTP::Get.new(my_url.request_uri)

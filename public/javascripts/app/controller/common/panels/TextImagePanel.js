@@ -10,15 +10,20 @@ Ext.define("TDGUI.controller.common.panels.TextImagePanel", {
   models: ['Target'],
 
   refs: [{
-    ref: 'window-textimagepanel',
+    ref: 'windowTextImagePanel',
     selector: 'window tdgui-textimagepanel'
   }],
 
   init:function () {
     this.control({
       'tdgui-textimagepanel': {
-        afterrender: this.initWindowTextImgPanel
+      },
+
+      'window[id="window-node-info"]': {
+        show: this.initWindowTextImgPanel
       }
+
+
     })
   },
 
@@ -28,13 +33,17 @@ Ext.define("TDGUI.controller.common.panels.TextImagePanel", {
 
 
   initWindowTextImgPanel: function (comp, opts) {
-    var store = comp.targetStore
-    var tokenObjQp = comp.data.nodename
+    var infoComp = this.getWindowTextImagePanel()
+    var store = infoComp.targetStore
+    var tokenObjQp = infoComp.data.nodename
+    tokenObjQp = 'http://www.uniprot.org/uniprot/'+tokenObjQp
     if (tokenObjQp != store.proxy.extraParams.protein_uri) {
       store.proxy.extraParams.protein_uri = tokenObjQp;
       //          this.getFormView().setLoading(true);
       store.load();
     }
-  }
+
+  },
+
 
 })

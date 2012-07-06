@@ -88,11 +88,13 @@ console.info ("raising Pharm By Target panel")
 
       case 'tdgui-graphdatapanel':
 console.info ("raising interactions for Target panel")
+        var uniprotAcc = tokenObj.qp
         newPanel = Ext.createByAlias ('widget.'+xtype, {
 //          fdDivName: 'xperimental-div',
-          target_id: 'Q13362'
+//          target_id: 'Q13362',
+          targetAcc: uniprotAcc,
+          closeable: true
         })
-//        newPanel.initGraph(newPanel)
         break
 
 

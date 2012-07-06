@@ -22,6 +22,17 @@ describe ConceptWikiApiCallsController do
 
 	end
 
+
+	it "should get a emtpy response" do
+		@substring = 'lpad' # no results
+		get :protein_lookup, :query => @substring
+
+		response.code.to_i.should eq(200)
+		JSON.parse(response.body).should be_kind_of Array
+
+	end
+
+
 	it "proteinLookup should not raise an exception" do
 		get :protein_lookup, :query => @substring
 

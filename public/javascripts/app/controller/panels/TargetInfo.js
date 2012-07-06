@@ -7,7 +7,7 @@ Ext.define("TDGUI.controller.panels.TargetInfo", {
   stores:['Targets'],
   models:['Target'],
 
-  refs:[{
+  refs: [{
     ref: 'targetinfopanel',
     selector: 'tdgui-targetinfopanel'
   }],
@@ -33,6 +33,10 @@ console.info ("Initializing TargetInfo controller...")
   onClickStringBtn: function (btn, ev, opts) {
 
     var theStore = this.getTargetinfopanel().targetInfoStore
+    var targetAcc = theStore.proxy.extraParams.protein_uri
+    if (targetAcc.indexOf ('conceptWiki') != -1)
+      return
+
     var targetName = this.getTargetinfopanel().down('#target_name').getRawValue()
     var historyParams = '!xt=tdgui-graphdatapanel&qp=' +
                 theStore.proxy.extraParams.protein_uri+

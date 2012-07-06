@@ -62,7 +62,7 @@ console.info ('SearchPanel controller initializing... ')
 //        afterrender: this.checkTxt
       },
 
-      'tdgui-west-search > tabpanel > panel > tdgui-panelbuttons > toolbar > button': { // see buttons on Panel
+      'tdgui-west-search > panel > tdgui-panelbuttons > toolbar > button': { // see buttons on Panel
         click: this.retrieveBtnClick
       },
 

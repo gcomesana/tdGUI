@@ -7,7 +7,10 @@
 Ext.define('TDGUI.view.panels.GraphDataPanel', {
   extend:'Ext.panel.Panel',
   alias:'widget.tdgui-graphdatapanel',
-  requires:['TDGUI.view.common.InteractionsGraph'],
+  requires: [
+    'TDGUI.view.common.InteractionsGraph',
+    'TDGUI.view.common.DisplayInfoDlg'
+  ],
 
   title:'Graph Data Panel',
   layout:{
@@ -21,31 +24,36 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
   graphDivId:'divgraph',
   closable: true,
 
+  targetAcc: '',
 
   initComponent:function () {
     var me = this
 
     var graphPanel = Ext.create('TDGUI.view.common.InteractionsGraph', {
-      fdDivName:'divgraph',
-      flex:3,
+      fdDivName: 'divgraph',
+      flex: 3,
+      targetId: me.targetAcc,
 
       nodeClickHandler: function (node, eventInfo, ev) {
       // console.info ("onClickHandler method...")
         if (typeof node !== 'undefined') {
-
           var list = [];
+
           node.eachAdjacency(function(adj) {
             list.push(adj.nodeTo.name);
           });
+
           var mytpl = new Ext.XTemplate ('<b>{nodename}</b><br><br>',
-            'Description:<br/>{nodedesc}<br/><br/>',
-            '{numconnections} connections<br/>'
+            'Description:<br/>{nodedesc}<br/>'
+//            '{numconnections} connections<br/>'
           )
 
           var myWin = Ext.create ('TDGUI.view.common.DisplayInfoDlg', {
 //            data: {nodename: node.name, nodedesc: node.data.node_desc, numconnections: list.length},
             data: {nodename: node.name, numconnections: list.length},
             tpl: mytpl,
+            id: 'window-node-info',
+
             buttons: [{
               xtype: 'button',
               text: 'Add',
@@ -55,7 +63,8 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
               }
             }, {
               xtype: 'button',
-              text: 'Close'
+              text: 'Close',
+              handler: function () { this.up('window').close() }
             }]
           })
 
@@ -82,13 +91,21 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
   }, // EO initComponent
 
 
+/**
+ * This method adds the uniprot accession of the node into the multitarget list
+ * It is set here as the functionality is very close to data panel funcition rather
+ * than the generic dialog function...
+ * @param aNode
+ */
   addNodeToList: function (aNode) {
     var txtArea = Ext.ComponentQuery.query('viewport > panel > panel > panel > textarea')[0]
-console.info ('got textarea...')
-
     var txtValues = txtArea.getRawValue()
-    txtValues += '\n'+aNode.name
-    txtArea.setRawValue(txtValues)
+
+    if (txtValues.indexOf(aNode.name) == -1) {
+      txtValues += '\n'+aNode.name
+      txtArea.setRawValue(txtValues)
+    }
+
   }
 
 }) // EO GraphDataPanel

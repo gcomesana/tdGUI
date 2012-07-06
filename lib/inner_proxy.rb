@@ -105,6 +105,11 @@ class InnerProxy
 			result = request(url, options)
 		end
 
+# OJO
+		@endpoint_ready = @urlMap[CONCEPT_WIKI_API_SEARCH_URL]
+		return false
+# EO OJO
+
 		if result == nil || result < 0
 			@endpoint_ready = @urlMap[CONCEPT_WIKI_API_SEARCH_URL]
 			false
@@ -140,6 +145,11 @@ class InnerProxy
 			rescue Timeout::Error => e
 				alive = 0
 			end
+
+# OJO
+ 			@endpoint_ready = nil
+			return false
+# EO OJO
 
 			if alive > 0 then
 puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '#{@coreApi_method}'\n"

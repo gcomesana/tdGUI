@@ -20,7 +20,8 @@ Ext.create('Ext.app.Application', {
     'TDGUI.controller.Viewport',
     'TDGUI.controller.grid.DynamicGrid',
     'TDGUI.controller.panels.MultiTarget',
-    'TDGUI.controller.panels.TargetInfo'
+    'TDGUI.controller.panels.TargetInfo',
+    'TDGUI.controller.common.panels.TextImagePanel'
   ],
 
   autoCreateViewport: true,

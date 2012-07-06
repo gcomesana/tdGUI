@@ -86,7 +86,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
   fdDivName:'infovis-div', // div to bear the graph
 
   interactionData: {},
-  target_id: '',
+  targetId: '',
 
   nodeClickHandler: undefined,
   edgeClickHandler: undefined,
@@ -265,6 +265,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
           style.color = "#ddd";
         },
 
+
         // Change node styles when DOM labels are placed
         // or moved.
         onPlaceLabel: function(domElement, node) {
@@ -284,11 +285,11 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 
 
     Ext.Ajax.request({
-//      url: 'resources/datatest/full-jit.json',
-      url: 'resources/datatest/intact-full.json',
+//      url: 'resources/datatest/intact-req.json',
+      url: '/tdgui_proxy/interactions_retrieval',
       method: 'GET',
       params: {
-        target: me.target_id
+        target: me.targetId
       },
 
       success: function(response, opts) {

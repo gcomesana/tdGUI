@@ -124,7 +124,8 @@ class ConceptWikiApiCall
 
 		if results == [] then # no concept found
 			puts "No concept found!"
-			@parsed_results = {:concept_uuid => nil, :concept_label => nil, :tag_uuid => nil, :tag_label => nil}
+#			@parsed_results = {:concept_uuid => nil, :concept_label => nil, :tag_uuid => nil, :tag_label => nil}
+			@parsed_results = Array.new
 			return @parsed_results
 
 		elsif results.nil? then
@@ -188,9 +189,8 @@ class ConceptWikiApiCall
 			@parsed_results.push(result)
 
 		end
-																	# puts "parsed results:" + @parsed_results.inspect + "\n"
 		@parsed_results
-	end
+	end # EO search_by_tag
 
 
 
@@ -263,8 +263,12 @@ puts "Call tooooooook #{@query_time} seconds"
 								 	begin
 								 		@results = JSON.parse(@response.body)
 									rescue JSON::ParserError
-										json_results = EndpointsProxy.uniprot2json(@response.body, options[:query])
-										@results = JSON.parse(json_results) # @results is an Array
+										if @response.body == "" then
+											@results = []
+										else
+											json_results = EndpointsProxy.uniprot2json(@response.body, options[:query])
+											@results = JSON.parse(json_results) # @results is an Array
+										end
 									end
 
 								 return @results

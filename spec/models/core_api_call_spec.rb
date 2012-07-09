@@ -22,6 +22,12 @@ describe "should call uniprot" do
 	end
 
 
+	it "should check endpoints" do
+
+
+	end
+
+
 	it "should make a coreApi call" do
 		res = @coreApi.request(@api_method, @coreApi_opts)
 

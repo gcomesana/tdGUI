@@ -96,7 +96,7 @@ private
 
 
 	def def_interaction (intrcn)
-		color = "white"
+		color = get_random_color
 		conn_nodes = intrcn.css('/participantList/participant/interactorRef')
 		exprmnt_ref = intrcn.css('/experimentList/experimentRef').text
 		msg = intrcn.css('/confidenceList/confidence/unit/names/fullName').text
@@ -181,7 +181,7 @@ private
 	# puts "line_width: #{line_width} for #{n[:nodeFrom]},#{n[:nodeTo]}\n"
 
 				if line_width != nil
-					n[:data]['$lineWidth'] = line_width
+					n[:data]['$lineWidth'] = line_width*2
 					edges_counter.delete( [n[:nodeFrom], n[:nodeTo]] )
 				end
 			}

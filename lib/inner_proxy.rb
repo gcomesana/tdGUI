@@ -1,30 +1,43 @@
 require 'net/http'
+require 'rexml/document'
+require 'nokogiri'
+require 'uri'
 
+
+#
+# This proxy is a kind of helper class to the tdgui_proxy in order to
+# give support to requests either to uniprot or coreAPI
+#
 class InnerProxy
+	include REXML
+
 	private
 # Suppossed endpoints for coreApi
-	CORE_API_URL_83 = "http://ops.few.vu.nl:9183/opsapi"
-	CORE_API_URL_84 = "http://ops.few.vu.nl:9184/opsapi"
-	CORE_API_URL_85 = "http://ops.few.vu.nl:9185/opsapi"
-	CORE_API_URL_86 = "http://ops.few.vu.nl:9186/opsapi"
-	CORE_API_URL_87 = "http://ops.few.vu.nl:9187/opsapi"
+	CORE_API_URL_83 = "http://ops.few.vu.nl:8183/opsapi"
+	CORE_API_URL_84 = "http://ops.few.vu.nl:8184/opsapi"
+	CORE_API_URL_85 = "http://ops.few.vu.nl:8185/opsapi"
+	CORE_API_URL_86 = "http://ops.few.vu.nl:8186/opsapi"
+	CORE_API_URL_87 = "http://ops.few.vu.nl:8187/opsapi"
 
 # URL for conceptwiki
 	CONCEPT_WIKI_API_SEARCH_URL = "http://staging.conceptwiki.org/web-ws/concept/search/"
 
 	TIMEOUT = 1.5 # arbitrary timeout to ping endpoints
 
-	UNIPROT_PROTEIN_LOOKUP = 'http://www.uniprot.org/uniprot/?query=organism:9606+AND+xxxx&format=tab&columns=id,protein%20names,citation,comments,genes&sort=score'
-	UNIPROT_PROTEIN_LOOKUP_SHORT = 'http://www.uniprot.org/uniprot/?format=tab&columns=id,protein%20names,citation,comments,genes&sort=score'
-	UNIPROT_PROTEIN_INFO ='http://www.uniprot.org/uniprot/?query=xxxx&format=tab&columns=id,protein%20names,citation,comments,genes&sort=score'
+	UNIPROT_PROTEIN_LOOKUP = 'http://www.uniprot.org/uniprot/?query=organism:9606+AND+xxxx&format=tab&columns=id,protein%20names,citation,comments,genes&sort=score&limit=25'
+	UNIPROT_PROTEIN_LOOKUP_SHORT = 'http://www.uniprot.org/uniprot/?format=tab&columns=id,protein%20names,citation,comments,genes&sort=score&limit=25'
+	UNIPROT_PROTEIN_INFO ='http://www.uniprot.org/'
 
 	URL_FETCH_ENTRY = 'http://www.uniprot.org/uniprot/'
 
 
 	public
 	def initialize ()
-		@coreApiEndpoints = [CORE_API_URL_83, CORE_API_URL_84, CORE_API_URL_85,
-												 CORE_API_URL_86, CORE_API_URL_87]
+		@coreApiEndpoints =[CORE_API_URL_83]
+
+#		@coreApiEndpoints = [CORE_API_URL_83, CORE_API_URL_84, CORE_API_URL_85,
+#												 CORE_API_URL_86, CORE_API_URL_87]
+
 		@coreApi_method = 'proteinInfo'
 		@coreApi_uri = 'http://chem2bio2rdf.org/chembl/resource/chembl_targets/12261'
 		@endpoint_ready = nil
@@ -42,23 +55,30 @@ class InnerProxy
 	end
 
 
-	def coreEndpointReady
+	def core_endpoint_ready
 		@endpoint_ready
 #		UNIPROT_PROTEIN_LOOKUP_SHORT
 	end
 
 
-	def coreEndpointsChecked
+	def core_endpoints_checked
 		@coreEndpointsChecked
 	end
 
 
 # conceptWikiEP
 # Returns the concept wiki search URI
-	def conceptWikiEP
+	def conceptwiki_ep
 		CONCEPT_WIKI_API_SEARCH_URL
 	end
 
+
+
+# concept_uniprot_ep
+# returns the uniprot url used to get entries based on a term (ej. brca2)
+	def concept_uniprot_ep
+		@urlMap[CONCEPT_WIKI_API_SEARCH_URL]
+	end
 
 # coreApiEP
 # Returns one of the five supposed coreAPI endpoints. All of them are similar except for the port
@@ -81,9 +101,14 @@ class InnerProxy
 		url = URI.parse(prot_uri)
 												 #		 url = checkEndpoints()
 		result = nil
-		Timeout::timeout (1.5) do
+		Timeout::timeout (TIMEOUT) do
 			result = request(url, options)
 		end
+
+# OJO
+		@endpoint_ready = @urlMap[CONCEPT_WIKI_API_SEARCH_URL]
+		return false
+# EO OJO
 
 		if result == nil || result < 0
 			@endpoint_ready = @urlMap[CONCEPT_WIKI_API_SEARCH_URL]
@@ -97,7 +122,10 @@ class InnerProxy
 # EO checkConcept...
 
 
-
+# Check the core api by requesting the CORE_API_URLs to see if anyone of them replies
+# If so, the method returns true and the endpoint_ready member is set to the
+# first endpoint in replying
+# Otherwise, the method returns nil and en endpoint_ready is reset to nil
 	def checkCoreAPI ()
 		options = Hash.new
 		options[:uri] = '<' + @coreApi_uri + '>'
@@ -106,23 +134,35 @@ class InnerProxy
 		options[:method] = @coreApi_method
 
 		alive = 0
+		@endpoint_ready = nil
 		@coreEndpointsChecked = 0
 		@coreApiEndpoints.each do |endpoint|
-			Timeout::timeout (1.5) do
+			begin
+			Timeout::timeout (TIMEOUT) do
+				@coreEndpointsChecked += 1 # checkpoint will be checked no matter it is dead or alive
 				alive = request(endpoint, options)
-				@coreEndpointsChecked += 1
+			end
+			rescue Timeout::Error => e
+				alive = 0
 			end
 
+# OJO
+ 			@endpoint_ready = nil
+			return false
+# EO OJO
+
 			if alive > 0 then
+puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '#{@coreApi_method}'\n"
 				@endpoint_ready = endpoint # any of them from 83 to 87
 				break
 			end
-#  break alive if alive != -1 && alive != -2 && alive != -3
 		end # EO loop on endopoints
-
+=begin
 		if alive == 0
 			@endpoint_ready = @urlMap[CORE_API_URL_83]
 		end
+=end
+
 		alive > 0 ? true : false
 	end
 
@@ -162,9 +202,140 @@ class InnerProxy
 
 
 
+# proteinInfo2json
+# returns a Hash from the uniprot info xml results
+=begin
+{
+:target_name=>"Alpha-2C adrenergic receptor (Homo sapiens)",
+:target_type=>"PROTEIN",
+:description=>"Alpha-2C adrenergic receptor",
+:synonyms=>"Alpha-2C adrenergic receptor; Alpha-2C adrenoreceptor; Alpha-2C adrenoceptor; Alpha-2 adrenergic receptor subtype C4",
+:organism=>"Homo sapiens",
+:keywords=>"Cell membrane; Complete proteome; Disulfide bond; G-protein coupled receptor; Glycoprotein; Membrane; Phosphoprotein; Polymorphism; Receptor; Transducer; Transmembrane",
+:cellularLocations=>"multi-passMembraneProtein",
+:molecularWeight=>"49523",
+:numberOfResidues=>"469",
+:pdbIdPage=>"http://www.pdb.org/pdb/explore/explore.do?structureId=1HOF",
+:specificFunction=>"Alpha-2 adrenergic receptors mediate the catecholamine- induced inhibition of adenylate cyclase through the action of G proteins",
+:theoreticalPi=>"10.69"}
+=end
+	def proteinInfo2hash (xmlRes)
+
+#		xmlDoc = Document.new xmlRes
+#		entries = xmlDoc.elements.collect('uniprot/entry') { |ent| ent }
+		xmlDoc = Nokogiri::XML(xmlRes)
+		entries = xmlDoc.css('uniprot > entry')
+# just take the very first entry
+		main_entry =  entries.first
+
+		recommended_name = main_entry.css('protein > recommendedName > fullName').collect {
+			|node| node.text
+		}
+		synonyms = main_entry.css('protein > alternativeName > fullName').collect {
+			|alt_name| alt_name.text
+		}
+		keywords = main_entry.css('keyword').collect { |keyw| keyw.text }
+
+		organism = main_entry.css('organism > name').collect { |org|
+			if org['type'] == 'scientific' then org.text end
+		}
+		function = main_entry.css("comment[type='function']").collect { |func|
+			func.text
+		}
+		location = main_entry.css("comment[type='subcellular location'] > subcellularLocation > location").collect { |loc|
+			loc.text
+		}
+
+		molWeight = nil
+		seqLength = nil
+		seq = nil
+		main_entry.css("/sequence").collect { |theSeq|
+			molWeight = theSeq.attributes['mass'].value
+			seqLength = theSeq.attributes['length'].value
+			seq = theSeq.text
+		}
+
+# the very first pdb reference is got. a comparison based on resolution can improve the choice
+		pdbs = main_entry.css("dbReference[type='PDB']").collect { |pdb|
+			pdb
+		}
+		pdbNodeMalformed = false
+		pdbs.each { |node|
+			resolution = node.css("property[type='resolution']")
+			if resolution.nil? || resolution.length == 0 then
+				pdbNodeMalformed = true
+				break
+			end
+		}
+		if pdbs.empty? == false && pdbNodeMalformed == false
+# sort by value resolution to get the element with lowes resolution value
+			pdbs = pdbs.sort_by{ |node|
+				node.css("property[type='resolution']").first['value']
+			}
+		end
+
+
+=begin
+		recommended_name = main_entry.elements.collect('//protein//recommendedName/fullName') {
+			|recName| recName.text
+		}
+		synonyms = main_entry.elements.collect('//protein//alternativeName/fullName') {
+			|alt_name| alt_name.text
+		}
+		keywords = main_entry.elements.collect('//keyword') { |keyw| keyw.text }
+
+		organism = main_entry.elements.collect('//organism/name') { |org|
+			if (org.attributes['type'] == 'synonym') then org.text end
+		}
+		function = main_entry.elements.collect("//comment[@type='function']") { |func|
+			func.text
+		}
+		location = main_entry.elements.collect("//comment[@type='subcellular location']") { |func|
+			func.text
+		}
+
+		molWeight = nil
+		seqLength = nil
+		seq = nil
+		main_entry.elements.collect("//sequence") { |theSeq|
+			molWeight = theSeq.attributes['mass']
+			seqLength = theSeq.attributes['length']
+			seq = theSeq.text
+		}
+
+# the very first pdb reference is got. a comparison based on resolution can improve the choice
+		pdbs = main_entry.elements.collect("//dbReference[@type='PDB']") { |pdb|
+			pdb
+		}
+=end
+		pdbResult = ''
+		if pdbs.empty? == false
+			pdbResult = 'http://www.pdb.org/pdb/explore/explore.do?structureId='
+#			pdbResult += pdbs[0].css("property[type='resolution']").first['value']
+			pdbResult += pdbs[0].attributes['id'].value
+		end
+		hash_result = Hash.new
+		hash_result[:target_name] = "#{recommended_name[0]} (#{organism[0]})"
+		hash_result[:target_type] = 'PROTEIN'
+		hash_result[:description] = recommended_name[0]
+		hash_result[:synonyms] = synonyms.join('; ')
+		hash_result[:organism] = organism[0]
+		hash_result[:keywords] = keywords.join('; ')
+		hash_result[:cellularLocations] = location.join('; ')
+		hash_result[:molecularWeight] = molWeight
+		hash_result[:numberOfResidues] = seqLength
+		hash_result[:sequence] = seq
+		hash_result[:specificFunction] = function.join('; ')
+		hash_result[:pdbIdPage] = pdbResult
+		hash_result[:theoreticalPi] = nil
+
+		hash_result
+	end
+
+
 	private
 # request (addrs, opts)
-# Make a simple http request and returns the response code
+# Make a simple http POST request and returns the response code
 	def request (addrs, opts)
 =begin
 			uri = URI.parse (addrs)
@@ -199,7 +370,8 @@ class InnerProxy
 # EO checkEndpoint
 
 
-# Returns a json object from a line
+# Returns a json object from a line. This is the result of a protein lookup
+# request to Uniprot
 # @param row, a row from a tab request from Uniprot, with the fields
 # uniprotId, protein names, pumed ids, comments, genes
 # @param query, the input query
@@ -222,6 +394,7 @@ class InnerProxy
 
 			if counter == 0 # this is the entry
 				str_json += '"define_url":"'+URL_FETCH_ENTRY + elem.strip()+'",'
+				str_json += '"concept_url":"'+URL_FETCH_ENTRY + elem.strip()+'",'
 
 			elsif counter == 1 # set of protein names, only the first one is got
 				prot_names = elem.split ("(")

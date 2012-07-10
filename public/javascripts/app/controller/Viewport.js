@@ -3,7 +3,8 @@
 Ext.define ("TDGUI.controller.Viewport", {
   extend: 'Ext.app.Controller',
 
-  views: ['Viewport', 'panels.BorderCenter', 'panels.MultiTarget', 'panels.PharmByTarget'],
+  views: ['Viewport', 'panels.BorderCenter', 'panels.MultiTarget',
+    'panels.PharmByTarget', 'common.InteractionsGraph', 'panels.GraphDataPanel'],
   stores: ['Targets'],
   models: ['Target'],
 
@@ -31,7 +32,7 @@ Ext.define ("TDGUI.controller.Viewport", {
     this.control({
       'tdgui-viewport': {
         historyAdded: this.handleHistoryToken
-      },
+      }
 /*
       'tdgui-multitargetpanel': {
         afterrender: function (comp, opts) {
@@ -84,6 +85,18 @@ console.info ("raising Pharm By Target panel")
           title: "Pharmacology for "+tokenObj.tg
         })
         break
+
+      case 'tdgui-graphdatapanel':
+console.info ("raising interactions for Target panel")
+        var uniprotAcc = tokenObj.qp
+        newPanel = Ext.createByAlias ('widget.'+xtype, {
+//          fdDivName: 'xperimental-div',
+//          target_id: 'Q13362',
+          targetAcc: uniprotAcc,
+          closeable: true
+        })
+        break
+
 
     }
 /*

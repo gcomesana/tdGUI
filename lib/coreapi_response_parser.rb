@@ -6,8 +6,10 @@ class CoreApiResponseParser
 	RESULT_BOOL = 'text/boolean'.freeze # Sesame-specific
 	RESULT_JSON = 'application/sparql-results+json'.freeze
 	RESULT_XML = 'application/sparql-results+xml'.freeze
+	RESULT_UNIPROT_XML = 'application/xml'.freeze
 	ACCEPT_JSON = {'Accept' => RESULT_JSON}.freeze
 	ACCEPT_XML = {'Accept' => RESULT_XML}.freeze
+
 
 	# Methods below lifted from sparql-client.rb by Arto Bendiken, Ben Lavender and others
 	# @see http://sparql.rubyforge.org/client/
@@ -24,6 +26,8 @@ class CoreApiResponseParser
 				self.parse_json_bindings(response.body, nodes)
 			when RESULT_XML
 				self.parse_xml_bindings(response.body, nodes)
+			when RESULT_UNIPROT_XML
+				EndpointsProxy.buildup_uniprot_info(response.body)
 			else
 				parse_rdf_serialization(response, options)
 		end

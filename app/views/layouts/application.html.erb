@@ -7,13 +7,18 @@
 
   <%= stylesheet_link_tag :all %>
   <%= stylesheet_link_tag '/javascripts/extjs4.0.7/resources/css/ext-all.css' %>
+  <%= stylesheet_link_tag '/stylesheets/tdgui.css' %>
+  <%= stylesheet_link_tag '/stylesheets/sbuttons.css' %>
+  <%= stylesheet_link_tag '/stylesheets/jit.css' %>
 
   <% if ENV['RAILS_ENV'] != 'production' %>
-    <%#= javascript_include_tag '/ext/ext-all-debug.js' %>
-    <%= javascript_include_tag "extjs4.0.7/bootstrap.js" %>
+    <%= javascript_include_tag 'extjs4.0.7/ext-all-debug.js' %>
+    <%#= javascript_include_tag "extjs4.0.7/bootstrap.js" %>
     <%#= javascript_include_tag 'prototype.js' %>
     <%# = javascript_include_tag "borderbis" %>
+    <%= javascript_include_tag 'lib/jit.js' %>
     <%= javascript_include_tag 'app.js' %>
+
   <% else %>
       <%= javascript_include_tag '/ext/ext-all.js' %>
       <%= javascript_include_tag 'prototype' %>

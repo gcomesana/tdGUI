@@ -34,10 +34,12 @@ class ResultsFormatter
 		return input_arr
 	end
 
-	##
-	# This function formats SPARQL query results to json column objects for ExtJS dynamicgrid widget
-	#
+##
+# This function formats SPARQL query results to json column objects for ExtJS dynamicgrid widget
+#
 	def self.construct_column_objects(input_arr)
+
+
 
 		if input_arr.length > 0 and input_arr.first.is_a?(Hash) then
 			header_keys = input_arr.first.keys

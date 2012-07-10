@@ -48,7 +48,7 @@ class CoreApiCallsController < ApplicationController
     render :json => ResultsFormatter.construct_column_objects(results).to_json, :layout => false
   end
 =end
-  
+
   
   # Main search for pharmacology by compound name. The input parameter is the cmpd_url returned by cmdp_name_lookup
   def pharm_by_compound_name(cmpd_uri = params[:compound_uri])
@@ -121,7 +121,11 @@ class CoreApiCallsController < ApplicationController
     options[:offset] = params[:offset]
     api_call = CoreApiCall.new
     results = api_call.request( api_method, options)
-    render :json => ResultsFormatter.construct_column_objects(results).to_json, :layout => false
+		if results.nil? then
+		  render :json => {:success => false}.to_json, :layout => false
+		else
+    	render :json => ResultsFormatter.construct_column_objects(results).to_json, :layout => false
+		end
   end
 
   # check to see if endpoint is responding
@@ -457,6 +461,7 @@ puts query_str
       options[:offset] = params[:offset]
       api_call = CoreApiCall.new
       results = api_call.request( api_method, options)
+puts "results.length: #{results.length} -> #{results.to_s}\n"
       results.each do |record|
   puts record.inspect  #NB Some proteins to NOT have a real uri! just "http://identifiers.org/#/WikiPathways/Other/" or similar
       end

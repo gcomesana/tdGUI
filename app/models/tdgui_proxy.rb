@@ -28,8 +28,8 @@ class TdguiProxy
 		if target_id.nil? || target_id.empty? then
 			nil
 		else
-			string_proxy = StringDbProxy.new
-			target_graph = string_proxy.get_interaction_graph(target_id)
+			intact_proxy = IntactProxy.new
+			target_graph = intact_proxy.get_interaction_graph(target_id)
 		end
 
 	end
@@ -76,6 +76,7 @@ puts "get_multiple_entries: #{entries}"
 		end
 
 	end
+
 
 
 	def get_interactions (qtarget)
@@ -225,6 +226,7 @@ private
 # @param options, parameters and other options for the request
 # @return the object response
 	def request(url, options)
+
 		my_url = URI.parse(url)
 
 		req = Net::HTTP::Get.new(my_url.request_uri)

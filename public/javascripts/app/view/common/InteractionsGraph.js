@@ -86,7 +86,8 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
   fdDivName:'infovis-div', // div to bear the graph
 
   interactionData: {},
-  target_id: '',
+  experimentsData: undefined,
+  targetId: '',
 
   nodeClickHandler: undefined,
   edgeClickHandler: undefined,
@@ -265,6 +266,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
           style.color = "#ddd";
         },
 
+
         // Change node styles when DOM labels are placed
         // or moved.
         onPlaceLabel: function(domElement, node) {
@@ -284,10 +286,11 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 
 
     Ext.Ajax.request({
-      url: 'resources/datatest/full-jit.json',
+//      url: 'resources/datatest/intact-bad.json',
+      url: '/tdgui_proxy/interactions_retrieval',
       method: 'GET',
       params: {
-        target: me.target_id
+        target: me.targetId
       },
 
       success: function(response, opts) {
@@ -321,8 +324,11 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 //    this.fd = new $jit.ForceDirected(defaultFDCfg)
     this.fd = new $jit.ForceDirected(this.fdCfg)
 //    this.fdCfg.fdGraph = this.fd
-    jsonObj = Ext.JSON.decode(jsonData)
-    this.fd.loadJSON(jsonObj)
+    var jsonObj = Ext.JSON.decode(jsonData) // jsonObj is an Array
+    me.interactionData = jsonObj.slice(0, jsonObj.length-1)
+    me.experimentsData = jsonObj[jsonObj.length-1]
+
+    this.fd.loadJSON (me.interactionData)
     this.fd.computeIncremental({
       iter: 40,
       property: 'end',

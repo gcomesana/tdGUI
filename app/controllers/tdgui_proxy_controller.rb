@@ -1,3 +1,4 @@
+
 class TdguiProxyController < ApplicationController
 
 	def test (myparam = params[:q]) # call is app.get '/tdgui_proxy/test?q=pffffffff'
@@ -30,7 +31,7 @@ class TdguiProxyController < ApplicationController
 	def interactions_retrieval (target_id = params[:target])
 		stringdb_proxy = TdguiProxy.new
 
-		return '{}' unless target_id != nil && target_id != ''
+		return '[]' unless target_id != nil && target_id != ''
 		graph = stringdb_proxy.get_target_interactions(target_id)
 
 		render :json => graph.to_json, :layout => false

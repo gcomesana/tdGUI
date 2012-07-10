@@ -13,11 +13,15 @@ describe TdguiProxyController do
 
 
 	it "interactions retrieval should return a json" do
-		get :interactions_retrieval, :target => 'Q13362'
+		get :interactions_retrieval, :target => 'Q76MZ3' # 'Q13362'
 
 		json_resp = JSON.parse(response.body)
 
 		json_resp.should be_kind_of Array
+		json_resp.length.should be > 0
+
+		experiments = json_resp.pop()
+		experiments.should be_kind_of Hash
 
 		json_resp[0].should be_kind_of Hash
 

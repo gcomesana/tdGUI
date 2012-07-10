@@ -7,7 +7,7 @@ Ext.define("TDGUI.controller.panels.TargetInfo", {
   stores:['Targets'],
   models:['Target'],
 
-  refs:[{
+  refs: [{
     ref: 'targetinfopanel',
     selector: 'tdgui-targetinfopanel'
   }],
@@ -20,7 +20,7 @@ console.info ("Initializing TargetInfo controller...")
       },
 
       'tdgui-targetinfopanel #stringdbTargetButton': {
-        click: this.onClickStringBtn
+        click: this.onClickInteractionsBtn
       }
 
     })
@@ -30,12 +30,27 @@ console.info ("Initializing TargetInfo controller...")
   },
 
 
-  onClickStringBtn: function (btn, ev, opts) {
+/**
+ * Callback on interactions button click.
+ * Keep in mind the protein_uri param, which is a uniprot url if coreApi
+ * is not working or a conceptwiki url otherwise.
+ * @param btn
+ * @param ev
+ * @param opts
+ */
+  onClickInteractionsBtn: function (btn, ev, opts) {
 
     var theStore = this.getTargetinfopanel().targetInfoStore
+    var targetAcc = theStore.proxy.extraParams.protein_uri
+
+    if (targetAcc.indexOf ('uniprot') != -1)
+      targetAcc = targetAcc.substring(targetAcc.lastIndexOf('/')+1)
+
+    if (targetAcc.indexOf ('conceptWiki') != -1)
+      return
+
     var targetName = this.getTargetinfopanel().down('#target_name').getRawValue()
-    var historyParams = '!xt=tdgui-graphdatapanel&qp=' +
-                theStore.proxy.extraParams.protein_uri+
+    var historyParams = '!xt=tdgui-graphdatapanel&qp=' + targetAcc +
                 '&tg='+targetName
 
     Ext.History.add (historyParams)
@@ -43,8 +58,15 @@ console.info ("Initializing TargetInfo controller...")
 //    console.info ('clicked for: '+historyParams)
   },
 
+
+/**
+ *
+ * @param comp
+ * @param opts
+ */
   initTargetInfoPanel: function (comp, opts) {
 //    var store = this.getTargetsStore();
+    comp.startLoading()
     var store = comp.targetInfoStore
     var tokenObjQp = comp.queryParam
     if (tokenObjQp != store.proxy.extraParams.protein_uri) {

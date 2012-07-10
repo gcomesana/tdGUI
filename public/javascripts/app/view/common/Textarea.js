@@ -23,5 +23,13 @@ Ext.define ("TDGUI.view.common.Textarea", {
           cmp.enable(true)
       }
     }
+  },
+
+
+  addLine: function (theValue) {
+    var txtValues = this.getRawValue()
+
+    txtValues += '\n'+theValue
+    this.setRawValue(txtValues)
   }
 })

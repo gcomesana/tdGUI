@@ -4,6 +4,7 @@ Ext.define ('TDGUI.view.panels.west.SearchPanel', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.tdgui-west-search',
 	requires: ['TDGUI.view.dropdowns.tdgui.ConceptWikiProteinLookup',
+             'TDGUI.view.dropdowns.tdgui.ButtonComboProteinLookup',
              'TDGUI.view.common.Textarea',
              'TDGUI.view.panels.PanelButtons'],
 
@@ -90,7 +91,8 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 //          style: 'background-color: lightblue;',
 
         items: [{
-            xtype: 'tdgui-conceptwiki-protein-lookup',
+//            xtype: 'tdgui-conceptwiki-protein-lookup',
+            xtype: 'tdgui-button-combo-proteinlookup',
             columnWidth: .85,
             enableKeyEvents: true
           }, {

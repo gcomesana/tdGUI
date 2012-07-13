@@ -19,7 +19,7 @@ Ext.define('TDGUI.controller.SearchPanel', {
 
 	refs: [{
 			ref: 'protLookup', // I get this.getProtLookup ()
-			selector: 'panel tdgui-conceptwiki-protein-lookup' // proteinLookup combo
+			selector: 'panel tdgui-chkbox-combo-proteinlookup' // proteinLookup combo
 		}, {
 			ref: 'examplesLabel', // I get this.getExamplesLabel
 			selector: 'tdgui-west-panel > panel > label' // label over the proteinLookup combo
@@ -52,7 +52,7 @@ console.info ('SearchPanel controller initializing... ')
 				click: this.labelClick // a window, tooltip or whatever has to be raised with ex
 			},
 
-			'tdgui-conceptwiki-protein-lookup': {
+			'tdgui-chkbox-combo-proteinlookup': {
 				focus: this.clickLookup,
         keyup: this.keepKeyup
 			},
@@ -67,8 +67,8 @@ console.info ('SearchPanel controller initializing... ')
       },
 
       'tdgui-west-search > panel button[action=query-protein-info]': {
-//      'tdgui-west-search button[action=query-protein-info]': {
         click: this.clickGoProteinInfo
+//        click: this.clickAddProteins
       }
 
 		});
@@ -125,7 +125,27 @@ console.info ('SearchPanel controller initializing... ')
 
 
 
+  clickAddProteins: function (btn, ev, opts) {
+    var protLookup = this.getProtLookup()
+    var list = protLookup.getSelectedItems()
+/*    var filteredStore = protLookup.store.filter ([{
+      filterFn: function (item) { return if in list }
+    }]) */
+    var txtArea = protLookup.up('panel').up('panel').up('panel').down('tdgui-textarea')
+
+    var listTargets = txtArea.getRawValue().split('\n')
+    list = listTargets.concat(list)
+    txtArea.setRawValue('')
+    Ext.each (list, function (item, index, listItself) {
+      txtArea.addLine (item)
+    })
+
+    console.info ('Added: '+list.join(','))
+  },
+
+
   clickGoProteinInfo: function (btn, ev, opts) {
+console.info ('clickGoProteinInfo...')
     var conceptLookup = this.getProtLookup ()
     var selOption = conceptLookup.getValue()
     if (selOption != null && selOption != "") {

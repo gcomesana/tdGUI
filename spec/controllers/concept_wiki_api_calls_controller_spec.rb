@@ -4,7 +4,7 @@ require 'spec_helper'
 describe ConceptWikiApiCallsController do
 
 	before (:all) do
-		@substring = 'brca2'
+		@substring = 'breast'
 	end
 
 

@@ -1,18 +1,18 @@
 
+
+
 /**
  * Store to retrieve the proteinInfo data for the targets
  */
-Ext.define('TDGUI.store.Targets', {
-  requires:'TDGUI.model.Target',
+Ext.define('TDGUI.store.AttributesTargets', {
+  requires:'TDGUI.model.AttributesTarget',
   extend:'Ext.data.Store',
-  model:'TDGUI.model.Target',
+  model:'TDGUI.model.AttributesTarget',
   id:'Targets',
 
   proxy:{
-    type:'ajax',
-    actionMethods:{
-      read:'POST'
-    },
+    type:'memory',
+
     extraParams: {
       protein_uri:''
     },

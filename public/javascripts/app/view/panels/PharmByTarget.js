@@ -12,7 +12,7 @@ Ext.define ('TDGUI.view.panels.PharmByTarget', {
     align:'stretch'
   },
   gridParams: null, // an object to set/add grid.proxy.extraParams
-
+  closable: true,
 
   initComponent:function () {
     var me = this

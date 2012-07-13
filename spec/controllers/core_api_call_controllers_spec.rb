@@ -8,7 +8,7 @@ describe CoreApiCallsController do
 
 		@coreApi_opts = {:uri=>"http://www.conceptwiki.org/concept/70dafe2f-2a08-43f7-b337-7e31fb1d67a8",
 						 :limit=>"25", :offset=>0, :method=>"proteinInfo"}
-		@uniprot_opts = {:uri=>"<http://www.uniprot.org/uniprot/P08913>",
+		@uniprot_opts = {:uri=>"Q13362",
 										 :limit=>"25", :offset=>nil} #, :method=>"proteinInfo"}
 
 		@uniprot_uri = @uniprot_opts[:uri]

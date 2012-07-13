@@ -37,4 +37,15 @@ class TdguiProxyController < ApplicationController
 		render :json => graph.to_json, :layout => false
 	end
 
+
+
+	def get_uniprot_by_name (target_label = params[:label])
+
+		proxy = TdguiProxy.new
+		return '[]' unless target_label != nil && target_label != ''
+
+		entry_hash = proxy.get_uniprot_by_name(target_label)
+
+		render :json => entry_hash.to_json, :layout => false
+	end
 end

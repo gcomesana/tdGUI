@@ -106,8 +106,8 @@ class InnerProxy
 		end
 
 # OJO
-		@endpoint_ready = @urlMap[CONCEPT_WIKI_API_SEARCH_URL]
-		return false
+#		@endpoint_ready = @urlMap[CONCEPT_WIKI_API_SEARCH_URL]
+#		return false
 # EO OJO
 
 		if result == nil || result < 0
@@ -147,8 +147,8 @@ class InnerProxy
 			end
 
 # OJO
- 			@endpoint_ready = nil
-			return false
+# 			@endpoint_ready = nil
+#			return false
 # EO OJO
 
 			if alive > 0 then

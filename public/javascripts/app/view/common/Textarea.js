@@ -29,7 +29,7 @@ Ext.define ("TDGUI.view.common.Textarea", {
   addLine: function (theValue) {
     var txtValues = this.getRawValue()
 
-    txtValues += '\n'+theValue
+    txtValues += theValue+'\n'
     this.setRawValue(txtValues)
   }
 })

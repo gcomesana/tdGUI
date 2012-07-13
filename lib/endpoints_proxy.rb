@@ -11,8 +11,8 @@ module EndpointsProxy
 private
 	@myProxy = InnerProxy.new
 
-	URI_REGEX = /^(?=[^&])(?:(?<scheme>[^:\/?#]+):)?(?:\/\/(?<authority>[^\/?#]*))?(?<path>[^?#]*)(?:\?(?<query>[^#]*))?(?:#(?<fragment>.*))?/
-
+#	URI_REGEX = /^(?=[^&])(?:(?<scheme>[^:\/?#]+):)?(?:\/\/(?<authority>[^\/?#]*))?(?<path>[^?#]*)(?:\?(?<query>[^#]*))?(?:#(?<fragment>.*))?/
+  URI_REGEX =	/(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#]*[\w\-\@?^=%&amp;\/~\+#])?/
 
 # build_coreapi_req
 # build a request POST object in order to make a further call to coreAPI from
@@ -136,11 +136,11 @@ public
 # if the source is the concept wiki api call model, it should be a uri
 # @param opts, the options to pass to the request
 	def self.make_request (url_or_method, opts)
-# puts ("make_request (#{url_or_method.to_s}, opts=#{opts.to_s})")
+puts ("make_request (#{url_or_method.to_s}, opts=#{opts.to_s})")
 
 # first, decode url_or_method param
 		uri_parts = url_or_method.scan(URI_REGEX)[0]
-		is_uri = !uri_parts[0].nil? && !uri_parts[1].nil? && !uri_parts[2].nil?
+		is_uri = !uri_parts.nil? && !uri_parts[0].nil? && !uri_parts[1].nil? && !uri_parts[2].nil?
 
 # conceptWiki part
 		if is_uri || url_or_method.include?(@myProxy.conceptwiki_ep) then # conceptAPI

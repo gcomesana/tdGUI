@@ -372,6 +372,8 @@ puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '
 
 # Returns a json object from a line. This is the result of a protein lookup
 # request to Uniprot
+# NOTE: concept_uuid will be represented here by the uniprot accession!!!
+#
 # @param row, a row from a tab request from Uniprot, with the fields
 # uniprotId, protein names, pumed ids, comments, genes
 # @param query, the input query
@@ -395,6 +397,7 @@ puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '
 			if counter == 0 # this is the entry
 				str_json += '"define_url":"'+URL_FETCH_ENTRY + elem.strip()+'",'
 				str_json += '"concept_url":"'+URL_FETCH_ENTRY + elem.strip()+'",'
+				str_json += '"concept_uuid:"'+elem.strip()+'",'
 
 			elsif counter == 1 # set of protein names, only the first one is got
 				prot_names = elem.split ("(")

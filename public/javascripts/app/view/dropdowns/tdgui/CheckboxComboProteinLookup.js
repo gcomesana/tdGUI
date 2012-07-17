@@ -1,7 +1,12 @@
 
 
-
-
+/**
+ * This is a multixelect combobox with checkboxes for every item.
+ * Actually, the items are images (checked and unchecked images) which are
+ * switched programmatically.
+ * This component has related images and css styles to set up the template
+ * to display the combo choices.
+ */
 Ext.define ('TDGUI.view.dropdowns.tdgui.CheckboxComboProteinLookup', {
   extend:'TDGUI.view.dropdowns.conceptWikiProteinLookup',
   alias:'widget.tdgui-chkbox-combo-proteinlookup',
@@ -22,26 +27,57 @@ Ext.define ('TDGUI.view.dropdowns.tdgui.CheckboxComboProteinLookup', {
   listConfig: {
     loadingText: 'Searching...',
     emptyText: 'No matching proteins found.',
-/*
+
     itemTpl: Ext.create('Ext.XTemplate',
-      '<p><span style="font-family: verdana; color: grey; ">',
+      '<span style="font-family: verdana; color: grey; ">',
       '<small>Matches: {match}</small></span><br/>',
+      '<img id="img{concept_uuid}" src="' + Ext.BLANK_IMAGE_URL + '" class="combo-iconbox-unchecked">',
       '<b>{concept_label}</b>&nbsp;&nbsp;',
-      '<input id="theChkBox" type="checkbox" name="targetItem" value="{concept_uri}" />',
-      '</p>', {
+//      '<input id="{concept_uuid}" onclick=this.toString() type="checkbox" name="targetItem" value="{concept_uri}" />',
+      {
         addListener: function () {
-          Ext.select('#theChkBox').on('click', function (event, target) {
+          Ext.select('input[type=checkbox]').on('click', function (event, target) {
             console.log(target);
           }, null, {delegate: 'a'});
+        },
+
+        chkOnClick: function () {
+          Ext.select('input[type=checkbox]').each (function (el, elemList, index) {
+            console.info ("element id: "+el.id)
+          })
+          console.info ("hasta aquí llego")
+        },
+
+        toString: function () {
+          console.info ('this is ok')
         }
       }
     ),
-*/
+/*
+
     getInnerTpl: function() {
       var me = this // no access
-      var onclickMsg = "'onclick clicked :-S'"
+console.info ("this is me: "+me)
+      var onclickMsg = "onclick clicked :-S "
       var btn = '<button onclick="console.info(' + onclickMsg + ');">Add</button>'
-      var chkbox = '<input id="{concept_uuid}" type="checkbox" name="targetItem" value="{concept_uri}" />'
+      var chkbox = '<input id="{concept_uuid}" onclick="console.info('+onclickMsg+': '+ me + ')" type="checkbox" name="targetItem" value="{concept_uri}" />'
+
+      var xtpl = new Ext.XTemplate (
+        '<p><span style="font-family: verdana; color: grey; ">',
+        '<small>Match: {match}</small></span><br/>',
+        '<b>{concept_label}</b>&nbsp;&nbsp;',
+        '<input id="{concept_uuid}" type="checkbox" name="targetItem" value="{concept_uri}" />',
+        '</p>', {
+          chkOnClick: function () {
+            Ext.select('input[type=checkbox]').each (function (el, elemList, index) {
+              console.info ("element id: "+el.id)
+            })
+            console.info ("hasta aquí llego")
+          }
+
+        }
+      )
+
 
       var tpl = '<p><span style="font-family: verdana; color: grey; ">' +
         '<small>Match: {match}</small></span><br/>' +
@@ -49,10 +85,10 @@ Ext.define ('TDGUI.view.dropdowns.tdgui.CheckboxComboProteinLookup', {
          chkbox +
         '</p>';
 
-console.info (tpl)
-      return tpl
+console.info (xtpl)
+      return xtpl
     }
-
+*/
   }, // EO listConfig
 
 
@@ -62,29 +98,33 @@ console.info (tpl)
       var urlDef = recs.data.concept_url
       var uniprotAcc
       if (urlDef.indexOf ('uniprot') != -1)
-        uniprotAcc = urlDef.substring(urlDef.lastIndexOf('/')+1)
+        uniprotAcc = urlDef.substring(urlDef.lastIndexOf('/') + 1)
 
       var checkBoxId = recs.data.concept_uuid
+// Image treatment
+      var img = Ext.get('img'+checkBoxId)
+
+//      var checkBox = Ext.get (checkBoxId)
+//      checkBox.dom.click()
+//      var theEl = new Ext.Element (checkBox)
+//      theEl.dom.click()
       var recIndex = this.store.find ('concept_uuid', checkBoxId)
       var recSel = this.store.getAt(recIndex)
-// console.info ("lookup beforeselect uuid compariso: "+checkBoxId + ' vs '+
-//              recSel.data.concept_uuid)
-
 
 // concept_uuid is better solution to further filtering
-      if (Ext.Array.contains (this.listSelected, checkBoxId))
+      if (Ext.Array.contains (this.listSelected, checkBoxId)) {
         this.listSelected = Ext.Array.remove (this.listSelected, checkBoxId)
-      else
+        img.dom.className = 'combo-iconbox-unchecked'
+      }
+      else {
         this.listSelected.push(checkBoxId)
-// Ext.Array.sort (this.listSelected) if strictly necessary
+        img.dom.className = 'combo-iconbox-checked'
+      }
 
-/*
-      var textareaQry = 'viewport > panel > panel > panel > textarea'
-      var txtArea = combo.up('panel').up('panel').up('panel').down('tdgui-textarea')
-
-      txtArea.addLine(uniprotAcc)
-    }
-*/
+console.info ("*** Currently on the list")
+Ext.each (this.listSelected, function (item, index, listIt) {
+  console.info (index + ".-" + item)
+})
       return false
     },
 

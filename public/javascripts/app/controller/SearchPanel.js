@@ -67,8 +67,8 @@ console.info ('SearchPanel controller initializing... ')
       },
 
       'tdgui-west-search > panel button[action=query-protein-info]': {
-        click: this.clickGoProteinInfo
-//        click: this.clickAddProteins
+//        click: this.clickGoProteinInfo
+        click: this.clickAddProteins
       }
 
 		});

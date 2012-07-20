@@ -18,7 +18,7 @@ class TdguiProxy
 # Constructor
 	def initialize
 		@parsed_results = nil
-
+		@uniprot_name = nil
 	end
 
 
@@ -91,6 +91,7 @@ puts "get_multiple_entries: #{entries}"
 # get_uniprot_by_name
 #
 	def get_uniprot_by_name (name)
+		@uniprot_name = name
 
 		url = UNIPROT_BY_NAME.gsub(/xxxx/, name)
 puts "the url: #{url}"
@@ -217,6 +218,10 @@ puts "Filling columns..."
 
 	def decode_uniprot_entry (ent)
 		entryHash = Hash.new
+
+		if ent.nil?
+			return entryHash
+		end
 
 		accList = ent.elements.collect('accession') { |acc| acc.text }
 		entryHash['accessions'] = accList

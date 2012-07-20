@@ -259,7 +259,6 @@ puts "Call tooooooook #{@query_time} seconds"
 
 							 when 200 then #HTTPOK =>  Success
 								 	@success = true
-# puts "response body:\n#{@response.body}\n"
 								 	begin
 								 		@results = JSON.parse(@response.body)
 									rescue JSON::ParserError

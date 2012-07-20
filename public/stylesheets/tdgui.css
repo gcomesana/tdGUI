@@ -235,3 +235,21 @@ sub {
 	position: relative;
 	bottom: -0.3em;
 }
+
+/* classes for the combo checkbox */
+.combo-iconbox-checked {
+	background: transparent url(/images/combo-boxchecked.gif);
+	width: 16px;
+	heigth: 16px;
+	margin-right: 2px;
+	vertical-align: text-bottom;
+}
+
+
+.combo-iconbox-unchecked {
+	background: transparent url(/images/combo-boxunchecked.gif);
+	width: 16px;
+	heigth: 16px;
+	margin-right: 2px;
+	vertical-align: text-bottom;
+}

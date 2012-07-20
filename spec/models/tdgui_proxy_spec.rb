@@ -39,7 +39,7 @@ describe "String-db requests" do
 
 		proxy.should_not be_nil
 
-		target_label = 'TP53-regulated inhibitor of apoptosis 1'
+		target_label = 'Deleted in bladder cancer protein 1'
 		target_hash = proxy.get_uniprot_by_name(target_label)
 
 		target_hash.should_not be_nil

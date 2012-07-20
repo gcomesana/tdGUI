@@ -32,6 +32,7 @@ puts "interactions:\n#{response.body}\n"
 
 	it "should retrieve an uniprot result from a name" do
 		thelabel = 'TP53-regulated inhibitor of apoptosis 1'
+#		thelabel = 'Next to BRCA1 gene 1 protein (Homo sapiens)'
 		get :get_uniprot_by_name, :label => thelabel
 
 puts "result from name:\n#{response.body}\n"

@@ -198,6 +198,8 @@ puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '
 		end # EO if
 
 		json_str += "]"
+puts "inner_proxy.uniprot2json:\n#{json_str}\n"
+		json_str
 	end
 
 
@@ -397,7 +399,7 @@ puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '
 			if counter == 0 # this is the entry
 				str_json += '"define_url":"'+URL_FETCH_ENTRY + elem.strip()+'",'
 				str_json += '"concept_url":"'+URL_FETCH_ENTRY + elem.strip()+'",'
-				str_json += '"concept_uuid:"'+elem.strip()+'",'
+				str_json += '"concept_uuid":"'+elem.strip()+'",'
 
 			elsif counter == 1 # set of protein names, only the first one is got
 				prot_names = elem.split ("(")

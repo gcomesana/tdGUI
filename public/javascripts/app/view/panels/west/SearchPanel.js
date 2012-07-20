@@ -6,6 +6,7 @@ Ext.define ('TDGUI.view.panels.west.SearchPanel', {
 	requires: ['TDGUI.view.dropdowns.tdgui.ConceptWikiProteinLookup',
              'TDGUI.view.dropdowns.tdgui.CheckboxComboProteinLookup',
              'TDGUI.view.common.Textarea',
+             'Ext.ux.form.MultiSelect', 'TDGUI.view.common.ItemMultilist',
              'TDGUI.view.panels.PanelButtons'],
 
 //	region: 'west',
@@ -111,11 +112,54 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
 
 
+  createTargetList: function () {
+    var myData = [{
+      name: "TP53-regulated inhibitor of apoptosis 1",
+      concept_uuid: "O43715",
+      concept_uri: "http://www.uniprot.org/uniprot/O43715.xml",
+      uniprot_acc: ["O43715","B2R4Z7", "Q5RKS5", "Q6LCA7"],
+      uniprot_id: "TRIA1_HUMAN",
+      uniprot_name: "TRIA1_HUMAN"
+    }, {
+      name: "Next to BRCA1 gene 1 protein (Homo sapiens)",
+      concept_uuid: "ec79efff-65cb-45b1-a9f5-dddfc1c4025c",
+      concept_uri: "http://www.conceptwiki.org/concept/ec79efff-65cb-45b1-a9f5-dddfc1c4025c",
+      uniprot_acc: ["Q14596","Q13173","Q15026","Q5J7Q8","Q96GB6","Q9NRF7"],
+      uniprot_id: "NBR1_HUMAN",
+      uniprot_name: "NBR1_HUMAN"
+    }, {
+    	name: "Kita-kyushu lung cancer antigen 1 (Homo sapiens)",
+    	concept_uuid: "eeaec894-d856-4106-9fa1-662b1dc6c6f1",
+    	concept_uri: "http://www.conceptwiki.org/concept/eeaec894-d856-4106-9fa1-662b1dc6c6f1",
+    	uniprot_acc: ["Q5H943"], // uniprot_acc: "Q5H943",
+    	uniprot_id: "KKLC1_HUMAN", // uniprot_id: "KKLC1_HUMAN"
+      uniprot_name: "KKLC1_HUMAN"
+    }]
+
+
+    var initStore = Ext.create('TDGUI.store.ListTargets')
+    initStore.loadData(myData)
+
+    this.targetList = Ext.widget ('tdgui-item-multilist', {
+
+      store: initStore,
+      displayField: 'display_field',
+      valueField: 'uniprot_acc'
+    })
+
+    this.targetList.addDockedItem({
+      xtype: 'button',
+      text: 'Search'
+    })
+    return this.targetList
+  },
+
+
 
   createTextarea: function () {
     this.textareaCode = Ext.widget ('tdgui-textarea', {
       anchor: '100% 80%',
-      value: 'Q13362\nP12345\nP0AEN3\nP0AEN2\nP0AEN1',
+      value: 'Q13362\nP12345\nP0AEN3\nP0AEN2\nP0AEN1'
 //      disabled: true
     })
 
@@ -129,7 +173,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
     this.retrievingTab = Ext.create ('Ext.panel.Panel', {
 //      title: 'Retrieve',
 //      width: 400,
-      height: 200,
+      height: 300,
       padding: '15 10 10 10',
       layout: 'anchor',
       frameHeader: false,
@@ -137,12 +181,14 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 //      closable: true,
 
       items: [
-        this.createTextarea(),
+        this.createTargetList(),
+        /*
         me.retrievingButtons = Ext.widget ('tdgui-panelbuttons', {
           anchor: '100%',
           rightButtonName: ' GO ',
           leftButtonName: 'Reset'
         })
+        */
       ]
     })
 

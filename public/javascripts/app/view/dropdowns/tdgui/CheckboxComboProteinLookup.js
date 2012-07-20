@@ -112,12 +112,12 @@ console.info (xtpl)
       var recSel = this.store.getAt(recIndex)
 
 // concept_uuid is better solution to further filtering
-      if (Ext.Array.contains (this.listSelected, checkBoxId)) {
-        this.listSelected = Ext.Array.remove (this.listSelected, checkBoxId)
+      if (Ext.Array.contains (this.listSelected, recIndex)) {
+        this.listSelected = Ext.Array.remove (this.listSelected, recIndex)
         img.dom.className = 'combo-iconbox-unchecked'
       }
       else {
-        this.listSelected.push(checkBoxId)
+        this.listSelected.push(recIndex)
         img.dom.className = 'combo-iconbox-checked'
       }
 
@@ -136,10 +136,22 @@ Ext.each (this.listSelected, function (item, index, listIt) {
   },
 
 
-
-
+/**
+ * Gets the selected objects. To do that, the store is accessed using the indexes
+ * stored in listSelected, the record.data object is retrieved and appended to the
+ * list which will be returned
+ * @return {Array} An array with the objects selected.
+ */
   getSelectedItems: function () {
-    return this.listSelected
+    var listChoices = new Array()
+    var me = this
+    Ext.Array.each (this.listSelected, function (selItem, index, selItems) {
+      var rec = me.store.getAt (selItem)
+      var objData = rec.data
+      listChoices.push(objData)
+    })
+
+    return listChoices
   }
 
 })

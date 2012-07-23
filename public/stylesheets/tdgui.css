@@ -236,6 +236,14 @@ sub {
 	bottom: -0.3em;
 }
 
+
+
+.targetlist-font-label {
+	font-size: 13px;
+	/* font-weight: bold; */
+}
+
+
 /* classes for the combo checkbox */
 .combo-iconbox-checked {
 	background: transparent url(/images/combo-boxchecked.gif);

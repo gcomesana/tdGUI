@@ -10,9 +10,9 @@ Ext.define ('TDGUI.view.panels.west.SearchPanel', {
              'TDGUI.view.panels.PanelButtons'],
 
 //	region: 'west',
-  collapsible: true,
-  title: 'Search center',
-  split: true,
+//  collapsible: true,
+//  title: 'Search center',
+//  split: true,
   width: '20%',
   minWidth: 300,
   minHeight: 200,
@@ -47,7 +47,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 // METHODS TO CREATE COMPONENTS ////////////////////////////////////////////////////
   createLabel: function () {
     this.exampleLabel = Ext.create ('Ext.form.Label', {
-      text: 'Click for examples!!!',
+      text: 'Target List',
       margin: 10,
 
       listeners: {
@@ -82,7 +82,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
 //      closable: true,
 
-      items: [this.createLabel(), {
+      items: [{
 //          title: 'Search',
         frameHeader: false,
         border: false,
@@ -98,7 +98,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
             enableKeyEvents: true
           }, {
             xtype: 'button',
-            text: ' GO ',
+            text: ' Add ',
             columnWidth: .15,
             action: 'query-protein-info',
 //            disabled: false
@@ -141,7 +141,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
     initStore.loadData(myData)
 
     this.targetList = Ext.widget ('tdgui-item-multilist', {
-
+      listName: 'Target List',
       store: initStore,
       displayField: 'display_field',
       valueField: 'uniprot_acc'
@@ -155,7 +155,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
   },
 
 
-
+/*
   createTextarea: function () {
     this.textareaCode = Ext.widget ('tdgui-textarea', {
       anchor: '100% 80%',
@@ -165,7 +165,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
     return this.textareaCode
   },
-
+*/
 
 
   createRetrievingTab: function () {
@@ -173,8 +173,8 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
     this.retrievingTab = Ext.create ('Ext.panel.Panel', {
 //      title: 'Retrieve',
 //      width: 400,
-      height: 300,
-      padding: '15 10 10 10',
+//      height: 300,
+      padding: '5 10 10 10',
       layout: 'anchor',
       frameHeader: false,
       border: false,

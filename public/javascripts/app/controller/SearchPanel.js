@@ -70,7 +70,7 @@ Ext.define('TDGUI.controller.SearchPanel', {
 //        afterrender: this.checkTxt
       },
 
-      'tdgui-west-search > panel > panel > toolbar > button[text=Search]':{ // see buttons on Panel
+      'tdgui-west-search panel > toolbar > button[text=Search]':{ // see buttons on Panel
         click: this.retrieveBtnClick
       },
 
@@ -97,9 +97,13 @@ Ext.define('TDGUI.controller.SearchPanel', {
 //    var txtArea = btn.up('tdgui-west-search').down('tdgui-textarea')
 //    var uniprotIds = txtArea.getRawValue().split('\n').join(',')
     var me = this
-    var uniprotIds = this.getItemList().getStoreItems()
+    var uniprotIds = this.getItemList().getStoreItems('uniprot_acc')
+    var accessions = []
+    Ext.each (uniprotIds, function (accs, index, theIds) {
+      accessions.push(accs[0])
+    })
 
-    Ext.History.add('!xt=tdgui-multitargetpanel&qp=' + uniprotIds)
+    Ext.History.add('!xt=tdgui-multitargetpanel&qp=' + accessions.join(','))
 
   /*
     if (btn.getId() == 'panelBtnLeft')
@@ -180,7 +184,7 @@ Ext.define('TDGUI.controller.SearchPanel', {
              uniprot_name: jsonResp.name
             }
 
-            if (jsonResp === {})
+            if (jsonResp == {})
               console.info ("Nothing found for: "+item)
             else {
               var target = Ext.create('TDGUI.model.ListTarget', listItem)

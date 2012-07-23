@@ -103,7 +103,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
       var newRule = '#' + this.fdDivName + ' {' + cssRuleText + '}'
       var newCSS = Ext.util.CSS.createStyleSheet(newRule, this.fdDivName + "-css")
 
-      this.html = '<div id="' + this.fdDivName + '" style="height:100%;background-color:white;">Graphx</div>'
+      this.html = '<div id="' + this.fdDivName + '" style="height:100%;background-color:white;"></div>'
     }
     else
       this.html = '<div id="infovis-div" style="background-color:white;">Graph</div>'

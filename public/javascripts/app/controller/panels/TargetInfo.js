@@ -69,6 +69,8 @@ console.info ("Initializing TargetInfo controller...")
     comp.startLoading()
     var store = comp.targetInfoStore
     var tokenObjQp = comp.queryParam
+
+
     if (tokenObjQp != store.proxy.extraParams.protein_uri) {
       store.proxy.extraParams.protein_uri = tokenObjQp;
       //          this.getFormView().setLoading(true);

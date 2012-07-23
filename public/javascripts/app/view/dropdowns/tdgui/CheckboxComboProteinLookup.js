@@ -17,10 +17,16 @@ Ext.define ('TDGUI.view.dropdowns.tdgui.CheckboxComboProteinLookup', {
   fieldLabel: '',
   width: undefined,
   inputString: '',
-  allowBlank: false,
+  allowBlank: true,
+  emptyText: 'Start typing (at least 4 characters)',
 //  multiSelect: true,
 //  displayField: undefined,
   delimiter: '',
+
+  labelAlign: 'top',
+  labelSeparator: '',
+  labelCls: 'targetlist-font-label',
+
 
   listSelected: [], // keep the index (0 based) of the elements selected in the store
 
@@ -131,6 +137,15 @@ Ext.each (this.listSelected, function (item, index, listIt) {
 
     select: function (combo, recs, opts) {
       console.info ("selected something...")
+    },
+
+
+    beforequery: function (qryEv, opts) {
+      console.info ('beforequery: qryEv: '+qryEv.query)
+
+      delete qryEv.combo.lastQuery
+      while (this.listSelected.length > 0)
+        this.listSelected.pop()
     }
 
   },

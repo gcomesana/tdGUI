@@ -13,6 +13,8 @@ Ext.define('TDGUI.store.ListTargets', {
 	storeId: 'listTargetsStore',
 	data: [],
 
+  myMask: undefined,
+
 	proxy: {
 		type: 'memory',
 		reader: {

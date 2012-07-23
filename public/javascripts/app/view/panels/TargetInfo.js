@@ -410,7 +410,7 @@ console.log('standard field: '+fieldId+' -> '+value);
 
 
 	startLoading: function() {
-		this.setLoading(true);
+		this.setLoading(true, true);
 	},
 
 

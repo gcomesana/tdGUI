@@ -15,12 +15,18 @@ Ext.define ('TDGUI.view.common.ItemMultilist', {
 	displayField: undefined,
   valueField: undefined,
   layout: 'anchor',
+  listName: '',
 
 
 	initComponent: function () {
 		var me = this
 
 		this.items = [{
+      fieldLabel: me.listName,
+      labelAlign: 'top',
+      labelSeparator: '',
+      labelCls: 'targetlist-font-label',
+
 			xtype: 'multiselect',
 			msgTarget: 'none',
 //			fieldLabel: 'Multiselect',
@@ -29,11 +35,11 @@ Ext.define ('TDGUI.view.common.ItemMultilist', {
 //			allowBlank: false,
 			anchor: '100%',
       border: false,
+      height: 400,
 
       store: me.store,
       displayField: me.displayField,
       valueField: me.valueField
-
 
       /*
 			store: [
@@ -79,7 +85,7 @@ Ext.define ('TDGUI.view.common.ItemMultilist', {
 					var myStore = list.store
 console.info ('store size before: '+myStore.count())
 					Ext.each (vals, function (val, index, theVals) {
-						var rec  = myStore.findRecord('concept_uuid', val)
+						var rec  = myStore.findRecord(list.valueField, val)
 						myStore.remove (rec)
 					})
 console.info ('store size afterwards: '+myStore.count())
@@ -98,11 +104,18 @@ console.info ('store size afterwards: '+myStore.count())
 
 
 
-  getStoreItems: function () {
-    var records = this.store.data
-    var accessions = records.collect('uniprot_acc')
+  getStoreItems: function (dataIndex) {
+    var records = this.store
+    var items = records.collect(dataIndex)
 
-    return accessions
+    return items
+  },
+
+
+  getStoreObject: function (field, value) {
+    var rec = this.store.findRecord(field, value)
+
+    return rec
   },
 
 

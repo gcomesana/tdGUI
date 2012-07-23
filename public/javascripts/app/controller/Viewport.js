@@ -14,6 +14,9 @@ Ext.define ("TDGUI.controller.Viewport", {
     }, {
       ref: 'multitarget',
       selector: 'tdgui-multitargetpanel'
+  }, {
+    ref: 'target-list',
+    selector: 'tdgui-item-multilist'
   }],
 
 
@@ -33,6 +36,8 @@ Ext.define ("TDGUI.controller.Viewport", {
       'tdgui-viewport': {
         historyAdded: this.handleHistoryToken
       }
+
+
 /*
       'tdgui-multitargetpanel': {
         afterrender: function (comp, opts) {

@@ -16,7 +16,8 @@ Ext.define("TDGUI.controller.panels.TargetInfo", {
 console.info ("Initializing TargetInfo controller...")
     this.control({
       'tdgui-targetinfopanel':{
-        afterrender: this.initTargetInfoPanel
+        afterrender: this.initTargetInfoPanel,
+        opsFailed: this.retryTargetInfoPanel
       },
 
       'tdgui-targetinfopanel #stringdbTargetButton': {
@@ -60,22 +61,45 @@ console.info ("Initializing TargetInfo controller...")
 
 
 /**
- *
- * @param comp
- * @param opts
+ * Decodes the token param (uniprot,ops) to load the panel-associated-store by
+ * requesting data to ops or uniprot if the latter is not working
+ * @param comp, the component which yields the event
+ * @param opts, options
  */
   initTargetInfoPanel: function (comp, opts) {
 //    var store = this.getTargetsStore();
     comp.startLoading()
     var store = comp.targetInfoStore
     var tokenObjQp = comp.queryParam
+    var tokenParams = tokenObjQp.split(',') // returns always a array
+console.info ('TargetInfo.initTargetInfoPanel tokenParams: '+tokenParams)
 
+// get the conceptUUID
+    Ext.each (tokenParams, function (token, index, tokens) {
+      if (token.indexOf('conceptwiki') != -1) {
+        var lastSlash = token.lastIndexOf('/')
+        comp.concept_uuid = token.substring(lastSlash+1)
+      }
+    })
 
-    if (tokenObjQp != store.proxy.extraParams.protein_uri) {
-      store.proxy.extraParams.protein_uri = tokenObjQp;
+    if (tokenParams[0] != store.proxy.extraParams.protein_uri) {
+      store.proxy.extraParams.protein_uri = tokenParams[0];
       //          this.getFormView().setLoading(true);
       store.load();
     }
+  },
+
+
+  retryTargetInfoPanel: function (comp, opts) {
+    var queryParam = opts.concept_req
+    var store = comp.targetInfoStore
+
+    if (queryParam != store.proxy.extraParams.protein_uri) {
+      store.proxy.extraParams.protein_uri = queryParam
+
+      store.load()
+    }
+
   }
 
 })

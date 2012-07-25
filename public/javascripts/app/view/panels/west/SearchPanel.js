@@ -115,8 +115,8 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
   createTargetList: function () {
     var myData = [{
       name: "TP53-regulated inhibitor of apoptosis 1",
-      concept_uuid: "O43715",
-      concept_uri: "http://www.uniprot.org/uniprot/O43715.xml",
+      concept_uuid: "d593db45-e954-4e97-94f7-c039350f97f4",
+      concept_uri: "http://www.conceptwiki.org/concept/d593db45-e954-4e97-94f7-c039350f97f4",
       uniprot_acc: ["O43715","B2R4Z7", "Q5RKS5", "Q6LCA7"],
       uniprot_id: "TRIA1_HUMAN",
       uniprot_name: "TRIA1_HUMAN"
@@ -134,6 +134,13 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
     	uniprot_acc: ["Q5H943"], // uniprot_acc: "Q5H943",
     	uniprot_id: "KKLC1_HUMAN", // uniprot_id: "KKLC1_HUMAN"
       uniprot_name: "KKLC1_HUMAN"
+    }, {
+      name: "Adenosine receptor A2a (Homo sapiens)",
+      concept_uuid: "979f02c6-3986-44d6-b5e8-308e89210c8d",
+      concept_uri: "http://www.conceptwiki.org/concept/979f02c6-3986-44d6-b5e8-308e89210c8d",
+      uniprot_acc: ["P29274","B2R7E0"], // uniprot_acc: "Q5H943",
+      uniprot_id: "AA2AR_HUMAN", // uniprot_id: "KKLC1_HUMAN"
+      uniprot_name: "AA2AR_HUMAN"
     }]
 
 

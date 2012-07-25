@@ -5,8 +5,8 @@ Ext.define ("TDGUI.controller.Viewport", {
 
   views: ['Viewport', 'panels.BorderCenter', 'panels.MultiTarget',
     'panels.PharmByTarget', 'common.InteractionsGraph', 'panels.GraphDataPanel'],
-  stores: ['Targets'],
-  models: ['Target'],
+  stores: ['Targets', 'ListTargets'],
+  models: ['Target', 'ListTarget'],
 
   refs: [{
       ref: 'contentTabs',
@@ -15,7 +15,7 @@ Ext.define ("TDGUI.controller.Viewport", {
       ref: 'multitarget',
       selector: 'tdgui-multitargetpanel'
   }, {
-    ref: 'target-list',
+    ref: 'targetList',
     selector: 'tdgui-item-multilist'
   }],
 
@@ -61,10 +61,14 @@ Ext.define ("TDGUI.controller.Viewport", {
 
     switch (xtype) {
       case 'tdgui-multitargetpanel':
+        var listStore = this.getTargetList().getStore()
+        var listStoreClone = listStore.clone() // as it is an ListTargets store
+
         newPanel = Ext.createByAlias ('widget.'+xtype, {
           closable: true,
           gridParams: {entries: tokenObj.qp},
-          title: "Multiple targets"
+          title: "Multiple targets",
+          storeListTargets: listStoreClone
         })
         break
 
@@ -87,7 +91,7 @@ console.info ("raising Pharm By Target panel")
           closeable: true,
           gridParams: { protein_uri: tokenObj.qp },
           targetName: tokenObj.tg,
-          title: "Pharmacology for "+tokenObj.tg
+          title: "Pharmacology for "+ window.decodeURI(tokenObj.tg)
         })
         break
 

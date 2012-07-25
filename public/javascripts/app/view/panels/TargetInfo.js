@@ -16,7 +16,17 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 	layout: 'anchor',
 
   targetInfoStore: null,
-//	style: 'background-color: #fff000;',
+
+// This config is used to count the numbers of requests in order to fill this
+// component with data.
+// As by 07.2012, only there will be two sources (coreAPI and uniprot) but
+// this is here in the case of we can add more in the future (chembl, f.ex.)
+// The requested URIs are in the queryParam config property
+  numOfReqs: 0,
+
+// this is a necessary property got from the multitarget component
+// in order to be able to set the pharma_button with right parameters
+  concept_uuid: undefined,
 
 	initComponent: function() {
 		this.items = [{
@@ -170,6 +180,9 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 			value: 'message here'
 		}];
 
+
+    this.title = window.decodeURI(this.title)
+
 // *** Store initialization:
 // Mind the name of the fields in the store are the same than the names of the
 // displayfields in here!!!!
@@ -177,7 +190,8 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
     var store = Ext.create ('TDGUI.store.Targets')
     this.targetInfoStore = store
 //		store.addListener('load', this.showData, this);
-    this.targetInfoStore.addListener('load', this.showData, this)
+//    this.targetInfoStore.addListener('load', this.showData, this)
+    this.targetInfoStore.addListener('load', this.displayData, this)
 		this.callParent(arguments);
 	},
 	// EO initComponent
@@ -201,28 +215,60 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 		msg.setVisible(true);
 	},
 
-	showData: function(store, records, succesful) {
-		if (succesful) {
-			if (records.length > 0) {
-				var dp = this.down('#dp');
-				var msg = this.down('#msg');
-				msg.setVisible(false);
-				this.setValues(store.first());
-				dp.setVisible(true);
-			}
-      else
-				this.showMessage('No records found within OPS for this search');
 
-		}
-    else
-			this.showMessage('Server did not respond');
+
+  displayData: function (store, records, successful) {
+    if (successful && records[0].data.hasOwnProperty('target_name')) {
+//      if (records.length > 0) {
+        var dp = this.down('#dp');
+        var msg = this.down('#msg');
+        msg.setVisible(false);
+        this.setValues(store.first());
+        dp.setVisible(true);
+/*      }
+      else
+        this.showMessage('No records found within OPS for this search');
+*/    }
+    else {
+//			this.showMessage('Server did not respond');
+      var prevReq = store.proxy.extraParams.protein_uri
+      var nextReq = this.queryParam.split(',')
+      if (nextReq.length > 1 && nextReq != prevReq) {
+        this.numOfReqs++
+        this.fireEvent('opsFailed', this, {concept_req: nextReq[this.numOfReqs]})
+      }
+      // else raise a message with no information found...
+    }
 
     this.endLoading();
 var targetInfos = Ext.ComponentQuery.query('tdgui-targetinfopanel')
 console.info ("targetinfos length: "+targetInfos.length)
 
-//		var searchButton = Ext.ComponentQuery.query('#TargetByNameSubmit_id')[0].enable();
-	},
+  },
+
+
+  showData:function (store, records, successful) {
+    if (successful) {
+
+      var td = store.first().data;
+
+      if (records.length > 0 && td.hasOwnProperty('target_name')) { // TEMP FIX -- new coreAPI's returning an empty object
+
+        var dp = this.down('#dp');
+        var msg = this.down('#msg');
+        msg.setVisible(false);
+        this.setValues(store.first());
+        dp.setVisible(true);
+
+      } else {
+        this.showMessage('No records found within OPS for this search');
+      }
+    } else {
+      this.showMessage('Server did not respond');
+    }
+    this.up('TargetByNameForm').setLoading(false);
+    var searchButton = Ext.ComponentQuery.query('#TargetByNameSubmit_id')[0].enable();
+  },
 
 
 
@@ -311,6 +357,7 @@ console.info ("targetinfos length: "+targetInfos.length)
 		img.show();
 	},
 
+
 	setFieldValue: function(fieldId, value) {
 		if (fieldId == 'synonyms') {
 			//            console.log('synonyms');
@@ -353,14 +400,20 @@ console.log('standard field: '+fieldId+' -> '+value);
 // Pharmacology data button initialization
     var pharmButton = this.down('#pharmTargetButton');
     var protein_uri = target.store.proxy.extraParams.protein_uri
-    if (protein_uri.indexOf("uniprot") == -1) {
-      var targetName = this.down ('#target_name').getRawValue()
+
+// get the concept_uri for pharma_button. it will be such as
+// conceptwiki.org/concept/<concept_uuid>
+
+//    if (protein_uri.indexOf("uniprot") == -1) {
+    if (this.concept_uuid != undefined && this.concept_uuid.length > 0) {
+      var targetName = target.get('target_name')
+      var pharmaURI = 'http://www.conceptwiki.org/concept/'+this.concept_uuid
 
       pharmButton.hide();
       pharmButton.setHandler(function () {
   // console.info('pharmButton.setHandler -> !xt=tdgui-pharmbytargetpanel&qp=' + target.store.proxy.extraParams.protein_uri)
-        var historyParams = '!xt=tdgui-pharmbytargetpanel&qp=' +
-              target.store.proxy.extraParams.protein_uri
+        var historyParams = '!xt=tdgui-pharmbytargetpanel&qp=' +pharmaURI
+
         historyParams += '&tg=' + targetName
         Ext.History.add(historyParams)
       });
@@ -410,11 +463,13 @@ console.log('standard field: '+fieldId+' -> '+value);
 
 
 	startLoading: function() {
+console.info ('TargetInfo.startLoading')
 		this.setLoading(true, true);
 	},
 
 
   endLoading: function() {
+console.info ('TargetInfo.endLoading')
 		this.setLoading(false);
 	}
 

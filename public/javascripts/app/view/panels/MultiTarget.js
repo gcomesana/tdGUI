@@ -16,6 +16,10 @@ Ext.define ('TDGUI.view.panels.MultiTarget', {
   },
   gridParams: null, // an object to set/add grid.proxy.extraParams
 
+// a copy of the list targets store in order to get the concept_uuid
+// and the concept_uri for coreAPI
+  storeListTargets: null,
+
 
   initComponent: function () {
     var me = this
@@ -51,6 +55,18 @@ Ext.define ('TDGUI.view.panels.MultiTarget', {
     var theGrid = Ext.create ('widget.dynamicgrid3', config)
 
     return theGrid
+  },
+
+
+/**
+ * Returns a reference to the storeListTargets, which is a clone of the store of
+ * the list targets. This is here in order to keep conceptWiki attributes which
+ * are not present in the grid's store. Not associated with any component (just a
+ * handy store)
+ * @return {*} a reference to the targets store
+ */
+  getListTargetsStore: function () {
+    return this.storeListTargets
   }
 
 

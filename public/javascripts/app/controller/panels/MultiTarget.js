@@ -10,8 +10,8 @@ Ext.define("TDGUI.controller.panels.MultiTarget", {
       selector:'tdgui-multitargetpanel dynamicgrid3'
     },
     {
-      ref:'itemList', // accessions textarea
-      selector:'viewport panel > tdgui-item-multilist'
+      ref:'gridPanel', // neccessary to retrieve list targets, no matter if the original was changed
+      selector:'tdgui-multitargetpanel'
     }
   ],
 
@@ -23,17 +23,21 @@ Ext.define("TDGUI.controller.panels.MultiTarget", {
         itemdblclick:function (view, record, item, index, e, opts) {
 
           var gridAccs = record.data.accessions
-          var recs = this.getItemList().getStoreObject ('uniprot_acc', gridAccs)
+          var listTargetsStore = this.getGridPanel().getListTargetsStore()
+//          var recs = this.getItemList().getStoreObject ('uniprot_acc', gridAccs)
+          var recs = listTargetsStore.findRecord('uniprot_acc', gridAccs)
 
+// Compose de uniprot parameter (in this case an uniprot url) to proteinInfo
           var primaryAcc = recs.data.uniprot_acc[0]
-          var qParam = 'http://www.uniprot.org/uniprot/'+primaryAcc
+          var uniprotParam = 'http://www.uniprot.org/uniprot/'+primaryAcc
+
+          var conceptUUID = recs.data.concept_uuid
+          var conceptURI = recs.data.concept_uri
 
 // get the accession from the table/grid
 //          var accessions = record.data.accessions.join(',')
 
-
-console.info("item double clicked!!! " + recs.data.uniprot_acc)
-
+          var qParam = conceptURI+','+uniprotParam
           Ext.History.add('!xt=tdgui-targetinfopanel&qp=' + qParam);
         }
 

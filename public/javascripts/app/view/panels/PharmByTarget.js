@@ -29,8 +29,8 @@ Ext.define ('TDGUI.view.panels.PharmByTarget', {
    */
   createGrid: function (config) {
     config = config || {
-      title:'Pharmacology for target '+this.targetName,
-      gridBaseTitle:'Pharmacology compounds for '+this.targetName,
+      title:'Pharmacology for target '+window.decodeURI(this.targetName),
+      gridBaseTitle:'Pharmacology compounds for '+window.decodeURI(this.targetName),
       margin:'5 5 5 5',
       //      border: '1 1 1 1',
       flex:1, // needed to fit all container

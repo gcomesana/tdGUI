@@ -184,14 +184,14 @@ Ext.define('TDGUI.controller.SearchPanel', {
              uniprot_name: jsonResp.name
             }
 
-            if (jsonResp == {})
-              console.info ("Nothing found for: "+item)
+            if (resp.responseText == '{}')
+              console.info("Nothing found for: "+item)
             else {
               var target = Ext.create('TDGUI.model.ListTarget', listItem)
               listStore.add(target)
             }
           }
-        })
+        }) // EO Ajax request
       } // EO if
     })
 

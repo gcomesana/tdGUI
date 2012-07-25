@@ -157,7 +157,9 @@ console.info ("item double clicked!!!")
 
   /**
    * Sets the grid features, like columns and filters, and fill it with the data
-   * proviede by the store associated to the grid
+   * proviede by the store associated to the grid.
+   * NOTE!!!! The scope is the grid instance (dynamicgrid3)
+   *
    * @param this_gridview, a reference to the grid component (could be just this)
    * @param success, true if request to backend was successful; false otherwise
    * @return {Boolean}

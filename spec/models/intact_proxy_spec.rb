@@ -31,4 +31,20 @@ describe "Intact proxy retrieves target interations from Intact" do
 
 	end
 
+
+	it "should return true" do
+
+		ok = @proxy.get_super_interaction_graph('P77569')
+#		ok = @proxy.get_super_interaction_graph('Q13362')
+
+		ok.should be_kind_of Array
+		ok.should_not be_nil
+		ok.length.should be > 1
+
+puts "\nAll interactions normalized\n"
+		ok.each { |intrcn| puts "#{intrcn.to_s}\n"}
+
+	end
+
+
 end

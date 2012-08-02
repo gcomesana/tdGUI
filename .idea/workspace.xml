@@ -36,7 +36,7 @@
       <file leaf-file-name="intact_proxy.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/intact_proxy.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="191" column="0" selection-start="6125" selection-end="6125" vertical-scroll-proportion="0.81710213">
+            <state line="165" column="86" selection-start="5558" selection-end="5558" vertical-scroll-proportion="0.82660335">
               <folding />
             </state>
           </provider>
@@ -45,16 +45,16 @@
       <file leaf-file-name="intact_proxy_spec.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spec/models/intact_proxy_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="36" column="0" selection-start="722" selection-end="722" vertical-scroll-proportion="0.0">
+            <state line="32" column="73" selection-start="729" selection-end="729" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="intact-full.json" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/resources/datatest/intact-full.json">
+      <file leaf-file-name="intact-rec.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/resources/datatest/intact-rec.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="2" selection-start="4" selection-end="4" vertical-scroll-proportion="0.0">
+            <state line="495" column="8" selection-start="10244" selection-end="10530" vertical-scroll-proportion="-16.538462">
               <folding />
             </state>
           </provider>
@@ -89,8 +89,8 @@
         <option value="$PROJECT_DIR$/public/javascripts/app/controller/grid/DynamicGrid.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/MultiTarget.js" />
         <option value="$PROJECT_DIR$/public/resources/datatest/intact-full.json" />
-        <option value="$PROJECT_DIR$/public/resources/datatest/intact-rec.json" />
         <option value="$PROJECT_DIR$/spec/models/intact_proxy_spec.rb" />
+        <option value="$PROJECT_DIR$/public/resources/datatest/intact-rec.json" />
         <option value="$PROJECT_DIR$/lib/intact_proxy.rb" />
       </list>
     </option>
@@ -156,16 +156,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="RailsProjectView">
         <subPane>
           <PATH>
@@ -272,29 +262,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
+              <option name="myItemId" value="resources" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
+              <option name="myItemId" value="datatest" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -324,6 +296,16 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -518,8 +500,8 @@
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
-      <RunnerSettings RunnerId="RubyDebugRunner" />
-      <ConfigurationWrapper RunnerId="RubyDebugRunner" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
     </configuration>
     <configuration default="true" type="RakeRunConfigurationType" factoryName="Rake">
@@ -897,8 +879,8 @@
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26557863" sideWeight="0.48639455" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25148368" sideWeight="0.71428573" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24703264" sideWeight="0.71428573" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2648368" sideWeight="0.0" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23293768" sideWeight="0.0" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2857143" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="251" y="496" width="1355" height="431" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28041542" sideWeight="0.2834467" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
@@ -1015,19 +997,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/spec/models/intact_proxy_spec.rb</url>
-          <line>36</line>
+          <line>37</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/lib/intact_proxy.rb</url>
-          <line>142</line>
+          <line>138</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/lib/intact_proxy.rb</url>
-          <line>431</line>
+          <line>428</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/lib/intact_proxy.rb</url>
-          <line>125</line>
+          <line>123</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/spec/models/intact_proxy_spec.rb</url>
+          <line>38</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/public/javascripts/app/view/panels/BorderCenter.js</url>
@@ -1096,33 +1082,33 @@
         <state line="2244" column="50" selection-start="47249" selection-end="47249" vertical-scroll-proportion="0.37894738" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/resources/datatest/intact-rec.json">
+    <entry file="file:///usr/local/lib/ruby/gems/1.9.1/gems/rspec-core-2.10.0/lib/rspec/core/example.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="10" selection-start="29" selection-end="29" vertical-scroll-proportion="0.042105265" />
+        <state line="90" column="0" selection-start="3483" selection-end="3483" vertical-scroll-proportion="0.3322034" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/resources/datatest/intact-full.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="2" selection-start="4" selection-end="4" vertical-scroll-proportion="0.0" />
+        <state line="1" column="2" selection-start="4" selection-end="4" vertical-scroll-proportion="0.014035088" />
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/ruby/gems/1.9.1/gems/rspec-core-2.10.0/lib/rspec/core/example.rb">
+    <entry file="file://$PROJECT_DIR$/public/resources/datatest/intact-rec.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="0" selection-start="3483" selection-end="3483" vertical-scroll-proportion="0.3322034">
+        <state line="495" column="8" selection-start="10244" selection-end="10530" vertical-scroll-proportion="-16.538462">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/models/intact_proxy_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="0" selection-start="722" selection-end="722" vertical-scroll-proportion="0.0">
+        <state line="32" column="73" selection-start="729" selection-end="729" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/intact_proxy.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="191" column="0" selection-start="6125" selection-end="6125" vertical-scroll-proportion="0.81710213">
+        <state line="165" column="86" selection-start="5558" selection-end="5558" vertical-scroll-proportion="0.82660335">
           <folding />
         </state>
       </provider>

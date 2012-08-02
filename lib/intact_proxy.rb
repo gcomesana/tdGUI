@@ -20,7 +20,6 @@ class IntactProxy
 
 
 	def get_interaction_graph (target_id = 'Q13362')
-
 #		xmlFile = File.new('../data/q13362-stringdb-interactions.xml') # psi-mi xml file
 
 		myuri = INTACT_URL.gsub(/xxxx/, target_id)
@@ -100,7 +99,6 @@ class IntactProxy
 			xmlstr = request(my_intactUri, [])
 			inner_xml_doc = Nokogiri::XML(xmlstr.body)
 
-
 #			experiments = get_experiments(inner_xml_doc)
 # puts "\nExperiments for #{accession}"
 # experiments.each { |exp| puts "#{exp}\n"}
@@ -109,23 +107,21 @@ class IntactProxy
 #puts "interactor and #{accession} subset\n"
 #			new_subset.each { |intrctr| puts("#{intrctr.to_json}\n") }
 
+# setup a new array with interactor objects extended with a real_id field
+# real_id is the id from source main_interactors
 			real_id_subset = Array.new
 			new_subset.each { |node|
 				node_index = main_interactors.index { |n_ref| n_ref[:name] == node[:name] }
 				node_ref = main_interactors[node_index]
 
 				node[:real_id] = node_ref[:id]
-# puts "#{node.to_s}\n"
 				real_id_subset << node
 			} # EO loop over nodes subset to normalize
-
 
 # puts "real_id_subset\n"
 # real_id_subset.each { |the_real| puts "#{the_real.to_s}\n" }
 
 			interactions_subset = get_interactions_subset(inner_xml_doc, new_subset)
-# puts "Interactions\n"
-# interactions_subset.each { |intrctr| puts("#{intrctr.to_json}\n") }
 #		}
 
 
@@ -163,6 +159,11 @@ class IntactProxy
 				intrcn
 			} # EO interactions_subset collect
 
+if accession == 'P67775' || accession == 'P30153'
+	puts "Interactions from #{accession}\n"
+	interactions_subset.each { |intrctr| puts("#{intrctr.to_json}\n") }
+end
+
 
 # get the experiment ids for this interaction subnet in order to exclude
 # experiments not involved on these interactions
@@ -171,20 +172,23 @@ class IntactProxy
 			}
 
 			full_experiments << get_experiments(inner_xml_doc, exp_ids)
-
+=begin
 puts "Interactions encoded\n"
 interactions_subset.each { |intrctn|
 	puts("#{intrctn.to_json}\n")
 	full_interactions << intrctn
 }
+=end
+			full_interactions = full_interactions + interactions_subset
 		} # EO main_interactions each
 
-
+=begin
 puts "FULL experiments...\n"
 full_experiments.flatten!
 full_experiments.each { |exp|
 	puts "#{exp.to_s}\n"
 }
+=end
 
 # Antes de terminar hay que cargarse del edges counter todas los elementos
 # cuyas keys no estén formadas por ninguno de los node_from, node_to de los
@@ -201,13 +205,6 @@ puts "\n#{super_graph.to_json}\n"
 	@edges_counter # = Hash.new
 	@node_data #  = {"$color" => "blue", "$type"=>"circle", "$dim" => 7}
 
-
-
-
-	def normalize_edges_counter (node_from, node_to)
-
-
-	end
 
 
 
@@ -243,7 +240,7 @@ puts "\n#{super_graph.to_json}\n"
 
 
 
-# Scan the document y gets only the nodes which are already within the subset
+# Scan the document y gets only the nodes which are already within the set of nodes
 # @param xmldoc, the Intact xml document
 # @param sset, the set of nodes which the new nodes have to be in
 # @return an array containing a nodes which are included in the subset
@@ -430,6 +427,7 @@ puts "\n#{super_graph.to_json}\n"
 
 		graph_cfg = Array.new
 		edges_counter = @edges_counter
+puts "*****==> edges count is #{edges.length}\n"
 		nodes.each { |node|
 			node_cfg = Hash.new
 			node_id = node[:id].slice(/\d+/)

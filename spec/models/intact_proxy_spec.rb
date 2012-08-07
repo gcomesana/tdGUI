@@ -7,7 +7,7 @@ describe "Intact proxy retrieves target interations from Intact" do
 		@proxy = IntactProxy.new
 	end
 
-
+=begin
 	it "should retrieve a valid JSON for Q!3362" do
 		myres = @proxy.get_interaction_graph
 
@@ -31,12 +31,13 @@ describe "Intact proxy retrieves target interations from Intact" do
 puts "for Q76MZ3:\n#{myres.to_json}\n"
 
 	end
-
+=end
 
 	it "should return true" do
 
 #		ok = @proxy.get_super_interaction_graph('P77569')
 		ok = @proxy.get_super_interaction_graph('Q13362')
+#		ok = @proxy.get_super_interaction_graph('P30154')
 #		ok = @proxy.get_super_interaction_graph('Q76MZ3')
 
 		ok.should be_kind_of Array
@@ -44,7 +45,7 @@ puts "for Q76MZ3:\n#{myres.to_json}\n"
 		ok.length.should be > 1
 
 puts "\nAll interactions normalized\n"
-		ok.each { |intrcn| puts "#{intrcn.to_s}\n"}
+		ok.each { |intrcn| puts "#{intrcn[:nodeFrom]}->#{intrcn[:nodeTo]} => #{intrcn.to_s}\n\n"}
 
 	end
 

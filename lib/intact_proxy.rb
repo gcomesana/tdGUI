@@ -9,6 +9,7 @@ class IntactProxy
 
 	STRING_DB_URL = 'http://string-db.org/api/psi-mi/interactions?identifier=xxxx&required_score=900&limit=5&network_flavor=confidence'
 	INTACT_URL = 'http://www.ebi.ac.uk/Tools/webservices/psicquic/intact/webservices/current/search/query/xxxx?format=xml25&species=9606'
+	CONFIDENCE_VAL_THRESHOLD = 0.3
 
 	def initialize
 # edges_counter counts the number of interactions between two nodes
@@ -78,34 +79,34 @@ class IntactProxy
 	def get_super_interaction_graph (target_id = 'P77569')
 		myuri = INTACT_URL.gsub(/xxxx/, target_id)
 		psimiResp = request(myuri, {})
+#		intact_file = File.open ('public/resources/datatest/intact/Q13362.xml')
 		xmlDoc = Nokogiri::XML(psimiResp.body)
+#		xmlDoc = Nokogiri::XML(intact_file)
 
 
-		puts "Starting\n"
+puts "Starting from file...\n"
 		main_interactors = build_interactors (xmlDoc)
-		puts "main interactors for #{target_id} net\n"
-		main_interactors.each { |intrctr| puts("#{intrctr.to_json}\n") }
-		puts "\n\n"
-
+puts "MAIN interactors for #{target_id} net\n"
+main_interactors.each { |intrctr| puts("#{intrctr.to_json}\n") }
+puts "\n\n"
 
 		full_interactions = Array.new
 		full_experiments = Array.new
+		main_ids = main_interactors.collect { |item| item[:id][4..(item[:id].length-1)] }
 
 # START loop over main interactors to build the 'supergraph'
 		main_interactors.each { |interactor|
 			accession = interactor[:name]
 			my_intactUri = INTACT_URL.sub('xxxx', accession)
-			puts "\nnew accession #{accession}\n"
+puts "\nnew accession #{accession}\n"
+#			intact_file = File.open('public/resources/datatest/intact/'+accession+'.xml')
+#			inner_xml_doc = Nokogiri::XML(intact_file)
+
 			xmlstr = request(my_intactUri, [])
 			inner_xml_doc = Nokogiri::XML(xmlstr.body)
 
-#			experiments = get_experiments(inner_xml_doc)
-# puts "\nExperiments for #{accession}"
-# experiments.each { |exp| puts "#{exp}\n"}
-
 			new_subset = get_interactors_subset(inner_xml_doc, main_interactors)
-#puts "interactor and #{accession} subset\n"
-#			new_subset.each { |intrctr| puts("#{intrctr.to_json}\n") }
+# new_subset.each { |intrctr| puts("#{intrctr.to_json}\n") }
 
 # setup a new array with interactor objects extended with a real_id field
 # real_id is the id from source main_interactors
@@ -118,18 +119,16 @@ class IntactProxy
 				real_id_subset << node
 			} # EO loop over nodes subset to normalize
 
-# puts "real_id_subset\n"
-# real_id_subset.each { |the_real| puts "#{the_real.to_s}\n" }
+puts "real_id_subset\n"
+real_id_subset.each { |the_real| puts "#{the_real.to_s}\n" }
 
-			interactions_subset = get_interactions_subset(inner_xml_doc, new_subset)
-#		}
-
+			interactions_subset = get_interactions_subset(accession, inner_xml_doc, new_subset)
 
 # Convert interactions ids for nodeFrom and nodeTo fields
 # as well as edges_counter references
 			interactions_subset.collect! { |intrcn|
 # remove this interaction from the @edges_counter
-				@edges_counter.delete([intrcn[:nodeFrom],intrcn[:nodeTo]])
+				num_edges = @edges_counter.delete([intrcn[:nodeFrom],intrcn[:nodeTo]])
 
 # calculates the index of the reference node in the real_id_subset
 				noderef_index = real_id_subset.index { |node|
@@ -146,67 +145,66 @@ class IntactProxy
 				noderef = real_id_subset[noderef_index]
 				noderef_to = intrcn[:nodeTo] = noderef[:real_id][4..(noderef[:real_id].length-1)]
 
-#				normalize_edges_counter(noderef_from, noderef_to)
-# hay que eliminar todos los elementos en @edge_counter con keys tales que
-# @edges_countr[intrcn[:nodeFrom],intrcn[:nodeTo]], antes de modificarse.
-# hay que buscar en edges counter las keys node_from,node_to e incrementar el valor
+=begin
 				if @edges_counter.has_key?([noderef_from, noderef_to])
-					@edges_counter[[noderef_from, noderef_to]] += 1
+					@edges_counter[[noderef_from, noderef_to]] += num_edges
 				else
-					@edges_counter[[noderef_from, noderef_to]] = 1
+					@edges_counter[[noderef_from, noderef_to]] = num_edges
 				end
-
+=end
+				if @edges_counter.has_key?([noderef_from, noderef_to]) == false
+					@edges_counter[[noderef_from, noderef_to]] = num_edges
+				end
 				intrcn
 			} # EO interactions_subset collect
 
-if accession == 'P67775' || accession == 'P30153'
-	puts "Interactions from #{accession}\n"
-	interactions_subset.each { |intrctr| puts("#{intrctr.to_json}\n") }
-end
 
+
+# Remove from edges_counter those interactions who don't belong to the actual interaction net
+			@edges_counter.delete_if { |edge_key|
+				node_from = edge_key[0]
+				node_to = edge_key[1]
+
+				main_ids.index(node_from).nil? || main_ids.index(node_to).nil?
+			}
 
 # get the experiment ids for this interaction subnet in order to exclude
 # experiments not involved on these interactions
 			exp_ids = interactions_subset.collect { |intrcn|
-				intrcn[:interactionData][:experimentRef]
+#				intrcn[:interactionData][:experimentRef]
+				intrcn[:interactionData].collect { |data|
+					data[:experimentRef]
+				}
 			}
+			exp_ids.flatten!
 
 			full_experiments << get_experiments(inner_xml_doc, exp_ids)
-=begin
-puts "Interactions encoded\n"
-interactions_subset.each { |intrctn|
-	puts("#{intrctn.to_json}\n")
-	full_interactions << intrctn
-}
-=end
-			full_interactions = full_interactions + interactions_subset
-		} # EO main_interactions each
 
-=begin
-puts "FULL experiments...\n"
-full_experiments.flatten!
-full_experiments.each { |exp|
-	puts "#{exp.to_s}\n"
-}
-=end
+#			full_interactions = full_interactions + interactions_subset
+			full_interactions = merge_interactions(interactions_subset, full_interactions)
+
+			full_interactions
+		} # EO main_interactions each
 
 # Antes de terminar hay que cargarse del edges counter todas los elementos
 # cuyas keys no estén formadas por ninguno de los node_from, node_to de los
 # main_interactors
-
+puts "\nedges_counter before building graph:\n"
+@edges_counter.each_pair { |key,val|
+	puts "#{key.to_s} -> #{val.to_s}\n"
+}
 		super_graph = buildup_graph(full_experiments, main_interactors, full_interactions)
-puts "\n#{super_graph.to_json}\n"
+puts "\n#{super_graph.to_json}\n\n"
 
 		full_interactions
-	end
+	end # EO get_super_graph_interaction
+
+
 
 
 	private
 	@edges_counter # = Hash.new
 	@node_data #  = {"$color" => "blue", "$type"=>"circle", "$dim" => 7}
-
-
-
 
 
 	def def_interactor (elem)
@@ -313,12 +311,23 @@ puts "\n#{super_graph.to_json}\n"
 		conn_nodes = intrcn.css('/participantList/participant/interactorRef')
 		exprmnt_ref = intrcn.css('/experimentList/experimentRef').text
 		msg = intrcn.css('/confidenceList/confidence/unit/names/fullName').text
-		conf_val = intrcn.css('/confidenceList/confidence/value').text
+		conf_name = intrcn.css('/confidenceList/confidence/unit/names/shortLabel[text()=intact-miscore]')
+		conf_val = conf_name.first().nil? ? 0.0: conf_name.first().parent().parent().parent().css('value').text
+#		conf_val = intrcn.css('/confidenceList/confidence/value').text
+
 		#	edge_id = intr['id']
 
 		# puts "***==> edge is [#{conn_nodes[0].text}, #{conn_nodes[1].text}]\n"
 		# puts "**===> @edge_counter: #{@edges_counter}\n"
 		# puts "***==> in this case @edges_counter = #{@edges_counter[[conn_nodes[0].text, conn_nodes[1].text]]}"
+
+# Don't include this interaction if conf_val is less than a threshold
+
+		if conf_val.to_f < CONFIDENCE_VAL_THRESHOLD || conn_nodes[0].text == conn_nodes[1].text
+puts "confidence val for #{conn_nodes[0].text}-#{conn_nodes[0].text} is #{conf_val}\n"
+			return nil
+		end
+
 		edge_counter = @edges_counter[[conn_nodes[0].text, conn_nodes[1].text]]
 		#puts "edge_counter: #{edge_counter}\n"
 		if edge_counter.nil?
@@ -331,11 +340,11 @@ puts "\n#{super_graph.to_json}\n"
 			:nodeFrom => conn_nodes[0].text,
 			:nodeTo => conn_nodes[1].text,
 			:data => {"$color" => color},
-			:interactionData => {
+			:interactionData => [{
 				:experimentRef => exprmnt_ref,
 				:confidenceVal => conf_val,
 				:conf_desc => msg
-			}
+			}]
 		}
 		#	$edges_counter.each { |k, v| puts "#{k} -> #{v}\n" }
 		#		adjacencies << adjacency
@@ -344,17 +353,83 @@ puts "\n#{super_graph.to_json}\n"
 
 
 
-
+# Just gets all interaction from an Intact psi-mi 2.5 xml file by accessing
+# all interaction elements
+# @param xmlDoc, the xml document as a nokogiri::XML object
+# @return an Array with all interactions retrieved as Hash objects
 	def build_interactions (xmlDoc)
 		interactionList = xmlDoc.css('interaction')
 		adjacencies = Array.new
 		color = "white"
 		interactionList.each { |intr|
 			adjacency = def_interaction (intr)
-			adjacencies << adjacency
+			next if adjacency.nil?
+
+			adj_index = adjacencies.index {|adj|
+				adj[:nodeFrom] == adjacency[:nodeFrom] && adj[:nodeTo] == adjacency[:nodeTo]
+			}
+
+			if adj_index.nil?
+				adjacencies << adjacency
+
+			else
+				the_adj = adjacencies[adj_index]
+				the_adj[:interactionData] << adjacency[:interactionData][0]
+			end
 		}
 
 		adjacencies
+	end
+
+
+# Merge the interactions for some current element into the full interactions array
+# As the interactions are suppossed to be without direction, an interaction
+# between x and y will be rejected if the interaction between y and x is already
+# held as a valid interactions
+# @param current, the interactions for the current element
+# @param full, the array of the interactions retrieved so far
+# @return a new Array with the new interactions merged into the old ones
+	def merge_interactions (current, full)
+		result = Array.new
+
+		current.each { |intrct|
+# this is necessary in order to see what check failed
+			cross_node_check1 = false
+			cross_node_check2 = false
+			index_full = full.index { |node|
+				cross_node_check1 = (intrct[:nodeFrom] == node[:nodeTo] && intrct[:nodeTo] == node[:nodeFrom])
+				cross_node_check2 = (intrct[:nodeTo] == node[:nodeFrom] && intrct[:nodeFrom] == node[:nodeTo])
+
+				(intrct[:nodeFrom] == node[:nodeFrom] && intrct[:nodeTo] == node[:nodeTo]) ||
+				cross_node_check1 || cross_node_check2
+			}
+
+			if index_full.nil?
+				result << intrct
+				full << intrct
+
+			elsif cross_node_check1
+				node = full[index_full]
+				num_edges4current = @edges_counter.delete([intrct[:nodeFrom],intrct[:nodeTo]])
+				@edges_counter[[node[:nodeFrom],node[:nodeTo]]] += num_edges4current
+				full[index_full][:interactionData].concat(intrct[:interactionData])
+
+			elsif cross_node_check2
+				node = full[index_full]
+				num_edges4current = @edges_counter.delete([intrct[:nodeTo],intrct[:nodeFrom]])
+				@edges_counter[[node[:nodeTo],node[:nodeFrom]]] += num_edges4current
+				full[index_full][:interactionData].concat(intrct[:interactionData])
+
+			else # same interaction got out of another experiment
+				node = full[index_full]
+				num_edges4current = intrct[:interactionData].length
+				@edges_counter[[node[:nodeFrom],node[:nodeTo]]] += num_edges4current
+				full[index_full][:interactionData].concat(intrct[:interactionData])
+			end
+		} # EO current.each
+
+		full
+#		result
 	end
 
 
@@ -363,7 +438,7 @@ puts "\n#{super_graph.to_json}\n"
 # @param xmldoc, the intact xml document representing the interaction 'net'
 # @param nodes_subset, the subset of nodes selected for this document
 # @return, an array with the interactions involving only nodes in the subset
-	def get_interactions_subset (xmldoc, nodes_subset)
+	def get_interactions_subset (accession, xmldoc, nodes_subset)
 		all_interactions = build_interactions(xmldoc)
 
 
@@ -381,6 +456,10 @@ puts "\n#{super_graph.to_json}\n"
 			end
 		}
 
+puts "Fucking right interactions...\n"
+right_interactions.each { |right_int|
+	puts "#{right_int.to_s}\n"
+}
 		right_interactions
 	end
 
@@ -427,6 +506,7 @@ puts "\n#{super_graph.to_json}\n"
 
 		graph_cfg = Array.new
 		edges_counter = @edges_counter
+		max_edges_value = edges_counter.values.min
 puts "*****==> edges count is #{edges.length}\n"
 		nodes.each { |node|
 			node_cfg = Hash.new
@@ -434,11 +514,12 @@ puts "*****==> edges count is #{edges.length}\n"
 
 			node_edges = edges.select { |e| e[:nodeFrom] == node_id }
 			node_edges.each { |n|
-				line_width = edges_counter[[n[:nodeFrom], n[:nodeTo]]]
+				line_width = edges_counter[[n[:nodeFrom], n[:nodeTo]]] / max_edges_value
+				line_width = line_width.round
 				# puts "line_width: #{line_width} for #{n[:nodeFrom]},#{n[:nodeTo]}\n"
 
 				if line_width != nil
-					n[:data]['$lineWidth'] = line_width*2
+					n[:data]['$lineWidth'] = line_width
 					edges_counter.delete([n[:nodeFrom], n[:nodeTo]])
 				end
 			}
@@ -462,6 +543,7 @@ puts "*****==> edges count is #{edges.length}\n"
 
 		graph_cfg
 	end
+
 
 
 	def get_random_color

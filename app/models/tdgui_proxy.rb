@@ -24,15 +24,16 @@ class TdguiProxy
 
 
 
-	def get_target_interactions(target_id)
+	def get_target_interactions(target_id, conf_val = 0.5)
 
 		if target_id.nil? || target_id.empty? then
 			nil
 		else
 			intact_proxy = IntactProxy.new
-			target_graph = intact_proxy.get_interaction_graph(target_id)
-		end
+#			target_graph = intact_proxy.get_interaction_graph(target_id)
+			target_graph = intact_proxy.get_super_interaction_graph(target_id, conf_val)
 
+		end
 	end
 
 
@@ -78,13 +79,6 @@ puts "get_multiple_entries: #{entries}"
 
 	end
 
-
-
-	def get_interactions (qtarget)
-
-
-
-	end
 
 
 

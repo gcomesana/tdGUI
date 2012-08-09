@@ -133,36 +133,42 @@ puts "the url: #{url}"
 			entryHash = Hash.new
 			if fieldsArray.empty?
 puts "Filling medatada..."
-				fieldsArray.push({'name' => 'accessions', 'type'=>'auto'})
-				fieldsArray.push ({'name' => 'name', 'type'=>'auto'})
-				fieldsArray.push ({'name' => 'keywords', 'type'=>'auto'})
+				fieldsArray.push({'name' => 'pdbimg', 'type'=>'auto'})
 				fieldsArray.push ({'name' => 'proteinFullName', 'type'=>'auto'})
+				fieldsArray.push({'name' => 'accessions', 'type'=>'auto'})
+#				fieldsArray.push ({'name' => 'name', 'type'=>'auto'})
+#				fieldsArray.push ({'name' => 'keywords', 'type'=>'auto'})
+				fieldsArray.push ({'name' => 'genes', 'type'=>'auto'})
 #				fieldsArray.push ({'name' => 'primaryName', 'type'=>'auto'})
 #				fieldsArray.push ({'name' => 'synonim_name', 'type'=>'auto'})
-#				fieldsArray.push ({'name' => 'organismSciName', 'type'=>'auto'})
+				fieldsArray.push ({'name' => 'organismSciName', 'type'=>'auto'})
 #				fieldsArray.push ({'name' => 'organism_comm_name', 'type'=>'auto'})
-#				fieldsArray.push ({'name' => 'function', 'type'=>'auto'})
-				fieldsArray.push ({'name' => 'numOfRefs', 'type'=>'auto'})
-				fieldsArray.push ({'name' => 'sequence', 'type'=>'auto'})
+				fieldsArray.push ({'name' => 'function', 'type'=>'auto'})
+#				fieldsArray.push ({'name' => 'numOfRefs', 'type'=>'auto'})
+#				fieldsArray.push ({'name' => 'sequence', 'type'=>'auto'})
 #				fieldsArray.push({'name' => 'pdbs', 'type'=>'auto'})
 			end
 
 			if columnsArray.empty?
 puts "Filling columns..."
+				columnsArray.push(set_column('PDB', 'pdbimg', nil, nil, nil, 'renderPdb'))
+				columnsArray.push (set_column('Target name', 'proteinFullName'))
 				columnsArray.push(set_column('Accessions', 'accessions', {'type' => 'string'},'templatecolumn',
 																		 "<tpl for=\"accessions\">{.}<br/></tpl>"))
-				columnsArray.push(set_column('Name', 'name'))
-				columnsArray.push (set_column('Keywords', 'keywords'))
-				columnsArray.push (set_column('Target name', 'proteinFullName'))
+				columnsArray.push(set_column('Genes', 'genes', {'type' => 'string'}, 'templatecolumn',
+																		 "<tpl for=\"genes\">{.}<br/></tpl>"))
+#				columnsArray.push(set_column('Name', 'name'))
+#				columnsArray.push (set_column('Keywords', 'keywords'))
+
 #				columnsArray.push (set_column('Gen primary name','primaryName'))
 #				columnsArray.push (set_column('Gene synonim name', 'synonim_name'))
-#				columnsArray.push (set_column('Scientific name', 'organismSciName'))
+				columnsArray.push (set_column('Organism', 'organismSciName'))
 #				columnsArray.push (set_column('Common name', 'organism_comm_name'))
-#				columnsArray.push (set_column('Target function', 'function'))
-				columnsArray.push (set_column('Citations', 'numOfRefs', {'type' => 'int'}))
-				columnsArray.push (set_column('Sequence', 'sequence', {'type' => 'auto'},
-																			'templatecolumn',"Length: {sequence.length}. Mass: <b>{sequence.mass}</b><br/>{sequence.seq}"))
-#				columnsArray.push(set_column('PDBs', 'pdbs'))
+				columnsArray.push (set_column('Target function', 'function'))
+#				columnsArray.push (set_column('Citations', 'numOfRefs', {'type' => 'int'}))
+#				columnsArray.push (set_column('Sequence', 'sequence', {'type' => 'auto'},
+#																			'templatecolumn',"Length: {sequence.length}. Mass: <b>{sequence.mass}</b><br/>{sequence.seq}"))
+
 			end
 
 
@@ -186,8 +192,8 @@ puts "Filling columns..."
 	end
 
 
-
-	def set_column (text, data_index, filter=nil, xtype=nil, tpl=nil)
+# Builds a column definition ready to be integrated with some grid
+	def set_column (text, data_index, filter=nil, xtype=nil, tpl=nil, renderer=nil)
 		columnHash = {
 			'text' => '', 'dataIndex' => '',
 			'hidden' => false,
@@ -205,6 +211,9 @@ puts "Filling columns..."
 			end
 		end
 
+		if renderer.nil? == false
+			columnHash['renderer'] = renderer
+		end
 		columnHash
 	end
 
@@ -217,43 +226,57 @@ puts "Filling columns..."
 			return entryHash
 		end
 
-		accList = ent.elements.collect('accession') { |acc| acc.text }
-		entryHash['accessions'] = accList
-
 		name = ent.elements['name']
-		entryHash['name'] = name.text
+#		entryHash['name'] = name.text
 
-		keywords = ent.elements.collect('keyword') {|keyw| keyw.text }
-		entryHash['keywords'] = keywords
+		pdb_ids = ent.elements.collect("dbReference[@type='PDB']") { |pdb|
+			pdb.attribute('id')
+		}
+		if pdb_ids.length > 0
+			entryHash['pdbimg'] = '<img src="http://www.rcsb.org/pdb/images/'+pdb_ids[0].value+'_asr_r_80.jpg" '									+ 'width="80" height="80" />'
+		else
+			entryHash['pdbimg'] = '<img src="/images/target_placeholder.png" width="80" height="80" />'
+		end
 
 		prot_full_name = ent.elements.collect('protein/recommendedName/fullName') { |name|
 			name.text
 		}
 		entryHash['proteinFullName'] = prot_full_name[0]
 
-	  gene_pri_name = ent.elements.collect("gene/name[@type='primary']") { |gene| gene.text }
-#			entryHash['primaryName'] = gene_pri_name[0].nil? ? '': gene_pri_name[0]
+		accList = ent.elements.collect('accession') { |acc| acc.text }
+		accList.map! { |acc| '<a href="http://www.uniprot.org/uniprot/'+acc+'" target="_blank">'+acc+'</a>' }
+		entryHash['accessions'] = accList
 
-		gene_syn_name = ent.elements.collect("gene/name[@type='synonim']") { |gene| gene.text }
-#			entryHash['synonim_name'] = gene_syn_name[0].nil? ? '': gene_syn_name[0]
+		gene_pri_name = ent.elements.collect("gene/name[@type='primary']") { |gene| gene.text }
+#		entryHash['primaryName'] = gene_pri_name[0].nil? ? '': gene_pri_name[0]
+		entryHash['genes'] = gene_pri_name
+
+		gene_syn_names = ent.elements.collect("gene/name[@type='synonym']") { |gene| gene.text }
+#		entryHash['synonim_name'] = gene_syn_name[0].nil? ? '': gene_syn_name[0]
+		entryHash['genes'] << gene_syn_names
+		entryHash['genes'].flatten!
+
+#		keywords = ent.elements.collect('keyword') {|keyw| keyw.text }
+#		entryHash['keywords'] = keywords
+
 
 		org_sci = ent.elements.collect("organism/name[@type='scientific']") { |orgName| orgName.text }
-#			entryHash['organismSciName'] = org_sci[0].nil? ? '': org_sci[0]
+		entryHash['organismSciName'] = org_sci[0].nil? ? '': org_sci[0]
 
 		org_comm = ent.elements.collect("organism/name[@type='common']") { |orgName| orgName.text }
 #			entryHash['organism_comm_name'] = org_comm[0].nil? ? '': org_comm[0]
 
 		func_comment = ent.elements.collect("comment[@type='function']/text") { |comment| comment.text }
-#			entryHash['function'] = func_comment[0].nil? ? '': func_comment[0]
+		entryHash['function'] = func_comment[0].nil? ? '': func_comment[0]
 
 		num_of_refs = 0
 		ent.elements.each("reference") { |ref| num_of_refs += 1 }
-		entryHash['numOfRefs'] = num_of_refs
+#		entryHash['numOfRefs'] = num_of_refs
 
 		seq = ent.elements['sequence'] #		seq.attributes (=> {attribute1=value1,... })
-		entryHash['sequence'] = {'length' => seq.attributes['length'],
-														 'mass' => seq.attributes['mass'],
-														 'seq' => seq.text.gsub!(/\s/, '') }
+#		entryHash['sequence'] = {'length' => seq.attributes['length'],
+#														 'mass' => seq.attributes['mass'],
+#														 'seq' => seq.text.gsub!(/\s/, '') }
 
 		entryHash
 	end

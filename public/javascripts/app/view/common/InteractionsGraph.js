@@ -92,6 +92,8 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
   nodeClickHandler: undefined,
   edgeClickHandler: undefined,
 
+
+
   //  height: 600,
 
   initComponent: function () {
@@ -136,6 +138,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 
   initGraph: function (thisInstance) {
     var me = this
+
 
 
     /**
@@ -349,6 +352,8 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
         })
       } // EO onComplete
     })
+
+    this.fireEvent ('graphCompleted', this)
 
   },
 

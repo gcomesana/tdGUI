@@ -17,19 +17,21 @@ Ext.define ("TDGUI.controller.Viewport", {
   }, {
     ref: 'targetList',
     selector: 'tdgui-item-multilist'
+  }, {
+    ref: 'theViewport',
+    selector: 'tdgui-viewport'
   }],
-
-
 
 
   init: function () {
     var me = this
+
     Ext.History.init()
 
     Ext.History.on('change', function (token) {
-       if (token) {
-          me.handleHistoryToken(token);
-       }
+      if (token) {
+        me.handleHistoryToken(token);
+      }
     }) // , this);
 
     this.control({
@@ -58,6 +60,7 @@ Ext.define ("TDGUI.controller.Viewport", {
     var tokenObj = this.parseHistoryToken(token)
     var xtype = tokenObj.xt
     var newPanel
+
 
     switch (xtype) {
       case 'tdgui-multitargetpanel':
@@ -120,6 +123,7 @@ console.info ("raising interactions for Target panel")
     tabsPanel.suspendEvents(false)
     tabsPanel.setActiveTab(newPanel)
     tabsPanel.resumeEvents()
+
   },
 
 

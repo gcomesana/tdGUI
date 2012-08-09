@@ -93,9 +93,9 @@ Ext.define('TDGUI.view.grid.DynamicGrid', {
 
 
 
-
+/*
   setAndFillGrid: function () {
-console.info ('storeLoad method')
+    console.info ('DynamicGrid view setAndFillGrid')
     if (typeof(this.store.proxy.reader.jsonData.columns) === 'object') {
       var columns = [];
       if (this.rowNumberer) {
@@ -120,8 +120,10 @@ console.info ('storeLoad method')
       this.reconfigure(this.store, columns);
       this.setHeight('80%');
     }
-  },
 
+    this.fireEvent ('endLoading', this)
+  },
+*/
 
 
   onRender: function (ct, position) {
@@ -130,6 +132,7 @@ console.info ('storeLoad method')
 //    if (this.store.isLoading() == false)
     this.store.proxy.api.read = 'resources/datatest/uniprotxml-single.json';
     this.store.on('load', this.setAndFillGrid, this);
+    this.fireEvent ('startLoading', this)
     this.store.load()
 
  /*

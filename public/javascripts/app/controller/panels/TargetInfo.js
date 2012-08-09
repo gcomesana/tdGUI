@@ -12,6 +12,9 @@ Ext.define("TDGUI.controller.panels.TargetInfo", {
     selector: 'tdgui-targetinfopanel'
   }],
 
+
+  myMask: undefined,
+
   init:function () {
 console.info ("Initializing TargetInfo controller...")
     this.control({
@@ -28,6 +31,9 @@ console.info ("Initializing TargetInfo controller...")
   },
 
   onLaunch:function (app) {
+    myMask = new Ext.LoadMask(Ext.getBody(), {
+      msg:'Loading data...'
+    })
   },
 
 
@@ -68,11 +74,13 @@ console.info ("Initializing TargetInfo controller...")
  */
   initTargetInfoPanel: function (comp, opts) {
 //    var store = this.getTargetsStore();
-    comp.startLoading()
+console.info ('initTargetInfoPanel from TargetInfo controller')
     var store = comp.targetInfoStore
     var tokenObjQp = comp.queryParam
     var tokenParams = tokenObjQp.split(',') // returns always a array
 console.info ('TargetInfo.initTargetInfoPanel tokenParams: '+tokenParams)
+
+    myMask.bindStore(store)
 
 // get the conceptUUID
     Ext.each (tokenParams, function (token, index, tokens) {
@@ -91,8 +99,11 @@ console.info ('TargetInfo.initTargetInfoPanel tokenParams: '+tokenParams)
 
 
   retryTargetInfoPanel: function (comp, opts) {
+console.info ('retryTargetInfoPanel from TargetInfo controller')
     var queryParam = opts.concept_req
     var store = comp.targetInfoStore
+
+    myMask.bindStore(store)
 
     if (queryParam != store.proxy.extraParams.protein_uri) {
       store.proxy.extraParams.protein_uri = queryParam

@@ -26,8 +26,13 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
 
   targetAcc: '',
 
+  myMask: undefined,
+
+
   initComponent:function () {
     var me = this
+    me.myMask = new Ext.LoadMask(Ext.getBody(), {msg: 'Loading data...'})
+    me.myMask.show()
 
     var graphPanel = Ext.create('TDGUI.view.common.InteractionsGraph', {
       fdDivName: 'divgraph',
@@ -86,6 +91,10 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
       graphPanel
     ]
     graphPanel.initGraph(graphPanel)
+
+    graphPanel.addListener ('graphCompleted', function (evName, opts) {
+      me.myMask.hide()
+    })
 
     this.callParent(arguments)
   }, // EO initComponent

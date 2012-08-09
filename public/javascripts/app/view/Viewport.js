@@ -213,15 +213,15 @@ console.info ("Viewport.initComponent starting...")
         title: 'Search center',
         split: true,
         width: '20%',
-        minWidth: 300,
-        minHeight: 140,
+        minWidth: 320,
+//        minHeight: 140,
         frame: false,
 
-//        layout: 'border',
-        layout: 'hbox',
+        layout: 'anchor',
+//        layout: 'hbox',
 //        items: [theWestItems]
         items: [{
-            region: 'north',
+//            region: 'north',
             xtype: 'tdgui-west-search'
           } /* , {
             region: 'center',

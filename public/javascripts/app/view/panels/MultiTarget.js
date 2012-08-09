@@ -58,6 +58,7 @@ Ext.define ('TDGUI.view.panels.MultiTarget', {
   },
 
 
+
 /**
  * Returns a reference to the storeListTargets, which is a clone of the store of
  * the list targets. This is here in order to keep conceptWiki attributes which

@@ -13,10 +13,12 @@ Ext.define ('TDGUI.view.panels.west.SearchPanel', {
 //  collapsible: true,
 //  title: 'Search center',
 //  split: true,
-  width: '20%',
-  minWidth: 300,
+//  width: '20%',
+//  minWidth: 300,
   minHeight: 200,
   border: false,
+
+  anchor: '100% 70%',
 
   defaults: {
     border: false
@@ -100,7 +102,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
             xtype: 'button',
             text: ' Add ',
             columnWidth: .15,
-            action: 'query-protein-info',
+            action: 'query-protein-info'
 //            disabled: false
         }] // EO items
 

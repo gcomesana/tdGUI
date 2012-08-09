@@ -9,7 +9,8 @@ class IntactProxy
 
 	STRING_DB_URL = 'http://string-db.org/api/psi-mi/interactions?identifier=xxxx&required_score=900&limit=5&network_flavor=confidence'
 	INTACT_URL = 'http://www.ebi.ac.uk/Tools/webservices/psicquic/intact/webservices/current/search/query/xxxx?format=xml25&species=9606'
-	CONFIDENCE_VAL_THRESHOLD = 0.3
+	CONFIDENCE_VAL_THRESHOLD = 0.4
+	MAX_EDGE_WIDTH = 10
 
 	def initialize
 # edges_counter counts the number of interactions between two nodes
@@ -20,7 +21,7 @@ class IntactProxy
 	end
 
 
-	def get_interaction_graph (target_id = 'Q13362')
+	def get_interaction_graph (target_id = 'Q13362', conf_threshold = 0.5)
 #		xmlFile = File.new('../data/q13362-stringdb-interactions.xml') # psi-mi xml file
 
 		myuri = INTACT_URL.gsub(/xxxx/, target_id)
@@ -53,7 +54,7 @@ class IntactProxy
 		color = "white"
 		interactionList.each { |intr|
 
-			adjacency = def_interaction (intr)
+			adjacency = def_interaction(intr, conf_threshold)
 			adjacencies << adjacency
 		}
 
@@ -76,19 +77,20 @@ class IntactProxy
 # first level deep interactions amid the closer neighbors
 # @param target_id, the main target which the interactions wants to be yield of
 # @return an array modelling all interactions
-	def get_super_interaction_graph (target_id = 'P77569')
+	def get_super_interaction_graph (target_id = 'P77569', conf_threshold = 0.5)
 		myuri = INTACT_URL.gsub(/xxxx/, target_id)
 		psimiResp = request(myuri, {})
 #		intact_file = File.open ('public/resources/datatest/intact/Q13362.xml')
 		xmlDoc = Nokogiri::XML(psimiResp.body)
 #		xmlDoc = Nokogiri::XML(intact_file)
 
-
-puts "Starting from file...\n"
 		main_interactors = build_interactors (xmlDoc)
+=begin
+puts "Starting from file...\n"
 puts "MAIN interactors for #{target_id} net\n"
 main_interactors.each { |intrctr| puts("#{intrctr.to_json}\n") }
 puts "\n\n"
+=end
 
 		full_interactions = Array.new
 		full_experiments = Array.new
@@ -98,15 +100,12 @@ puts "\n\n"
 		main_interactors.each { |interactor|
 			accession = interactor[:name]
 			my_intactUri = INTACT_URL.sub('xxxx', accession)
-puts "\nnew accession #{accession}\n"
-#			intact_file = File.open('public/resources/datatest/intact/'+accession+'.xml')
-#			inner_xml_doc = Nokogiri::XML(intact_file)
-
+# puts "\nnew accession #{accession}\n"
 			xmlstr = request(my_intactUri, [])
 			inner_xml_doc = Nokogiri::XML(xmlstr.body)
 
+# get the nodes subset for the current target
 			new_subset = get_interactors_subset(inner_xml_doc, main_interactors)
-# new_subset.each { |intrctr| puts("#{intrctr.to_json}\n") }
 
 # setup a new array with interactor objects extended with a real_id field
 # real_id is the id from source main_interactors
@@ -119,10 +118,9 @@ puts "\nnew accession #{accession}\n"
 				real_id_subset << node
 			} # EO loop over nodes subset to normalize
 
-puts "real_id_subset\n"
-real_id_subset.each { |the_real| puts "#{the_real.to_s}\n" }
 
-			interactions_subset = get_interactions_subset(accession, inner_xml_doc, new_subset)
+# get the interactions of interest for the current target
+			interactions_subset = get_interactions_subset(accession, inner_xml_doc, new_subset, conf_threshold)
 
 # Convert interactions ids for nodeFrom and nodeTo fields
 # as well as edges_counter references
@@ -158,8 +156,6 @@ real_id_subset.each { |the_real| puts "#{the_real.to_s}\n" }
 				intrcn
 			} # EO interactions_subset collect
 
-
-
 # Remove from edges_counter those interactions who don't belong to the actual interaction net
 			@edges_counter.delete_if { |edge_key|
 				node_from = edge_key[0]
@@ -186,17 +182,17 @@ real_id_subset.each { |the_real| puts "#{the_real.to_s}\n" }
 			full_interactions
 		} # EO main_interactions each
 
-# Antes de terminar hay que cargarse del edges counter todas los elementos
-# cuyas keys no estén formadas por ninguno de los node_from, node_to de los
-# main_interactors
+=begin
 puts "\nedges_counter before building graph:\n"
 @edges_counter.each_pair { |key,val|
 	puts "#{key.to_s} -> #{val.to_s}\n"
 }
+=end
 		super_graph = buildup_graph(full_experiments, main_interactors, full_interactions)
-puts "\n#{super_graph.to_json}\n\n"
+# puts "\n#{super_graph.to_json}\n\n"
 
-		full_interactions
+#		full_interactions
+		super_graph
 	end # EO get_super_graph_interaction
 
 
@@ -249,8 +245,8 @@ puts "\n#{super_graph.to_json}\n\n"
 		interactor_list.each { |elem|
 			interactor = def_interactor(elem)
 
-			set.each { |elem|
-				if elem[:name] == interactor[:name] && new_subset.index(interactor).nil?
+			set.each { |the_elem|
+				if the_elem[:name] == interactor[:name] && new_subset.index(interactor).nil?
 					new_subset << interactor
 					break
 				end
@@ -271,7 +267,7 @@ puts "\n#{super_graph.to_json}\n\n"
 		detection = exp.css('/interactionDetectionMethod/names/shortLabel').text
 		exp_id = "exprmnt"+exp['id']
 		bibref = exp.css('/bibref/xref/primaryRef[@db="pubmed"]')[0]
-		if (bibref.nil? == false)
+		if bibref.nil? == false
 			pubmed_id = bibref.get_attribute('id')
 			pubmed_id = pubmed_id.nil? ? '' : pubmed_id
 		else
@@ -306,7 +302,7 @@ puts "\n#{super_graph.to_json}\n\n"
 # Defines an interaction from a Nokogiri::XML element from the xml document
 # @param intrcn, the nokogiri element to be manipulated
 # @result an adjacency hash ready to be transformed into a json string
-	def def_interaction (intrcn)
+	def def_interaction (intrcn, conf_threshold)
 		color = get_random_color
 		conn_nodes = intrcn.css('/participantList/participant/interactorRef')
 		exprmnt_ref = intrcn.css('/experimentList/experimentRef').text
@@ -315,16 +311,10 @@ puts "\n#{super_graph.to_json}\n\n"
 		conf_val = conf_name.first().nil? ? 0.0: conf_name.first().parent().parent().parent().css('value').text
 #		conf_val = intrcn.css('/confidenceList/confidence/value').text
 
-		#	edge_id = intr['id']
-
-		# puts "***==> edge is [#{conn_nodes[0].text}, #{conn_nodes[1].text}]\n"
-		# puts "**===> @edge_counter: #{@edges_counter}\n"
-		# puts "***==> in this case @edges_counter = #{@edges_counter[[conn_nodes[0].text, conn_nodes[1].text]]}"
-
 # Don't include this interaction if conf_val is less than a threshold
-
-		if conf_val.to_f < CONFIDENCE_VAL_THRESHOLD || conn_nodes[0].text == conn_nodes[1].text
-puts "confidence val for #{conn_nodes[0].text}-#{conn_nodes[0].text} is #{conf_val}\n"
+#		if conf_val.to_f < CONFIDENCE_VAL_THRESHOLD || conn_nodes[0].text == conn_nodes[1].text
+		if conf_val.to_f < conf_threshold || conn_nodes[0].text == conn_nodes[1].text
+# puts "confidence val for #{conn_nodes[0].text}-#{conn_nodes[0].text} is #{conf_val}\n"
 			return nil
 		end
 
@@ -357,12 +347,12 @@ puts "confidence val for #{conn_nodes[0].text}-#{conn_nodes[0].text} is #{conf_v
 # all interaction elements
 # @param xmlDoc, the xml document as a nokogiri::XML object
 # @return an Array with all interactions retrieved as Hash objects
-	def build_interactions (xmlDoc)
+	def build_interactions (xmlDoc, conf_thr)
 		interactionList = xmlDoc.css('interaction')
 		adjacencies = Array.new
 		color = "white"
 		interactionList.each { |intr|
-			adjacency = def_interaction (intr)
+			adjacency = def_interaction(intr, conf_thr)
 			next if adjacency.nil?
 
 			adj_index = adjacencies.index {|adj|
@@ -438,8 +428,8 @@ puts "confidence val for #{conn_nodes[0].text}-#{conn_nodes[0].text} is #{conf_v
 # @param xmldoc, the intact xml document representing the interaction 'net'
 # @param nodes_subset, the subset of nodes selected for this document
 # @return, an array with the interactions involving only nodes in the subset
-	def get_interactions_subset (accession, xmldoc, nodes_subset)
-		all_interactions = build_interactions(xmldoc)
+	def get_interactions_subset (accession, xmldoc, nodes_subset, conf_threshold)
+		all_interactions = build_interactions(xmldoc, conf_threshold)
 
 
 		nodes_id = nodes_subset.collect { |a_node| a_node[:id].slice(4, a_node[:id].length-4) }
@@ -455,11 +445,12 @@ puts "confidence val for #{conn_nodes[0].text}-#{conn_nodes[0].text} is #{conf_v
 				right_interactions << new_int
 			end
 		}
-
+=begin
 puts "Fucking right interactions...\n"
 right_interactions.each { |right_int|
 	puts "#{right_int.to_s}\n"
 }
+=end
 		right_interactions
 	end
 
@@ -506,7 +497,8 @@ right_interactions.each { |right_int|
 
 		graph_cfg = Array.new
 		edges_counter = @edges_counter
-		max_edges_value = edges_counter.values.min
+		min_edges_value = edges_counter.values.min
+
 puts "*****==> edges count is #{edges.length}\n"
 		nodes.each { |node|
 			node_cfg = Hash.new
@@ -514,8 +506,9 @@ puts "*****==> edges count is #{edges.length}\n"
 
 			node_edges = edges.select { |e| e[:nodeFrom] == node_id }
 			node_edges.each { |n|
-				line_width = edges_counter[[n[:nodeFrom], n[:nodeTo]]] / max_edges_value
+				line_width = edges_counter[[n[:nodeFrom], n[:nodeTo]]] / min_edges_value
 				line_width = line_width.round
+				line_width = line_width > MAX_EDGE_WIDTH ? MAX_EDGE_WIDTH: line_width
 				# puts "line_width: #{line_width} for #{n[:nodeFrom]},#{n[:nodeTo]}\n"
 
 				if line_width != nil
@@ -537,7 +530,7 @@ puts "*****==> edges count is #{edges.length}\n"
 			graph_cfg << node_cfg
 		} # EO nodes.each
 
-		graph_cfg << {:experiments => experiments}
+#		graph_cfg << {:experiments => experiments}
 			#		puts "graph_cfg:\n"
 			#		puts "\n#{graph_cfg.to_json}"
 

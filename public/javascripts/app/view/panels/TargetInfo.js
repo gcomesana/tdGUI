@@ -74,7 +74,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
             cls:'target-pharm-button'
           }, {
             xtype:'button',
-            text:'Interaction Data',
+            text:'Interactions Data',
             itemId:'stringdbTargetButton',
             cls:'target-pharm-button'
           }, {
@@ -216,38 +216,38 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 	},
 
 
-
-  displayData: function (store, records, successful) {
+  displayData:function (store, records, successful) {
     if (successful && records[0].data.hasOwnProperty('target_name')) {
 //      if (records.length > 0) {
-        var dp = this.down('#dp');
-        var msg = this.down('#msg');
-        msg.setVisible(false);
-        this.setValues(store.first());
-        dp.setVisible(true);
-/*      }
-      else
-        this.showMessage('No records found within OPS for this search');
-*/    }
+      var dp = this.down('#dp');
+      var msg = this.down('#msg');
+      msg.setVisible(false);
+      this.setValues(store.first());
+      dp.setVisible(true);
+      /*      }
+       else
+       this.showMessage('No records found within OPS for this search');
+       */
+    }
     else {
 //			this.showMessage('Server did not respond');
       var prevReq = store.proxy.extraParams.protein_uri
       var nextReq = this.queryParam.split(',')
       if (nextReq.length > 1 && nextReq != prevReq) {
         this.numOfReqs++
-        this.fireEvent('opsFailed', this, {concept_req: nextReq[this.numOfReqs]})
+        this.fireEvent('opsFailed', this, {concept_req:nextReq[this.numOfReqs]})
       }
       // else raise a message with no information found...
     }
 
     this.endLoading();
-var targetInfos = Ext.ComponentQuery.query('tdgui-targetinfopanel')
-console.info ("targetinfos length: "+targetInfos.length)
+// var targetInfos = Ext.ComponentQuery.query('tdgui-targetinfopanel')
+// console.info ("targetinfos length: "+targetInfos.length)
 
   },
 
 
-  showData:function (store, records, successful) {
+  showData: function (store, records, successful) {
     if (successful) {
 
       var td = store.first().data;
@@ -464,7 +464,7 @@ console.log('standard field: '+fieldId+' -> '+value);
 
 	startLoading: function() {
 console.info ('TargetInfo.startLoading')
-		this.setLoading(true, true);
+		this.setLoading({msg: 'Loading data...'}, true);
 	},
 
 

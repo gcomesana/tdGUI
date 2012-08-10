@@ -119,32 +119,80 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       name: "TP53-regulated inhibitor of apoptosis 1",
       concept_uuid: "d593db45-e954-4e97-94f7-c039350f97f4",
       concept_uri: "http://www.conceptwiki.org/concept/d593db45-e954-4e97-94f7-c039350f97f4",
-      uniprot_acc: ["O43715","B2R4Z7", "Q5RKS5", "Q6LCA7"],
+      uniprot_acc: ["<a href=\"http://www.uniprot.org/uniprot/O43715\" target=\"_blank\">P08913</a>",
+        "<a href=\"http://www.uniprot.org/uniprot/B2R4Z7\" target=\"_blank\">B2R4Z7</a>",
+        "<a href=\"http://www.uniprot.org/uniprot/Q5RKS5\" target=\"_blank\">Q5RKS5</a>",
+        "<a href=\"http://www.uniprot.org/uniprot/Q6LCA7\" target=\"_blank\">Q6LCA7</a>"],
       uniprot_id: "TRIA1_HUMAN",
       uniprot_name: "TRIA1_HUMAN"
     }, {
       name: "Next to BRCA1 gene 1 protein (Homo sapiens)",
       concept_uuid: "ec79efff-65cb-45b1-a9f5-dddfc1c4025c",
       concept_uri: "http://www.conceptwiki.org/concept/ec79efff-65cb-45b1-a9f5-dddfc1c4025c",
-      uniprot_acc: ["Q14596","Q13173","Q15026","Q5J7Q8","Q96GB6","Q9NRF7"],
+      uniprot_acc: ["<a href=\"http://www.uniprot.org/uniprot/Q14596\" target=\"_blank\">Q14596</a>",
+        "<a href=\"http://www.uniprot.org/uniprot/Q13173\" target=\"_blank\">Q13173</a>",
+        "<a href=\"http://www.uniprot.org/uniprot/Q15026\" target=\"_blank\">Q15026</a>",
+        "<a href=\"http://www.uniprot.org/uniprot/Q5J7Q8\" target=\"_blank\">Q5J7Q8</a>",
+        "<a href=\"http://www.uniprot.org/uniprot/Q96GB6\" target=\"_blank\">Q96GB6</a>",
+        "<a href=\"http://www.uniprot.org/uniprot/Q9NRF7\" target=\"_blank\">Q9NRF7</a>"
+      ],
       uniprot_id: "NBR1_HUMAN",
       uniprot_name: "NBR1_HUMAN"
     }, {
     	name: "Kita-kyushu lung cancer antigen 1 (Homo sapiens)",
     	concept_uuid: "eeaec894-d856-4106-9fa1-662b1dc6c6f1",
     	concept_uri: "http://www.conceptwiki.org/concept/eeaec894-d856-4106-9fa1-662b1dc6c6f1",
-    	uniprot_acc: ["Q5H943"], // uniprot_acc: "Q5H943",
+    	uniprot_acc: ["<a href=\"http://www.uniprot.org/uniprot/Q5H943\" target=\"_blank\">Q5H943</a>"], // uniprot_acc: "Q5H943",
     	uniprot_id: "KKLC1_HUMAN", // uniprot_id: "KKLC1_HUMAN"
       uniprot_name: "KKLC1_HUMAN"
     }, {
       name: "Adenosine receptor A2a (Homo sapiens)",
       concept_uuid: "979f02c6-3986-44d6-b5e8-308e89210c8d",
       concept_uri: "http://www.conceptwiki.org/concept/979f02c6-3986-44d6-b5e8-308e89210c8d",
-      uniprot_acc: ["P29274","B2R7E0"], // uniprot_acc: "Q5H943",
+      uniprot_acc: ["<a href=\"http://www.uniprot.org/uniprot/P29274\" target=\"_blank\">P29274</a>",
+        "<a href=\"http://www.uniprot.org/uniprot/B2R7E0\" target=\"_blank\">B2R7E0</a>"
+      ], // uniprot_acc: "Q5H943",
       uniprot_id: "AA2AR_HUMAN", // uniprot_id: "KKLC1_HUMAN"
       uniprot_name: "AA2AR_HUMAN"
     }]
 
+    myData = [{
+      name: "Alpha-2A adrenergic receptor",
+      concept_uuid: "d593db45-e954-4e97-94f7-c039350f97f4",
+      concept_uri: "http://www.conceptwiki.org/concept/d593db45-e954-4e97-94f7-c039350f97f4",
+      uniprot_acc: ["P08913",     "B0LPF6",    "Q2I8G2",  "Q2XN99","Q86TH8","Q9BZK1"],
+      uniprot_id: "TRIA1_HUMAN",
+      uniprot_name: "TRIA1_HUMAN"
+    }, {
+      name: "Next to BRCA1 gene 1 protein (Homo sapiens)",
+      concept_uuid: "ec79efff-65cb-45b1-a9f5-dddfc1c4025c",
+      concept_uri: "http://www.conceptwiki.org/concept/ec79efff-65cb-45b1-a9f5-dddfc1c4025c",
+      uniprot_acc: ["Q14596",
+        "Q13173",
+        "Q15026",
+        "Q5J7Q8",
+        "Q96GB6",
+        "Q9NRF7"
+      ],
+      uniprot_id: "NBR1_HUMAN",
+      uniprot_name: "NBR1_HUMAN"
+    }, {
+      name: "Kita-kyushu lung cancer antigen 1 (Homo sapiens)",
+      concept_uuid: "eeaec894-d856-4106-9fa1-662b1dc6c6f1",
+      concept_uri: "http://www.conceptwiki.org/concept/eeaec894-d856-4106-9fa1-662b1dc6c6f1",
+      uniprot_acc: ["Q5H943"], // uniprot_acc: "Q5H943",
+      uniprot_id: "KKLC1_HUMAN", // uniprot_id: "KKLC1_HUMAN"
+      uniprot_name: "KKLC1_HUMAN"
+    }, {
+      name: "Adenosine receptor A2a (Homo sapiens)",
+      concept_uuid: "979f02c6-3986-44d6-b5e8-308e89210c8d",
+      concept_uri: "http://www.conceptwiki.org/concept/979f02c6-3986-44d6-b5e8-308e89210c8d",
+      uniprot_acc: ["P29274",
+        "B2R7E0"
+      ], // uniprot_acc: "Q5H943",
+      uniprot_id: "AA2AR_HUMAN", // uniprot_id: "KKLC1_HUMAN"
+      uniprot_name: "AA2AR_HUMAN"
+    }]
 
     var initStore = Ext.create('TDGUI.store.ListTargets')
     initStore.loadData(myData)

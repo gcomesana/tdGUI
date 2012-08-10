@@ -16,6 +16,9 @@ Ext.define('TDGUI.controller.SearchPanel', {
 
    }],*/
 
+
+  myMask: undefined,
+
   refs:[
     {
       ref:'protLookup', // I get this.getProtLookup ()
@@ -46,7 +49,8 @@ Ext.define('TDGUI.controller.SearchPanel', {
 
   init:function () {
 
-    console.info('SearchPanel controller initializing... ')
+console.info('SearchPanel controller initializing... ')
+    this.myMask = new Ext.LoadMask(Ext.getBody(), {msg: 'Loading data...'})
     this.control({
       'TargetByNameForm button[action=query_target_by_name]':{
         click:this.submitQuery
@@ -76,7 +80,7 @@ Ext.define('TDGUI.controller.SearchPanel', {
 
       'tdgui-west-search > panel button[action=query-protein-info]':{
 //        click: this.clickGoProteinInfo
-        click:this.clickAddProteins
+        click: this.clickAddProteins
       }
 
     });
@@ -137,12 +141,14 @@ Ext.define('TDGUI.controller.SearchPanel', {
 
 
   clickAddProteins:function (btn, ev, opts) {
+    var me = this
     var protLookup = this.getProtLookup()
     var listChoices = protLookup.getSelectedItems()
     /*    var filteredStore = protLookup.store.filter ([{
      filterFn: function (item) { return if in list }
      }]) */
 
+    me.myMask.show()
     var labels = new Array()
     Ext.each(listChoices, function (choice, index, theChoices) {
       if (choice.concept_url.indexOf('uniprot') == -1) {
@@ -156,6 +162,7 @@ Ext.define('TDGUI.controller.SearchPanel', {
     })
 
     var listStore = this.getItemList().getStore()
+    var labelCount = 0
     Ext.Array.each (labels, function (item, number, theLabels) {
 
       if (item.indexOf ('uniprot') == -1) { // if uniprot, dont go there again
@@ -169,18 +176,29 @@ Ext.define('TDGUI.controller.SearchPanel', {
 
           failure:function (resp, opts) {
             console.info('ajax failed for item number: ' + number + ' -> ' + resp.responseText)
+            labelCount++
+            if (labelCount == labels.length)
+              me.myMask.hide()
           },
 
           success:function (resp, opts) {
             console.info('success for number ' + number + ' -> ' + resp.responseText)
 
             var jsonResp = Ext.JSON.decode(resp.responseText)
+            var accessions = jsonResp.accessions
+            Ext.each (accessions, function (acc, index, accsItself){
+              var ini = acc.indexOf('>')
+              var end = acc.lastIndexOf('<')
+              acc = acc.substring(ini+1, end)
+              accsItself[index] = acc
+            })
+
             var listItem = {
              name: item, // target_name for conceptWiki or /uniprot/protein/recommendedname/fullname
              concept_uuid: listChoices[number].concept_uuid,
              concept_uri: listChoices[number].concept_uri,
-             uniprot_acc: jsonResp.accessions,
-             uniprot_id: jsonResp.accessions,
+             uniprot_acc: accessions,
+             uniprot_id: accessions,
              uniprot_name: jsonResp.name
             }
 
@@ -190,6 +208,10 @@ Ext.define('TDGUI.controller.SearchPanel', {
               var target = Ext.create('TDGUI.model.ListTarget', listItem)
               listStore.add(target)
             }
+
+            labelCount++
+            if (labelCount == labels.length)
+              me.myMask.hide()
           }
         }) // EO Ajax request
       } // EO if

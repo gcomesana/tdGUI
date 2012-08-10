@@ -26,12 +26,14 @@ Ext.define("TDGUI.controller.panels.MultiTarget", {
         itemdblclick:function (view, record, item, index, e, opts) {
 
           var gridAccs = record.data.accessions
+
           Ext.each (gridAccs, function (acc, index, accsItself){
             var ini = acc.indexOf('>')
             var end = acc.lastIndexOf('<')
             acc = acc.substring(ini+1, end)
             accsItself[index] = acc
           })
+
           var listTargetsStore = this.getGridPanel().getListTargetsStore()
 //          var recs = this.getItemList().getStoreObject ('uniprot_acc', gridAccs)
           var recs = listTargetsStore.findRecord('uniprot_acc', gridAccs)

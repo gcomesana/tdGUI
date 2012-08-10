@@ -95,6 +95,7 @@ puts "\n\n"
 		full_interactions = Array.new
 		full_experiments = Array.new
 		main_ids = main_interactors.collect { |item| item[:id][4..(item[:id].length-1)] }
+		main_interactions = get_interactions_subset(main_interactors[0][:name], xmlDoc, main_interactors, conf_threshold)
 
 # START loop over main interactors to build the 'supergraph'
 		main_interactors.each { |interactor|

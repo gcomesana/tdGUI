@@ -25,12 +25,13 @@ Ext.define ('TDGUI.view.panels.BorderCenter', {
   initComponent: function () {
   	var me = this
 console.info ("Initializing panels.BorderCenter comp..." + this.nombre)
-
+/*
 	  me.items = [{
       xtype: 'panel',
       region: 'center',
+      frame: false,
 //      html: 'center center (center up)',
-      title: 'Center',
+//      title: 'Center',
       minHeight: 80,
 
 // This layout is ultimately needed to get scroolbars on the gridpanel...
@@ -39,7 +40,7 @@ console.info ("Initializing panels.BorderCenter comp..." + this.nombre)
         type:'vbox',
         align:'stretch'
       },
-/*
+*
       items: [cw = Ext.create ('Ext.Window', { // TODO delete when disturbing
           xtype: 'window',
           closable: false,
@@ -55,13 +56,13 @@ console.info ("Initializing panels.BorderCenter comp..." + this.nombre)
           }
         }) // EO create window
       ], // invisible items (a hidden window) for the center center panel
-*/
+*
 
       items: [
 //        this.theGrid = this.createGrid()
       ],
 
-
+* DOCKED ITEMS!!!!!!
       dockedItems: [{
         xtype: 'toolbar',
         dock: 'bottom',
@@ -76,6 +77,7 @@ console.info ("Initializing panels.BorderCenter comp..." + this.nombre)
           }
         ] // EO items
       }] // EO dockedItems
+*
 
     } /* ,
     { // minipanel south /////////////////////////////
@@ -86,9 +88,9 @@ console.info ("Initializing panels.BorderCenter comp..." + this.nombre)
       title: 'Splitter above me',
       minHeight: 60,
       html: 'center south (center down)'
-    } */
+    } *
   	]
-
+*/
  		me.callParent (arguments)
 	}, // EO initComponent
 

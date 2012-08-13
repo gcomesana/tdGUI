@@ -12,11 +12,15 @@ Ext.define("TDGUI.controller.panels.TargetInfo", {
     selector: 'tdgui-targetinfopanel'
   }],
 
+
+  myMask: undefined,
+
   init:function () {
 console.info ("Initializing TargetInfo controller...")
     this.control({
       'tdgui-targetinfopanel':{
-        afterrender: this.initTargetInfoPanel
+        afterrender: this.initTargetInfoPanel,
+        opsFailed: this.retryTargetInfoPanel
       },
 
       'tdgui-targetinfopanel #stringdbTargetButton': {
@@ -27,6 +31,9 @@ console.info ("Initializing TargetInfo controller...")
   },
 
   onLaunch:function (app) {
+    myMask = new Ext.LoadMask(Ext.getBody(), {
+      msg:'Loading data...'
+    })
   },
 
 
@@ -53,27 +60,58 @@ console.info ("Initializing TargetInfo controller...")
     var historyParams = '!xt=tdgui-graphdatapanel&qp=' + targetAcc +
                 '&tg='+targetName
 
-    Ext.History.add (historyParams)
+    var dcParam = '&dc='+Math.random()
+    Ext.History.add (historyParams + dcParam)
 
 //    console.info ('clicked for: '+historyParams)
   },
 
 
 /**
- *
- * @param comp
- * @param opts
+ * Decodes the token param (uniprot,ops) to load the panel-associated-store by
+ * requesting data to ops or uniprot if the latter is not working
+ * @param comp, the component which yields the event
+ * @param opts, options
  */
   initTargetInfoPanel: function (comp, opts) {
 //    var store = this.getTargetsStore();
-    comp.startLoading()
+console.info ('initTargetInfoPanel from TargetInfo controller')
     var store = comp.targetInfoStore
     var tokenObjQp = comp.queryParam
-    if (tokenObjQp != store.proxy.extraParams.protein_uri) {
-      store.proxy.extraParams.protein_uri = tokenObjQp;
+    var tokenParams = tokenObjQp.split(',') // returns always a array
+console.info ('TargetInfo.initTargetInfoPanel tokenParams: '+tokenParams)
+
+    myMask.bindStore(store)
+
+// get the conceptUUID
+    Ext.each (tokenParams, function (token, index, tokens) {
+      if (token.indexOf('conceptwiki') != -1) {
+        var lastSlash = token.lastIndexOf('/')
+        comp.concept_uuid = token.substring(lastSlash+1)
+      }
+    })
+
+//    if (tokenParams[0] != store.proxy.extraParams.protein_uri) {
+      store.proxy.extraParams.protein_uri = tokenParams[0];
       //          this.getFormView().setLoading(true);
       store.load();
+//    }
+  },
+
+
+  retryTargetInfoPanel: function (comp, opts) {
+console.info ('retryTargetInfoPanel from TargetInfo controller')
+    var queryParam = opts.concept_req
+    var store = comp.targetInfoStore
+
+    myMask.bindStore(store)
+
+    if (queryParam != store.proxy.extraParams.protein_uri) {
+      store.proxy.extraParams.protein_uri = queryParam
+
+      store.load()
     }
+
   }
 
 })

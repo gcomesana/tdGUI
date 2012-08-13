@@ -27,14 +27,28 @@ class TdguiProxyController < ApplicationController
 
 
 
+	def interactions_retrieval (target_id = params[:target], conf_val = 0.5)
+		intact_proxy = TdguiProxy.new
 
-	def interactions_retrieval (target_id = params[:target])
-		stringdb_proxy = TdguiProxy.new
+		conf_param = params[:confval]
+		conf_val = conf_param.to_f == 0.0 ? conf_val: conf_param.to_f
 
 		return '[]' unless target_id != nil && target_id != ''
-		graph = stringdb_proxy.get_target_interactions(target_id)
+#		graph = stringdb_proxy.get_target_interactions(target_id)
+		graph = intact_proxy.get_target_interactions(target_id, conf_val)
 
 		render :json => graph.to_json, :layout => false
 	end
 
+
+
+	def get_uniprot_by_name (target_label = params[:label])
+
+		proxy = TdguiProxy.new
+		return '[]' unless target_label != nil && target_label != ''
+
+		entry_hash = proxy.get_uniprot_by_name(target_label)
+
+		render :json => entry_hash.to_json, :layout => false
+	end
 end

@@ -32,4 +32,21 @@ describe "String-db requests" do
 		last_elem.has_key?(:experiments).should be_true
 
 	end
+
+
+	it "should return a hash from a target label" do
+		proxy = TdguiProxy.new
+
+		proxy.should_not be_nil
+
+		target_label = 'Deleted in bladder cancer protein 1'
+		target_hash = proxy.get_uniprot_by_name(target_label)
+
+		target_hash.should_not be_nil
+		target_hash.length.should be > 0
+
+		target_hash['accessions'].should be_instance_of Array
+
+		target_hash.each_key { |key| puts "#{key} -> #{target_hash[key]}" }
+	end
 end

@@ -92,6 +92,8 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
   nodeClickHandler: undefined,
   edgeClickHandler: undefined,
 
+
+
   //  height: 600,
 
   initComponent: function () {
@@ -103,7 +105,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
       var newRule = '#' + this.fdDivName + ' {' + cssRuleText + '}'
       var newCSS = Ext.util.CSS.createStyleSheet(newRule, this.fdDivName + "-css")
 
-      this.html = '<div id="' + this.fdDivName + '" style="height:100%;background-color:white;">Graphx</div>'
+      this.html = '<div id="' + this.fdDivName + '" style="height:100%;background-color:white;"></div>'
     }
     else
       this.html = '<div id="infovis-div" style="background-color:white;">Graph</div>'
@@ -136,6 +138,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 
   initGraph: function (thisInstance) {
     var me = this
+
 
 
     /**
@@ -294,11 +297,20 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
       },
 
       success: function(response, opts) {
+
+        if (response.responseText == null || response.responseText == '' ||
+            response.responseText =='[]') {
+          Ext.MessageBox.alert("No interactions for were found for target '"+me.targetId+'"')
+          me.fireEvent ('graphCompleted', me)
+          return false
+        }
+
+
         me.fdCfg = setInstanceGraph (thisInstance)
         me.startupGraph(response.responseText, thisInstance)
       },
 
-// TODO check the erro control here!!! Graph has not be displayed and err message raised
+// TODO check the error control here!!! Graph has not be displayed and err message raised
       failure: function(response, opts) {
           console.log('server-side failure with status code ' + response.status);
       }
@@ -349,6 +361,8 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
         })
       } // EO onComplete
     })
+
+    this.fireEvent ('graphCompleted', this)
 
   },
 

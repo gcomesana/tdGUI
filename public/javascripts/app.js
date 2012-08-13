@@ -7,6 +7,8 @@ Ext.Loader.setConfig({
   disableCaching:false
 });
 
+Ext.Loader.setPath('Ext.ux', '/javascripts/extjs4.0.7/ux')
+
 // Ext.Ajax.disableCaching = false
 Ext.create('Ext.app.Application', {
 // Ext.Application ({

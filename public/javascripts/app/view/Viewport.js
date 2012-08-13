@@ -7,7 +7,7 @@ Ext.define('TDGUI.view.Viewport', {
   alias: 'widget.tdgui-viewport',
 
   requires: ['TDGUI.view.panels.BorderSouth','TDGUI.view.panels.BorderCenter',
-              'TDGUI.view.panels.BorderEast',
+              'TDGUI.view.panels.BorderEast','TDGUI.view.panels.LogosPanel',
               'TDGUI.view.panels.west.SearchPanel',
               'TDGUI.view.panels.west.HistoryPanel',
               'TDGUI.view.panels.west.ExamplesPanel'],
@@ -190,39 +190,46 @@ console.info ("Viewport.initComponent starting...")
     }
 // EO //////////////////////////////////////////////// PANEL COMPONENTS //////
 */
+
+    var logosPanel = Ext.create ('TDGUI.view.panels.LogosPanel')
     me.items = [
       {
         region: 'north',
 //        collapsible: true,
 //        title: 'North',
 //        split: true,
-        height: 100,
+        height: 120,
         minHeight: 60,
-        split: false
+        split: false,
+        items: [
+          logosPanel
+        ]
 //        border: false
 //        html: 'north'
       },
       {
         region: 'west',
         collapsible: true,
-        title: 'Mission control',
+        title: 'Search center',
         split: true,
         width: '20%',
-        minWidth: 300,
-        minHeight: 140,
-//            html: 'west<br>I am floatable',
-        layout: 'border',
+        minWidth: 320,
+//        minHeight: 140,
+        frame: false,
+
+        layout: 'anchor',
+//        layout: 'hbox',
 //        items: [theWestItems]
         items: [{
-            region: 'north',
+//            region: 'north',
             xtype: 'tdgui-west-search'
-          }, {
+          } /* , {
             region: 'center',
-            xtype: 'tdgui-west-history'
+//            xtype: 'tdgui-west-history'
           }, {
             region: 'south',
-            xtype: 'tdgui-west-examples'
-        }]
+//            xtype: 'tdgui-west-examples'
+        }*/ ]
       },
       { xtype: 'tdgui-border-center'},
 //      theCenter,

@@ -106,8 +106,8 @@ class InnerProxy
 		end
 
 # OJO
-		@endpoint_ready = @urlMap[CONCEPT_WIKI_API_SEARCH_URL]
-		return false
+#		@endpoint_ready = @urlMap[CONCEPT_WIKI_API_SEARCH_URL]
+#		return false
 # EO OJO
 
 		if result == nil || result < 0
@@ -147,8 +147,8 @@ class InnerProxy
 			end
 
 # OJO
- 			@endpoint_ready = nil
-			return false
+# 			@endpoint_ready = nil
+#			return false
 # EO OJO
 
 			if alive > 0 then
@@ -198,6 +198,8 @@ puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '
 		end # EO if
 
 		json_str += "]"
+puts "inner_proxy.uniprot2json:\n#{json_str}\n"
+		json_str
 	end
 
 
@@ -372,6 +374,8 @@ puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '
 
 # Returns a json object from a line. This is the result of a protein lookup
 # request to Uniprot
+# NOTE: concept_uuid will be represented here by the uniprot accession!!!
+#
 # @param row, a row from a tab request from Uniprot, with the fields
 # uniprotId, protein names, pumed ids, comments, genes
 # @param query, the input query
@@ -395,6 +399,7 @@ puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '
 			if counter == 0 # this is the entry
 				str_json += '"define_url":"'+URL_FETCH_ENTRY + elem.strip()+'",'
 				str_json += '"concept_url":"'+URL_FETCH_ENTRY + elem.strip()+'",'
+				str_json += '"concept_uuid":"'+elem.strip()+'",'
 
 			elsif counter == 1 # set of protein names, only the first one is got
 				prot_names = elem.split ("(")

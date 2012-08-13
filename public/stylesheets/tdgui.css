@@ -136,6 +136,25 @@
 	color: black;
 }
 
+
+/* To word-wrap lines inside the grid cells */
+.x-column-header-inner .x-column-header-text {
+    white-space: normal;
+}
+
+.x-column-header-inner {
+    line-height: normal;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+    text-align: center;
+    top: 20%;
+}
+.x-grid-cell-inner {
+    white-space: normal
+}
+
+
+
 .target-field-label {
 	color: rgb(128, 128, 128);
 }
@@ -234,4 +253,30 @@ sub {
 	font-size: xx-small;
 	position: relative;
 	bottom: -0.3em;
+}
+
+
+
+.targetlist-font-label {
+	font-size: 13px;
+	/* font-weight: bold; */
+}
+
+
+/* classes for the combo checkbox */
+.combo-iconbox-checked {
+	background: transparent url(/images/combo-boxchecked.gif);
+	width: 16px;
+	heigth: 16px;
+	margin-right: 2px;
+	vertical-align: text-bottom;
+}
+
+
+.combo-iconbox-unchecked {
+	background: transparent url(/images/combo-boxunchecked.gif);
+	width: 16px;
+	heigth: 16px;
+	margin-right: 2px;
+	vertical-align: text-bottom;
 }

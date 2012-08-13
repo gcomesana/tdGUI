@@ -5,8 +5,8 @@ Ext.define ("TDGUI.controller.Viewport", {
 
   views: ['Viewport', 'panels.BorderCenter', 'panels.MultiTarget',
     'panels.PharmByTarget', 'common.InteractionsGraph', 'panels.GraphDataPanel'],
-  stores: ['Targets'],
-  models: ['Target'],
+  stores: ['Targets', 'ListTargets'],
+  models: ['Target', 'ListTarget'],
 
   refs: [{
       ref: 'contentTabs',
@@ -14,25 +14,33 @@ Ext.define ("TDGUI.controller.Viewport", {
     }, {
       ref: 'multitarget',
       selector: 'tdgui-multitargetpanel'
+  }, {
+    ref: 'targetList',
+    selector: 'tdgui-item-multilist'
+  }, {
+    ref: 'theViewport',
+    selector: 'tdgui-viewport'
   }],
-
-
 
 
   init: function () {
     var me = this
+
     Ext.History.init()
 
     Ext.History.on('change', function (token) {
-       if (token) {
-          me.handleHistoryToken(token);
-       }
+console.info ("A element was added to history: -> "+token)
+      if (token) {
+        me.handleHistoryToken(token);
+      }
     }) // , this);
 
     this.control({
       'tdgui-viewport': {
         historyAdded: this.handleHistoryToken
       }
+
+
 /*
       'tdgui-multitargetpanel': {
         afterrender: function (comp, opts) {
@@ -54,12 +62,17 @@ Ext.define ("TDGUI.controller.Viewport", {
     var xtype = tokenObj.xt
     var newPanel
 
+
     switch (xtype) {
       case 'tdgui-multitargetpanel':
+        var listStore = this.getTargetList().getStore()
+        var listStoreClone = listStore.clone() // as it is an ListTargets store
+
         newPanel = Ext.createByAlias ('widget.'+xtype, {
           closable: true,
           gridParams: {entries: tokenObj.qp},
-          title: "Multiple targets"
+          title: "Multiple targets",
+          storeListTargets: listStoreClone
         })
         break
 
@@ -77,12 +90,12 @@ Ext.define ("TDGUI.controller.Viewport", {
         break
 
       case 'tdgui-pharmbytargetpanel':
-console.info ("raising Pharm By Target panel")
+// console.info ("raising Pharm By Target panel")
         newPanel = Ext.createByAlias('widget.'+xtype, {
           closeable: true,
           gridParams: { protein_uri: tokenObj.qp },
           targetName: tokenObj.tg,
-          title: "Pharmacology for "+tokenObj.tg
+          title: "Pharmacology for "+ window.decodeURI(tokenObj.tg)
         })
         break
 
@@ -111,6 +124,7 @@ console.info ("raising interactions for Target panel")
     tabsPanel.suspendEvents(false)
     tabsPanel.setActiveTab(newPanel)
     tabsPanel.resumeEvents()
+
   },
 
 

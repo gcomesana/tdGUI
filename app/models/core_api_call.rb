@@ -105,10 +105,10 @@ puts ("coreAPi.request(#{api_method.to_s}, opts=#{options.to_s})")
 #		response = EndpointsProxy.make_request(api_method, options)
 		status = case response.code.to_i
 							 when 100..199 then
-								 @http_error = "HTTP {status.to_s}-error"
+								 @http_error = "HTTP #{status.to_s}-error"
 								 puts @http_error
 								 return nil
-							 when 200 then #HTTPOK =>  Success
+							 when 200 then #HTTPOK => Success
 								 @success = true
 								 parsed_response = CoreApiResponseParser.parse_response(response)
 								 if parsed_response.instance_of?(Hash)
@@ -122,7 +122,7 @@ puts ("coreAPi.request(#{api_method.to_s}, opts=#{options.to_s})")
 								 end
 								 return @results
 							 when 201..407 then
-								 @http_error = "HTTP {status.to_s}-error"
+								 @http_error = "HTTP #{status.to_s}-error"
 								 puts @http_error
 								 return nil
 							 when 408 then
@@ -131,7 +131,7 @@ puts ("coreAPi.request(#{api_method.to_s}, opts=#{options.to_s})")
 								 return nil
 							 when 409..600 then
 								 puts @http_error
-								 @http_error = "HTTP {status.to_s}-error"
+								 @http_error = "HTTP #{status.to_s}-error"
 								 return nil
 						 end
 		#    rescue StandardError => the_exception

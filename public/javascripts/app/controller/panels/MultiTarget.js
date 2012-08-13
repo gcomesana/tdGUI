@@ -1,31 +1,81 @@
 Ext.define("TDGUI.controller.panels.MultiTarget", {
   extend:'Ext.app.Controller',
 
-  view: ['panels.MultiTarget'],
+  view:['panels.MultiTarget'],
   stores:[],
 
-  refs:[{
-      ref: 'multitargetGrid',
-      selector: 'tdgui-multitargetpanel dynamicgrid3'
+  refs:[
+    {
+      ref:'multitargetGrid',
+      selector:'tdgui-multitargetpanel dynamicgrid3'
+    },
+    {
+      ref:'gridPanel', // neccessary to retrieve list targets, no matter if the original was changed
+      selector:'tdgui-multitargetpanel'
     }
   ],
 
+
+  myMask: undefined,
+
   init:function () {
-console.info ('Initializing MultiTarget controller...')
+    console.info('Initializing MultiTarget controller...')
+
     this.control({
-      'tdgui-multitargetpanel dynamicgrid3': {
-        itemdblclick: function (view, record, item, index, e, opts) {
-          var accessions =  record.data.accessions.join (',')
-console.info ("item double clicked!!! " + accessions)
+      'tdgui-multitargetpanel dynamicgrid3':{
+        itemdblclick:function (view, record, item, index, e, opts) {
 
-//          Ext.History.add('!xt=tdgui-multitargetpanel&qp=' + uniprotIds);
+          var gridAccs = record.data.accessions
+console.info('accessions for selected one: '+gridAccs)
 
-        }
+          Ext.each (gridAccs, function (acc, index, accsItself){
+            var ini = acc.indexOf('>')
+            var end = acc.lastIndexOf('<')
+            if (ini != -1 && end != -1)
+              acc = acc.substring(ini+1, end)
+
+            accsItself[index] = acc
+          })
+
+          var listTargetsStore = this.getGridPanel().getListTargetsStore()
+//          var recs = this.getItemList().getStoreObject ('uniprot_acc', gridAccs)
+          var recs = listTargetsStore.findRecord('uniprot_acc', gridAccs)
+
+// Compose de uniprot parameter (in this case an uniprot url) to proteinInfo
+          var primaryAcc = recs.data.uniprot_acc[0]
+          var uniprotParam = 'http://www.uniprot.org/uniprot/'+primaryAcc
+
+          var conceptUUID = recs.data.concept_uuid
+          var conceptURI = recs.data.concept_uri
+
+// get the accession from the table/grid
+//          var accessions = record.data.accessions.join(',')
+
+          var qParam = conceptURI+','+uniprotParam
+          var dcParam = '&dc='+Math.random()
+          Ext.History.add('!xt=tdgui-targetinfopanel&qp=' + qParam + dcParam);
+        },
+
+       'tdgui-multitargetpanel': {
+         afterrender: function (comp, opts) {
+           var theGrid = comp.theGrid()
+
+           if (theGrid != null && theGrid !== undefined) {
+             var numColumns = theGrid.columns.length
+             Ext.each (theGrid.columns, function (col, index, cols) {
+
+             })
+
+           }
+
+         }
+       } // EO tdgui-multitargetpanel
 
       }
     })
   },
 
   onLaunch:function (app) {
+    myMask = new Ext.LoadMask (Ext.getBody(), {msg: 'It\'s ok...'})
   }
 })

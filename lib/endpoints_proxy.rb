@@ -11,8 +11,8 @@ module EndpointsProxy
 private
 	@myProxy = InnerProxy.new
 
-	URI_REGEX = /^(?=[^&])(?:(?<scheme>[^:\/?#]+):)?(?:\/\/(?<authority>[^\/?#]*))?(?<path>[^?#]*)(?:\?(?<query>[^#]*))?(?:#(?<fragment>.*))?/
-
+#	URI_REGEX = /^(?=[^&])(?:(?<scheme>[^:\/?#]+):)?(?:\/\/(?<authority>[^\/?#]*))?(?<path>[^?#]*)(?:\?(?<query>[^#]*))?(?:#(?<fragment>.*))?/
+  URI_REGEX =	/(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#]*[\w\-\@?^=%&amp;\/~\+#])?/
 
 # build_coreapi_req
 # build a request POST object in order to make a further call to coreAPI from
@@ -32,6 +32,7 @@ private
 		if options[:limit].nil? then
 			options[:limit] = 100
 		end
+
 		if options[:offset].nil? then
 			options[:offset] = 0
 		end
@@ -136,11 +137,11 @@ public
 # if the source is the concept wiki api call model, it should be a uri
 # @param opts, the options to pass to the request
 	def self.make_request (url_or_method, opts)
-# puts ("make_request (#{url_or_method.to_s}, opts=#{opts.to_s})")
+puts ("make_request (#{url_or_method.to_s}, opts=#{opts.to_s})")
 
 # first, decode url_or_method param
 		uri_parts = url_or_method.scan(URI_REGEX)[0]
-		is_uri = !uri_parts[0].nil? && !uri_parts[1].nil? && !uri_parts[2].nil?
+		is_uri = !uri_parts.nil? && !uri_parts[0].nil? && !uri_parts[1].nil? && !uri_parts[2].nil?
 
 # conceptWiki part
 		if is_uri || url_or_method.include?(@myProxy.conceptwiki_ep) then # conceptAPI
@@ -169,10 +170,10 @@ puts "EndpointsProxy.make_request: #{ep_ready}"
 
 			end
 
-# coreAPI part
+# coreAPI part: proteinInfo, pharmaByTargetInfo, ...
 #		elsif url.include? @myProxy.coreApiEP then # coreAPI on
 		else # url_or_method should be something like 'proteinInfo', 'compoundPharma', 'sparql'
-puts "Attacking coreApi part..."
+puts "Attacking coreApi part...coreAPIok? #{check_coreAPI()}\n"
 			ep_alive = check_coreAPI()
 			ep_ready = get_core_endpoint() # ep_alive ? get_endpoint(): nil
 
@@ -184,7 +185,7 @@ puts "Attacking coreApi part..."
 			end
 
 puts "EndpointsProxy.make_request: #{ep_alive} -> #{ep_ready ? ep_ready: 'no endpoint'}"
-			if ep_alive then
+			if ep_alive
 				req = build_coreapi_req(url_or_method, opts, ep_ready)
 				start_time = Time.now
 				response = nil
@@ -199,17 +200,19 @@ puts "EndpointsProxy.make_request: #{ep_alive} -> #{ep_ready ? ep_ready: 'no end
 				end
 				return response
 
-			else # no endpoint is alive => we resort to uniprot
-				ep_ready = opts[:uri].scan(/[^<].*[^>]/)[0]+'.xml'
+			else # no endpoint is alive => we resort to uniprot for proteinInfo!!!
+				if url_or_method == 'proteinInfo'
+					ep_ready = opts[:uri].scan(/[^<].*[^>]/)[0]+'.xml'
+	puts "endpoints.make_req!!! -> #{ep_ready}\n"
 
-
-				url = URI.parse(ep_ready)
-				req = Net::HTTP::Get.new(url.request_uri)
-				res = Net::HTTP.start(url.host, url.port) {|http|
-					http.request(req)
-				}
-#				json_resp = @myProxy.uniprot2json(res.body, opts[:query]) # necessary to convert to OPS json
-				res
+					url = URI.parse(ep_ready)
+					req = Net::HTTP::Get.new(url.request_uri)
+					res = Net::HTTP.start(url.host, url.port) {|http|
+						http.request(req)
+					}
+	#				json_resp = @myProxy.uniprot2json(res.body, opts[:query]) # necessary to convert to OPS json
+					res
+				end # EO if proteinInfo
 
 			end
 		end

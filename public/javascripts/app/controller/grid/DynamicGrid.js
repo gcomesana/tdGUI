@@ -16,6 +16,9 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
   }],
 
 
+  myMask: undefined,
+
+
   init: function () {
     this.control ({
       'dynamicgrid3': {
@@ -32,13 +35,13 @@ console.info ("item double clicked!!!")
             }
           }
         },
-*/
-        itemcontextmenu:function (view, record, itemHTMLElement, index, eventObject, eOpts) {
+*
+        itemcontextmenu: function (view, record, itemHTMLElement, index, eventObject, eOpts) {
           eventObject.preventDefault();
 //                    console.log('itemcontextmenu');
           this.getGridView().showMenu(eventObject.getX(), eventObject.getY(), record);
         }
-
+ */
       }, // EO dynamicgrid3
 
       'dynamicgrid3 toolbar #sdfDownloadProxy_id':{
@@ -49,6 +52,9 @@ console.info ("item double clicked!!!")
 
 
   onLaunch:function () {
+    myMask = new Ext.LoadMask(Ext.getBody(), {
+      msg:'Loading data...'
+    })
   },
 
 
@@ -61,6 +67,8 @@ console.info ("item double clicked!!!")
     this_gridview.down('#sdfDownload_id').disable();
 
     var this_store = this_gridview.store;
+    myMask.bindStore(this_store)
+
     var this_controller = this;
     var temp_store = Ext.create('LSP.store.DynamicGrid');
     // configure copy store:
@@ -120,6 +128,8 @@ console.info ("item double clicked!!!")
     var theActionMethods =
       (compActionMethods === undefined || compActionMethods == null)? {read: "GET"}: compActionMethods
 
+    myMask.bindStore(comp.store)
+
     var defOpts = {
       actionMethods: theActionMethods,
       apiread: comp.readUrl,
@@ -157,12 +167,15 @@ console.info ("item double clicked!!!")
 
   /**
    * Sets the grid features, like columns and filters, and fill it with the data
-   * proviede by the store associated to the grid
+   * proviede by the store associated to the grid.
+   * NOTE!!!! The scope is the grid instance (dynamicgrid3)
+   *
    * @param this_gridview, a reference to the grid component (could be just this)
    * @param success, true if request to backend was successful; false otherwise
    * @return {Boolean}
    */
   setAndFillGrid: function (store, records, success) { // scope: grid instance
+
     var this_gridview = this
 
     if (success === false) {
@@ -177,14 +190,15 @@ console.info ("item double clicked!!!")
     }
 
 //    this_gridview.down('#sdfDownloadProxy_id').setText('Prepare SD-file download');
-
+//    mask.show()
     var dynamicgridStore = this_gridview.store;
     if (typeof (dynamicgridStore.proxy.reader.jsonData.columns) === 'object') {
       var columns = [];
 
       if (this_gridview.rowNumberer)
-        columns.push(Ext.create ('Ext.grid.RowNumberer', {width:40}));
+        columns.push(Ext.create ('Ext.grid.RowNumberer', {width:25}));
 
+// Add columns to grid columns array as they come from json response
       Ext.each(dynamicgridStore.proxy.reader.jsonData.columns, function (column) {
         columns.push(column);
         /*
@@ -217,8 +231,8 @@ console.info ("item double clicked!!!")
           this_gridview.setTitle(this_gridview.gridBaseTitle + ' - All ' + this_gridview.recordsLoaded + ' records loaded');
         }
       }
-
     } // EO if (typeof(...))
+//    mask.hide()
   },
 
 

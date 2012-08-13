@@ -26,11 +26,14 @@ Ext.define("TDGUI.controller.panels.MultiTarget", {
         itemdblclick:function (view, record, item, index, e, opts) {
 
           var gridAccs = record.data.accessions
+console.info('accessions for selected one: '+gridAccs)
 
           Ext.each (gridAccs, function (acc, index, accsItself){
             var ini = acc.indexOf('>')
             var end = acc.lastIndexOf('<')
-            acc = acc.substring(ini+1, end)
+            if (ini != -1 && end != -1)
+              acc = acc.substring(ini+1, end)
+
             accsItself[index] = acc
           })
 
@@ -49,9 +52,24 @@ Ext.define("TDGUI.controller.panels.MultiTarget", {
 //          var accessions = record.data.accessions.join(',')
 
           var qParam = conceptURI+','+uniprotParam
-          Ext.History.add('!xt=tdgui-targetinfopanel&qp=' + qParam);
+          var dcParam = '&dc='+Math.random()
+          Ext.History.add('!xt=tdgui-targetinfopanel&qp=' + qParam + dcParam);
         },
 
+       'tdgui-multitargetpanel': {
+         afterrender: function (comp, opts) {
+           var theGrid = comp.theGrid()
+
+           if (theGrid != null && theGrid !== undefined) {
+             var numColumns = theGrid.columns.length
+             Ext.each (theGrid.columns, function (col, index, cols) {
+
+             })
+
+           }
+
+         }
+       } // EO tdgui-multitargetpanel
 
       }
     })

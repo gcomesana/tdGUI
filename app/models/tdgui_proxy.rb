@@ -198,7 +198,7 @@ puts "Filling columns..."
 			'text' => '', 'dataIndex' => '',
 			'hidden' => false,
 			'filter' => {'type' => 'string'},
-			'width' => 150
+			'width' => 110
 		}
 
 		columnHash['text'] = text

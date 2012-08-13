@@ -136,6 +136,25 @@
 	color: black;
 }
 
+
+/* To word-wrap lines inside the grid cells */
+.x-column-header-inner .x-column-header-text {
+    white-space: normal;
+}
+
+.x-column-header-inner {
+    line-height: normal;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+    text-align: center;
+    top: 20%;
+}
+.x-grid-cell-inner {
+    white-space: normal
+}
+
+
+
 .target-field-label {
 	color: rgb(128, 128, 128);
 }

@@ -413,8 +413,9 @@ console.log('standard field: '+fieldId+' -> '+value);
       pharmButton.setHandler(function () {
   // console.info('pharmButton.setHandler -> !xt=tdgui-pharmbytargetpanel&qp=' + target.store.proxy.extraParams.protein_uri)
         var historyParams = '!xt=tdgui-pharmbytargetpanel&qp=' +pharmaURI
-
         historyParams += '&tg=' + targetName
+        historyParams += '&dc=' + Math.random()
+
         Ext.History.add(historyParams)
       });
     }

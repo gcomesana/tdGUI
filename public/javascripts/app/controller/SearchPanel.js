@@ -107,7 +107,8 @@ console.info('SearchPanel controller initializing... ')
       accessions.push(accs[0])
     })
 
-    Ext.History.add('!xt=tdgui-multitargetpanel&qp=' + accessions.join(','))
+    var dc = Math.random()
+    Ext.History.add('!xt=tdgui-multitargetpanel&qp=' + accessions.join(',')+'&dc='+dc)
 
   /*
     if (btn.getId() == 'panelBtnLeft')
@@ -234,11 +235,11 @@ console.info('SearchPanel controller initializing... ')
 
 
   clickGoProteinInfo:function (btn, ev, opts) {
-    console.info('clickGoProteinInfo...')
+//    console.info('clickGoProteinInfo...')
     var conceptLookup = this.getProtLookup()
     var selOption = conceptLookup.getValue()
     if (selOption != null && selOption != "") {
-      console.info('button clicked for: ' + selOption)
+//      console.info('button clicked for: ' + selOption)
     }
 
     Ext.History.add('!xt=tdgui-targetinfopanel&qp=' + selOption)
@@ -274,6 +275,7 @@ console.info('SearchPanel controller initializing... ')
 
     var form = this.getFormView();
     var target_uri = form.getValues().protein_uri;
+
 
     Ext.History.add('TargetByNameForm=' + target_uri);
   }

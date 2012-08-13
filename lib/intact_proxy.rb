@@ -92,6 +92,10 @@ main_interactors.each { |intrctr| puts("#{intrctr.to_json}\n") }
 puts "\n\n"
 =end
 
+		if main_interactors.length == 0
+			return []
+		end
+
 		full_interactions = Array.new
 		full_experiments = Array.new
 		main_ids = main_interactors.collect { |item| item[:id][4..(item[:id].length-1)] }

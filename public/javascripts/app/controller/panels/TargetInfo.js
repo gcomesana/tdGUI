@@ -60,7 +60,8 @@ console.info ("Initializing TargetInfo controller...")
     var historyParams = '!xt=tdgui-graphdatapanel&qp=' + targetAcc +
                 '&tg='+targetName
 
-    Ext.History.add (historyParams)
+    var dcParam = '&dc='+Math.random()
+    Ext.History.add (historyParams + dcParam)
 
 //    console.info ('clicked for: '+historyParams)
   },
@@ -90,11 +91,11 @@ console.info ('TargetInfo.initTargetInfoPanel tokenParams: '+tokenParams)
       }
     })
 
-    if (tokenParams[0] != store.proxy.extraParams.protein_uri) {
+//    if (tokenParams[0] != store.proxy.extraParams.protein_uri) {
       store.proxy.extraParams.protein_uri = tokenParams[0];
       //          this.getFormView().setLoading(true);
       store.load();
-    }
+//    }
   },
 
 

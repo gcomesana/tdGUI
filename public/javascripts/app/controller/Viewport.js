@@ -29,6 +29,7 @@ Ext.define ("TDGUI.controller.Viewport", {
     Ext.History.init()
 
     Ext.History.on('change', function (token) {
+console.info ("A element was added to history: -> "+token)
       if (token) {
         me.handleHistoryToken(token);
       }
@@ -89,7 +90,7 @@ Ext.define ("TDGUI.controller.Viewport", {
         break
 
       case 'tdgui-pharmbytargetpanel':
-console.info ("raising Pharm By Target panel")
+// console.info ("raising Pharm By Target panel")
         newPanel = Ext.createByAlias('widget.'+xtype, {
           closeable: true,
           gridParams: { protein_uri: tokenObj.qp },

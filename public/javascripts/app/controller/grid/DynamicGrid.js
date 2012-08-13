@@ -35,13 +35,13 @@ console.info ("item double clicked!!!")
             }
           }
         },
-*/
-        itemcontextmenu:function (view, record, itemHTMLElement, index, eventObject, eOpts) {
+*
+        itemcontextmenu: function (view, record, itemHTMLElement, index, eventObject, eOpts) {
           eventObject.preventDefault();
 //                    console.log('itemcontextmenu');
           this.getGridView().showMenu(eventObject.getX(), eventObject.getY(), record);
         }
-
+ */
       }, // EO dynamicgrid3
 
       'dynamicgrid3 toolbar #sdfDownloadProxy_id':{
@@ -196,7 +196,7 @@ console.info ("item double clicked!!!")
       var columns = [];
 
       if (this_gridview.rowNumberer)
-        columns.push(Ext.create ('Ext.grid.RowNumberer', {width:40}));
+        columns.push(Ext.create ('Ext.grid.RowNumberer', {width:25}));
 
 // Add columns to grid columns array as they come from json response
       Ext.each(dynamicgridStore.proxy.reader.jsonData.columns, function (column) {

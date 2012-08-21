@@ -77,7 +77,7 @@ class IntactProxy
 # first level deep interactions amid the closer neighbors
 # @param target_id, the main target which the interactions wants to be yield of
 # @return an array modelling all interactions
-	def get_super_interaction_graph (target_id = 'P77569', conf_threshold = 0.5)
+	def get_super_interaction_graph (target_id = 'P77569', max_interactors = 5, conf_threshold = 0.5)
 		myuri = INTACT_URL.gsub(/xxxx/, target_id)
 		psimiResp = request(myuri, {})
 #		intact_file = File.open ('public/resources/datatest/intact/Q13362.xml')
@@ -98,8 +98,14 @@ puts "\n\n"
 
 		full_interactions = Array.new
 		full_experiments = Array.new
+		main_interactions = get_interactions_subset(target_id, xmlDoc, main_interactors, conf_threshold) # main_interactors[0][:name] == target_id
+puts "\n#{main_interactions.to_s}\n"
+
+		if main_interactors.length > max_interactors
+			main_interactors = screen(main_interactors, main_interactions, conf_threshold, max_interactors)
+			return [] unless main_interactors.length > 0
+		end
 		main_ids = main_interactors.collect { |item| item[:id][4..(item[:id].length-1)] }
-		main_interactions = get_interactions_subset(main_interactors[0][:name], xmlDoc, main_interactors, conf_threshold)
 
 # START loop over main interactors to build the 'supergraph'
 		main_interactors.each { |interactor|
@@ -194,7 +200,7 @@ puts "\nedges_counter before building graph:\n"
 }
 =end
 		super_graph = buildup_graph(full_experiments, main_interactors, full_interactions)
-# puts "\n#{super_graph.to_json}\n\n"
+puts "\n#{super_graph.to_json}\n\n"
 
 #		full_interactions
 		super_graph
@@ -344,6 +350,72 @@ puts "\nedges_counter before building graph:\n"
 		#	$edges_counter.each { |k, v| puts "#{k} -> #{v}\n" }
 		#		adjacencies << adjacency
 
+	end
+
+
+
+# Screen the interactions (and interactors) when the number of interactors is
+# higher than the max nodes params and has to be cut.
+# Two pretty naïve conditions in order to select nodes:
+# - get the interactions with confidence value greater or equal than threshold
+# - if the nodes result is greater than number of nodes, remove the last ones
+#
+# @param interactors, the set of main interactors (those interactors which are supposed
+# to have a interaction with the target)
+# @param interactions the set of interactions with the main target
+# @param threshold, the threshold used to discard interactions when the confidence
+# value for an interaction is less than threshold
+	def screen (interactors, interactions, threshold, max_nodes)
+
+# select interactions with a confidence value greater than threshold
+		selected_edges = interactions.select { |intr|
+			inner_intr = intr[:interactionData].select { |elem|
+				elem[:confidenceVal].to_f >= threshold
+			}
+			if inner_intr.length > 0
+				intr
+			end
+		}
+# sort the edges in order to prioritize the nodes with more edges join them -strong(er) relationship-
+		selected_edges.sort! { |e1, e2|
+			e2[:interactionData].length <=> e1[:interactionData].length
+		}
+
+#	take the single interactions and sort them by the confidence value
+# always trying prioritize strong(er) relationships
+		single_edges = selected_edges.select { |edge|
+			if edge[:interactionData].length > 1
+puts "edge: #{edge.to_s}\n"
+				selected_edges.delete (edge)
+				true
+			end
+		}
+		single_edges.sort! { |e1, e2|
+			e2[:interactionData][:confidenceVal] <=> e1[:interactionData][:confidenceVal]
+		}
+		selected_edges = selected_edges + single_edges
+
+# select nodes which have departure edges
+		sel_nodes = Array.new
+		selected_edges.each { |edge|
+
+			new_nodes = interactors.select { |a_node|
+				node_id = a_node[:id].slice(4..(a_node[:id].length-1))
+				node_id == edge[:nodeFrom]
+#					a_node
+			}
+			sel_nodes = sel_nodes + new_nodes
+
+			if sel_nodes.length >= max_nodes
+				while sel_nodes.length > max_nodes
+					sel_nodes.delete_at(sel_nodes.length-1)
+				end
+
+				return sel_nodes
+			end
+		} # EO selected_edges.each
+
+		sel_nodes
 	end
 
 

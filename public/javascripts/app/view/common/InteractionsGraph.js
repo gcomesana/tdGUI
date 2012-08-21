@@ -300,6 +300,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 
         if (response.responseText == null || response.responseText == '' ||
             response.responseText =='[]') {
+// Esta ventana is not enough...
           Ext.MessageBox.alert("No interactions for were found for target '"+me.targetId+'"')
           me.fireEvent ('graphCompleted', me)
           return false

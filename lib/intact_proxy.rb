@@ -384,14 +384,16 @@ puts "\n#{super_graph.to_json}\n\n"
 #	take the single interactions and sort them by the confidence value
 # always trying prioritize strong(er) relationships
 		single_edges = selected_edges.select { |edge|
-			if edge[:interactionData].length > 1
+			if edge[:interactionData].length == 1
 puts "edge: #{edge.to_s}\n"
-				selected_edges.delete (edge)
+#				selected_edges.delete(edge)
 				true
 			end
 		}
+		selected_edges = selected_edges - single_edges
+
 		single_edges.sort! { |e1, e2|
-			e2[:interactionData][:confidenceVal] <=> e1[:interactionData][:confidenceVal]
+			e2[:interactionData][0][:confidenceVal] <=> e1[:interactionData][0][:confidenceVal]
 		}
 		selected_edges = selected_edges + single_edges
 

@@ -27,8 +27,8 @@ Ext.define('TDGUI.view.panels.MultiTarget', {
     this.theGrid = this.createGrid()
     this.items = [this.theGrid]
     this.callParent(arguments)
-
   },
+
 
 
   /**
@@ -45,7 +45,7 @@ Ext.define('TDGUI.view.panels.MultiTarget', {
 //      readUrl: 'resources/datatest/yaut.json'
 //      readUrl: 'tdgui_proxy/multiple_entries_retrieval?entries=Q13362,P0AEN2,P0AEN3'
       readUrl:'tdgui_proxy/multiple_entries_retrieval',
-      queryParams:this.gridParams,
+      queryParams: this.gridParams,
       forceFit: true
 //      id: 'dyngrid'+(new Date()).getMilliseconds(),
 //      itemId: 'dyngrid'+(new Date()).getMilliseconds()
@@ -55,6 +55,7 @@ Ext.define('TDGUI.view.panels.MultiTarget', {
 
     return theGrid
   },
+
 
 
   /**

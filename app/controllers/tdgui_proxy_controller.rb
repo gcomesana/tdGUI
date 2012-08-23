@@ -19,15 +19,60 @@ class TdguiProxyController < ApplicationController
 #		entries = {:uniprotIds => ['Q13362','P12345','P0AEN3','P0AEN2','P0AEN1']}
 
 #		entries = ['Q13362','P12345','P0AEN3'] unless entries.empty?
+#		uuids_query = params[:uuids]
+
+		targetIds = entries_query.split(',')
+		accs = targetIds.collect { |tid| mytid = tid.split(';'); mytid[0] }
+		uuids_arr = targetIds.collect { |tid| mytid = tid.split(';'); mytid[1] }
+
 		tdgui_proxy = TdguiProxy.new
-		json_entries = tdgui_proxy.get_multiple_entries(entries_query)
+		json_entries = tdgui_proxy.get_multiple_entries(accs.join(','))
+puts "json_entries: #{json_entries}\n"
+
+
+#		uuids_arr = uuids_query.split(',')
+		index = 0
+		uuids_arr.each { |uuid|
+			options = Hash.new
+			api_method = 'proteinInfo'
+			prot_uri = 'http://www.conceptwiki.org/concept/'+uuid
+			options[:uri] = '<' + prot_uri + '>'
+			options[:limit] =  params[:limit]
+			options[:offset] = params[:offset]
+			api_call = CoreApiCall.new
+			results = api_call.request( api_method, options)
+
+			if results[0].empty? == false
+
+				if accs[index] == '-'
+					concept_item = Hash.new
+					concept_item['proteinFullName'] = results[0][:target_name]
+					concept_item['function'] = results[0][:description]
+					concept_item['organismSciName'] = results[0][:organism]
+					concept_item['pdbImg'] = "<img src=\"/images/target_placeholder.png\" width=\"80\" height=\"80\" />"
+					concept_item['genes'] = []
+					concept_item['accessions'] = []
+
+					json_entries['ops_records'].insert(index, concept_item)
+					json_entries['totalCount'] += 1
+
+				else
+					uniprot_item = json_entries['ops_records'][index]
+					uniprot_item['proteinFullName'] = results[0][:target_name] unless results[0][:target_name].empty?
+					uniprot_item['function'] = results[0][:description] unless results[0][:description].empty?
+	#				uniprot_item[:organismSciName] = results[0][:organism] unless results[0][:organism].empty?
+				end
+			end
+			index += 1
+	puts "protein_info resutls: #{results.to_s}\n"
+		}
 
 		render :json => json_entries, :layout => false
 	end
 
 
 
-	def interactions_retrieval (target_id = params[:target], conf_val = 0.5)
+	def interactions_retrieval (target_id = params[:target], max_nodes = 6, conf_val = 0.5)
 		intact_proxy = TdguiProxy.new
 
 		conf_param = params[:confval]
@@ -35,7 +80,7 @@ class TdguiProxyController < ApplicationController
 
 		return '[]' unless target_id != nil && target_id != ''
 #		graph = stringdb_proxy.get_target_interactions(target_id)
-		graph = intact_proxy.get_target_interactions(target_id, conf_val)
+		graph = intact_proxy.get_target_interactions(target_id, conf_val, max_nodes)
 
 		render :json => graph.to_json, :layout => false
 	end

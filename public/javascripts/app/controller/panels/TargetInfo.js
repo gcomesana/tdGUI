@@ -48,13 +48,15 @@ console.info ("Initializing TargetInfo controller...")
   onClickInteractionsBtn: function (btn, ev, opts) {
 
     var theStore = this.getTargetinfopanel().targetInfoStore
-    var targetAcc = theStore.proxy.extraParams.protein_uri
-
+//    var targetAcc = theStore.proxy.extraParams.protein_uri
+    var targetAcc = this.getTargetinfopanel().uniprot_acc
+/*
     if (targetAcc.indexOf ('uniprot') != -1)
       targetAcc = targetAcc.substring(targetAcc.lastIndexOf('/')+1)
 
     if (targetAcc.indexOf ('conceptWiki') != -1)
       return
+*/
 
     var targetName = this.getTargetinfopanel().down('#target_name').getRawValue()
     var historyParams = '!xt=tdgui-graphdatapanel&qp=' + targetAcc +
@@ -89,7 +91,15 @@ console.info ('TargetInfo.initTargetInfoPanel tokenParams: '+tokenParams)
         var lastSlash = token.lastIndexOf('/')
         comp.concept_uuid = token.substring(lastSlash+1)
       }
+
+      if (token.indexOf ('uniprot') != -1) {
+        var lastSlash = token.lastIndexOf('/')
+        comp.uniprot_acc = token.substring(lastSlash+1)
+      }
     })
+
+// get the uniprot accession from query string
+
 
 //    if (tokenParams[0] != store.proxy.extraParams.protein_uri) {
       store.proxy.extraParams.protein_uri = tokenParams[0];

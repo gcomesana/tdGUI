@@ -113,6 +113,7 @@ puts "\n#{main_interactions.to_s}\n"
 			my_intactUri = INTACT_URL.sub('xxxx', accession)
 # puts "\nnew accession #{accession}\n"
 			xmlstr = request(my_intactUri, [])
+start_time = Time.now
 			inner_xml_doc = Nokogiri::XML(xmlstr.body)
 
 # get the nodes subset for the current target
@@ -191,6 +192,9 @@ puts "\n#{main_interactions.to_s}\n"
 			full_interactions = merge_interactions(interactions_subset, full_interactions)
 
 			full_interactions
+end_time = Time.now
+elapsed_time = (end_time - start_time) * 1000
+puts "///=> Elapsed time in processing '#{accession}' was #{elapsed_time} ms\n\n"
 		} # EO main_interactions each
 
 =begin
@@ -403,10 +407,17 @@ puts "edge: #{edge.to_s}\n"
 
 			new_nodes = interactors.select { |a_node|
 				node_id = a_node[:id].slice(4..(a_node[:id].length-1))
-				node_id == edge[:nodeFrom]
+				node_id == edge[:nodeFrom] || node_id == edge[:nodeTo]
 #					a_node
 			}
-			sel_nodes = sel_nodes + new_nodes
+=begin
+			if sel_nodes.empty?
+				sel_nodes = sel_nodes + new_nodes
+			else
+				sel_nodes = sel_nodes.zip(new_nodes).flatten.compact
+			end
+=end
+			sel_nodes = sel_nodes | new_nodes
 
 			if sel_nodes.length >= max_nodes
 				while sel_nodes.length > max_nodes
@@ -630,6 +641,7 @@ puts "*****==> edges count is #{edges.length}\n"
 	end
 
 
+
 #
 # This method does a get request to an uri
 # @param url, the target url
@@ -639,12 +651,14 @@ puts "*****==> edges count is #{edges.length}\n"
 	def request(url, options)
 		puts "IntactProxy.request (#{url}, #{options.inspect})\n"
 		my_url = URI.parse(url)
-
+start_time = Time.now
 		req = Net::HTTP::Get.new(my_url.request_uri)
 		res = Net::HTTP.start(my_url.host, my_url.port) { |http|
 			http.request(req)
 		}
-
+end_time = Time.now
+elapsed_time = (end_time - start_time) * 1000
+puts "***=> Time elapsed for #{url}: #{elapsed_time} ms\n"
 # puts "response code: #{res.code}"
 		res
 	end

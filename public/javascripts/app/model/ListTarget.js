@@ -16,11 +16,12 @@ Ext.define ('TDGUI.model.ListTarget', {
     { name:'display_field', type: 'string',
       convert: function (value, rec) {
         var accs = rec.data.uniprot_acc
+        var accsLabel = accs.length > 0? accs[0]: '-'
         var name = rec.data.name
         var indexOfPar = name.indexOf ('(Homo')
         if (indexOfPar != -1)
           name = name.substring(0, indexOfPar-1)
-        return '('+accs[0]+') '+name
+        return '('+accsLabel+') '+name
       }
     }
 	]

@@ -28,6 +28,9 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 // in order to be able to set the pharma_button with right parameters
   concept_uuid: undefined,
 
+// And this is necessary in order to perform the target interactions operation
+  uniprot_acc: undefined,
+
 	initComponent: function() {
 		this.items = [{
 			xtype: 'panel',

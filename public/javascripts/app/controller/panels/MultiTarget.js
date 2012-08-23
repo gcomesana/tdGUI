@@ -54,7 +54,8 @@ console.info('accessions for selected one: '+gridAccs)
           var qParam = conceptURI+','+uniprotParam
           var dcParam = '&dc='+Math.random()
           Ext.History.add('!xt=tdgui-targetinfopanel&qp=' + qParam + dcParam);
-        },
+        }, // itemdoblclick
+
 
        'tdgui-multitargetpanel': {
          afterrender: function (comp, opts) {

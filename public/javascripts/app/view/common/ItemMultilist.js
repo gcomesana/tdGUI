@@ -83,12 +83,13 @@ Ext.define ('TDGUI.view.common.ItemMultilist', {
 					var list = me.down('multiselect')
 					var vals = list.getValue()
 					var myStore = list.store
-console.info ('store size before: '+myStore.count())
+// console.info ('store size before: '+myStore.count())
+
 					Ext.each (vals, function (val, index, theVals) {
 						var rec  = myStore.findRecord(list.valueField, val)
 						myStore.remove (rec)
 					})
-console.info ('store size afterwards: '+myStore.count())
+// console.info ('store size afterwards: '+myStore.count())
 				}
 			}]
 		}]

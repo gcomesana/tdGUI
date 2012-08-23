@@ -14,13 +14,16 @@ Ext.define ("TDGUI.controller.Viewport", {
     }, {
       ref: 'multitarget',
       selector: 'tdgui-multitargetpanel'
-  }, {
-    ref: 'targetList',
-    selector: 'tdgui-item-multilist'
-  }, {
-    ref: 'theViewport',
-    selector: 'tdgui-viewport'
-  }],
+    }, {
+      ref: 'targetList',
+      selector: 'tdgui-item-multilist'
+    }, {
+      ref: 'theViewport',
+      selector: 'tdgui-viewport'
+    },{
+      ref: 'itemList', // accessions textarea
+      selector: 'panel > tdgui-item-multilist'
+    }],
 
 
   init: function () {
@@ -68,15 +71,22 @@ console.info ("A element was added to history: -> "+token)
         var listStore = this.getTargetList().getStore()
         var listStoreClone = listStore.clone() // as it is an ListTargets store
 
+// get concept_uuids to get info from coreAPI as well
+        var concept_uuids = this.getItemList().getStoreItems('concept_uuid')
+
         newPanel = Ext.createByAlias ('widget.'+xtype, {
           closable: true,
-          gridParams: {entries: tokenObj.qp},
+          gridParams: {
+            entries: tokenObj.qp
+//            uuids: concept_uuids.join(',')
+          },
           title: "Multiple targets",
           storeListTargets: listStoreClone
         })
         break
 
       case 'tdgui-targetinfopanel':
+
         newPanel = Ext.createByAlias ('widget.'+xtype, {
           closable: true,
           queryParam: tokenObj.qp

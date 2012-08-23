@@ -24,14 +24,15 @@ class TdguiProxy
 
 
 
-	def get_target_interactions(target_id, conf_val = 0.5)
+	def get_target_interactions(target_id, conf_val = 0.5, max_nodes = 6)
 
 		if target_id.nil? || target_id.empty? then
 			nil
+
 		else
 			intact_proxy = IntactProxy.new
 #			target_graph = intact_proxy.get_interaction_graph(target_id)
-			target_graph = intact_proxy.get_super_interaction_graph(target_id, conf_val)
+			target_graph = intact_proxy.get_super_interaction_graph(target_id, max_nodes, conf_val)
 
 		end
 	end
@@ -187,7 +188,8 @@ puts "Filling columns..."
 		topHash['columns'] = columnsArray
 # puts "\njson:\n#{topHash.to_json}"
 
-		topHash.to_json
+		topHash
+#		topHash.to_json
 
 	end
 

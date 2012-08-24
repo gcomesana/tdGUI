@@ -158,8 +158,8 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
     myData = [{
       name: "Alpha-2A adrenergic receptor",
-      concept_uuid: "d593db45-e954-4e97-94f7-c039350f97f4",
-      concept_uri: "http://www.conceptwiki.org/concept/d593db45-e954-4e97-94f7-c039350f97f4",
+      concept_uuid: "59aabd64-bee9-45b7-bbe0-9533f6a1f6bc",
+      concept_uri: "http://www.conceptwiki.org/concept/59aabd64-bee9-45b7-bbe0-9533f6a1f6bc",
       uniprot_acc: ["P08913",     "B0LPF6",    "Q2I8G2",  "Q2XN99","Q86TH8","Q9BZK1"],
       uniprot_id: "TRIA1_HUMAN",
       uniprot_name: "TRIA1_HUMAN"

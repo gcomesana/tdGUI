@@ -13,7 +13,10 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
     }, {
       ref: 'multitargetGrid',
       selector: 'tdgui-multitargetpanel dynamicgrid3'
-  }],
+    }, {
+      ref: 'itemList', // accessions textarea
+      selector: 'panel > tdgui-item-multilist'
+   }],
 
 
   myMask: undefined,
@@ -177,6 +180,9 @@ console.info ("item double clicked!!!")
   setAndFillGrid: function (store, records, success) { // scope: grid instance
 
     var this_gridview = this
+    var listitems = this_gridview.up('viewport').down('tdgui-item-multilist')
+    var numListItems = listitems.getStore().count()
+    var numGridItems = store.count()
 
     if (success === false) {
       Ext.MessageBox.show({
@@ -188,6 +194,17 @@ console.info ("item double clicked!!!")
       this_gridview.setTitle(this_gridview.gridBaseTitle + ' - Error on search!');
       return false;
     }
+
+    if (numGridItems < numListItems) {
+      Ext.MessageBox.show({
+        title:'Error',
+        msg:'Data for all required targets could not be found: Missing data',
+        buttons:Ext.MessageBox.OK,
+        icon:Ext.MessageBox.WARNING
+      });
+      this_gridview.setTitle(this_gridview.gridBaseTitle + ' - Missing data!');
+    }
+
 
 //    this_gridview.down('#sdfDownloadProxy_id').setText('Prepare SD-file download');
 //    mask.show()

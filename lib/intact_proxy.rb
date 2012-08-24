@@ -21,6 +21,7 @@ class IntactProxy
 	end
 
 
+
 	def get_interaction_graph (target_id = 'Q13362', conf_threshold = 0.5)
 #		xmlFile = File.new('../data/q13362-stringdb-interactions.xml') # psi-mi xml file
 
@@ -588,11 +589,14 @@ right_interactions.each { |right_int|
 		graph_cfg = Array.new
 		edges_counter = @edges_counter
 		min_edges_value = edges_counter.values.min
+		nodes_id = Array.new
+
 
 puts "*****==> edges count is #{edges.length}\n"
 		nodes.each { |node|
 			node_cfg = Hash.new
 			node_id = node[:id].slice(/\d+/)
+			nodes_id << node_id
 
 			node_edges = edges.select { |e| e[:nodeFrom] == node_id }
 			node_edges.each { |n|
@@ -624,8 +628,48 @@ puts "*****==> edges count is #{edges.length}\n"
 			#		puts "graph_cfg:\n"
 			#		puts "\n#{graph_cfg.to_json}"
 
+		graph_cfg = remove_orphans(graph_cfg, nodes_id)
 		graph_cfg
 	end
+
+
+# As after manipulating the interactions, due to restrictions on confidence value
+# and number of nodes, orphans can raise, we remove it in order to preserve the
+# network nature of the interaction web.
+# This method returns the graph without orphan nodes
+# @param graph, the generated graph
+# @param node_ids, the list of node identifier in order to simplify the screening process
+# @return the graph with the orphan nodes removed
+	def remove_orphans (graph, node_ids)
+
+		orphans = Array.new
+		node_ids.each { |node_id|
+			isOrphan = true
+
+			graph.each { |node|
+				node[:adjacencies].each { |adj|
+					if adj[:nodeFrom] == node_id || adj[:nodeTo] == node_id
+						isOrphan = false
+						break
+					end
+				}
+				break if isOrphan == false
+			}
+			orphans << node_id unless isOrphan == false
+		}
+
+		orphan_nodes = graph.select { |node|
+			orphans.include?(node[:id])
+		}
+
+		orphan_nodes.each { |orphan|
+			graph.delete(orphan)
+		}
+puts "\norphans: #{orphans}\n"
+
+		graph
+	end
+
 
 
 

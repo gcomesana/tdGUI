@@ -31,7 +31,8 @@ puts "json_entries: #{json_entries}\n"
 
 
 #		uuids_arr = uuids_query.split(',')
-		index = 0
+		index_ops = 0
+		index_uuid = 0
 		uuids_arr.each { |uuid|
 			options = Hash.new
 			api_method = 'proteinInfo'
@@ -42,29 +43,40 @@ puts "json_entries: #{json_entries}\n"
 			api_call = CoreApiCall.new
 			results = api_call.request( api_method, options)
 
-			if results[0].empty? == false
+# Fusion the information got from uniprot with info we gotta get from coreAPI (if existing, if working)
+			if results[0].empty? && accs[index_uuid] == '-'
+				index_uuid += 1
 
-				if accs[index] == '-'
-					concept_item = Hash.new
-					concept_item['proteinFullName'] = results[0][:target_name]
-					concept_item['function'] = results[0][:description]
-					concept_item['organismSciName'] = results[0][:organism]
-					concept_item['pdbImg'] = "<img src=\"/images/target_placeholder.png\" width=\"80\" height=\"80\" />"
-					concept_item['genes'] = []
-					concept_item['accessions'] = []
+			elsif results[0].empty? && accs[index_uuid] != '-'
+				index_ops += 1
+				index_uuid += 1
 
-					json_entries['ops_records'].insert(index, concept_item)
-					json_entries['totalCount'] += 1
+			elsif results[0].empty? == false && accs[index_uuid] == '-'
+				concept_item = Hash.new
+				concept_item['proteinFullName'] = results[0][:target_name]
+				concept_item['function'] = results[0][:description]
+				concept_item['organismSciName'] = results[0][:organism]
+				concept_item['pdbImg'] = "<img src=\"/images/target_placeholder.png\" width=\"80\" height=\"80\" />"
+				concept_item['genes'] = []
+				concept_item['accessions'] = []
 
-				else
-					uniprot_item = json_entries['ops_records'][index]
-					uniprot_item['proteinFullName'] = results[0][:target_name] unless results[0][:target_name].empty?
-					uniprot_item['function'] = results[0][:description] unless results[0][:description].empty?
-	#				uniprot_item[:organismSciName] = results[0][:organism] unless results[0][:organism].empty?
-				end
+				json_entries['ops_records'].insert(index_ops, concept_item)
+				json_entries['totalCount'] += 1
+
+				index_ops += 1
+				index_uuid += 1
+
+			elsif results[0].empty? == false && accs[index_uuid] != '-'
+				uniprot_item = json_entries['ops_records'][index_ops]
+				uniprot_item['proteinFullName'] = results[0][:target_name] unless results[0][:target_name].empty?
+				uniprot_item['function'] = results[0][:description] unless results[0][:description].empty?
+#				uniprot_item[:organismSciName] = results[0][:organism] unless results[0][:organism].empty?
+
+				index_uuid += 1
+				index_ops += 1
 			end
-			index += 1
-	puts "protein_info resutls: #{results.to_s}\n"
+
+#	puts "protein_info resutls: #{results.to_s}\n"
 		}
 
 		render :json => json_entries, :layout => false

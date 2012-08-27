@@ -87,8 +87,10 @@ puts "json_entries: #{json_entries}\n"
 	def interactions_retrieval (target_id = params[:target], max_nodes = 6, conf_val = 0.5)
 		intact_proxy = TdguiProxy.new
 
-		conf_param = params[:confval]
+		conf_param = params[:conf_val]
 		conf_val = conf_param.to_f == 0.0 ? conf_val: conf_param.to_f
+		max_nodes_param = params[:max_nodes]
+		max_nodes = max_nodes_param == 0 ? max_nodes: max_nodes_param
 
 		return '[]' unless target_id != nil && target_id != ''
 #		graph = stringdb_proxy.get_target_interactions(target_id)
@@ -108,4 +110,17 @@ puts "json_entries: #{json_entries}\n"
 
 		render :json => entry_hash.to_json, :layout => false
 	end
+
+
+
+	def send_feedback (from = params[:from], subject = params[:subject], msg = params[:msg])
+		email_proxy = TdguiProxy.new
+
+		res = email_proxy.send_feedback(from, subject, msg)
+
+		render :json => res ? '{"success": true}': '{"success":false}', :layout => false
+	end
+
+
+
 end

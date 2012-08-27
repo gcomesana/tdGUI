@@ -23,8 +23,27 @@ console.info ("Initializing TargetInfo controller...")
         opsFailed: this.retryTargetInfoPanel
       },
 
-      'tdgui-targetinfopanel #stringdbTargetButton': {
-        click: this.onClickInteractionsBtn
+//      'tdgui-targetinfopanel #stringdbTargetButton': {
+      'window#interactionsDlg form button': {
+//        click: this.onClickInteractionsBtn
+        click: function () {
+          var comp = this.getTargetinfopanel()
+
+          console.info ('Yes, button send interactions clicked')
+        },
+
+        afterrender: function (comp, opts) {
+          console.info ('button rendered')
+          console.info (comp.getId())
+        }
+      },
+
+      'window#interactionsDlg': {
+        show: function (win, opts) {
+          var mywin = win
+
+          console.info ("window raised!!")
+        }
       }
 
     })

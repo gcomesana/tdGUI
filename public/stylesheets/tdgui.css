@@ -136,24 +136,22 @@
 	color: black;
 }
 
-
 /* To word-wrap lines inside the grid cells */
 .x-column-header-inner .x-column-header-text {
-    white-space: normal;
+	white-space: normal;
 }
 
 .x-column-header-inner {
-    line-height: normal;
-    padding-top: 3px !important;
-    padding-bottom: 3px !important;
-    text-align: center;
-    top: 20%;
+	line-height: normal;
+	padding-top: 3px !important;
+	padding-bottom: 3px !important;
+	text-align: center;
+	top: 20%;
 }
+
 .x-grid-cell-inner {
-    white-space: normal
+	white-space: normal
 }
-
-
 
 .target-field-label {
 	color: rgb(128, 128, 128);
@@ -255,13 +253,10 @@ sub {
 	bottom: -0.3em;
 }
 
-
-
 .targetlist-font-label {
 	font-size: 13px;
 	/* font-weight: bold; */
 }
-
 
 /* classes for the combo checkbox */
 .combo-iconbox-checked {
@@ -272,11 +267,68 @@ sub {
 	vertical-align: text-bottom;
 }
 
-
 .combo-iconbox-unchecked {
 	background: transparent url(/images/combo-boxunchecked.gif);
 	width: 16px;
 	heigth: 16px;
 	margin-right: 2px;
 	vertical-align: text-bottom;
+}
+
+/* layout */
+.x-panel-body-default {
+	background: transparent;
+}
+
+#panel-1026 {
+	border-top: 0px;
+	border-left: 0px;
+	border-right: 0px;
+	left: 0px;
+	top: 0px;
+	border-bottom: 1px solid #EAEAEA;
+	background: #5C5D60 url(/images/top-bg.png) repeat-x;
+
+}
+
+/* layout */
+.x-panel-body-default {
+	background: transparent;
+}
+
+/* Top */
+#panel-1026 {
+	border: 0px 0px 1px 0px !important;
+	border-color: #EAEAEA;
+	background: 0px 76px #5C5D60 url(/images/top-bg.png) repeat-x;
+}
+
+#panel-1026-body {
+	border: 0px !important;
+}
+
+
+/* Left */
+#panel-1027 {
+	background: #EAEBEC url(/images/tree-bg.png) repeat-x fixed;
+}
+
+#header-1050 {
+	display: none !important;
+}
+
+/* Main */
+#tdgui-border-center-1040 {
+	background: white url(/images/main-bg.png) repeat-x;
+}
+
+/* miscellaneous */
+a, a:hover {
+	color: #c64b34;
+	text-decoration: none;
+}
+
+.synonym, .keyword {
+	color: #FFF;
+	background-color: #c64b34;
 }

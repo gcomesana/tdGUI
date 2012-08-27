@@ -1,5 +1,8 @@
+
+
 require 'rexml/document'
 require 'net/http'
+require 'net/smtp'
 require 'uri'
 
 #
@@ -109,6 +112,37 @@ puts "the url: #{url}"
 			entry_hash
 		end
 
+	end
+
+
+
+	def send_feedback (from, subject, msg)
+		opts = Hash.new
+		opts[:server]      ||= 'webmail.cnio.es'
+		opts[:from]        ||= from
+#		opts[:from_alias]  ||= ''
+		opts[:subject]     ||= subject
+		opts[:body]        ||= msg
+
+		email_to = 'gcomesana@cnio.es'
+		email_from = 'gcomesana@cnio.es'
+		body_message = <<-EOF
+			From: #{opts[:from]}
+			To: <#{email_to}>
+			Subject: #{opts[:subject]}
+
+			#{opts[:body]}
+		EOF
+
+		begin
+			Net::SMTP.start(opts[:server]) do |smtp|
+				smtp.send_message body_message, email_from, email_to
+			end
+			return true
+
+		rescue Exception => ex
+			return false
+		end
 	end
 
 

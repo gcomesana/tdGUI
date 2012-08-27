@@ -32,6 +32,7 @@ TdGUI::Application.routes.draw do
 			get :multiple_entries_retrieval
 			get :interactions_retrieval
 			get :get_uniprot_by_name
+			post :send_feedback
 		end
 	end
 

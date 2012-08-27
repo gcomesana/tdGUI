@@ -2,7 +2,6 @@ require "rspec"
 require 'spec_helper'
 
 describe "String-db requests" do
-
 	it "should return a non empty hash for Q13362" do
 		tdguiproxy = TdguiProxy.new
 		target_acc = 'Q13362'
@@ -33,7 +32,6 @@ describe "String-db requests" do
 
 	end
 
-
 	it "should return a hash from a target label" do
 		proxy = TdguiProxy.new
 
@@ -48,5 +46,20 @@ describe "String-db requests" do
 		target_hash['accessions'].should be_instance_of Array
 
 		target_hash.each_key { |key| puts "#{key} -> #{target_hash[key]}" }
+	end
+
+
+
+	it "should send an email" do
+		email_proxy = TdguiProxy.new
+
+		from = 'miumiu@crap.com'
+		subject = 'everything is crap'
+		msg = 'You heard ok, everything is a hyper-fucking shit'
+
+		res = email_proxy.send_feedback(from, subject, msg)
+
+		res.should be_true
+
 	end
 end

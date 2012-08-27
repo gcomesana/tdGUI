@@ -8,17 +8,16 @@ Ext.define('TDGUI.view.Viewport', {
 
   requires: ['TDGUI.view.panels.BorderSouth','TDGUI.view.panels.BorderCenter',
               'TDGUI.view.panels.BorderEast','TDGUI.view.panels.LogosPanel',
-              'TDGUI.view.panels.west.SearchPanel',
-              'TDGUI.view.panels.west.HistoryPanel',
-              'TDGUI.view.panels.west.ExamplesPanel'],
+              'TDGUI.view.panels.west.SearchPanel','TDGUI.view.panels.StatusBarPanel'],
 
   layout: {
     type: 'border',
-    padding: 5
+    padding: 1
   },
   defaults: {
     split: true
   },
+  border: false,
 
 
 
@@ -235,7 +234,12 @@ console.info ("Viewport.initComponent starting...")
 //      theCenter,
 //      theEast,
 //      { xtype: 'tdgui-border-east'},
-//      { xtype: 'tdgui-border-south'}
+
+      { xtype: 'tdgui-statusbar',
+        region: 'south',
+        split: false
+      }
+
     ]
 
     this.callParent (arguments)

@@ -89,8 +89,22 @@ puts "\n#{response.body}\n"
 			json_resp.should_not be_nil
 			json_resp['ops_records'].should_not be_empty
 			json_resp['metaData']['fields'][0]['name'].should be == 'pdbimg'
+	end
 
 
-		end
+	it "should send an email" do
+		params = Hash.new
+		params[:from] = 'manolo@eldelbombo.com'
+		params[:subject] = 'The subject does not matter'
+		params[:msg] = 'This is another place to place loren ipsum planet motherfocker'
+
+		get :send_feedback, params
+
+puts "EMAIL sent: #{response.body}\n"
+		json_resp = JSON.parse(response.body)
+
+		json_resp['success'].should_not be_nil
+		json_resp['success'].should be_true
+	end
 
 end

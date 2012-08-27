@@ -79,12 +79,14 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
             xtype:'button',
             text:'Interactions Data',
             itemId:'stringdbTargetButton',
-            cls:'target-pharm-button'
+            cls:'target-pharm-button',
+            handler: this.raiseInteractionParams
           }, {
             xtype:'button',
             text:'Pathway Data',
             itemId:'pathwayTargetButton',
-            cls:'target-pharm-button'
+            cls:'target-pharm-button',
+            disable: true
           }, {
 						xtype: 'displayfield',
 						anchor: '100%',
@@ -198,6 +200,108 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 		this.callParent(arguments);
 	},
 	// EO initComponent
+
+
+  raiseInteractionParams: function () {
+
+    var me = this
+    var form = Ext.createWidget('form', {
+      bodyPadding: 5,
+      frame: true,
+      width: 200,
+      fieldDefaults: {
+        labelAlign: 'left',
+        labelWidth: 105,
+        anchor: '100%'
+      },
+
+      items: [
+        {
+          xtype: 'numberfield',
+          fieldLabel: 'Confidence value',
+          name: 'conf_val',
+          hideTrigger: true,
+          minValue: 0,
+          maxValue: 1,
+          allowDecimals: true,
+          decimalPrecision: 2
+        },
+        {
+          xtype: 'numberfield',
+          hideTrigger: true,
+          fieldLabel: 'Max neighbours',
+          name: 'max_nodes',
+          allowDecimals: false,
+          maxValue: 10,
+          minValue: 2
+        }
+      ],
+
+      buttons: [
+        {
+          text: 'Cancel',
+          id: 'interactionCancelBtn',
+          handler: function () {
+            var me = this
+            me.up('form').getForm().reset();
+            me.up('window').hide();
+          }
+        }, {
+          text: 'Send',
+          id: 'interactionSendBtn',
+          /*
+          handler: function () {
+            var me = this
+
+            if (this.up('form').getForm().isValid()) {
+console.info ('form valid, sent request...')
+
+              this.up('form').getForm().submit({
+                success: function (form, action) {
+                  if (!action.result.success)
+                    Ext.Msg.alert('Failed', 'Request could not be sent. Please try later.')
+
+                  me.up('form').getForm().reset();
+                  me.up('window').hide();
+                },
+
+                failure: function (form, action) {
+                  Ext.Msg.alert('Failed', 'Failed to send request. Please try later.');
+
+                  me.up('form').getForm().reset();
+                  me.up('window').hide();
+                }
+
+              });
+
+//                          this.up('form').getForm().reset();
+//                          this.up('window').hide();
+//                          Ext.MessageBox.alert('Thank you!', 'Your feedback has been sent.');
+            }
+          } // EO handler
+          */
+        }
+      ]
+    });
+
+
+    this.interactionDlg = Ext.widget('window', {
+      title: 'Interactions parameters',
+      closeAction: 'hide',
+      id: 'interactionsDlg',
+      width: 250,
+//      height: 400,
+//      minHeight: 400,
+      layout: 'fit',
+      resizable: true,
+      modal: true,
+      items: form
+    });
+
+    this.interactionDlg.show()
+
+  },
+
 
 
 	resetAllFields: function() {

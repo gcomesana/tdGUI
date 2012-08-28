@@ -3,11 +3,13 @@
 Ext.define ('TDGUI.view.panels.BorderCenter', {
 	extend: 'Ext.tab.Panel',
 	alias: 'widget.tdgui-border-center',
-//  requires: ['TDGUI.view.grid.DynamicGrid3'],
+  requires: ['TDGUI.view.panels.WelcomePanel'],
 
 	region: 'center',
   layout: 'border',
   border: false,
+
+  padding: '10 0 0 0',
 
 
   listeners: {
@@ -25,6 +27,10 @@ Ext.define ('TDGUI.view.panels.BorderCenter', {
   initComponent: function () {
   	var me = this
 console.info ("Initializing panels.BorderCenter comp..." + this.nombre)
+
+    me.items = [{
+      xtype: 'tdgui-welcomepanel'
+    }]
 /*
 	  me.items = [{
       xtype: 'panel',

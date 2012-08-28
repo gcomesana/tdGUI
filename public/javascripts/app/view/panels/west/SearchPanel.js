@@ -17,6 +17,7 @@ Ext.define ('TDGUI.view.panels.west.SearchPanel', {
 //  minWidth: 300,
   minHeight: 200,
   border: false,
+  margin: '30px 0px 0px 0px',
 
   anchor: '100% 70%',
 
@@ -39,7 +40,11 @@ this.callParent(arguments);
 console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
 //    me.items = [this.createTabs()]
-    me.items = [this.createSearchTab(), this.createRetrievingTab()]
+    me.items = [
+      this.createLabel(),
+      this.createSearchTab(),
+      this.createRetrievingTab()
+    ]
     me.callParent (arguments)
   }, // EO initComponent
 
@@ -49,7 +54,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 // METHODS TO CREATE COMPONENTS ////////////////////////////////////////////////////
   createLabel: function () {
     this.exampleLabel = Ext.create ('Ext.form.Label', {
-      text: 'Target List',
+      text: 'Semantic search',
       margin: 10,
 
       listeners: {
@@ -63,11 +68,12 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       },
 
       initComponent: function () {
-        this.addEvents ('click')
+//        this.addEvents ('click')
 
         this.callParent (arguments)
       }
     })
+
     return this.exampleLabel
   },
 
@@ -79,7 +85,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 //      renderTo: Ext.getBody(),
 //      width: 400,
 //      height: 200,
-      bodyPadding: '15 0 10 0',
+      bodyPadding: '0 0 10 0',
       border: false,
 
 //      closable: true,

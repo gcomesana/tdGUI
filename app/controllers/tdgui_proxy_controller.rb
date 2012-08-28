@@ -89,9 +89,9 @@ puts "json_entries: #{json_entries}\n"
 
 		conf_param = params[:conf_val]
 		conf_val = conf_param.to_f == 0.0 ? conf_val: conf_param.to_f
-		max_nodes_param = params[:max_nodes]
+		max_nodes_param = params[:max_nodes] ? 0: params[:max_nodes].to_i
 		max_nodes = max_nodes_param == 0 ? max_nodes: max_nodes_param
-
+puts "Getting interactions from Intact with conf_val=#{conf_val} & max_nodes=#{max_nodes}\n"
 		return '[]' unless target_id != nil && target_id != ''
 #		graph = stringdb_proxy.get_target_interactions(target_id)
 		graph = intact_proxy.get_target_interactions(target_id, conf_val, max_nodes)

@@ -1,8 +1,8 @@
 
 TdGUI::Application.routes.draw do
 
-  get "home/index"
-  get "home/test"
+  get "home/index", :as => :home
+#  get "home/test"
 
 =begin
   get "thrashcan/start"
@@ -71,6 +71,7 @@ TdGUI::Application.routes.draw do
 =end
   root :to => "home#index"
 
+	match "home" => "home#index"
 
 
   # The priority is based upon order of creation:

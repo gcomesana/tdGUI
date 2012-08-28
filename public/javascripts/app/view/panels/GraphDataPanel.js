@@ -25,6 +25,8 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
   closable: true,
 
   targetAcc: '',
+  confVal: 0.6,
+  maxNodes: 5,
 
   myMask: undefined,
 
@@ -38,6 +40,8 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
       fdDivName: 'divgraph',
       flex: 3,
       targetId: me.targetAcc,
+      confVal: me.confVal,
+      maxNodes: me.maxNodes,
 
       nodeClickHandler: function (node, eventInfo, ev) {
       // console.info ("onClickHandler method...")

@@ -10,6 +10,9 @@ Ext.define("TDGUI.controller.panels.TargetInfo", {
   refs: [{
     ref: 'targetinfopanel',
     selector: 'tdgui-targetinfopanel'
+  }, {
+    ref: 'interactionsForm',
+    selector: 'window#interactionsDlg form'
   }],
 
 
@@ -24,18 +27,18 @@ console.info ("Initializing TargetInfo controller...")
       },
 
 //      'tdgui-targetinfopanel #stringdbTargetButton': {
-      'window#interactionsDlg form button': {
+      'window#interactionsDlg form button#interactionSendBtn': {
 //        click: this.onClickInteractionsBtn
-        click: function () {
-          var comp = this.getTargetinfopanel()
 
-          console.info ('Yes, button send interactions clicked')
-        },
+        click: function (comp, opts) {
+          var form = comp.up('form')
+          var formVals = form.getForm().getValues()
 
-        afterrender: function (comp, opts) {
-          console.info ('button rendered')
-          console.info (comp.getId())
+console.info ('Yes, button send interactions clicked')
+          this.onClickInteractionsBtn (formVals.conf_val, formVals.max_nodes)
+          comp.up('window').hide()
         }
+
       },
 
       'window#interactionsDlg': {
@@ -64,7 +67,7 @@ console.info ("Initializing TargetInfo controller...")
  * @param ev
  * @param opts
  */
-  onClickInteractionsBtn: function (btn, ev, opts) {
+  onClickInteractionsBtn: function (confVal, maxNodes) {
 
     var theStore = this.getTargetinfopanel().targetInfoStore
 //    var targetAcc = theStore.proxy.extraParams.protein_uri
@@ -78,8 +81,8 @@ console.info ("Initializing TargetInfo controller...")
 */
 
     var targetName = this.getTargetinfopanel().down('#target_name').getRawValue()
-    var historyParams = '!xt=tdgui-graphdatapanel&qp=' + targetAcc +
-                '&tg='+targetName
+    var historyParams = '!xt=tdgui-graphdatapanel&qp=' + targetAcc + '&cv=' + confVal +
+                '&mn=' + maxNodes + '&tg='+targetName
 
     var dcParam = '&dc='+Math.random()
     Ext.History.add (historyParams + dcParam)

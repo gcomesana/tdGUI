@@ -116,6 +116,8 @@ console.info ("raising interactions for Target panel")
 //          fdDivName: 'xperimental-div',
 //          target_id: 'Q13362',
           targetAcc: uniprotAcc,
+          confVal: tokenObj.cv,
+          maxNodes: tokenObj.mn,
           closeable: true
         })
         break

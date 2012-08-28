@@ -86,7 +86,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
             text:'Pathway Data',
             itemId:'pathwayTargetButton',
             cls:'target-pharm-button',
-            disable: true
+            disabled: true
           }, {
 						xtype: 'displayfield',
 						anchor: '100%',
@@ -224,7 +224,8 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
           minValue: 0,
           maxValue: 1,
           allowDecimals: true,
-          decimalPrecision: 2
+          decimalPrecision: 2,
+          value: 0.43
         },
         {
           xtype: 'numberfield',
@@ -233,7 +234,8 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
           name: 'max_nodes',
           allowDecimals: false,
           maxValue: 10,
-          minValue: 2
+          minValue: 2,
+          value: 5
         }
       ],
 

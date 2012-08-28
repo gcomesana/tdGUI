@@ -87,7 +87,10 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 
   interactionData: {},
   experimentsData: undefined,
+
   targetId: '',
+  confVal: 0.6,
+  maxNodes: 5,
 
   nodeClickHandler: undefined,
   edgeClickHandler: undefined,
@@ -293,7 +296,9 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
       url: '/tdgui_proxy/interactions_retrieval',
       method: 'GET',
       params: {
-        target: me.targetId
+        target: me.targetId,
+        max_nodes: me.maxNodes,
+        conf_val: me.confVal
       },
 
       success: function(response, opts) {

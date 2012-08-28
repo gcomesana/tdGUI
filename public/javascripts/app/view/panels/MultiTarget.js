@@ -15,6 +15,7 @@ Ext.define('TDGUI.view.panels.MultiTarget', {
     align:'stretch'
   },
   gridParams:null, // an object to set/add grid.proxy.extraParams
+  border: false,
 
 // a copy of the list targets store in order to get the concept_uuid
 // and the concept_uri for coreAPI
@@ -46,9 +47,15 @@ Ext.define('TDGUI.view.panels.MultiTarget', {
 //      readUrl: 'tdgui_proxy/multiple_entries_retrieval?entries=Q13362,P0AEN2,P0AEN3'
       readUrl:'tdgui_proxy/multiple_entries_retrieval',
       queryParams: this.gridParams,
-      forceFit: true
+      forceFit: true,
 //      id: 'dyngrid'+(new Date()).getMilliseconds(),
 //      itemId: 'dyngrid'+(new Date()).getMilliseconds()
+
+      listeners: {
+        itemmouseenter: function(view, record, item) {
+          Ext.fly(item).set({'data-qtip': '<b>Double click</b> to get extended information about this target'});
+        }
+      }
     }
 
     var theGrid = Ext.create('widget.dynamicgrid3', config)

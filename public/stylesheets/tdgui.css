@@ -275,52 +275,109 @@ sub {
 	vertical-align: text-bottom;
 }
 
+
+
+
+
+/* Welcome style classes */
+.speech-tit {
+	font-size: x-large;
+	font-weight: bold;
+	color: #c64b34;
+	margin-bottom: 10px;
+	margin-left: 40px;
+	margin-top: 20px;
+}
+
+
+.speech-div {
+	padding: 10px 40px 10px 40px;
+	margin-bottom: 20px;
+}
+
+
+
+.feats-container-odd {
+	width: 430px;
+	height: 230px;
+	float: left;
+	margin-left: 20px;
+}
+
+
+.welcome-img {
+	width: 200px;
+	margin-right: 20px;
+	margin-left: 40px;
+	float: left;
+	border: 1px solid #CCC;
+}
+
+
+.welcome-tit {
+	font-weight: bold;
+	color: #c64b34;
+	font-size: 12px;
+}
+
+.welcome-text {
+	margin-top: 5px;
+}
+
+
+
+
+
+
+
 /* layout */
 .x-panel-body-default {
 	background: transparent;
 }
-
-#panel-1026 {
-	border-top: 0px;
-	border-left: 0px;
-	border-right: 0px;
-	left: 0px;
-	top: 0px;
-	border-bottom: 1px solid #EAEAEA;
-	background: #5C5D60 url(/images/top-bg.png) repeat-x;
-
-}
-
-/* layout */
-.x-panel-body-default {
-	background: transparent;
+.x-body{
+	font-family: Arial;
 }
 
 /* Top */
-#panel-1026 {
-	border: 0px 0px 1px 0px !important;
-	border-color: #EAEAEA;
-	background: 0px 76px #5C5D60 url(/images/top-bg.png) repeat-x;
+#td-top {
+	left: 0px !important;
+	top: 0px !important;
+	border-style: solid;
+	border-width: 0px 0px 1px 0px !important;
+	border-bottom-color: #EAEAEA;
+	background: 0px 54px #7D8083 url(/images/top-bg.gif);
 }
 
-#panel-1026-body {
+#td-top-body {
 	border: 0px !important;
 }
 
 
 /* Left */
-#panel-1027 {
+#td-left {
 	background: #EAEBEC url(/images/tree-bg.png) repeat-x fixed;
+	border:none !important;
 }
 
-#header-1050 {
+#td-left .x-panel-header {
 	display: none !important;
 }
+#td-left-body{
+	border-width: 0px 1px 0px 0px;
+	border-right-color: #AEB0B5;
+}
 
-/* Main */
-#tdgui-border-center-1040 {
+.x-splitter-vertical{
 	background: white url(/images/main-bg.png) repeat-x;
 }
+.x-splitter-vertical .x-collapse-el{display: none;}
+
+/* Main */
+#td-main {
+	background: white url(/images/main-bg.png) repeat-x;
+}
+#td-main .x-tab-bar{background: transparent;}
+#td-main .x-tab-bar-body{border: none;}
 
 /* miscellaneous */
 a, a:hover {

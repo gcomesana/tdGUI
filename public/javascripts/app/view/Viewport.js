@@ -194,10 +194,11 @@ console.info ("Viewport.initComponent starting...")
     me.items = [
       {
         region: 'north',
+        id: 'td-top',
 //        collapsible: true,
 //        title: 'North',
 //        split: true,
-        height: 120,
+        height: 100,
         minHeight: 60,
         split: false,
         items: [
@@ -208,8 +209,10 @@ console.info ("Viewport.initComponent starting...")
       },
       {
         region: 'west',
+        id: 'td-left',
         collapsible: true,
-        title: 'Search center',
+//        title: 'Search center',
+
         split: true,
         width: '20%',
         minWidth: 320,
@@ -221,16 +224,21 @@ console.info ("Viewport.initComponent starting...")
 //        items: [theWestItems]
         items: [{
 //            region: 'north',
-            xtype: 'tdgui-west-search'
+            xtype: 'tdgui-west-search',
+            split: false,
+            frame: false
           } /* , {
             region: 'center',
 //            xtype: 'tdgui-west-history'
           }, {
             region: 'south',
 //            xtype: 'tdgui-west-examples'
-        }*/ ]
+        }*/
+        ]
       },
-      { xtype: 'tdgui-border-center'},
+      { xtype: 'tdgui-border-center',
+        id: 'td-main'
+      },
 //      theCenter,
 //      theEast,
 //      { xtype: 'tdgui-border-east'},

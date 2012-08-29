@@ -245,7 +245,8 @@ Ext.define('TDGUI.controller.SearchPanel', {
      })
      */
 //    console.info('Added: ' + list.join(','))
-  },
+  }, // EO clickAddProteins
+
 
 
   clickGoProteinInfo: function (btn, ev, opts) {

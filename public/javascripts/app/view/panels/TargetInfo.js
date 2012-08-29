@@ -250,38 +250,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
           }
         }, {
           text: 'Send',
-          id: 'interactionSendBtn',
-          /*
-          handler: function () {
-            var me = this
-
-            if (this.up('form').getForm().isValid()) {
-console.info ('form valid, sent request...')
-
-              this.up('form').getForm().submit({
-                success: function (form, action) {
-                  if (!action.result.success)
-                    Ext.Msg.alert('Failed', 'Request could not be sent. Please try later.')
-
-                  me.up('form').getForm().reset();
-                  me.up('window').hide();
-                },
-
-                failure: function (form, action) {
-                  Ext.Msg.alert('Failed', 'Failed to send request. Please try later.');
-
-                  me.up('form').getForm().reset();
-                  me.up('window').hide();
-                }
-
-              });
-
-//                          this.up('form').getForm().reset();
-//                          this.up('window').hide();
-//                          Ext.MessageBox.alert('Thank you!', 'Your feedback has been sent.');
-            }
-          } // EO handler
-          */
+          id: 'interactionSendBtn'
         }
       ]
     });
@@ -292,6 +261,7 @@ console.info ('form valid, sent request...')
       closeAction: 'hide',
       id: 'interactionsDlg',
       width: 250,
+      height: 150,
 //      height: 400,
 //      minHeight: 400,
       layout: 'fit',

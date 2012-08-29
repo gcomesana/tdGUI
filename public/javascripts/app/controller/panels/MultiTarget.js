@@ -39,7 +39,8 @@ console.info('accessions for selected one: '+gridAccs)
 
           var listTargetsStore = this.getGridPanel().getListTargetsStore()
 //          var recs = this.getItemList().getStoreObject ('uniprot_acc', gridAccs)
-          var recs = listTargetsStore.findRecord('uniprot_acc', gridAccs)
+//          var recs = listTargetsStore.findRecord('uniprot_acc', gridAccs)
+          var recs = listTargetsStore.getAt(index)
 
 // Compose de uniprot parameter (in this case an uniprot url) to proteinInfo
           var primaryAcc = recs.data.uniprot_acc[0]

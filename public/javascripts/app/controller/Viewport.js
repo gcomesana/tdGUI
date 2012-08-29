@@ -81,7 +81,7 @@ console.info ("A element was added to history: -> "+token)
 //            uuids: concept_uuids.join(',')
           },
           title: "Multiple targets",
-          storeListTargets: listStoreClone
+          storeListTargets: listStore
         })
         break
 

@@ -290,10 +290,18 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
     } // EO setInstanceGraph
 
 
+console.info ("InteractionsGraph: targetId -> "+me.targetId)
+    var intactUrl = ''
+    if (me.targetId == 'Q14596')
+      intactUrl = '/resources/datatest/intact-sndtarget.json';
+    else if (me.targetId == 'P29274')
+      intactUrl = '/resources/datatest/intact-4thtarget.json';
+    else
+      intactUrl = '/tdgui_proxy/interactions_retrieval';
 
     Ext.Ajax.request({
 //      url: 'resources/datatest/intact-bad.json',
-      url: '/tdgui_proxy/interactions_retrieval',
+      url: intactUrl,
       method: 'GET',
       params: {
         target: me.targetId,

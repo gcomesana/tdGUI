@@ -1,0 +1,3002 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<entrySet xmlns="http://psi.hupo.org/mi/mif" level="2" version="5"
+					minorVersion="4">
+	<entry>
+		<source releaseDate="2012-07-03+01:00">
+			<names>
+				<shortLabel>unspecified</shortLabel>
+			</names>
+		</source>
+		<experimentList>
+			<experimentDescription id="1254">
+				<names>
+					<shortLabel>arifuzzaman-2006</shortLabel>
+				</names>
+				<bibref>
+					<xref>
+						<primaryRef db="pubmed" dbAc="MI:0446" id="16606699"
+												refType="primary-reference" refTypeAc="MI:0358"/>
+					</xref>
+				</bibref>
+				<hostOrganismList>
+					<hostOrganism ncbiTaxId="316407">
+						<names>
+							<shortLabel>Escherichia coli str. K-12 substr. W3110</shortLabel>
+						</names>
+					</hostOrganism>
+				</hostOrganismList>
+				<interactionDetectionMethod>
+					<names>
+						<shortLabel>pull down</shortLabel>
+						<fullName>pull down</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0096"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionDetectionMethod>
+				<attributeList>
+					<attribute name="publication year">2006</attribute>
+					<attribute name="author-list">Arifuzzaman et al.</attribute>
+				</attributeList>
+			</experimentDescription>
+			<experimentDescription id="1256">
+				<names>
+					<shortLabel>arifuzzaman-2006</shortLabel>
+				</names>
+				<bibref>
+					<xref>
+						<primaryRef db="pubmed" dbAc="MI:0446" id="16606699"
+												refType="primary-reference" refTypeAc="MI:0358"/>
+					</xref>
+				</bibref>
+				<hostOrganismList>
+					<hostOrganism ncbiTaxId="316407">
+						<names>
+							<shortLabel>Escherichia coli str. K-12 substr. W3110</shortLabel>
+						</names>
+					</hostOrganism>
+				</hostOrganismList>
+				<interactionDetectionMethod>
+					<names>
+						<shortLabel>pull down</shortLabel>
+						<fullName>pull down</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0096"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionDetectionMethod>
+				<attributeList>
+					<attribute name="publication year">2006</attribute>
+					<attribute name="author-list">Arifuzzaman et al.</attribute>
+				</attributeList>
+			</experimentDescription>
+			<experimentDescription id="1258">
+				<names>
+					<shortLabel>arifuzzaman-2006</shortLabel>
+				</names>
+				<bibref>
+					<xref>
+						<primaryRef db="pubmed" dbAc="MI:0446" id="16606699"
+												refType="primary-reference" refTypeAc="MI:0358"/>
+					</xref>
+				</bibref>
+				<hostOrganismList>
+					<hostOrganism ncbiTaxId="316407">
+						<names>
+							<shortLabel>Escherichia coli str. K-12 substr. W3110</shortLabel>
+						</names>
+					</hostOrganism>
+				</hostOrganismList>
+				<interactionDetectionMethod>
+					<names>
+						<shortLabel>pull down</shortLabel>
+						<fullName>pull down</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0096"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionDetectionMethod>
+				<attributeList>
+					<attribute name="publication year">2006</attribute>
+					<attribute name="author-list">Arifuzzaman et al.</attribute>
+				</attributeList>
+			</experimentDescription>
+			<experimentDescription id="1260">
+				<names>
+					<shortLabel>arifuzzaman-2006</shortLabel>
+				</names>
+				<bibref>
+					<xref>
+						<primaryRef db="pubmed" dbAc="MI:0446" id="16606699"
+												refType="primary-reference" refTypeAc="MI:0358"/>
+					</xref>
+				</bibref>
+				<hostOrganismList>
+					<hostOrganism ncbiTaxId="316407">
+						<names>
+							<shortLabel>Escherichia coli str. K-12 substr. W3110</shortLabel>
+						</names>
+					</hostOrganism>
+				</hostOrganismList>
+				<interactionDetectionMethod>
+					<names>
+						<shortLabel>pull down</shortLabel>
+						<fullName>pull down</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0096"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionDetectionMethod>
+				<attributeList>
+					<attribute name="publication year">2006</attribute>
+					<attribute name="author-list">Arifuzzaman et al.</attribute>
+				</attributeList>
+			</experimentDescription>
+			<experimentDescription id="1262">
+				<names>
+					<shortLabel>arifuzzaman-2006</shortLabel>
+				</names>
+				<bibref>
+					<xref>
+						<primaryRef db="pubmed" dbAc="MI:0446" id="16606699"
+												refType="primary-reference" refTypeAc="MI:0358"/>
+					</xref>
+				</bibref>
+				<hostOrganismList>
+					<hostOrganism ncbiTaxId="316407">
+						<names>
+							<shortLabel>Escherichia coli str. K-12 substr. W3110</shortLabel>
+						</names>
+					</hostOrganism>
+				</hostOrganismList>
+				<interactionDetectionMethod>
+					<names>
+						<shortLabel>pull down</shortLabel>
+						<fullName>pull down</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0096"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionDetectionMethod>
+				<attributeList>
+					<attribute name="publication year">2006</attribute>
+					<attribute name="author-list">Arifuzzaman et al.</attribute>
+				</attributeList>
+			</experimentDescription>
+			<experimentDescription id="1264">
+				<names>
+					<shortLabel>arifuzzaman-2006</shortLabel>
+				</names>
+				<bibref>
+					<xref>
+						<primaryRef db="pubmed" dbAc="MI:0446" id="16606699"
+												refType="primary-reference" refTypeAc="MI:0358"/>
+					</xref>
+				</bibref>
+				<hostOrganismList>
+					<hostOrganism ncbiTaxId="316407">
+						<names>
+							<shortLabel>Escherichia coli str. K-12 substr. W3110</shortLabel>
+						</names>
+					</hostOrganism>
+				</hostOrganismList>
+				<interactionDetectionMethod>
+					<names>
+						<shortLabel>pull down</shortLabel>
+						<fullName>pull down</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0096"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionDetectionMethod>
+				<attributeList>
+					<attribute name="publication year">2006</attribute>
+					<attribute name="author-list">Arifuzzaman et al.</attribute>
+				</attributeList>
+			</experimentDescription>
+			<experimentDescription id="1266">
+				<names>
+					<shortLabel>arifuzzaman-2006</shortLabel>
+				</names>
+				<bibref>
+					<xref>
+						<primaryRef db="pubmed" dbAc="MI:0446" id="16606699"
+												refType="primary-reference" refTypeAc="MI:0358"/>
+					</xref>
+				</bibref>
+				<hostOrganismList>
+					<hostOrganism ncbiTaxId="316407">
+						<names>
+							<shortLabel>Escherichia coli str. K-12 substr. W3110</shortLabel>
+						</names>
+					</hostOrganism>
+				</hostOrganismList>
+				<interactionDetectionMethod>
+					<names>
+						<shortLabel>pull down</shortLabel>
+						<fullName>pull down</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0096"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionDetectionMethod>
+				<attributeList>
+					<attribute name="publication year">2006</attribute>
+					<attribute name="author-list">Arifuzzaman et al.</attribute>
+				</attributeList>
+			</experimentDescription>
+			<experimentDescription id="1268">
+				<names>
+					<shortLabel>arifuzzaman-2006</shortLabel>
+				</names>
+				<bibref>
+					<xref>
+						<primaryRef db="pubmed" dbAc="MI:0446" id="16606699"
+												refType="primary-reference" refTypeAc="MI:0358"/>
+					</xref>
+				</bibref>
+				<hostOrganismList>
+					<hostOrganism ncbiTaxId="316407">
+						<names>
+							<shortLabel>Escherichia coli str. K-12 substr. W3110</shortLabel>
+						</names>
+					</hostOrganism>
+				</hostOrganismList>
+				<interactionDetectionMethod>
+					<names>
+						<shortLabel>pull down</shortLabel>
+						<fullName>pull down</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0096"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionDetectionMethod>
+				<attributeList>
+					<attribute name="publication year">2006</attribute>
+					<attribute name="author-list">Arifuzzaman et al.</attribute>
+				</attributeList>
+			</experimentDescription>
+			<experimentDescription id="1270">
+				<names>
+					<shortLabel>arifuzzaman-2006</shortLabel>
+				</names>
+				<bibref>
+					<xref>
+						<primaryRef db="pubmed" dbAc="MI:0446" id="16606699"
+												refType="primary-reference" refTypeAc="MI:0358"/>
+					</xref>
+				</bibref>
+				<hostOrganismList>
+					<hostOrganism ncbiTaxId="316407">
+						<names>
+							<shortLabel>Escherichia coli str. K-12 substr. W3110</shortLabel>
+						</names>
+					</hostOrganism>
+				</hostOrganismList>
+				<interactionDetectionMethod>
+					<names>
+						<shortLabel>pull down</shortLabel>
+						<fullName>pull down</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0096"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionDetectionMethod>
+				<attributeList>
+					<attribute name="publication year">2006</attribute>
+					<attribute name="author-list">Arifuzzaman et al.</attribute>
+				</attributeList>
+			</experimentDescription>
+			<experimentDescription id="1272">
+				<names>
+					<shortLabel>arifuzzaman-2006</shortLabel>
+				</names>
+				<bibref>
+					<xref>
+						<primaryRef db="pubmed" dbAc="MI:0446" id="16606699"
+												refType="primary-reference" refTypeAc="MI:0358"/>
+					</xref>
+				</bibref>
+				<hostOrganismList>
+					<hostOrganism ncbiTaxId="316407">
+						<names>
+							<shortLabel>Escherichia coli str. K-12 substr. W3110</shortLabel>
+						</names>
+					</hostOrganism>
+				</hostOrganismList>
+				<interactionDetectionMethod>
+					<names>
+						<shortLabel>pull down</shortLabel>
+						<fullName>pull down</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0096"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionDetectionMethod>
+				<attributeList>
+					<attribute name="publication year">2006</attribute>
+					<attribute name="author-list">Arifuzzaman et al.</attribute>
+				</attributeList>
+			</experimentDescription>
+			<experimentDescription id="1274">
+				<names>
+					<shortLabel>arifuzzaman-2006</shortLabel>
+				</names>
+				<bibref>
+					<xref>
+						<primaryRef db="pubmed" dbAc="MI:0446" id="16606699"
+												refType="primary-reference" refTypeAc="MI:0358"/>
+					</xref>
+				</bibref>
+				<hostOrganismList>
+					<hostOrganism ncbiTaxId="316407">
+						<names>
+							<shortLabel>Escherichia coli str. K-12 substr. W3110</shortLabel>
+						</names>
+					</hostOrganism>
+				</hostOrganismList>
+				<interactionDetectionMethod>
+					<names>
+						<shortLabel>pull down</shortLabel>
+						<fullName>pull down</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0096"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionDetectionMethod>
+				<attributeList>
+					<attribute name="publication year">2006</attribute>
+					<attribute name="author-list">Arifuzzaman et al.</attribute>
+				</attributeList>
+			</experimentDescription>
+			<experimentDescription id="1276">
+				<names>
+					<shortLabel>arifuzzaman-2006</shortLabel>
+				</names>
+				<bibref>
+					<xref>
+						<primaryRef db="pubmed" dbAc="MI:0446" id="16606699"
+												refType="primary-reference" refTypeAc="MI:0358"/>
+					</xref>
+				</bibref>
+				<hostOrganismList>
+					<hostOrganism ncbiTaxId="316407">
+						<names>
+							<shortLabel>Escherichia coli str. K-12 substr. W3110</shortLabel>
+						</names>
+					</hostOrganism>
+				</hostOrganismList>
+				<interactionDetectionMethod>
+					<names>
+						<shortLabel>pull down</shortLabel>
+						<fullName>pull down</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0096"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionDetectionMethod>
+				<attributeList>
+					<attribute name="publication year">2006</attribute>
+					<attribute name="author-list">Arifuzzaman et al.</attribute>
+				</attributeList>
+			</experimentDescription>
+			<experimentDescription id="1278">
+				<names>
+					<shortLabel>arifuzzaman-2006</shortLabel>
+				</names>
+				<bibref>
+					<xref>
+						<primaryRef db="pubmed" dbAc="MI:0446" id="16606699"
+												refType="primary-reference" refTypeAc="MI:0358"/>
+					</xref>
+				</bibref>
+				<hostOrganismList>
+					<hostOrganism ncbiTaxId="316407">
+						<names>
+							<shortLabel>Escherichia coli str. K-12 substr. W3110</shortLabel>
+						</names>
+					</hostOrganism>
+				</hostOrganismList>
+				<interactionDetectionMethod>
+					<names>
+						<shortLabel>pull down</shortLabel>
+						<fullName>pull down</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0096"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionDetectionMethod>
+				<attributeList>
+					<attribute name="publication year">2006</attribute>
+					<attribute name="author-list">Arifuzzaman et al.</attribute>
+				</attributeList>
+			</experimentDescription>
+		</experimentList>
+		<interactorList>
+			<interactor id="1201">
+				<names>
+					<shortLabel>P77569</shortLabel>
+					<alias type="gene name">mhpR</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P77569"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR011991"
+												secondary="Winged helix repressor DNA-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR005471"
+												secondary="Transcriptional regulator IclR, N-terminal"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR014757"
+												secondary="Transcriptional regulator IclR, C-terminal"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2MC78"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P71202"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006351"
+												secondary="transcription, DNA-dependent"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006355"
+												secondary="regulation of transcription, DNA-dependent"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0019439"
+												secondary="aromatic compound catabolic process"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0003677"
+												secondary="DNA binding"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_414880.2"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1202">
+				<names>
+					<shortLabel>P0AEN1</shortLabel>
+					<alias type="gene name">fre</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0AEN1"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017938"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001221"
+												secondary="Phenol hydroxylase reductase"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001433"
+												secondary="Oxidoreductase FAD/NAD(P)-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR008333"
+												secondary="Oxidoreductase FAD-binding region"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017927"/>
+					<secondaryRef db="rcsb pdb" id="1QFJ"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M8E7"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P76768"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P23486"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0055072"
+												secondary="iron ion homeostasis"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006811"
+												secondary="ion transport"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0047138"
+												secondary="aquacobalamin reductase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0052875"
+												secondary="riboflavin reductase (NADH) activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0042602"
+												secondary="riboflavin reductase (NADPH) activity"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418286.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1205">
+				<names>
+					<shortLabel>P0A9F9</shortLabel>
+					<alias type="gene name">metR</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0A9F9"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR000847"
+												secondary="Bacterial regulatory protein, LysR"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR005119"
+												secondary="LysR, substrate-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR011991"
+												secondary="Winged helix repressor DNA-binding"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M8D3"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P19797"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0009086"
+												secondary="methionine biosynthetic process"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0003700"
+												secondary="sequence-specific DNA binding transcription factor activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0003677"
+												secondary="DNA binding"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0005737"
+												secondary="cytoplasm"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006351"
+												secondary="transcription, DNA-dependent"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418272.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1202">
+				<names>
+					<shortLabel>P0AEN1</shortLabel>
+					<alias type="gene name">fre</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0AEN1"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017938"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001221"
+												secondary="Phenol hydroxylase reductase"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001433"
+												secondary="Oxidoreductase FAD/NAD(P)-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR008333"
+												secondary="Oxidoreductase FAD-binding region"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017927"/>
+					<secondaryRef db="rcsb pdb" id="1QFJ"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M8E7"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P76768"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P23486"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0055072"
+												secondary="iron ion homeostasis"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006811"
+												secondary="ion transport"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0047138"
+												secondary="aquacobalamin reductase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0052875"
+												secondary="riboflavin reductase (NADH) activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0042602"
+												secondary="riboflavin reductase (NADPH) activity"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418286.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1202">
+				<names>
+					<shortLabel>P0AEN1</shortLabel>
+					<alias type="gene name">fre</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0AEN1"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017938"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001221"
+												secondary="Phenol hydroxylase reductase"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001433"
+												secondary="Oxidoreductase FAD/NAD(P)-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR008333"
+												secondary="Oxidoreductase FAD-binding region"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017927"/>
+					<secondaryRef db="rcsb pdb" id="1QFJ"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M8E7"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P76768"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P23486"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0055072"
+												secondary="iron ion homeostasis"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006811"
+												secondary="ion transport"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0047138"
+												secondary="aquacobalamin reductase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0052875"
+												secondary="riboflavin reductase (NADH) activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0042602"
+												secondary="riboflavin reductase (NADPH) activity"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418286.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1210">
+				<names>
+					<shortLabel>P37326</shortLabel>
+					<alias type="gene name">intS</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P37326"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR023109"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR002104"
+												secondary="Integrase, catalytic core, phage"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR013762"
+												secondary="Integrase-like, catalytic core, phage"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR011010"
+												secondary="DNA breaking-rejoining enzyme, catalytic core"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR025166"/>
+					<secondaryRef db="rcsb pdb" id="2KJ8"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P76942"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006310"
+												secondary="DNA recombination"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0015074"
+												secondary="DNA integration"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0003677"
+												secondary="DNA binding"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_416850.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1202">
+				<names>
+					<shortLabel>P0AEN1</shortLabel>
+					<alias type="gene name">fre</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0AEN1"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017938"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001221"
+												secondary="Phenol hydroxylase reductase"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001433"
+												secondary="Oxidoreductase FAD/NAD(P)-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR008333"
+												secondary="Oxidoreductase FAD-binding region"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017927"/>
+					<secondaryRef db="rcsb pdb" id="1QFJ"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M8E7"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P76768"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P23486"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0055072"
+												secondary="iron ion homeostasis"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006811"
+												secondary="ion transport"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0047138"
+												secondary="aquacobalamin reductase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0052875"
+												secondary="riboflavin reductase (NADH) activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0042602"
+												secondary="riboflavin reductase (NADPH) activity"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418286.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1214">
+				<names>
+					<shortLabel>P37906</shortLabel>
+					<alias type="gene name">puuB</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P37906"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR006076"
+												secondary="FAD dependent oxidoreductase"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q5H773"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0016491"
+												secondary="oxidoreductase activity"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_415817.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1217">
+				<names>
+					<shortLabel>P0ACB4</shortLabel>
+					<alias type="gene name">hemG</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0ACB4"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001226"
+												secondary="Flavodoxin, conserved site"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR008254"
+												secondary="Flavodoxin/nitric oxide synthase"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M8F3"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P27863"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006783"
+												secondary="heme biosynthetic process"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0004729"
+												secondary="oxygen-dependent protoporphyrinogen oxidase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0070819"
+												secondary="menaquinone-dependent protoporphyrinogen oxidase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0010181"
+												secondary="FMN binding"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0009055"
+												secondary="electron carrier activity"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418292.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1202">
+				<names>
+					<shortLabel>P0AEN1</shortLabel>
+					<alias type="gene name">fre</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0AEN1"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017938"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001221"
+												secondary="Phenol hydroxylase reductase"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001433"
+												secondary="Oxidoreductase FAD/NAD(P)-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR008333"
+												secondary="Oxidoreductase FAD-binding region"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017927"/>
+					<secondaryRef db="rcsb pdb" id="1QFJ"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M8E7"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P76768"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P23486"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0055072"
+												secondary="iron ion homeostasis"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006811"
+												secondary="ion transport"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0047138"
+												secondary="aquacobalamin reductase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0052875"
+												secondary="riboflavin reductase (NADH) activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0042602"
+												secondary="riboflavin reductase (NADPH) activity"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418286.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1221">
+				<names>
+					<shortLabel>P0AFW0</shortLabel>
+					<alias type="gene name">rfaH</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0AFW0"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR014722"
+												secondary="Translation protein SH3-like, subgroup"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR006645"
+												secondary="Transcription antitermination protein, NusG, N-terminal"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR010215"
+												secondary="Transcriptional activator RfaH"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR005824"
+												secondary="KOW"/>
+					<secondaryRef db="rcsb pdb" id="2OUG"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M8E5"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P26614"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006351"
+												secondary="transcription, DNA-dependent"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0032968"
+												secondary="positive regulation of transcription elongation from RNA polymerase II promoter"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0009103"
+												secondary="lipopolysaccharide biosynthetic process"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0003677"
+												secondary="DNA binding"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418284.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1202">
+				<names>
+					<shortLabel>P0AEN1</shortLabel>
+					<alias type="gene name">fre</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0AEN1"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017938"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001221"
+												secondary="Phenol hydroxylase reductase"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001433"
+												secondary="Oxidoreductase FAD/NAD(P)-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR008333"
+												secondary="Oxidoreductase FAD-binding region"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017927"/>
+					<secondaryRef db="rcsb pdb" id="1QFJ"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M8E7"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P76768"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P23486"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0055072"
+												secondary="iron ion homeostasis"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006811"
+												secondary="ion transport"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0047138"
+												secondary="aquacobalamin reductase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0052875"
+												secondary="riboflavin reductase (NADH) activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0042602"
+												secondary="riboflavin reductase (NADPH) activity"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418286.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1202">
+				<names>
+					<shortLabel>P0AEN1</shortLabel>
+					<alias type="gene name">fre</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0AEN1"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017938"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001221"
+												secondary="Phenol hydroxylase reductase"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001433"
+												secondary="Oxidoreductase FAD/NAD(P)-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR008333"
+												secondary="Oxidoreductase FAD-binding region"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017927"/>
+					<secondaryRef db="rcsb pdb" id="1QFJ"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M8E7"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P76768"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P23486"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0055072"
+												secondary="iron ion homeostasis"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006811"
+												secondary="ion transport"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0047138"
+												secondary="aquacobalamin reductase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0052875"
+												secondary="riboflavin reductase (NADH) activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0042602"
+												secondary="riboflavin reductase (NADPH) activity"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418286.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1226">
+				<names>
+					<shortLabel>P18843</shortLabel>
+					<alias type="gene name">nadE</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P18843"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR014729"
+												secondary="Rossmann-like alpha/beta/alpha sandwich fold"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR022926"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR003694"
+												secondary="NAD+ synthase"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR022310"/>
+					<secondaryRef db="rcsb pdb" id="1WXI"/>
+					<secondaryRef db="rcsb pdb" id="1WXH"/>
+					<secondaryRef db="rcsb pdb" id="1WXG"/>
+					<secondaryRef db="rcsb pdb" id="1WXF"/>
+					<secondaryRef db="rcsb pdb" id="1WXE"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P78235"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0034355"
+												secondary="NAD salvage"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0034628"
+												secondary="de novo NAD biosynthetic process from aspartate"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0008795"
+												secondary="NAD+ synthase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0003952"
+												secondary="NAD+ synthase (glutamine-hydrolyzing) activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0005524"
+												secondary="ATP binding"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_416254.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1202">
+				<names>
+					<shortLabel>P0AEN1</shortLabel>
+					<alias type="gene name">fre</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0AEN1"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017938"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001221"
+												secondary="Phenol hydroxylase reductase"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001433"
+												secondary="Oxidoreductase FAD/NAD(P)-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR008333"
+												secondary="Oxidoreductase FAD-binding region"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017927"/>
+					<secondaryRef db="rcsb pdb" id="1QFJ"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M8E7"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P76768"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P23486"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0055072"
+												secondary="iron ion homeostasis"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006811"
+												secondary="ion transport"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0047138"
+												secondary="aquacobalamin reductase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0052875"
+												secondary="riboflavin reductase (NADH) activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0042602"
+												secondary="riboflavin reductase (NADPH) activity"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418286.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1230">
+				<names>
+					<shortLabel>P0AG30</shortLabel>
+					<alias type="gene name">rho</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0AG30"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR004665"
+												secondary="Transcription termination factor Rho"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR011113"
+												secondary="Rho termination factor, RNA-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR011112"
+												secondary="Rho termination factor, N-terminal"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR016027"
+												secondary="Nucleic acid-binding, OB-fold-like"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR012340"
+												secondary="Nucleic acid-binding, OB-fold"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR011129"
+												secondary="Cold shock protein"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR000194"
+												secondary="ATPase, F1/V1/A1 complex, alpha/beta subunit, nucleotide-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR003593"
+												secondary="AAA+ ATPase, core"/>
+					<secondaryRef db="rcsb pdb" id="3ICE"/>
+					<secondaryRef db="rcsb pdb" id="2HT1"/>
+					<secondaryRef db="rcsb pdb" id="2A8V"/>
+					<secondaryRef db="rcsb pdb" id="1XPU"/>
+					<secondaryRef db="rcsb pdb" id="1XPR"/>
+					<secondaryRef db="rcsb pdb" id="1XPO"/>
+					<secondaryRef db="rcsb pdb" id="1PVO"/>
+					<secondaryRef db="rcsb pdb" id="1PV4"/>
+					<secondaryRef db="rcsb pdb" id="1A8V"/>
+					<secondaryRef db="rcsb pdb" id="1A63"/>
+					<secondaryRef db="rcsb pdb" id="1A62"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q48357"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M891"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P03002"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0031555"
+												secondary="transcriptional attenuation"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006353"
+												secondary="transcription termination, DNA-dependent"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0008186"
+												secondary="RNA-dependent ATPase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0003723"
+												secondary="RNA binding"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0004386"
+												secondary="helicase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0005524"
+												secondary="ATP binding"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0016020"
+												secondary="membrane"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418230.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1202">
+				<names>
+					<shortLabel>P0AEN1</shortLabel>
+					<alias type="gene name">fre</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0AEN1"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017938"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001221"
+												secondary="Phenol hydroxylase reductase"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001433"
+												secondary="Oxidoreductase FAD/NAD(P)-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR008333"
+												secondary="Oxidoreductase FAD-binding region"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017927"/>
+					<secondaryRef db="rcsb pdb" id="1QFJ"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M8E7"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P76768"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P23486"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0055072"
+												secondary="iron ion homeostasis"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006811"
+												secondary="ion transport"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0047138"
+												secondary="aquacobalamin reductase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0052875"
+												secondary="riboflavin reductase (NADH) activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0042602"
+												secondary="riboflavin reductase (NADPH) activity"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418286.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1234">
+				<names>
+					<shortLabel>P0ABB4</shortLabel>
+					<alias type="gene name">atpD</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0ABB4"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR024034"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR000194"
+												secondary="ATPase, F1/V1/A1 complex, alpha/beta subunit, nucleotide-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR004100"
+												secondary="ATPase, F1/V1/A1 complex, alpha/beta subunit, N-terminal"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR000793"
+												secondary="ATPase, F1/V1/A1 complex, alpha/beta subunit, C-terminal"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR018118"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR005722"
+												secondary="ATPase, F1 complex, beta subunit"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR003593"
+												secondary="AAA+ ATPase, core"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR020003"/>
+					<secondaryRef db="rcsb pdb" id="1D8S"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M850"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P00824"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0015986"
+												secondary="ATP synthesis coupled proton transport"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0015991"
+												secondary="ATP hydrolysis coupled proton transport"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0046961"
+												secondary="proton-transporting ATPase activity, rotational mechanism"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0005515"
+												secondary="protein binding"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0008553"
+												secondary="hydrogen-exporting ATPase activity, phosphorylative mechanism"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0046933"
+												secondary="hydrogen ion transporting ATP synthase activity, rotational mechanism"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0005524"
+												secondary="ATP binding"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0045261"
+												secondary="proton-transporting ATP synthase complex, catalytic core F(1)"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0005886"
+												secondary="plasma membrane"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418188.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1202">
+				<names>
+					<shortLabel>P0AEN1</shortLabel>
+					<alias type="gene name">fre</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0AEN1"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017938"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001221"
+												secondary="Phenol hydroxylase reductase"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001433"
+												secondary="Oxidoreductase FAD/NAD(P)-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR008333"
+												secondary="Oxidoreductase FAD-binding region"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017927"/>
+					<secondaryRef db="rcsb pdb" id="1QFJ"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M8E7"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P76768"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P23486"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0055072"
+												secondary="iron ion homeostasis"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006811"
+												secondary="ion transport"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0047138"
+												secondary="aquacobalamin reductase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0052875"
+												secondary="riboflavin reductase (NADH) activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0042602"
+												secondary="riboflavin reductase (NADPH) activity"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418286.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1238">
+				<names>
+					<shortLabel>P0AE08</shortLabel>
+					<alias type="gene name">ahpC</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0AE08"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR000866"
+												secondary="Alkyl hydroperoxide reductase/ Thiol specific antioxidant/ Mal allergen"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017559"
+												secondary="Peroxiredoxin"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR012336"
+												secondary="Thioredoxin-like fold"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR019479"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR024706"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P26427"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006805"
+												secondary="xenobiotic metabolic process"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0051920"
+												secondary="peroxiredoxin activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0004601"
+												secondary="peroxidase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0016020"
+												secondary="membrane"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0005829"
+												secondary="cytosol"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_415138.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1241">
+				<names>
+					<shortLabel>P32173</shortLabel>
+					<alias type="gene name">mobA</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P32173"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR013482"
+												secondary="Molybdopterin-guanine dinucleotide biosynthesis protein A"/>
+					<secondaryRef db="rcsb pdb" id="1HJL"/>
+					<secondaryRef db="rcsb pdb" id="1HJJ"/>
+					<secondaryRef db="rcsb pdb" id="1H4E"/>
+					<secondaryRef db="rcsb pdb" id="1H4D"/>
+					<secondaryRef db="rcsb pdb" id="1H4C"/>
+					<secondaryRef db="rcsb pdb" id="1FRW"/>
+					<secondaryRef db="rcsb pdb" id="1FR9"/>
+					<secondaryRef db="rcsb pdb" id="1E5K"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q9LBV0"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M8F5"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006777"
+												secondary="Mo-molybdopterin cofactor biosynthetic process"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0005515"
+												secondary="protein binding"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0005525"
+												secondary="GTP binding"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0003824"
+												secondary="catalytic activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0005737"
+												secondary="cytoplasm"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418294.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1202">
+				<names>
+					<shortLabel>P0AEN1</shortLabel>
+					<alias type="gene name">fre</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0AEN1"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017938"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001221"
+												secondary="Phenol hydroxylase reductase"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001433"
+												secondary="Oxidoreductase FAD/NAD(P)-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR008333"
+												secondary="Oxidoreductase FAD-binding region"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017927"/>
+					<secondaryRef db="rcsb pdb" id="1QFJ"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M8E7"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P76768"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P23486"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0055072"
+												secondary="iron ion homeostasis"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006811"
+												secondary="ion transport"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0047138"
+												secondary="aquacobalamin reductase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0052875"
+												secondary="riboflavin reductase (NADH) activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0042602"
+												secondary="riboflavin reductase (NADPH) activity"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418286.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1245">
+				<names>
+					<shortLabel>P0A9V8</shortLabel>
+					<alias type="gene name">yihU</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0A9V8"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR016040"
+												secondary="NAD(P)-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR013328"
+												secondary="Dehydrogenase, multihelical"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR006115"
+												secondary="6-phosphogluconate dehydrogenase, NAD-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR008927"
+												secondary="6-phosphogluconate dehydrogenase, C-terminal-like"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR015815"
+												secondary="3-hydroxyacid dehydrogenase/reductase"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR002204"
+												secondary="3-hydroxyisobutyrate dehydrogenase-related, conserved site"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M8H9"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P32142"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006573"
+												secondary="valine metabolic process"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0009407"
+												secondary="toxin catabolic process"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006098"
+												secondary="pentose-phosphate shunt"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0004616"
+												secondary="phosphogluconate dehydrogenase (decarboxylating) activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0050662"
+												secondary="coenzyme binding"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0047577"
+												secondary="4-hydroxybutyrate dehydrogenase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0008442"
+												secondary="3-hydroxyisobutyrate dehydrogenase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0000166"
+												secondary="nucleotide binding"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418318.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1202">
+				<names>
+					<shortLabel>P0AEN1</shortLabel>
+					<alias type="gene name">fre</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0AEN1"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017938"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001221"
+												secondary="Phenol hydroxylase reductase"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001433"
+												secondary="Oxidoreductase FAD/NAD(P)-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR008333"
+												secondary="Oxidoreductase FAD-binding region"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017927"/>
+					<secondaryRef db="rcsb pdb" id="1QFJ"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M8E7"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P76768"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P23486"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0055072"
+												secondary="iron ion homeostasis"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006811"
+												secondary="ion transport"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0047138"
+												secondary="aquacobalamin reductase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0052875"
+												secondary="riboflavin reductase (NADH) activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0042602"
+												secondary="riboflavin reductase (NADPH) activity"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418286.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1202">
+				<names>
+					<shortLabel>P0AEN1</shortLabel>
+					<alias type="gene name">fre</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0AEN1"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017938"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001221"
+												secondary="Phenol hydroxylase reductase"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR001433"
+												secondary="Oxidoreductase FAD/NAD(P)-binding"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR008333"
+												secondary="Oxidoreductase FAD-binding region"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR017927"/>
+					<secondaryRef db="rcsb pdb" id="1QFJ"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M8E7"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P76768"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P23486"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0055072"
+												secondary="iron ion homeostasis"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006811"
+												secondary="ion transport"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0047138"
+												secondary="aquacobalamin reductase activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0052875"
+												secondary="riboflavin reductase (NADH) activity"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0042602"
+												secondary="riboflavin reductase (NADPH) activity"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_418286.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+			<interactor id="1250">
+				<names>
+					<shortLabel>P0AG55</shortLabel>
+					<alias type="gene name">rplF</alias>
+				</names>
+				<xref>
+					<primaryRef db="uniprotkb" dbAc="MI:0486" id="P0AG55"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR002358"
+												secondary="Ribosomal protein L6, conserved site-1"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR019906"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR020040"/>
+					<secondaryRef db="interpro" dbAc="MI:0449" id="IPR000702"
+												secondary="Ribosomal protein L6"/>
+					<secondaryRef db="rcsb pdb" id="487D"/>
+					<secondaryRef db="rcsb pdb" id="3R8T"/>
+					<secondaryRef db="rcsb pdb" id="3R8S"/>
+					<secondaryRef db="rcsb pdb" id="3ORB"/>
+					<secondaryRef db="rcsb pdb" id="3OG0"/>
+					<secondaryRef db="rcsb pdb" id="3OFZ"/>
+					<secondaryRef db="rcsb pdb" id="3OFR"/>
+					<secondaryRef db="rcsb pdb" id="3OFQ"/>
+					<secondaryRef db="rcsb pdb" id="3OFD"/>
+					<secondaryRef db="rcsb pdb" id="3OFC"/>
+					<secondaryRef db="rcsb pdb" id="3OAT"/>
+					<secondaryRef db="rcsb pdb" id="3OAS"/>
+					<secondaryRef db="rcsb pdb" id="3KCR"/>
+					<secondaryRef db="rcsb pdb" id="3J01"/>
+					<secondaryRef db="rcsb pdb" id="3IZU"/>
+					<secondaryRef db="rcsb pdb" id="3IZT"/>
+					<secondaryRef db="rcsb pdb" id="3I22"/>
+					<secondaryRef db="rcsb pdb" id="3I20"/>
+					<secondaryRef db="rcsb pdb" id="3I1T"/>
+					<secondaryRef db="rcsb pdb" id="3I1R"/>
+					<secondaryRef db="rcsb pdb" id="3I1P"/>
+					<secondaryRef db="rcsb pdb" id="3I1N"/>
+					<secondaryRef db="rcsb pdb" id="3FIK"/>
+					<secondaryRef db="rcsb pdb" id="3E1D"/>
+					<secondaryRef db="rcsb pdb" id="3E1B"/>
+					<secondaryRef db="rcsb pdb" id="3BBX"/>
+					<secondaryRef db="rcsb pdb" id="2Z4N"/>
+					<secondaryRef db="rcsb pdb" id="2Z4L"/>
+					<secondaryRef db="rcsb pdb" id="2WWQ"/>
+					<secondaryRef db="rcsb pdb" id="2VHN"/>
+					<secondaryRef db="rcsb pdb" id="2VHM"/>
+					<secondaryRef db="rcsb pdb" id="2RDO"/>
+					<secondaryRef db="rcsb pdb" id="2QP1"/>
+					<secondaryRef db="rcsb pdb" id="2QOZ"/>
+					<secondaryRef db="rcsb pdb" id="2QOX"/>
+					<secondaryRef db="rcsb pdb" id="2QOV"/>
+					<secondaryRef db="rcsb pdb" id="2QBK"/>
+					<secondaryRef db="rcsb pdb" id="2QBI"/>
+					<secondaryRef db="rcsb pdb" id="2QBG"/>
+					<secondaryRef db="rcsb pdb" id="2QBE"/>
+					<secondaryRef db="rcsb pdb" id="2QBC"/>
+					<secondaryRef db="rcsb pdb" id="2QBA"/>
+					<secondaryRef db="rcsb pdb" id="2QAO"/>
+					<secondaryRef db="rcsb pdb" id="2QAM"/>
+					<secondaryRef db="rcsb pdb" id="2J28"/>
+					<secondaryRef db="rcsb pdb" id="2I2V"/>
+					<secondaryRef db="rcsb pdb" id="2I2T"/>
+					<secondaryRef db="rcsb pdb" id="2GYC"/>
+					<secondaryRef db="rcsb pdb" id="2GYA"/>
+					<secondaryRef db="rcsb pdb" id="2AWB"/>
+					<secondaryRef db="rcsb pdb" id="2AW4"/>
+					<secondaryRef db="rcsb pdb" id="1VT2"/>
+					<secondaryRef db="rcsb pdb" id="1VS8"/>
+					<secondaryRef db="rcsb pdb" id="1VS6"/>
+					<secondaryRef db="rcsb pdb" id="1P86"/>
+					<secondaryRef db="rcsb pdb" id="1P85"/>
+					<secondaryRef db="rcsb pdb" id="3J14"/>
+					<secondaryRef db="rcsb pdb" id="3J12"/>
+					<secondaryRef db="rcsb pdb" id="3J11"/>
+					<secondaryRef db="rcsb pdb" id="3UOS"/>
+					<secondaryRef db="rcsb pdb" id="3SGF"/>
+					<secondaryRef db="rcsb pdb" id="3J0Y"/>
+					<secondaryRef db="rcsb pdb" id="3J0W"/>
+					<secondaryRef db="rcsb pdb" id="3J0T"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="Q2M6X0"
+												secondary="secondary-ac"/>
+					<secondaryRef db="uniprotkb" dbAc="MI:0486" id="P02390"
+												secondary="secondary-ac"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0006412"
+												secondary="translation"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0046677"
+												secondary="response to antibiotic"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0003735"
+												secondary="structural constituent of ribosome"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0019843"
+												secondary="rRNA binding"/>
+					<secondaryRef db="go" dbAc="MI:0448" id="GO:0005840"
+												secondary="ribosome"/>
+					<secondaryRef db="refseq" dbAc="MI:0481" id="NP_417764.1"/>
+				</xref>
+				<interactorType>
+					<names>
+						<shortLabel>protein</shortLabel>
+						<fullName>protein</fullName>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0326"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactorType>
+				<organism ncbiTaxId="83333">
+					<names>
+						<shortLabel>Escherichia coli (strain K12)</shortLabel>
+					</names>
+				</organism>
+			</interactor>
+		</interactorList>
+		<interactionList>
+			<interaction id="1253">
+				<names>
+					<shortLabel>P77569-P0AEN1-1</shortLabel>
+				</names>
+				<xref>
+					<primaryRef db="intact" dbAc="MI:0469" id="EBI-1136313"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="psi-mi" dbAc="MI:0488" id="MI:0469"
+												refType="source reference" refTypeAc="MI:0685"/>
+				</xref>
+				<experimentList>
+					<experimentRef>1254</experimentRef>
+				</experimentList>
+				<participantList>
+					<participant id="1203">
+						<interactorRef>1201</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>bait</shortLabel>
+									<fullName>bait</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0496"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+					<participant id="1204">
+						<interactorRef>1202</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>prey</shortLabel>
+									<fullName>prey</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0498"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+				</participantList>
+				<interactionType>
+					<names>
+						<shortLabel>association</shortLabel>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0914"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionType>
+				<modelled>false</modelled>
+				<intraMolecular>false</intraMolecular>
+				<negative>false</negative>
+				<confidenceList>
+					<confidence>
+						<unit>
+							<names>
+								<shortLabel>intact-miscore</shortLabel>
+							</names>
+						</unit>
+						<value>0.35</value>
+					</confidence>
+				</confidenceList>
+				<attributeList>
+					<attribute name="source reference:label">intact</attribute>
+					<attribute name="expansion">Spoke</attribute>
+				</attributeList>
+			</interaction>
+			<interaction id="1255">
+				<names>
+					<shortLabel>P0A9F9-P0AEN1-1</shortLabel>
+				</names>
+				<xref>
+					<primaryRef db="intact" dbAc="MI:0469" id="EBI-1146741"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="psi-mi" dbAc="MI:0488" id="MI:0469"
+												refType="source reference" refTypeAc="MI:0685"/>
+				</xref>
+				<experimentList>
+					<experimentRef>1256</experimentRef>
+				</experimentList>
+				<participantList>
+					<participant id="1207">
+						<interactorRef>1205</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>bait</shortLabel>
+									<fullName>bait</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0496"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+					<participant id="1208">
+						<interactorRef>1202</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>prey</shortLabel>
+									<fullName>prey</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0498"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+				</participantList>
+				<interactionType>
+					<names>
+						<shortLabel>association</shortLabel>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0914"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionType>
+				<modelled>false</modelled>
+				<intraMolecular>false</intraMolecular>
+				<negative>false</negative>
+				<confidenceList>
+					<confidence>
+						<unit>
+							<names>
+								<shortLabel>intact-miscore</shortLabel>
+							</names>
+						</unit>
+						<value>0.35</value>
+					</confidence>
+				</confidenceList>
+				<attributeList>
+					<attribute name="source reference:label">intact</attribute>
+					<attribute name="expansion">Spoke</attribute>
+				</attributeList>
+			</interaction>
+			<interaction id="1257">
+				<names>
+					<shortLabel>P0AEN1-P37326-1</shortLabel>
+				</names>
+				<xref>
+					<primaryRef db="intact" dbAc="MI:0469" id="EBI-1146778"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="psi-mi" dbAc="MI:0488" id="MI:0469"
+												refType="source reference" refTypeAc="MI:0685"/>
+				</xref>
+				<experimentList>
+					<experimentRef>1258</experimentRef>
+				</experimentList>
+				<participantList>
+					<participant id="1211">
+						<interactorRef>1202</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>bait</shortLabel>
+									<fullName>bait</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0496"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+					<participant id="1212">
+						<interactorRef>1210</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>prey</shortLabel>
+									<fullName>prey</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0498"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+				</participantList>
+				<interactionType>
+					<names>
+						<shortLabel>association</shortLabel>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0914"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionType>
+				<modelled>false</modelled>
+				<intraMolecular>false</intraMolecular>
+				<negative>false</negative>
+				<confidenceList>
+					<confidence>
+						<unit>
+							<names>
+								<shortLabel>intact-miscore</shortLabel>
+							</names>
+						</unit>
+						<value>0.35</value>
+					</confidence>
+				</confidenceList>
+				<attributeList>
+					<attribute name="source reference:label">intact</attribute>
+					<attribute name="expansion">Spoke</attribute>
+				</attributeList>
+			</interaction>
+			<interaction id="1259">
+				<names>
+					<shortLabel>P0AEN1-P37906-1</shortLabel>
+				</names>
+				<xref>
+					<primaryRef db="intact" dbAc="MI:0469" id="EBI-1146778"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="psi-mi" dbAc="MI:0488" id="MI:0469"
+												refType="source reference" refTypeAc="MI:0685"/>
+				</xref>
+				<experimentList>
+					<experimentRef>1260</experimentRef>
+				</experimentList>
+				<participantList>
+					<participant id="1215">
+						<interactorRef>1202</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>bait</shortLabel>
+									<fullName>bait</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0496"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+					<participant id="1216">
+						<interactorRef>1214</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>prey</shortLabel>
+									<fullName>prey</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0498"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+				</participantList>
+				<interactionType>
+					<names>
+						<shortLabel>association</shortLabel>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0914"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionType>
+				<modelled>false</modelled>
+				<intraMolecular>false</intraMolecular>
+				<negative>false</negative>
+				<confidenceList>
+					<confidence>
+						<unit>
+							<names>
+								<shortLabel>intact-miscore</shortLabel>
+							</names>
+						</unit>
+						<value>0.35</value>
+					</confidence>
+				</confidenceList>
+				<attributeList>
+					<attribute name="source reference:label">intact</attribute>
+					<attribute name="expansion">Spoke</attribute>
+				</attributeList>
+			</interaction>
+			<interaction id="1261">
+				<names>
+					<shortLabel>P0ACB4-P0AEN1-1</shortLabel>
+				</names>
+				<xref>
+					<primaryRef db="intact" dbAc="MI:0469" id="EBI-1146797"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="psi-mi" dbAc="MI:0488" id="MI:0469"
+												refType="source reference" refTypeAc="MI:0685"/>
+				</xref>
+				<experimentList>
+					<experimentRef>1262</experimentRef>
+				</experimentList>
+				<participantList>
+					<participant id="1219">
+						<interactorRef>1217</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>bait</shortLabel>
+									<fullName>bait</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0496"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+					<participant id="1220">
+						<interactorRef>1202</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>prey</shortLabel>
+									<fullName>prey</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0498"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+				</participantList>
+				<interactionType>
+					<names>
+						<shortLabel>association</shortLabel>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0914"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionType>
+				<modelled>false</modelled>
+				<intraMolecular>false</intraMolecular>
+				<negative>false</negative>
+				<confidenceList>
+					<confidence>
+						<unit>
+							<names>
+								<shortLabel>intact-miscore</shortLabel>
+							</names>
+						</unit>
+						<value>0.35</value>
+					</confidence>
+				</confidenceList>
+				<attributeList>
+					<attribute name="source reference:label">intact</attribute>
+					<attribute name="expansion">Spoke</attribute>
+				</attributeList>
+			</interaction>
+			<interaction id="1263">
+				<names>
+					<shortLabel>P0AFW0-P0AEN1-1</shortLabel>
+				</names>
+				<xref>
+					<primaryRef db="intact" dbAc="MI:0469" id="EBI-1146766"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="psi-mi" dbAc="MI:0488" id="MI:0469"
+												refType="source reference" refTypeAc="MI:0685"/>
+				</xref>
+				<experimentList>
+					<experimentRef>1264</experimentRef>
+				</experimentList>
+				<participantList>
+					<participant id="1223">
+						<interactorRef>1221</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>bait</shortLabel>
+									<fullName>bait</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0496"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+					<participant id="1224">
+						<interactorRef>1202</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>prey</shortLabel>
+									<fullName>prey</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0498"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+				</participantList>
+				<interactionType>
+					<names>
+						<shortLabel>association</shortLabel>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0914"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionType>
+				<modelled>false</modelled>
+				<intraMolecular>false</intraMolecular>
+				<negative>false</negative>
+				<confidenceList>
+					<confidence>
+						<unit>
+							<names>
+								<shortLabel>intact-miscore</shortLabel>
+							</names>
+						</unit>
+						<value>0.35</value>
+					</confidence>
+				</confidenceList>
+				<attributeList>
+					<attribute name="source reference:label">intact</attribute>
+					<attribute name="expansion">Spoke</attribute>
+				</attributeList>
+			</interaction>
+			<interaction id="1265">
+				<names>
+					<shortLabel>P0AEN1-P18843-1</shortLabel>
+				</names>
+				<xref>
+					<primaryRef db="intact" dbAc="MI:0469" id="EBI-1146778"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="psi-mi" dbAc="MI:0488" id="MI:0469"
+												refType="source reference" refTypeAc="MI:0685"/>
+				</xref>
+				<experimentList>
+					<experimentRef>1266</experimentRef>
+				</experimentList>
+				<participantList>
+					<participant id="1227">
+						<interactorRef>1202</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>bait</shortLabel>
+									<fullName>bait</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0496"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+					<participant id="1228">
+						<interactorRef>1226</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>prey</shortLabel>
+									<fullName>prey</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0498"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+				</participantList>
+				<interactionType>
+					<names>
+						<shortLabel>association</shortLabel>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0914"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionType>
+				<modelled>false</modelled>
+				<intraMolecular>false</intraMolecular>
+				<negative>false</negative>
+				<confidenceList>
+					<confidence>
+						<unit>
+							<names>
+								<shortLabel>intact-miscore</shortLabel>
+							</names>
+						</unit>
+						<value>0.35</value>
+					</confidence>
+				</confidenceList>
+				<attributeList>
+					<attribute name="source reference:label">intact</attribute>
+					<attribute name="expansion">Spoke</attribute>
+				</attributeList>
+			</interaction>
+			<interaction id="1267">
+				<names>
+					<shortLabel>P0AEN1-P0AG30-1</shortLabel>
+				</names>
+				<xref>
+					<primaryRef db="intact" dbAc="MI:0469" id="EBI-1146778"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="psi-mi" dbAc="MI:0488" id="MI:0469"
+												refType="source reference" refTypeAc="MI:0685"/>
+				</xref>
+				<experimentList>
+					<experimentRef>1268</experimentRef>
+				</experimentList>
+				<participantList>
+					<participant id="1231">
+						<interactorRef>1202</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>bait</shortLabel>
+									<fullName>bait</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0496"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+					<participant id="1232">
+						<interactorRef>1230</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>prey</shortLabel>
+									<fullName>prey</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0498"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+				</participantList>
+				<interactionType>
+					<names>
+						<shortLabel>association</shortLabel>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0914"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionType>
+				<modelled>false</modelled>
+				<intraMolecular>false</intraMolecular>
+				<negative>false</negative>
+				<confidenceList>
+					<confidence>
+						<unit>
+							<names>
+								<shortLabel>intact-miscore</shortLabel>
+							</names>
+						</unit>
+						<value>0.35</value>
+					</confidence>
+				</confidenceList>
+				<attributeList>
+					<attribute name="source reference:label">intact</attribute>
+					<attribute name="expansion">Spoke</attribute>
+				</attributeList>
+			</interaction>
+			<interaction id="1269">
+				<names>
+					<shortLabel>P0AEN1-P0ABB4-1</shortLabel>
+				</names>
+				<xref>
+					<primaryRef db="intact" dbAc="MI:0469" id="EBI-1146778"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="psi-mi" dbAc="MI:0488" id="MI:0469"
+												refType="source reference" refTypeAc="MI:0685"/>
+				</xref>
+				<experimentList>
+					<experimentRef>1270</experimentRef>
+				</experimentList>
+				<participantList>
+					<participant id="1235">
+						<interactorRef>1202</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>bait</shortLabel>
+									<fullName>bait</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0496"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+					<participant id="1236">
+						<interactorRef>1234</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>prey</shortLabel>
+									<fullName>prey</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0498"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+				</participantList>
+				<interactionType>
+					<names>
+						<shortLabel>association</shortLabel>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0914"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionType>
+				<modelled>false</modelled>
+				<intraMolecular>false</intraMolecular>
+				<negative>false</negative>
+				<confidenceList>
+					<confidence>
+						<unit>
+							<names>
+								<shortLabel>intact-miscore</shortLabel>
+							</names>
+						</unit>
+						<value>0.35</value>
+					</confidence>
+				</confidenceList>
+				<attributeList>
+					<attribute name="source reference:label">intact</attribute>
+					<attribute name="expansion">Spoke</attribute>
+				</attributeList>
+			</interaction>
+			<interaction id="1271">
+				<names>
+					<shortLabel>P0AEN1-P0AE08-1</shortLabel>
+				</names>
+				<xref>
+					<primaryRef db="intact" dbAc="MI:0469" id="EBI-1146778"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="psi-mi" dbAc="MI:0488" id="MI:0469"
+												refType="source reference" refTypeAc="MI:0685"/>
+				</xref>
+				<experimentList>
+					<experimentRef>1272</experimentRef>
+				</experimentList>
+				<participantList>
+					<participant id="1239">
+						<interactorRef>1202</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>bait</shortLabel>
+									<fullName>bait</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0496"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+					<participant id="1240">
+						<interactorRef>1238</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>prey</shortLabel>
+									<fullName>prey</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0498"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+				</participantList>
+				<interactionType>
+					<names>
+						<shortLabel>association</shortLabel>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0914"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionType>
+				<modelled>false</modelled>
+				<intraMolecular>false</intraMolecular>
+				<negative>false</negative>
+				<confidenceList>
+					<confidence>
+						<unit>
+							<names>
+								<shortLabel>intact-miscore</shortLabel>
+							</names>
+						</unit>
+						<value>0.35</value>
+					</confidence>
+				</confidenceList>
+				<attributeList>
+					<attribute name="source reference:label">intact</attribute>
+					<attribute name="expansion">Spoke</attribute>
+				</attributeList>
+			</interaction>
+			<interaction id="1273">
+				<names>
+					<shortLabel>P32173-P0AEN1-1</shortLabel>
+				</names>
+				<xref>
+					<primaryRef db="intact" dbAc="MI:0469" id="EBI-1146806"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="psi-mi" dbAc="MI:0488" id="MI:0469"
+												refType="source reference" refTypeAc="MI:0685"/>
+				</xref>
+				<experimentList>
+					<experimentRef>1274</experimentRef>
+				</experimentList>
+				<participantList>
+					<participant id="1243">
+						<interactorRef>1241</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>bait</shortLabel>
+									<fullName>bait</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0496"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+					<participant id="1244">
+						<interactorRef>1202</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>prey</shortLabel>
+									<fullName>prey</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0498"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+				</participantList>
+				<interactionType>
+					<names>
+						<shortLabel>association</shortLabel>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0914"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionType>
+				<modelled>false</modelled>
+				<intraMolecular>false</intraMolecular>
+				<negative>false</negative>
+				<confidenceList>
+					<confidence>
+						<unit>
+							<names>
+								<shortLabel>intact-miscore</shortLabel>
+							</names>
+						</unit>
+						<value>0.35</value>
+					</confidence>
+				</confidenceList>
+				<attributeList>
+					<attribute name="source reference:label">intact</attribute>
+					<attribute name="expansion">Spoke</attribute>
+				</attributeList>
+			</interaction>
+			<interaction id="1275">
+				<names>
+					<shortLabel>P0A9V8-P0AEN1-1</shortLabel>
+				</names>
+				<xref>
+					<primaryRef db="intact" dbAc="MI:0469" id="EBI-1146877"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="psi-mi" dbAc="MI:0488" id="MI:0469"
+												refType="source reference" refTypeAc="MI:0685"/>
+				</xref>
+				<experimentList>
+					<experimentRef>1276</experimentRef>
+				</experimentList>
+				<participantList>
+					<participant id="1247">
+						<interactorRef>1245</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>bait</shortLabel>
+									<fullName>bait</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0496"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+					<participant id="1248">
+						<interactorRef>1202</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>prey</shortLabel>
+									<fullName>prey</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0498"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+				</participantList>
+				<interactionType>
+					<names>
+						<shortLabel>association</shortLabel>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0914"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionType>
+				<modelled>false</modelled>
+				<intraMolecular>false</intraMolecular>
+				<negative>false</negative>
+				<confidenceList>
+					<confidence>
+						<unit>
+							<names>
+								<shortLabel>intact-miscore</shortLabel>
+							</names>
+						</unit>
+						<value>0.35</value>
+					</confidence>
+				</confidenceList>
+				<attributeList>
+					<attribute name="source reference:label">intact</attribute>
+					<attribute name="expansion">Spoke</attribute>
+				</attributeList>
+			</interaction>
+			<interaction id="1277">
+				<names>
+					<shortLabel>P0AEN1-P0AG55-1</shortLabel>
+				</names>
+				<xref>
+					<primaryRef db="intact" dbAc="MI:0469" id="EBI-1146778"
+											refType="identity" refTypeAc="MI:0356"/>
+					<secondaryRef db="psi-mi" dbAc="MI:0488" id="MI:0469"
+												refType="source reference" refTypeAc="MI:0685"/>
+				</xref>
+				<experimentList>
+					<experimentRef>1278</experimentRef>
+				</experimentList>
+				<participantList>
+					<participant id="1251">
+						<interactorRef>1202</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>bait</shortLabel>
+									<fullName>bait</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0496"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+					<participant id="1252">
+						<interactorRef>1250</interactorRef>
+						<biologicalRole>
+							<names>
+								<shortLabel>unspecified role</shortLabel>
+								<fullName>unspecified role</fullName>
+							</names>
+							<xref>
+								<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0499"
+														refType="identity" refTypeAc="MI:0356"/>
+							</xref>
+						</biologicalRole>
+						<experimentalRoleList>
+							<experimentalRole>
+								<names>
+									<shortLabel>prey</shortLabel>
+									<fullName>prey</fullName>
+								</names>
+								<xref>
+									<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0498"
+															refType="identity" refTypeAc="MI:0356"/>
+								</xref>
+							</experimentalRole>
+						</experimentalRoleList>
+					</participant>
+				</participantList>
+				<interactionType>
+					<names>
+						<shortLabel>association</shortLabel>
+					</names>
+					<xref>
+						<primaryRef db="psi-mi" dbAc="MI:0488" id="MI:0914"
+												refType="identity" refTypeAc="MI:0356"/>
+					</xref>
+				</interactionType>
+				<modelled>false</modelled>
+				<intraMolecular>false</intraMolecular>
+				<negative>false</negative>
+				<confidenceList>
+					<confidence>
+						<unit>
+							<names>
+								<shortLabel>intact-miscore</shortLabel>
+							</names>
+						</unit>
+						<value>0.35</value>
+					</confidence>
+				</confidenceList>
+				<attributeList>
+					<attribute name="source reference:label">intact</attribute>
+					<attribute name="expansion">Spoke</attribute>
+				</attributeList>
+			</interaction>
+		</interactionList>
+		<attributeList>
+			<attribute>Data retrieved using the PSICQUIC service. Query: P23486 AND
+				source:intact
+			</attribute>
+			<attribute>Total results found: 13</attribute>
+		</attributeList>
+	</entry>
+</entrySet>

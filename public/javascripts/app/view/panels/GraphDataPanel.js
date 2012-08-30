@@ -43,6 +43,8 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
       confVal: me.confVal,
       maxNodes: me.maxNodes,
 
+      id: 'graph-'+me.targetAcc,
+
       nodeClickHandler: function (node, eventInfo, ev) {
       // console.info ("onClickHandler method...")
         if (typeof node !== 'undefined') {
@@ -80,7 +82,6 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
 
           myWin.show()
         } // EO if node is undefined
-
       } // EO nodeClickHandler callback function
 
     }) // EO graphPanel

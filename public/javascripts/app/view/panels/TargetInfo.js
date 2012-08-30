@@ -32,6 +32,14 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
   uniprot_acc: undefined,
 
 	initComponent: function() {
+// set concept_uuid and uniprot_acc from
+// "http://www.conceptwiki.org/concept/ec79efff-65cb-45b1-a9f5-dddfc1c4025c,http://www.uniprot.org/uniprot/Q14596"
+    var qparams = this.queryParam.split(',')
+    this.uniprot_acc = qparams[1].substring(qparams[1].lastIndexOf('/')+1, qparams[1].length)
+    this.concept_uuid = qparams[0].substring(qparams[0].lastIndexOf('/')+1, qparams[0].length)
+
+
+    var me = this
 		this.items = [{
 			xtype: 'panel',
 			border: 0,
@@ -202,13 +210,17 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 	// EO initComponent
 
 
-  raiseInteractionParams: function () {
+  raiseInteractionParams: function (btn, ev) {
 
-    var me = this
+    var panel = btn.up('tdgui-targetinfopanel')
+
+    var me = panel
     var form = Ext.createWidget('form', {
       bodyPadding: 5,
       frame: true,
       width: 200,
+
+
       fieldDefaults: {
         labelAlign: 'left',
         labelWidth: 105,
@@ -236,6 +248,10 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
           maxValue: 10,
           minValue: 2,
           value: 5
+        }, {
+          xtype: 'hiddenfield',
+          name: 'uniprotAcc',
+          value: me.uniprot_acc
         }
       ],
 

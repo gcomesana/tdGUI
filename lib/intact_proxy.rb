@@ -696,6 +696,7 @@ puts "\norphans: #{orphans}\n"
 		puts "IntactProxy.request (#{url}, #{options.inspect})\n"
 		my_url = URI.parse(url)
 start_time = Time.now
+
 		req = Net::HTTP::Get.new(my_url.request_uri)
 		res = Net::HTTP.start(my_url.host, my_url.port) { |http|
 			http.request(req)

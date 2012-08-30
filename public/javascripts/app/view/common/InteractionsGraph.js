@@ -107,11 +107,12 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
       var cssRuleText = cssRule.style.cssText
       var newRule = '#' + this.fdDivName + ' {' + cssRuleText + '}'
       var newCSS = Ext.util.CSS.createStyleSheet(newRule, this.fdDivName + "-css")
+      this.fdDivName = this.fdDivName+'-'+this.targetId
 
       this.html = '<div id="' + this.fdDivName + '" style="height:100%;background-color:white;"></div>'
     }
     else
-      this.html = '<div id="infovis-div" style="background-color:white;">Graph</div>'
+      this.html = '<div id="infovis-div-'+this.targetId+'" style="background-color:white;">Graph</div>'
 
 /*
     Ext.Ajax.request({
@@ -143,7 +144,6 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
     var me = this
 
 
-
     /**
      * This is a private method to set the graph features by default.
      * It is only call from the initGraph function, so it is implemented mostly
@@ -157,7 +157,8 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
       var defaultFDCfg = {
         fdGraph: null, // this is a reference to the graph
         // id of the visualization container
-        injectInto: 'infovis-div',
+//        injectInto: 'infovis-div',
+        injectInto: me.fdDivName,
       /*
         Canvas: { // dont work
           width: 100,

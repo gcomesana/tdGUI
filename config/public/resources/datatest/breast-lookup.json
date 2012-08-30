@@ -1,0 +1,202 @@
+[
+  {
+    "match":"<b>Breast</b> carcinoma-amplified sequence 1 homolog (Rattus norvegicus)",
+    "concept_uuid":"57521c82-4695-4bc0-a6d8-d67d5f0e61b2",
+    "concept_url":"http://www.conceptwiki.org/concept/57521c82-4695-4bc0-a6d8-d67d5f0e61b2",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/57521c82-4695-4bc0-a6d8-d67d5f0e61b2/view",
+    "concept_label":"Breast carcinoma-amplified sequence 1 homolog (Rattus norvegicus)",
+    "concept_alt_labels":"Pmes-2; Protein whose mRNA is enriched in synaptosomes 2",
+    "tag_uuid":"eeaec894-d856-4106-9fa1-662b1dc6c6f1",
+    "tag_label":"Amino Acid, Peptide, or Protein"
+  },
+  {
+    "match":"<b>Breast</b> cancer metastasis-suppressor 1 homolog (Mus musculus)",
+    "concept_uuid":"56185e0d-c7cf-4b05-87dc-d12ad52fd972",
+    "concept_url":"http://www.conceptwiki.org/concept/56185e0d-c7cf-4b05-87dc-d12ad52fd972",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/56185e0d-c7cf-4b05-87dc-d12ad52fd972/view",
+    "concept_label":"Breast cancer metastasis-suppressor 1 homolog (Mus musculus)",
+    "concept_alt_labels":"<b>breast</b> cancer metastasis suppressor 1 protein, mouse",
+    "tag_uuid":"41820dbb-3d2f-4e5e-aaf7-de865ec1ce4e",
+    "tag_label":"Breast cancer metastasis-suppressor 1 homolog"
+  },
+  {
+    "match":"<b>Breast</b> cancer metastasis-suppressor 1 (Homo sapiens)",
+    "concept_uuid":"db08081a-6fbd-467d-a4be-254e80301841",
+    "concept_url":"http://www.conceptwiki.org/concept/db08081a-6fbd-467d-a4be-254e80301841",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/db08081a-6fbd-467d-a4be-254e80301841/view",
+    "concept_label":"Breast cancer metastasis-suppressor 1 (Homo sapiens)",
+    "concept_alt_labels":"<b>breast</b>-cancer metastasis suppressor 1",
+    "tag_uuid":"876f1e0a-8650-4eef-84a7-e0caa6245a85",
+    "tag_label":"Breast cancer metastasis-suppressor 1"
+  },
+  {
+    "match":"<b>Breast</b> carcinoma-amplified sequence 4 (Homo sapiens)",
+    "concept_uuid":"c3f31e34-b32d-441c-a65c-c24cd36de1b4",
+    "concept_url":"http://www.conceptwiki.org/concept/c3f31e34-b32d-441c-a65c-c24cd36de1b4",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/c3f31e34-b32d-441c-a65c-c24cd36de1b4/view",
+    "concept_label":"Breast carcinoma-amplified sequence 4 (Homo sapiens)",
+    "concept_alt_labels":"<b>breast</b> carcinoma amplified sequence 4 protein, human",
+    "tag_uuid":"eeaec894-d856-4106-9fa1-662b1dc6c6f1",
+    "tag_label":"Amino Acid, Peptide, or Protein"
+  },
+  {
+    "match":"<b>Breast</b> carcinoma-amplified sequence 3 (Homo sapiens)",
+    "concept_uuid":"2ef8e5a9-efff-4f92-a6f0-818c3fad3dbe",
+    "concept_url":"http://www.conceptwiki.org/concept/2ef8e5a9-efff-4f92-a6f0-818c3fad3dbe",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/2ef8e5a9-efff-4f92-a6f0-818c3fad3dbe/view",
+    "concept_label":"Breast carcinoma-amplified sequence 3 (Homo sapiens)",
+    "concept_alt_labels":"<b>breast</b> carcinoma amplified sequence 3 protein, human; GAOB1",
+    "tag_uuid":"a9b11693-d5af-4f67-bbb9-93414f0f88b7",
+    "tag_label":"Breast carcinoma-amplified sequence 3"
+  },
+  {
+    "match":"<b>Breast</b> carcinoma-amplified sequence 1 (Homo sapiens)",
+    "concept_uuid":"25933584-d121-4176-bb9c-03276e142649",
+    "concept_url":"http://www.conceptwiki.org/concept/25933584-d121-4176-bb9c-03276e142649",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/25933584-d121-4176-bb9c-03276e142649/view",
+    "concept_label":"Breast carcinoma-amplified sequence 1 (Homo sapiens)",
+    "concept_alt_labels":"Novel amplified in <b>breast</b> cancer 1; NABC1 protein, human; <b>breast</b> carcinoma amplified sequence 1 protein, human; Amplified and overexpressed in <b>breast</b> cancer",
+    "tag_uuid":"09391f66-0728-4047-9116-2c7ebfaebde6",
+    "tag_label":"Breast carcinoma-amplified sequence 1"
+  },
+  {
+    "match":"<b>Breast</b> cancer type 2 susceptibility protein (Homo sapiens)",
+    "concept_uuid":"d76e4a78-c06c-416e-a0fc-c073a69000d5",
+    "concept_url":"http://www.conceptwiki.org/concept/d76e4a78-c06c-416e-a0fc-c073a69000d5",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/d76e4a78-c06c-416e-a0fc-c073a69000d5/view",
+    "concept_label":"Breast cancer type 2 susceptibility protein (Homo sapiens)",
+    "concept_alt_labels":"Fanconi anemia group D1 protein; <b>breast</b> cancer type 2 susceptibility protein, human; FANCD1 protein, human; <b>breast</b> cancer 2, early onset protein, human; Fanconi anemia group D1 protein, human",
+    "tag_uuid":"3d9d4d67-e8e9-4371-bd0e-e1886a29e30e",
+    "tag_label":"Breast cancer type 2 susceptibility protein"
+  },
+  {
+    "match":"<b>Breast</b> cancer type 1 susceptibility protein (Homo sapiens)",
+    "concept_uuid":"d8df783a-4600-4f70-844c-c70564e4a911",
+    "concept_url":"http://www.conceptwiki.org/concept/d8df783a-4600-4f70-844c-c70564e4a911",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/d8df783a-4600-4f70-844c-c70564e4a911/view",
+    "concept_label":"Breast cancer type 1 susceptibility protein (Homo sapiens)",
+    "concept_alt_labels":"BRCC1 protein, human; <b>breast</b> cancer 1, early onset protein, human; RING finger protein 53; EC 6.3.2.-",
+    "tag_uuid":"5c6405bd-2b3d-4165-b521-8bb1d35b49c6",
+    "tag_label":"Breast cancer type 1 susceptibility protein"
+  },
+  {
+    "match":"Prostate and <b>breast</b> cancer overexpressed gene 1 protein (Homo sapiens)",
+    "concept_uuid":"d428df8a-e6a3-4e38-883d-e33257bd608d",
+    "concept_url":"http://www.conceptwiki.org/concept/d428df8a-e6a3-4e38-883d-e33257bd608d",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/d428df8a-e6a3-4e38-883d-e33257bd608d/view",
+    "concept_label":"Prostate and breast cancer overexpressed gene 1 protein (Homo sapiens)",
+    "concept_alt_labels":"prostate and <b>breast</b> cancer overexpressed 1 protein, human; UROC28 protein, human; UC28; Protein UROC28",
+    "tag_uuid":"2c6163ba-d911-411f-a999-cc404204e0a0",
+    "tag_label":"Prostate and breast cancer overexpressed gene 1 protein"
+  },
+  {
+    "match":"<b>Breast</b> cancer anti-estrogen resistance protein 3 (Mus musculus)",
+    "concept_uuid":"61de7794-9be9-4498-9f65-a9c45132194d",
+    "concept_url":"http://www.conceptwiki.org/concept/61de7794-9be9-4498-9f65-a9c45132194d",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/61de7794-9be9-4498-9f65-a9c45132194d/view",
+    "concept_label":"Breast cancer anti-estrogen resistance protein 3 (Mus musculus)",
+    "concept_alt_labels":"<b>breast</b> cancer anti-estrogen resistance 3 protein, mouse; p130Cas-binding protein AND-34; AND-34 protein, mouse",
+    "tag_uuid":"eeaec894-d856-4106-9fa1-662b1dc6c6f1",
+    "tag_label":"Amino Acid, Peptide, or Protein"
+  },
+  {
+    "match":"<b>Breast</b> cancer anti-estrogen resistance protein 3 (Homo sapiens)",
+    "concept_uuid":"bb9500c5-2e73-438c-8c9a-d7c8ddf1d385",
+    "concept_url":"http://www.conceptwiki.org/concept/bb9500c5-2e73-438c-8c9a-d7c8ddf1d385",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/bb9500c5-2e73-438c-8c9a-d7c8ddf1d385/view",
+    "concept_label":"Breast cancer anti-estrogen resistance protein 3 (Homo sapiens)",
+    "concept_alt_labels":"SH2D3B protein, human; Novel SH2-containing protein 2; NSP2 adaptor protein, human; SH2 domain-containing protein 3B; <b>breast</b> cancer anti-estrogen resistance 3 protein, human",
+    "tag_uuid":"eeaec894-d856-4106-9fa1-662b1dc6c6f1",
+    "tag_label":"Amino Acid, Peptide, or Protein"
+  },
+  {
+    "match":"<b>Breast</b> cancer anti-estrogen resistance protein 1 (Mus musculus)",
+    "concept_uuid":"75b66788-f29d-4d2f-8d46-c0d6aafd493d",
+    "concept_url":"http://www.conceptwiki.org/concept/75b66788-f29d-4d2f-8d46-c0d6aafd493d",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/75b66788-f29d-4d2f-8d46-c0d6aafd493d/view",
+    "concept_label":"Breast cancer anti-estrogen resistance protein 1 (Mus musculus)",
+    "concept_alt_labels":"p130 Cas protein, mouse; p130cas; Cas protein, mouse; CRK-associated substrate; <b>breast</b> cancer anti-estrogen resistance 1, mouse; Crkas protein, mouse",
+    "tag_uuid":"d3bf270f-109d-4cf2-89fa-c5e3f808e8e2",
+    "tag_label":"Breast cancer anti-estrogen resistance protein 1"
+  },
+  {
+    "match":"<b>Breast</b> cancer anti-estrogen resistance protein 1 (Homo sapiens)",
+    "concept_uuid":"1cc175d4-d169-428a-8618-dc9d1baf9611",
+    "concept_url":"http://www.conceptwiki.org/concept/1cc175d4-d169-428a-8618-dc9d1baf9611",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/1cc175d4-d169-428a-8618-dc9d1baf9611/view",
+    "concept_label":"Breast cancer anti-estrogen resistance protein 1 (Homo sapiens)",
+    "concept_alt_labels":"Cas scaffolding protein family member 1; Crk-associated substrate, human; p130 Crk-associated substrate protein, human; p130cas; CRK-associated substrate; P130 platelet protein, human; P130Cas protein, human; P130 protein, human; <b>breast</b> cancer anti-estrogen resistance 1, human",
+    "tag_uuid":"d3bf270f-109d-4cf2-89fa-c5e3f808e8e2",
+    "tag_label":"Breast cancer anti-estrogen resistance protein 1"
+  },
+  {
+    "match":"<b>Breast</b> cancer anti-estrogen resistance protein 1 (Rattus norvegicus)",
+    "concept_uuid":"61a22cdc-5a5d-4ac1-b9af-85ad13f555f6",
+    "concept_url":"http://www.conceptwiki.org/concept/61a22cdc-5a5d-4ac1-b9af-85ad13f555f6",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/61a22cdc-5a5d-4ac1-b9af-85ad13f555f6/view",
+    "concept_label":"Breast cancer anti-estrogen resistance protein 1 (Rattus norvegicus)",
+    "concept_alt_labels":"Crkas protein, rat; p130cas; <b>breast</b> cancer anti-estrogen resistance 1 protein, rat; CRK-associated substrate; P130CAS protein, rat; Cas protein, rat; v-crk-associated tyrosine kinase substrate protein, rat",
+    "tag_uuid":"d3bf270f-109d-4cf2-89fa-c5e3f808e8e2",
+    "tag_label":"Breast cancer anti-estrogen resistance protein 1"
+  },
+  {
+    "match":"<b>Breast</b> cancer type 2 susceptibility protein homolog (Mus musculus)",
+    "concept_uuid":"4753363d-800d-41a6-9f19-c5c0c2011007",
+    "concept_url":"http://www.conceptwiki.org/concept/4753363d-800d-41a6-9f19-c5c0c2011007",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/4753363d-800d-41a6-9f19-c5c0c2011007/view",
+    "concept_label":"Breast cancer type 2 susceptibility protein homolog (Mus musculus)",
+    "concept_alt_labels":"Fanconi anemia group D1 protein homolog; <b>breast</b> cancer 2 protein, mouse; RAB163 protein, mouse",
+    "tag_uuid":"8c37009c-75d8-4959-a5cd-d8ae2eb24e8a",
+    "tag_label":"Breast cancer type 2 susceptibility protein homolog"
+  },
+  {
+    "match":"<b>breast</b> cancer antigen NY-BR-1, human",
+    "concept_uuid":"21911f96-fa8d-479d-976b-5e04409dceb2",
+    "concept_url":"http://www.conceptwiki.org/concept/21911f96-fa8d-479d-976b-5e04409dceb2",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/21911f96-fa8d-479d-976b-5e04409dceb2/view",
+    "concept_label":"breast cancer antigen NY-BR-1, human",
+    "concept_alt_labels":"NY-BR-1 <b>breast</b> cancer antigen, human",
+    "tag_uuid":"381f01c4-3e37-4a34-8df6-83fc5e5ba9be",
+    "tag_label":"Immunologic Factor"
+  },
+  {
+    "match":"<b>breast</b> cancer-associated antigen 200, human",
+    "concept_uuid":"66693271-ffb5-455e-a88f-b705ac9bc478",
+    "concept_url":"http://www.conceptwiki.org/concept/66693271-ffb5-455e-a88f-b705ac9bc478",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/66693271-ffb5-455e-a88f-b705ac9bc478/view",
+    "concept_label":"breast cancer-associated antigen 200, human",
+    "concept_alt_labels":"glycoprotein BCA 200, human; glycoprotein BCA-200, human; BCA200 protein, human; BCA 200 antigen, human",
+    "tag_uuid":"381f01c4-3e37-4a34-8df6-83fc5e5ba9be",
+    "tag_label":"Immunologic Factor"
+  },
+  {
+    "match":"<b>Breast</b> cancer metastasis-suppressor 1-like protein (Gallus gallus)",
+    "concept_uuid":"910a992a-50ca-477d-a0b8-99c784538294",
+    "concept_url":"http://www.conceptwiki.org/concept/910a992a-50ca-477d-a0b8-99c784538294",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/910a992a-50ca-477d-a0b8-99c784538294/view",
+    "concept_label":"Breast cancer metastasis-suppressor 1-like protein (Gallus gallus)",
+    "concept_alt_labels":"",
+    "tag_uuid":"579790f5-95fb-48e6-85b5-b9288abb70c2",
+    "tag_label":"Breast cancer metastasis-suppressor 1-like protein"
+  },
+  {
+    "match":"<b>Breast</b> cancer metastasis-suppressor 1-like protein (Mus musculus)",
+    "concept_uuid":"a0140ee1-4a68-456c-bebe-626accb1079e",
+    "concept_url":"http://www.conceptwiki.org/concept/a0140ee1-4a68-456c-bebe-626accb1079e",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/a0140ee1-4a68-456c-bebe-626accb1079e/view",
+    "concept_label":"Breast cancer metastasis-suppressor 1-like protein (Mus musculus)",
+    "concept_alt_labels":"",
+    "tag_uuid":"579790f5-95fb-48e6-85b5-b9288abb70c2",
+    "tag_label":"Breast cancer metastasis-suppressor 1-like protein"
+  },
+  {
+    "match":"<b>Breast</b> cancer metastasis-suppressor 1-like protein (Xenopus tropicalis)",
+    "concept_uuid":"e631f6f5-e3b1-4e9c-9bc8-18c755059c73",
+    "concept_url":"http://www.conceptwiki.org/concept/e631f6f5-e3b1-4e9c-9bc8-18c755059c73",
+    "define_url":"http://staging.conceptwiki.org/wiki/#/concept/e631f6f5-e3b1-4e9c-9bc8-18c755059c73/view",
+    "concept_label":"Breast cancer metastasis-suppressor 1-like protein (Xenopus tropicalis)",
+    "concept_alt_labels":"",
+    "tag_uuid":"579790f5-95fb-48e6-85b5-b9288abb70c2",
+    "tag_label":"Breast cancer metastasis-suppressor 1-like protein"
+  }
+]

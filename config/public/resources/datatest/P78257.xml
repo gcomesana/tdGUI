@@ -1,0 +1,1087 @@
+<uniprot
+	xsi:schemaLocation="http://uniprot.org/uniprot http://www.uniprot.org/support/docs/uniprot.xsd">
+	<entry dataset="Swiss-Prot" created="1986-07-21" modified="2012-05-16"
+				 version="45">
+		<accession>P0ABH8</accession>
+		<accession>O32552</accession>
+		<accession>P00891</accession>
+		<accession>P78257</accession>
+		<name>CISY_ECOL6</name>
+		<protein>
+			<recommendedName>
+				<fullName>Citrate synthase</fullName>
+				<ecNumber>2.3.3.1</ecNumber>
+				<id>1</id>
+			</recommendedName>
+		</protein>
+		<gene>
+			<name type="primary">gltA</name>
+			<name type="ordered locus">c0796</name>
+		</gene>
+		<organism>
+			<name type="scientific">Escherichia coli O6</name>
+			<dbReference type="NCBI Taxonomy" id="217992"/>
+			<lineage>
+				<taxon>Bacteria</taxon>
+				<taxon>Proteobacteria</taxon>
+				<taxon>Gammaproteobacteria</taxon>
+				<taxon>Enterobacteriales</taxon>
+				<taxon>Enterobacteriaceae</taxon>
+				<taxon>Escherichia</taxon>
+			</lineage>
+		</organism>
+		<reference key="1">
+			<citation type="journal article" date="2002"
+								name="Proc. Natl. Acad. Sci. U.S.A." volume="99" first="17020"
+								last="17024">
+				<title>Extensive mosaic structure revealed by the complete genome
+					sequence of uropathogenic Escherichia coli.
+				</title>
+				<authorList>
+					<person name="Welch R.A."/>
+					<person name="Burland V."/>
+					<person name="Plunkett G. III"/>
+					<person name="Redford P."/>
+					<person name="Roesch P."/>
+					<person name="Rasko D."/>
+					<person name="Buckles E.L."/>
+					<person name="Liou S.-R."/>
+					<person name="Boutin A."/>
+					<person name="Hackett J."/>
+					<person name="Stroud D."/>
+					<person name="Mayhew G.F."/>
+					<person name="Rose D.J."/>
+					<person name="Zhou S."/>
+					<person name="Schwartz D.C."/>
+					<person name="Perna N.T."/>
+					<person name="Mobley H.L.T."/>
+					<person name="Donnenberg M.S."/>
+					<person name="Blattner F.R."/>
+				</authorList>
+				<dbReference type="MEDLINE" id="22388234"/>
+				<dbReference type="PubMed" id="12471157"/>
+				<dbReference type="DOI" id="10.1073/pnas.252529799"/>
+			</citation>
+			<scope>NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA]</scope>
+			<source>
+				<strain>O6:H1 / CFT073 / ATCC 700928 / UPEC</strain>
+			</source>
+		</reference>
+		<comment type="catalytic activity">
+			<text>Acetyl-CoA + H(2)O + oxaloacetate = citrate + CoA.</text>
+		</comment>
+		<comment type="pathway">
+			<text>Carbohydrate metabolism; tricarboxylic acid cycle; isocitrate from
+				oxaloacetate: step 1/2.
+			</text>
+		</comment>
+		<comment type="subunit">
+			<text>Homohexamer (By similarity).</text>
+		</comment>
+		<comment type="miscellaneous">
+			<text>Citrate synthase is found in nearly all cells capable of oxidative
+				metabolism.
+			</text>
+		</comment>
+		<comment type="similarity">
+			<text>Belongs to the citrate synthase family.</text>
+		</comment>
+		<dbReference type="EC" id="2.3.3.1"/>
+		<dbReference type="EMBL" id="AE014075">
+			<property type="protein sequence ID" value="AAN79269.1"/>
+			<property type="molecule type" value="Genomic_DNA"/>
+		</dbReference>
+		<dbReference type="RefSeq" id="NP_752726.1">
+			<property type="nucleotide sequence ID" value="NC_004431.1"/>
+		</dbReference>
+		<dbReference type="ProteinModelPortal" id="P0ABH8"/>
+		<dbReference type="SMR" id="P0ABH8">
+			<property type="residue range" value="2-427"/>
+		</dbReference>
+		<dbReference type="EnsemblBacteria" id="EBESCT00000043290">
+			<property type="protein sequence ID" value="EBESCP00000041639"/>
+			<property type="gene ID" value="EBESCG00000042340"/>
+		</dbReference>
+		<dbReference type="GeneID" id="1036856"/>
+		<dbReference type="GenomeReviews" id="AE014075_GR">
+			<property type="gene designation" value="c0796"/>
+		</dbReference>
+		<dbReference type="KEGG" id="ecc:c0796"/>
+		<dbReference type="PATRIC" id="18279649">
+			<property type="gene designation" value="VBIEscCol75197_0761"/>
+		</dbReference>
+		<dbReference type="HOGENOM" id="HOG000021224"/>
+		<dbReference type="KO" id="K01647"/>
+		<dbReference type="OMA" id="RVTHHTM"/>
+		<dbReference type="ProtClustDB" id="PRK05614"/>
+		<dbReference type="GO" id="GO:0005737">
+			<property type="term" value="C:cytoplasm"/>
+			<property type="evidence" value="IEA:InterPro"/>
+		</dbReference>
+		<dbReference type="GO" id="GO:0004108">
+			<property type="term" value="F:citrate (Si)-synthase activity"/>
+			<property type="evidence" value="IEA:EC"/>
+		</dbReference>
+		<dbReference type="GO" id="GO:0044262">
+			<property type="term" value="P:cellular carbohydrate metabolic process"/>
+			<property type="evidence" value="IEA:InterPro"/>
+		</dbReference>
+		<dbReference type="GO" id="GO:0006099">
+			<property type="term" value="P:tricarboxylic acid cycle"/>
+			<property type="evidence" value="IEA:UniProtKB-KW"/>
+		</dbReference>
+		<dbReference type="Gene3D" id="G3DSA:1.10.580.10">
+			<property type="entry name" value="Citrate_synthase_lrg_a-sub"/>
+			<property type="match status" value="1"/>
+		</dbReference>
+		<dbReference type="Gene3D" id="G3DSA:1.10.230.10">
+			<property type="entry name" value="Citrate_synthase_sm_a-sub"/>
+			<property type="match status" value="1"/>
+		</dbReference>
+		<dbReference type="InterPro" id="IPR016142">
+			<property type="entry name" value="Citrate_synth-like_lrg_a-sub"/>
+		</dbReference>
+		<dbReference type="InterPro" id="IPR016143">
+			<property type="entry name" value="Citrate_synth-like_sm_a-sub"/>
+		</dbReference>
+		<dbReference type="InterPro" id="IPR002020">
+			<property type="entry name" value="Citrate_synthase-like"/>
+		</dbReference>
+		<dbReference type="InterPro" id="IPR016141">
+			<property type="entry name" value="Citrate_synthase-like_core"/>
+		</dbReference>
+		<dbReference type="InterPro" id="IPR019810">
+			<property type="entry name" value="Citrate_synthase_AS"/>
+		</dbReference>
+		<dbReference type="InterPro" id="IPR024176">
+			<property type="entry name" value="Citrate_synthase_bac-typ"/>
+		</dbReference>
+		<dbReference type="InterPro" id="IPR010953">
+			<property type="entry name" value="Citrate_synthase_typ-II"/>
+		</dbReference>
+		<dbReference type="PANTHER" id="PTHR11739">
+			<property type="entry name" value="Citrate_synth"/>
+			<property type="match status" value="1"/>
+		</dbReference>
+		<dbReference type="Pfam" id="PF00285">
+			<property type="entry name" value="Citrate_synt"/>
+			<property type="match status" value="1"/>
+		</dbReference>
+		<dbReference type="PIRSF" id="PIRSF001369">
+			<property type="entry name" value="Citrate_synth"/>
+			<property type="match status" value="1"/>
+		</dbReference>
+		<dbReference type="PRINTS" id="PR00143">
+			<property type="entry name" value="CITRTSNTHASE"/>
+		</dbReference>
+		<dbReference type="SUPFAM" id="SSF48256">
+			<property type="entry name" value="Citrate_synthase_core"/>
+			<property type="match status" value="1"/>
+		</dbReference>
+		<dbReference type="TIGRFAMs" id="TIGR01798">
+			<property type="entry name" value="Cit_synth_I"/>
+			<property type="match status" value="1"/>
+		</dbReference>
+		<dbReference type="PROSITE" id="PS00480">
+			<property type="entry name" value="CITRATE_SYNTHASE"/>
+			<property type="match status" value="1"/>
+		</dbReference>
+		<proteinExistence type="inferred from homology"/>
+		<keyword id="KW-0007">Acetylation</keyword>
+		<keyword id="KW-0021">Allosteric enzyme</keyword>
+		<keyword id="KW-0181">Complete proteome</keyword>
+		<keyword id="KW-0808">Transferase</keyword>
+		<keyword id="KW-0816">Tricarboxylic acid cycle</keyword>
+		<feature type="chain" description="Citrate synthase" id="PRO_0000169944">
+			<location>
+				<begin position="1"/>
+				<end position="427"/>
+			</location>
+		</feature>
+		<feature type="active site" status="by similarity">
+			<location>
+				<position position="306"/>
+			</location>
+		</feature>
+		<feature type="active site" status="by similarity">
+			<location>
+				<position position="363"/>
+			</location>
+		</feature>
+		<feature type="modified residue" description="N6-acetyllysine"
+						 status="by similarity">
+			<location>
+				<position position="283"/>
+			</location>
+		</feature>
+		<sequence length="427" mass="48015" checksum="F30A9DBF1FC590D5"
+							modified="2005-10-25" version="1">
+			MADTKAKLTLNGDTAVELDVLKGTLGQDVIDIRTLGSKGVFTFDPGFTSTASCESKITFI
+			DGDEGILLHRGFPIDQLATDSNYLEVCYILLNGEKPTQEQYDEFKTTVTRHTMIHEQITR
+			LFHAFRRDSHPMAVMCGITGALAAFYHDSLDVNNPRHREIAAFRLLSKMPTMAAMCYKYS
+			IGQPFVYPRNDLSYAGNFLNMMFSTPCEPYEVNPILERAMDRILILHADHEQNASTSTVR
+			TAGSSGANPFACIAAGIASLWGPAHGGANEAALKMLEEISSVKHIPEFVRRAKDKNDSFR
+			LMGFGHRVYKNYDPRATVMRETCHEVLKELGTKDDLLEVAMELENIALNDPYFIEKKLYP
+			NVDFYSGIILKAMGIPSSMFTVIFAMARTVGWIAHWSEMHSDGMKIARPRQLYTGYEKRD
+			FKSDIKR
+		</sequence>
+	</entry>
+	<entry dataset="Swiss-Prot" created="1986-07-21" modified="2012-05-16"
+				 version="63">
+		<accession>P0ABH7</accession>
+		<accession>O32552</accession>
+		<accession>P00891</accession>
+		<accession>P78257</accession>
+		<name>CISY_ECOLI</name>
+		<protein>
+			<recommendedName>
+				<fullName>Citrate synthase</fullName>
+				<ecNumber>2.3.3.1</ecNumber>
+				<id>2</id>
+			</recommendedName>
+		</protein>
+		<gene>
+			<name type="primary">gltA</name>
+			<name type="synonym">gluT</name>
+			<name type="synonym">icdB</name>
+			<name type="ordered locus">b0720</name>
+			<name type="ordered locus">JW0710</name>
+		</gene>
+		<organism>
+			<name type="scientific">Escherichia coli (strain K12)</name>
+			<dbReference type="NCBI Taxonomy" id="83333"/>
+			<lineage>
+				<taxon>Bacteria</taxon>
+				<taxon>Proteobacteria</taxon>
+				<taxon>Gammaproteobacteria</taxon>
+				<taxon>Enterobacteriales</taxon>
+				<taxon>Enterobacteriaceae</taxon>
+				<taxon>Escherichia</taxon>
+			</lineage>
+		</organism>
+		<reference key="1">
+			<citation type="journal article" date="1983" name="Biochemistry"
+								volume="22" first="5243" last="5249">
+				<title>Complete sequence of the gltA gene encoding citrate synthase in
+					Escherichia coli.
+				</title>
+				<authorList>
+					<person name="Ner S.S."/>
+					<person name="Bhayana V."/>
+					<person name="Bell A.W."/>
+					<person name="Giles I.G."/>
+					<person name="Duckworth H.W."/>
+					<person name="Bloxham D.P."/>
+				</authorList>
+			</citation>
+			<scope>NUCLEOTIDE SEQUENCE [GENOMIC DNA]</scope>
+			<source>
+				<strain>K12</strain>
+			</source>
+		</reference>
+		<reference key="2">
+			<citation type="journal article" date="1996" name="DNA Res." volume="3"
+								first="137" last="155">
+				<title>A 718-kb DNA sequence of the Escherichia coli K-12 genome
+					corresponding to the 12.7-28.0 min region on the linkage map.
+				</title>
+				<authorList>
+					<person name="Oshima T."/>
+					<person name="Aiba H."/>
+					<person name="Baba T."/>
+					<person name="Fujita K."/>
+					<person name="Hayashi K."/>
+					<person name="Honjo A."/>
+					<person name="Ikemoto K."/>
+					<person name="Inada T."/>
+					<person name="Itoh T."/>
+					<person name="Kajihara M."/>
+					<person name="Kanai K."/>
+					<person name="Kashimoto K."/>
+					<person name="Kimura S."/>
+					<person name="Kitagawa M."/>
+					<person name="Makino K."/>
+					<person name="Masuda S."/>
+					<person name="Miki T."/>
+					<person name="Mizobuchi K."/>
+					<person name="Mori H."/>
+					<person name="Motomura K."/>
+					<person name="Nakamura Y."/>
+					<person name="Nashimoto H."/>
+					<person name="Nishio Y."/>
+					<person name="Saito N."/>
+					<person name="Sampei G."/>
+					<person name="Seki Y."/>
+					<person name="Tagami H."/>
+					<person name="Takemoto K."/>
+					<person name="Wada C."/>
+					<person name="Yamamoto Y."/>
+					<person name="Yano M."/>
+					<person name="Horiuchi T."/>
+				</authorList>
+				<dbReference type="MEDLINE" id="97061202"/>
+				<dbReference type="PubMed" id="8905232"/>
+				<dbReference type="DOI" id="10.1093/dnares/3.3.137"/>
+			</citation>
+			<scope>NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA]</scope>
+			<source>
+				<strain>K12 / W3110 / ATCC 27325 / DSM 5911</strain>
+			</source>
+		</reference>
+		<reference key="3">
+			<citation type="journal article" date="1997" name="Science" volume="277"
+								first="1453" last="1474">
+				<title>The complete genome sequence of Escherichia coli K-12.</title>
+				<authorList>
+					<person name="Blattner F.R."/>
+					<person name="Plunkett G. III"/>
+					<person name="Bloch C.A."/>
+					<person name="Perna N.T."/>
+					<person name="Burland V."/>
+					<person name="Riley M."/>
+					<person name="Collado-Vides J."/>
+					<person name="Glasner J.D."/>
+					<person name="Rode C.K."/>
+					<person name="Mayhew G.F."/>
+					<person name="Gregor J."/>
+					<person name="Davis N.W."/>
+					<person name="Kirkpatrick H.A."/>
+					<person name="Goeden M.A."/>
+					<person name="Rose D.J."/>
+					<person name="Mau B."/>
+					<person name="Shao Y."/>
+				</authorList>
+				<dbReference type="MEDLINE" id="97426617"/>
+				<dbReference type="PubMed" id="9278503"/>
+				<dbReference type="DOI" id="10.1126/science.277.5331.1453"/>
+			</citation>
+			<scope>NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA]</scope>
+			<source>
+				<strain>K12 / MG1655 / ATCC 47076</strain>
+			</source>
+		</reference>
+		<reference key="4">
+			<citation type="journal article" date="2006" name="Mol. Syst. Biol."
+								volume="2" first="E1" last="E5">
+				<title>Highly accurate genome sequences of Escherichia coli K-12 strains
+					MG1655 and W3110.
+				</title>
+				<authorList>
+					<person name="Hayashi K."/>
+					<person name="Morooka N."/>
+					<person name="Yamamoto Y."/>
+					<person name="Fujita K."/>
+					<person name="Isono K."/>
+					<person name="Choi S."/>
+					<person name="Ohtsubo E."/>
+					<person name="Baba T."/>
+					<person name="Wanner B.L."/>
+					<person name="Mori H."/>
+					<person name="Horiuchi T."/>
+				</authorList>
+				<dbReference type="PubMed" id="16738553"/>
+				<dbReference type="DOI" id="10.1038/msb4100049"/>
+			</citation>
+			<scope>NUCLEOTIDE SEQUENCE [LARGE SCALE GENOMIC DNA]</scope>
+			<source>
+				<strain>K12 / W3110 / ATCC 27325 / DSM 5911</strain>
+			</source>
+		</reference>
+		<reference key="5">
+			<citation type="journal article" date="1984" name="Biochem. J."
+								volume="222" first="519" last="534">
+				<title>Nucleotide sequence encoding the flavoprotein and hydrophobic
+					subunits of the succinate dehydrogenase of Escherichia coli.
+				</title>
+				<authorList>
+					<person name="Wood D."/>
+					<person name="Darlison M.G."/>
+					<person name="Wilde R.J."/>
+					<person name="Guest J.R."/>
+				</authorList>
+				<dbReference type="MEDLINE" id="84307466"/>
+				<dbReference type="PubMed" id="6383359"/>
+			</citation>
+			<scope>NUCLEOTIDE SEQUENCE [GENOMIC DNA] OF 1-127</scope>
+		</reference>
+		<reference key="6">
+			<citation type="journal article" date="1984" name="Biochemistry"
+								volume="23" first="2900" last="2905">
+				<title>Amino acid sequence of Escherichia coli citrate synthase.</title>
+				<authorList>
+					<person name="Bhayana V."/>
+					<person name="Duckworth H.W."/>
+				</authorList>
+				<dbReference type="MEDLINE" id="84280857"/>
+				<dbReference type="PubMed" id="6380576"/>
+				<dbReference type="DOI" id="10.1021/bi00308a008"/>
+			</citation>
+			<scope>PROTEIN SEQUENCE OF 1-101; 110-217 AND 220-427</scope>
+		</reference>
+		<reference key="7">
+			<citation type="journal article" date="1983" name="FEBS Lett."
+								volume="156" first="366" last="370">
+				<title>Nucleotide sequence of the promoter region of the citrate
+					synthase gene (gltA) of Escherichia coli.
+				</title>
+				<authorList>
+					<person name="Hull E.P."/>
+					<person name="Spencer M.E."/>
+					<person name="Wood D."/>
+					<person name="Guest J.R."/>
+				</authorList>
+				<dbReference type="MEDLINE" id="83210236"/>
+				<dbReference type="PubMed" id="6343122"/>
+				<dbReference type="DOI" id="10.1016/0014-5793(83)80530-4"/>
+			</citation>
+			<scope>NUCLEOTIDE SEQUENCE [GENOMIC DNA] OF 1-98</scope>
+			<source>
+				<strain>K12</strain>
+			</source>
+		</reference>
+		<reference key="8">
+			<citation type="submission" date="1984-08"
+								db="EMBL/GenBank/DDBJ databases">
+				<authorList>
+					<person name="Guest J.R."/>
+				</authorList>
+			</citation>
+			<scope>SEQUENCE REVISION TO 92-94</scope>
+		</reference>
+		<reference key="9">
+			<citation type="journal article" date="1986" name="J. Gen. Microbiol."
+								volume="132" first="3239" last="3251">
+				<title>Transcript analysis of the citrate synthase and succinate
+					dehydrogenase genes of Escherichia coli K12.
+				</title>
+				<authorList>
+					<person name="Wilde R.J."/>
+					<person name="Guest J.R."/>
+				</authorList>
+				<dbReference type="MEDLINE" id="88009821"/>
+				<dbReference type="PubMed" id="3309132"/>
+			</citation>
+			<scope>NUCLEOTIDE SEQUENCE [GENOMIC DNA] OF 1-33</scope>
+			<source>
+				<strain>K12</strain>
+			</source>
+		</reference>
+		<reference key="10">
+			<citation type="journal article" date="1986" name="Int. J. Biochem."
+								volume="18" first="257" last="262">
+				<title>The synthesis and use of oligodeoxynucleotides in plasmid DNA
+					sequencing.
+				</title>
+				<authorList>
+					<person name="Ner S.S."/>
+					<person name="Bloxham D.P."/>
+					<person name="Handford P.A."/>
+					<person name="Akhtar M."/>
+				</authorList>
+				<dbReference type="MEDLINE" id="86165297"/>
+				<dbReference type="PubMed" id="3514304"/>
+				<dbReference type="DOI" id="10.1016/0020-711X(86)90115-1"/>
+			</citation>
+			<scope>NUCLEOTIDE SEQUENCE [GENOMIC DNA] OF 360-388</scope>
+		</reference>
+		<reference key="11">
+			<citation type="journal article" date="1991" name="J. Biol. Chem."
+								volume="266" first="20709" last="20713">
+				<title>The role of cysteine 206 in allosteric inhibition of Escherichia
+					coli citrate synthase. Studies by chemical modification, site-directed
+					mutagenesis, and 19F NMR.
+				</title>
+				<authorList>
+					<person name="Donald L.J."/>
+					<person name="Crane B.R."/>
+					<person name="Anderson D.H."/>
+					<person name="Duckworth H.W."/>
+				</authorList>
+				<dbReference type="MEDLINE" id="92041923"/>
+				<dbReference type="PubMed" id="1939121"/>
+			</citation>
+			<scope>MUTAGENESIS OF CYS-207 AND GLU-208</scope>
+			<source>
+				<strain>ATCC 33694 / HB101</strain>
+			</source>
+		</reference>
+		<reference key="12">
+			<citation type="journal article" date="1995" name="J. Bacteriol."
+								volume="177" first="2592" last="2593">
+				<title>icdB mutants of Escherichia coli.</title>
+				<authorList>
+					<person name="Helling R.B."/>
+				</authorList>
+				<dbReference type="MEDLINE" id="95247701"/>
+				<dbReference type="PubMed" id="7730298"/>
+			</citation>
+			<scope>IDENTIFICATION OF ICDB AS GLTA</scope>
+		</reference>
+		<reference key="13">
+			<citation type="journal article" date="2009" name="Mol. Cell. Proteomics"
+								volume="8" first="215" last="225">
+				<title>Lysine acetylation is a highly abundant and evolutionarily
+					conserved modification in Escherichia coli.
+				</title>
+				<authorList>
+					<person name="Zhang J."/>
+					<person name="Sprung R."/>
+					<person name="Pei J."/>
+					<person name="Tan X."/>
+					<person name="Kim S."/>
+					<person name="Zhu H."/>
+					<person name="Liu C.F."/>
+					<person name="Grishin N.V."/>
+					<person name="Zhao Y."/>
+				</authorList>
+				<dbReference type="PubMed" id="18723842"/>
+				<dbReference type="DOI" id="10.1074/mcp.M800187-MCP200"/>
+			</citation>
+			<scope>ACETYLATION [LARGE SCALE ANALYSIS] AT LYS-283</scope>
+			<scope>MASS SPECTROMETRY</scope>
+			<source>
+				<strain>K12 / JW1106</strain>
+				<strain>K12 / MG1655 / ATCC 47076</strain>
+			</source>
+		</reference>
+		<comment type="catalytic activity">
+			<text>Acetyl-CoA + H(2)O + oxaloacetate = citrate + CoA.</text>
+		</comment>
+		<comment type="enzyme regulation">
+			<text>Allosterically inhibited by NADH.</text>
+		</comment>
+		<comment type="pathway">
+			<text>Carbohydrate metabolism; tricarboxylic acid cycle; isocitrate from
+				oxaloacetate: step 1/2.
+			</text>
+		</comment>
+		<comment type="subunit">
+			<text>Homohexamer.</text>
+		</comment>
+		<comment type="interaction">
+			<interactant intactId="EBI-547808"/>
+			<interactant intactId="EBI-547808"/>
+			<organismsDiffer>false</organismsDiffer>
+			<experiments>2</experiments>
+		</comment>
+		<comment type="miscellaneous">
+			<text>Citrate synthase is found in nearly all cells capable of oxidative
+				metabolism.
+			</text>
+		</comment>
+		<comment type="similarity">
+			<text>Belongs to the citrate synthase family.</text>
+		</comment>
+		<dbReference type="EC" id="2.3.3.1"/>
+		<dbReference type="EMBL" id="J01619">
+			<property type="protein sequence ID" value="AAA23892.1"/>
+			<property type="molecule type" value="Genomic_DNA"/>
+		</dbReference>
+		<dbReference type="EMBL" id="U00096">
+			<property type="protein sequence ID" value="AAC73814.1"/>
+			<property type="molecule type" value="Genomic_DNA"/>
+		</dbReference>
+		<dbReference type="EMBL" id="AP009048">
+			<property type="protein sequence ID" value="BAA35384.1"/>
+			<property type="molecule type" value="Genomic_DNA"/>
+		</dbReference>
+		<dbReference type="EMBL" id="X00980">
+			<property type="protein sequence ID" value="CAA25484.1"/>
+			<property type="molecule type" value="Genomic_DNA"/>
+		</dbReference>
+		<dbReference type="EMBL" id="V01501">
+			<property type="protein sequence ID" value="CAA24746.1"/>
+			<property type="molecule type" value="Genomic_DNA"/>
+		</dbReference>
+		<dbReference type="EMBL" id="M28987">
+			<property type="protein sequence ID" value="AAA23901.1"/>
+			<property type="molecule type" value="Genomic_DNA"/>
+		</dbReference>
+		<dbReference type="EMBL" id="M29373">
+			<property type="protein sequence ID" value="AAA23902.1"/>
+			<property type="molecule type" value="Genomic_DNA"/>
+		</dbReference>
+		<dbReference type="PIR" id="G64807">
+			<property type="entry name" value="YKEC"/>
+		</dbReference>
+		<dbReference type="RefSeq" id="NP_415248.1">
+			<property type="nucleotide sequence ID" value="NC_000913.2"/>
+		</dbReference>
+		<dbReference type="PDB" id="1K3P">
+			<property type="method" value="X-ray"/>
+			<property type="resolution" value="2.20"/>
+			<property type="chains" value="A/B=2-427"/>
+		</dbReference>
+		<dbReference type="PDB" id="1NXE">
+			<property type="method" value="X-ray"/>
+			<property type="resolution" value="2.30"/>
+			<property type="chains" value="A/B=1-427"/>
+		</dbReference>
+		<dbReference type="PDB" id="1NXG">
+			<property type="method" value="X-ray"/>
+			<property type="resolution" value="2.50"/>
+			<property type="chains" value="A/B=1-427"/>
+		</dbReference>
+		<dbReference type="PDB" id="1OWB">
+			<property type="method" value="X-ray"/>
+			<property type="resolution" value="2.20"/>
+			<property type="chains" value="A/B=1-427"/>
+		</dbReference>
+		<dbReference type="PDB" id="1OWC">
+			<property type="method" value="X-ray"/>
+			<property type="resolution" value="2.20"/>
+			<property type="chains" value="A/B=1-427"/>
+		</dbReference>
+		<dbReference type="PDB" id="3L96">
+			<property type="method" value="X-ray"/>
+			<property type="resolution" value="1.90"/>
+			<property type="chains" value="A/B=2-427"/>
+		</dbReference>
+		<dbReference type="PDB" id="3L97">
+			<property type="method" value="X-ray"/>
+			<property type="resolution" value="2.70"/>
+			<property type="chains" value="A/B=2-427"/>
+		</dbReference>
+		<dbReference type="PDB" id="3L98">
+			<property type="method" value="X-ray"/>
+			<property type="resolution" value="2.30"/>
+			<property type="chains" value="A/B=2-427"/>
+		</dbReference>
+		<dbReference type="PDB" id="3L99">
+			<property type="method" value="X-ray"/>
+			<property type="resolution" value="2.10"/>
+			<property type="chains" value="A/B=2-427"/>
+		</dbReference>
+		<dbReference type="PDBsum" id="1K3P"/>
+		<dbReference type="PDBsum" id="1NXE"/>
+		<dbReference type="PDBsum" id="1NXG"/>
+		<dbReference type="PDBsum" id="1OWB"/>
+		<dbReference type="PDBsum" id="1OWC"/>
+		<dbReference type="PDBsum" id="3L96"/>
+		<dbReference type="PDBsum" id="3L97"/>
+		<dbReference type="PDBsum" id="3L98"/>
+		<dbReference type="PDBsum" id="3L99"/>
+		<dbReference type="ProteinModelPortal" id="P0ABH7"/>
+		<dbReference type="SMR" id="P0ABH7">
+			<property type="residue range" value="2-427"/>
+		</dbReference>
+		<dbReference type="DIP" id="DIP-36204N"/>
+		<dbReference type="IntAct" id="P0ABH7">
+			<property type="interactions" value="8"/>
+		</dbReference>
+		<dbReference type="MINT" id="MINT-1249502"/>
+		<dbReference type="ECO2DBASE" id="H047.4">
+			<property type="edition" value="6TH EDITION"/>
+		</dbReference>
+		<dbReference type="ECO2DBASE" id="H047.5">
+			<property type="edition" value="6TH EDITION"/>
+		</dbReference>
+		<dbReference type="EnsemblBacteria" id="EBESCT00000003104">
+			<property type="protein sequence ID" value="EBESCP00000003104"/>
+			<property type="gene ID" value="EBESCG00000002544"/>
+		</dbReference>
+		<dbReference type="EnsemblBacteria" id="EBESCT00000003105">
+			<property type="protein sequence ID" value="EBESCP00000003105"/>
+			<property type="gene ID" value="EBESCG00000002544"/>
+		</dbReference>
+		<dbReference type="EnsemblBacteria" id="EBESCT00000015732">
+			<property type="protein sequence ID" value="EBESCP00000015023"/>
+			<property type="gene ID" value="EBESCG00000014792"/>
+		</dbReference>
+		<dbReference type="GeneID" id="945323"/>
+		<dbReference type="GenomeReviews" id="AP009048_GR">
+			<property type="gene designation" value="JW0710"/>
+		</dbReference>
+		<dbReference type="GenomeReviews" id="U00096_GR">
+			<property type="gene designation" value="b0720"/>
+		</dbReference>
+		<dbReference type="KEGG" id="eco:b0720"/>
+		<dbReference type="PATRIC" id="32116635">
+			<property type="gene designation" value="VBIEscCol129921_0750"/>
+		</dbReference>
+		<dbReference type="EchoBASE" id="EB0397"/>
+		<dbReference type="EcoGene" id="EG10402">
+			<property type="gene designation" value="gltA"/>
+		</dbReference>
+		<dbReference type="eggNOG" id="COG0372"/>
+		<dbReference type="HOGENOM" id="HOG000021224"/>
+		<dbReference type="KO" id="K01647"/>
+		<dbReference type="OMA" id="RVTHHTM"/>
+		<dbReference type="ProtClustDB" id="PRK05614"/>
+		<dbReference type="BioCyc" id="EcoCyc:CITSYN-MONOMER"/>
+		<dbReference type="BioCyc" id="MetaCyc:CITSYN-MONOMER"/>
+		<dbReference type="EvolutionaryTrace" id="P0ABH7"/>
+		<dbReference type="Genevestigator" id="P0ABH7"/>
+		<dbReference type="GO" id="GO:0005829">
+			<property type="term" value="C:cytosol"/>
+			<property type="evidence" value="IDA:UniProtKB"/>
+		</dbReference>
+		<dbReference type="GO" id="GO:0016020">
+			<property type="term" value="C:membrane"/>
+			<property type="evidence" value="IDA:UniProtKB"/>
+		</dbReference>
+		<dbReference type="GO" id="GO:0004108">
+			<property type="term" value="F:citrate (Si)-synthase activity"/>
+			<property type="evidence" value="IEA:EC"/>
+		</dbReference>
+		<dbReference type="GO" id="GO:0042802">
+			<property type="term" value="F:identical protein binding"/>
+			<property type="evidence" value="IPI:IntAct"/>
+		</dbReference>
+		<dbReference type="GO" id="GO:0044262">
+			<property type="term" value="P:cellular carbohydrate metabolic process"/>
+			<property type="evidence" value="IEA:InterPro"/>
+		</dbReference>
+		<dbReference type="GO" id="GO:0006099">
+			<property type="term" value="P:tricarboxylic acid cycle"/>
+			<property type="evidence" value="IDA:EcoliWiki"/>
+		</dbReference>
+		<dbReference type="Gene3D" id="G3DSA:1.10.580.10">
+			<property type="entry name" value="Citrate_synthase_lrg_a-sub"/>
+			<property type="match status" value="1"/>
+		</dbReference>
+		<dbReference type="Gene3D" id="G3DSA:1.10.230.10">
+			<property type="entry name" value="Citrate_synthase_sm_a-sub"/>
+			<property type="match status" value="1"/>
+		</dbReference>
+		<dbReference type="InterPro" id="IPR016142">
+			<property type="entry name" value="Citrate_synth-like_lrg_a-sub"/>
+		</dbReference>
+		<dbReference type="InterPro" id="IPR016143">
+			<property type="entry name" value="Citrate_synth-like_sm_a-sub"/>
+		</dbReference>
+		<dbReference type="InterPro" id="IPR002020">
+			<property type="entry name" value="Citrate_synthase-like"/>
+		</dbReference>
+		<dbReference type="InterPro" id="IPR016141">
+			<property type="entry name" value="Citrate_synthase-like_core"/>
+		</dbReference>
+		<dbReference type="InterPro" id="IPR019810">
+			<property type="entry name" value="Citrate_synthase_AS"/>
+		</dbReference>
+		<dbReference type="InterPro" id="IPR024176">
+			<property type="entry name" value="Citrate_synthase_bac-typ"/>
+		</dbReference>
+		<dbReference type="InterPro" id="IPR010953">
+			<property type="entry name" value="Citrate_synthase_typ-II"/>
+		</dbReference>
+		<dbReference type="PANTHER" id="PTHR11739">
+			<property type="entry name" value="Citrate_synth"/>
+			<property type="match status" value="1"/>
+		</dbReference>
+		<dbReference type="Pfam" id="PF00285">
+			<property type="entry name" value="Citrate_synt"/>
+			<property type="match status" value="1"/>
+		</dbReference>
+		<dbReference type="PIRSF" id="PIRSF001369">
+			<property type="entry name" value="Citrate_synth"/>
+			<property type="match status" value="1"/>
+		</dbReference>
+		<dbReference type="PRINTS" id="PR00143">
+			<property type="entry name" value="CITRTSNTHASE"/>
+		</dbReference>
+		<dbReference type="SUPFAM" id="SSF48256">
+			<property type="entry name" value="Citrate_synthase_core"/>
+			<property type="match status" value="1"/>
+		</dbReference>
+		<dbReference type="TIGRFAMs" id="TIGR01798">
+			<property type="entry name" value="Cit_synth_I"/>
+			<property type="match status" value="1"/>
+		</dbReference>
+		<dbReference type="PROSITE" id="PS00480">
+			<property type="entry name" value="CITRATE_SYNTHASE"/>
+			<property type="match status" value="1"/>
+		</dbReference>
+		<proteinExistence type="evidence at protein level"/>
+		<keyword id="KW-0002">3D-structure</keyword>
+		<keyword id="KW-0007">Acetylation</keyword>
+		<keyword id="KW-0021">Allosteric enzyme</keyword>
+		<keyword id="KW-0181">Complete proteome</keyword>
+		<keyword id="KW-0903">Direct protein sequencing</keyword>
+		<keyword id="KW-1185">Reference proteome</keyword>
+		<keyword id="KW-0808">Transferase</keyword>
+		<keyword id="KW-0816">Tricarboxylic acid cycle</keyword>
+		<feature type="chain" description="Citrate synthase" id="PRO_0000169943">
+			<location>
+				<begin position="1"/>
+				<end position="427"/>
+			</location>
+		</feature>
+		<feature type="active site" status="by similarity">
+			<location>
+				<position position="306"/>
+			</location>
+		</feature>
+		<feature type="active site" status="by similarity">
+			<location>
+				<position position="363"/>
+			</location>
+		</feature>
+		<feature type="modified residue" description="N6-acetyllysine" evidence="1">
+			<location>
+				<position position="283"/>
+			</location>
+		</feature>
+		<feature type="mutagenesis site"
+						 description="Weakened NADH binding and inhibition." evidence="2">
+			<original>C</original>
+			<variation>S</variation>
+			<location>
+				<position position="207"/>
+			</location>
+		</feature>
+		<feature type="mutagenesis site"
+						 description="Weakened NADH binding and inhibition." evidence="2">
+			<original>E</original>
+			<variation>A</variation>
+			<location>
+				<position position="208"/>
+			</location>
+		</feature>
+		<feature type="sequence conflict" description="In Ref. 6; AA sequence."
+						 ref="6">
+			<original>N</original>
+			<variation>D</variation>
+			<location>
+				<position position="11"/>
+			</location>
+		</feature>
+		<feature type="sequence conflict"
+						 description="In Ref. 1; AAA23892 and 6; AA sequence." ref="1 6">
+			<original>V</original>
+			<variation>F</variation>
+			<location>
+				<position position="289"/>
+			</location>
+		</feature>
+		<feature type="strand">
+			<location>
+				<begin position="4"/>
+				<end position="14"/>
+			</location>
+		</feature>
+		<feature type="strand">
+			<location>
+				<begin position="16"/>
+				<end position="21"/>
+			</location>
+		</feature>
+		<feature type="strand">
+			<location>
+				<begin position="24"/>
+				<end position="26"/>
+			</location>
+		</feature>
+		<feature type="strand">
+			<location>
+				<begin position="29"/>
+				<end position="31"/>
+			</location>
+		</feature>
+		<feature type="turn">
+			<location>
+				<begin position="33"/>
+				<end position="39"/>
+			</location>
+		</feature>
+		<feature type="strand">
+			<location>
+				<begin position="50"/>
+				<end position="61"/>
+			</location>
+		</feature>
+		<feature type="turn">
+			<location>
+				<begin position="62"/>
+				<end position="65"/>
+			</location>
+		</feature>
+		<feature type="strand">
+			<location>
+				<begin position="66"/>
+				<end position="69"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="74"/>
+				<end position="80"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="83"/>
+				<end position="92"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="98"/>
+				<end position="109"/>
+			</location>
+		</feature>
+		<feature type="turn">
+			<location>
+				<begin position="116"/>
+				<end position="118"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="119"/>
+				<end position="122"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="131"/>
+				<end position="139"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="142"/>
+				<end position="145"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="147"/>
+				<end position="149"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="155"/>
+				<end position="181"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="194"/>
+				<end position="203"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="214"/>
+				<end position="225"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="234"/>
+				<end position="244"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="249"/>
+				<end position="265"/>
+			</location>
+		</feature>
+		<feature type="turn">
+			<location>
+				<begin position="269"/>
+				<end position="273"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="274"/>
+				<end position="276"/>
+			</location>
+		</feature>
+		<feature type="strand">
+			<location>
+				<begin position="280"/>
+				<end position="282"/>
+			</location>
+		</feature>
+		<feature type="turn">
+			<location>
+				<begin position="286"/>
+				<end position="289"/>
+			</location>
+		</feature>
+		<feature type="turn">
+			<location>
+				<begin position="300"/>
+				<end position="303"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="316"/>
+				<end position="327"/>
+			</location>
+		</feature>
+		<feature type="turn">
+			<location>
+				<begin position="335"/>
+				<end position="338"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="339"/>
+				<end position="349"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="351"/>
+				<end position="355"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="362"/>
+				<end position="372"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="377"/>
+				<end position="379"/>
+			</location>
+		</feature>
+		<feature type="helix">
+			<location>
+				<begin position="380"/>
+				<end position="401"/>
+			</location>
+		</feature>
+		<feature type="strand">
+			<location>
+				<begin position="410"/>
+				<end position="413"/>
+			</location>
+		</feature>
+		<evidence key="1" type="ECO:0000006">
+			<source>
+				<dbReference type="PubMed" id="18723842"/>
+			</source>
+		</evidence>
+		<evidence key="2" type="ECO:0000006">
+			<source>
+				<dbReference type="PubMed" id="1939121"/>
+			</source>
+		</evidence>
+		<sequence length="427" mass="48015" checksum="F30A9DBF1FC590D5"
+							modified="2005-10-25" version="1">
+			MADTKAKLTLNGDTAVELDVLKGTLGQDVIDIRTLGSKGVFTFDPGFTSTASCESKITFI
+			DGDEGILLHRGFPIDQLATDSNYLEVCYILLNGEKPTQEQYDEFKTTVTRHTMIHEQITR
+			LFHAFRRDSHPMAVMCGITGALAAFYHDSLDVNNPRHREIAAFRLLSKMPTMAAMCYKYS
+			IGQPFVYPRNDLSYAGNFLNMMFSTPCEPYEVNPILERAMDRILILHADHEQNASTSTVR
+			TAGSSGANPFACIAAGIASLWGPAHGGANEAALKMLEEISSVKHIPEFVRRAKDKNDSFR
+			LMGFGHRVYKNYDPRATVMRETCHEVLKELGTKDDLLEVAMELENIALNDPYFIEKKLYP
+			NVDFYSGIILKAMGIPSSMFTVIFAMARTVGWIAHWSEMHSDGMKIARPRQLYTGYEKRD
+			FKSDIKR
+		</sequence>
+	</entry>
+	<copyright>
+		Copyrighted by the UniProt Consortium, see http://www.uniprot.org/terms
+		Distributed under the Creative Commons Attribution-NoDerivs License
+	</copyright>
+</uniprot>

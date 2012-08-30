@@ -35,7 +35,7 @@ console.info ("Initializing TargetInfo controller...")
           var formVals = form.getForm().getValues()
 
 console.info ('Yes, button send interactions clicked')
-          this.onClickInteractionsBtn (formVals.conf_val, formVals.max_nodes)
+          this.onClickInteractionsBtn (formVals.uniprotAcc, formVals.conf_val, formVals.max_nodes)
           comp.up('window').hide()
         }
 
@@ -67,11 +67,11 @@ console.info ('Yes, button send interactions clicked')
  * @param ev
  * @param opts
  */
-  onClickInteractionsBtn: function (confVal, maxNodes) {
+  onClickInteractionsBtn: function (targetAcc, confVal, maxNodes) {
 
     var theStore = this.getTargetinfopanel().targetInfoStore
 //    var targetAcc = theStore.proxy.extraParams.protein_uri
-    var targetAcc = this.getTargetinfopanel().uniprot_acc
+//    var targetAcc = this.getTargetinfopanel().uniprot_acc
 /*
     if (targetAcc.indexOf ('uniprot') != -1)
       targetAcc = targetAcc.substring(targetAcc.lastIndexOf('/')+1)

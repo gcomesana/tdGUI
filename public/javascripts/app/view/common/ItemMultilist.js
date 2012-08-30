@@ -35,7 +35,7 @@ Ext.define ('TDGUI.view.common.ItemMultilist', {
 //			allowBlank: false,
 			anchor: '100%',
       border: false,
-      height: 400,
+      height: 350,
 
       store: me.store,
       displayField: me.displayField,

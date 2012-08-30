@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TdGUI</title>
+  <%#= stylesheet_link_tag "application" %>
+  <%#= javascript_include_tag "application" %>
+
+  <%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag '/javascripts/extjs4.0.7/resources/css/ext-all-gray.css' %>
+  <%= stylesheet_link_tag '/stylesheets/tdgui.css' %>
+  <%= stylesheet_link_tag '/stylesheets/sbuttons.css' %>
+  <%= stylesheet_link_tag '/stylesheets/jit.css' %>
+
+  <% if ENV['RAILS_ENV'] != 'production' %>
+    <%= javascript_include_tag '/javascripts/extjs4.0.7/ext-all-debug.js' %>
+    <%#= javascript_include_tag "extjs4.0.7/bootstrap.js" %>
+    <%#= javascript_include_tag 'prototype.js' %>
+    <%# = javascript_include_tag "borderbis" %>
+    <%= javascript_include_tag '/javascripts/lib/jit.js' %>
+    <%= javascript_include_tag '/javascripts/app.js' %>
+
+  <% else %>
+      <%= javascript_include_tag '/ext/ext-all.js' %>
+      <%= javascript_include_tag 'prototype' %>
+      <%= javascript_include_tag '/all-classes.js' %>
+      <%= javascript_include_tag '/app-all.js' %>
+  <% end %>
+
+  <%#= javascript_include_tag '/app/view/ux/exporter/Exporter.js' %>
+  <%#= javascript_include_tag '/downloadify/downloadify.min.js' %>
+  <%#= javascript_include_tag '/downloadify/swfobject.js' %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<form id="history-form" class="x-hide-display">
+    <input type="hidden" id="x-history-field" />
+    <iframe id="x-history-frame"></iframe>
+</form>
+
+<%= yield %>
+
+</body>
+</html>

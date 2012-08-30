@@ -326,18 +326,35 @@ puts "Filling columns..."
 	def request(url, options)
 #		my_url = URI.parse(URI.encode(url))
 
+
 		begin
 			my_url = URI.parse(url)
 		rescue URI::InvalidURIError
 			my_url = URI.parse(URI.encode(url))
 		end
 
-		req = Net::HTTP::Get.new(my_url.request_uri)
-		res = Net::HTTP.start(my_url.host, my_url.port) { |http|
-			http.request(req)
+		proxy_host = 'ubio.cnio.es'
+		proxy_port = 3128
+
+		proxy = Net::HTTP::Proxy(proxy_host, proxy_port)
+		http_session = proxy.new(my_url.host, my_url.port)
+
+		res = nil
+#		proxy.new(my_url.host, my_url.port).start { |http|
+		Net::HTTP::Proxy(proxy_host, proxy_port).start(my_url.host) { |http|
+			req = Net::HTTP::Get.new(my_url.request_uri)
+			res, data = http.request(req)
+
+			puts "shitting data: #{data}\n"
+			puts "res.code: #{res.code}\n"
 		}
 
-puts "response code: #{res.code}"
+
+		res = Net::HTTP.start(my_url.host, my_url.port) { |http|
+			req = Net::HTTP::Get.new(my_url.request_uri)
+			http.request(req)
+		}
+puts "response code: #{res ? res.code: 'res not available here'}"
 		res
 	end
 

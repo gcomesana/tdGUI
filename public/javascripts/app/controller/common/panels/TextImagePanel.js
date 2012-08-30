@@ -34,16 +34,17 @@ Ext.define("TDGUI.controller.common.panels.TextImagePanel", {
 
   initWindowTextImgPanel: function (comp, opts) {
     var infoComp = this.getWindowTextImagePanel()
+console.info ('loading for window')
     var store = infoComp.targetStore
     var tokenObjQp = infoComp.data.nodename
     tokenObjQp = 'http://www.uniprot.org/uniprot/'+tokenObjQp
-    if (tokenObjQp != store.proxy.extraParams.protein_uri) {
+//    if (tokenObjQp != store.proxy.extraParams.protein_uri) {
       store.proxy.extraParams.protein_uri = tokenObjQp;
       //          this.getFormView().setLoading(true);
       store.load();
-    }
+//    }
 
-  },
+  }
 
 
 })

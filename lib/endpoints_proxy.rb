@@ -11,6 +11,10 @@ module EndpointsProxy
 private
 	@myProxy = InnerProxy.new
 
+# squid proxy parameters
+	@proxy_host = 'ubio.cnio.es'
+	@proxy_port = 3128
+
 #	URI_REGEX = /^(?=[^&])(?:(?<scheme>[^:\/?#]+):)?(?:\/\/(?<authority>[^\/?#]*))?(?<path>[^?#]*)(?:\?(?<query>[^#]*))?(?:#(?<fragment>.*))?/
   URI_REGEX =	/(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#]*[\w\-\@?^=%&amp;\/~\+#])?/
 
@@ -162,7 +166,7 @@ puts "EndpointsProxy.make_request: #{ep_ready}"
 				url = URI.parse(ep_ready)
 
 				req = Net::HTTP::Get.new(url.request_uri)
-				res = Net::HTTP.start(url.host, url.port) {|http|
+				res = Net::HTTP.start(url.host, url.port, @proxy_host, @proxy_port) {|http|
 					http.request(req)
 				}
 				json_resp = @myProxy.uniprot2json(res.body, opts[:query]) # necessary to convert to OPS json
@@ -207,7 +211,7 @@ puts "EndpointsProxy.make_request: #{ep_alive} -> #{ep_ready ? ep_ready: 'no end
 
 					url = URI.parse(ep_ready)
 					req = Net::HTTP::Get.new(url.request_uri)
-					res = Net::HTTP.start(url.host, url.port) {|http|
+					res = Net::HTTP.start(url.host, url.port, @proxy_host, @proxy_port) {|http|
 						http.request(req)
 					}
 	#				json_resp = @myProxy.uniprot2json(res.body, opts[:query]) # necessary to convert to OPS json

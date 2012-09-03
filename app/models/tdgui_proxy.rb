@@ -333,10 +333,16 @@ puts "Filling columns..."
 			my_url = URI.parse(URI.encode(url))
 		end
 
+start_time = Time.now
 		proxy_host = 'ubio.cnio.es'
 		proxy_port = 3128
+		req = Net::HTTP::Get.new(my_url.request_uri)
+		res = Net::HTTP.start(my_url.host, my_url.port, proxy_host, proxy_port) { |http|
+			http.request(req)
+		}
 
-		proxy = Net::HTTP::Proxy(proxy_host, proxy_port)
+
+=begin
 		http_session = proxy.new(my_url.host, my_url.port)
 
 		res = nil
@@ -354,6 +360,11 @@ puts "Filling columns..."
 			req = Net::HTTP::Get.new(my_url.request_uri)
 			http.request(req)
 		}
+=end
+end_time = Time.now
+elapsed_time = (end_time - start_time) * 1000
+puts "***=> Time elapsed for #{url}: #{elapsed_time} ms\n"
+
 puts "response code: #{res ? res.code: 'res not available here'}"
 		res
 	end

@@ -697,8 +697,10 @@ puts "\norphans: #{orphans}\n"
 		my_url = URI.parse(url)
 start_time = Time.now
 
+		proxy_host = 'ubio.cnio.es'
+		proxy_port = 3128
 		req = Net::HTTP::Get.new(my_url.request_uri)
-		res = Net::HTTP.start(my_url.host, my_url.port) { |http|
+		res = Net::HTTP.start(my_url.host, my_url.port, proxy_host, proxy_port) { |http|
 			http.request(req)
 		}
 end_time = Time.now

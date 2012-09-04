@@ -15,11 +15,11 @@ Ext.define ('TDGUI.view.panels.west.SearchPanel', {
 //  split: true,
 //  width: '20%',
 //  minWidth: 300,
-  minHeight: 200,
+//  minHeight: 500,
   border: false,
   margin: '30px 0px 0px 0px',
 
-  anchor: '100% 70%',
+  anchor: '100% 100%',
 
   defaults: {
     border: false
@@ -214,6 +214,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       xtype: 'button',
       text: 'Search'
     })
+
     return this.targetList
   },
 

@@ -211,30 +211,18 @@ console.info ("Viewport.initComponent starting...")
         region: 'west',
         id: 'td-left',
         collapsible: true,
-//        title: 'Search center',
-
         split: true,
         width: '20%',
         minWidth: 320,
-//        minHeight: 140,
         frame: false,
 
         layout: 'anchor',
 //        layout: 'hbox',
-//        items: [theWestItems]
         items: [{
-//            region: 'north',
-            xtype: 'tdgui-west-search',
-            split: false,
-            frame: false
-          } /* , {
-            region: 'center',
-//            xtype: 'tdgui-west-history'
-          }, {
-            region: 'south',
-//            xtype: 'tdgui-west-examples'
-        }*/
-        ]
+          xtype: 'tdgui-west-search',
+          split: false,
+          frame: false
+        }]
       },
       { xtype: 'tdgui-border-center',
         id: 'td-main'

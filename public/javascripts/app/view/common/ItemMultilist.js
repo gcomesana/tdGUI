@@ -63,6 +63,8 @@ Ext.define ('TDGUI.view.common.ItemMultilist', {
       */
 		}]
 
+
+
 		this.dockedItems = [{
 			xtype: 'toolbar',
 			dock: 'bottom',
@@ -89,10 +91,10 @@ Ext.define ('TDGUI.view.common.ItemMultilist', {
 						var rec  = myStore.findRecord(list.valueField, val)
 						myStore.remove (rec)
 					})
-// console.info ('store size afterwards: '+myStore.count())
+
 				}
 			}]
-		}]
+		}] // EO dockedItems
 
 		this.callParent(arguments)
 	},

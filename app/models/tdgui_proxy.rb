@@ -5,9 +5,14 @@ require 'net/http'
 require 'net/smtp'
 require 'uri'
 
-#
 # It does requests to endpoints different than coreAPI endpoints
+# This is a proxy to perform different things the coreAPI does not support, either
+# they are not supported by coreAPI itself or the coreAPI endpoints are down and
+# we need new information sources to pull the information which is interesting/necessary
+# for the application
 #
+# It is set as a model in order to have got a straight controller to perform
+# the actions
 class TdguiProxy
 	include ActiveModel::Validations
 	include EndpointsProxy
@@ -18,7 +23,7 @@ class TdguiProxy
 	DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch/uniprotkb/xxxx/uniprotxml'
 	UNIPROT_BY_NAME = 'http://www.uniprot.org/uniprot/?query=xxxx+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
 
-# Constructor
+# Proxy/Model constructor
 	def initialize
 		@parsed_results = nil
 		@uniprot_name = nil
@@ -26,8 +31,14 @@ class TdguiProxy
 
 
 
-
-	def get_target_interactions(target_id, conf_val = 0.5, max_nodes = 6)
+# Builds up a graph (array of hashes) for the uniprot accession taking into account
+# a maximun number of nodes in the graph and a minimum score the interactions has
+# to accomplish.
+# @param [String] an uniprot accession
+# @param [Float] a confidence value threshold
+# @param [Integer] the max number of nodes for the graph
+# @return [Array] the graph as an array of hashes
+	def get_target_interactions (target_id, conf_val = 0.5, max_nodes = 6)
 
 		if target_id.nil? || target_id.empty? then
 			nil
@@ -41,11 +52,11 @@ class TdguiProxy
 	end
 
 
-# getMultipleEntries method
+
 # Request for entries to ebi and returns a hash properly formatted to be able
 # to be converted to json with a single method call .to_json
-# @param entries, a comma separeted uniprot accessions
-# @return a hash with the proper format to be converted into json
+# @param [String] a comma separeted uniprot accessions
+# @return [Hash] a hash with the proper format to be converted into json
 	def get_multiple_entries (entries)
 
 		if entries.nil? then
@@ -86,8 +97,10 @@ puts "get_multiple_entries: #{entries}"
 
 
 
-# get_uniprot_by_name
-#
+
+# Builds up a hash with properties extracted out of a uniprot xml file
+# @param [String] a name of a target (no accession, just a name)
+# @return [Hash] an hash object filled with uniprot properties
 	def get_uniprot_by_name (name)
 		@uniprot_name = name
 
@@ -116,6 +129,11 @@ puts "the url: #{url}"
 
 
 
+# Send an email as feedback. Use the standard Net::SMTP ruby class to make the sending
+# @param [String] the sender of the email
+# @param [String] the subject of the email
+# @param [String] the body
+# @return [Boolean] true if everything was ok; false otherwise
 	def send_feedback (from, subject, msg)
 		opts = Hash.new
 		opts[:server]      ||= 'webmail.cnio.es'
@@ -149,11 +167,10 @@ puts "the url: #{url}"
 
 
 	private
-# uniprotxml2json
 # Filter and translate to json an uniprotxml response from EBI upon request for
 # multiple uniprot entries retrieval based on accessions
-# @param xmlRes, the body of the request performed elsewhere
-# @return a json object with the corresponding fields
+# @param [String], the body of the request performed elsewhere
+# @return [Hash] a json object with the corresponding fields
 	def uniprotxml2json (xmlRes)
 		xmlDoc = Document.new xmlRes
 		entries = xmlDoc.elements.collect('uniprot/entry') { |ent| ent }
@@ -228,7 +245,14 @@ puts "Filling columns..."
 	end
 
 
-# Builds a column definition ready to be integrated with some grid
+# Builds a column definition ready to be integrated with some extjs 4 grid
+# @param [String] the content of the cell in the extjs grid
+# @param [Integer]
+# @param [String]
+# @param [String] the type of the extjs component
+# @param [String] the template to render for this text
+# @param [String]
+# @result [Hash]
 	def set_column (text, data_index, filter=nil, xtype=nil, tpl=nil, renderer=nil)
 		columnHash = {
 			'text' => '', 'dataIndex' => '',
@@ -255,6 +279,9 @@ puts "Filling columns..."
 
 
 
+# Extract properties or features out of a uniprot entry
+# @param [REXML::Element] an xml element out of a uniprot response xml file
+# @return [Hash] an object with the features for the target
 	def decode_uniprot_entry (ent)
 		entryHash = Hash.new
 
@@ -318,11 +345,11 @@ puts "Filling columns..."
 	end
 
 
-#
+
 # This method does a get request to an uri
-# @param url, the target url
-# @param options, parameters and other options for the request
-# @return the object response
+# @param [String] the target url
+# @param [Hash] parameters and other options for the request
+# @return [Net::HTTPResponse] the object response
 	def request(url, options)
 #		my_url = URI.parse(URI.encode(url))
 

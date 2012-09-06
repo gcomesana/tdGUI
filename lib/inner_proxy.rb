@@ -4,10 +4,9 @@ require 'nokogiri'
 require 'uri'
 
 
-#
-# This proxy is a kind of helper class to the tdgui_proxy in order to
+
+# This proxy is a kind of helper class for the tdgui_proxy in order to
 # give support to requests either to uniprot or coreAPI
-#
 class InnerProxy
 	include REXML
 
@@ -33,10 +32,9 @@ class InnerProxy
 
 	public
 	def initialize ()
-		@coreApiEndpoints =[CORE_API_URL_83]
-
-#		@coreApiEndpoints = [CORE_API_URL_83, CORE_API_URL_84, CORE_API_URL_85,
-#												 CORE_API_URL_86, CORE_API_URL_87]
+#		@coreApiEndpoints =[CORE_API_URL_83]
+		@coreApiEndpoints = [CORE_API_URL_83, CORE_API_URL_84, CORE_API_URL_85,
+												 CORE_API_URL_86, CORE_API_URL_87]
 
 		@coreApi_method = 'proteinInfo'
 		@coreApi_uri = 'http://chem2bio2rdf.org/chembl/resource/chembl_targets/12261'
@@ -54,40 +52,47 @@ class InnerProxy
 		}
 	end
 
-
+# Checks whether the endpoint for coreAPI is alive
+# @return [Boolean] true if the endpoint is alive; false otherwise
 	def core_endpoint_ready
 		@endpoint_ready
 #		UNIPROT_PROTEIN_LOOKUP_SHORT
 	end
 
-
+# Gets the number of coreAPI endpoints checked if a list of them is provided.
+# The endpoints are hardcoded and they are volatile and prone to be changed by
+# coreAPI developer team
+# @return [Integer] the number of checked endpoints (not less than 0)
 	def core_endpoints_checked
 		@coreEndpointsChecked
 	end
 
 
-# conceptWikiEP
-# Returns the concept wiki search URI
+# Gets the concept wiki search URI
+# @return [String] a conceptWiki url
 	def conceptwiki_ep
 		CONCEPT_WIKI_API_SEARCH_URL
 	end
 
 
 
-# concept_uniprot_ep
-# returns the uniprot url used to get entries based on a term (ej. brca2)
+# Gets the uniprot url used to get entries based on a term (ej. brca2)
+# return [String] a uniprot endpoint
 	def concept_uniprot_ep
 		@urlMap[CONCEPT_WIKI_API_SEARCH_URL]
 	end
 
-# coreApiEP
-# Returns one of the five supposed coreAPI endpoints. All of them are similar except for the port
+# Returns one of the five supposed coreAPI endpoints.
+# All of them are similar except for the port and prone to be down or to be changed
+# by development team
+# @return [String] the coreAPI endpoint
 	def coreApiEP
 		CORE_API_URL_83
 	end
 
 
 # Checks the conceptWiki endpoint, which is different of the coreApi endpoint
+# @return [Boolean] true if the conceptWiki endpoint is reachable; false otherwise
 	def checkConceptWiki ()
 		# check to see if endpoint is responding
 		#		api_method = 'proteinInfo'
@@ -109,7 +114,6 @@ class InnerProxy
 #		@endpoint_ready = @urlMap[CONCEPT_WIKI_API_SEARCH_URL]
 #		return false
 # EO OJO
-
 		if result == nil || result < 0
 			@endpoint_ready = @urlMap[CONCEPT_WIKI_API_SEARCH_URL]
 			false
@@ -118,14 +122,14 @@ class InnerProxy
 			true
 		end
 	end
-
 # EO checkConcept...
 
 
-# Check the core api by requesting the CORE_API_URLs to see if anyone of them replies
+# Check the core api by requesting the CORE_API_URLs to see if any of them ping back
 # If so, the method returns true and the endpoint_ready member is set to the
 # first endpoint in replying
 # Otherwise, the method returns nil and en endpoint_ready is reset to nil
+# @return [Boolean] true if any of the endpoints is alive; false otherwise
 	def checkCoreAPI ()
 		options = Hash.new
 		options[:uri] = '<' + @coreApi_uri + '>'
@@ -145,7 +149,6 @@ class InnerProxy
 			rescue Timeout::Error => e
 				alive = 0
 			end
-
 # OJO
 # 			@endpoint_ready = nil
 #			return false
@@ -165,18 +168,17 @@ puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '
 
 		alive > 0 ? true : false
 	end
-
 # EO checkCoreApi
 
 
 
-# uniprot2json
+
 # Converst the tabular response from uniprot into a json similar to OPS json
 # [{match:..., concept_uuid:...,concept_url:...,define_url:...,concept_label:...,
 #   concept_alt_labels:...,tag_uuid:...,tag_label:}, ..., {...}]
-# @param uniprot_res, the tabular uniprot response
-# @param query, the query which was input
-# @return a json string ready to use with default OPS combo-protein-lookup comp
+# @param [String] uniprot_res, the tabular uniprot response
+# @param [String] the query which was input
+# @return [String] a json string ready to use with default OPS combo-protein-lookup comp
 	def uniprot2json (uniprot_res, query)
 
 #		lines = uniprot_res.body.split("\n")
@@ -204,23 +206,24 @@ puts "inner_proxy.uniprot2json:\n#{json_str}\n"
 
 
 
-# proteinInfo2json
-# returns a Hash from the uniprot info xml results
-=begin
-{
-:target_name=>"Alpha-2C adrenergic receptor (Homo sapiens)",
-:target_type=>"PROTEIN",
-:description=>"Alpha-2C adrenergic receptor",
-:synonyms=>"Alpha-2C adrenergic receptor; Alpha-2C adrenoreceptor; Alpha-2C adrenoceptor; Alpha-2 adrenergic receptor subtype C4",
-:organism=>"Homo sapiens",
-:keywords=>"Cell membrane; Complete proteome; Disulfide bond; G-protein coupled receptor; Glycoprotein; Membrane; Phosphoprotein; Polymorphism; Receptor; Transducer; Transmembrane",
-:cellularLocations=>"multi-passMembraneProtein",
-:molecularWeight=>"49523",
-:numberOfResidues=>"469",
-:pdbIdPage=>"http://www.pdb.org/pdb/explore/explore.do?structureId=1HOF",
-:specificFunction=>"Alpha-2 adrenergic receptors mediate the catecholamine- induced inhibition of adenylate cyclase through the action of G proteins",
-:theoreticalPi=>"10.69"}
-=end
+
+# Returns a Hash from the uniprot info xml results, i.e.
+#{
+#	:target_name=>"Alpha-2C adrenergic receptor (Homo sapiens)",
+#	:target_type=>"PROTEIN",
+#	:description=>"Alpha-2C adrenergic receptor",
+#	:synonyms=>"Alpha-2C adrenergic receptor; Alpha-2C adrenoreceptor; Alpha-2C adrenoceptor; Alpha-2 adrenergic receptor subtype C4",
+#	:organism=>"Homo sapiens",
+#	:keywords=>"Cell membrane; Complete proteome; Disulfide bond; G-protein coupled receptor; Glycoprotein; Membrane; Phosphoprotein; Polymorphism; Receptor; Transducer; Transmembrane",
+#	:cellularLocations=>"multi-passMembraneProtein",
+#	:molecularWeight=>"49523",
+#	:numberOfResidues=>"469",
+#	:pdbIdPage=>"http://www.pdb.org/pdb/explore/explore.do?structureId=1HOF",
+#	:specificFunction=>"Alpha-2 adrenergic receptors mediate the catecholamine- induced inhibition of adenylate cyclase through the action of G proteins",
+#	:theoreticalPi=>"10.69"
+#}
+# @param [String] a xml document string
+# @return [String] a Hash object with the right information
 	def proteinInfo2hash (xmlRes)
 
 #		xmlDoc = Document.new xmlRes
@@ -369,17 +372,16 @@ puts "inner_proxy.uniprot2json:\n#{json_str}\n"
 			response.code.to_i
 	end
 
-# EO checkEndpoint
 
 
 # Returns a json object from a line. This is the result of a protein lookup
 # request to Uniprot
 # NOTE: concept_uuid will be represented here by the uniprot accession!!!
 #
-# @param row, a row from a tab request from Uniprot, with the fields
+# @param [String] a row from a tab request from Uniprot, with the fields
 # uniprotId, protein names, pumed ids, comments, genes
-# @param query, the input query
-# @return, a json object as string, comma-ended
+# @param [String] the input query
+# @return [String] a json object as string, comma-ended
 	def row2json (row, query)
 		str_json = '{"concept_uuid":"","concept_url":"","tag_uuid":"","tag_label":"",'
 		counter = 0

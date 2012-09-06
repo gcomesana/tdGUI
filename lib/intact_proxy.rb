@@ -27,6 +27,9 @@ class IntactProxy
 
 
 # get_interaction_graph
+# @deprecated Use of {#get_super_interaction_graph} is encouraged as it is more
+# reliable and gets a more complete graph
+#
 # Builds a star-topology graph out of a uniprot target accession. The returned
 # Hash object has to be ready to be converted into a json string ready to be used
 # as a data to feed a force directed graph like <a href="http://thejit.org/static/v20/Jit/Examples/ForceDirected/example1.html" target="_blank">this</a>
@@ -75,6 +78,7 @@ class IntactProxy
 			adjacency = def_interaction(intr, conf_threshold)
 			adjacencies << adjacency
 		}
+
 
 		#puts "adjacencies is #{adjacencies.length} long\n"
 		adjacencies.each { |edge|
@@ -627,7 +631,9 @@ puts "*****==> edges count is #{edges.length}\n"
 # select the edges with similar origin (always suppossing directed edges)
 			node_edges = edges.select { |e| e[:nodeFrom] == node_id }
 			node_edges.each { |n|
-				line_width = edges_counter[[n[:nodeFrom], n[:nodeTo]]] / min_edges_value
+				num_edges = edges_counter[[n[:nodeFrom], n[:nodeTo]]]
+
+				line_width = num_edges / min_edges_value
 				line_width = line_width.round
 				line_width = line_width > MAX_EDGE_WIDTH ? MAX_EDGE_WIDTH: line_width
 				# puts "line_width: #{line_width} for #{n[:nodeFrom]},#{n[:nodeTo]}\n"

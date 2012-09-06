@@ -2,7 +2,7 @@ require "rspec"
 require 'spec_helper'
 
 describe "String-db requests" do
-=begin
+
 	it "should return a non empty hash for Q13362" do
 		tdguiproxy = TdguiProxy.new
 		target_acc = 'Q13362'
@@ -14,7 +14,6 @@ describe "String-db requests" do
 
 #	  target_int[:experiments].should_not be_nil
 #		target_int[:adjacencies].length.should be > 0
-
 	end
 
 
@@ -29,10 +28,10 @@ describe "String-db requests" do
 
 		last_elem = target_int.pop()
 		last_elem.should be_kind_of Hash
-		last_elem.has_key?(:experiments).should be_true
+#		last_elem.has_key?(:experiments).should be_true
 
 	end
-=end
+
 
 	it "should return a hash from a target label" do
 		proxy = TdguiProxy.new

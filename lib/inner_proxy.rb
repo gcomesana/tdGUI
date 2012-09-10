@@ -5,6 +5,7 @@ require 'uri'
 
 
 
+
 # This proxy is a kind of helper class for the tdgui_proxy in order to
 # give support to requests either to uniprot or coreAPI
 class InnerProxy
@@ -77,7 +78,7 @@ class InnerProxy
 
 
 # Gets the uniprot url used to get entries based on a term (ej. brca2)
-# return [String] a uniprot endpoint
+# @return [String] a uniprot endpoint
 	def concept_uniprot_ep
 		@urlMap[CONCEPT_WIKI_API_SEARCH_URL]
 	end
@@ -160,11 +161,11 @@ puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '
 				break
 			end
 		end # EO loop on endopoints
-=begin
-		if alive == 0
-			@endpoint_ready = @urlMap[CORE_API_URL_83]
-		end
-=end
+
+#		if alive == 0
+#			@endpoint_ready = @urlMap[CORE_API_URL_83]
+#		end
+
 
 		alive > 0 ? true : false
 	end
@@ -174,10 +175,9 @@ puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '
 
 
 # Converst the tabular response from uniprot into a json similar to OPS json
-# [{match:..., concept_uuid:...,concept_url:...,define_url:...,concept_label:...,
-#   concept_alt_labels:...,tag_uuid:...,tag_label:}, ..., {...}]
-# @param [String] uniprot_res, the tabular uniprot response
-# @param [String] the query which was input
+# [{match:..., concept_uuid:...,concept_url:...,define_url:...,concept_label:..., concept_alt_labels:...,tag_uuid:...,tag_label:}, ..., {...}]
+# @param [String] uniprot_res the tabular uniprot response
+# @param [String] query the query which was input
 # @return [String] a json string ready to use with default OPS combo-protein-lookup comp
 	def uniprot2json (uniprot_res, query)
 
@@ -207,23 +207,11 @@ puts "inner_proxy.uniprot2json:\n#{json_str}\n"
 
 
 
-# Returns a Hash from the uniprot info xml results, i.e.
-#{
-#	:target_name=>"Alpha-2C adrenergic receptor (Homo sapiens)",
-#	:target_type=>"PROTEIN",
-#	:description=>"Alpha-2C adrenergic receptor",
-#	:synonyms=>"Alpha-2C adrenergic receptor; Alpha-2C adrenoreceptor; Alpha-2C adrenoceptor; Alpha-2 adrenergic receptor subtype C4",
-#	:organism=>"Homo sapiens",
-#	:keywords=>"Cell membrane; Complete proteome; Disulfide bond; G-protein coupled receptor; Glycoprotein; Membrane; Phosphoprotein; Polymorphism; Receptor; Transducer; Transmembrane",
-#	:cellularLocations=>"multi-passMembraneProtein",
-#	:molecularWeight=>"49523",
-#	:numberOfResidues=>"469",
-#	:pdbIdPage=>"http://www.pdb.org/pdb/explore/explore.do?structureId=1HOF",
-#	:specificFunction=>"Alpha-2 adrenergic receptors mediate the catecholamine- induced inhibition of adenylate cyclase through the action of G proteins",
-#	:theoreticalPi=>"10.69"
-#}
-# @param [String] a xml document string
-# @return [String] a Hash object with the right information
+# Returns a Hash from the uniprot info xml results. The pairs key=>value can
+# be as what are showed below:
+#
+# @param [String] xmlRes a xml document string
+# @return [Hash] a Hash object with the right information
 	def proteinInfo2hash (xmlRes)
 
 #		xmlDoc = Document.new xmlRes
@@ -280,39 +268,39 @@ puts "inner_proxy.uniprot2json:\n#{json_str}\n"
 		end
 
 
-=begin
-		recommended_name = main_entry.elements.collect('//protein//recommendedName/fullName') {
-			|recName| recName.text
-		}
-		synonyms = main_entry.elements.collect('//protein//alternativeName/fullName') {
-			|alt_name| alt_name.text
-		}
-		keywords = main_entry.elements.collect('//keyword') { |keyw| keyw.text }
 
-		organism = main_entry.elements.collect('//organism/name') { |org|
-			if (org.attributes['type'] == 'synonym') then org.text end
-		}
-		function = main_entry.elements.collect("//comment[@type='function']") { |func|
-			func.text
-		}
-		location = main_entry.elements.collect("//comment[@type='subcellular location']") { |func|
-			func.text
-		}
+#		recommended_name = main_entry.elements.collect('//protein//recommendedName/fullName') {
+#			|recName| recName.text
+#		}
+#		synonyms = main_entry.elements.collect('//protein//alternativeName/fullName') {
+#			|alt_name| alt_name.text
+#		}
+#		keywords = main_entry.elements.collect('//keyword') { |keyw| keyw.text }
+#
+#		organism = main_entry.elements.collect('//organism/name') { |org|
+#			if (org.attributes['type'] == 'synonym') then org.text end
+#		}
+#		function = main_entry.elements.collect("//comment[@type='function']") { |func|
+#			func.text
+#		}
+#		location = main_entry.elements.collect("//comment[@type='subcellular location']") { |func|
+#			func.text
+#		}
+#
+#		molWeight = nil
+#		seqLength = nil
+#		seq = nil
+#		main_entry.elements.collect("//sequence") { |theSeq|
+#			molWeight = theSeq.attributes['mass']
+#			seqLength = theSeq.attributes['length']
+#			seq = theSeq.text
+#		}
+#
+## the very first pdb reference is got. a comparison based on resolution can improve the choice
+#		pdbs = main_entry.elements.collect("//dbReference[@type='PDB']") { |pdb|
+#			pdb
+#		}
 
-		molWeight = nil
-		seqLength = nil
-		seq = nil
-		main_entry.elements.collect("//sequence") { |theSeq|
-			molWeight = theSeq.attributes['mass']
-			seqLength = theSeq.attributes['length']
-			seq = theSeq.text
-		}
-
-# the very first pdb reference is got. a comparison based on resolution can improve the choice
-		pdbs = main_entry.elements.collect("//dbReference[@type='PDB']") { |pdb|
-			pdb
-		}
-=end
 		pdbResult = ''
 		if pdbs.empty? == false
 			pdbResult = 'http://www.pdb.org/pdb/explore/explore.do?structureId='
@@ -342,15 +330,15 @@ puts "inner_proxy.uniprot2json:\n#{json_str}\n"
 # request (addrs, opts)
 # Make a simple http POST request and returns the response code
 	def request (addrs, opts)
-=begin
-			uri = URI.parse (addrs)
-			myHttp = Net::HTTP.new(uri.host, uri.port)
-			request = Net::HTTP::Post.new(uri.request_uri)
-			request["Content-Type"] = "application/json"
 
-			request.set_form_data(opts)
-			response = Net::HTTP::post_form(uri, opts)
-=end
+			uri = URI.parse (addrs)
+			#myHttp = Net::HTTP.new(uri.host, uri.port)
+			#request = Net::HTTP::Post.new(uri.request_uri)
+			#request["Content-Type"] = "application/json"
+			#
+			#request.set_form_data(opts)
+			#response = Net::HTTP::post_form(uri, opts)
+
 
 		uri = URI.parse (addrs) rescue addrs
 		response = Net::HTTP.post_form(uri == nil ? addrs : uri, opts)
@@ -378,9 +366,9 @@ puts "inner_proxy.uniprot2json:\n#{json_str}\n"
 # request to Uniprot
 # NOTE: concept_uuid will be represented here by the uniprot accession!!!
 #
-# @param [String] a row from a tab request from Uniprot, with the fields
+# @param [String] row a row from a tab request from Uniprot, with the fields
 # uniprotId, protein names, pumed ids, comments, genes
-# @param [String] the input query
+# @param [String] query the input query
 # @return [String] a json object as string, comma-ended
 	def row2json (row, query)
 		str_json = '{"concept_uuid":"","concept_url":"","tag_uuid":"","tag_label":"",'

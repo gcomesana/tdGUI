@@ -21,10 +21,10 @@ private
 # build_coreapi_req
 # build a request POST object in order to make a further call to coreAPI from
 # api_method and options
-# @param api_method, the api method to be called by coreAPI
-# @param opts, options for the call
-# @param ep_ready, the coreAPI endpoint which is reachable
-# @return a Net::HTTP::Post object
+# @param [String] api_method the api method to be called by coreAPI
+# @param [Hash] options options for the call
+# @param [String] ep_ready the coreAPI endpoint which is reachable
+# @return [Net::HTTP::Post] a request object
 	def self.build_coreapi_req (api_method, options, ep_ready)
 
 		if api_method.nil? then
@@ -40,14 +40,15 @@ private
 		if options[:offset].nil? then
 			options[:offset] = 0
 		end
-=begin we store the settings for a possible later call
-		if not options[:named_graph_uri].nil? then
-			@named_graph_uri = options[:named_graph_uri]
-		end
-		if not options[:default_graph_uri] then
-			@default_graph_uri = options[:default_graph_uri]
-		end
-=end
+
+#we store the settings for a possible later call
+#		if not options[:named_graph_uri].nil? then
+#			@named_graph_uri = options[:named_graph_uri]
+#		end
+#		if not options[:default_graph_uri] then
+#			@default_graph_uri = options[:default_graph_uri]
+#		end
+
 		uri = URI.parse(ep_ready)
 		@coreAPI_http = Net::HTTP.new(uri.host, uri.port)
 		@coreAPI_http.open_timeout = 60 # in seconds
@@ -64,7 +65,12 @@ puts "\nIssues call to coreAPI on #{@uri.inspect} with options: #{options.inspec
 
 
 
-
+# Gets a hash with information about a target from uniprot. Basically, call a method
+# from InnerProxy class to performa a uniprot request and build up a Hash with the
+# relevant information
+# (see #InnerProxy)
+# @param [String] results the results returned from uniprot
+# @return [Hash] a Hash object with uniprot information about the target
 	def self.buildup_uniprot_info (results)
 		@myProxy.proteinInfo2hash(results)
 	end
@@ -72,7 +78,10 @@ puts "\nIssues call to coreAPI on #{@uri.inspect} with options: #{options.inspec
 
 
 public
-
+# Converts a Hash with uniprot data into a json string
+# @param [Hash] uniprot_res
+# @param [String] query
+# @return [String] a json string
 	def self.uniprot2json (uniprot_res, query)
 		@myProxy.uniprot2json(uniprot_res, query)
 	end
@@ -81,7 +90,7 @@ public
 
 # Ping for conceptWiki API endpoint
 # Calls the checkConceptWiki method of InnerProxy inner class
-# Returns true if conceptWiki endpoint is up and usable; false otherwise
+# @return [Object] true if conceptWiki endpoint is up and usable; false otherwise
 	def self.checkConceptAPI ()
 
 #		@myProxy = InnerProxy.new
@@ -95,6 +104,7 @@ public
 # Returns true if coreAPI endpoint is up and usable; false otherwise
 # If returned true, coreEndpointReady member of InnerProxy class is set to the
 # first endpoint ready
+# @return [Object] true if coreAPI is alive; false otherwise
 	def self.check_coreAPI ()
 #		@myProxy = InnerProxy.new
 		result = @myProxy.checkCoreAPI()
@@ -102,11 +112,17 @@ public
 	end
 
 
+# Gets the core endpoint which is alive to make requests to it
+# @return [String] the address of the endpoint
 	def self.get_core_endpoint
 		@myProxy.core_endpoint_ready
 	end
 
 
+# Gets the endpoint which is to be used to get information about a concept.
+# The default endpoint is conceptWiki; if conceptWiki (or coreAPI) are not alive
+# a uniprot endpoint is returned
+# @return [String] the endpoint which the concept requests are going to be
 	def self.get_concept_endpoint
 		status = @myProxy.checkCoreAPI
 
@@ -114,6 +130,9 @@ public
 	end
 
 
+
+# Gets a uniprot endpoint which replies to concept requests
+# @return [String] an uniprot endpoing
 	def self.get_uniprot_concept_endpoint
 		@myProxy.concept_uniprot_ep
 	end
@@ -130,16 +149,16 @@ public
 
 
 
-# make_request
 # Make a request to coreAPI or cconceptwiki or alternative uniprot endpoints
 # depending on the url_or_method parameter.
 # The check for endpoints for conceptWiki and coreApi were performed in advance
 # in the model class (for conceptWiki).
 #
-# @param url_or_method, this parameter is different depending on the source. If
+# @param [String] url_or_method this parameter is different depending on the source. If
 # the source is coreAPI model, it will be the action to call (the api_method);
 # if the source is the concept wiki api call model, it should be a uri
-# @param opts, the options to pass to the request
+# @param [Hash] opts the options to pass to the request
+# @return [Net::HTTPResponse] the response object
 	def self.make_request (url_or_method, opts)
 puts ("make_request (#{url_or_method.to_s}, opts=#{opts.to_s})")
 

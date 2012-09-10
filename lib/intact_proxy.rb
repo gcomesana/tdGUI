@@ -34,8 +34,8 @@ class IntactProxy
 # Hash object has to be ready to be converted into a json string ready to be used
 # as a data to feed a force directed graph like <a href="http://thejit.org/static/v20/Jit/Examples/ForceDirected/example1.html" target="_blank">this</a>
 #
-# @param [String] the uniprot accession of the target
-# @param [Float] the confidence value threshold: all interactions whose confidence
+# @param [String] target_id the uniprot accession of the target
+# @param [Float] conf_threshold the confidence value threshold: all interactions whose confidence
 # value is below this parameter will be discarded
 # @return [Hash] a hash object ready to be converted in to a json object suitable
 # to configure a force directed graph as indicated above
@@ -57,15 +57,15 @@ class IntactProxy
 
 		interactors = Array.new
 		interactors = build_interactors(xmlDoc)
-=begin
-		interactorList = xmlDoc.css('interactor')
-		interactorList.each { |elem|
-			interactor = def_interactor(elem)
-			interactors << interactor
 
-			#	interactionList = xmlDoc.css('interaction')
-		}
-=end
+		#interactorList = xmlDoc.css('interactor')
+		#interactorList.each { |elem|
+		#	interactor = def_interactor(elem)
+		#	interactors << interactor
+		#
+		#	#	interactionList = xmlDoc.css('interaction')
+		#}
+
 # puts "***************************\nRetrieved interactors (#{interactors.length})\n"
 		interactors.each { |intrctr| puts("#{intrctr.to_json}\n") }
 
@@ -97,9 +97,9 @@ class IntactProxy
 
 # Builds up a interaction graph starting off a uniprot accession target but getting
 # additional first level deep interactions amid the closer neighbors
-# @param [String] the main target which the interactions wants to be yield of
-# @param [Integer] the maximum number of interactors in the graph
-# @param [Float]  (see #get_interaction_graph)
+# @param [String] target_id the main target which the interactions wants to be yield of
+# @param [Integer] max_interactors the maximum number of interactors in the graph
+# @param [Float] conf_threshold (see #get_interaction_graph)
 # @return [Array] an array modelling all interactions
 	def get_super_interaction_graph (target_id = 'P77569', max_interactors = 5, conf_threshold = 0.5)
 		myuri = INTACT_URL.gsub(/xxxx/, target_id)
@@ -173,13 +173,7 @@ start_time = Time.now
 				noderef = real_id_subset[noderef_index]
 				noderef_to = intrcn[:nodeTo] = noderef[:real_id][4..(noderef[:real_id].length-1)]
 
-=begin
-				if @edges_counter.has_key?([noderef_from, noderef_to])
-					@edges_counter[[noderef_from, noderef_to]] += num_edges
-				else
-					@edges_counter[[noderef_from, noderef_to]] = num_edges
-				end
-=end
+
 				if @edges_counter.has_key?([noderef_from, noderef_to]) == false
 					@edges_counter[[noderef_from, noderef_to]] = num_edges
 				end
@@ -215,12 +209,7 @@ elapsed_time = (end_time - start_time) * 1000
 puts "///=> Elapsed time in processing '#{accession}' was #{elapsed_time} ms\n\n"
 		} # EO main_interactions each
 
-=begin
-puts "\nedges_counter before building graph:\n"
-@edges_counter.each_pair { |key,val|
-	puts "#{key.to_s} -> #{val.to_s}\n"
-}
-=end
+
 		super_graph = buildup_graph(full_experiments, main_interactors, full_interactions)
 puts "\n#{super_graph.to_json}\n\n"
 
@@ -251,7 +240,7 @@ puts "\n#{super_graph.to_json}\n\n"
 
 
 # Build an interators list (an Array) out of a Intact xml document
-# @param [Nokogiri::XML::Document] a Intact xml document as a Nokogiri object
+# @param [Nokogiri::XML::Document] xmlDoc a Intact xml document as a Nokogiri object
 # @return [Array] with the found interactors
 	def build_interactors (xmlDoc)
 		interactors = Array.new
@@ -271,8 +260,8 @@ puts "\n#{super_graph.to_json}\n\n"
 
 
 # Scan the document y gets only the nodes which are already within the set of nodes
-# @param (see #build_interactors))
-# @param [Array], the set of nodes which the new nodes have to be in
+# @param xmldoc (see #build_interactors))
+# @param [Array] set the set of nodes which the new nodes have to be in
 # @return [Array] a list containing a nodes which are included in the subset
 	def get_interactors_subset (xmldoc, set)
 		new_subset = Array.new
@@ -336,9 +325,9 @@ puts "\n#{super_graph.to_json}\n\n"
 
 
 # Defines an interaction from a XML element from the xml25 intact document
-# @param [Nokogiri::XML::Element], the nokogiri element to be manipulated
+# @param [Nokogiri::XML::Element] intrcn the nokogiri element to be manipulated
 # @param (see #get_super_interaction_graph)
-# @result [Hash] an adjacency hash ready to be transformed into a json string
+# @return [Hash] an adjacency hash ready to be transformed into a json string
 	def def_interaction (intrcn, conf_threshold)
 		color = get_random_color
 		conn_nodes = intrcn.css('/participantList/participant/interactorRef')
@@ -387,9 +376,9 @@ puts "\n#{super_graph.to_json}\n\n"
 # - if the nodes result is greater than number of nodes, remove the last ones based
 # on low number or weak interactions
 #
-# @param [Array], the set of main interactors (those interactors which are supposed
+# @param [Array] interactors the set of main interactors (those interactors which are supposed
 # to have a interaction with the target)
-# @param [Array] the set of interactions with the main target
+# @param [Array] interactions the set of interactions with the main target
 # @param (see #get_super_interaction_graph)
 # @param (see #get_super_interaction_graph)
 # @return [Array], an array with the selected nodes
@@ -434,13 +423,13 @@ puts "edge: #{edge.to_s}\n"
 				node_id == edge[:nodeFrom] || node_id == edge[:nodeTo]
 #					a_node
 			}
-=begin
-			if sel_nodes.empty?
-				sel_nodes = sel_nodes + new_nodes
-			else
-				sel_nodes = sel_nodes.zip(new_nodes).flatten.compact
-			end
-=end
+
+			#if sel_nodes.empty?
+			#	sel_nodes = sel_nodes + new_nodes
+			#else
+			#	sel_nodes = sel_nodes.zip(new_nodes).flatten.compact
+			#end
+
 			sel_nodes = sel_nodes | new_nodes
 
 			if sel_nodes.length >= max_nodes
@@ -491,8 +480,8 @@ puts "edge: #{edge.to_s}\n"
 # As the interactions are suppossed to be without direction, an interaction
 # between x and y will be rejected if the interaction between y and x is already
 # held as a valid interactions
-# @param [Array] the interactions for the current element
-# @param [Array] the array of the interactions retrieved so far
+# @param [Array] current the interactions for the current element
+# @param [Array] full the array of the interactions retrieved so far
 # @return [Array] a list with the new interactions merged into the old ones
 	def merge_interactions (current, full)
 		result = Array.new
@@ -541,7 +530,7 @@ puts "edge: #{edge.to_s}\n"
 
 # Search inside de document for interactions including ONLY nodes in the subset
 # @param (see #build_interactors)
-# @param [Array] the subset of nodes selected for this document
+# @param [Array] nodes_subset the subset of nodes selected for this document
 # @param (see #def_interaction)
 # @return [Array] a set with the interactions involving only nodes in the subset
 	def get_interactions_subset (xmldoc, nodes_subset, conf_threshold)
@@ -561,47 +550,42 @@ puts "edge: #{edge.to_s}\n"
 				right_interactions << new_int
 			end
 		}
-=begin
-puts "Fucking right interactions...\n"
-right_interactions.each { |right_int|
-	puts "#{right_int.to_s}\n"
-}
-=end
+
 		right_interactions
 	end
 
 
-	# INTERACTIONS
-=begin
-	{
-	  "adjacencies": [{
-	    "nodeTo": "graphnode5",
-	    "nodeFrom": "graphnode2",
-	    "data": {
-	      "$color": "#909291"
-	    }
-	  }, {
-	    "nodeTo": "graphnode9",
-	    "nodeFrom": "graphnode2",
-	    "data": {
-	      "$color": "#557EAA"
-	    }
-	  }, {
-	    "nodeTo": "graphnode18",
-	    "nodeFrom": "graphnode2",
-	    "data": {
-	      "$color": "#557EAA"
-	    }
-	  }],
-	  "data": {
-	    "$color": "#416D9C",
-	    "$type": "circle",
-	    "$dim": 7
-	  },
-	  "id": "graphnode2",
-	  "name": "graphnode2"
-	},
-=end
+# INTERACTIONS
+#
+#	{
+#	  "adjacencies": [{
+#	    "nodeTo": "graphnode5",
+#	    "nodeFrom": "graphnode2",
+#	    "data": {
+#	      "$color": "#909291"
+#	    }
+#	  }, {
+#	    "nodeTo": "graphnode9",
+#	    "nodeFrom": "graphnode2",
+#	    "data": {
+#	      "$color": "#557EAA"
+#	    }
+#	  }, {
+#	    "nodeTo": "graphnode18",
+#	    "nodeFrom": "graphnode2",
+#	    "data": {
+#	      "$color": "#557EAA"
+#	    }
+#	  }],
+#	  "data": {
+#	    "$color": "#416D9C",
+#	    "$type": "circle",
+#	    "$dim": 7
+#	  },
+#	  "id": "graphnode2",
+#	  "name": "graphnode2"
+#	},
+
 
 
 
@@ -610,9 +594,9 @@ right_interactions.each { |right_int|
 # 2. Fetch all interations where interactor is in from
 # 3. Add to interaction arrays
 #
-# @param [Array] the experiemnts extracted from the intact psi-mi xml file
-# @param [Array] (see #build_interactors) nodes
-# @param [Array] (see #build_interactions) interactions
+# @param [Array] experiments the experiemnts extracted from the intact psi-mi xml file
+# @param [Array] (see #build_interactors)
+# @param [Array] (see #build_interactions)
 # @return [Array] the result graph as an array of hash objects
 	def buildup_graph (experiments, nodes, edges)
 
@@ -671,9 +655,9 @@ puts "*****==> edges count is #{edges.length}\n"
 # and number of nodes, orphans can raise, we remove it in order to preserve the
 # network nature of the interaction web.
 # This method returns the graph without orphan nodes
-# @param [Array] the generated graph
-# @param [Array] the list of node identifier in order to simplify the screening process
-# @return [Arrau] the graph with the orphan nodes removed
+# @param [Array] graph the generated graph
+# @param [Array] node_ids the list of node identifier in order to simplify the screening process
+# @return [Array] the graph with the orphan nodes removed
 	def remove_orphans (graph, node_ids)
 
 		orphans = Array.new
@@ -707,7 +691,7 @@ puts "\norphans: #{orphans}\n"
 
 
 # Gets a random color in order to colorize the nodes
-# @return [String], the color in hexadecimal, i.e. #F1F1F1
+# @return [String] the color in hexadecimal, i.e. #F1F1F1
 	def get_random_color
 		letters = '0123456789ABCDEF'.split('');
 		color = '#';
@@ -723,8 +707,8 @@ puts "\norphans: #{orphans}\n"
 
 #
 # This method does a http get request to an uri
-# @param [String], the target url
-# @param [Hash], parameters and other options for the request (query string, ...)
+# @param [String] url the target url
+# @param [Hash] options parameters and other options for the request (query string, ...)
 # @return [Net::HTTPResponse] the object response
 	def request(url, options)
 		puts "IntactProxy.request (#{url}, #{options.inspect})\n"

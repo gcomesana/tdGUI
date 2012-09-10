@@ -48,7 +48,21 @@ describe "inner_proxy 'helper' class behaviour" do
 		end
 
 
+# Test the protein2Hash method; uses a uniprot xml file (chosen by chance) as input
 		it "should get a hash object out of an uniprot xml file" do
+			fileContent = ''
+			File.open('public/resources/datatest/P78257.xml', 'r') do |f|
+				while line = f.gets
+					fileContent += line
+				end
+			end
+
+			proteinHash = @inner_proxy.proteinInfo2hash(fileContent)
+			proteinHash.should_not be_nil
+			proteinHash.should be_kind_of Hash
+
+			proteinHash.size.should be > 0
+			proteinHash[:target_name].size.should_not be 0
 
 		end
 

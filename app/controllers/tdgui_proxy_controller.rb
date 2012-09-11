@@ -1,4 +1,7 @@
 
+
+# This is a 'custom' controller (which means is not derived from CoreGUI controllers)
+# to perform the actions triggered from application interface
 class TdguiProxyController < ApplicationController
 
 	def test (myparam = params[:q]) # call is app.get '/tdgui_proxy/test?q=pffffffff'
@@ -9,11 +12,11 @@ class TdguiProxyController < ApplicationController
 	end
 
 
-# multiple_entries_retrieval
-# gets multiple entries from uniprot and renders a json document with the most
+
+# Gets multiple entries from uniprot and renders a json document with the most
 # "interesting" attributes
-# @param entries_query a comma separeted list of accessions, string classed
-# @render just a json string in order to be processed by the client
+# @param [String] entries_query a comma separeted list of accessions, string classed
+# @return [String] just a json string in order to be processed by the client
 	def multiple_entries_retrieval (entries_query = params[:entries])
 
 #		entries = {:uniprotIds => ['Q13362','P12345','P0AEN3','P0AEN2','P0AEN1']}
@@ -78,12 +81,19 @@ puts "json_entries: #{json_entries}\n"
 
 #	puts "protein_info resutls: #{results.to_s}\n"
 		}
-
 		render :json => json_entries, :layout => false
 	end
 
 
 
+# Gets the interactions for this target from intact.
+# The interactions are actually
+# in this case a json string ready to feed a graph to represent the interactions
+# @param [String] target_id the uniprot accession
+# @param [Integer] max_nodes the maximun number of nodes in the graph (default is 6)
+# @param [Float] conf_val the confidence value. Intact assigns a score to every interaction.
+# This parameter is used to screen interactions below this threshold (defautl is 0.5)
+# @return [String] the json object to feed the javascript graph
 	def interactions_retrieval (target_id = params[:target], max_nodes = 6, conf_val = 0.5)
 		intact_proxy = TdguiProxy.new
 
@@ -101,6 +111,10 @@ puts "Getting interactions from Intact with conf_val=#{conf_val} & max_nodes=#{m
 
 
 
+# Gets a uniprot target out of a name. This action is involved when trying to
+# get information about a target from uniprot but only a name exists
+# @param [String] target_label the name or label to get the target from uniprot
+# @return a json string
 	def get_uniprot_by_name (target_label = params[:label])
 
 		proxy = TdguiProxy.new
@@ -112,7 +126,11 @@ puts "Getting interactions from Intact with conf_val=#{conf_val} & max_nodes=#{m
 	end
 
 
-
+# Sends an email feedback to admin from the feedback window on GUI
+# @param [String] from the sender
+# @param [String] subject
+# @param [String] msg email body
+# @return a json object with just a reponse true or false depending on the success (true = success)
 	def send_feedback (from = params[:from], subject = params[:subject], msg = params[:msg])
 		email_proxy = TdguiProxy.new
 

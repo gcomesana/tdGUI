@@ -331,7 +331,7 @@ puts "inner_proxy.uniprot2json:\n#{json_str}\n"
 # Make a simple http POST request and returns the response code
 	def request (addrs, opts)
 
-			uri = URI.parse (addrs)
+			# uri = URI.parse (addrs)
 			#myHttp = Net::HTTP.new(uri.host, uri.port)
 			#request = Net::HTTP::Post.new(uri.request_uri)
 			#request["Content-Type"] = "application/json"
@@ -341,6 +341,7 @@ puts "inner_proxy.uniprot2json:\n#{json_str}\n"
 
 
 		uri = URI.parse (addrs) rescue addrs
+puts "InnerProxy.request (#{addrs.to_s})\n"
 		response = Net::HTTP.post_form(uri == nil ? addrs : uri, opts)
 		@requestErrMsg = "Request success"
 		rescue Timeout::Error => exc

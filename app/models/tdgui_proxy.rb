@@ -34,9 +34,9 @@ class TdguiProxy
 # Builds up a graph (array of hashes) for the uniprot accession taking into account
 # a maximun number of nodes in the graph and a minimum score the interactions has
 # to accomplish.
-# @param [String] an uniprot accession
-# @param [Float] a confidence value threshold
-# @param [Integer] the max number of nodes for the graph
+# @param [String] target_id an uniprot accession
+# @param [Float] conf_val a confidence value threshold
+# @param [Integer] max_nodes the max number of nodes for the graph
 # @return [Array] the graph as an array of hashes
 	def get_target_interactions (target_id, conf_val = 0.5, max_nodes = 6)
 
@@ -55,7 +55,7 @@ class TdguiProxy
 
 # Request for entries to ebi and returns a hash properly formatted to be able
 # to be converted to json with a single method call .to_json
-# @param [String] a comma separeted uniprot accessions
+# @param [String] entries a comma separeted uniprot accessions
 # @return [Hash] a hash with the proper format to be converted into json
 	def get_multiple_entries (entries)
 
@@ -99,8 +99,8 @@ puts "get_multiple_entries: #{entries}"
 
 
 # Builds up a hash with properties extracted out of a uniprot xml file
-# @param [String] a name of a target (no accession, just a name)
-# @return [Hash] an hash object filled with uniprot properties
+# @param [String] name a name of a target (no accession, just a name)
+# @return [Hash] a hash object filled with uniprot properties
 	def get_uniprot_by_name (name)
 		@uniprot_name = name
 
@@ -130,9 +130,9 @@ puts "the url: #{url}"
 
 
 # Send an email as feedback. Use the standard Net::SMTP ruby class to make the sending
-# @param [String] the sender of the email
-# @param [String] the subject of the email
-# @param [String] the body
+# @param [String] from  the sender of the email
+# @param [String] subject the subject of the email
+# @param [String] msg the body
 # @return [Boolean] true if everything was ok; false otherwise
 	def send_feedback (from, subject, msg)
 		opts = Hash.new
@@ -169,8 +169,8 @@ puts "the url: #{url}"
 	private
 # Filter and translate to json an uniprotxml response from EBI upon request for
 # multiple uniprot entries retrieval based on accessions
-# @param [String], the body of the request performed elsewhere
-# @return [Hash] a json object with the corresponding fields
+# @param [String] xmlRes the body of the request performed elsewhere
+# @return [Hash] a hash object with the corresponding fields
 	def uniprotxml2json (xmlRes)
 		xmlDoc = Document.new xmlRes
 		entries = xmlDoc.elements.collect('uniprot/entry') { |ent| ent }
@@ -246,13 +246,13 @@ puts "Filling columns..."
 
 
 # Builds a column definition ready to be integrated with some extjs 4 grid
-# @param [String] the content of the cell in the extjs grid
-# @param [Integer]
-# @param [String]
-# @param [String] the type of the extjs component
-# @param [String] the template to render for this text
-# @param [String]
-# @result [Hash]
+# @param [String] text the content of the cell in the extjs grid
+# @param [Integer] data_index necessary for extjs 4 grid
+# @param [String] filter filter for the grid data
+# @param [String] xtype the type of the extjs component
+# @param [String] tpl the template to render for this column
+# @param [String] renderer a render method to override the default one
+# @return [Hash]
 	def set_column (text, data_index, filter=nil, xtype=nil, tpl=nil, renderer=nil)
 		columnHash = {
 			'text' => '', 'dataIndex' => '',
@@ -279,8 +279,8 @@ puts "Filling columns..."
 
 
 
-# Extract properties or features out of a uniprot entry
-# @param [REXML::Element] an xml element out of a uniprot response xml file
+# Extracts properties or features out of a uniprot entry
+# @param [REXML::Element] ent an xml element out of a uniprot response xml file
 # @return [Hash] an object with the features for the target
 	def decode_uniprot_entry (ent)
 		entryHash = Hash.new
@@ -347,8 +347,8 @@ puts "Filling columns..."
 
 
 # This method does a get request to an uri
-# @param [String] the target url
-# @param [Hash] parameters and other options for the request
+# @param [String] url the target url
+# @param [Hash] options parameters and other options for the request
 # @return [Net::HTTPResponse] the object response
 	def request(url, options)
 #		my_url = URI.parse(URI.encode(url))
@@ -369,30 +369,32 @@ start_time = Time.now
 		}
 
 
-=begin
-		http_session = proxy.new(my_url.host, my_url.port)
 
-		res = nil
-#		proxy.new(my_url.host, my_url.port).start { |http|
-		Net::HTTP::Proxy(proxy_host, proxy_port).start(my_url.host) { |http|
-			req = Net::HTTP::Get.new(my_url.request_uri)
-			res, data = http.request(req)
+		#http_session = proxy.new(my_url.host, my_url.port)
+		#
+		#res = nil
+		#proxy.new(my_url.host, my_url.port).start { |http|
+		#Net::HTTP::Proxy(proxy_host, proxy_port).start(my_url.host) { |http|
+		#	req = Net::HTTP::Get.new(my_url.request_uri)
+		#	res, data = http.request(req)
+		#
+		#	puts "shitting data: #{data}\n"
+		#	puts "res.code: #{res.code}\n"
+		#}
+		#
+		#
+		#res = Net::HTTP.start(my_url.host, my_url.port) { |http|
+		#	req = Net::HTTP::Get.new(my_url.request_uri)
+		#	http.request(req)
+		#}
 
-			puts "shitting data: #{data}\n"
-			puts "res.code: #{res.code}\n"
-		}
 
+#end_time = Time.now
+#elapsed_time = (end_time - start_time) * 1000
+#puts "***=> Time elapsed for #{url}: #{elapsed_time} ms\n"
+#
+#puts "response code: #{res ? res.code: 'res not available here'}"
 
-		res = Net::HTTP.start(my_url.host, my_url.port) { |http|
-			req = Net::HTTP::Get.new(my_url.request_uri)
-			http.request(req)
-		}
-=end
-end_time = Time.now
-elapsed_time = (end_time - start_time) * 1000
-puts "***=> Time elapsed for #{url}: #{elapsed_time} ms\n"
-
-puts "response code: #{res ? res.code: 'res not available here'}"
 		res
 	end
 

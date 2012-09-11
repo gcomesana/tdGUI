@@ -128,7 +128,7 @@ class CoreApiCallsController < ApplicationController
 		end
   end
 
-  # check to see if endpoint is responding
+# Checks whether or not endpoint is responding
    def check
       api_method = 'proteinInfo'
       prot_uri = 'http://chem2bio2rdf.org/chembl/resource/chembl_targets/12261'

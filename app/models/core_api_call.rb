@@ -42,14 +42,12 @@ class CoreApiCall
 
 # alt_endpoint_req method
 # makes a request to an alternative url different from coreAPI
-# @param op, the operation to perform. Similar to coreAPI calls
-# @param url, the url to make de request
-# @param params, the url query params as a hash structure
+# @param [String] op the operation to perform. Similar to coreAPI calls
+# @param [String] url the url to make de request
+# @param [Hash] params the url query params as a hash structure
 # @param http_method, the request method. GET by default.
-	def alt_endpoint_req (op, url, params, http_method="GET")
-
-
-	end
+#	def alt_endpoint_req (op, url, params, http_method="GET")
+#	end
 
 
 	def request(api_method, options)

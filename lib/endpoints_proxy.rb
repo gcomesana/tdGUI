@@ -18,8 +18,8 @@ private
 #	URI_REGEX = /^(?=[^&])(?:(?<scheme>[^:\/?#]+):)?(?:\/\/(?<authority>[^\/?#]*))?(?<path>[^?#]*)(?:\?(?<query>[^#]*))?(?:#(?<fragment>.*))?/
   URI_REGEX =	/(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:\/~\+#]*[\w\-\@?^=%&amp;\/~\+#])?/
 
-# build_coreapi_req
-# build a request POST object in order to make a further call to coreAPI from
+
+# Build a request POST object in order to make a further call to coreAPI from
 # api_method and options
 # @param [String] api_method the api method to be called by coreAPI
 # @param [Hash] options options for the call
@@ -65,19 +65,19 @@ puts "\nIssues call to coreAPI on #{@uri.inspect} with options: #{options.inspec
 
 
 
+
+public
 # Gets a hash with information about a target from uniprot. Basically, call a method
 # from InnerProxy class to performa a uniprot request and build up a Hash with the
 # relevant information
 # (see #InnerProxy)
 # @param [String] results the results returned from uniprot
 # @return [Hash] a Hash object with uniprot information about the target
-	def self.buildup_uniprot_info (results)
-		@myProxy.proteinInfo2hash(results)
-	end
+		def self.buildup_uniprot_info (results)
+			@myProxy.proteinInfo2hash(results)
+		end
 
 
-
-public
 # Converts a Hash with uniprot data into a json string
 # @param [Hash] uniprot_res
 # @param [String] query
@@ -138,13 +138,10 @@ public
 	end
 
 
-	def self.getEndpointsChecked
+# Gets the number of endpoints checked before finding one of them alive
+# @return [Integer] number of pinged endpoints
+	def self.get_endpoints_checked
 		@myProxy.core_endpoints_checked
-	end
-
-
-	def self.autocheck
-		return true
 	end
 
 
@@ -209,7 +206,7 @@ puts "Attacking coreApi part...coreAPIok? #{check_coreAPI()}\n"
 
 puts "EndpointsProxy.make_request: #{ep_alive} -> #{ep_ready ? ep_ready: 'no endpoint'}"
 			if ep_alive
-				req = build_coreapi_req(url_or_method, opts, ep_ready)
+				req = EndpointsProxy.build_coreapi_req(url_or_method, opts, ep_ready)
 				start_time = Time.now
 				response = nil
 				begin

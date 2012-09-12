@@ -27,8 +27,7 @@ class IntactProxy
 
 
 # get_interaction_graph
-# @deprecated Use of {#get_super_interaction_graph} is encouraged as it is more
-# reliable and gets a more complete graph
+# @deprecated Use of {#get_super_interaction_graph} is encouraged as it is more reliable and gets a more complete graph
 #
 # Builds a star-topology graph out of a uniprot target accession. The returned
 # Hash object has to be ready to be converted into a json string ready to be used

@@ -227,10 +227,6 @@ class ConceptWikiApiCall
 	end
 =end
 
-	def testCW
-		moduleOk = EndpointsProxy.autocheck
-		moduleOk
-	end
 
 
 private

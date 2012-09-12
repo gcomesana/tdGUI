@@ -32,8 +32,7 @@ class TdguiProxy
 
 
 # Builds up a graph (array of hashes) for the uniprot accession taking into account
-# a maximun number of nodes in the graph and a minimum score the interactions has
-# to accomplish.
+# a maximun number of nodes in the graph and a minimum score the interactions have to accomplish.
 # @param [String] target_id an uniprot accession
 # @param [Float] conf_val a confidence value threshold
 # @param [Integer] max_nodes the max number of nodes for the graph

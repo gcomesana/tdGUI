@@ -68,7 +68,4 @@ describe "inner_proxy 'helper' class behaviour" do
 
 	end
 
-
-
-
 end

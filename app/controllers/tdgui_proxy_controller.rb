@@ -4,7 +4,9 @@
 # to perform the actions triggered from application interface
 class TdguiProxyController < ApplicationController
 
-	def test (myparam = params[:q]) # call is app.get '/tdgui_proxy/test?q=pffffffff'
+# Test action. Call it from consoles as app.get '/tdgui_proxy/test?q=ping-back'
+# @param [String] myparam this is the param which will be returned
+	def test (myparam = params[:q]) #
 		myparam = myparam ? myparam: "nillllllll"
 
 		render :json => {'res' => "tdguiProxy Controller myparam #{myparam} ok"}.to_json, :layout => false

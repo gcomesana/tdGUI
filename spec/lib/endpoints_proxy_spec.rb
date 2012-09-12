@@ -39,25 +39,30 @@ describe "Behaviour of EndpointsProxy" do
 
 	it "module check conceptWiki should ping back" do
 		result = EndpointsProxy.autocheck.should be_true
-		result = EndpointsProxy.checkConceptAPI.should be_true
+		EndpointsProxy.checkConceptAPI.should be_true
+		EndpointsProxy.checkConceptAPI.should satisfy { |it|
+			(it.is_a? FalseClass) || (it.is_a? TrueClass)
+		}
 
-puts "proteinLookup endpoint: #{EndpointsProxy.get_core_endpoint}"
-
+# puts "proteinLookup endpoint: #{EndpointsProxy.get_core_endpoint}"
 	end
 
 
 
 	it "module check coreApi should ping back" do
-		result = EndpointsProxy.autocheck.should be_true
+		EndpointsProxy.autocheck.should be_true
 		coreApiAlive = EndpointsProxy.check_coreAPI
+		coreApiAlive.should satisfy {|alive|
+			(alive.is_a? FalseClass) || (alive.is_a? TrueClass)
+		}
 
 #		EndpointsProxy.myProxy.should be_nil
-puts "Endpoints checked: #{EndpointsProxy.getEndpointsChecked}"
+# puts "Endpoints checked: #{EndpointsProxy.getEndpointsChecked}"
 
-		EndpointsProxy.getEndpointsChecked.should be > 0
-		coreApiAlive.should be_true
+		EndpointsProxy.get_endpoints_checked.should be > 0
+		EndpointsProxy.get_core_endpoint.should_not be_nil
 
-puts "Endpoint used: #{EndpointsProxy.get_core_endpoint}"
+# puts "Endpoint used: #{EndpointsProxy.get_core_endpoint}"
 	end
 
 
@@ -69,6 +74,8 @@ puts "Endpoint used: #{EndpointsProxy.get_core_endpoint}"
 		res = EndpointsProxy.make_request(@url, @options)
 		res.should_not be_nil
 		res.should be_kind_of Net::HTTPResponse # be_kind_of is true if a superclass is got at actual object
+		res.code.to_i.should be == 200
+		res.body.should_not be == ''
 
 	end
 
@@ -136,7 +143,9 @@ puts "json_str: #{json_str}"
 			result.should_not be_nil
 #			result.code.to_i.should == 403
 
-			result.should be_kind_of String
+			result.should be_kind_of Net::HTTPResponse
+			result.code.to_i.should be == 200
+			result.body.should_not be ''
 		end
 	end
 

@@ -1,16 +1,28 @@
-
-
-
+/**
+ * @class TDGUI.view.panels.PharmByTarget
+ * @extend Ext.panel.Panel
+ * @alias widget.tdgui-pharmbytargetpanel
+ *
+ * This is the panel who supports the pharmacology grid. It is displayed when
+ * 'Pharmacology' button is clicked from 'Target Info' panel, if enabled
+ */
 Ext.define ('TDGUI.view.panels.PharmByTarget', {
   extend:'Ext.panel.Panel',
   alias:'widget.tdgui-pharmbytargetpanel',
 
   requires: ['TDGUI.view.grid.DynamicGrid3'],
 
+  /**
+   * @cfg {@see TDGUI.view.Viewport#layout}
+   */
   layout:{
     type:'vbox',
     align:'stretch'
   },
+
+  /**
+   * @cfg {@see TDGUI.view.panels.MultiTarget#gridParams}
+   */
   gridParams: null, // an object to set/add grid.proxy.extraParams
   closable: true,
 
@@ -25,7 +37,8 @@ Ext.define ('TDGUI.view.panels.PharmByTarget', {
 
   /**
    * Creates an instance of dynamicgrid3 grid component an returns it.
-   * @return {grid} an instance of thrid
+   * {@see TDGUI.view.panels.MultiTarget#createGrid}
+   * @return {grid} an instance of {@see TDGUI.grid.DynamicGrid3}
    */
   createGrid: function (config) {
     config = config || {

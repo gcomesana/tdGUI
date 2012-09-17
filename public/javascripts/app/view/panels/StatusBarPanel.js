@@ -1,18 +1,38 @@
+/**
+ * @class TDGUI.view.panels.StatusBarPanel
+ * @extend Ext.panel.Panel
+ * @alias widget.tdgui-statusbar
+ *
+ * This is a Ext.panel.Panel supporting no items and one docked item to simulate
+ * a status bar at the bottom of the viewport. It is defined as a panel in order
+ * to be able to place it at the south region.
+ */
 Ext.define('TDGUI.view.panels.StatusBarPanel', {
   extend: 'Ext.panel.Panel',
   alias: 'widget.tdgui-statusbar',
 
   requires: [],
-
+  /**
+   * @cfg {String} [layout=auto] the layout to apply to this panel
+   */
   layout: 'auto',
 
 //  region: 'south',
+  /**
+   * @cfg {Boolean} [frame=false] remove the frame out of the panel
+   */
   frame: false,
 //  height: 200,
 //  minHeight: 120,
+  /**
+   * {@see TDGUI.view.Viewport#border}
+   */
   border: false,
 //  split: false,
 
+  /**
+   * @cfg {Boolean} win Swith to set whether or not the feedback window is raised
+   */
   win: false,
 
 

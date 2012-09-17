@@ -1,7 +1,11 @@
 
-
-
-
+/**
+ * @class TDGUI.view.Viewport
+ * @extends Ext.container.Viewport
+ * @alias widget.tdgui-viewport
+ *
+ * The Viewport to support the main application layout
+ */
 Ext.define('TDGUI.view.Viewport', {
   extend: 'Ext.container.Viewport',
   alias: 'widget.tdgui-viewport',
@@ -10,13 +14,27 @@ Ext.define('TDGUI.view.Viewport', {
               'TDGUI.view.panels.BorderEast','TDGUI.view.panels.LogosPanel',
               'TDGUI.view.panels.west.SearchPanel','TDGUI.view.panels.StatusBarPanel'],
 
+/**
+ * @cfg {Object} layout the layout which is to be used
+ * @cfg {String} [layout.type='border']
+ * @cfg {Number} [layout.padding=1]
+ */
   layout: {
     type: 'border',
     padding: 1
   },
+
+/**
+ * @cfg {Object} defaults the default properties' value for the items contained in this viewport
+ * @cfg {Boolean} [defaults.split=true]
+ */
   defaults: {
     split: true
   },
+
+  /**
+   * @cfg {Boolean} [border=false] the presence or absence of the border around the viewport
+   */
   border: false,
 
 
@@ -25,7 +43,7 @@ Ext.define('TDGUI.view.Viewport', {
 console.info ("Viewport.initComponent starting...")
     var me = this
 
-/**
+/*
     Ext.History.init()
     Ext.History.on('change', function (token) {
       this.fireEvent ('historyAdded', token)

@@ -13,7 +13,8 @@ describe "Intact proxy retrieves target interations from Intact" do
 #		ok = @proxy.get_super_interaction_graph('Q13362', 5, 0.4)
 #		ok = @proxy.get_super_interaction_graph('O43312', 5, 0.3) # dis 0 edges...
 #		ok = @proxy.get_super_interaction_graph('Q76MZ3', 5, 0.2)
-		ok = @proxy.get_super_interaction_graph('P29274', 6, 0.5)
+#		ok = @proxy.get_super_interaction_graph('P29274', 6, 0.5)
+		ok = @proxy.get_super_interaction_graph('P42345', 5, 0.4)
 
 
 		ok.should be_kind_of Array

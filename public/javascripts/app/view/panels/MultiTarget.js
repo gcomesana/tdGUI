@@ -1,8 +1,10 @@
 /**
- * TDGUI.view.panels.MultiTarget
- * A panel containing a DyanmicGrid and methods to support multitarget plans
+ * @class TDGUI.view.panels.MultiTarget
+ * @extends Ext.panel.Panel,
+ * @alias widget.tdgui-multitargetpanel
  *
- *
+ * A panel containing a {@see TDGUI.view.grid.DyanmicGrid3} grid and methods to
+ * support a mutiple target joint view
  */
 Ext.define('TDGUI.view.panels.MultiTarget', {
   extend:'Ext.panel.Panel',
@@ -10,15 +12,27 @@ Ext.define('TDGUI.view.panels.MultiTarget', {
 
   requires:['TDGUI.view.grid.DynamicGrid3'],
 
+  /**
+   * @cfg {@see TDGUI.view.panels.LogosPanel#layout}
+   */
   layout:{
     type:'vbox',
     align:'stretch'
   },
-  gridParams:null, // an object to set/add grid.proxy.extraParams
+
+  /**
+   * @cfg {Object} gridParams an object to set/add grid.proxy.extraParams
+   */
+  gridParams:null,
+  /**
+   * @cfg {@see TDGUI.view.Viewport#border}
+   */
   border: false,
 
-// a copy of the list targets store in order to get the concept_uuid
-// and the concept_uri for coreAPI
+/**
+ * @cfg {Object} a copy of the list targets store in order to get the concept_uuid
+ * and the concept_uri for coreAPI
+ */
   storeListTargets:null,
 
 

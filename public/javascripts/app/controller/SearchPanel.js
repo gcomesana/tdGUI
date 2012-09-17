@@ -1,3 +1,6 @@
+/**
+ * @class TDGUI.co
+ */
 Ext.define('TDGUI.controller.SearchPanel', {
   extend: 'Ext.app.Controller',
 //	models: ['Target'],

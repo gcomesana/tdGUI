@@ -49,10 +49,10 @@ puts "json_entries: #{json_entries}\n"
 			results = api_call.request( api_method, options)
 
 # Fusion the information got from uniprot with info we gotta get from coreAPI (if existing, if working)
-			if results[0].empty? && accs[index_uuid] == '-'
+			if (results.nil? || results[0].empty?) && accs[index_uuid] == '-'
 				index_uuid += 1
 
-			elsif results[0].empty? && accs[index_uuid] != '-'
+			elsif (results.nil? || results[0].empty?) && accs[index_uuid] != '-'
 				index_ops += 1
 				index_uuid += 1
 

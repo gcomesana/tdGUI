@@ -1,6 +1,10 @@
 /**
- * Panel to support the InteractionsPanel and a window which is raised upon clicking
- * a node.
+ * @class TDGUI.view.panels.GraphDataPanel
+ * @extends Ext.panel.Panel
+ * @alias widget.tdgui-graphdatapanel
+ *
+ * This extends a Ext.panel.Panel  to support the InteractionsPanel and a window which is raised
+ * upon clicking a node.
  * The window shows a bit of informatio about the entity represented by the node and it
  * is based on a template plus the data which is to be showed.
  */
@@ -13,19 +17,45 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
   ],
 
   title:'Graph Data Panel',
+
+  /**
+   * @cfg {Object} layout layout to support the contained items
+   * @cfg {String} [layout.type='hbox']
+   * @cfg {String} [layout.align='strech']
+   */
   layout:{
     type:'hbox',
     align:'stretch'
   },
 
+  /**
+   * @cfg {Object} defaults defaults for contained items
+   * @cfg {String} [defaults.margin='5 5 5 5']
+   */
   defaults:{
     margin:'5 5 5 5'
   },
+
+  /**
+   * @cfg {String} graphDivId the id of the <code>div</code> element to support the
+   * graph object
+   */
   graphDivId:'divgraph',
   closable: true,
 
+  /**
+   * @cfg {String} targetAcc the main target accession which the interaction network
+   * is to be built on
+   */
   targetAcc: '',
+
+  /**
+   * @cfg {Number} confVal the confidence value to select an interaction
+   */
   confVal: 0.6,
+  /**
+   * @cfg {Number} maxNodes, the max number of nodes in the graph
+   */
   maxNodes: 5,
 
   myMask: undefined,
@@ -110,7 +140,8 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
  * This method adds the uniprot accession of the node into the multitarget list
  * It is set here as the functionality is very close to data panel funcition rather
  * than the generic dialog function...
- * @param aNode
+ * @param {Object} aNode
+ * @param {Object} targetDlg the information dialog for a node
  */
   addNodeToList: function (aNode, targetDlg) {
     var me = this

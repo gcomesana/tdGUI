@@ -1,3 +1,13 @@
+
+/**
+ * @class TDGUI.view.panels.LogosPanel
+ * @extends Ext.panel.Panel,
+ * @alias widget.tdgui-logospanel,
+ *
+ * This is a just panel to contain logos of sponsors and partners.
+ * As the position of the logos in the panel is assymetric (1+2) two more panels
+ * (internal to the class) has to be created to correctly set the logos
+ */
 Ext.define('TDGUI.view.panels.LogosPanel', {
   extend: 'Ext.panel.Panel',
   alias: 'widget.tdgui-logospanel',
@@ -5,8 +15,17 @@ Ext.define('TDGUI.view.panels.LogosPanel', {
   requires: [],
 
   frame: false,
+
+  /**
+   * {@cfg @see TDGUI.view.Viewport.border}
+   */
   border: false,
 
+  /**
+   * @cfg {Object} layout the layout set for this panel
+   * @cfg {String} [layout.type='hbox']
+   * @cfg {String} [layout.align='middle']
+   */
   layout: {
     type: 'hbox',
     align: 'middle'
@@ -25,6 +44,10 @@ Ext.define('TDGUI.view.panels.LogosPanel', {
   },
 
 
+  /**
+   * Creates the lef panel for the logos.
+   * @return {Ext.panel.Panel} a panel as a property of this class (leftpanel)
+   */
   createLeftLogo: function () {
 /*
     var td_logo = Ext.create('Ext.Img', {
@@ -55,7 +78,7 @@ Ext.define('TDGUI.view.panels.LogosPanel', {
 
       items: [Ext.create ('Ext.Img', {
           xtype: 'img',
-          src: '/images/td-logo-new.png',
+          src: '/images/td-logo-new.png'
 //          bodyStyle: {background: ''}
         })
       ]
@@ -65,6 +88,10 @@ Ext.define('TDGUI.view.panels.LogosPanel', {
   },
 
 
+  /**
+   * As #createLeftLogo, creates the right panel for the logos
+   * @return {Ext.panel.Panel} a panel as a property for this class (rightpanel)
+   */
   createRightLogos: function () {
     var ops_logo = Ext.create('Ext.Img', {
       src: '/images/ops-on.png',

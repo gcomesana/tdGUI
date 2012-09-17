@@ -225,13 +225,14 @@ puts "EndpointsProxy.make_request: #{ep_alive} -> #{ep_ready ? ep_ready: 'no end
 					ep_ready = opts[:uri].scan(/[^<].*[^>]/)[0]+'.xml'
 	puts "endpoints.make_req!!! -> #{ep_ready}\n"
 
-					url = URI.parse(ep_ready)
-					req = Net::HTTP::Get.new(url.request_uri)
-					res = Net::HTTP.start(url.host, url.port, @proxy_host, @proxy_port) {|http|
-						http.request(req)
-					}
-	#				json_resp = @myProxy.uniprot2json(res.body, opts[:query]) # necessary to convert to OPS json
-					res
+#					if ep_ready.include? "uniprot"
+						url = URI.parse(ep_ready)
+						req = Net::HTTP::Get.new(url.request_uri)
+						res = Net::HTTP.start(url.host, url.port, @proxy_host, @proxy_port) {|http|
+							http.request(req)
+						}
+		#				json_resp = @myProxy.uniprot2json(res.body, opts[:query]) # necessary to convert to OPS json
+						res
 				end # EO if proteinInfo
 
 			end

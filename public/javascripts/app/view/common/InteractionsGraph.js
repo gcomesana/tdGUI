@@ -56,7 +56,10 @@ var computeCfg = {
 
 
 /**
- * Interactions
+ * @class TDGUI.view.common.InteractionsGraph
+ * @extend Ext.panel.Panel
+ * @alias widget.tdgui-interactionsgraph-panel
+ *
  * This component define a panel with a jit ForceDirected graph embedded
  * Use:
  * Ext.widget ('tdgui-interactiontargetpanel', {
@@ -70,29 +73,70 @@ var computeCfg = {
  * Dependencies:
  * - jit.js
  * - jit.css -> necessary for correct positioning
+ *
+ * For more information and tutorials about the graph object, go to
+ * {@link thejit.org
  */
 Ext.define('TDGUI.view.common.InteractionsGraph', {
   extend:'Ext.panel.Panel',
   alias:'widget.tdgui-interactionsgraph-panel',
 
 //  title:'Interactions Network',
+  /**
+   * @cfg {String} [html='<div id="infovis-div"></div>']
+   * is the html which will be the place where the graph component
+   * will be rendered.
+   */
   html:'<div id="infovis-div"></div>',
+
+  /**
+   * @cfg {Boolean} border see {@link TDGUI.view.Viewport#border}, {@link Ext.panel.Panel#border}
+   */
   border: false,
 
   // Config options to add the ForceDirected graph
+  /**
+   * @cfg {Object} fd the graph object itself
+   */
   fd: undefined, // the graph
+  /**
+   * @cfg {Object} fdCfg the configuration options for the graph object. They are passed
+   * to the object constructor
+   */
   fdCfg: {}, // the graph constructor config object
+  /**
+   * @cfg {Object} fcComputeCfg it is the configuration for animation and display computation
+   */
   fdComputeCfg: computeCfg, // the computeInterval function config object
+  /**
+   * @cfg {String} [fdDivName='infovis-div'] the id of the div element to bear the graph
+   */
   fdDivName:'infovis-div', // div to bear the graph
 
+  /**
+   * @cfg {Object} interactionData structured data to represent by using the graph
+   */
   interactionData: {},
+  /**
+   * @cfg {Array} experimentsData an array of experiments related to interactions
+   */
   experimentsData: undefined,
 
+  /**
+   * @cfg {String} targetId the id of the target (uniprot accession)
+   */
   targetId: '',
+
   confVal: 0.6,
   maxNodes: 5,
 
+  /**
+   * @cfg {Function} nodeClickHandler a callback function on response to a click over a node
+   */
   nodeClickHandler: undefined,
+  /**
+   * @cfg {Function} edgeClickHandler a callback function on response to a click over a edge
+   */
   edgeClickHandler: undefined,
 
 
@@ -138,8 +182,11 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
   },
 
 
-
-
+  /**
+   * Graph initialization method.
+   * @param {Object} thisInstance the instance of this class itself, necessary to
+   * access some configs and properties of this graph instance.
+   */
   initGraph: function (thisInstance) {
     var me = this
 
@@ -337,7 +384,7 @@ console.info ("InteractionsGraph: targetId -> "+me.targetId)
 
   /**
    * Starts up the graph on its div component by setting the data and run the
-   * methods to render the graph.
+   * methods to render the graph. Has to be called AFTER {@link #initGraph}
    * @param jsonData, the data which is to feed the graph
    */
   startupGraph: function (jsonData) {

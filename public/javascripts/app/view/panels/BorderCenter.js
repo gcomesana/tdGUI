@@ -17,7 +17,7 @@ Ext.define ('TDGUI.view.panels.BorderCenter', {
 	region: 'center',
   layout: 'border',
   /**
-   * @cfg {@see TDGUI.view.Viewport#border}
+   * @cfg {Boolean} border see TDGUI.view.Viewport#border
    */
   border: false,
 
@@ -120,7 +120,7 @@ console.info ("Initializing panels.BorderCenter comp..." + this.nombre)
 
 
   /**
-   * Creates a grid ({@see TDGUI.view.grid.DynamicGrid3}), in this case to
+   * Creates a grid ({@link TDGUI.view.grid.DynamicGrid3}), in this case to
    * display multiple entries.
    * @return {Object} the created grid
    */

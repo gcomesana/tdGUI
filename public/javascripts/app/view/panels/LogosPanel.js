@@ -17,7 +17,7 @@ Ext.define('TDGUI.view.panels.LogosPanel', {
   frame: false,
 
   /**
-   * {@cfg @see TDGUI.view.Viewport.border}
+   * @cfg {Boolean} border see TDGUI.view.Viewport#border
    */
   border: false,
 

@@ -377,7 +377,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 
 
   /**
-   * Show data as the {@see #displayData} method
+   * Show data as the #displayData method
    * @param store
    * @param records
    * @param successful
@@ -470,7 +470,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 
 
   /**
-   * Add synonim terms for the current target {@see #addKeywords}
+   * Add synonim terms for the current target (see #addKeywords)
    * @param {Array} synonyms
    */
 	addSynonyms: function(synonyms) {

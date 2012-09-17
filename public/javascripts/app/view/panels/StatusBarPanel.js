@@ -25,13 +25,13 @@ Ext.define('TDGUI.view.panels.StatusBarPanel', {
 //  height: 200,
 //  minHeight: 120,
   /**
-   * {@see TDGUI.view.Viewport#border}
+   * @cfg {Boolean} border see TDGUI.view.Viewport#border
    */
   border: false,
 //  split: false,
 
   /**
-   * @cfg {Boolean} win Swith to set whether or not the feedback window is raised
+   * @cfg {Boolean} win a switch to set whether or not the feedback window is raised
    */
   win: false,
 

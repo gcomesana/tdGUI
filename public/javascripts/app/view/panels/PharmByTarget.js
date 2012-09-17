@@ -13,7 +13,7 @@ Ext.define ('TDGUI.view.panels.PharmByTarget', {
   requires: ['TDGUI.view.grid.DynamicGrid3'],
 
   /**
-   * @cfg {@see TDGUI.view.Viewport#layout}
+   * @cfg {Object} layout see TDGUI.view.Viewport#layout
    */
   layout:{
     type:'vbox',
@@ -21,7 +21,7 @@ Ext.define ('TDGUI.view.panels.PharmByTarget', {
   },
 
   /**
-   * @cfg {@see TDGUI.view.panels.MultiTarget#gridParams}
+   * @cfg {Object} gridParams see TDGUI.view.panels.MultiTarget#gridParams
    */
   gridParams: null, // an object to set/add grid.proxy.extraParams
   closable: true,
@@ -37,8 +37,8 @@ Ext.define ('TDGUI.view.panels.PharmByTarget', {
 
   /**
    * Creates an instance of dynamicgrid3 grid component an returns it.
-   * {@see TDGUI.view.panels.MultiTarget#createGrid}
-   * @return {grid} an instance of {@see TDGUI.grid.DynamicGrid3}
+   * (see TDGUI.view.panels.MultiTarget#createGrid)
+   * @return {grid} an instance of {@link TDGUI.view.grid.DynamicGrid3}
    */
   createGrid: function (config) {
     config = config || {

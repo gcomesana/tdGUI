@@ -41,7 +41,7 @@ Ext.define ('TDGUI.view.panels.west.SearchPanel', {
   anchor: '100% 100%',
 
   /**
-   * Same as {@link TDGUI.view.Viewport#defaults}
+   * @cfg defaults Same as {@link TDGUI.view.Viewport#defaults}
    */
   defaults: {
     border: false

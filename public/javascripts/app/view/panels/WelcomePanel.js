@@ -45,6 +45,14 @@ var imageTpl = new Ext.XTemplate (
 );
 
 
+/**
+ * @class TDGUI.view.panels.WelcomePanel
+ * @extend Ext.panel.Panel
+ * @alias widget.tdgui-welcomepanel
+ *
+ * This is the very first panel displayed when the application boots up.
+ * No closable, it is just a kind of welcome screen, tab sized
+ */
 Ext.define ('TDGUI.view.panels.WelcomePanel', {
 	extend: 'Ext.panel.Panel',
   alias: 'widget.tdgui-welcomepanel',
@@ -52,17 +60,19 @@ Ext.define ('TDGUI.view.panels.WelcomePanel', {
 
 	autoScroll: true,
   title: "Welcome",
-//	bodyPadding: 10,
-	layout: {
-//		type: "vbox"
-	},
 
-	defaults: {
+  /**
+   * @cfg {Object} defaults see TDGUI.view.Viewport#defaults
+   */
+  defaults: {
 		margins: '0 0 10 0',
 		padding: '15px 15px 15px 15px'
 	},
 
 
+  /**
+   * @cfg {Ext.XTemplate} the template used to show the welcome screen
+   */
 	tpl: imageTpl,
 
 	listeners: {

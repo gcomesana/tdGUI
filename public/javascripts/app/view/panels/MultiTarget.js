@@ -3,7 +3,7 @@
  * @extends Ext.panel.Panel,
  * @alias widget.tdgui-multitargetpanel
  *
- * A panel containing a {@see TDGUI.view.grid.DyanmicGrid3} grid and methods to
+ * A panel containing a {@link TDGUI.view.grid.DynamicGrid3 grid} and methods to
  * support a mutiple target joint view
  */
 Ext.define('TDGUI.view.panels.MultiTarget', {
@@ -13,7 +13,7 @@ Ext.define('TDGUI.view.panels.MultiTarget', {
   requires:['TDGUI.view.grid.DynamicGrid3'],
 
   /**
-   * @cfg {@see TDGUI.view.panels.LogosPanel#layout}
+   * @cfg {Object} layout see TDGUI.view.panels.LogosPanel#layout
    */
   layout:{
     type:'vbox',
@@ -25,15 +25,15 @@ Ext.define('TDGUI.view.panels.MultiTarget', {
    */
   gridParams:null,
   /**
-   * @cfg {@see TDGUI.view.Viewport#border}
+   * @cfg {Boolean} border see TDGUI.view.Viewport#border
    */
   border: false,
 
 /**
- * @cfg {Object} a copy of the list targets store in order to get the concept_uuid
+ * @cfg {Object} storeListTargets a copy of the list targets store in order to get the concept_uuid
  * and the concept_uri for coreAPI
  */
-  storeListTargets:null,
+  storeListTargets: null,
 
 
   initComponent:function () {
@@ -48,7 +48,7 @@ Ext.define('TDGUI.view.panels.MultiTarget', {
 
   /**
    * Creates an instance of dynamicgrid3 grid component an returns it.
-   * @return {grid} an instance of thrid
+   * @return {TDGUI.view.grid.DynamicGrid3} an instance of thrid
    */
   createGrid:function (config) {
     config = config || {

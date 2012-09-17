@@ -7,26 +7,17 @@
     <list default="true" id="ac4d959b-7041-4845-b29b-39d7db68b813" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/doc/README_FOR_APP" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/tdgui_proxy_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/tdgui_proxy_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/concept_wiki_api_call.rb" afterPath="$PROJECT_DIR$/app/models/concept_wiki_api_call.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/endpoints_proxy.rb" afterPath="$PROJECT_DIR$/lib/endpoints_proxy.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app.js" afterPath="$PROJECT_DIR$/public/javascripts/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/controller/SearchPanel.js" afterPath="$PROJECT_DIR$/public/javascripts/app/controller/SearchPanel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/controller/common/panels/TextImagePanel.js" afterPath="$PROJECT_DIR$/public/javascripts/app/controller/common/panels/TextImagePanel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/Viewport.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/Viewport.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/common/DisplayInfoDlg.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/common/DisplayInfoDlg.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/common/InteractionsGraph.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/common/InteractionsGraph.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/grid/DynamicGrid3.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/grid/DynamicGrid3.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/BorderCenter.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/BorderCenter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/BorderEast.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/BorderEast.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/GraphDataPanel.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/GraphDataPanel.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/LogosPanel.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/LogosPanel.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/MultiTarget.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/MultiTarget.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/PanelButtons.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/PanelButtons.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/PharmByTarget.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/PharmByTarget.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/StatusBarPanel.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/StatusBarPanel.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/WelcomePanel.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/WelcomePanel.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/controllers/tdgui_proxy_controller_spec.rb" afterPath="$PROJECT_DIR$/spec/controllers/tdgui_proxy_controller_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/lib/intact_proxy_spec.rb" afterPath="$PROJECT_DIR$/spec/lib/intact_proxy_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/tdgui_proxy_spec.rb" afterPath="$PROJECT_DIR$/spec/models/tdgui_proxy_spec.rb" />
     </list>
     <ignored path="tdGUI.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -58,55 +49,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SearchPanel.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js">
+      <file leaf-file-name="DynamicGrid3.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/grid/DynamicGrid3.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="2" selection-start="596" selection-end="596" vertical-scroll-proportion="-7.3846154">
+            <state line="175" column="48" selection-start="5236" selection-end="5236" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GraphDataPanel.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/GraphDataPanel.js">
+      <file leaf-file-name="DisplayInfoDlg.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/DisplayInfoDlg.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="144" column="2" selection-start="3958" selection-end="3958" vertical-scroll-proportion="0.0">
+            <state line="42" column="61" selection-start="1361" selection-end="1361" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LogosPanel.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/LogosPanel.js">
+      <file leaf-file-name="InteractionsGraph.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/InteractionsGraph.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="92" column="80" selection-start="1998" selection-end="1998" vertical-scroll-proportion="0.0">
+            <state line="386" column="75" selection-start="11824" selection-end="11824" vertical-scroll-proportion="-0.011876484">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MultiTarget.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/MultiTarget.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="33" selection-start="736" selection-end="736" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PharmByTarget.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/PharmByTarget.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="65" selection-start="1058" selection-end="1058" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TargetInfo.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="TargetInfo.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="552" column="33" selection-start="14709" selection-end="14709" vertical-scroll-proportion="0.2">
+            <state line="472" column="64" selection-start="12599" selection-end="12599" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -128,22 +101,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/spec/controllers/tdgui_proxy_controller_spec.rb" />
-        <option value="$PROJECT_DIR$/app/models/concept_wiki_api_call.rb" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/controller/common/panels/TextImagePanel.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/app.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/controller/SearchPanel.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/BorderEast.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/StatusBarPanel.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/GraphDataPanel.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/view/Viewport.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/LogosPanel.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/BorderCenter.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/MultiTarget.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/PanelButtons.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/WelcomePanel.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/BorderCenter.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/LogosPanel.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/MultiTarget.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/PharmByTarget.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/StatusBarPanel.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/grid/DynamicGrid3.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/common/DisplayInfoDlg.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/common/InteractionsGraph.js" />
       </list>
     </option>
   </component>
@@ -218,6 +191,16 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="RailsProjectView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -286,11 +269,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
+              <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -317,44 +296,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="panels" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="panels" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="west" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -503,10 +444,6 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="store" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -530,7 +467,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
+              <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -557,6 +494,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="grid" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -608,30 +549,20 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="RailsProjectView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="editor.preferences.smartKeys" />
+    <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="RakeTaksPopup.undocumentedIncluded" value="false" />
-    <property name="DefaultHtmlFileTemplate" value="Html" />
     <property name="RailsGeneratorsPopup.hiddenIncluded" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="DefaultHtmlFileTemplate" value="Html" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -940,6 +871,15 @@
         <option name="RakeTask" enabled="false" />
       </method>
     </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Remote">
+      <JSRemoteDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSRemoteDebuggerConfigurationSettings>
+      <method>
+        <option name="RakeTask" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="CucumberRunConfigurationType" factoryName="Cucumber">
       <predefined_log_file id="RUBY_CUCUMBER" enabled="true" />
       <module name="" />
@@ -971,15 +911,6 @@
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="CUCUMBER_RUNNER_PATH" VALUE="" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_RUNNER" VALUE="false" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="SETTINGS_VERSION" VALUE="2" />
-      <method>
-        <option name="RakeTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Remote">
-      <JSRemoteDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" />
-      </JSRemoteDebuggerConfigurationSettings>
       <method>
         <option name="RakeTask" enabled="false" />
       </method>
@@ -1210,17 +1141,17 @@
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26557863" sideWeight="0.48185942" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2324263" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24777448" sideWeight="0.7675737" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26261127" sideWeight="0.7675737" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2670623" sideWeight="0.760771" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26417235" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="251" y="496" width="1355" height="431" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25222552" sideWeight="0.17687075" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2670623" sideWeight="0.23129252" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25510204" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="515" y="551" width="1155" height="374" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2324263" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896304" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -1354,98 +1285,98 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/BorderSouth.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/BorderEast.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="74" selection-start="183" selection-end="183" vertical-scroll-proportion="0.07202881" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="81" selection-start="178" selection-end="178" vertical-scroll-proportion="0.058536585" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/Viewport.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.058536585" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/Viewport.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="28" selection-start="519" selection-end="519" vertical-scroll-proportion="0.23414634" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/StatusBarPanel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="54" selection-start="749" selection-end="749" vertical-scroll-proportion="0.3804878" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/LogosPanel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="80" selection-start="1998" selection-end="1998" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/GraphDataPanel.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="144" column="2" selection-start="3958" selection-end="3958" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/BorderCenter.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/PanelButtons.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="11" selection-start="479" selection-end="479" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="5" column="54" selection-start="166" selection-end="166" vertical-scroll-proportion="0.09756097" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/store/Targets.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/model/Target.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="2" selection-start="596" selection-end="596" vertical-scroll-proportion="-7.3846154">
-          <folding />
-        </state>
+        <state line="17" column="39" selection-start="644" selection-end="644" vertical-scroll-proportion="0.07855974" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/PanelButtons.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/LogosPanel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="54" selection-start="166" selection-end="166" vertical-scroll-proportion="0.09756097">
-          <folding />
-        </state>
+        <state line="19" column="27" selection-start="513" selection-end="513" vertical-scroll-proportion="0.3323077" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/MultiTarget.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="33" selection-start="736" selection-end="736" vertical-scroll-proportion="0.0">
+        <state line="5" column="51" selection-start="167" selection-end="167" vertical-scroll-proportion="0.09419152" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/WelcomePanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="28" selection-start="2763" selection-end="2763" vertical-scroll-proportion="0.5121951" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="472" column="64" selection-start="12599" selection-end="12599" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/StatusBarPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="27" selection-start="844" selection-end="844" vertical-scroll-proportion="0.39904988">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/PharmByTarget.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="65" selection-start="1058" selection-end="1058" vertical-scroll-proportion="0.0">
+        <state line="16" column="54" selection-start="509" selection-end="509" vertical-scroll-proportion="0.18764846">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/store/Targets.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/BorderCenter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="14" column="31" selection-start="375" selection-end="375" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/model/Target.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/grid/DynamicGrid3.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="175" column="48" selection-start="5236" selection-end="5236" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/DisplayInfoDlg.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="552" column="33" selection-start="14709" selection-end="14709" vertical-scroll-proportion="0.2">
+        <state line="42" column="61" selection-start="1361" selection-end="1361" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/lib/jit.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-2.2536585">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/InteractionsGraph.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="386" column="75" selection-start="11824" selection-end="11824" vertical-scroll-proportion="-0.011876484">
           <folding />
         </state>
       </provider>

@@ -2,6 +2,7 @@
  * @class TDGUI.controller.common.panels.TextImagePanel
  * @extends Ext.app.Controller
  *
+ * Controller for the {@link TDGUI.view.panels.TextImagePanel} component
  */
 Ext.define("TDGUI.controller.common.panels.TextImagePanel", {
   extend:'Ext.app.Controller',

@@ -1,4 +1,6 @@
 /**
+ * @class TDGUI.store.ListTargets
+ *
  * This store keeps the objects which are displayed in the list of selected targets
  * So, the data here will be being inserted and removed as the user removes and/or
  * adds objects to it.
@@ -8,7 +10,13 @@ Ext.define('TDGUI.store.ListTargets', {
   extend:'Ext.data.Store',
   model:'TDGUI.model.ListTarget',
 
+/**
+ * @cfg {String} id the id of this stores
+ */
   id:'listTargetsStore',
+/**
+ * @cfg {String} storeId the id which the store can be access by using Ext.data.StoreManager.lookup
+ */
   storeId:'listTargetsStore',
   data:[],
 
@@ -23,6 +31,12 @@ Ext.define('TDGUI.store.ListTargets', {
   },
 
 
+/**
+ * This method performs a deep cloning of this store, creating new instances of this one and the contained data.
+ * It is a kind of factory method for new stores created based on this one.
+ * 
+ * @return {TDGUI.store.ListTargets} the new instance of the store
+ */
   clone:function () {
     var newStore = Ext.create('TDGUI.store.ListTargets')
 

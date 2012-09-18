@@ -1,5 +1,8 @@
 /**
- * @class TDGUI.co
+ * @class TDGUI.controller.SearchPanel
+ * @extends Ext.app.Controller
+ *
+ * Controller for the panel on the west border of the viewport
  */
 Ext.define('TDGUI.controller.SearchPanel', {
   extend: 'Ext.app.Controller',
@@ -100,6 +103,12 @@ Ext.define('TDGUI.controller.SearchPanel', {
   },
 
 
+/**
+ * This is the callback method upon clicking the 'Search' button on the west panel
+ * @param {Ext.Component} btn the button instance which triggered the click event
+ * @param {Event} ev the event instance
+ * @param {Object} opts options
+ */
   retrieveBtnClick: function (btn, ev, opts) {
 //    var txtArea = btn.up('tdgui-west-search').down('tdgui-textarea')
 //    var uniprotIds = txtArea.getRawValue().split('\n').join(',')
@@ -150,7 +159,13 @@ Ext.define('TDGUI.controller.SearchPanel', {
 
   },
 
-
+/**
+ * This is the callback method run upon clicking the 'Add' button close to the checkbox-combo to add selected entries
+ * to the multiselection list.
+ * @param {Ext.Component} btn the button which triggered the event
+ * @param {Event} ev the event instance
+ * @param {Object} opts the event options
+ */
   clickAddProteins: function (btn, ev, opts) {
     var me = this
     var protLookup = this.getProtLookup()
@@ -251,7 +266,11 @@ Ext.define('TDGUI.controller.SearchPanel', {
   }, // EO clickAddProteins
 
 
-
+/**
+ * This method was used to display a target information upon entry selection
+ * @deprecated 
+ * Further changes on requirements removed the use of this method 
+ */
   clickGoProteinInfo: function (btn, ev, opts) {
 //    console.info('clickGoProteinInfo...')
     var conceptLookup = this.getProtLookup()

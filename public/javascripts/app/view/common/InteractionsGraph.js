@@ -429,7 +429,9 @@ console.info ("InteractionsGraph: targetId -> "+me.targetId)
   },
 
 
-
+/**
+ * @cfg {Object} listeners an object containing event handlers for this object
+ */
   listeners:{
     afterrender:{
       fn:function (comp, opts) {

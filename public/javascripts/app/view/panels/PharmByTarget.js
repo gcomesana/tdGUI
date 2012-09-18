@@ -38,7 +38,7 @@ Ext.define ('TDGUI.view.panels.PharmByTarget', {
   /**
    * Creates an instance of dynamicgrid3 grid component an returns it.
    * (see TDGUI.view.panels.MultiTarget#createGrid)
-   * @return {grid} an instance of {@link TDGUI.view.grid.DynamicGrid3}
+   * @return {TDGUI.view.grid.DynamicGrid3} an instance of {@link TDGUI.view.grid.DynamicGrid3}
    */
   createGrid: function (config) {
     config = config || {

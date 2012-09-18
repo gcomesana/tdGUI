@@ -1,6 +1,11 @@
 
 
-
+/**
+ * @class TDGUI.model.DynamicGrid
+ * @extend Ext.data.Model 
+ *
+ * The model 'template' for the store associated with {@link TDGUI.view.grid.DynamicGrid}
+ */
 Ext.define('TDGUI.model.DynamicGrid', {
   extend:'Ext.data.Model',
 //    config:{

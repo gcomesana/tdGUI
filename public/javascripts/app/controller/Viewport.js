@@ -1,5 +1,11 @@
 
-
+/**
+ * @class TDGUI.controller.Viewport
+ * @extends Ext.app.Controller
+ * 
+ * This is the main application controller. Basically, all tab creation or action carried  out (except tab closing)
+ * is handled upon history change event by the handleHistoryToken method. 
+ */
 Ext.define ("TDGUI.controller.Viewport", {
   extend: 'Ext.app.Controller',
 
@@ -51,14 +57,23 @@ console.info ("A element was added to history: -> "+token)
         }
       }
 */
-    })
-  },
+    }) // this.control
+
+  }, // init
 
 
   onLaunch: function (app) {
   },
 
 
+/**
+ * This is the method which handles the application 'state' change. This method is not intended to be called by user,
+ * as it is called back from this controller when a change in the history (just through the {@link Ext.util.History#added added} method)
+ * is triggered.<br/>
+ * The token parameter is to configure the element which will be created upon history change.
+ * @param {String} token this is a string with the form of a query string which carry parameters as the new widget to show
+ * and some parameter values to config the widget.
+ */ 
   handleHistoryToken: function (token) {
     var tabsPanel = this.getContentTabs()
     var tokenObj = this.parseHistoryToken(token)
@@ -143,7 +158,7 @@ console.info ("raising interactions for Target panel")
 /**
  * Parse a history-token string and returns an object such that its keys are
  * the name of the params and the values, the params values
- * @param stringToParse, the token history
+ * @param {String} stringToParse, the token history
  * @return {Object}
  */
   parseHistoryToken:function (stringToParse) {

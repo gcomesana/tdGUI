@@ -1,5 +1,11 @@
 
-
+/**
+ * @class TDGUI.controller.panels.TargetInfo
+ * @extends Ext.app.Controller
+ * 
+ * Controller for the {@link TDGUI.view.panel.TargetInfo TargetInfo panel} on the content area.
+ *
+ */
 Ext.define("TDGUI.controller.panels.TargetInfo", {
   extend:'Ext.app.Controller',
 
@@ -60,12 +66,13 @@ console.info ('Yes, button send interactions clicked')
 
 
 /**
- * Callback on interactions button click.
- * Keep in mind the protein_uri param, which is a uniprot url if coreApi
- * is not working or a conceptwiki url otherwise.
- * @param btn
- * @param ev
- * @param opts
+ * Method to process interactions button click. This is not a callback method rather than a controller method to
+ * do the business logic. The actual callback function is implemented as a anoymous function inside the 
+ * {@link Ext.app.Controller#control control method}
+ * 
+ * @param {Ext.Component} targetAcc the accession of the target displayed on proteinInfo panel
+ * @param {Event} confVal the confidence value to select the right interactions
+ * @param {Object} maxNodes the maximun number of node for the interactions graph
  */
   onClickInteractionsBtn: function (targetAcc, confVal, maxNodes) {
 
@@ -92,10 +99,11 @@ console.info ('Yes, button send interactions clicked')
 
 
 /**
- * Decodes the token param (uniprot,ops) to load the panel-associated-store by
+ * Thisis is a method to initialize the {@link TDGUI.view.panels.TargetInfo TargetInfo} panel component
+ * So, this method decodes the token param (uniprot,ops) to load the panel-associated-store by
  * requesting data to ops or uniprot if the latter is not working
- * @param comp, the component which yields the event
- * @param opts, options
+ * @param {Ext.Component} comp the component which yields the event
+ * @param {Object} opts options
  */
   initTargetInfoPanel: function (comp, opts) {
 //    var store = this.getTargetsStore();
@@ -129,6 +137,7 @@ console.info ('TargetInfo.initTargetInfoPanel tokenParams: '+tokenParams)
       store.load();
 //    }
   },
+
 
 
   retryTargetInfoPanel: function (comp, opts) {

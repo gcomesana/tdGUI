@@ -1,7 +1,11 @@
 
 
 /**
- * This is a multixelect combobox with checkboxes for every item.
+ * @class TDGUI.view.dropdowns.tdgui.CheckboxComboProteinLookup
+ * @extends TDGUI.view.dropdowns.conceptWikiProteinLookup
+ * @alias widget.tdgui-chkbox-combo-proteinlookup
+ *
+ * This is a multiselect combobox with checkboxes for every item.
  * Actually, the items are images (checked and unchecked images) which are
  * switched programmatically.
  * This component has related images and css styles to set up the template
@@ -14,22 +18,44 @@ Ext.define ('TDGUI.view.dropdowns.tdgui.CheckboxComboProteinLookup', {
 //  requires:[],
 // store: declared on conceptWikiProteinLookup
   margin: '0 5 0 0',
+
+/**
+ * @cfg {String} see TDGUI.view.common.ItemMultilist#fieldLabel
+ */
   fieldLabel: '',
   width: undefined,
+/**
+ * @cfg {String} inputString the string if something wants to be initialized
+ */
   inputString: '',
+/**
+ * @cfg {Boolean} [allowBlank=true] if blank entry is allowed, see {@link Ext.form.field.ComboBox}
+ */
   allowBlank: true,
+/**
+ * @cfg {String} emptyText see {@link Ext.form.field.ComboBox#emptyText}
+ */
   emptyText: 'Start typing (at least 4 characters)',
 //  multiSelect: true,
 //  displayField: undefined,
   delimiter: '',
 
+/**
+ * @cfg {String} labelAlign label position on to the component
+ */
   labelAlign: 'top',
   labelSeparator: '',
+/**
+ * @cfg {String} labelCls CSS class to apply to the #fieldLabel
+ */
   labelCls: 'targetlist-font-label',
-
 
   listSelected: [], // keep the index (0 based) of the elements selected in the store
 
+/**
+ * @cfg {Object} listConfig the configuration to override the markup rendering in order to add checkbox support.
+ * Basically sets a new rendering and behaviour for every item in the combo box.
+ */
   listConfig: {
     loadingText: 'Searching...',
     emptyText: 'No matching proteins found.',
@@ -97,7 +123,9 @@ console.info (xtpl)
 */
   }, // EO listConfig
 
-
+/**
+ * @cfg {Object} listeners callback methods to respond to events
+ */
   listeners: {
     beforeselect: function (combo, recs, index, opts) {
 // console.info ('#'+index+'. '+recs.data.concept_url)

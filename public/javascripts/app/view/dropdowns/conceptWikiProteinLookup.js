@@ -1,3 +1,10 @@
+/**
+ * @class TDGUI.view.dropdowns.conceptWikiProteinLookup
+ * @extends Ext.form.ComboBox
+ * @alias widget.conceptWikiProteinLookup
+ *
+ * This is a base class to build a custom combobox which display results based on the input text.
+ */
 Ext.define('TDGUI.view.dropdowns.conceptWikiProteinLookup', {
 	extend: 'Ext.form.ComboBox',
 	alias: 'widget.conceptWikiProteinLookup',

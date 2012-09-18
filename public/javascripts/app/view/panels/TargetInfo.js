@@ -409,7 +409,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 
   /**
    * Handy method to remove all dom domeElement's children elements
-   * @param {Element} domElement a dom element
+   * @param {Ext.Element} domElement a dom element
    */
   clearDomBelow: function(domElement) {
 		if (domElement.hasChildNodes()) {

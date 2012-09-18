@@ -1,7 +1,9 @@
 
 /**
- * Model for the selected items displayed in the textarea/list of selected
- * targets.
+ * @class TDGUI.model.ListTarget
+ * @extend Ext.data.Model 
+ *
+ * Model for the selected items displayed in the textarea/list of selected targets.
  */
 Ext.define ('TDGUI.model.ListTarget', {
 	extend: 'Ext.data.Model',

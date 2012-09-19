@@ -3,9 +3,6 @@ require 'rexml/document'
 require 'nokogiri'
 require 'uri'
 
-
-
-
 # This proxy is a kind of helper class for the tdgui_proxy in order to
 # give support to requests either to uniprot or coreAPI
 class InnerProxy

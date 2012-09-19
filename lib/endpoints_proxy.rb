@@ -1,11 +1,11 @@
 
 
-# EndpointsProxy class
-# Set the correct endpoint to call on every request, depending whether or not
-# the endpoints are alive
 require 'inner_proxy.rb'
 require 'net/http'
 require 'uri'
+
+# Set the correct endpoint to call on every request, depending whether or not
+# the endpoints are alive
 module EndpointsProxy
 
 private

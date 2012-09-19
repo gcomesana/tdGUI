@@ -1,6 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 
-# require 'rails/all'
+require 'rails/all'
 
 # !!!!! to avoid to use activeRecord (and, then, any db)
 require "action_controller/railtie"
@@ -48,7 +48,7 @@ module TdGUI
     config.filter_parameters += [:password]
 
     # Enable the asset pipeline
-    config.assets.enabled = false
+#    config.assets.enabled = false
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'

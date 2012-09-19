@@ -1,5 +1,9 @@
 
-
+/**
+ * @class TDGUI.store.DynamicGrid
+ *
+ * This is the store which is used with TDGUI.view.grid.DynamicGrid. The store is filled on the fly
+ */
 Ext.define('TDGUI.store.DynamicGrid', {
   extend:'Ext.data.Store',
   model:'TDGUI.model.DynamicGrid',

@@ -1,6 +1,10 @@
 /**
- * Panel to support the InteractionsPanel and a window which is raised upon clicking
- * a node.
+ * @class TDGUI.view.panels.GraphDataPanel
+ * @extends Ext.panel.Panel
+ * @alias widget.tdgui-graphdatapanel
+ *
+ * This extends a Ext.panel.Panel  to support the InteractionsPanel and a window which is raised
+ * upon clicking a node.
  * The window shows a bit of informatio about the entity represented by the node and it
  * is based on a template plus the data which is to be showed.
  */
@@ -13,18 +17,46 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
   ],
 
   title:'Graph Data Panel',
+
+  /**
+   * @cfg {Object} layout layout to support the contained items
+   * @cfg {String} [layout.type='hbox']
+   * @cfg {String} [layout.align='strech']
+   */
   layout:{
     type:'hbox',
     align:'stretch'
   },
 
+  /**
+   * @cfg {Object} defaults defaults for contained items
+   * @cfg {String} [defaults.margin='5 5 5 5']
+   */
   defaults:{
     margin:'5 5 5 5'
   },
+
+  /**
+   * @cfg {String} graphDivId the id of the <code>div</code> element to support the
+   * graph object
+   */
   graphDivId:'divgraph',
   closable: true,
 
+  /**
+   * @cfg {String} targetAcc the main target accession which the interaction network
+   * is to be built on
+   */
   targetAcc: '',
+
+  /**
+   * @cfg {Number} confVal the confidence value to select an interaction
+   */
+  confVal: 0.6,
+  /**
+   * @cfg {Number} maxNodes, the max number of nodes in the graph
+   */
+  maxNodes: 5,
 
   myMask: undefined,
 
@@ -38,6 +70,10 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
       fdDivName: 'divgraph',
       flex: 3,
       targetId: me.targetAcc,
+      confVal: me.confVal,
+      maxNodes: me.maxNodes,
+
+      id: 'graph-'+me.targetAcc,
 
       nodeClickHandler: function (node, eventInfo, ev) {
       // console.info ("onClickHandler method...")
@@ -64,7 +100,8 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
               text: 'Add',
               tooltip: 'Add this node to the <b>multiple targets</b> list',
               handler: function (btn, evObj) {
-                me.addNodeToList (node)
+                var thisWin = btn.up ('window')
+                me.addNodeToList (node, thisWin)
               }
             }, {
               xtype: 'button',
@@ -75,7 +112,6 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
 
           myWin.show()
         } // EO if node is undefined
-
       } // EO nodeClickHandler callback function
 
     }) // EO graphPanel
@@ -104,17 +140,85 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
  * This method adds the uniprot accession of the node into the multitarget list
  * It is set here as the functionality is very close to data panel funcition rather
  * than the generic dialog function...
- * @param aNode
+ * @param {Object} aNode
+ * @param {Object} targetDlg the information dialog for a node
  */
-  addNodeToList: function (aNode) {
-    var txtArea = Ext.ComponentQuery.query('viewport > panel > panel > panel > textarea')[0]
-    var txtValues = txtArea.getRawValue()
+  addNodeToList: function (aNode, targetDlg) {
+    var me = this
+    var listTargets = Ext.ComponentQuery.query ('panel > tdgui-item-multilist')[0]
+    var listStore = listTargets.getStore()
+    var nodename = Ext.ComponentQuery.query('window > tdgui-textimagepanel')[0].data.nodename
+    var uniprotAcc = aNode.name
+
+    var myMask = new Ext.LoadMask(Ext.getBody(), {msg: 'Loading data...'})
+    myMask.show()
+    Ext.Ajax.request({
+      url: '/concept_wiki_api_calls/protein_lookup',
+      method: 'GET',
+      params: {
+        query: nodename
+      },
+
+      failure: function (resp, opts) {
+console.info('Unable to get response from concept_wiki.')
+        myMask.hide()
+
+        Ext.Msg.show({
+          title:'Target information',
+          msg: "Unable to get response from ConceptWiki.",
+          buttons: Ext.Msg.OK,
+          icon: Ext.Msg.ERROR
+        });
+
+      },
+
+      success: function (resp, opts) {
+
+        myMask.hide()
+        var listItem = {
+          name: nodename, // target_name for conceptWiki or /uniprot/protein/recommendedname/fullname
+          concept_uuid: undefined,
+          concept_uri: undefined,
+          uniprot_acc: [uniprotAcc],
+          uniprot_id: uniprotAcc,
+          uniprot_name: nodename
+        }
+
+        if (resp.responseText == '{}') {
+//          console.info("Nothing found for: " + item)
+          Ext.Msg.show({
+             title:'Target information',
+             msg: "No information about the chosen target was found in ConceptWiki. Some features won't be available.",
+             buttons: Ext.Msg.OK,
+             icon: Ext.Msg.WARNING
+          });
+        }
+        else {
+          var jsonResp = Ext.JSON.decode(resp.responseText)
+          var conceptMatch = jsonResp[0]
+
+          listItem.concept_uuid = conceptMatch.concept_uuid;
+          listItem.concept_uri = conceptMatch.concept_uri;
+          listItem.name = conceptMatch.concept_label;
+        }
+
+        var target = Ext.create('TDGUI.model.ListTarget', listItem)
+        listStore.add(target)
+
+        targetDlg.close();
+//        labelCount++
+//        if (labelCount == labels.length)
+
+      }
+    })
+
+/*    var txtValues = txtArea.getRawValue()
 
     if (txtValues.indexOf(aNode.name) == -1) {
       txtValues += '\n'+aNode.name
       txtArea.setRawValue(txtValues)
     }
-
+*/
   }
 
 }) // EO GraphDataPanel

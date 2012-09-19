@@ -1,24 +1,41 @@
 
-
-
-
+/**
+ * @class TDGUI.view.Viewport
+ * @extends Ext.container.Viewport
+ * @alias widget.tdgui-viewport
+ *
+ * The Viewport to support the main application layout
+ */
 Ext.define('TDGUI.view.Viewport', {
   extend: 'Ext.container.Viewport',
   alias: 'widget.tdgui-viewport',
 
   requires: ['TDGUI.view.panels.BorderSouth','TDGUI.view.panels.BorderCenter',
               'TDGUI.view.panels.BorderEast','TDGUI.view.panels.LogosPanel',
-              'TDGUI.view.panels.west.SearchPanel',
-              'TDGUI.view.panels.west.HistoryPanel',
-              'TDGUI.view.panels.west.ExamplesPanel'],
+              'TDGUI.view.panels.west.SearchPanel','TDGUI.view.panels.StatusBarPanel'],
 
+/**
+ * @cfg {Object} layout the layout which is to be used
+ * @cfg {String} [layout.type='border']
+ * @cfg {Number} [layout.padding=1]
+ */
   layout: {
     type: 'border',
-    padding: 5
+    padding: 1
   },
+
+/**
+ * @cfg {Object} defaults the default properties' value for the items contained in this viewport
+ * @cfg {Boolean} [defaults.split=true]
+ */
   defaults: {
     split: true
   },
+
+  /**
+   * @cfg {Boolean} [border=false] the presence or absence of the border around the viewport
+   */
+  border: false,
 
 
 
@@ -26,7 +43,7 @@ Ext.define('TDGUI.view.Viewport', {
 console.info ("Viewport.initComponent starting...")
     var me = this
 
-/**
+/*
     Ext.History.init()
     Ext.History.on('change', function (token) {
       this.fireEvent ('historyAdded', token)
@@ -195,10 +212,11 @@ console.info ("Viewport.initComponent starting...")
     me.items = [
       {
         region: 'north',
+        id: 'td-top',
 //        collapsible: true,
 //        title: 'North',
 //        split: true,
-        height: 120,
+        height: 100,
         minHeight: 60,
         split: false,
         items: [
@@ -209,33 +227,33 @@ console.info ("Viewport.initComponent starting...")
       },
       {
         region: 'west',
+        id: 'td-left',
         collapsible: true,
-        title: 'Search center',
         split: true,
         width: '20%',
         minWidth: 320,
-//        minHeight: 140,
         frame: false,
 
         layout: 'anchor',
 //        layout: 'hbox',
-//        items: [theWestItems]
         items: [{
-//            region: 'north',
-            xtype: 'tdgui-west-search'
-          } /* , {
-            region: 'center',
-//            xtype: 'tdgui-west-history'
-          }, {
-            region: 'south',
-//            xtype: 'tdgui-west-examples'
-        }*/ ]
+          xtype: 'tdgui-west-search',
+          split: false,
+          frame: false
+        }]
       },
-      { xtype: 'tdgui-border-center'},
+      { xtype: 'tdgui-border-center',
+        id: 'td-main'
+      },
 //      theCenter,
 //      theEast,
 //      { xtype: 'tdgui-border-east'},
-//      { xtype: 'tdgui-border-south'}
+
+      { xtype: 'tdgui-statusbar',
+        region: 'south',
+        split: false
+      }
+
     ]
 
     this.callParent (arguments)

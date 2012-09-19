@@ -2,13 +2,21 @@
 
 
 /**
- * Store to retrieve the proteinInfo data for the targets
+ * @alias TDGUI.store.AttributesTargets
+ * @extends Ext.data.Store
+ * 
+ * Store to keep the proteinInfo data for the targets in the target list. Use TDGUI.model.AttributesTarget as the
+ * model to store the data
  */
 Ext.define('TDGUI.store.AttributesTargets', {
   requires:'TDGUI.model.AttributesTarget',
   extend:'Ext.data.Store',
   model:'TDGUI.model.AttributesTarget',
-  id:'Targets',
+
+/**
+ * @cfg {String} id the id for the store
+ */  
+  id: 'Targets',
 
   proxy:{
     type:'memory',

@@ -1,8 +1,8 @@
 
 TdGUI::Application.routes.draw do
 
-  get "home/index"
-  get "home/test"
+  get "home/index" #, :as => :home
+#  get "home/test"
 
 =begin
   get "thrashcan/start"
@@ -32,6 +32,7 @@ TdGUI::Application.routes.draw do
 			get :multiple_entries_retrieval
 			get :interactions_retrieval
 			get :get_uniprot_by_name
+			post :send_feedback
 		end
 	end
 
@@ -48,6 +49,7 @@ TdGUI::Application.routes.draw do
 	resources :core_api_calls do
 		collection do
 			post :protein_info
+#			get :protein_lookup
 			post :pharm_by_protein_name
 			get :wiki_pathway_protein_lookup
 			get :wiki_pathways_by_protein
@@ -70,6 +72,7 @@ TdGUI::Application.routes.draw do
 =end
   root :to => "home#index"
 
+#	match "home" => "home#index"
 
 
   # The priority is based upon order of creation:

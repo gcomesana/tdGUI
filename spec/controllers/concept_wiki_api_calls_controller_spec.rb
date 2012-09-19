@@ -38,6 +38,8 @@ describe ConceptWikiApiCallsController do
 
 		response.code.to_i.should eq(200)
 		expect { JSON.parse(response.body) }.to_not raise_error
+
+		JSON.parse(response.body).should be_kind_of Array
 puts "\n#{response.body}"
 	end
 

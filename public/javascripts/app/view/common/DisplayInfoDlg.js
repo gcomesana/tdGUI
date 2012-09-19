@@ -1,5 +1,8 @@
 /**
- * DisplayInfoDlg component
+ * @class TDGUI.view.common.DisplayInfoDlg
+ * @extends Ext.window.Window
+ * @alias widget.tdgui-displayinfo-dlg
+ *
  * This is a configurable window addressed to show a little information.
  * Defaults is a panel (TDGUI.view.common.panels.TextImagePanel) which is a
  * splitted panel (displayfield + img), but by providing any other panel on
@@ -20,12 +23,23 @@
  */
 Ext.define('TDGUI.view.common.DisplayInfoDlg', {
 	extend: 'Ext.window.Window',
+  alias: 'widget.tdgui-displayinfo-dlg',
   requires: ['TDGUI.view.common.panels.TextImagePanel'],
 
 	width: 600,
-	modal: true,
+  /**
+   * @cfg {Boolean} [modal=true] see {@link Ext.window.Window#modal}
+   */
+  modal: true,
 
+  /**
+   * @cfg {Ext.XTemplate} tpl the template to show in the display area
+   */
   tpl: undefined,
+
+  /**
+   * @cfg {Object} data the data to show through the template
+   */
   data: undefined,
   
   initComponent: function () {

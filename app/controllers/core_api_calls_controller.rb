@@ -13,7 +13,9 @@ class CoreApiCallsController < ApplicationController
       results = api_call.request( api_method, options)
       render :json => ResultsFormatter.construct_column_objects(results).to_json, :layout => false
   end
-  
+
+# Main method to preform a concept search on ConceptWiki
+# @param [String] substring the concept to be looked up
   def protein_lookup(substring = params[:query])
       options = Hash.new
       api_method = 'proteinLookup'
@@ -71,7 +73,8 @@ class CoreApiCallsController < ApplicationController
       render :json => ResultsFormatter.construct_column_objects(ResultsFormatter.format_chemspider_results(ResultsFormatter.format_pubmed_id(results))).to_json, :layout => false    
   end
   
-  # Main search for pharmacology by compound name. The input parameter is the cmpd_url returned by cmdp_name_lookup
+  # Main search for pharmacology by protein/target name.
+	# The input parameter is the cmpd_url returned by cmdp_name_lookup
   def pharm_by_protein_name(prot_uri = params[:protein_uri])
       options = Hash.new
       api_method = 'proteinPharmacology'
@@ -112,7 +115,10 @@ class CoreApiCallsController < ApplicationController
       if results.nil? then "Then what? Error handling" end
       render :json => ResultsFormatter.construct_column_objects(ResultsFormatter.format_chemspider_results(results)).to_json, :layout => false    
    end
- 
+
+
+# Main method to get information about a target from ConceptWiki
+# @param [String] prot_uri the protein uri of concept wiki to make the query request
   def protein_info(prot_uri = params[:protein_uri])
     options = Hash.new
     api_method = 'proteinInfo'
@@ -128,7 +134,7 @@ class CoreApiCallsController < ApplicationController
 		end
   end
 
-  # check to see if endpoint is responding
+# Checks whether or not endpoint is responding
    def check
       api_method = 'proteinInfo'
       prot_uri = 'http://chem2bio2rdf.org/chembl/resource/chembl_targets/12261'

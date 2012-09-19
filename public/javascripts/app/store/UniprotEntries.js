@@ -1,9 +1,14 @@
 
 
+/**
+  * @class TDGUI.store.UniprotEntries
+  * @extend Ext.data.Store
+  *
+  * Store to hold data of several uniprot entries
+  */
 Ext.define ('TDGUI.store.UniprotEntries', {
   extend: 'Ext.data.Store',
   requires: 'TDGUI.model.UniprotEntry',
-
 
   storeId: 'uniprot-entries',
   model: 'TDGUI.model.UniprotEntry',

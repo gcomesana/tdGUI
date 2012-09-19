@@ -56,7 +56,10 @@ var computeCfg = {
 
 
 /**
- * Interactions
+ * @class TDGUI.view.common.InteractionsGraph
+ * @extend Ext.panel.Panel
+ * @alias widget.tdgui-interactionsgraph-panel
+ *
  * This component define a panel with a jit ForceDirected graph embedded
  * Use:
  * Ext.widget ('tdgui-interactiontargetpanel', {
@@ -70,26 +73,70 @@ var computeCfg = {
  * Dependencies:
  * - jit.js
  * - jit.css -> necessary for correct positioning
+ *
+ * For more information and tutorials about the graph object, go to
+ * {@link thejit.org
  */
 Ext.define('TDGUI.view.common.InteractionsGraph', {
   extend:'Ext.panel.Panel',
   alias:'widget.tdgui-interactionsgraph-panel',
 
 //  title:'Interactions Network',
+  /**
+   * @cfg {String} [html='<div id="infovis-div"></div>']
+   * is the html which will be the place where the graph component
+   * will be rendered.
+   */
   html:'<div id="infovis-div"></div>',
+
+  /**
+   * @cfg {Boolean} border see {@link TDGUI.view.Viewport#border}, {@link Ext.panel.Panel#border}
+   */
   border: false,
 
   // Config options to add the ForceDirected graph
+  /**
+   * @cfg {Object} fd the graph object itself
+   */
   fd: undefined, // the graph
+  /**
+   * @cfg {Object} fdCfg the configuration options for the graph object. They are passed
+   * to the object constructor
+   */
   fdCfg: {}, // the graph constructor config object
+  /**
+   * @cfg {Object} fcComputeCfg it is the configuration for animation and display computation
+   */
   fdComputeCfg: computeCfg, // the computeInterval function config object
+  /**
+   * @cfg {String} [fdDivName='infovis-div'] the id of the div element to bear the graph
+   */
   fdDivName:'infovis-div', // div to bear the graph
 
+  /**
+   * @cfg {Object} interactionData structured data to represent by using the graph
+   */
   interactionData: {},
+  /**
+   * @cfg {Array} experimentsData an array of experiments related to interactions
+   */
   experimentsData: undefined,
+
+  /**
+   * @cfg {String} targetId the id of the target (uniprot accession)
+   */
   targetId: '',
 
+  confVal: 0.6,
+  maxNodes: 5,
+
+  /**
+   * @cfg {Function} nodeClickHandler a callback function on response to a click over a node
+   */
   nodeClickHandler: undefined,
+  /**
+   * @cfg {Function} edgeClickHandler a callback function on response to a click over a edge
+   */
   edgeClickHandler: undefined,
 
 
@@ -104,11 +151,12 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
       var cssRuleText = cssRule.style.cssText
       var newRule = '#' + this.fdDivName + ' {' + cssRuleText + '}'
       var newCSS = Ext.util.CSS.createStyleSheet(newRule, this.fdDivName + "-css")
+      this.fdDivName = this.fdDivName+'-'+this.targetId
 
       this.html = '<div id="' + this.fdDivName + '" style="height:100%;background-color:white;"></div>'
     }
     else
-      this.html = '<div id="infovis-div" style="background-color:white;">Graph</div>'
+      this.html = '<div id="infovis-div-'+this.targetId+'" style="background-color:white;">Graph</div>'
 
 /*
     Ext.Ajax.request({
@@ -134,11 +182,13 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
   },
 
 
-
-
+  /**
+   * Graph initialization method.
+   * @param {Object} thisInstance the instance of this class itself, necessary to
+   * access some configs and properties of this graph instance.
+   */
   initGraph: function (thisInstance) {
     var me = this
-
 
 
     /**
@@ -154,7 +204,8 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
       var defaultFDCfg = {
         fdGraph: null, // this is a reference to the graph
         // id of the visualization container
-        injectInto: 'infovis-div',
+//        injectInto: 'infovis-div',
+        injectInto: me.fdDivName,
       /*
         Canvas: { // dont work
           width: 100,
@@ -287,19 +338,30 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
     } // EO setInstanceGraph
 
 
+console.info ("InteractionsGraph: targetId -> "+me.targetId)
+    var intactUrl = ''
+    if (me.targetId == 'Q14596')
+      intactUrl = '/resources/datatest/intact-sndtarget.json';
+    else if (me.targetId == 'P29274')
+      intactUrl = '/resources/datatest/intact-4thtarget.json';
+    else
+      intactUrl = '/tdgui_proxy/interactions_retrieval';
 
     Ext.Ajax.request({
 //      url: 'resources/datatest/intact-bad.json',
-      url: '/tdgui_proxy/interactions_retrieval',
+      url: intactUrl,
       method: 'GET',
       params: {
-        target: me.targetId
+        target: me.targetId,
+        max_nodes: me.maxNodes,
+        conf_val: me.confVal
       },
 
       success: function(response, opts) {
 
         if (response.responseText == null || response.responseText == '' ||
             response.responseText =='[]') {
+// Esta ventana is not enough...
           Ext.MessageBox.alert("No interactions for were found for target '"+me.targetId+'"')
           me.fireEvent ('graphCompleted', me)
           return false
@@ -322,7 +384,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 
   /**
    * Starts up the graph on its div component by setting the data and run the
-   * methods to render the graph.
+   * methods to render the graph. Has to be called AFTER {@link #initGraph}
    * @param jsonData, the data which is to feed the graph
    */
   startupGraph: function (jsonData) {
@@ -367,7 +429,9 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
   },
 
 
-
+/**
+ * @cfg {Object} listeners an object containing event handlers for this object
+ */
   listeners:{
     afterrender:{
       fn:function (comp, opts) {

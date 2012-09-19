@@ -1,20 +1,29 @@
 /**
- * This is the entire 'Target by name' panel.
+ * @class TDGUI.view.panels.TargetInfo
+ * @extend Ext.panel.Panel
+ * @alias widget.tdgui-targetinfopanel
  *
- *
+ * This is the entire 'Target by name' panel. Displays information about the
+ * chosen target
  */
-
-
 Ext.define('TDGUI.view.panels.TargetInfo', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.tdgui-targetinfopanel',
   
 	title: 'Target Info',
+
+  /**
+   * @cfg {String} anchor the properties for the anchor layout
+   */
 	anchor: '100% 100%',
 	autoScroll: true,
 	bodyPadding: '10px',
 	layout: 'anchor',
 
+  /**
+   * @cfg {Object} targetInfoStore this is intended to be an store where store
+   * the properties for this target
+   */
   targetInfoStore: null,
 
 // This config is used to count the numbers of requests in order to fill this
@@ -24,11 +33,27 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 // The requested URIs are in the queryParam config property
   numOfReqs: 0,
 
-// this is a necessary property got from the multitarget component
-// in order to be able to set the pharma_button with right parameters
+/**
+ * @cfg {String} concept_uuid this is a necessary config, got from the multitarget
+ * component, in order to be able to set the pharma_button with the necessary parameters
+ * to get pharmacological info from coreAPI / LDA
+ */
   concept_uuid: undefined,
 
+  /**
+   * @cfg {String} uniprot_acc And this is necessary in order to perform the target interactions operation
+   */
+  uniprot_acc: undefined,
+
 	initComponent: function() {
+// set concept_uuid and uniprot_acc from
+// "http://www.conceptwiki.org/concept/ec79efff-65cb-45b1-a9f5-dddfc1c4025c,http://www.uniprot.org/uniprot/Q14596"
+    var qparams = this.queryParam.split(',')
+    this.uniprot_acc = qparams[1].substring(qparams[1].lastIndexOf('/')+1, qparams[1].length)
+    this.concept_uuid = qparams[0].substring(qparams[0].lastIndexOf('/')+1, qparams[0].length)
+
+
+    var me = this
 		this.items = [{
 			xtype: 'panel',
 			border: 0,
@@ -76,12 +101,14 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
             xtype:'button',
             text:'Interactions Data',
             itemId:'stringdbTargetButton',
-            cls:'target-pharm-button'
+            cls:'target-pharm-button',
+            handler: this.raiseInteractionParams
           }, {
             xtype:'button',
             text:'Pathway Data',
             itemId:'pathwayTargetButton',
-            cls:'target-pharm-button'
+            cls:'target-pharm-button',
+            disabled: true
           }, {
 						xtype: 'displayfield',
 						anchor: '100%',
@@ -197,6 +224,98 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 	// EO initComponent
 
 
+  /**
+   * Display a dialog requesting for parameters for yielding the interaction network
+   * (specifically interaction confidence value and max number of nodes)
+   * @param {Ext.Component} btn the component source of the event (specifically a button)
+   * @param {Event} ev the event information
+   */
+  raiseInteractionParams: function (btn, ev) {
+
+    var panel = btn.up('tdgui-targetinfopanel')
+
+    var me = panel
+    var form = Ext.createWidget('form', {
+      bodyPadding: 5,
+      frame: true,
+      width: 200,
+
+
+      fieldDefaults: {
+        labelAlign: 'left',
+        labelWidth: 105,
+        anchor: '100%'
+      },
+
+      items: [
+        {
+          xtype: 'numberfield',
+          fieldLabel: 'Confidence value',
+          name: 'conf_val',
+          hideTrigger: true,
+          minValue: 0,
+          maxValue: 1,
+          allowDecimals: true,
+          decimalPrecision: 2,
+          value: 0.43
+        },
+        {
+          xtype: 'numberfield',
+          hideTrigger: true,
+          fieldLabel: 'Max neighbours',
+          name: 'max_nodes',
+          allowDecimals: false,
+          maxValue: 10,
+          minValue: 2,
+          value: 5
+        }, {
+          xtype: 'hiddenfield',
+          name: 'uniprotAcc',
+          value: me.uniprot_acc
+        }
+      ],
+
+      buttons: [
+        {
+          text: 'Cancel',
+          id: 'interactionCancelBtn',
+          handler: function () {
+            var me = this
+            me.up('form').getForm().reset();
+            me.up('window').hide();
+          }
+        }, {
+          text: 'Send',
+          id: 'interactionSendBtn'
+        }
+      ]
+    });
+
+
+    this.interactionDlg = Ext.widget('window', {
+      title: 'Interactions parameters',
+      closeAction: 'hide',
+      id: 'interactionsDlg',
+      width: 250,
+      height: 150,
+//      height: 400,
+//      minHeight: 400,
+      layout: 'fit',
+      resizable: true,
+      modal: true,
+      items: form
+    });
+
+    this.interactionDlg.show()
+
+  },
+
+
+  /**
+   * Reset all display fields (where target information is displayed). This is
+   * done in order to set information for a different target than the current one
+   * @deprecated No longer useful as different target information is displayed in different tabs
+   */
 	resetAllFields: function() {
 		var displayFields = this.query('displayfield');
 		Ext.each(displayFields, function(field) {
@@ -207,15 +326,25 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 		this.doLayout();
 	},
 
+
+
 	showMessage: function(message) {
 		var dp = this.down('#dp');
 		var msg = this.down('#msg');
+
 		dp.setVisible(false);
 		msg.setValue(message);
 		msg.setVisible(true);
 	},
 
 
+  /**
+   * Set the data for the current target on the rigth display fields. This is usually
+   * a callback method for some store event (as onload event, i.e.)
+   * @param {Ext.data.Store} store the store where the data is to be retrieved
+   * @param {Array} records the records of teh store as a Ext.data.Model array
+   * @param {Boolean} successful
+   */
   displayData:function (store, records, successful) {
     if (successful && records[0].data.hasOwnProperty('target_name')) {
 //      if (records.length > 0) {
@@ -247,6 +376,13 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
   },
 
 
+  /**
+   * Show data as the #displayData method
+   * @param store
+   * @param records
+   * @param successful
+   * @deprecated just used at coreGUI application, not in TDGUI
+   */
   showData: function (store, records, successful) {
     if (successful) {
 
@@ -271,7 +407,10 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
   },
 
 
-
+  /**
+   * Handy method to remove all dom domeElement's children elements
+   * @param {Ext.Element} domElement a dom element
+   */
   clearDomBelow: function(domElement) {
 		if (domElement.hasChildNodes()) {
 			while (domElement.childNodes.length > 0) {
@@ -281,7 +420,10 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 	},
 
 
-
+  /**
+   * Display the keywords for the current target
+   * @param {String} keywords a semi-colon separated list of keywords
+   */
 	addKeywords: function(keywords) {
 		var bits = keywords.split('; ');
 		var keywordDisplayField = this.down('#keywords');
@@ -306,6 +448,10 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 	},
 
 
+  /**
+   * Set the organism field to the value for the current target
+   * @param {String} organism the organism name
+   */
 	addOrganism: function(organism) {
 		var organismDisplayField = this.down('#organism');
 		var bodyEl = organismDisplayField.bodyEl;
@@ -322,6 +468,11 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 		organismDisplayField.show();
 	},
 
+
+  /**
+   * Add synonim terms for the current target (see #addKeywords)
+   * @param {Array} synonyms
+   */
 	addSynonyms: function(synonyms) {
 		var bits = synonyms.split('; ');
 		var synonymsField = this.down('#synonyms');
@@ -341,6 +492,11 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 		synonymsField.show();
 	},
 
+
+  /**
+   * Set the pdb image based on the pdb id.
+   * @param {String} pdbIdPage a pdb url for the image
+   */
 	addPDBImage: function(pdbIdPage) {
 		//example http://www.pdb.org/pdb/explore/explore.do?structureId=1HOF
 		//        http://www.rcsb.org/pdb/images/1HOF_asr_r_250.jpg
@@ -358,6 +514,11 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 	},
 
 
+  /**
+   * Set information fields for the current target
+   * @param {String} fieldId the field identifier
+   * @param {String} value the value for that field
+   */
 	setFieldValue: function(fieldId, value) {
 		if (fieldId == 'synonyms') {
 			//            console.log('synonyms');

@@ -1,7 +1,9 @@
 
-
-
-
+/**
+ * Main ExtJs 4 application file. Create a Viewport and set the three main panels
+ * in it.
+ * Loads ExtJs 4 application controllers and init tooltips and history components
+ */
 Ext.Loader.setConfig({
   enabled:true,
   disableCaching:false

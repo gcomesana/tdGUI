@@ -1,0 +1,42 @@
+{"experiments": [{
+    "id": "exprmnt7",
+    "type": "automated_textmining",
+    "detection": "predictive text mining",
+    "desc": "Unsupervised, automated mining of biomedical texts: analysis of protein-protein co-mentioning"
+  }, {
+    "id": "exprmnt6",
+    "type": "knowledge datamining",
+    "detection": "experimental knowledge based",
+    "desc": "Import of protein-protein association information from curated knowledge databases"
+  }, {
+    "id": "exprmnt5",
+    "type": "experimental_interaction_data",
+    "detection": "experimental knowledge based",
+    "desc": "Global analysis of protein-protein interaction data, obtained from the literature and from large-scale datasets (BIND database)"
+  }, {
+    "id": "exprmnt4",
+    "type": "gene_coexpression",
+    "detection": "other/not applicable",
+    "desc": "Combined analysis of available microarray data, co-expression analysis"
+  }, {
+    "id": "exprmnt3",
+    "type": "gene_cooccurence",
+    "detection": "sequence based phylogenetic profile",
+    "desc": "Analysis of presence/absence patterns of genes in genomes: functional partners co-occur"
+  }, {
+    "id": "exprmnt2",
+    "type": "gene_fusion_events",
+    "detection": "domain fusion",
+    "desc": "Detection of gene fusion events: functional linkage inferred for the separate components in other genomes"
+  }, {
+    "id": "exprmnt1",
+    "type": "",
+    "detection": "gene neighborhoods",
+    "desc": ""
+  }, {
+    "id": "exprmnt0",
+    "type": "combined_confidence",
+    "detection": "other/not applicable",
+    "desc": "Probabilistic, benchmarked integration of all evidence types: combined confidence score of predicted functional association (range 0.0 to 1.0)"
+  }]
+}

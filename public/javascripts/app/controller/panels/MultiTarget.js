@@ -1,3 +1,12 @@
+/**
+ * @class TDGUI.controller.panels.MultiTarget", {
+ * @extends Ext.app.Controller
+ * 
+ * Controller for the multitarget panel (see {@link TDGUI.view.panel.MultiTarget MultiTarget panel}) 
+ * on the ccontent area.
+ * No methods in this class as the functionality is implemented as anonymous functions in the 
+ * {@link Ext.app.Controller#control control method}
+ */
 Ext.define("TDGUI.controller.panels.MultiTarget", {
   extend:'Ext.app.Controller',
 
@@ -39,7 +48,8 @@ console.info('accessions for selected one: '+gridAccs)
 
           var listTargetsStore = this.getGridPanel().getListTargetsStore()
 //          var recs = this.getItemList().getStoreObject ('uniprot_acc', gridAccs)
-          var recs = listTargetsStore.findRecord('uniprot_acc', gridAccs)
+//          var recs = listTargetsStore.findRecord('uniprot_acc', gridAccs)
+          var recs = listTargetsStore.getAt(index)
 
 // Compose de uniprot parameter (in this case an uniprot url) to proteinInfo
           var primaryAcc = recs.data.uniprot_acc[0]
@@ -54,7 +64,8 @@ console.info('accessions for selected one: '+gridAccs)
           var qParam = conceptURI+','+uniprotParam
           var dcParam = '&dc='+Math.random()
           Ext.History.add('!xt=tdgui-targetinfopanel&qp=' + qParam + dcParam);
-        },
+        }, // itemdoblclick
+
 
        'tdgui-multitargetpanel': {
          afterrender: function (comp, opts) {

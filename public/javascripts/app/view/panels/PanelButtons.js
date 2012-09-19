@@ -1,4 +1,10 @@
-
+/**
+ * @class TDGUI.view.panels.PanelButtons
+ * @extends Ext.panel.Panel
+ * @alias widget.tdgui-panelbuttons
+ *
+ * This is just a panel to support a couple of buttons
+ */
 Ext.define ('TDGUI.view.panels.PanelButtons', {
   extend: 'Ext.panel.Panel',
   alias: 'widget.tdgui-panelbuttons',
@@ -28,7 +34,7 @@ Ext.define ('TDGUI.view.panels.PanelButtons', {
     this.buttons = [{
         xtype: 'button',
         text: btnLeft,
-        id: 'panelBtnLeft',
+        id: 'panelBtnLeft'
       }, {
         xtype: 'button',
         text: btnRight,

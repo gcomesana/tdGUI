@@ -18,7 +18,9 @@ class ConceptWikiApiCallsController < ApplicationController
       results = api_call.search_by_tag('07a84994-e464-4bbf-812a-a4b96fa3d197',substring, options)  # this is the 'Pharmacologic Substance'Amino Acid, Peptide, or Protein' tag
       render :json => results.to_json, :layout => false
   end
-  
+
+# Performs a protein search on ConceptWiki based on a query
+# @param [String] substring the query term
   def protein_lookup(substring = params[:query])
       options = Hash.new
       options[:limit] =  params[:limit]
@@ -37,7 +39,8 @@ class ConceptWikiApiCallsController < ApplicationController
       results = api_call.search_by_tag('504ea493-f757-4921-b699-3843fcacae1d',substring, options)  # this is the 'Amino Acid, Peptide, or Protein' tag
       render :json => results.to_json, :layout => false
   end
-  
+
+# Kind of autocheck method to see if this action is accesible
   def test
 		render :json => {"code" => 200}.to_json, :layout => false
 	end

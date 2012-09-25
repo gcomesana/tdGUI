@@ -46,7 +46,6 @@ class TdguiProxy
 			intact_proxy = IntactProxy.new
 #			target_graph = intact_proxy.get_interaction_graph(target_id)
 			target_graph = intact_proxy.get_super_interaction_graph(target_id, max_nodes, conf_val)
-
 		end
 	end
 
@@ -350,8 +349,7 @@ puts "Filling columns..."
 # @param [Hash] options parameters and other options for the request
 # @return [Net::HTTPResponse] the object response
 	def request(url, options)
-#		my_url = URI.parse(URI.encode(url))
-
+		my_url = URI.parse(URI.encode(url))
 
 		begin
 			my_url = URI.parse(url)
@@ -363,7 +361,8 @@ start_time = Time.now
 		proxy_host = 'ubio.cnio.es'
 		proxy_port = 3128
 		req = Net::HTTP::Get.new(my_url.request_uri)
-		res = Net::HTTP.start(my_url.host, my_url.port, proxy_host, proxy_port) { |http|
+#		res = Net::HTTP.start(my_url.host, my_url.port, proxy_host, proxy_port) { |http|
+		res = Net::HTTP.start(my_url.host, my_url.port) { |http|
 			http.request(req)
 		}
 

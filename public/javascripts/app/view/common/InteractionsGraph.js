@@ -340,11 +340,13 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 
 console.info ("InteractionsGraph: targetId -> "+me.targetId)
     var intactUrl = ''
+    /*
     if (me.targetId == 'Q14596')
       intactUrl = '/resources/datatest/intact-sndtarget.json';
     else if (me.targetId == 'P29274')
       intactUrl = '/resources/datatest/intact-4thtarget.json';
     else
+    */
       intactUrl = '/tdgui_proxy/interactions_retrieval';
 
     Ext.Ajax.request({
@@ -358,7 +360,7 @@ console.info ("InteractionsGraph: targetId -> "+me.targetId)
       },
 
       success: function(response, opts) {
-
+console.log ("RESPONDING TO INTACT-PAINTING GRAPH")
         if (response.responseText == null || response.responseText == '' ||
             response.responseText =='[]') {
 // Esta ventana is not enough...

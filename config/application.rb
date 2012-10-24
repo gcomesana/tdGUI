@@ -8,10 +8,15 @@ require "action_mailer/railtie"
 require "active_resource/railtie"
 require "rails/test_unit/railtie"
 require "sprockets/railtie"
+require "ostruct"
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))
+	#Bundle.with_clean_env do
+	#	system("ruby pgm.rb")
+	#end
+
   # If you want your assets lazily compiled in production, use this line
   # Bundler.require(:default, :assets, Rails.env)
 end
@@ -52,5 +57,12 @@ module TdGUI
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-  end
+
+		# IntAct db configuration
+		opts = {:intact_server => 'localhost', :intact_user => 'intact',
+						:intact_pass => '1ntakt', :intact_port => '5432'}
+		config.intactdb = OpenStruct.new(opts)
+
+	end
+
 end

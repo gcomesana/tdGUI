@@ -5,6 +5,7 @@ require 'net/http'
 require 'net/smtp'
 require 'uri'
 
+
 # It does requests to endpoints different than coreAPI endpoints
 # This is a proxy to perform different things the coreAPI does not support, either
 # they are not supported by coreAPI itself or the coreAPI endpoints are down and
@@ -39,15 +40,17 @@ class TdguiProxy
 # @return [Array] the graph as an array of hashes
 	def get_target_interactions (target_id, conf_val = 0.5, max_nodes = 6)
 
+		target_graph = nil
 		if target_id.nil? || target_id.empty? then
 			nil
 
 		else
 			intact_proxy = IntactProxy.new
-#			target_graph = intact_proxy.get_interaction_graph(target_id)
-			target_graph = intact_proxy.get_super_interaction_graph(target_id, max_nodes, conf_val)
-
+			target_graph = intact_proxy.get_interaction_graph(target_id, conf_val, max_nodes)
+#			target_graph = intact_proxy.get_super_interaction_graph(target_id, max_nodes, conf_val)
 		end
+
+		target_graph
 	end
 
 
@@ -350,8 +353,7 @@ puts "Filling columns..."
 # @param [Hash] options parameters and other options for the request
 # @return [Net::HTTPResponse] the object response
 	def request(url, options)
-#		my_url = URI.parse(URI.encode(url))
-
+		my_url = URI.parse(URI.encode(url))
 
 		begin
 			my_url = URI.parse(url)
@@ -363,7 +365,8 @@ start_time = Time.now
 		proxy_host = 'ubio.cnio.es'
 		proxy_port = 3128
 		req = Net::HTTP::Get.new(my_url.request_uri)
-		res = Net::HTTP.start(my_url.host, my_url.port, proxy_host, proxy_port) { |http|
+#		res = Net::HTTP.start(my_url.host, my_url.port, proxy_host, proxy_port) { |http|
+		res = Net::HTTP.start(my_url.host, my_url.port) { |http|
 			http.request(req)
 		}
 

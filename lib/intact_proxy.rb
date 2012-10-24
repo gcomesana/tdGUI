@@ -5,6 +5,8 @@ require 'cgi'
 require 'nokogiri'
 require 'JSON'
 
+require 'intact/jit_graph'
+require 'intact/intact_dao'
 
 # This class encapsulates the methods to get an protein interaction networks from
 # Intact database (<a href="http://www.ebi.ac.uk/intact" target="_blank">link</a>)
@@ -14,6 +16,7 @@ class IntactProxy
 	STRING_DB_URL = 'http://string-db.org/api/psi-mi/interactions?identifier=xxxx&required_score=900&limit=5&network_flavor=confidence'
 	INTACT_URL = 'http://www.ebi.ac.uk/Tools/webservices/psicquic/intact/webservices/current/search/query/xxxx?format=xml25&species=9606'
 	CONFIDENCE_VAL_THRESHOLD = 0.4
+	MAX_NEIGHBOURS = 6
 	MAX_EDGE_WIDTH = 10
 
 	def initialize
@@ -38,58 +41,23 @@ class IntactProxy
 # value is below this parameter will be discarded
 # @return [Hash] a hash object ready to be converted in to a json object suitable
 # to configure a force directed graph as indicated above
-	def get_interaction_graph (target_id = 'Q13362', conf_threshold = 0.5)
+	def get_interaction_graph (target_id = 'Q13362', conf_threshold = CONFIDENCE_VAL_THRESHOLD,
+					num_neighbours = MAX_NEIGHBOURS)
 #		xmlFile = File.new('../data/q13362-stringdb-interactions.xml') # psi-mi xml file
 
-		myuri = INTACT_URL.gsub(/xxxx/, target_id)
-		psimiResp = request(myuri, {})
-		xmlDoc = Nokogiri::XML(psimiResp.body)
+#		myuri = INTACT_URL.gsub(/xxxx/, target_id)
+		dbhost = TdGUI::Application.config.intactdb.intact_server
+		dbport = TdGUI::Application.config.intactdb.intact_port
+		dbuser = TdGUI::Application.config.intactdb.intact_user
+		dbpasswd = TdGUI::Application.config.intactdb.intact_pass
+		dbname = 'intact'
 
-		experiments = Array.new
-		expList = xmlDoc.css('experimentDescription')
-		expList.each { |exp|
-			experiment = def_experiment(exp)
-			experiments << experiment
-		}
-#		puts "Retrieved experiments (#{experiments.length})\n"
-#		experiments.each { |one| puts("#{one[:desc]}\n")}
+		graph_jit = JitGraph.new
+#		dao = IntactDao.new(dbhost, dbport, dbname, dbuser, dbpasswd)
+		graph_jit.set_db_params(dbhost, dbport, dbname, dbuser, dbpasswd)
+		graph_ary = graph_jit.yield_graph(target_id, conf_threshold, num_neighbours)
 
-		interactors = Array.new
-		interactors = build_interactors(xmlDoc)
-
-		#interactorList = xmlDoc.css('interactor')
-		#interactorList.each { |elem|
-		#	interactor = def_interactor(elem)
-		#	interactors << interactor
-		#
-		#	#	interactionList = xmlDoc.css('interaction')
-		#}
-
-# puts "***************************\nRetrieved interactors (#{interactors.length})\n"
-		interactors.each { |intrctr| puts("#{intrctr.to_json}\n") }
-
-
-		interactionList = xmlDoc.css('interaction')
-		adjacencies = Array.new
-		color = "white"
-		interactionList.each { |intr|
-
-			adjacency = def_interaction(intr, conf_threshold)
-			adjacencies << adjacency
-		}
-
-
-		#puts "adjacencies is #{adjacencies.length} long\n"
-		adjacencies.each { |edge|
-			#	puts("#{edge.to_json}\n")
-		}
-
-		# $edges_counter.each { |k, v| puts "#{k} -> #{v}\n" }
-
-		puts "\n buildup_graph\n"
-		graph = buildup_graph(experiments, interactors, adjacencies)
-
-		graph
+		graph_ary
 	end
 
 
@@ -130,7 +98,7 @@ puts "\n#{main_interactions.to_s}\n"
 		main_interactors.each { |intr|
 			main_accs << intr[:name]
 		}
-#		intact_xml_resps = perform_intact_reqs(main_accs) # return a Hash {:acc => :http_response}
+		intact_xml_resps = perform_intact_reqs(main_accs) # return a Hash {:acc => :http_response}
 
 puts "** main_ids: #{main_ids.to_s}\n"
 main_interactors.each { |intrc|
@@ -141,13 +109,14 @@ puts "** and main_accs: #{main_accs.to_s}\n"
 # START loop over main interactors to build the 'supergraph'
 		main_interactors.each { |interactor|
 			accession = interactor[:name]
+=begin
 			my_intactUri = INTACT_URL.sub('xxxx', accession)
 			xmlstr = request(my_intactUri, [])
 			inner_xml_doc = Nokogiri::XML(xmlstr.body)
-
+=end
 # thread issue
-#      xmlstr_thr = intact_xml_resps[accession]
-#			inner_xml_doc = Nokogiri::XML(xmlstr_thr.body)
+      xmlstr_thr = intact_xml_resps[accession]
+			inner_xml_doc = Nokogiri::XML(xmlstr_thr.body)
 
 =begin
 			xmlstrEq = xmlstr_thr.to_s == xmlstr.body

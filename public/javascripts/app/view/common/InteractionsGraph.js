@@ -75,7 +75,7 @@ var computeCfg = {
  * - jit.css -> necessary for correct positioning
  *
  * For more information and tutorials about the graph object, go to
- * {@link thejit.org
+ * {@link thejit.org}
  */
 Ext.define('TDGUI.view.common.InteractionsGraph', {
   extend:'Ext.panel.Panel',
@@ -145,7 +145,10 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 
   initComponent: function () {
     var me = this
+    var helpText = '<div id="divIntrHelp" class="well well-small" style="width:50%;">Click on any node to get information about the target<br/>'
+    helpText += 'Click on any edge to get information about the interaction between both two targets</div>'
 
+//    helpText = ''
     if (this.fdDivName != 'infovis-div') {
       var cssRule = Ext.util.CSS.getRule('#infovis-div')
       var cssRuleText = cssRule.style.cssText
@@ -153,10 +156,12 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
       var newCSS = Ext.util.CSS.createStyleSheet(newRule, this.fdDivName + "-css")
       this.fdDivName = this.fdDivName+'-'+this.targetId
 
-      this.html = '<div id="' + this.fdDivName + '" style="height:100%;background-color:white;"></div>'
+      this.html = '<div id="' + this.fdDivName + '" style="height:100%;">'+
+        helpText+'</div>'
     }
     else
-      this.html = '<div id="infovis-div-'+this.targetId+'" style="background-color:white;">Graph</div>'
+      this.html = '<div id="infovis-div-'+this.targetId+'" style="border:1px solid red;">'+
+        helpText+'</div>'
 
 /*
     Ext.Ajax.request({
@@ -189,7 +194,6 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
    */
   initGraph: function (thisInstance) {
     var me = this
-
 
     /**
      * This is a private method to set the graph features by default.
@@ -252,15 +256,18 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
             });
             //display node info in tooltip
             tip.innerHTML = "<div class=\"tip-title\">" +
-              node.name + " (" + node.data.type + ")</div>" +
-              "<div class=\"tip-text\"><b>Konnections:</b> " + count + "</div>";
+              node.name + "</div>" +
+              "<div class=\"tip-text\"><b>Interactions:</b> " + count + "</div>";
           }
         },
 
 
         Events: { // Add node events
           enable: true,
+          enableForEdges: true,
           type: 'Native',
+          graphData: me.interactionData,
+
           //Change cursor style when hovering a node
           onMouseEnter: function() {
             thisInstance.fd.canvas.getElement().style.cursor = 'move';
@@ -281,7 +288,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
           },
 
           onClick: me.nodeClickHandler
-          // Add also a click handler to nodes
+
           /*
           onClick: function(node) {
             if (!node) return;
@@ -347,7 +354,7 @@ console.info ("InteractionsGraph: targetId -> "+me.targetId)
       intactUrl = '/resources/datatest/intact-4thtarget.json';
     else
     */
-      intactUrl = '/tdgui_proxy/interactions_retrieval';
+    intactUrl = '/tdgui_proxy/interactions_retrieval';
 
     Ext.Ajax.request({
 //      url: 'resources/datatest/intact-bad.json',
@@ -369,7 +376,6 @@ console.log ("RESPONDING TO INTACT-PAINTING GRAPH")
           return false
         }
 
-
         me.fdCfg = setInstanceGraph (thisInstance)
         me.startupGraph(response.responseText, thisInstance)
       },
@@ -378,7 +384,7 @@ console.log ("RESPONDING TO INTACT-PAINTING GRAPH")
       failure: function(response, opts) {
           console.log('server-side failure with status code ' + response.status);
       }
-    })
+    }) // request
 
   }, // EO initGraph
 
@@ -401,8 +407,9 @@ console.log ("RESPONDING TO INTACT-PAINTING GRAPH")
     this.fd = new $jit.ForceDirected(this.fdCfg)
 //    this.fdCfg.fdGraph = this.fd
     var jsonObj = Ext.JSON.decode(jsonData) // jsonObj is an Array
-    me.interactionData = jsonObj.slice(0, jsonObj.length-1)
-    me.experimentsData = jsonObj[jsonObj.length-1]
+//    me.interactionData = jsonObj.slice(0, jsonObj.length-1)
+    me.interactionData = jsonObj
+//    me.experimentsData = jsonObj[jsonObj.length-1]
 
     this.fd.loadJSON (me.interactionData)
     this.fd.computeIncremental({
@@ -427,7 +434,6 @@ console.log ("RESPONDING TO INTACT-PAINTING GRAPH")
     })
 
     this.fireEvent ('graphCompleted', this)
-
   },
 
 

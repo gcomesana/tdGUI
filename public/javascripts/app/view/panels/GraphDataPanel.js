@@ -24,7 +24,7 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
    * @cfg {String} [layout.align='strech']
    */
   layout:{
-    type:'hbox',
+    type:'vbox',
     align:'stretch'
   },
 
@@ -73,44 +73,69 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
       confVal: me.confVal,
       maxNodes: me.maxNodes,
 
+      layout: {
+        type: 'hbox',
+        align: 'strech'
+      },
+
       id: 'graph-'+me.targetAcc,
 
+    // event handle for clicking on both edges and nodes
       nodeClickHandler: function (node, eventInfo, ev) {
-      // console.info ("onClickHandler method...")
-        if (typeof node !== 'undefined') {
-          var list = [];
+        if (typeof node !== 'undefined' && node != false) {
+          if (node.nodeFrom === undefined) { // this is a node
+            var list = [];
 
-          node.eachAdjacency(function(adj) {
-            list.push(adj.nodeTo.name);
-          });
+            node.eachAdjacency(function(adj) {
+              list.push(adj.nodeTo.name);
+            });
 
-          var mytpl = new Ext.XTemplate ('<b>{nodename}</b><br><br>',
-            'Description:<br/>{nodedesc}<br/>'
-//            '{numconnections} connections<br/>'
-          )
+            var mytpl = new Ext.XTemplate ('<b>{nodename}</b><br><br>',
+              'Description:<br/>{nodedesc}<br/>'
+  //            '{numconnections} connections<br/>'
+            )
 
-          var myWin = Ext.create ('TDGUI.view.common.DisplayInfoDlg', {
-//            data: {nodename: node.name, nodedesc: node.data.node_desc, numconnections: list.length},
-            data: {nodename: node.name, numconnections: list.length},
-            tpl: mytpl,
-            id: 'window-node-info',
+            var myWin = Ext.create ('TDGUI.view.common.DisplayInfoDlg', {
+  //            data: {nodename: node.name, nodedesc: node.data.node_desc, numconnections: list.length},
+              data: {nodename: node.name, numconnections: list.length},
+              tpl: mytpl,
+              id: 'window-node-info',
 
-            buttons: [{
-              xtype: 'button',
-              text: 'Add',
-              tooltip: 'Add this node to the <b>multiple targets</b> list',
-              handler: function (btn, evObj) {
-                var thisWin = btn.up ('window')
-                me.addNodeToList (node, thisWin)
-              }
-            }, {
-              xtype: 'button',
-              text: 'Close',
-              handler: function () { this.up('window').close() }
-            }]
-          })
+              buttons: [{
+                xtype: 'button',
+                text: 'Add',
+                tooltip: 'Add this node to the <b>multiple targets</b> list',
+                handler: function (btn, evObj) {
+                  var thisWin = btn.up ('window')
+                  me.addNodeToList (node, thisWin)
+                }
+              }, {
+                xtype: 'button',
+                text: 'Close',
+                handler: function () { this.up('window').close() }
+              }]
+            })
 
-          myWin.show()
+            myWin.show()
+          } // click event callback for nodes
+
+          else if (node.nodeFrom !== undefined) { // this is an edge
+            var edges = Ext.Array.filter(me.interactionData, function (elem, index, interactions) {
+              return elem.id == node.nodeFrom.id || elem.id == node.nodeTo.id
+            })
+
+            var selectedIntrData = new Array()
+            Ext.Array.each (edges, function (edge, index, theEdges) {
+              var localSel = Ext.Array.filter(edge.adjacencies, function (adj, index, theAdjcs) {
+                return (adj.nodeFrom == node.nodeFrom.id && adj.nodeTo == node.nodeTo.id) ||
+                  (adj.nodeFrom == node.nodeTo.id && adj.nodeTo == node.nodeFrom.id)
+              })
+              selectedIntrData = selectedIntrData.concat (localSel)
+            })
+
+            console.log ('raise something to show '+selectedIntrData[0].interactionData.length+' interactions')
+          }
+
         } // EO if node is undefined
       } // EO nodeClickHandler callback function
 
@@ -123,12 +148,20 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
     })
 
 */
-    this.items = [
+    this.items = [{
+        xtype: 'displayfield',
+        anchor: '100%',
+        itemId: 'title',
+        fieldCls: 'target-title',
+        value: "Interactions for accession target '"+this.targetAcc+"'"
+      },
       graphPanel
     ]
     graphPanel.initGraph(graphPanel)
 
     graphPanel.addListener ('graphCompleted', function (evName, opts) {
+// this callback is run in the context of the event emitter
+      me.interactionData = this.interactionData
       me.myMask.hide()
     })
 
@@ -208,7 +241,6 @@ console.info('Unable to get response from concept_wiki.')
         targetDlg.close();
 //        labelCount++
 //        if (labelCount == labels.length)
-
       }
     })
 

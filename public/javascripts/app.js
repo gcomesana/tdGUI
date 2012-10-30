@@ -21,11 +21,11 @@ Ext.create('Ext.app.Application', {
 
   controllers: [
     'TDGUI.controller.SearchPanel', // not working in rails3 if not qualified
-    'TDGUI.controller.Viewport',
     'TDGUI.controller.grid.DynamicGrid',
     'TDGUI.controller.panels.MultiTarget',
     'TDGUI.controller.panels.TargetInfo',
-    'TDGUI.controller.common.panels.TextImagePanel'
+    'TDGUI.controller.common.panels.TextImagePanel',
+    'TDGUI.controller.Viewport'
   ],
 
   autoCreateViewport: true,
@@ -36,8 +36,6 @@ Ext.create('Ext.app.Application', {
     Ext.QuickTips.init();
 
     Ext.History.init()
-
-//    Ext.history.init()
 
     /*
      Ext.Loader.setConfig({

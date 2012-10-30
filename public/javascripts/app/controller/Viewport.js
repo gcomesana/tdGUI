@@ -36,7 +36,6 @@ Ext.define ("TDGUI.controller.Viewport", {
     var me = this
 
     Ext.History.init()
-
     Ext.History.on('change', function (token) {
 console.info ("A element was added to history: -> "+token)
       if (token) {
@@ -46,7 +45,8 @@ console.info ("A element was added to history: -> "+token)
 
     this.control({
       'tdgui-viewport': {
-        historyAdded: this.handleHistoryToken
+        historyAdded: this.handleHistoryToken,
+        afterrender: this.onAfterrender
       }
 
 
@@ -63,7 +63,23 @@ console.info ("A element was added to history: -> "+token)
 
 
   onLaunch: function (app) {
+    console.log("Viewport controller: onLaunch!!!")
+    var mytoken = window.location.hash
+    mytoken = mytoken.substr(2, mytoken.length)
+    if (mytoken.length != 0)
+      this.handleHistoryToken(mytoken);
   },
+
+
+
+
+  onAfterrender: function (comp, opts) {
+//    console.log("onAfterrender: "+ comp.getId())
+  },
+
+
+
+
 
 
 /**
@@ -79,7 +95,6 @@ console.info ("A element was added to history: -> "+token)
     var tokenObj = this.parseHistoryToken(token)
     var xtype = tokenObj.xt
     var newPanel
-
 
     switch (xtype) {
       case 'tdgui-multitargetpanel':

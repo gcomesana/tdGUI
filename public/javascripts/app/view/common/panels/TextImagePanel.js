@@ -1,4 +1,8 @@
 /**
+ * @class TDGUI.view.common.panels.GraphDataPanel
+ * @extends Ext.panel.Panel
+ * @alias widget.tdgui-textimagepanel
+ *
  * A panel splited in text side and image side (if image is defined...) by using a hbox layout.
  * Specifically built to be used as information dispaly when a graph node is clicked.
  * In such a case, the component in used as content area for a window component
@@ -13,8 +17,17 @@ Ext.define('TDGUI.view.common.panels.TextImagePanel', {
     align:'strech'
   },
 
+  /**
+   * @cfg {String} the default image for the template used by this class
+   */
   imagePath:'images/target_placeholder.png',
+  /**
+   * @cfg {Ext.XTemplate} tpl the template used to render the content in this panel
+   */
   tpl:undefined,
+  /**
+   * @cfg {Object} data the data necessary in order this component to work
+   */
   data:undefined,
 
   height:150,
@@ -61,6 +74,13 @@ console.info("TextImagePanel data? " + me.data.nodename)
   },
 
 
+/**
+ * Custom callback method to run when the store associated to this TextImagePanel
+ * is loaded. Its goal is just to display the right information.
+ * @param {Ext.data.Store} store the store source of the data for this class
+ * @param {Array} records the records hold in the store
+ * @param {boolean} succesful if the operation was succesful (true)
+ */
   showData:function (store, records, succesful) {
     console.info("on TextImagePanel.showData")
     var me = this

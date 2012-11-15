@@ -61,7 +61,7 @@ describe TdguiProxyController do
 	#		accs = 'P08913,Q14596,Q5H943,P29274'
 	#		uuids = '59aabd64-bee9-45b7-bbe0-9533f6a1f6bc,ec79efff-65cb-45b1-a9f5-dddfc1c4025c,'
 	#		uuids += 'eeaec894-d856-4106-9fa1-662b1dc6c6f1,979f02c6-3986-44d6-b5e8-308e89210c8d'
-
+puts "******* multiple shitsss\n"
 			uuids_arr = uuids.split(',')
 			target_ids = []
 			index = 0

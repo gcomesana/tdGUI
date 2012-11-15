@@ -147,7 +147,7 @@ private
 
 			interaction_data = Array.new
 			elem[:info].each {|info|
-puts "pubmed: #{info[:pubmed]}\n"
+# puts "pubmed: #{info[:pubmed]}\n"
 				intr_ids = info[:intr_id].split('|')
 				intact_id = intr_ids[0][intr_ids[0].index(':')+1..intr_ids[0].length]
 				last_index = intr_ids.index('(').nil? ? intr_ids.length: intr_ids[1].rindex('(')-1

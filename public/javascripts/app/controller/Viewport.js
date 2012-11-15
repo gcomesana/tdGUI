@@ -10,7 +10,9 @@ Ext.define ("TDGUI.controller.Viewport", {
   extend: 'Ext.app.Controller',
 
   views: ['Viewport', 'panels.BorderCenter', 'panels.MultiTarget',
-    'panels.PharmByTarget', 'common.InteractionsGraph', 'panels.GraphDataPanel'],
+    'panels.PharmByTarget', 'common.InteractionsGraph', 'panels.GraphDataPanel',
+    'panels.GraphTabPanel'],
+
   stores: ['Targets', 'ListTargets'],
   models: ['Target', 'ListTarget'],
 
@@ -79,9 +81,6 @@ console.info ("A element was added to history: -> "+token)
 
 
 
-
-
-
 /**
  * This is the method which handles the application 'state' change. This method is not intended to be called by user,
  * as it is called back from this controller when a change in the history (just through the {@link Ext.util.History#added added} method)
@@ -140,6 +139,7 @@ console.info ("A element was added to history: -> "+token)
         break
 
       case 'tdgui-graphdatapanel':
+      case 'tdgui-graphtabpanel':
 console.info ("raising interactions for Target panel")
         var uniprotAcc = tokenObj.qp
         newPanel = Ext.createByAlias ('widget.'+xtype, {

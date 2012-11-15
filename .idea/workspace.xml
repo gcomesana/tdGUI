@@ -6,15 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="ac4d959b-7041-4845-b29b-39d7db68b813" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/doc/README_FOR_APP" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/tdGUI.iml" afterPath="$PROJECT_DIR$/.idea/tdGUI.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/tdgui_proxy_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/tdgui_proxy_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/thrashcan_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/thrashcan_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/tdgui_proxy.rb" afterPath="$PROJECT_DIR$/app/models/tdgui_proxy.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/application.rb" afterPath="$PROJECT_DIR$/config/application.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/intact_proxy.rb" afterPath="$PROJECT_DIR$/lib/intact_proxy.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/intact/jit_graph.rb" afterPath="$PROJECT_DIR$/lib/intact/jit_graph.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/controller/Viewport.js" afterPath="$PROJECT_DIR$/public/javascripts/app/controller/Viewport.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/common/InteractionsGraph.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/common/InteractionsGraph.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/common/ItemMultilist.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/common/ItemMultilist.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/common/panels/GraphInfoPanel.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/common/panels/GraphInfoPanel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/common/panels/TextImagePanel.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/common/panels/TextImagePanel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/GraphDataPanel.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/GraphDataPanel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/controllers/concept_wiki_api_calls_controller_spec.rb" afterPath="$PROJECT_DIR$/spec/controllers/concept_wiki_api_calls_controller_spec.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/controllers/tdgui_proxy_controller_spec.rb" afterPath="$PROJECT_DIR$/spec/controllers/tdgui_proxy_controller_spec.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/lib/endpoints_proxy_spec.rb" afterPath="$PROJECT_DIR$/spec/lib/endpoints_proxy_spec.rb" />
@@ -52,37 +52,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="tdgui_proxy.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/tdgui_proxy.rb">
+      <file leaf-file-name="InteractionsGraph.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/InteractionsGraph.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="30" selection-start="1331" selection-end="1331" vertical-scroll-proportion="0.0">
+            <state line="281" column="14" selection-start="8785" selection-end="8785" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="intact_proxy.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/intact_proxy.rb">
+      <file leaf-file-name="GraphTabPanel.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/GraphTabPanel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="7" selection-start="117" selection-end="117" vertical-scroll-proportion="0.0">
+            <state line="38" column="31" selection-start="893" selection-end="893" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jit_graph.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/intact/jit_graph.rb">
+      <file leaf-file-name="GraphInfoPanel.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/panels/GraphInfoPanel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="72" selection-start="1783" selection-end="1783" vertical-scroll-proportion="0.0">
+            <state line="22" column="0" selection-start="500" selection-end="500" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="[intact]" pinned="true" current="true" current-in-tab="true">
-        <entry file="mock:///[intact]">
+      <file leaf-file-name="TextImagePanel.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/panels/TextImagePanel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="27" selection-start="54" selection-end="135" vertical-scroll-proportion="0.26168224">
+            <state line="25" column="55" selection-start="828" selection-end="828" vertical-scroll-proportion="0.39268294">
               <folding />
             </state>
           </provider>
@@ -104,22 +104,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/spec/lib/inner_proxy_spec.rb" />
-        <option value="$PROJECT_DIR$/spec/models/concept_wiki_api_call_spec.rb" />
-        <option value="$PROJECT_DIR$/spec/controllers/concept_wiki_api_calls_controller_spec.rb" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/view/common/InteractionsGraph.js" />
-        <option value="$PROJECT_DIR$/spec/controllers/tdgui_proxy_controller_spec.rb" />
-        <option value="$PROJECT_DIR$/spec/models/tdgui_proxy_spec.rb" />
-        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-        <option value="$PROJECT_DIR$/app/controllers/thrashcan_controller.rb" />
-        <option value="$PROJECT_DIR$/config/application.rb" />
-        <option value="$PROJECT_DIR$/Gemfile" />
-        <option value="$PROJECT_DIR$/lib/intact/intact_dao.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/tdgui_proxy_controller.rb" />
         <option value="$PROJECT_DIR$/lib/intact_proxy.rb" />
         <option value="$PROJECT_DIR$/app/models/tdgui_proxy.rb" />
         <option value="$PROJECT_DIR$/lib/intact/jit_graph.rb" />
+        <option value="$PROJECT_DIR$/public/stylesheets/tdgui.css" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/controller/grid/DynamicGrid.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/GraphTabpanel.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/GraphDataPanel.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/controller/Viewport.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/common/ItemMultilist.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/GraphTabPanel.js" />
         <option value="/[intact]" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/common/InteractionsGraph.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/common/panels/GraphInfoPanel.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/common/panels/TextImagePanel.js" />
       </list>
     </option>
   </component>
@@ -184,22 +184,22 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="RailsProjectView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
             <PATH_ELEMENT USER_OBJECT="Root">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="RailsProjectView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -219,6 +219,180 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="panels" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="panels" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -286,6 +460,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Favorites" />
@@ -294,15 +486,15 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.General" />
     <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.General" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="RakeTaksPopup.undocumentedIncluded" value="false" />
-    <property name="RailsGeneratorsPopup.hiddenIncluded" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="options.searchVisible" value="true" />
+    <property name="RailsGeneratorsPopup.hiddenIncluded" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -583,15 +775,6 @@
         <option name="RakeTask" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Remote">
-      <JSRemoteDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" />
-      </JSRemoteDebuggerConfigurationSettings>
-      <method>
-        <option name="RakeTask" enabled="false" />
-      </method>
-    </configuration>
     <configuration default="true" type="CucumberRunConfigurationType" factoryName="Cucumber">
       <predefined_log_file id="RUBY_CUCUMBER" enabled="true" />
       <module name="" />
@@ -623,6 +806,15 @@
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="CUCUMBER_RUNNER_PATH" VALUE="" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_RUNNER" VALUE="false" />
       <CUCUMBER_RUN_CONFIG_SETTINGS_ID NAME="SETTINGS_VERSION" VALUE="2" />
+      <method>
+        <option name="RakeTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Remote">
+      <JSRemoteDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSRemoteDebuggerConfigurationSettings>
       <method>
         <option name="RakeTask" enabled="false" />
       </method>
@@ -741,11 +933,11 @@
       <item index="1" class="java.lang.String" itemvalue="RSpec.concept_wiki_api_calls_controller_spec" />
       <item index="2" class="java.lang.String" itemvalue="RSpec.tdgui_proxy_controller_spec" />
       <item index="3" class="java.lang.String" itemvalue="RSpec.tdgui_proxy_spec" />
-      <item index="4" class="java.lang.String" itemvalue="Rails.Development: tdGUI" />
-      <item index="5" class="java.lang.String" itemvalue="Rails.Production: tdGUI" />
-      <item index="6" class="java.lang.String" itemvalue="Rake.spec" />
-      <item index="7" class="java.lang.String" itemvalue="Rake.test" />
-      <item index="8" class="java.lang.String" itemvalue="Query Language Console.Default" />
+      <item index="4" class="java.lang.String" itemvalue="Query Language Console.Default" />
+      <item index="5" class="java.lang.String" itemvalue="Rails.Development: tdGUI" />
+      <item index="6" class="java.lang.String" itemvalue="Rails.Production: tdGUI" />
+      <item index="7" class="java.lang.String" itemvalue="Rake.spec" />
+      <item index="8" class="java.lang.String" itemvalue="Rake.test" />
     </list>
     <configuration default="true" type="TestUnitRunConfigurationType" factoryName="Test::Unit/Shoulda">
       <predefined_log_file id="RUBY_TESTUNIT" enabled="true" />
@@ -806,6 +998,7 @@
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="StructureViewFactory">
     <option name="AUTOSCROLL_MODE" value="false" />
+    <option name="ACTIVE_ACTIONS" value="SHOW_INHERITED" />
   </component>
   <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false">
     <option name="USER" value="" />
@@ -857,17 +1050,17 @@
     <frame x="70" y="22" width="1394" height="979" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32993197" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26557863" sideWeight="0.3185941" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2744807" sideWeight="0.47052154" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26557863" sideWeight="0.34353742" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26632047" sideWeight="0.670068" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2744807" sideWeight="0.52154195" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27002966" sideWeight="0.670068" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26303855" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="251" y="496" width="1355" height="431" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26632047" sideWeight="0.18820861" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25510204" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="515" y="551" width="1155" height="374" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -945,94 +1138,98 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/home/index.html.erb">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/model/ListTarget.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+    <entry file="file://$PROJECT_DIR$/public/stylesheets/tdgui.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="0" selection-start="1295" selection-end="1295" vertical-scroll-proportion="0.60493827" />
+        <state line="372" column="57" selection-start="5865" selection-end="5865" vertical-scroll-proportion="0.19327731" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/home_controller.rb">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/GraphDataPanel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="35" selection-start="373" selection-end="373" vertical-scroll-proportion="0.2857143" />
+        <state line="248" column="57" selection-start="8133" selection-end="8133" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+        <state line="245" column="25" selection-start="8781" selection-end="8781" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/thrashcan_controller.rb">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/ItemMultilist.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="27" selection-start="445" selection-end="445" vertical-scroll-proportion="0.3614035" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="33" selection-start="656" selection-end="656" vertical-scroll-proportion="0.55672514" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Gemfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="51" selection-start="399" selection-end="399" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/intact/interactions_util.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/intact/intact_dao.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="110" column="23" selection-start="3907" selection-end="3907" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/application.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="79" selection-start="45" selection-end="45" vertical-scroll-proportion="0.0" />
+        <state line="13" column="13" selection-start="372" selection-end="403" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/tdgui_proxy_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="120" column="53" selection-start="4810" selection-end="4810" vertical-scroll-proportion="0.83658534">
-          <folding />
-        </state>
+        <state line="98" column="6" selection-start="3788" selection-end="3788" vertical-scroll-proportion="0.33333334" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/endpoints_proxy.rb">
+    <entry file="file://$PROJECT_DIR$/spec/lib/intact_proxy_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.08313539">
-          <folding />
-        </state>
+        <state line="19" column="43" selection-start="623" selection-end="623" vertical-scroll-proportion="0.32439023" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/tdgui_proxy.rb">
+    <entry file="file://$PROJECT_DIR$/lib/intact/interactions_util.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="30" selection-start="1331" selection-end="1331" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/intact_proxy.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="7" selection-start="117" selection-end="117" vertical-scroll-proportion="0.0">
+        <state line="54" column="6" selection-start="1821" selection-end="1821" vertical-scroll-proportion="0.016627079">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/intact/jit_graph.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="72" selection-start="1783" selection-end="1783" vertical-scroll-proportion="0.0">
+        <state line="76" column="40" selection-start="2607" selection-end="2607" vertical-scroll-proportion="0.016627079">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/intact_proxy.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="6" selection-start="1880" selection-end="1880" vertical-scroll-proportion="0.016627079">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/intact/intact_dao.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="110" column="30" selection-start="3914" selection-end="3914" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/InteractionsGraph.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="281" column="14" selection-start="8785" selection-end="8785" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/GraphTabPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="31" selection-start="893" selection-end="893" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/DisplayInfoDlg.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.37815127">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/panels/GraphInfoPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="0" selection-start="500" selection-end="500" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/panels/TextImagePanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="55" selection-start="828" selection-end="828" vertical-scroll-proportion="0.39268294">
           <folding />
         </state>
       </provider>

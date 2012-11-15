@@ -1,35 +1,37 @@
 
 
-Ext.Loader.setPath('Ext.ux', 'extjs4.0.7/ux');
+// Ext.Loader.setPath('Ext.ux', 'extjs4.0.7/ux');
 Ext.require(['Ext.ux.form.MultiSelect', 'Ext.ux.form.ItemSelector']);
 
 Ext.define ('TDGUI.view.common.panels.GraphInfoPanel', {
   extend: 'Ext.panel.Panel',
   alias: 'widget.tdgui-graphinfopanel',
 
-  id: 'graphInfoPanel',
+//  id: 'graphInfoPanel',
 //  border: false,
 //  title: 'Selected graph elements',
 //  frameHeader: false,
 //  html: '<h1>This is the info panel',
   flex: 1,
   layout: 'anchor',
+  store: undefined,
+
 
   initComponent: function () {
     var me = this
 
-    this.items = [{
-      xtype: 'multiselect',
+
+/*
+    var myNewList = Ext.create('Ext.ux.form.MultiSelect', {
       msgTarget: 'under',
       border: false,
       anchor: '100%, 60%',
 
-
 //      fieldLabel: 'Multiselect',
       name: 'multiselect',
-      id: 'multiselect-field',
+      id: 'info-multiselect',
       allowBlank: false,
-      /*
+
       store: [
         [123, 'One Hundred Twenty Three'],
         ['1', 'One'],
@@ -43,13 +45,14 @@ Ext.define ('TDGUI.view.common.panels.GraphInfoPanel', {
         ['9', 'Nine']
       ],
       value: ['3', '4', '6'],
-      */
-      store: me.store,
-      value: me.value,
 
       ddReorder: true
-    }]
+    })
 
+    this.items = [
+      myNewList
+    ]
+*/
     this.callParent (arguments)
   }
 

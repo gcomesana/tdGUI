@@ -31,14 +31,9 @@ describe "Behaviour of EndpointsProxy" do
 
 
 
-	it "should exist the module" do
-		EndpointsProxy.autocheck().should == true
-		false.should == false
-	end
-
 
 	it "module check conceptWiki should ping back" do
-		result = EndpointsProxy.autocheck.should be_true
+#		result = EndpointsProxy.autocheck.should be_true
 		EndpointsProxy.checkConceptAPI.should be_true
 		EndpointsProxy.checkConceptAPI.should satisfy { |it|
 			(it.is_a? FalseClass) || (it.is_a? TrueClass)
@@ -50,7 +45,7 @@ describe "Behaviour of EndpointsProxy" do
 
 
 	it "module check coreApi should ping back" do
-		EndpointsProxy.autocheck.should be_true
+#		EndpointsProxy.autocheck.should be_true
 		coreApiAlive = EndpointsProxy.check_coreAPI
 		coreApiAlive.should satisfy {|alive|
 			(alive.is_a? FalseClass) || (alive.is_a? TrueClass)
@@ -67,7 +62,6 @@ describe "Behaviour of EndpointsProxy" do
 
 
 	it "make_request should get a response" do
-		EndpointsProxy.autocheck.should be_true
 		EndpointsProxy.checkConceptAPI.should be_true
 		EndpointsProxy.get_core_endpoint.should_not eq(@url)
 
@@ -81,7 +75,6 @@ describe "Behaviour of EndpointsProxy" do
 
 
 	it "uniprot2json should return a json array from tab rows" do
-		EndpointsProxy.autocheck.should be_true
 		json_str = EndpointsProxy.uniprot2json(@tab_string, 'brca2')
 
 		json_str.length.should be > 0

@@ -1,4 +1,3 @@
-
 /*
  * Configuratin options for ForceDirected graph. These ones will be the default
  */
@@ -7,7 +6,7 @@
 // TODO estos cfgs hay que meterlos en una clase...
 
 var labelType
-(function() {
+(function () {
   var ua = navigator.userAgent,
     iStuff = ua.match(/iPhone/i) || ua.match(/iPad/i),
     typeOfCanvas = typeof HTMLCanvasElement,
@@ -23,19 +22,15 @@ var labelType
 })();
 
 
-
-
-
-
 // Configuration for animation and display computation
 var computeCfg = {
   iter: 40,
   property: 'end',
-  onStep: function(perc) {
+  onStep: function (perc) {
     console.info(perc + '% loaded...');
   },
 
-  onComplete: function() {
+  onComplete: function () {
     console.info('graph pre-processing done');
 //      var aNode = fd.graph.getNode('12')
 //      var pos = aNode.getPos()
@@ -47,12 +42,6 @@ var computeCfg = {
     })
   } // EO onComplete
 } // EO config for compute the FD
-
-
-
-
-
-
 
 
 /**
@@ -78,8 +67,8 @@ var computeCfg = {
  * {@link thejit.org}
  */
 Ext.define('TDGUI.view.common.InteractionsGraph', {
-  extend:'Ext.panel.Panel',
-  alias:'widget.tdgui-interactionsgraph-panel',
+  extend: 'Ext.panel.Panel',
+  alias: 'widget.tdgui-interactionsgraph-panel',
 
 //  title:'Interactions Network',
   /**
@@ -87,7 +76,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
    * is the html which will be the place where the graph component
    * will be rendered.
    */
-  html:'<div id="infovis-div"></div>',
+  html: '<div id="infovis-div"></div>',
 
   /**
    * @cfg {Boolean} border see {@link TDGUI.view.Viewport#border}, {@link Ext.panel.Panel#border}
@@ -111,7 +100,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
   /**
    * @cfg {String} [fdDivName='infovis-div'] the id of the div element to bear the graph
    */
-  fdDivName:'infovis-div', // div to bear the graph
+  fdDivName: 'infovis-div', // div to bear the graph
 
   /**
    * @cfg {Object} interactionData structured data to represent by using the graph
@@ -140,12 +129,12 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
   edgeClickHandler: undefined,
 
 
-
   //  height: 600,
 
   initComponent: function () {
     var me = this
-    var helpText = '<div id="divIntrHelp" class="well well-small" style="width:50%;">Click on any node to get information about the target<br/>'
+
+    var helpText = '<div id="divIntrHelp" class="well well-small" style="width:50%;margin-bottom:5px">Click on any node to get information about the target<br/>'
     helpText += 'Click on any edge to get information about the interaction between both two targets</div>'
 
 //    helpText = ''
@@ -154,35 +143,39 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
       var cssRuleText = cssRule.style.cssText
       var newRule = '#' + this.fdDivName + ' {' + cssRuleText + '}'
       var newCSS = Ext.util.CSS.createStyleSheet(newRule, this.fdDivName + "-css")
-      this.fdDivName = this.fdDivName+'-'+this.targetId
+      this.fdDivName = this.fdDivName + '-' + this.targetId
 
-      this.html = '<div id="' + this.fdDivName + '" style="height:100%;">'+
-        helpText+'</div>'
+      this.html = '<div id="' + this.fdDivName + '" style="height:100%">' +
+        helpText + '</div>';
+
+      this.html = '<div id="outerdiv-graph" style="height:100%">'+helpText+
+        '<div id="' + this.fdDivName + '" style="xborder:1px solid black;height:88%"></div></div>';
+
     }
     else
-      this.html = '<div id="infovis-div-'+this.targetId+'" style="border:1px solid red;">'+
-        helpText+'</div>'
+      this.html = '<div id="infovis-div-' + this.targetId + '" style="border:1px solid red;">' +
+        helpText + '</div>'
 
-/*
-    Ext.Ajax.request({
-//      url: 'tdgui_proxy/interactions_retrieval',
-      url: 'resources/datatest/full-jit.json',
-      method: 'GET',
-      params: {
-        target: me.target_id
-      },
 
-      success: function(response, opts) {
-        me.startupGraph(response.responseText)
-        console.dir(response.body);
-      },
+    /*
+     Ext.Ajax.request({
+     //      url: 'tdgui_proxy/interactions_retrieval',
+     url: 'resources/datatest/full-jit.json',
+     method: 'GET',
+     params: {
+     target: me.target_id
+     },
 
-// TODO check the erro control here!!! Graph has not be displayed and err message raised
-      failure: function(response, opts) {
-          console.log('server-side failure with status code ' + response.status);
-      }
-    })
-*/
+     success: function(response, opts) {
+     me.startupGraph(response.responseText)
+     console.dir(response.body);
+     },
+
+     failure: function(response, opts) {
+     console.log('server-side failure with status code ' + response.status);
+     }
+     })
+     */
     this.callParent(arguments)
   },
 
@@ -210,12 +203,12 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
         // id of the visualization container
 //        injectInto: 'infovis-div',
         injectInto: me.fdDivName,
-      /*
-        Canvas: { // dont work
-          width: 100,
-          height: 100
-        },
-      */
+        /*
+         Canvas: { // dont work
+         width: 100,
+         height: 100
+         },
+         */
         //Enable zooming and panning
         //by scrolling and DnD
         Navigation: {
@@ -248,16 +241,28 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
         //Add Tips
         Tips: {
           enable: true,
-          onShow: function(tip, node) {
+          onShow: function (tip, node) {
             //count connections
-            var count = 0;
-            node.eachAdjacency(function() {
-              count++;
+            var interactionsCount = 0;
+            node.eachAdjacency(function () {
+              interactionsCount++;
             });
+
+            var experimentsCount = 0;
+            var nodeExperiments = Ext.Array.filter(me.interactionData, function (it) {
+              return it.name == node.name
+            })
+
+            if (nodeExperiments != null && nodeExperiments !== undefined)
+              Ext.Array.forEach (nodeExperiments[0].adjacencies, function (it, ind, adjs) {
+                experimentsCount += it.interactionData.length
+              });
+
             //display node info in tooltip
             tip.innerHTML = "<div class=\"tip-title\">" +
               node.name + "</div>" +
-              "<div class=\"tip-text\"><b>Interactions:</b> " + count + "</div>";
+              "<div class=\"tip-text\"><b>Interactions:</b> " + interactionsCount + "<br/>" +
+              "<b>Experiments:</b> "+ experimentsCount+ "</div>";
           }
         },
 
@@ -269,20 +274,28 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
           graphData: me.interactionData,
 
           //Change cursor style when hovering a node
-          onMouseEnter: function() {
+          onMouseEnter: function (node, evInfo, ev) {
+            if (node.name)
+              console.log('onMouseEnter: '+node.name)
+
+            else {
+
+            }
+
+
             thisInstance.fd.canvas.getElement().style.cursor = 'move';
           },
-          onMouseLeave: function() {
+          onMouseLeave: function () {
             thisInstance.fd.canvas.getElement().style.cursor = '';
           },
           //Update node positions when dragged
-          onDragMove: function(node, eventInfo, e) {
+          onDragMove: function (node, eventInfo, e) {
             var pos = eventInfo.getPos();
             node.pos.setc(pos.x, pos.y);
             thisInstance.fd.plot();
           },
           //Implement the same handler for touchscreens
-          onTouchMove: function(node, eventInfo, e) {
+          onTouchMove: function (node, eventInfo, e) {
             $jit.util.event.stop(e); //stop default touchmove event
             this.onDragMove(node, eventInfo, e);
           },
@@ -290,20 +303,20 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
           onClick: me.nodeClickHandler
 
           /*
-          onClick: function(node) {
-            if (!node) return;
-            // Build the right column relations list.
-            // This is done by traversing the clicked node connections.
-            var html = "<h4>" + node.name + "</h4><b> connections:</b><ul><li>",
-              list = [];
-            node.eachAdjacency(function(adj) {
-              list.push(adj.nodeTo.name);
-            });
-            //append connections information
-      //        $jit.id('inner-details').innerHTML = html + list.join("</li><li>") + "</li></ul>";
-      //        $('inner-details').html(html + list.join("</li><li>") + "</li></ul>");
-          }
-          */
+           onClick: function(node) {
+           if (!node) return;
+           // Build the right column relations list.
+           // This is done by traversing the clicked node connections.
+           var html = "<h4>" + node.name + "</h4><b> connections:</b><ul><li>",
+           list = [];
+           node.eachAdjacency(function(adj) {
+           list.push(adj.nodeTo.name);
+           });
+           //append connections information
+           //        $jit.id('inner-details').innerHTML = html + list.join("</li><li>") + "</li></ul>";
+           //        $('inner-details').html(html + list.join("</li><li>") + "</li></ul>");
+           }
+           */
         },
 
         //Number of iterations for the FD algorithm
@@ -312,7 +325,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
         //Edge length
         levelDistance: 130,
 
-        onBeforePlotLine: function(adj) {
+        onBeforePlotLine: function (adj) {
           //Set random lineWidth for edges.
           //     if (adj.data.$lineWidth)
           //        adj.data.$lineWidth = Math.random() * 7 + 1;
@@ -320,7 +333,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 
         // Add text to the labels. This method is only triggered
         // on label creation and only for DOM labels (not native canvas ones).
-        onCreateLabel: function(domElement, node) {
+        onCreateLabel: function (domElement, node) {
           domElement.innerHTML = node.name;
           var style = domElement.style;
           style.fontSize = "0.8em";
@@ -330,7 +343,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 
         // Change node styles when DOM labels are placed
         // or moved.
-        onPlaceLabel: function(domElement, node) {
+        onPlaceLabel: function (domElement, node) {
           var style = domElement.style;
           var left = parseInt(style.left);
           var top = parseInt(style.top);
@@ -345,15 +358,15 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
     } // EO setInstanceGraph
 
 
-console.info ("InteractionsGraph: targetId -> "+me.targetId)
+    console.info("InteractionsGraph: targetId -> " + me.targetId)
     var intactUrl = ''
     /*
-    if (me.targetId == 'Q14596')
-      intactUrl = '/resources/datatest/intact-sndtarget.json';
-    else if (me.targetId == 'P29274')
-      intactUrl = '/resources/datatest/intact-4thtarget.json';
-    else
-    */
+     if (me.targetId == 'Q14596')
+     intactUrl = '/resources/datatest/intact-sndtarget.json';
+     else if (me.targetId == 'P29274')
+     intactUrl = '/resources/datatest/intact-4thtarget.json';
+     else
+     */
     intactUrl = '/tdgui_proxy/interactions_retrieval';
 
     Ext.Ajax.request({
@@ -366,23 +379,23 @@ console.info ("InteractionsGraph: targetId -> "+me.targetId)
         conf_val: me.confVal
       },
 
-      success: function(response, opts) {
-console.log ("RESPONDING TO INTACT-PAINTING GRAPH")
+      success: function (response, opts) {
+        console.log("RESPONDING TO INTACT-PAINTING GRAPH")
         if (response.responseText == null || response.responseText == '' ||
-            response.responseText =='[]') {
+          response.responseText == '[]') {
 // Esta ventana is not enough...
-          Ext.MessageBox.alert("No interactions for were found for target '"+me.targetId+'"')
-          me.fireEvent ('graphCompleted', me)
+          Ext.MessageBox.alert("No interactions for were found for target '" + me.targetId + '"')
+          me.fireEvent('graphCompleted', me)
           return false
         }
 
-        me.fdCfg = setInstanceGraph (thisInstance)
+        me.fdCfg = setInstanceGraph(thisInstance)
         me.startupGraph(response.responseText, thisInstance)
       },
 
 // TODO check the error control here!!! Graph has not be displayed and err message raised
-      failure: function(response, opts) {
-          console.log('server-side failure with status code ' + response.status);
+      failure: function (response, opts) {
+        console.log('server-side failure with status code ' + response.status);
       }
     }) // request
 
@@ -411,19 +424,19 @@ console.log ("RESPONDING TO INTACT-PAINTING GRAPH")
     me.interactionData = jsonObj
 //    me.experimentsData = jsonObj[jsonObj.length-1]
 
-    this.fd.loadJSON (me.interactionData)
+    this.fd.loadJSON(me.interactionData)
     this.fd.computeIncremental({
       iter: 40,
       property: 'end',
 
-      onStep: function(perc) {
-        console.info (perc + '% loaded...');
+      onStep: function (perc) {
+        console.info(perc + '% loaded...');
       },
 
-      onComplete: function() {
+      onComplete: function () {
         console.info('graph pre-processing done');
-    //      var aNode = fd.graph.getNode('12')
-    //      var pos = aNode.getPos()
+        //      var aNode = fd.graph.getNode('12')
+        //      var pos = aNode.getPos()
 
         me.fd.animate({
           modes: ['linear'],
@@ -433,27 +446,27 @@ console.log ("RESPONDING TO INTACT-PAINTING GRAPH")
       } // EO onComplete
     })
 
-    this.fireEvent ('graphCompleted', this)
+    this.fireEvent('graphCompleted', this)
   },
 
 
-/**
- * @cfg {Object} listeners an object containing event handlers for this object
- */
-  listeners:{
-    afterrender:{
-      fn:function (comp, opts) {
+  /**
+   * @cfg {Object} listeners an object containing event handlers for this object
+   */
+  listeners: {
+    afterrender: {
+      fn: function (comp, opts) {
         var divVis = Ext.get('infovis-div')
         //        divVis.insertHtml ('afterBegin', '<p>Kgallon</p>')
-/*
-        if (this.fdDivName != 'infovis-div')
-          defaultFDCfg.injectInto = this.fdDivName
+        /*
+         if (this.fdDivName != 'infovis-div')
+         defaultFDCfg.injectInto = this.fdDivName
 
-        fd = new $jit.ForceDirected(defaultFDCfg)
-        fd.loadJSON(myJson)
-        fd.computeIncremental(computeCfg)
+         fd = new $jit.ForceDirected(defaultFDCfg)
+         fd.loadJSON(myJson)
+         fd.computeIncremental(computeCfg)
 
-  */
+         */
 //        var canvasEl = fd.canvas.getElement()
         console.info('EO afterrender')
 

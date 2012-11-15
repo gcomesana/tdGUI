@@ -24,11 +24,11 @@ Ext.define('TDGUI.view.common.panels.TextImagePanel', {
   /**
    * @cfg {Ext.XTemplate} tpl the template used to render the content in this panel
    */
-  tpl:undefined,
+  tpl: undefined,
   /**
    * @cfg {Object} data the data necessary in order this component to work
    */
-  data:undefined,
+  data: undefined,
 
   height:150,
   bodyPadding:'2 2 2 2',

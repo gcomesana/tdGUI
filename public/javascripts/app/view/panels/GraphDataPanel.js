@@ -13,10 +13,12 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
   alias:'widget.tdgui-graphdatapanel',
   requires: [
     'TDGUI.view.common.InteractionsGraph',
-    'TDGUI.view.common.DisplayInfoDlg'
+    'TDGUI.view.common.DisplayInfoDlg',
+    'TDGUI.view.common.ItemMultilist'
   ],
 
   title:'Graph Data Panel',
+  id: 'GraphDataPanelid',
 
   /**
    * @cfg {Object} layout layout to support the contained items
@@ -61,27 +63,88 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
   myMask: undefined,
 
 
+
+  onClickHandler: function (node, eventInfo, ev) {
+    if (typeof node !== 'undefined' && node != false) {
+      if (node.nodeFrom === undefined) { // this is a node
+        var list = [];
+
+        node.eachAdjacency(function(adj) {
+          list.push(adj.nodeTo.name);
+        });
+
+        var mytpl = new Ext.XTemplate ('<b>{nodename}</b><br><br>',
+          'Description:<br/>{nodedesc}<br/>'
+//            '{numconnections} connections<br/>'
+        )
+
+        var myWin = Ext.create ('TDGUI.view.common.DisplayInfoDlg', {
+//            data: {nodename: node.name, nodedesc: node.data.node_desc, numconnections: list.length},
+          data: {nodename: node.name, numconnections: list.length},
+          tpl: mytpl,
+          id: 'window-node-info',
+
+          buttons: [{
+            xtype: 'button',
+            text: 'Add',
+            tooltip: 'Add this node to the <b>multiple targets</b> list',
+            handler: function (btn, evObj) {
+              var thisWin = btn.up ('window')
+              me.addNodeToList (node, thisWin)
+            }
+          }, {
+            xtype: 'button',
+            text: 'Close',
+            handler: function () { this.up('window').close() }
+          }]
+        })
+
+        myWin.show()
+      } // click event callback for nodes
+
+      else if (node.nodeFrom !== undefined) { // this is an edge
+        var edges = Ext.Array.filter(me.interactionData, function (elem, index, interactions) {
+          return elem.id == node.nodeFrom.id || elem.id == node.nodeTo.id
+        })
+
+        var selectedIntrData = new Array()
+        Ext.Array.each (edges, function (edge, index, theEdges) {
+          var localSel = Ext.Array.filter(edge.adjacencies, function (adj, index, theAdjcs) {
+            return (adj.nodeFrom == node.nodeFrom.id && adj.nodeTo == node.nodeTo.id) ||
+              (adj.nodeFrom == node.nodeTo.id && adj.nodeTo == node.nodeFrom.id)
+          })
+          selectedIntrData = selectedIntrData.concat (localSel)
+        })
+
+        console.log ('raise something to show '+selectedIntrData[0].interactionData.length+' interactions')
+      }
+    } // EO if node is undefined
+  }, // EO onClickHandler callback function
+
+
   initComponent:function () {
     var me = this
     me.myMask = new Ext.LoadMask(Ext.getBody(), {msg: 'Loading data...'})
     me.myMask.show()
 
-    var graphPanel = Ext.create('TDGUI.view.common.InteractionsGraph', {
+    var intrctnGraphPanel = Ext.create('TDGUI.view.common.InteractionsGraph', {
       fdDivName: 'divgraph',
-      flex: 3,
+      flex: 1,
       targetId: me.targetAcc,
       confVal: me.confVal,
       maxNodes: me.maxNodes,
-
+/*
       layout: {
         type: 'hbox',
         align: 'strech'
       },
-
+*/
       id: 'graph-'+me.targetAcc,
 
-    // event handle for clicking on both edges and nodes
-      nodeClickHandler: function (node, eventInfo, ev) {
+// event handle for clicking on both edges and nodes
+      nodeClickHandler: me.onClickHandler
+/*
+        function (node, eventInfo, ev) {
         if (typeof node !== 'undefined' && node != false) {
           if (node.nodeFrom === undefined) { // this is a node
             var list = [];
@@ -135,35 +198,32 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
 
             console.log ('raise something to show '+selectedIntrData[0].interactionData.length+' interactions')
           }
-
         } // EO if node is undefined
       } // EO nodeClickHandler callback function
+*/
+    }) // EO create intrctnGraphPanel - InteractionsGraph
 
-    }) // EO graphPanel
 
-/*
-    var infoPanel = Ext.create('TDGUI.view.common.panels.GraphInfoPanel', {
-      store:[],
-      value:undefined
+
+    var displayTit = Ext.create('Ext.form.field.Display', {
+      itemId: 'title',
+      fieldCls: 'target-title',
+      value: "Interactions for accession target '"+this.targetAcc+"'"
     })
 
-*/
-    this.items = [{
-        xtype: 'displayfield',
-        anchor: '100%',
-        itemId: 'title',
-        fieldCls: 'target-title',
-        value: "Interactions for accession target '"+this.targetAcc+"'"
-      },
-      graphPanel
-    ]
-    graphPanel.initGraph(graphPanel)
 
-    graphPanel.addListener ('graphCompleted', function (evName, opts) {
+    this.items = [
+      displayTit,
+      intrctnGraphPanel
+    ]
+
+    intrctnGraphPanel.initGraph(intrctnGraphPanel)
+    intrctnGraphPanel.addListener('graphCompleted', function (evName, opts) {
 // this callback is run in the context of the event emitter
       me.interactionData = this.interactionData
       me.myMask.hide()
     })
+
 
     this.callParent(arguments)
   }, // EO initComponent

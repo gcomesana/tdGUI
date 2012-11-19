@@ -249,12 +249,22 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
             });
 
             var experimentsCount = 0;
+            var nodeExperiments = new Array();
+            Ext.Array.each (me.interactionData, function(it, ind, nodes) {
+              var thisExperiments = Ext.Array.filter (it.adjacencies, function (adj) {
+                return adj.nodeFrom == node.id || adj.nodeTo == node.id;
+              })
+              nodeExperiments = nodeExperiments.concat(thisExperiments);
+            })
+
+            /*
             var nodeExperiments = Ext.Array.filter(me.interactionData, function (it) {
               return it.name == node.name
             })
-
+            */
             if (nodeExperiments != null && nodeExperiments !== undefined)
-              Ext.Array.forEach (nodeExperiments[0].adjacencies, function (it, ind, adjs) {
+//              Ext.Array.forEach (nodeExperiments[0].adjacencies, function (it, ind, adjs) {
+              Ext.Array.forEach(nodeExperiments, function (it, ind, adjs) {
                 experimentsCount += it.interactionData.length
               });
 
@@ -276,10 +286,10 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
           //Change cursor style when hovering a node
           onMouseEnter: function (node, evInfo, ev) {
             if (node.name)
-              console.log('onMouseEnter: '+node.name)
+              console.log('onMouseEnter: '+node.name);
 
             else {
-
+              console.log('I must have hovered on an edge: '+node.nodeFrom.id+'->'+node.nodeTo.id);
             }
 
 
@@ -358,17 +368,9 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
     } // EO setInstanceGraph
 
 
-    console.info("InteractionsGraph: targetId -> " + me.targetId)
-    var intactUrl = ''
-    /*
-     if (me.targetId == 'Q14596')
-     intactUrl = '/resources/datatest/intact-sndtarget.json';
-     else if (me.targetId == 'P29274')
-     intactUrl = '/resources/datatest/intact-4thtarget.json';
-     else
-     */
-    intactUrl = '/tdgui_proxy/interactions_retrieval';
+console.info("InteractionsGraph: targetId -> " + me.targetId);
 
+    var intactUrl = '/tdgui_proxy/interactions_retrieval';
     Ext.Ajax.request({
 //      url: 'resources/datatest/intact-bad.json',
       url: intactUrl,
@@ -380,24 +382,46 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
       },
 
       success: function (response, opts) {
-        console.log("RESPONDING TO INTACT-PAINTING GRAPH")
+        console.log("RESPONDING TO INTACT-PAINTING GRAPH");
         if (response.responseText == null || response.responseText == '' ||
           response.responseText == '[]') {
-// Esta ventana is not enough...
+// This window is not enough and pronbe to be removed
           Ext.MessageBox.alert("No interactions for were found for target '" + me.targetId + '"')
-          me.fireEvent('graphCompleted', me)
-          return false
+          me.fireEvent('graphCompleted', me);
+          return false;
         }
 
-        me.fdCfg = setInstanceGraph(thisInstance)
-        me.startupGraph(response.responseText, thisInstance)
+// reformat response text and build arrays with accessions (String[])
+        var jsonObj = Ext.JSON.decode(response.responseText); // jsonObj is an Array
+        var accessions = Ext.Array.map(jsonObj, function (it) {
+          return it.name;
+        });
+
+// and interactions (Object[])
+        var interactions = Ext.Array.map(jsonObj, function (it) {
+          var thisInteractions = Ext.Array.map (it.adjacencies, function (adj, ind, adjs) {
+            return {
+              nodeFrom: adj.nodeFrom,
+              nodeTo: adj.nodeTo,
+              experiments: adj.interactionData
+            };
+          });
+          return thisInteractions;
+        })
+// In order to build the stores with the right data to serve the side panel information
+// accessions to remotely retrieve information and the graph interactions as a
+// flat array are passed in
+        me.fireEvent('intactDataGot', accessions, Ext.Array.flatten(interactions));
+
+        me.fdCfg = setInstanceGraph(thisInstance);
+        me.startupGraph(jsonObj, thisInstance);
       },
 
 // TODO check the error control here!!! Graph has not be displayed and err message raised
       failure: function (response, opts) {
         console.log('server-side failure with status code ' + response.status);
       }
-    }) // request
+    }); // request
 
   }, // EO initGraph
 
@@ -406,9 +430,9 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
   /**
    * Starts up the graph on its div component by setting the data and run the
    * methods to render the graph. Has to be called AFTER {@link #initGraph}
-   * @param jsonData, the data which is to feed the graph
+   * @param {Object} jsonObj the data which is to feed the graph
    */
-  startupGraph: function (jsonData) {
+  startupGraph: function (jsonObj) {
     var divVis = Ext.get('infovis-div')
     var me = this
     //        divVis.insertHtml ('afterBegin', '<p>Kgallon</p>')
@@ -419,7 +443,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 //    this.fd = new $jit.ForceDirected(defaultFDCfg)
     this.fd = new $jit.ForceDirected(this.fdCfg)
 //    this.fdCfg.fdGraph = this.fd
-    var jsonObj = Ext.JSON.decode(jsonData) // jsonObj is an Array
+//    var jsonObj = Ext.JSON.decode(jsonData) // jsonObj is an Array
 //    me.interactionData = jsonObj.slice(0, jsonObj.length-1)
     me.interactionData = jsonObj
 //    me.experimentsData = jsonObj[jsonObj.length-1]

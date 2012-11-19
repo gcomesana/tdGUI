@@ -41,7 +41,7 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
 
 		this.items = [
 			ivPanel, // panel with graph + .well message
-			infoPanel // panel with list
+			infoPanel // panel with information about selection (by clicking or hovering over)
 		];
 //		ivPanel.initGraph(ivPanel);
 /*		ivPanel.addListener('graphCompleted', function(evName, opts) {

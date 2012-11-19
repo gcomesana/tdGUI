@@ -39,6 +39,7 @@ puts "json_entries: #{json_entries}\n"
 		index_ops = 0
 		index_uuid = 0
 		uuids_arr.each { |uuid|
+			next if uuid.nil?
 			options = Hash.new
 			api_method = 'proteinInfo'
 			prot_uri = 'http://www.conceptwiki.org/concept/'+uuid

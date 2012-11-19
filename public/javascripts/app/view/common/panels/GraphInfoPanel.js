@@ -15,6 +15,7 @@ Ext.define ('TDGUI.view.common.panels.GraphInfoPanel', {
   flex: 1,
   layout: 'anchor',
   store: undefined,
+  title: 'Information panel',
 
 
   initComponent: function () {
@@ -54,6 +55,11 @@ Ext.define ('TDGUI.view.common.panels.GraphInfoPanel', {
     ]
 */
     this.callParent (arguments)
+  },
+
+
+  loadStore: function (accessions) {
+
   }
 
 })

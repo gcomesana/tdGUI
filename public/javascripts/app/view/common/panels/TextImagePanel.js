@@ -4,7 +4,7 @@
  * @alias widget.tdgui-textimagepanel
  *
  * A panel splited in text side and image side (if image is defined...) by using a hbox layout.
- * Specifically built to be used as information dispaly when a graph node is clicked.
+ * Specifically built to be used as information display when a graph node is clicked.
  * In such a case, the component in used as content area for a window component
  */
 Ext.define('TDGUI.view.common.panels.TextImagePanel', {
@@ -39,11 +39,16 @@ Ext.define('TDGUI.view.common.panels.TextImagePanel', {
 
   initComponent:function () {
     var me = this
-console.info("TextImagePanel data? " + me.data.nodename)
+// console.info("TextImagePanel data? " + me.data.nodename)
     var displayWidth = this.width - 15
 
-    this.items = [
-      {
+    this.items = [{
+        xtype:'image',
+        src: me.imagePath,
+        flex: 1,
+        width: 150,
+        height: 150
+      },  {
         xtype: 'panel',
         border: false,
         tpl: me.tpl,
@@ -51,13 +56,6 @@ console.info("TextImagePanel data? " + me.data.nodename)
         height:'97%',
         autoScroll:true,
         flex:2
-      },
-      {
-        xtype:'image',
-        src: me.imagePath,
-        flex: 1,
-        width: 150,
-        height: 150
       }
     ]
 

@@ -111,6 +111,13 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
    */
   experimentsData: undefined,
 
+
+  /**
+   * @cfg {String} interactionUrl the string with the endpoint rest service url
+   * to retrieve the json to feed the FD graph and display the interaction network
+   */
+  interactionUrl: '/tdgui_proxy/interactions_retrieval',
+
   /**
    * @cfg {String} targetId the id of the target (uniprot accession)
    */
@@ -192,12 +199,12 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
      * This is a private method to set the graph features by default.
      * It is only call from the initGraph function, so it is implemented mostly
      * like a closure, a private function for initGraph method
-     * @param fdInstance, the ACTUAL INSTANCE of the JIT graph. This is necessary
+     * @param {Object} fdInstance, the ACTUAL INSTANCE of the JIT graph. This is necessary
      * as the actual instance is referenced from some event callback methods in
      * order to perform actions on the graph
      * @return {Object}
      */
-    setInstanceGraph = function (fdInstance) {
+    var setInstanceGraph = function (fdInstance) {
       var defaultFDCfg = {
         fdGraph: null, // this is a reference to the graph
         // id of the visualization container
@@ -285,18 +292,23 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 
           //Change cursor style when hovering a node
           onMouseEnter: function (node, evInfo, ev) {
-            if (node.name)
-              console.log('onMouseEnter: '+node.name);
-
+            if (node.name) {
+console.log('onMouseEnter: '+node.name);
+              node.setData('color', 'yellow');
+              node.setData('alpha', 20, 'end');
+              me.fireEvent('nodeMouseEnter', node.name)
+            }
             else {
               console.log('I must have hovered on an edge: '+node.nodeFrom.id+'->'+node.nodeTo.id);
+              me.fireEvent('edgeMouseEnter', node.nodeFrom.id, node.nodeTo.id)
             }
 
-
             thisInstance.fd.canvas.getElement().style.cursor = 'move';
+
           },
-          onMouseLeave: function () {
+          onMouseLeave: function (node, evInfo, ev) {
             thisInstance.fd.canvas.getElement().style.cursor = '';
+            node.setData('dim', 7)
           },
           //Update node positions when dragged
           onDragMove: function (node, eventInfo, e) {
@@ -312,21 +324,6 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 
           onClick: me.nodeClickHandler
 
-          /*
-           onClick: function(node) {
-           if (!node) return;
-           // Build the right column relations list.
-           // This is done by traversing the clicked node connections.
-           var html = "<h4>" + node.name + "</h4><b> connections:</b><ul><li>",
-           list = [];
-           node.eachAdjacency(function(adj) {
-           list.push(adj.nodeTo.name);
-           });
-           //append connections information
-           //        $jit.id('inner-details').innerHTML = html + list.join("</li><li>") + "</li></ul>";
-           //        $('inner-details').html(html + list.join("</li><li>") + "</li></ul>");
-           }
-           */
         },
 
         //Number of iterations for the FD algorithm
@@ -341,9 +338,10 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
           //        adj.data.$lineWidth = Math.random() * 7 + 1;
         },
 
-        // Add text to the labels. This method is only triggered
-        // on label creation and only for DOM labels (not native canvas ones).
+// Add text to the labels. This method is only triggered
+// on label creation and only for DOM labels (not native canvas ones).
         onCreateLabel: function (domElement, node) {
+console.log("¡###¡ onCreateLabel...");
           domElement.innerHTML = node.name;
           var style = domElement.style;
           style.fontSize = "0.8em";
@@ -370,10 +368,10 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 
 console.info("InteractionsGraph: targetId -> " + me.targetId);
 
-    var intactUrl = '/tdgui_proxy/interactions_retrieval';
+//    var intactUrl = '/tdgui_proxy/interactions_retrieval';
     Ext.Ajax.request({
 //      url: 'resources/datatest/intact-bad.json',
-      url: intactUrl,
+      url: me.interactionUrl,
       method: 'GET',
       params: {
         target: me.targetId,
@@ -429,7 +427,7 @@ console.info("InteractionsGraph: targetId -> " + me.targetId);
 
   /**
    * Starts up the graph on its div component by setting the data and run the
-   * methods to render the graph. Has to be called AFTER {@link #initGraph}
+   * methods to render the graph. It has to be called AFTER {@link #initGraph}
    * @param {Object} jsonObj the data which is to feed the graph
    */
   startupGraph: function (jsonObj) {

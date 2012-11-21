@@ -15,7 +15,7 @@ Ext.define ('TDGUI.view.common.panels.GraphInfoPanel', {
   flex: 1,
   layout: 'anchor',
   store: undefined,
-  title: 'Information panel',
+  title: 'Information panel (GraphInfoPanel)',
 
 
   initComponent: function () {

@@ -1,9 +1,10 @@
 /**
- * @class TDGUI.view.common.panels.GraphDataPanel
+ * @class TDGUI.view.common.panels.TextImagePanel
  * @extends Ext.panel.Panel
  * @alias widget.tdgui-textimagepanel
  *
- * A panel splited in text side and image side (if image is defined...) by using a hbox layout.
+ * A panel splited in text side and image side (if image is defined...) by
+ * using a hbox layout.
  * Specifically built to be used as information display when a graph node is clicked.
  * In such a case, the component in used as content area for a window component
  */
@@ -29,9 +30,17 @@ Ext.define('TDGUI.view.common.panels.TextImagePanel', {
    * @cfg {Object} data the data necessary in order this component to work
    */
   data: undefined,
+  /**
+   * @cfg {Ext.data.Store} the store where the information about targets and
+   * adjacencies is going to be retrieved from
+   */
+  targetStore: undefined,
 
-  height:150,
+
+//  height:150,
   bodyPadding:'2 2 2 2',
+
+
 
 //  myMask: undefined,
   //	autoScroll: true,
@@ -64,8 +73,8 @@ Ext.define('TDGUI.view.common.panels.TextImagePanel', {
 //    this.data = undefined
 
 // Store initialization. Controller will do the store load
-    this.targetStore = Ext.create ("TDGUI.store.Targets")
-    this.targetStore.addListener('load', this.showData, this)
+//    this.targetStore = Ext.create ("TDGUI.store.Targets")
+//    this.targetStore.addListener('load', this.showData, this)
 
 //    this.myMask = new Ext.LoadMask(me.getEl(), {msg:"Please wait..."});
     this.callParent(arguments)
@@ -109,6 +118,36 @@ Ext.define('TDGUI.view.common.panels.TextImagePanel', {
       }
     }
 //    me.myMask.hide()
+  },
+
+
+
+  afterStoreLoaded: function (store, records, succesful) {
+    if (!succesful)
+      return;
+
+    console.log('afterStoreLoaded: Suppossedly store loaded...')
+    console.log('record count: '+store.count())
+    if (records.length > 0) {
+      var genericModel = store.proxy.getModel();
+// If you don't use 'prototype' you can't access the fields and many more
+// properties of model, even if they are listed as properties :-S
+//      var legacyFields = genericModel.prototype.fields.getRange();
+      var fields = [];
+      var rec = records[0].data
+      for (prop in rec) {
+        fields.push(Ext.create('Ext.data.Field', {
+          name: prop
+        }));
+      }
+
+      genericModel.prototype.fields.removeAll();
+      genericModel.prototype.fields.addAll(fields);
+
+      store.proxy.setModel(genericModel);
+    }
+    console.log("myComp.id: "+this.getId());
+
   }
 
 })

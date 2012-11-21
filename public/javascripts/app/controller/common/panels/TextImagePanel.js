@@ -7,15 +7,18 @@
 // Ext.require(['TDGUI.model.DynamicGrid','TDGUI.store.DynamicGrid']);
 Ext.define("TDGUI.controller.common.panels.TextImagePanel", {
   extend:'Ext.app.Controller',
-  requires: ['TDGUI.model.DynamicGrid','TDGUI.store.DynamicGrid'],
+  requires: ['TDGUI.model.GenericModel','TDGUI.store.GenericStore'],
 
   views: ['common.panels.TextImagePanel'],
   stores: ['Targets'],
-  models: ['Target'],
+  models: ['Target', 'GenericModel'],
 
   refs: [{
     ref: 'windowTextImagePanel',
     selector: 'window tdgui-textimagepanel'
+  }, {
+    ref: 'graphTextImagePanel',
+    selector: 'tdgui-graphtabpanel tdgui-textimagepanel' // panel on the left of graph
   }],
 
 
@@ -29,7 +32,10 @@ Ext.define("TDGUI.controller.common.panels.TextImagePanel", {
       },
 
       'tdgui-interactionsgraph-panel': {
-        intactDataGot: this.createInteractionsInfoStore
+        intactDataGot: this.createInteractionsInfoStore,
+
+        nodeMouseEnter: this.respondGraphEvents,
+        edgeMouseEnter: this.respondGraphEvents
       }
 
     })
@@ -40,6 +46,7 @@ Ext.define("TDGUI.controller.common.panels.TextImagePanel", {
   },
 
 
+
 /**
  * Init the component instance for this controller. Basically load the right
  * store based on properties got from the window the text panel is contained in.
@@ -48,8 +55,8 @@ Ext.define("TDGUI.controller.common.panels.TextImagePanel", {
  * @param {Object} opts the options for the event the component triggered
  */
   initWindowTextImgPanel: function (comp, opts) {
-//    var infoComp = this.getWindowTextImagePanel()
-    var infoComp = this.getCommonPanelsTextImagePanelView();
+    var infoComp = this.getWindowTextImagePanel()
+//    var infoComp = this.getCommonPanelsTextImagePanelView();
     var infoCompBis = this.getWindowTextImagePanel();
 console.info ('loading for window');
     var store = infoComp.targetStore;
@@ -65,11 +72,23 @@ console.info ('loading for window');
 
 
 
+  /**
+   * Retrieve information about the targets involved in the interaction network.
+   * This is done asynchronously in order to initialize the display component in
+   * background.
+   *
+   * @param accessions
+   * @param interactions
+   */
   createInteractionsInfoStore: function (accessions, interactions) {
-    console.log('***==> got event triggered by InteractionsGraph: '+accessions)
-    var nodesSt = Ext.create('TDGUI.store.DynamicGrid', {
+console.log('***==> got event triggered by InteractionsGraph: '+accessions);
+    var myComp = this.getGraphTextImagePanel();
+    /*
+    var nodesSt = Ext.create('TDGUI.store.GenericStore', {
       storeId: 'interaction_targets'
     });
+    */
+    var nodesSt = myComp.targetStore;
 
     var opts = {
       actionMethods: {
@@ -87,21 +106,53 @@ console.info ('loading for window');
     nodesSt.proxy.params = opts.params;
     nodesSt.proxy.extraParams = {entries: accessions.join(',')};
 
-    nodesSt.on('load', this.storeLoaded, this);
+//    nodesSt.on('load', this.storeLoaded, this);
+    nodesSt.on('load', myComp.afterStoreLoaded, myComp);
     nodesSt.load();
 
     console.log('interactions length? '+interactions.length)
   },
 
 
-  storeLoaded: function (store, records, success) {
 
-    console.log('Suppossedly store loaded...')
-    console.log('record count: '+store.count())
+  storeLoaded: function(store, records, success) {
+    var genericModel = this.getGenericModelModel();
+    var legacyFields = genericModel.prototype.fields.getRange();
+    var fields = [];
+    var rec = records[0].data
+    for (prop in rec) {
+      fields.push(Ext.create('Ext.data.Field', {
+        name: prop
+      }));
+    }
 
-    store.each(function(rec) {
-      console.log('* -> '+rec.raw['proteinFullName'])
-    })
+    genericModel.prototype.fields.removeAll();
+    genericModel.prototype.fields.addAll(fields);
+
+    store.proxy.setModel(genericModel);
+    console.log('record count: '+store.count());
+
+  },
+
+
+
+  /**
+   * This method will be callbacked for several events fired from the graph class.
+   * By Nov21-2012, only 'on node enter' and 'on edge enter' are supported/neccesary
+   * If a sort of pretty different event wants to be managed, the name of the event
+   * should be passed as the very first argument.
+   */
+  respondGraphEvents: function () {
+    var myComp = this.getGraphTextImagePanel();
+
+    switch (arguments.length) {
+      case 2: myComp.respondNodeEnter(arguments[0]); // args[0] is node name
+        break;
+      case 3: myComp.respondEdgeEnter(arguments[0], arguments[1]); // args are from and to nodes for the edge
+        break;
+
+      default: break;
+    }
   }
 
 

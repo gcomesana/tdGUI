@@ -148,7 +148,7 @@ console.info ("raising interactions for Target panel")
           targetAcc: uniprotAcc,
           confVal: tokenObj.cv,
           maxNodes: tokenObj.mn,
-          closeable: true
+          closable: true
         })
         break
 

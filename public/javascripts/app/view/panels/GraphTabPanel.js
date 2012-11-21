@@ -3,7 +3,7 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
 	extend: 'Ext.panel.Panel',
   alias: 'widget.tdgui-graphtabpanel',
   require: ['TDGUI.view.panels.GraphDataPanel', 'TDGUI.view.common.panels.GraphInfoPanel',
-            'TDGUI.view.common.ItemMultilist'],
+            'TDGUI.view.common.ItemMultilist', 'TDGUI.store.GenericStore'],
 
 	title: 'Graph Tab Panel',
 	layout: {
@@ -30,16 +30,52 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
       maxNodes: me.maxNodes,
       confVal: me.confVal
 		});
-/*
-		var infoPanel = Ext.create('TDGUI.view.common.panels.GraphInfoPanel', {
-		});
-*/
+
     var infoPanel = Ext.create ('TDGUI.view.common.panels.GraphInfoPanel', {
       listName: 'Content list',
       id: 'the-graph-infopanel'
-    })
+    });
 
-		this.items = [
+    var targetStore = Ext.create('TDGUI.store.GenericStore');
+    /*
+    var newModel = Ext.create('TDGUI.model.GenericModel', {
+      fields: ['proteinFullName', 'accessions', 'genes', 'pdmImg',
+        'organismSciName','function']
+    });
+    targetStore.proxy.setModel(newModel, true);
+    */
+    infoPanel = Ext.create('TDGUI.view.common.panels.TextImagePanel', {
+      layout: 'anchor',
+      title: 'TextImage information',
+      targetStore: targetStore
+    });
+
+    infoPanel.respondNodeEnter = function (nodeName) {
+      console.log("infoPanel.respondNodeEnter: "+nodeName)
+
+// Seems to be ok!!
+      var idxNode = infoPanel.targetStore.findBy (function (rec) {
+        var accs = rec.get('accessions');
+        var uniprotAccs = []
+        uniprotAccs = Ext.Array.filter(accs, function (it) {
+          var matches = []
+          matches = it.match(/[A-Z0-9]{6}/)
+          return matches.length > 0 && Ext.Array.contains(matches, nodeName)
+        })
+
+        return uniprotAccs.length > 0
+      });
+
+      var nodeRec = infoPanel.targetStore.getAt(idxNode);
+      console.log("nodeRec found?: "+nodeRec.get('proteinFullName'));
+    };
+
+    infoPanel.respondEdgeEnter = function (nodeFromId, nodeToId) {
+      console.log("infoPanel.respondEdgeEnter: "+nodeFromId+" -> "+nodeToId)
+    };
+
+
+    this.items = [
 			ivPanel, // panel with graph + .well message
 			infoPanel // panel with information about selection (by clicking or hovering over)
 		];

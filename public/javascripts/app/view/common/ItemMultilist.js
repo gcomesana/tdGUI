@@ -8,7 +8,8 @@
  * @alias widget.tdgui-item-multilist
  *
  * This component extends a simple panel by adding an multiselect component (a multi-selection enabled list)
- * plus buttons to remove one element, clear and perform some action. 
+ * plus buttons to remove one element, clear and perform some action.
+ * In order to fill the list a store should be provided.
  */
 Ext.define ('TDGUI.view.common.ItemMultilist', {
   requires: ['TDGUI.store.ListTargets', 'Ext.ux.form.MultiSelect'],
@@ -66,7 +67,7 @@ Ext.define ('TDGUI.view.common.ItemMultilist', {
       displayField: me.displayField,
       valueField: me.valueField
 
-      /*
+/*
 			store: [
 				[123, 'One Hundred Twenty Three'],
 				['1', 'One'],
@@ -85,8 +86,8 @@ Ext.define ('TDGUI.view.common.ItemMultilist', {
 				['9', 'Nine']
 			],
 			value: ['3', '4', '6']
-      */
-		}]
+*/
+		}],
 
 
 

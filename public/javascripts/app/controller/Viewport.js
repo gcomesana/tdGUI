@@ -10,7 +10,9 @@ Ext.define ("TDGUI.controller.Viewport", {
   extend: 'Ext.app.Controller',
 
   views: ['Viewport', 'panels.BorderCenter', 'panels.MultiTarget',
-    'panels.PharmByTarget', 'common.InteractionsGraph', 'panels.GraphDataPanel'],
+    'panels.PharmByTarget', 'common.InteractionsGraph', 'panels.GraphDataPanel',
+    'panels.GraphTabPanel'],
+
   stores: ['Targets', 'ListTargets'],
   models: ['Target', 'ListTarget'],
 
@@ -36,7 +38,6 @@ Ext.define ("TDGUI.controller.Viewport", {
     var me = this
 
     Ext.History.init()
-
     Ext.History.on('change', function (token) {
 console.info ("A element was added to history: -> "+token)
       if (token) {
@@ -46,7 +47,8 @@ console.info ("A element was added to history: -> "+token)
 
     this.control({
       'tdgui-viewport': {
-        historyAdded: this.handleHistoryToken
+        historyAdded: this.handleHistoryToken,
+        afterrender: this.onAfterrender
       }
 
 
@@ -63,7 +65,20 @@ console.info ("A element was added to history: -> "+token)
 
 
   onLaunch: function (app) {
+    console.log("Viewport controller: onLaunch!!!")
+    var mytoken = window.location.hash
+    mytoken = mytoken.substr(2, mytoken.length)
+    if (mytoken.length != 0)
+      this.handleHistoryToken(mytoken);
   },
+
+
+
+
+  onAfterrender: function (comp, opts) {
+//    console.log("onAfterrender: "+ comp.getId())
+  },
+
 
 
 /**
@@ -79,7 +94,6 @@ console.info ("A element was added to history: -> "+token)
     var tokenObj = this.parseHistoryToken(token)
     var xtype = tokenObj.xt
     var newPanel
-
 
     switch (xtype) {
       case 'tdgui-multitargetpanel':
@@ -125,6 +139,7 @@ console.info ("A element was added to history: -> "+token)
         break
 
       case 'tdgui-graphdatapanel':
+      case 'tdgui-graphtabpanel':
 console.info ("raising interactions for Target panel")
         var uniprotAcc = tokenObj.qp
         newPanel = Ext.createByAlias ('widget.'+xtype, {
@@ -133,7 +148,7 @@ console.info ("raising interactions for Target panel")
           targetAcc: uniprotAcc,
           confVal: tokenObj.cv,
           maxNodes: tokenObj.mn,
-          closeable: true
+          closable: true
         })
         break
 

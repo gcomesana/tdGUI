@@ -7,11 +7,12 @@ describe "TdguiProxy model actions" do
 		tdguiproxy = TdguiProxy.new
 		target_acc = 'Q13362'
 
-		target_int = tdguiproxy.get_target_interactions(target_acc)
+		target_int = tdguiproxy.get_target_interactions(target_acc, 0.3)
 
 		target_int.should be_kind_of Array
 		target_int.length.should be > 0
 
+puts "Fucking end\n\n"
 #	  target_int[:experiments].should_not be_nil
 #		target_int[:adjacencies].length.should be > 0
 	end
@@ -19,7 +20,7 @@ describe "TdguiProxy model actions" do
 
 	it "should have the right structure for JIT" do
 		tdguiproxy = TdguiProxy.new
-		target_acc = 'Q13363'
+		target_acc = 'Q9BXW4'
 
 		target_int = tdguiproxy.get_target_interactions(target_acc)
 		target_int.should be_an_instance_of Array
@@ -29,7 +30,7 @@ describe "TdguiProxy model actions" do
 		last_elem = target_int.pop()
 		last_elem.should be_kind_of Hash
 #		last_elem.has_key?(:experiments).should be_true
-
+puts "Fucking end\n\n"
 	end
 
 
@@ -50,7 +51,7 @@ describe "TdguiProxy model actions" do
 	end
 
 
-
+=begin
 	it "should return an array with info for entries" do
 
 		accs = 'P08913,Q14596,Q5H943,P29274,P42345'
@@ -60,20 +61,24 @@ describe "TdguiProxy model actions" do
 
 		uuids_arr = uuids.split(',')
 		target_ids = []
+		target_str = ''
 		index = 0
 		accs.split(',').each { |acc|
 			target_ids << acc+';'+uuids_arr[index]
+			target_str += acc+';'+uuids_arr[index]+','
 			index += 1
 		}
 
+		target_str = target_str[0..(target_str.length-1)]
 		td_proxy = TdguiProxy.new
-		hash = td_proxy.get_multiple_entries(target_ids.to_s)
+puts "target ids: #{target_str}\n\n"
+		hash = td_proxy.get_multiple_entries(target_str)
 
 		hash.should_not be_nil
 		hash.size.should be > 0
 
 	end
-
+=end
 
 =begin
 	it "should send an email" do

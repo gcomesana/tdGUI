@@ -241,8 +241,9 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
     var initStore = Ext.create('TDGUI.store.ListTargets')
     initStore.loadData(myData)
 
-    this.targetList = Ext.widget ('tdgui-item-multilist', {
+    this.targetList = Ext.create ('TDGUI.view.common.ItemMultilist', {
       listName: 'Target List',
+      id: 'targetListId',
       store: initStore,
       displayField: 'display_field',
       valueField: 'uniprot_acc'

@@ -15,6 +15,7 @@ describe "inner_proxy 'helper' class behaviour" do
 			concept_wiki_check.should satisfy { |concept_w|
 				(concept_w.is_a? FalseClass) || (concept_w.is_a? TrueClass)
 			}
+puts "concept_wiki ok? #{concept_wiki_check}\n"
 
 		end
 

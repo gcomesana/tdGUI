@@ -34,6 +34,8 @@ describe ConceptWikiApiCallsController do
 
 
 	it "proteinLookup should not raise an exception" do
+		@substring = 'mtor'
+
 		get :protein_lookup, :query => @substring
 
 		response.code.to_i.should eq(200)

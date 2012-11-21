@@ -23,11 +23,15 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
 
 
   init: function () {
+    this.myMask = 'cagallon'
+    console.log ("DynamicGrid.Controller.init... myMask: "+this.myMask)
     this.control ({
+
+
       'dynamicgrid3': {
         afterrender: function (comp, opts) {
           this.initGrid(comp, opts)
-        },
+        }
 /*
         itemdblclick: function (view, record, item, index, e, opts) {
 console.info ("item double clicked!!!")
@@ -55,7 +59,8 @@ console.info ("item double clicked!!!")
 
 
   onLaunch:function () {
-    myMask = new Ext.LoadMask(Ext.getBody(), {
+  console.log ("DynamicGrid.Controller.onLaunch")
+    this.myMask = new Ext.LoadMask(Ext.getBody(), {
       msg:'Loading data...'
     })
   },
@@ -70,7 +75,7 @@ console.info ("item double clicked!!!")
     this_gridview.down('#sdfDownload_id').disable();
 
     var this_store = this_gridview.store;
-    myMask.bindStore(this_store)
+    this.myMask.bindStore(this_store)
 
     var this_controller = this;
     var temp_store = Ext.create('LSP.store.DynamicGrid');
@@ -131,7 +136,7 @@ console.info ("item double clicked!!!")
     var theActionMethods =
       (compActionMethods === undefined || compActionMethods == null)? {read: "GET"}: compActionMethods
 
-    myMask.bindStore(comp.store)
+    me.myMask.bindStore(comp.store)
 
     var defOpts = {
       actionMethods: theActionMethods,

@@ -64,6 +64,66 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
 
 
 
+  initComponent:function () {
+    var me = this
+    me.myMask = new Ext.LoadMask(Ext.getBody(), {msg: 'Loading data...'})
+    me.myMask.show()
+
+// this is properly the class which encapsulates the graph.
+    var intrctnGraphPanel = Ext.create('TDGUI.view.common.InteractionsGraph', {
+      fdDivName: 'divgraph',
+      flex: 1,
+      targetId: me.targetAcc,
+      confVal: me.confVal,
+      maxNodes: me.maxNodes,
+/*
+      layout: {
+        type: 'hbox',
+        align: 'strech'
+      },
+*/
+      id: 'graph-'+me.targetAcc,
+
+// event handle for clicking on both edges and nodes
+      nodeClickHandler: me.onClickHandler
+
+    }); // EO create intrctnGraphPanel - InteractionsGraph
+
+
+    var displayTit = Ext.create('Ext.form.field.Display', {
+      itemId: 'title',
+      fieldCls: 'target-title',
+      value: "Interactions for accession target '"+this.targetAcc+"'"
+    });
+
+
+    this.items = [
+      displayTit,
+      intrctnGraphPanel
+    ];
+
+    intrctnGraphPanel.initGraph(intrctnGraphPanel)
+// this callback is run in the context of the event emitter
+    intrctnGraphPanel.addListener('graphCompleted', function (evName, opts) {
+      me.interactionData = this.interactionData
+      me.myMask.hide()
+    });
+
+    this.callParent(arguments);
+  }, // EO initComponent
+
+
+
+
+
+  /**
+   * This is the callback implementation in response to a graph node click.
+   * Keep in mind this method is reponding to a event yields inside JIT, not ExtJS,
+   * but relayed to be able to work
+   * @param node, then node the click was done
+   * @param eventInfo, information about the event
+   * @param ev, event itself
+   */
   onClickHandler: function (node, eventInfo, ev) {
     if (typeof node !== 'undefined' && node != false) {
       if (node.nodeFrom === undefined) { // this is a node
@@ -122,53 +182,8 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
   }, // EO onClickHandler callback function
 
 
-  initComponent:function () {
-    var me = this
-    me.myMask = new Ext.LoadMask(Ext.getBody(), {msg: 'Loading data...'})
-    me.myMask.show()
-
-    var intrctnGraphPanel = Ext.create('TDGUI.view.common.InteractionsGraph', {
-      fdDivName: 'divgraph',
-      flex: 1,
-      targetId: me.targetAcc,
-      confVal: me.confVal,
-      maxNodes: me.maxNodes,
-/*
-      layout: {
-        type: 'hbox',
-        align: 'strech'
-      },
-*/
-      id: 'graph-'+me.targetAcc,
-
-// event handle for clicking on both edges and nodes
-      nodeClickHandler: me.onClickHandler
-
-    }); // EO create intrctnGraphPanel - InteractionsGraph
 
 
-
-    var displayTit = Ext.create('Ext.form.field.Display', {
-      itemId: 'title',
-      fieldCls: 'target-title',
-      value: "Interactions for accession target '"+this.targetAcc+"'"
-    });
-
-
-    this.items = [
-      displayTit,
-      intrctnGraphPanel
-    ];
-
-    intrctnGraphPanel.initGraph(intrctnGraphPanel)
-    intrctnGraphPanel.addListener('graphCompleted', function (evName, opts) {
-// this callback is run in the context of the event emitter
-      me.interactionData = this.interactionData
-      me.myMask.hide()
-    });
-
-    this.callParent(arguments);
-  }, // EO initComponent
 
 
 /**

@@ -141,8 +141,9 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
   initComponent: function () {
     var me = this
 
-    var helpText = '<div id="divIntrHelp" class="well well-small" style="width:50%;margin-bottom:5px">Click on any node to get information about the target<br/>'
-    helpText += 'Click on any edge to get information about the interaction between both two targets</div>'
+    var helpText = '<div id="divIntrHelp" class="well well-small" style="width:50%;margin-bottom:5px">' +
+      'Click/hover over a node to get information about the target<br/>'
+    helpText += 'Click/hover over a edge to get information about the interaction between both two targets</div>'
 
 //    helpText = ''
     if (this.fdDivName != 'infovis-div') {

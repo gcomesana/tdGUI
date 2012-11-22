@@ -25,14 +25,15 @@ Ext.define("TDGUI.controller.common.panels.TextImagePanel", {
   init:function () {
     this.control({
       'tdgui-textimagepanel': {
+//        render: this.initTpl
       },
 
       'window[id="window-node-info"]': {
         show: this.initWindowTextImgPanel
       },
 
-      'tdgui-interactionsgraph-panel': {
-        intactDataGot: this.createInteractionsInfoStore,
+      'tdgui-interactionsgraph-panel': { // the panel supporting the graph itself
+        intactDataGot: this.createInteractionsInfoStores,
 
         nodeMouseEnter: this.respondGraphEvents,
         edgeMouseEnter: this.respondGraphEvents
@@ -44,6 +45,7 @@ Ext.define("TDGUI.controller.common.panels.TextImagePanel", {
 
   onLaunch: function (app) {
   },
+
 
 
 
@@ -80,7 +82,7 @@ console.info ('loading for window');
    * @param accessions
    * @param interactions
    */
-  createInteractionsInfoStore: function (accessions, interactions) {
+  createInteractionsInfoStores: function (accessions, interactions) {
 console.log('***==> got event triggered by InteractionsGraph: '+accessions);
     var myComp = this.getGraphTextImagePanel();
     /*
@@ -89,12 +91,15 @@ console.log('***==> got event triggered by InteractionsGraph: '+accessions);
     });
     */
     var nodesSt = myComp.targetStore;
-
+// apiread: 'tdgui_proxy/multiple_entries_retrieval',
     var opts = {
+      type: 'ajax',
       actionMethods: {
         read: 'GET'
       },
-      apiread: 'tdgui_proxy/multiple_entries_retrieval',
+      api: {
+        read: 'tdgui_proxy/multiple_entries_retrieval'
+      },
       params: {
         limit: 50,
         offset: 0
@@ -102,14 +107,47 @@ console.log('***==> got event triggered by InteractionsGraph: '+accessions);
     };
 
     nodesSt.proxy.actionMethods = opts.actionMethods;
-    nodesSt.proxy.api.read = opts.apiread;
+    nodesSt.proxy.api.read = opts.api.read;
     nodesSt.proxy.params = opts.params;
     nodesSt.proxy.extraParams = {entries: accessions.join(',')};
-
 //    nodesSt.on('load', this.storeLoaded, this);
     nodesSt.on('load', myComp.afterStoreLoaded, myComp);
     nodesSt.load();
 
+
+// create new store for interactions
+    myComp.interactionsStore = Ext.create('TDGUI.store.GenericStore', {
+      storeId: 'interactions'
+    });
+    myComp.interactionsStore.setProxy({
+      type: 'memory',
+      model: 'TDGUI.model.GenericModel',
+      reader: {
+        type: 'json'
+      }
+    });
+
+    var genericModel = myComp.interactionsStore.proxy.getModel();
+    var fields = [];
+    var rec = interactions[0];
+    for (prop in rec) {
+      fields.push(Ext.create('Ext.data.Field', {
+        name: prop
+      }));
+    }
+
+    genericModel.prototype.fields.removeAll();
+    genericModel.prototype.fields.addAll(fields);
+
+    myComp.interactionsStore.proxy.setModel(genericModel);
+    myComp.interactionsStore.loadData(interactions);
+/*
+    var numIdx = myComp.interactionsStore.findBy(function(rec) {
+      return (rec.get('nodeFrom') == 2 && rec.get('nodeTo') == 5) ||
+            (rec.get('nodeFrom') == 5 && rec.get('nodeTo') == 2)
+    });
+    var rec = myComp.interactionsStore.getAt(numIdx);
+*/
     console.log('interactions length? '+interactions.length)
   },
 
@@ -130,7 +168,10 @@ console.log('***==> got event triggered by InteractionsGraph: '+accessions);
     genericModel.prototype.fields.addAll(fields);
 
     store.proxy.setModel(genericModel);
-    console.log('record count: '+store.count());
+
+    var myComp = this.getGraphTextImagePanel();
+    if (myComp.tpl)
+      myComp.tpl.overwrite()
 
   },
 

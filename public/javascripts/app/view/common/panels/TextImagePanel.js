@@ -26,6 +26,13 @@ Ext.define('TDGUI.view.common.panels.TextImagePanel', {
    * @cfg {Ext.XTemplate} tpl the template used to render the content in this panel
    */
   tpl: undefined,
+
+  /**
+   * @cfg {Array} tplList this is the list of templates usable by this component
+   * in order to display different kind of data with different layout
+   */
+  tplList: [],
+
   /**
    * @cfg {Object} data the data necessary in order this component to work
    */
@@ -35,6 +42,12 @@ Ext.define('TDGUI.view.common.panels.TextImagePanel', {
    * adjacencies is going to be retrieved from
    */
   targetStore: undefined,
+
+  /**
+   * @cfg {Array} storeList an array of stores. As different kind of data can
+   * be used by this component, a different number of stores will be supported
+   */
+  storeList: [],
 
 
 //  height:150,
@@ -47,17 +60,17 @@ Ext.define('TDGUI.view.common.panels.TextImagePanel', {
   //	margin: '2 2 2 2',
 
   initComponent:function () {
-    var me = this
+    var me = this;
 // console.info("TextImagePanel data? " + me.data.nodename)
-    var displayWidth = this.width - 15
+    var displayWidth = this.width - 15;
 
-    this.items = [{
+    this.items = [/*{
         xtype:'image',
         src: me.imagePath,
         flex: 1,
         width: 150,
         height: 150
-      },  {
+      }, */ {
         xtype: 'panel',
         border: false,
         tpl: me.tpl,
@@ -66,11 +79,12 @@ Ext.define('TDGUI.view.common.panels.TextImagePanel', {
         autoScroll:true,
         flex:2
       }
-    ]
+    ];
 
 // OJO!!
-    this.tpl = undefined
-//    this.data = undefined
+//    this.tpl = undefined
+    if (this.tpl)
+      this.tpl.overwrite(this.items[1].body);
 
 // Store initialization. Controller will do the store load
 //    this.targetStore = Ext.create ("TDGUI.store.Targets")
@@ -81,6 +95,19 @@ Ext.define('TDGUI.view.common.panels.TextImagePanel', {
   },
 
 
+
+
+  listeners: {
+    afterrender: function (comp, opts) {
+      if (comp.tpl) {
+        var panel = comp.items.getAt(0);
+        comp.tpl.overwrite(panel.body, {});
+      }
+    }
+  },
+
+
+
 /**
  * Custom callback method to run when the store associated to this TextImagePanel
  * is loaded. Its goal is just to display the right information.
@@ -89,9 +116,8 @@ Ext.define('TDGUI.view.common.panels.TextImagePanel', {
  * @param {boolean} succesful if the operation was succesful (true)
  */
   showData:function (store, records, succesful) {
-    console.info("on TextImagePanel.showData")
-    var me = this
-
+console.info("on TextImagePanel.showData");
+    var me = this;
 
     if (succesful) {
       if (records.length > 0) {
@@ -107,7 +133,6 @@ Ext.define('TDGUI.view.common.panels.TextImagePanel', {
           numconnections: numConn,
           pdbId: pdbId
         }
-
 
         this.imagePath = 'http://www.rcsb.org/pdb/images/' + pdbId + '_asr_r_250.jpg'
         this.data = data

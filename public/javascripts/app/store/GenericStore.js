@@ -12,7 +12,7 @@ Ext.define('TDGUI.store.GenericStore', {
   proxy: {
     type: 'ajax',
     timeout: '180000',
-    api: {
+    api: { // property exclusive to ajax proxies
       read: ''  // We configure this in the form controller
     },
     reader: {

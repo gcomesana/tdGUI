@@ -106,10 +106,14 @@ console.log('***==> got event triggered by InteractionsGraph: '+accessions);
       }
     };
 
+
+    var accsName = Ext.Array.map (accessions, function (acc, ind, accs) {
+      return acc.name;
+    });
     nodesSt.proxy.actionMethods = opts.actionMethods;
     nodesSt.proxy.api.read = opts.api.read;
     nodesSt.proxy.params = opts.params;
-    nodesSt.proxy.extraParams = {entries: accessions.join(',')};
+    nodesSt.proxy.extraParams = {entries: accsName.join(',')};
 //    nodesSt.on('load', this.storeLoaded, this);
     nodesSt.on('load', myComp.afterStoreLoaded, myComp);
     nodesSt.load();
@@ -122,9 +126,7 @@ console.log('***==> got event triggered by InteractionsGraph: '+accessions);
     myComp.interactionsStore.setProxy({
       type: 'memory',
       model: 'TDGUI.model.GenericModel',
-      reader: {
-        type: 'json'
-      }
+      reader: 'json'
     });
 
     var genericModel = myComp.interactionsStore.proxy.getModel();

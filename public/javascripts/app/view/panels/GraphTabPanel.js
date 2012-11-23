@@ -94,7 +94,7 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
 
     interactionTpl: new Ext.XTemplate (
       '<div style="background-color: green; margin: 5px 5px 5px 5px; padding: 2px 2px 2px 2px">',
-        '<div>Edge between targets {nodeFrom} - {nodeTo}</div>',
+        '<div>Edge between targets {nodeFromAcc} - {nodeToAcc}</div>',
           '<div>Found on experiments:<br>',
             '<tpl for="experiments">',
               '<a href="http://www.ebi.ac.uk/intact/interaction/{intactid}" target="_blank">{intactid}</a> (Confidence value: {confidenceVal})<br/>',
@@ -102,6 +102,8 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
           '</div>',
         '</div>',
       '</div>'),
+
+
 
     onNodeEnter: function (nodeName) {
       console.log("infoPanel.onNodeEnter: "+nodeName)
@@ -130,14 +132,13 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
 
 
     onEdgeEnter: function (nodeFromId, nodeToId) {
-      console.log("infoPanel.respondEdgeEnter: "+nodeFromId+" -> "+nodeToId)
       var indexEdge = this.interactionsStore.findBy (function (rec) {
-        return (rec.get('nodeFrom') == nodeFromId && rec.get('nodeTo') == nodeToId) ||
-               (rec.get('nodeFrom') == nodeToId && rec.get('nodeTo') == nodeFromId)
+        return (rec.get('nodeFromId') == nodeFromId && rec.get('nodeToId') == nodeToId) ||
+               (rec.get('nodeFromId') == nodeToId && rec.get('nodeToId') == nodeFromId)
       })
 
       var edgeRec = this.interactionsStore.getAt(indexEdge);
-      console.log ("Edge: "+nodeFromId+" -> "+nodeToId);
+      console.log ("Edge: ("+edgeRec.get('nodeFromAcc')+") "+nodeFromId+" -> "+nodeToId);
       Ext.Array.forEach(edgeRec.get('experiments'), function (exp, ind, exps) {
         console.log('cv:'+exp.confidenceVal+' - intactId: '+exp.intactid +
                   ' - pubmed: '+exp.pubmed+" - iref: "+exp.iref);

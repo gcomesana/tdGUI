@@ -393,17 +393,25 @@ console.info("InteractionsGraph: targetId -> " + me.targetId);
 // reformat response text and build arrays with accessions (String[])
         var jsonObj = Ext.JSON.decode(response.responseText); // jsonObj is an Array
         var accessions = Ext.Array.map(jsonObj, function (it) {
-          return it.name;
+          return {id: it.id, name: it.name};
         });
+        accessions.length = 0;
+        for (var i=0; i<jsonObj.length; i++) {
+          accessions[jsonObj[i].id] = jsonObj[i].name;
+        }
+
 
 // and interactions (Object[])
         var interactions = Ext.Array.map(jsonObj, function (it) {
           var thisInteractions = Ext.Array.map (it.adjacencies, function (adj, ind, adjs) {
-            return {
-              nodeFrom: adj.nodeFrom,
-              nodeTo: adj.nodeTo,
+            var myObj =  {
+              nodeFromId: adj.nodeFrom,
+              nodeFromAcc: accessions[adj.nodeFrom],
+              nodeToId: adj.nodeTo,
+              nodeToAcc: accessions[adj.nodeTo],
               experiments: adj.interactionData
             };
+            return myObj;
           });
           return thisInteractions;
         })
@@ -423,6 +431,7 @@ console.info("InteractionsGraph: targetId -> " + me.targetId);
     }); // request
 
   }, // EO initGraph
+
 
 
 

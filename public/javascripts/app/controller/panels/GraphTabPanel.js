@@ -41,8 +41,15 @@ Ext.define("TDGUI.controller.panels.GraphTabPanel", {
   },
 
 
+/**
+ * Method to be executed on enter (hover over) a node in the graph. It is here
+ * as the event on the graph should produce a change into the TextImagePanel
+ * component
+ * @param nodeName the node name which is displayed in the label
+ * @param graphComp the component which the graph is contained in. Provides a
+ * reference to get the correct target store
+ */
   onNodeEnter: function (nodeName, graphComp) {
-console.log('controller: GraphTabPanel.respondNodeEnter...');
     var theTab = graphComp.up('tdgui-graphtabpanel');
     var textImgPanel = theTab.down('tdgui-textimagepanel');
     console.log ('activating TAB: '+theTab.getId()+' and textpanel: '+textImgPanel.getId());
@@ -54,6 +61,13 @@ console.log('controller: GraphTabPanel.respondNodeEnter...');
   },
 
 
+  /**
+   * Similar to the #onNodeEnter method but takes care on edges.
+   * @param nodeFrom the node origin of the interaction (edge). This is arbitrary
+   * @param nodeTo the node destintation of the edge (interaction). Arbitrary.
+   * @param graphComp the container in order to get the proper reference of the
+   * TextImagePanel component and the interactions store.
+   */
   onEdgeEnter: function (nodeFrom, nodeTo, graphComp) {
     var theTab = graphComp.up('tdgui-graphtabpanel');
     var textImgPanel = theTab.down('tdgui-textimagepanel');
@@ -64,14 +78,6 @@ console.log('controller: GraphTabPanel.respondNodeEnter...');
 
 
 
-  onActivate: function(theTab, opts) {
-    var textImgPanel = theTab.down('tdgui-textimagepanel');
-    console.log ('activating TAB: '+theTab.getId()+' and textpanel: '+textImgPanel.getId());
-    var myStore = theTab.targetStore;
-    var rec = myStore.getAt(1);
-
-    console.log ('activating TAB. some accessions: '+rec.get('accessions'));
-  },
 
 /**
  * This method adds the uniprot accession of the node into the multitarget list
@@ -170,10 +176,10 @@ console.info('Unable to get response from concept_wiki.')
    * Retrieve information about the targets involved in the interaction network.
    * This is done asynchronously in order to initialize the display component in
    * background.
-   *
-   * @param accessions
-   * @param interactions
-   * @param container
+   * @param accessions the accession of the nodes involved in the graph
+   * @param interactions the edges of the graph
+   * @param container the container component containing the graphpanel. This is
+   * by convention for this application, the GraphTabPanel instance for this graph
    */
   createInteractionsInfoStores: function (accessions, interactions, container) {
     if (accessions.length == 0 || interactions.length == 0)
@@ -277,6 +283,9 @@ console.log('***==> got event triggered by InteractionsGraph: '+accessions);
       store.proxy.setModel(genericModel);
     }
     this.targetStore = store;
+
+    var interactionsGraph = this.down('tdgui-interactionsgraph-panel');
+    interactionsGraph.startupGraph();
 
     console.log("myComp.id: "+this.getId()+ 'targetStore.count: '+
       this.targetStore.count());

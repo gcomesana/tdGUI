@@ -34,16 +34,6 @@ Ext.define('TDGUI.view.common.panels.TextImagePanel', {
   tplList: [],
 
   /**
-   * @cfg {Object} data the data necessary in order this component to work
-   */
-  data: undefined,
-  /**
-   * @cfg {Ext.data.Store} the store where the information about targets and
-   * adjacencies is going to be retrieved from
-   */
-  targetStore: undefined,
-
-  /**
    * @cfg {Array} storeList an array of stores. As different kind of data can
    * be used by this component, a different number of stores will be supported
    */

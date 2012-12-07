@@ -164,26 +164,6 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
       this.html = '<div id="infovis-div-' + this.targetId + '" style="border:1px solid red;">' +
         helpText + '</div>'
 
-
-    /*
-     Ext.Ajax.request({
-     //      url: 'tdgui_proxy/interactions_retrieval',
-     url: 'resources/datatest/full-jit.json',
-     method: 'GET',
-     params: {
-     target: me.target_id
-     },
-
-     success: function(response, opts) {
-     me.startupGraph(response.responseText)
-     console.dir(response.body);
-     },
-
-     failure: function(response, opts) {
-     console.log('server-side failure with status code ' + response.status);
-     }
-     })
-     */
     this.callParent(arguments)
   },
 
@@ -293,15 +273,13 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 
           //Change cursor style when hovering a node
           onMouseEnter: function (node, evInfo, ev) {
-            var container = me.up('tdgui-graphtabpanel');
+            // var container = me.up('tdgui-graphtabpanel');
             if (node.name) {
-console.log('onMouseEnter: '+node.name+' on '+container.getId());
               node.setData('color', 'yellow');
               node.setData('alpha', 20, 'end');
               me.fireEvent('nodeMouseEnter', node.name, me)
             }
             else {
-console.log('I must have hovered on an edge: '+node.nodeFrom.id+'->'+node.nodeTo.id);
               me.fireEvent('edgeMouseEnter', node.nodeFrom.id, node.nodeTo.id, me)
             }
 
@@ -339,10 +317,9 @@ console.log('I must have hovered on an edge: '+node.nodeFrom.id+'->'+node.nodeTo
           //        adj.data.$lineWidth = Math.random() * 7 + 1;
         },
 
-// Add text to the labels. This method is only triggered
-// on label creation and only for DOM labels (not native canvas ones).
+        // Add text to the labels. This method is only triggered
+        // on label creation and only for DOM labels (not native canvas ones).
         onCreateLabel: function (domElement, node) {
-console.log("¡###¡ onCreateLabel...");
           domElement.innerHTML = node.name;
           var style = domElement.style;
           style.fontSize = "0.8em";
@@ -367,9 +344,8 @@ console.log("¡###¡ onCreateLabel...");
     } // EO setInstanceGraph
 
 
-console.info("InteractionsGraph: targetId -> " + me.targetId);
+    console.info("InteractionsGraph: targetId -> " + me.targetId);
 
-//    var intactUrl = '/tdgui_proxy/interactions_retrieval';
     Ext.Ajax.request({
 //      url: 'resources/datatest/intact-bad.json',
       url: me.interactionUrl,
@@ -390,7 +366,6 @@ console.info("InteractionsGraph: targetId -> " + me.targetId);
           return false;
         }
 
-// reformat response text and build arrays with accessions (String[])
         var jsonObj = Ext.JSON.decode(response.responseText); // jsonObj is an Array
         var accessions = Ext.Array.map(jsonObj, function (it) {
           return {id: it.id, name: it.name};
@@ -401,7 +376,6 @@ console.info("InteractionsGraph: targetId -> " + me.targetId);
         }
 
 
-// and interactions (Object[])
         var interactions = Ext.Array.map(jsonObj, function (it) {
           var thisInteractions = Ext.Array.map (it.adjacencies, function (adj, ind, adjs) {
             var myObj =  {
@@ -415,13 +389,14 @@ console.info("InteractionsGraph: targetId -> " + me.targetId);
           });
           return thisInteractions;
         })
-// In order to build the stores with the right data to serve the side panel information
-// accessions to remotely retrieve information and the graph interactions as a
-// flat array are passed in
+        // In order to build the stores with the right data to serve the side panel information
+        // accessions to remotely retrieve information and the graph interactions as a
+        // flat array are passed in
+        // The event is caught in GraphTabPanel controller
         me.fireEvent('intactDataGot', accessions, Ext.Array.flatten(interactions), me.up('tdgui-graphtabpanel'));
 
+        me.interactionData = jsonObj;
         me.fdCfg = setInstanceGraph(thisInstance);
-        me.startupGraph(jsonObj, thisInstance);
       },
 
 // TODO check the error control here!!! Graph has not be displayed and err message raised
@@ -434,13 +409,12 @@ console.info("InteractionsGraph: targetId -> " + me.targetId);
 
 
 
-
   /**
    * Starts up the graph on its div component by setting the data and run the
    * methods to render the graph. It has to be called AFTER {@link #initGraph}
    * @param {Object} jsonObj the data which is to feed the graph
    */
-  startupGraph: function (jsonObj) {
+  startupGraph: function () {
     var divVis = Ext.get('infovis-div')
     var me = this
     //        divVis.insertHtml ('afterBegin', '<p>Kgallon</p>')
@@ -453,7 +427,7 @@ console.info("InteractionsGraph: targetId -> " + me.targetId);
 //    this.fdCfg.fdGraph = this.fd
 //    var jsonObj = Ext.JSON.decode(jsonData) // jsonObj is an Array
 //    me.interactionData = jsonObj.slice(0, jsonObj.length-1)
-    me.interactionData = jsonObj
+//    me.interactionData = jsonObj
 //    me.experimentsData = jsonObj[jsonObj.length-1]
 
     this.fd.loadJSON(me.interactionData)
@@ -489,17 +463,6 @@ console.info("InteractionsGraph: targetId -> " + me.targetId);
     afterrender: {
       fn: function (comp, opts) {
         var divVis = Ext.get('infovis-div')
-        //        divVis.insertHtml ('afterBegin', '<p>Kgallon</p>')
-        /*
-         if (this.fdDivName != 'infovis-div')
-         defaultFDCfg.injectInto = this.fdDivName
-
-         fd = new $jit.ForceDirected(defaultFDCfg)
-         fd.loadJSON(myJson)
-         fd.computeIncremental(computeCfg)
-
-         */
-//        var canvasEl = fd.canvas.getElement()
         console.info('EO afterrender')
 
       }

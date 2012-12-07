@@ -43,23 +43,7 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
       confVal: me.confVal,
       id: 'graphdiv-'+me.targetAcc
 		});
-/*
-    var infoPanel = Ext.create('TDGUI.view.common.panels.TextImagePanel', {
-      flex: 1,
-      layout: 'anchor',
-      title: 'TextImage information',
-      targetStore: Ext.create('TDGUI.store.GenericStore'),
-      id: 'textimagepanel-'+me.targetAcc
-    });
-    infoPanel.respondNodeEnter = this.private.onNodeEnter;
-    infoPanel.respondEdgeEnter = this.private.onEdgeEnter;
-    infoPanel.tpl = this.private.welcomeTpl;
-    infoPanel.tplList = [
-      this.private.welcomeTpl,
-      this.private.targetTpl,
-      this.private.interactionTpl
-    ];
-*/
+
     var infoPanel = this.createInfoPanel();
     console.log("GraphTabPanel.infoPanel?? "+infoPanel.getId());
     this.items = [
@@ -127,7 +111,6 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
     var onNodeEnter = function (nodeName, targetStore) {
       console.log("infoPanel.onNodeEnter: "+nodeName)
 
-//      var targetStore = this.up('tdgui-graphtabpanel#'+graphTabId).targetStore;
       var idxNode = targetStore.findBy (function (rec) {
         var accs = rec.get('accessions');
         var uniprotAccs = [];
@@ -152,7 +135,6 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
 
 
     var onEdgeEnter = function (nodeFromId, nodeToId, interactionStore) {
-//      var interactionStore = this.up('tdgui-graphtabpanel').interactionStore;
       var indexEdge = interactionStore.findBy (function (rec) {
         return (rec.get('nodeFromId') == nodeFromId && rec.get('nodeToId') == nodeToId) ||
                (rec.get('nodeFromId') == nodeToId && rec.get('nodeToId') == nodeFromId)
@@ -174,7 +156,6 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
       flex: 1,
       layout: 'anchor',
       title: 'TextImage information',
-      targetStore: Ext.create('TDGUI.store.GenericStore'),
       id: 'textimagepanel-'+me.targetAcc,
 
       respondNodeEnter: onNodeEnter,

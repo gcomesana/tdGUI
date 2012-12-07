@@ -54,6 +54,8 @@ Ext.define('TDGUI.view.common.panels.TextImagePanel', {
   bodyPadding:'2 2 2 2',
 
 
+  respondNodeEnter: undefined,
+  respondEdgeEnter: undefined,
 
 //  myMask: undefined,
   //	autoScroll: true,
@@ -61,9 +63,7 @@ Ext.define('TDGUI.view.common.panels.TextImagePanel', {
 
   initComponent:function () {
     var me = this;
-// console.info("TextImagePanel data? " + me.data.nodename)
-    var displayWidth = this.width - 15;
-
+console.info("TextImagePanel initComponent: "+this.tpl);
     this.items = [/*{
         xtype:'image',
         src: me.imagePath,

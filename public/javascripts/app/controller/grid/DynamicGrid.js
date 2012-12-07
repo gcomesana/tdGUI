@@ -2,7 +2,7 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
   extend:'Ext.app.Controller',
 
   views:[
-    'grid.DynamicGrid3'
+    'grid.DynamicGrid'
   ],
 
   models:['DynamicGrid'],
@@ -24,7 +24,7 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
 
   init: function () {
     this.myMask = 'cagallon'
-    console.log ("DynamicGrid.Controller.init... myMask: "+this.myMask)
+    console.log ("DynamicGrid3.Controller.init... myMask: "+this.myMask)
     this.control ({
 
 
@@ -51,7 +51,7 @@ console.info ("item double clicked!!!")
  */
       }, // EO dynamicgrid3
 
-      'dynamicgrid3 toolbar #sdfDownloadProxy_id':{
+      'genecir-simple-grid toolbar #sdfDownloadProxy_id':{
         click:this.prepSDFile
       }
     })
@@ -59,7 +59,7 @@ console.info ("item double clicked!!!")
 
 
   onLaunch:function () {
-  console.log ("DynamicGrid.Controller.onLaunch")
+  console.log ("DynamicGrid3.Controller.onLaunch")
     this.myMask = new Ext.LoadMask(Ext.getBody(), {
       msg:'Loading data...'
     })
@@ -78,7 +78,8 @@ console.info ("item double clicked!!!")
     this.myMask.bindStore(this_store)
 
     var this_controller = this;
-    var temp_store = Ext.create('LSP.store.DynamicGrid');
+//    var temp_store = Ext.create('LSP.store.DynamicGrid');
+    var temp_store = Ext.create('TDGUI.store.DynamicGrid');
     // configure copy store:
     temp_store.proxy.extraParams = extraParams;
     temp_store.proxy.api.read = this_gridview.readUrl;

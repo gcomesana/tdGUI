@@ -91,7 +91,7 @@ public
 # Ping for conceptWiki API endpoint
 # Calls the checkConceptWiki method of InnerProxy inner class
 # @return [Object] true if conceptWiki endpoint is up and usable; false otherwise
-	def self.checkConceptAPI ()
+	def self.checkConceptWiki ()
 
 #		@myProxy = InnerProxy.new
 		result = @myProxy.checkConceptWiki()
@@ -179,10 +179,12 @@ puts "Attacking conceptWiki part"
 			else # so far, protein_lookup via uniprot
 				ep_ready = ep_ready + "&query="+opts[:query]+'+AND+organism:9606'
 puts "EndpointsProxy.make_request: #{ep_ready}"
+#				ep_ready = CGI.escape(ep_ready)
 				url = URI.parse(ep_ready)
 
 				req = Net::HTTP::Get.new(url.request_uri)
-				res = Net::HTTP.start(url.host, url.port, @proxy_host, @proxy_port) {|http|
+#				res = Net::HTTP.start(url.host, url.port, @proxy_host, @proxy_port) {|http|
+				res = Net::HTTP.start(url.host, url.port) {|http|
 					http.request(req)
 				}
 				json_resp = @myProxy.uniprot2json(res.body, opts[:query]) # necessary to convert to OPS json
@@ -228,7 +230,7 @@ puts "EndpointsProxy.make_request: #{ep_alive} -> #{ep_ready ? ep_ready: 'no end
 #					if ep_ready.include? "uniprot"
 						url = URI.parse(ep_ready)
 						req = Net::HTTP::Get.new(url.request_uri)
-						res = Net::HTTP.start(url.host, url.port, @proxy_host, @proxy_port) {|http|
+						res = Net::HTTP.start(url.host, url.port) {|http|
 							http.request(req)
 						}
 		#				json_resp = @myProxy.uniprot2json(res.body, opts[:query]) # necessary to convert to OPS json

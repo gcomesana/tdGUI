@@ -200,6 +200,8 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       uniprot_name: "AA2AR_HUMAN"
     }]
 
+
+//////////////////////////////////////////////////////////////
     myData = [{
       name: "Alpha-2A adrenergic receptor",
       concept_uuid: "59aabd64-bee9-45b7-bbe0-9533f6a1f6bc",
@@ -236,10 +238,10 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       ], // uniprot_acc: "Q5H943",
       uniprot_id: "AA2AR_HUMAN", // uniprot_id: "KKLC1_HUMAN"
       uniprot_name: "AA2AR_HUMAN"
-    }]
+    }];
 
-    var initStore = Ext.create('TDGUI.store.ListTargets')
-    initStore.loadData(myData)
+    var initStore = Ext.create('TDGUI.store.ListTargets');
+    initStore.loadData(myData);
 
     this.targetList = Ext.create ('TDGUI.view.common.ItemMultilist', {
       listName: 'Target List',
@@ -247,14 +249,14 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       store: initStore,
       displayField: 'display_field',
       valueField: 'uniprot_acc'
-    })
+    });
 
     this.targetList.addDockedItem({
       xtype: 'button',
       text: 'Search'
-    })
+    });
 
-    return this.targetList
+    return this.targetList;
   },
 
 

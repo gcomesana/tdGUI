@@ -33,10 +33,10 @@ Ext.define("TDGUI.controller.common.panels.TextImagePanel", {
       },
 
       'tdgui-interactionsgraph-panel': { // the panel supporting the graph itself
-        intactDataGot: this.createInteractionsInfoStores,
+//        intactDataGot: this.createInteractionsInfoStores,
 
-        nodeMouseEnter: this.respondGraphEvents,
-        edgeMouseEnter: this.respondGraphEvents
+//        nodeMouseEnter: this.respondGraphEvents,
+//        edgeMouseEnter: this.respondGraphEvents
       }
 
     })
@@ -108,7 +108,8 @@ console.log('***==> got event triggered by InteractionsGraph: '+accessions);
 
 
     var accsName = Ext.Array.map (accessions, function (acc, ind, accs) {
-      return acc.name;
+//      return acc.name;
+      return acc;
     });
     nodesSt.proxy.actionMethods = opts.actionMethods;
     nodesSt.proxy.api.read = opts.api.read;
@@ -186,12 +187,29 @@ console.log('***==> got event triggered by InteractionsGraph: '+accessions);
    * should be passed as the very first argument.
    */
   respondGraphEvents: function () {
+/*
     var myComp = this.getGraphTextImagePanel();
+    var graphTabPanelId = arguments.length == 3? arguments[2]: arguments[3];
 
     switch (arguments.length) {
       case 2: myComp.respondNodeEnter(arguments[0]); // args[0] is node name
         break;
+
       case 3: myComp.respondEdgeEnter(arguments[0], arguments[1]); // args are from and to nodes for the edge
+        break;
+
+      default: break;
+    }
+ */
+
+    var myComp = this.getGraphTextImagePanel();
+    var graphTabPanelId = arguments.length == 3? arguments[1]: arguments[2];
+
+    switch (arguments.length) {
+      case 3: myComp.respondNodeEnter(arguments[0], graphTabPanelId); // args[0] is node name
+        break;
+
+      case 4: myComp.respondEdgeEnter(arguments[0], arguments[1], graphTabPanelId); // args are from and to nodes for the edge
         break;
 
       default: break;

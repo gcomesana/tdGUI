@@ -239,7 +239,7 @@ private
 	def request(url, options)
 #		puts "\nIssues call to ConceptWiki API \"#{p url}\" with options: \"#{p options}\"\n"
 
-		conceptApiOk = EndpointsProxy.checkConceptAPI
+		conceptApiOk = EndpointsProxy.checkConceptWiki
 		coreApiOk = EndpointsProxy.check_coreAPI
 		endpoint_ok = conceptApiOk && coreApiOk
 		url = endpoint_ok ? url: EndpointsProxy.get_uniprot_concept_endpoint

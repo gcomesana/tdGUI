@@ -15,7 +15,18 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
 		margin: '5 5 5 5'
 	},
 
-	interactionData: [],
+  /**
+   * @cfg {Ext.data.Store} a memory store to hold the current interactions. It
+   * will provide interactions information for the info panel component
+   */
+	interactionStore: undefined,
+
+  /**
+   * @cfg {Ext.data.Store} the store where the information about targets and
+   * adjacencies is going to be retrieved from. As the interactionStore, will
+   * provide information about the nodes to the information panel component.
+   */
+  targetStore: undefined,
 
   confVal: 0.43,
   maxNodes: 5,
@@ -23,20 +34,22 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
 
 
 	initComponent: function() {
-		var me = this
+		var me = this;
 
 		var ivPanel = Ext.create('TDGUI.view.panels.GraphDataPanel', {
 			flex: 3,
       targetAcc: me.targetAcc,
       maxNodes: me.maxNodes,
-      confVal: me.confVal
+      confVal: me.confVal,
+      id: 'graphdiv-'+me.targetAcc
 		});
-
+/*
     var infoPanel = Ext.create('TDGUI.view.common.panels.TextImagePanel', {
       flex: 1,
       layout: 'anchor',
       title: 'TextImage information',
-      targetStore: Ext.create('TDGUI.store.GenericStore')
+      targetStore: Ext.create('TDGUI.store.GenericStore'),
+      id: 'textimagepanel-'+me.targetAcc
     });
     infoPanel.respondNodeEnter = this.private.onNodeEnter;
     infoPanel.respondEdgeEnter = this.private.onEdgeEnter;
@@ -46,7 +59,9 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
       this.private.targetTpl,
       this.private.interactionTpl
     ];
-
+*/
+    var infoPanel = this.createInfoPanel();
+    console.log("GraphTabPanel.infoPanel?? "+infoPanel.getId());
     this.items = [
 			ivPanel, // panel with graph + .well message
 			infoPanel // panel with information about selection (by clicking or hovering over)
@@ -56,15 +71,15 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
 	},
 
 
-  private: {
+  createInfoPanel: function () {
+    var me = this;
 
-    welcomeTpl: new Ext.XTemplate ('<div class="well well-small" style="margin-bottom:5px">',
+    var welcomeTpl = new Ext.XTemplate ('<div class="well well-small" style="margin-bottom:5px">',
       'Choose or hover over a node or edge to get information about target or interactions',
       '</div>'
-    ),
+    );
 
-
-    targetTpl: new Ext.XTemplate(
+    var targetTpl = new Ext.XTemplate(
       '<div style="margin: 5px 5px 5px 5px; padding: 2px 2px 2px 2px">',
       '<div style="margin-bottom:10px">{pdbimg}</div>',
       '<div><span style="font-weight: bold;">{proteinFullName}</span> ({organismSciName})</div>',
@@ -83,16 +98,21 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
 //      '</tpl>',
       '<div><button id="btnAdd" class="x-btn x-toolbar-item x-btn-default-small x-noicon x-btn-noicon x-btn-default-small-noicon">Add to list</button></div>',
       '</div>', {
-        onClickButton: function (accessions) {
-          var parentComp = Ext.ComponentQuery.query('tdgui-graphtabpanel');
-          var myComp = parentComp[0].down('tdgui-textimagepanel');
-          myComp.fireEvent('addTarget', accessions[0])
+        onClickButton: function (nodeRec) {
+          var myBtn = Ext.get('btnAdd');
+          Ext.get('btnAdd').on('click', function (e) {
+            e.stopEvent();
+            console.info ("button clicked: "+nodeRec.get('proteinFullName'));
+            var parentComp = Ext.ComponentQuery.query('tdgui-graphtabpanel');
+            var myComp = parentComp[0].down('tdgui-textimagepanel');
+            myComp.fireEvent('addTarget', nodeRec);
+          });
+
         }
       }
-    ),
+    );
 
-
-    interactionTpl: new Ext.XTemplate (
+    var interactionTpl = new Ext.XTemplate (
       '<div style="background-color: green; margin: 5px 5px 5px 5px; padding: 2px 2px 2px 2px">',
         '<div>Edge between targets {nodeFromAcc} - {nodeToAcc}</div>',
           '<div>Found on experiments:<br>',
@@ -101,43 +121,44 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
             '</tpl>',
           '</div>',
         '</div>',
-      '</div>'),
+      '</div>');
 
 
-
-    onNodeEnter: function (nodeName) {
+    var onNodeEnter = function (nodeName, targetStore) {
       console.log("infoPanel.onNodeEnter: "+nodeName)
 
-// Seems to be ok!!
-      var idxNode = this.targetStore.findBy (function (rec) {
+//      var targetStore = this.up('tdgui-graphtabpanel#'+graphTabId).targetStore;
+      var idxNode = targetStore.findBy (function (rec) {
         var accs = rec.get('accessions');
-        var uniprotAccs = []
+        var uniprotAccs = [];
         uniprotAccs = Ext.Array.filter(accs, function (it) {
           var matches = []
           matches = it.match(/[A-Z0-9]{6}/)
           return matches.length > 0 && Ext.Array.contains(matches, nodeName)
-        })
+        });
 
-        return uniprotAccs.length > 0
+        return uniprotAccs.length > 0;
       });
 
-      var nodeRec = this.targetStore.getAt(idxNode);
+      var nodeRec = targetStore.getAt(idxNode);
       console.log("nodeRec found?: "+nodeRec.get('proteinFullName'));
 
       var panel = this.items.getAt(0);
+
       this.tplList[1].overwrite(panel.body, nodeRec.raw);
+      this.tplList[1].onClickButton(nodeRec);
+    };
 
 
-    },
 
-
-    onEdgeEnter: function (nodeFromId, nodeToId) {
-      var indexEdge = this.interactionsStore.findBy (function (rec) {
+    var onEdgeEnter = function (nodeFromId, nodeToId, interactionStore) {
+//      var interactionStore = this.up('tdgui-graphtabpanel').interactionStore;
+      var indexEdge = interactionStore.findBy (function (rec) {
         return (rec.get('nodeFromId') == nodeFromId && rec.get('nodeToId') == nodeToId) ||
                (rec.get('nodeFromId') == nodeToId && rec.get('nodeToId') == nodeFromId)
       })
 
-      var edgeRec = this.interactionsStore.getAt(indexEdge);
+      var edgeRec = interactionStore.getAt(indexEdge);
       console.log ("Edge: ("+edgeRec.get('nodeFromAcc')+") "+nodeFromId+" -> "+nodeToId);
       Ext.Array.forEach(edgeRec.get('experiments'), function (exp, ind, exps) {
         console.log('cv:'+exp.confidenceVal+' - intactId: '+exp.intactid +
@@ -146,7 +167,27 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
 
       var panel = this.items.getAt(0);
       this.tplList[2].overwrite(panel.body, edgeRec.data);
-    }
+    };
+
+
+    var infoPanel = Ext.create('TDGUI.view.common.panels.TextImagePanel', {
+      flex: 1,
+      layout: 'anchor',
+      title: 'TextImage information',
+      targetStore: Ext.create('TDGUI.store.GenericStore'),
+      id: 'textimagepanel-'+me.targetAcc,
+
+      respondNodeEnter: onNodeEnter,
+      respondEdgeEnter: onEdgeEnter
+    });
+    infoPanel.tpl = welcomeTpl;
+    infoPanel.tplList = [
+      welcomeTpl,
+      targetTpl,
+      interactionTpl
+    ];
+
+    return infoPanel;
   } // EO private
 
 })

@@ -123,7 +123,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
    */
   targetId: '',
 
-  confVal: 0.6,
+  confVal: 0.4,
   maxNodes: 5,
 
   /**
@@ -293,15 +293,16 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 
           //Change cursor style when hovering a node
           onMouseEnter: function (node, evInfo, ev) {
+            var container = me.up('tdgui-graphtabpanel');
             if (node.name) {
-console.log('onMouseEnter: '+node.name);
+console.log('onMouseEnter: '+node.name+' on '+container.getId());
               node.setData('color', 'yellow');
               node.setData('alpha', 20, 'end');
-              me.fireEvent('nodeMouseEnter', node.name)
+              me.fireEvent('nodeMouseEnter', node.name, me)
             }
             else {
-              console.log('I must have hovered on an edge: '+node.nodeFrom.id+'->'+node.nodeTo.id);
-              me.fireEvent('edgeMouseEnter', node.nodeFrom.id, node.nodeTo.id)
+console.log('I must have hovered on an edge: '+node.nodeFrom.id+'->'+node.nodeTo.id);
+              me.fireEvent('edgeMouseEnter', node.nodeFrom.id, node.nodeTo.id, me)
             }
 
             thisInstance.fd.canvas.getElement().style.cursor = 'move';
@@ -324,7 +325,6 @@ console.log('onMouseEnter: '+node.name);
           },
 
           onClick: me.nodeClickHandler
-
         },
 
         //Number of iterations for the FD algorithm
@@ -363,7 +363,7 @@ console.log("¡###¡ onCreateLabel...");
         }
       } // EO fd $jit.ForceDirected
 
-      return defaultFDCfg
+      return defaultFDCfg;
     } // EO setInstanceGraph
 
 
@@ -418,7 +418,7 @@ console.info("InteractionsGraph: targetId -> " + me.targetId);
 // In order to build the stores with the right data to serve the side panel information
 // accessions to remotely retrieve information and the graph interactions as a
 // flat array are passed in
-        me.fireEvent('intactDataGot', accessions, Ext.Array.flatten(interactions));
+        me.fireEvent('intactDataGot', accessions, Ext.Array.flatten(interactions), me.up('tdgui-graphtabpanel'));
 
         me.fdCfg = setInstanceGraph(thisInstance);
         me.startupGraph(jsonObj, thisInstance);

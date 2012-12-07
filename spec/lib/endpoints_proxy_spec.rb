@@ -34,8 +34,8 @@ describe "Behaviour of EndpointsProxy" do
 
 	it "module check conceptWiki should ping back" do
 #		result = EndpointsProxy.autocheck.should be_true
-		EndpointsProxy.checkConceptAPI.should be_true
-		EndpointsProxy.checkConceptAPI.should satisfy { |it|
+		EndpointsProxy.checkConceptWiki.should be_true
+		EndpointsProxy.checkConceptWiki.should satisfy { |it|
 			(it.is_a? FalseClass) || (it.is_a? TrueClass)
 		}
 
@@ -62,7 +62,7 @@ describe "Behaviour of EndpointsProxy" do
 
 
 	it "make_request should get a response" do
-		EndpointsProxy.checkConceptAPI.should be_true
+		EndpointsProxy.checkConceptWiki.should be_true
 		EndpointsProxy.get_core_endpoint.should_not eq(@url)
 
 		res = EndpointsProxy.make_request(@url, @options)

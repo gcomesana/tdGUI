@@ -1,5 +1,5 @@
 
-
+// TODO class to remove, no longer used
 // Ext.Loader.setPath('Ext.ux', 'extjs4.0.7/ux');
 Ext.require(['Ext.ux.form.MultiSelect', 'Ext.ux.form.ItemSelector']);
 

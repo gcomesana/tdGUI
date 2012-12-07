@@ -141,14 +141,15 @@ console.info ("A element was added to history: -> "+token)
       case 'tdgui-graphdatapanel':
       case 'tdgui-graphtabpanel':
 console.info ("raising interactions for Target panel")
-        var uniprotAcc = tokenObj.qp
+        var uniprotAcc = tokenObj.qp;
         newPanel = Ext.createByAlias ('widget.'+xtype, {
 //          fdDivName: 'xperimental-div',
 //          target_id: 'Q13362',
           targetAcc: uniprotAcc,
           confVal: tokenObj.cv,
           maxNodes: tokenObj.mn,
-          closable: true
+          closable: true,
+          id: 'tdgui-graphtabpanel-'+uniprotAcc
         })
         break
 

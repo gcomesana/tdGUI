@@ -123,7 +123,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
    */
   targetId: '',
 
-  confVal: 0.6,
+  confVal: 0.4,
   maxNodes: 5,
 
   /**
@@ -141,8 +141,9 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
   initComponent: function () {
     var me = this
 
-    var helpText = '<div id="divIntrHelp" class="well well-small" style="width:50%;margin-bottom:5px">Click on any node to get information about the target<br/>'
-    helpText += 'Click on any edge to get information about the interaction between both two targets</div>'
+    var helpText = '<div id="divIntrHelp" class="well well-small" style="width:50%;margin-bottom:5px">' +
+      'Click/hover over a node to get information about the target<br/>'
+    helpText += 'Click/hover over a edge to get information about the interaction between both two targets</div>'
 
 //    helpText = ''
     if (this.fdDivName != 'infovis-div') {
@@ -292,15 +293,16 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
 
           //Change cursor style when hovering a node
           onMouseEnter: function (node, evInfo, ev) {
+            var container = me.up('tdgui-graphtabpanel');
             if (node.name) {
-console.log('onMouseEnter: '+node.name);
+console.log('onMouseEnter: '+node.name+' on '+container.getId());
               node.setData('color', 'yellow');
               node.setData('alpha', 20, 'end');
-              me.fireEvent('nodeMouseEnter', node.name)
+              me.fireEvent('nodeMouseEnter', node.name, me)
             }
             else {
-              console.log('I must have hovered on an edge: '+node.nodeFrom.id+'->'+node.nodeTo.id);
-              me.fireEvent('edgeMouseEnter', node.nodeFrom.id, node.nodeTo.id)
+console.log('I must have hovered on an edge: '+node.nodeFrom.id+'->'+node.nodeTo.id);
+              me.fireEvent('edgeMouseEnter', node.nodeFrom.id, node.nodeTo.id, me)
             }
 
             thisInstance.fd.canvas.getElement().style.cursor = 'move';
@@ -323,7 +325,6 @@ console.log('onMouseEnter: '+node.name);
           },
 
           onClick: me.nodeClickHandler
-
         },
 
         //Number of iterations for the FD algorithm
@@ -362,7 +363,7 @@ console.log("¡###¡ onCreateLabel...");
         }
       } // EO fd $jit.ForceDirected
 
-      return defaultFDCfg
+      return defaultFDCfg;
     } // EO setInstanceGraph
 
 
@@ -392,24 +393,32 @@ console.info("InteractionsGraph: targetId -> " + me.targetId);
 // reformat response text and build arrays with accessions (String[])
         var jsonObj = Ext.JSON.decode(response.responseText); // jsonObj is an Array
         var accessions = Ext.Array.map(jsonObj, function (it) {
-          return it.name;
+          return {id: it.id, name: it.name};
         });
+        accessions.length = 0;
+        for (var i=0; i<jsonObj.length; i++) {
+          accessions[jsonObj[i].id] = jsonObj[i].name;
+        }
+
 
 // and interactions (Object[])
         var interactions = Ext.Array.map(jsonObj, function (it) {
           var thisInteractions = Ext.Array.map (it.adjacencies, function (adj, ind, adjs) {
-            return {
-              nodeFrom: adj.nodeFrom,
-              nodeTo: adj.nodeTo,
+            var myObj =  {
+              nodeFromId: adj.nodeFrom,
+              nodeFromAcc: accessions[adj.nodeFrom],
+              nodeToId: adj.nodeTo,
+              nodeToAcc: accessions[adj.nodeTo],
               experiments: adj.interactionData
             };
+            return myObj;
           });
           return thisInteractions;
         })
 // In order to build the stores with the right data to serve the side panel information
 // accessions to remotely retrieve information and the graph interactions as a
 // flat array are passed in
-        me.fireEvent('intactDataGot', accessions, Ext.Array.flatten(interactions));
+        me.fireEvent('intactDataGot', accessions, Ext.Array.flatten(interactions), me.up('tdgui-graphtabpanel'));
 
         me.fdCfg = setInstanceGraph(thisInstance);
         me.startupGraph(jsonObj, thisInstance);
@@ -422,6 +431,7 @@ console.info("InteractionsGraph: targetId -> " + me.targetId);
     }); // request
 
   }, // EO initGraph
+
 
 
 

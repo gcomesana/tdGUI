@@ -9,13 +9,15 @@ Ext.Loader.setConfig({
   disableCaching:false
 });
 
-Ext.Loader.setPath('Ext.ux', '/javascripts/extjs4.0.7/ux')
+Ext.Loader.setPath('Ext.ux', '/javascripts/extjs4.0.7/ux');
+Ext.Loader.setPath('LDA', '/LinkedDataAPIParser/lib');
 
 // Ext.Ajax.disableCaching = false
 Ext.create('Ext.app.Application', {
 // Ext.Application ({
   name: 'TDGUI',
   appFolder: 'javascripts/app',
+  requires: ['LDA.helper.LDAConstants'],
 
 // Define all the controllers that should initialize at boot up of your application
 
@@ -24,6 +26,7 @@ Ext.create('Ext.app.Application', {
     'TDGUI.controller.grid.DynamicGrid',
     'TDGUI.controller.panels.MultiTarget',
     'TDGUI.controller.panels.TargetInfo',
+    'TDGUI.controller.panels.GraphTabPanel',
     'TDGUI.controller.common.panels.TextImagePanel',
     'TDGUI.controller.Viewport'
   ],
@@ -31,7 +34,7 @@ Ext.create('Ext.app.Application', {
   autoCreateViewport: true,
 
   launch: function() {
-    console.info("Starting TDGUI...")
+    console.info("Starting TDGUI...");
 
     Ext.QuickTips.init();
 

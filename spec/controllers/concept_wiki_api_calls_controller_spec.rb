@@ -5,6 +5,8 @@ describe ConceptWikiApiCallsController do
 
 	before (:all) do
 		@substring = 'breast'
+		@substring = 'Ubiquitin carboxyl-terminal hydrolase 4'
+#		@substring = CGI.escape(@substring)
 	end
 
 

@@ -40,7 +40,6 @@ console.info ("Initializing TargetInfo controller...")
           var form = comp.up('form')
           var formVals = form.getForm().getValues()
 
-console.info ('Yes, button send interactions clicked')
           this.onClickInteractionsBtn (formVals.uniprotAcc, formVals.conf_val, formVals.max_nodes)
           comp.up('window').hide()
         }
@@ -88,7 +87,7 @@ console.info ('Yes, button send interactions clicked')
 */
 
     var targetName = this.getTargetinfopanel().down('#target_name').getRawValue()
-    var historyParams = '!xt=tdgui-graphdatapanel&qp=' + targetAcc + '&cv=' + confVal +
+    var historyParams = '!xt=tdgui-graphtabpanel&qp=' + targetAcc + '&cv=' + confVal +
                 '&mn=' + maxNodes + '&tg='+targetName
 
     var dcParam = '&dc='+Math.random()

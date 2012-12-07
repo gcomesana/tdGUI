@@ -17,9 +17,11 @@ class InnerProxy
 	CORE_API_URL_87 = "http://ops.few.vu.nl:8187/opsapi"
 
 # URL for conceptwiki
-	CONCEPT_WIKI_API_SEARCH_URL = "http://staging.conceptwiki.org/web-ws/concept/search/"
+#	CONCEPT_WIKI_API_SEARCH_URL = "http://staging.conceptwiki.org/web-ws/concept/search/"
+	CONCEPT_WIKI_API_SEARCH_URL = "http://ops.conceptwiki.org/web-ws/concept/search/"
 
-	TIMEOUT = 1.5 # arbitrary timeout to ping endpoints
+
+	TIMEOUT = 2.5 # arbitrary timeout to ping endpoints
 
 	UNIPROT_PROTEIN_LOOKUP = 'http://www.uniprot.org/uniprot/?query=organism:9606+AND+xxxx&format=tab&columns=id,protein%20names,citation,comments,genes&sort=score&limit=25'
 	UNIPROT_PROTEIN_LOOKUP_SHORT = 'http://www.uniprot.org/uniprot/?format=tab&columns=id,protein%20names,citation,comments,genes&sort=score&limit=25'
@@ -96,13 +98,14 @@ class InnerProxy
 		#		api_method = 'proteinInfo'
 		#		prot_uri = 'http://chem2bio2rdf.org/chembl/resource/chembl_targets/12261'
 		prot_uri = CONCEPT_WIKI_API_SEARCH_URL
+		prot_uri = prot_uri + 'byTag'
 		options = Hash.new
 		options[:limit] = 1
 		options[:offset] = 0
 		options[:q] = 'tp53' # default test
 
 		url = URI.parse(prot_uri)
-												 #		 url = checkEndpoints()
+#		 url = checkEndpoints()
 		result = nil
 		Timeout::timeout (TIMEOUT) do
 			result = request(url, options)

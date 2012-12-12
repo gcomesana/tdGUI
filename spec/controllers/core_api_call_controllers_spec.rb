@@ -11,7 +11,7 @@ describe CoreApiCallsController do
 		@bad_uniprot_opts = {:uri=>"Q13362",
 										 :limit=>"25", :offset=>nil} #, :method=>"proteinInfo"}
 
-		@ok_uniprot_opts = {:uri=>"<http://www.uniprot.org/uniprot/Q13362",
+		@ok_uniprot_opts = {:uri=>"http://www.uniprot.org/uniprot/Q13362",
 												:limit=>"25", :offset=>nil, :method=>"proteinInfo"}
 
 		@bad_uniprot_uri = @bad_uniprot_opts[:uri]

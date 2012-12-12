@@ -11,7 +11,7 @@ Ext.define('TDGUI.controller.SearchPanel', {
   views: ['panels.west.SearchPanel', 'panels.BorderCenter'],
 
   /*refs: [{
-   ref: 'targetPanel',                       º
+   ref: 'targetPanel',
    selector: 'TargetPanel'
    }, {
    ref: 'formView',
@@ -174,16 +174,18 @@ Ext.define('TDGUI.controller.SearchPanel', {
      filterFn: function (item) { return if in list }
      }]) */
 
-    me.myMask.show()
-    var labels = new Array()
+    me.myMask.show();
+    var labels = new Array(), uuids = new Array();
     Ext.each(listChoices, function (choice, index, theChoices) {
-      if (choice.concept_url.indexOf('uniprot') == -1) {
-        var label = choice.concept_label
-        var speciesIndex = label.indexOf('(')
+      if (choice.concept_url.indexOf('uniprot') == -1) { // no uniprot on concept_url
+        var label = choice.concept_label;
+        var uuid = choice.concept_uuid;
+        var speciesIndex = label.indexOf('(');
         if (speciesIndex != -1)
-          label = label.substring(0, speciesIndex - 1)
+          label = label.substring(0, speciesIndex - 1);
 
-        labels.push(label)
+        labels.push(label);
+        uuids.push(uuid);
       }
     })
 
@@ -193,12 +195,17 @@ Ext.define('TDGUI.controller.SearchPanel', {
 
       if (item.indexOf('uniprot') == -1) { // if uniprot, dont go there again
 
+// TODO This has to be changed to use conceptwiki get...
+// url = http://ops.conceptwiki.org/web-ws/concept/get?uuid=<uuid>
+// uuid = choice.concept_uuid
+        var url = '/tdgui_proxy/get_uniprot_by_name';
+        var params = {
+          label: item // The name of the label (name) for the current item
+        };
         Ext.Ajax.request({
-          url: '/tdgui_proxy/get_uniprot_by_name',
+          url: url,
           method: 'GET',
-          params: {
-            label: item
-          },
+          params: params,
 
           failure: function (resp, opts) {
             console.info('ajax failed for item number: ' + number + ' -> ' + resp.responseText)

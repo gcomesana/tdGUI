@@ -103,6 +103,7 @@ puts "get_multiple_entries: #{entries}"
 # Builds up a hash with properties extracted out of a uniprot xml file
 # @param [String] name a name of a target (no accession, just a name)
 # @return [Hash] a hash object filled with uniprot properties
+# TODO it should be adapted to ops.conceptwiki.org/.../get?
 	def get_uniprot_by_name (name)
 		@uniprot_name = name
 
@@ -114,7 +115,7 @@ puts "the url: #{url}"
 # puts "the url encoded: #{url}"
 
 		results = request(url, options)
-		if results.code.to_i != 200 then
+		if results.code.to_i != 200
 			puts "Uniprot fetch service not working properly right now!"
 			return nil
 

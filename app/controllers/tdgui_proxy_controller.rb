@@ -49,7 +49,8 @@ puts "json_entries: #{json_entries}\n"
 			api_call = CoreApiCall.new
 			results = api_call.request( api_method, options)
 
-# Fusion the information got from uniprot with info we gotta get from coreAPI (if existing, if working)
+# Fusion the information got from uniprot with info we gotta get from coreAPI
+# (if existing, if working)
 			if (results.nil? || results[0].empty?) && accs[index_uuid] == '-'
 				index_uuid += 1
 

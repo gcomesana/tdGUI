@@ -120,7 +120,7 @@ class ConceptWikiApiCall
 		if options[:limit].nil? then
 			options[:limit] = @limit
 		end
-		options[:q] = substring.strip # + '*'
+		options[:q] = substring.strip   # + '*'
 		options[:query] = substring.strip
 		options[:uuid] = tag_uuid
 #		url = URI.parse(CONCEPT_WIKI_API_BY_TAG_URL)
@@ -238,16 +238,18 @@ class ConceptWikiApiCall
 private
 	def request(url, options)
 #		puts "\nIssues call to ConceptWiki API \"#{p url}\" with options: \"#{p options}\"\n"
-
-		conceptApiOk = EndpointsProxy.checkConceptWiki
-		coreApiOk = EndpointsProxy.check_coreAPI
+=begin
+		conceptApiOk = EndpointsProxy.checkConceptWiki()
+		coreApiOk = EndpointsProxy.check_ops_api
 		endpoint_ok = conceptApiOk && coreApiOk
 		url = endpoint_ok ? url: EndpointsProxy.get_uniprot_concept_endpoint
-
+=end
 		puts "got endpoint: #{url}"
 #		url = URI.parse(url)
 		@request_time = Time.now
 #		@response = Net::HTTP.post_form(url, options)
+# url="http://ops.conceptwiki.org/web-ws/concept/search/byTag"
+# opttions=[uuid:tolchurro, query:term, limit, offset]
 		@response = EndpointsProxy.make_request(url, options)
 		@response_time = Time.now
 		@query_time = @response_time - @request_time

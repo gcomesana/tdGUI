@@ -96,8 +96,8 @@ puts ("coreAPi.request(#{api_method.to_s}, opts=#{options.to_s})")
 #
 #		puts "Call took #{@query_time} seconds"
 
-
-
+# api_method: proteinInfo or similar
+# options = [url: http://conceptwiki/concept/..., method->proteinInfo]
 		response = EndpointsProxy.make_request(api_method, options)
 # below would be EndpointsProxy.make_request ('proteinInfo', {protein_uri:...} )
 #		response = EndpointsProxy.make_request(api_method, options)

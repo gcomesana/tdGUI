@@ -8,7 +8,7 @@ require 'open-uri'
 describe "Behaviour of EndpointsProxy" do
 
 	before(:all) do
-		@url = "http://staging.conceptwiki.org/web-ws/concept/search/byTag"
+		@url = "http://ops.conceptwiki.org/web-ws/concept/search/byTag"
 		@options ={
 			:q => "some",
 			:query => "some",
@@ -39,14 +39,14 @@ describe "Behaviour of EndpointsProxy" do
 			(it.is_a? FalseClass) || (it.is_a? TrueClass)
 		}
 
-# puts "proteinLookup endpoint: #{EndpointsProxy.get_core_endpoint}"
 	end
 
 
 
-	it "module check coreApi should ping back" do
+=begin
+	it "module check OPS api should ping back" do
 #		EndpointsProxy.autocheck.should be_true
-		coreApiAlive = EndpointsProxy.check_coreAPI
+		coreApiAlive = EndpointsProxy.check_ops_api
 		coreApiAlive.should satisfy {|alive|
 			(alive.is_a? FalseClass) || (alive.is_a? TrueClass)
 		}
@@ -54,16 +54,30 @@ describe "Behaviour of EndpointsProxy" do
 #		EndpointsProxy.myProxy.should be_nil
 # puts "Endpoints checked: #{EndpointsProxy.getEndpointsChecked}"
 
-		EndpointsProxy.get_endpoints_checked.should be > 0
+#		EndpointsProxy.get_endpoints_checked.should be > 0
 		EndpointsProxy.get_core_endpoint.should_not be_nil
 
 # puts "Endpoint used: #{EndpointsProxy.get_core_endpoint}"
+	end
+=end
+
+
+	it "check OPS API should ping back" do
+		ops_api_alive = EndpointsProxy.check_ops_api
+		ops_api_alive.should be_true
+
+		core_endpoint = EndpointsProxy.get_core_endpoint
+		core_endpoint.should_not be_nil
 	end
 
 
 	it "make_request should get a response" do
 		EndpointsProxy.checkConceptWiki.should be_true
-		EndpointsProxy.get_core_endpoint.should_not eq(@url)
+		EndpointsProxy.get_core_endpoint.should be_nil
+
+		api_alive = EndpointsProxy.check_ops_api
+		api_alive.should be_true
+		EndpointsProxy.get_core_endpoint.should_not be_nil
 
 		res = EndpointsProxy.make_request(@url, @options)
 		res.should_not be_nil

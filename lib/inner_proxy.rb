@@ -57,6 +57,7 @@ class InnerProxy
 #		}
 	end
 
+
 # Checks whether the endpoint for coreAPI is alive
 # @return [Boolean] true if the endpoint is alive; false otherwise
 	def core_endpoint_ready
@@ -107,8 +108,8 @@ class InnerProxy
 
 # Checks the conceptWiki endpoint, which is different of the coreApi endpoint
 # @return [Boolean] true if the conceptWiki endpoint is reachable; false otherwise
-	def checkConceptWiki ()
-	puts "checkConceptWiki..."
+	def check_conceptwiki ()
+	puts "InnerProxy.check_conceptwiki..."
 		# check to see if endpoint is responding
 		#		api_method = 'proteinInfo'
 		#		prot_uri = 'http://chem2bio2rdf.org/chembl/resource/chembl_targets/12261'
@@ -203,7 +204,6 @@ puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '
 		result = request(ops_api_fulluri)
 		alive = result.code.to_i
 		if alive > 0
-puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '#{@coreApi_method}'\n"
 			@endpoint_ready = OPSAPI_TARGET_URL # any of them from 83 to 87
 		end
 

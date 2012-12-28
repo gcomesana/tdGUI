@@ -51,7 +51,6 @@ puts "Fucking end\n\n"
 	end
 
 
-=begin
 	it "should return an array with info for entries" do
 
 		accs = 'P08913,Q14596,Q5H943,P29274,P42345'
@@ -69,7 +68,7 @@ puts "Fucking end\n\n"
 			index += 1
 		}
 
-		target_str = target_str[0..(target_str.length-1)]
+		target_str = target_str[0..(target_str.length-2)]
 		td_proxy = TdguiProxy.new
 puts "target ids: #{target_str}\n\n"
 		hash = td_proxy.get_multiple_entries(target_str)
@@ -78,7 +77,6 @@ puts "target ids: #{target_str}\n\n"
 		hash.size.should be > 0
 
 	end
-=end
 
 =begin
 	it "should send an email" do

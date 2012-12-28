@@ -21,8 +21,9 @@ class TdguiProxy
 	extend ActiveModel::Naming
 
 
-	DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch/uniprotkb/xxxx/uniprotxml'
+	OLD_DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch/uniprotkb/xxxx/uniprotxml'
 	UNIPROT_BY_NAME = 'http://www.uniprot.org/uniprot/?query=xxxx+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
+	DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=uniprotkb&id=xxxx&format=xml'
 
 # Proxy/Model constructor
 	def initialize
@@ -67,7 +68,11 @@ class TdguiProxy
 
 puts "get_multiple_entries: #{entries}"
 #		q_string = entries[:uniprotIds].join(',')
-		q_string = entries
+		entries_pairs = entries.split(',')
+		accessions = entries_pairs.map { |it|
+			it.split(';')[0]
+		}
+		q_string = accessions.join(',')
 		url = DBFETCH_URL.gsub(/xxxx/, q_string)
 
 		options = {}

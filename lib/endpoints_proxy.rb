@@ -107,9 +107,9 @@ public
 # Ping for conceptWiki API endpoint
 # Calls the checkConceptWiki method of InnerProxy inner class
 # @return [Object] true if conceptWiki endpoint is up and usable; false otherwise
-	def self.checkConceptWiki ()
+	def self.check_conceptwiki ()
 
-		result = @myProxy.checkConceptWiki()
+		result = @myProxy.check_conceptwiki()
 		result
 	end
 
@@ -132,7 +132,9 @@ public
 		result
 	end
 
-# Gets the core endpoint which is alive to make requests to it
+
+# Gets the core endpoint which is alive to make requests to it.
+# The core endpoint is kind of OPSAPI target url
 # @return [String] the address of the endpoint
 	def self.get_core_endpoint
 		@myProxy.core_endpoint_ready
@@ -198,13 +200,13 @@ public
 #
 	def self.make_request (url_or_method, opts)
 # check if OPS published endpoints are alive, otherwise use uniprot :-S
-		concept_wiki_ok = checkConceptWiki
+		concept_wiki_ok = check_conceptwiki
 		ops_api_ok = check_ops_api()
 		api_endpoints_ok = concept_wiki_ok && ops_api_ok
 
 # check if url_or_method is an url or a method like protinInfo, compoundInfo,...
 		uri_parts = url_or_method.scan(URI_REGEX)[0]
-		is_uri = uri_parts.select {|uri| uri.nil? == false}.length > 0
+		is_uri = uri_parts.nil? == false && uri_parts.select {|uri| uri.nil? == false}.length > 0
 		url = ""
 
 # build up the requests, depending on guards above
@@ -221,7 +223,11 @@ public
 			else # url_or_method is method... proteinInfo, ...
 				if url_or_method == 'proteinInfo'
 					url = @myProxy.ops_api_target + "?_format=json&uri="
-					url = url + CGI.escape(opts[:url])
+					conceptwiki_uri = opts[:uri].scan(/[^<].*[^>]/).length == 0 ?
+										opts[:uri]:
+										opts[:uri].scan(/[^<].*[^>]/)[0]
+
+					url = url + CGI.escape(conceptwiki_uri)
 				end
 
 			end # EO is_uri

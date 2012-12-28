@@ -31,71 +31,51 @@ describe "Behaviour of EndpointsProxy" do
 
 
 
+	describe "Remote endpoints behaviour..." do
+		it "module check conceptWiki should ping back" do
+	#		result = EndpointsProxy.autocheck.should be_true
+			EndpointsProxy.check_conceptwiki.should be_true
+			EndpointsProxy.check_conceptwiki.should satisfy { |it|
+				(it.is_a? FalseClass) || (it.is_a? TrueClass)
+			}
 
-	it "module check conceptWiki should ping back" do
-#		result = EndpointsProxy.autocheck.should be_true
-		EndpointsProxy.checkConceptWiki.should be_true
-		EndpointsProxy.checkConceptWiki.should satisfy { |it|
-			(it.is_a? FalseClass) || (it.is_a? TrueClass)
-		}
-
-	end
-
-
-
-=begin
-	it "module check OPS api should ping back" do
-#		EndpointsProxy.autocheck.should be_true
-		coreApiAlive = EndpointsProxy.check_ops_api
-		coreApiAlive.should satisfy {|alive|
-			(alive.is_a? FalseClass) || (alive.is_a? TrueClass)
-		}
-
-#		EndpointsProxy.myProxy.should be_nil
-# puts "Endpoints checked: #{EndpointsProxy.getEndpointsChecked}"
-
-#		EndpointsProxy.get_endpoints_checked.should be > 0
-		EndpointsProxy.get_core_endpoint.should_not be_nil
-
-# puts "Endpoint used: #{EndpointsProxy.get_core_endpoint}"
-	end
-=end
+		end
 
 
-	it "check OPS API should ping back" do
-		ops_api_alive = EndpointsProxy.check_ops_api
-		ops_api_alive.should be_true
+		it "check OPS API should ping back" do
+			ops_api_alive = EndpointsProxy.check_ops_api
+			ops_api_alive.should be_true
 
-		core_endpoint = EndpointsProxy.get_core_endpoint
-		core_endpoint.should_not be_nil
-	end
-
-
-	it "make_request should get a response" do
-		EndpointsProxy.checkConceptWiki.should be_true
-		EndpointsProxy.get_core_endpoint.should be_nil
-
-		api_alive = EndpointsProxy.check_ops_api
-		api_alive.should be_true
-		EndpointsProxy.get_core_endpoint.should_not be_nil
-
-		res = EndpointsProxy.make_request(@url, @options)
-		res.should_not be_nil
-		res.should be_kind_of Net::HTTPResponse # be_kind_of is true if a superclass is got at actual object
-		res.code.to_i.should be == 200
-		res.body.should_not be == ''
-
-	end
+			core_endpoint = EndpointsProxy.get_core_endpoint
+			core_endpoint.should_not be_nil
+		end
 
 
-	it "uniprot2json should return a json array from tab rows" do
-		json_str = EndpointsProxy.uniprot2json(@tab_string, 'brca2')
+		it "make_request should get a response" do
+			EndpointsProxy.check_conceptwiki.should be_true
+	#		EndpointsProxy.get_core_endpoint.should be_nil
 
-		json_str.length.should be > 0
-		expect { JSON.parse(json_str) }.to_not raise_exception (JSON::ParserError)
-puts "json_str: #{json_str}"
-	end
+			api_alive = EndpointsProxy.check_ops_api
+			api_alive.should be_true
+			EndpointsProxy.get_core_endpoint.should_not be_nil
 
+			res = EndpointsProxy.make_request(@url, @options)
+			res.should_not be_nil
+			res.should be_kind_of Net::HTTPResponse # be_kind_of is true if a superclass is got at actual object
+			res.code.to_i.should be == 200
+			res.body.should_not be == ''
+
+		end
+
+
+		it "uniprot2json should return a json array from tab rows" do
+			json_str = EndpointsProxy.uniprot2json(@tab_string, 'brca2')
+
+			json_str.length.should be > 0
+			expect { JSON.parse(json_str) }.to_not raise_exception (JSON::ParserError)
+	puts "json_str: #{json_str}"
+		end
+ end
 
 
 
@@ -135,7 +115,7 @@ puts "json_str: #{json_str}"
 	end
 
 
-
+=begin
 	describe "coreAPI call through proxy" do
 
 		before(:all) do
@@ -156,7 +136,7 @@ puts "json_str: #{json_str}"
 		end
 	end
 
-=begin
+
 		it "buildup_uniprot_info should return a hash" do
 			build_up = EndpointsProxy.buildup_uniprot_info(@xmlContent)
 			build_up.should_not be_empty

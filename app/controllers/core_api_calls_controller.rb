@@ -130,9 +130,11 @@ class CoreApiCallsController < ApplicationController
 		if results.nil? then
 		  render :json => {:success => false}.to_json, :layout => false
 		else
-    	render :json => ResultsFormatter.construct_column_objects(results).to_json, :layout => false
+#    	render :json => ResultsFormatter.construct_column_objects(results).to_json, :layout => false
+			render :json => results, :layout => false
 		end
   end
+
 
 # Checks whether or not endpoint is responding
    def check

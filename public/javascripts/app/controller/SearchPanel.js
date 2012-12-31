@@ -195,12 +195,12 @@ Ext.define('TDGUI.controller.SearchPanel', {
 
       if (item.indexOf('uniprot') == -1) { // if uniprot, dont go there again
 
-// TODO This has to be changed to use conceptwiki get...
 // url = http://ops.conceptwiki.org/web-ws/concept/get?uuid=<uuid>
 // uuid = choice.concept_uuid
         var url = '/tdgui_proxy/get_uniprot_by_name';
         var params = {
-          label: item // The name of the label (name) for the current item
+          label: item, // The name of the label (name) for the current item
+          uuid: uuids[number]
         };
         Ext.Ajax.request({
           url: url,

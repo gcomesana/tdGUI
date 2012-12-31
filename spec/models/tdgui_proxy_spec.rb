@@ -34,13 +34,32 @@ puts "Fucking end\n\n"
 	end
 
 
+
+	it "should return a hash with 3 elements got from conceptWiki" do
+		proxy = TdguiProxy.new
+		target_uuid = 'd76e4a78-c06c-416e-a0fc-c073a69000d5'
+
+		proxy.should_not be_nil
+		hash_res = proxy.get_target_by_uuid(target_uuid)
+
+		hash_res.should_not be_nil
+		hash_res.should have(3).items
+		hash_res[:uniprot_url].should match(/uniprot/)
+		hash_res.should have_key(:uuid)
+	end
+
+
+
+
 	it "should return a hash from a target label" do
 		proxy = TdguiProxy.new
 
 		proxy.should_not be_nil
+		target_uuid = 'd76e4a78-c06c-416e-a0fc-c073a69000d5'
+		target_label = 'Breast cancer type 2 susceptibility protein'
 
-		target_label = 'Deleted in bladder cancer protein 1'
-		target_hash = proxy.get_uniprot_by_name(target_label)
+#		target_label = 'Deleted in bladder cancer protein 1'
+		target_hash = proxy.get_uniprot_by_name(target_label, target_uuid)
 
 		target_hash.should_not be_nil
 		target_hash.length.should be > 0

@@ -36,9 +36,13 @@ describe TdguiProxyController do
 
 
 	it "should retrieve an uniprot result from a name" do
-		thelabel = 'TP53-regulated inhibitor of apoptosis 1'
+#		thelabel = 'TP53-regulated inhibitor of apoptosis 1'
 #		thelabel = 'Next to BRCA1 gene 1 protein (Homo sapiens)'
-		get :get_uniprot_by_name, :label => @target_label
+		params = {:thelabel => 'TP53-regulating kinase',
+							:uuid => '2e7a6477-b144-4911-942d-4ccd3ecfbb1a'}
+		thelabel = params[:thelabel]
+		uuid = params[:uuid]
+		get :get_uniprot_by_name, :label => thelabel, :uuid => uuid
 
 # puts "result from name:\n#{response.body}\n"
 		json_resp = JSON.parse(response.body)

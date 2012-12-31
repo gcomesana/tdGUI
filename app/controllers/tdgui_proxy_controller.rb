@@ -158,12 +158,12 @@ puts "Getting interactions for '#{target_id}' from Intact with conf_val=#{conf_v
 # get information about a target from uniprot but only a name exists
 # @param [String] target_label the name or label to get the target from uniprot
 # @return a json string
-	def get_uniprot_by_name (target_label = params[:label])
+	def get_uniprot_by_name (target_label = params[:label], target_uuid = params[:uuid])
 
 		proxy = TdguiProxy.new
 		return '[]' unless target_label != nil && target_label != ''
 
-		entry_hash = proxy.get_uniprot_by_name(target_label)
+		entry_hash = proxy.get_uniprot_by_name(target_label, target_uuid)
 
 		render :json => entry_hash.to_json, :layout => false
 	end

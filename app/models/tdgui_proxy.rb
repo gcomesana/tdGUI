@@ -23,6 +23,7 @@ class TdguiProxy
 
 	OLD_DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch/uniprotkb/xxxx/uniprotxml'
 	UNIPROT_BY_NAME = 'http://www.uniprot.org/uniprot/?query=xxxx+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
+
 	DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=uniprotkb&id=xxxx&format=xml'
 
 # Proxy/Model constructor
@@ -107,18 +108,27 @@ puts "get_multiple_entries: #{entries}"
 
 # Builds up a hash with properties extracted out of a uniprot xml file
 # @param [String] name a name of a target (no accession, just a name)
+# @param [String uuid the uuid for the target as returned by conceptWiki]
 # @return [Hash] a hash object filled with uniprot properties
 # TODO it should be adapted to ops.conceptwiki.org/.../get?
-	def get_uniprot_by_name (name)
+# TODO then uniprot again to get the properties!!
+	def get_uniprot_by_name (name, uuid)
 		@uniprot_name = name
+		concept_hash = nil
+		url = nil
+		if (uuid.nil? == false || uuid.empty? == false) # we have uuid
+			concept_hash = get_target_by_uuid(uuid)
+			url = concept_hash[:uniprot_url]+'.xml'
 
-		url = UNIPROT_BY_NAME.gsub(/xxxx/, name)
+		else
+			url = UNIPROT_BY_NAME.gsub(/xxxx/, name)
+		end
+
 puts "the url: #{url}"
 		options = {}
 
 #		url =  URI.encode(url)
 # puts "the url encoded: #{url}"
-
 		results = request(url, options)
 		if results.code.to_i != 200
 			puts "Uniprot fetch service not working properly right now!"
@@ -135,6 +145,38 @@ puts "the url: #{url}"
 
 	end
 
+
+
+# Uses the http://ops.conceptwiki.org/web-ws/concept/get?uuid endpoint to get
+# basic information about a target based on the uuid returned by a previous
+# search by tag.
+# @param [String] uuid the uuid for the target
+# @return
+	def get_target_by_uuid (uuid)
+		inner_proxy = InnerProxy.new
+		url = inner_proxy.conceptwiki_ep_get + "?uuid=#{uuid}"
+
+		response = request(url, [])
+		if response.code.to_i != 200
+			puts "ConceptWiki get service not working properly right now!"
+			nil
+
+		else
+			json_hash = JSON.parse(response.body)
+			result = Hash.new
+			result[:uuid] = json_hash['uuid']
+
+			labels = json_hash['labels']
+			pref_label = labels.select { |lb| lb['type'] == 'PREFERRED' }
+			result[:pref_label] = pref_label[0]['text']
+
+			urls = json_hash['urls']
+			uniprot_url = urls.select { |url| url['value'] =~ /uniprot/ }
+			result[:uniprot_url] = uniprot_url[0]['value']
+
+			result
+		end
+	end
 
 
 # Send an email as feedback. Use the standard Net::SMTP ruby class to make the sending
@@ -287,7 +329,7 @@ puts "Filling columns..."
 
 
 
-# Extracts properties or features out of a uniprot entry
+# Extracts properties or features out of a uniprot entry for get_uniprot_by_name
 # @param [REXML::Element] ent an xml element out of a uniprot response xml file
 # @return [Hash] an object with the features for the target
 	def decode_uniprot_entry (ent)

@@ -63,6 +63,8 @@ module TdGUI
 						:intact_pass => '1ntakt', :intact_port => '5432'}
 		config.intactdb = OpenStruct.new(opts)
 
+		require File.expand_path(File.join(File.dirname(__FILE__), '../lib/app_settings'))
+		AppSettings.config = YAML.load_file("config/app_settings.yml")[Rails.env]
 	end
 
 end

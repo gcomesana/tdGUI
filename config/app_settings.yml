@@ -1,0 +1,24 @@
+# config/application.yml
+defaults: &defaults
+  mail:
+    :to = ["gcomesana@cnio.es", "vdelatorre@cnio.es",]
+    :password = "Run3ks_3"
+    :user = "gcomesana@cnio.es"
+    :address = "webmail.cnio.es"
+    :port = 587
+
+  tsv:
+    tsv_url : "api.openphacts.org" #without the http:// bit and no trailing slash
+    target_path : "/target/pharmacology/pages"
+    compound_path: "/compound/pharmacology/pages"
+    enzyme_path: "/target/enzyme/pharmacology/pages"
+
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

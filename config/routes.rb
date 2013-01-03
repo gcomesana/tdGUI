@@ -1,7 +1,11 @@
 
 TdGUI::Application.routes.draw do
 
-  get "home/index" #, :as => :home
+	get "home/index", :as => :home
+
+	if Rails.env.development?
+		match 'test' => 'home#test'
+	end
 #  get "home/test"
 
 =begin

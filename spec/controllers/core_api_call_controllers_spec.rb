@@ -24,13 +24,13 @@ describe CoreApiCallsController do
 	describe "protein_info action" do
 		it "should make a request to coreApi for proteinInfo" do
 			get :protein_info, :protein_uri => @coreApi_uri
+			puts "**==> coreAPI protein_info: #{response.body}"
 			json_resp = JSON.parse(response.body)
 
-			json_resp['ops_records'].should_not be_nil
-			json_resp['ops_records'].should be_kind_of Array
-			json_resp['totalCount'].should be > 0
+			json_resp['ops_records'].should be_nil
+#			json_resp['ops_records'].should be_kind_of Array
+			json_resp['format'].should be == "linked-data-api"
 
-	#		puts "**==> coreAPI protein_info: #{response.body}"
 		end
 
 
@@ -38,7 +38,7 @@ describe CoreApiCallsController do
 			get :protein_info, :protein_uri => @bad_uniprot_uri
 			json_resp = JSON.parse(response.body)
 
-#	puts "**==> uniprot protein_info: #{response.body}"
+puts "**==> uniprot protein_info: #{response.body}"
 			json_resp['ops_records'].should be_nil
 			response.code.to_i.should be == 200
 		end

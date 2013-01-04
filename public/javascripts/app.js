@@ -17,7 +17,8 @@ Ext.create('Ext.app.Application', {
 // Ext.Application ({
   name: 'TDGUI',
   appFolder: 'javascripts/app',
-  requires: ['LDA.helper.LDAConstants'],
+//  requires: ['LDA.helper.LDAConstants'],
+  requires: ['TDGUI.util.LDAConstants'],
 
 // Define all the controllers that should initialize at boot up of your application
 

@@ -26,6 +26,7 @@ Ext.define("TDGUI.controller.panels.TargetInfo", {
 
   init:function () {
 console.info ("Initializing TargetInfo controller...")
+
     this.control({
       'tdgui-targetinfopanel':{
         afterrender: this.initTargetInfoPanel,

@@ -215,7 +215,8 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 // displayfields in here!!!!
 //		var store = Ext.data.StoreManager.lookup('Targets');
     var store = Ext.create ('TDGUI.store.Targets')
-    this.targetInfoStore = store
+    // var store = Ext.create ('TDGUI.store.lda.TargetStore');
+    this.targetInfoStore = store;
 //		store.addListener('load', this.showData, this);
 //    this.targetInfoStore.addListener('load', this.showData, this)
     this.targetInfoStore.addListener('load', this.displayData, this)

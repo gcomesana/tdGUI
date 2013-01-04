@@ -16,18 +16,18 @@
     var ldaBaseUrl = 'http://ops2.few.vu.nl';
     ldaBaseUrl = 'http://api.openphacts.org';
   </script>
-<script type="text/javascript">
-console.log("Setting Ext application paths...");
-Ext.Loader.setConfig({
-    enabled: true,
-    paths: {
-//      'CS':'chemspider/lib',
-//      'CW':'conceptwiki/lib',
-      'LDA':'../LinkedDataAPIParser/lib',
-      'TDGUI':'../app'
-    }
-});
-</script>
+  <script type="text/javascript">
+    console.log("Setting Ext application paths...");
+    Ext.Loader.setConfig({
+        enabled: true,
+        paths: {
+    //      'CS':'chemspider/lib',
+    //      'CW':'conceptwiki/lib',
+          'LDA':'../LinkedDataAPIParser/lib',
+          'TDGUI':'../app'
+        }
+    });
+  </script>
     <!-- UNIT TEST CLASSES --
     <script type="text/javascript" src="app-test/spec/PharmacologyByCompoundTest.js"></script>
     <script type="text/javascript" src="app-test/spec/PharmacologyByEnzymeTest.js"></script>

@@ -74,7 +74,7 @@ body { background-color: #eeeeee; padding: 0; margin: 5px; overflow-y: scroll; }
 #TrivialReporter .skipped { color: #777; background-color: #eee; display: none; }
 #TrivialReporter .resultMessage span.result { display: block; line-height: 2em; color: black; }
 #TrivialReporter .resultMessage .mismatch { color: black; }
-#TrivialReporter .stackTrace { white-space: pre; font-size: .8em; margin-left: 10px; max-height: 5em; overflow: auto; border: 1px inset red; padding: 1em; background: #eef; }
+#TrivialReporter .stackTrace { white-space: pre; font-size: .8em; margin-left: 10px; max-height: 15em; overflow: auto; border: 1px inset red; padding: 1em; background: #eef; }
 #TrivialReporter .finished-at { padding-left: 1em; font-size: .6em; }
 #TrivialReporter.show-passed .passed, #TrivialReporter.show-skipped .skipped { display: block; }
 #TrivialReporter #jasmine_content { position: fixed; right: 100%; }

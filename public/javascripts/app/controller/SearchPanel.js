@@ -177,9 +177,9 @@ Ext.define('TDGUI.controller.SearchPanel', {
     me.myMask.show();
     var labels = new Array(), uuids = new Array();
     Ext.each(listChoices, function (choice, index, theChoices) {
-      if (choice.concept_url.indexOf('uniprot') == -1) { // no uniprot on concept_url
-        var label = choice.concept_label;
-        var uuid = choice.concept_uuid;
+      if (choice.pref_url.indexOf('uniprot') == -1) { // no uniprot on concept_url
+        var label = choice.pref_label;
+        var uuid = choice.uuid;
         var speciesIndex = label.indexOf('(');
         if (speciesIndex != -1)
           label = label.substring(0, speciesIndex - 1);
@@ -215,7 +215,7 @@ Ext.define('TDGUI.controller.SearchPanel', {
           },
 
           success: function (resp, opts) {
-            console.info('success for number ' + number + ' -> ' + resp.responseText)
+//            console.info('success for number ' + number + ' -> ' + resp.responseText)
 
             var jsonResp = Ext.JSON.decode(resp.responseText)
             var accessions = jsonResp.accessions
@@ -228,8 +228,8 @@ Ext.define('TDGUI.controller.SearchPanel', {
 
             var listItem = {
               name: item, // target_name for conceptWiki or /uniprot/protein/recommendedname/fullname
-              concept_uuid: listChoices[number].concept_uuid,
-              concept_uri: listChoices[number].concept_uri,
+              concept_uuid: listChoices[number].uuid,
+              concept_uri: listChoices[number].ops_uri,
               uniprot_acc: accessions,
               uniprot_id: accessions,
               uniprot_name: jsonResp.name

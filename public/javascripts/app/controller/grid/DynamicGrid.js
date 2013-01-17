@@ -32,7 +32,11 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
 
       'tdgui-pharmbytargetpanel tdgui-pharmbytargetscroll-grid': {
         afterrender: function (comp, opts) {
+          comp.columns[0].setHeight(25);
           this.prepPharmaGrid(comp, opts);
+        },
+        beforerender: function (comp, opts) {
+          comp.columns[0].setHeight(25);
         }
       },
 

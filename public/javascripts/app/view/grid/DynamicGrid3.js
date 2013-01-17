@@ -83,8 +83,6 @@ Ext.define('TDGUI.view.grid.DynamicGrid3', {
     {name:'temp', hidden:true}
   ],
 
-
-
   initComponent: function () {
 
 // initializing features for the grid

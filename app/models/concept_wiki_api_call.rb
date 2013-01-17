@@ -137,14 +137,8 @@ class ConceptWikiApiCall
 		elsif results.nil? then
 			puts "Concept wiki not responding correctly!"
 			return nil
-
-		else # everything is supposedly normal
-			results
 		end
 
-
-
-=begin
 		@parsed_results = Array.new
 		if results[0]['source'].nil? == false
 			results.delete_at(0)
@@ -159,30 +153,30 @@ class ConceptWikiApiCall
 			result[:match].gsub!(/<em>/, '<b>')
 			result[:match].gsub!(/<\/em>/, '</b>')
 			# concept uuid
-			result[:concept_uuid] = concept['uuid']
+			result[:uuid] = concept['uuid']
 			# construct concept uri to LDC
-			result[:concept_url] = 'http://www.conceptwiki.org/concept/' + (concept['uuid'] ? concept['uuid']: '')
+			result[:ops_uri] = "http://ops.conceptwiki.org/wiki/#/concept/#{(concept['uuid'] ? concept['uuid']: '')}/view"
 
 			# urls
 			if concept['urls'].nil? then
 				next
 			else
 #				result[:define_url] = 'http://staging.conceptwiki.org/wiki/#/concept/' + concept['uuid'] + '/view'
-				result[:define_url] = 'http://ops.conceptwiki.org/wiki/#/concept/' + concept['uuid'] + '/view'
+				result[:pref_url] = 'http://ops.conceptwiki.org/wiki/#/concept/' + concept['uuid'] + '/view'
 			end
 
 			# labels
-			result[:concept_label] = nil
+			result[:pref_label] = nil
 			alt_labels = Array.new
 			concept['labels'].each do |label|
 				if not label['language']['code'] == 'en' then # only use english labels
 					next # we skip all non english labels
 				end
-				if result[:concept_label].nil? then
-					result[:concept_label] = label['text'] # In case there is no preferred label we use the first one
+				if result[:pref_label].nil? then
+					result[:pref_label] = label['text'] # In case there is no preferred label we use the first one
 				end
 				if label['type'] == "PREFERRED"
-					result[:concept_label] = label['text']
+					result[:pref_label] = label['text']
 				end
 				if label['type'] == "ALTERNATIVE"
 					#this line causes errors if the submitted string does not compile as a regex
@@ -192,17 +186,17 @@ class ConceptWikiApiCall
 					alt_labels.push(alt_label)
 				end
 			end
-			result[:concept_alt_labels] = alt_labels.join('; ')
+			result[:alt_labels] = alt_labels.join('; ')
 
 			#tags
 			tag = concept['tags'].first
-			result[:tag_uuid] = tag['uuid']
-			result[:tag_label] = tag['labels'].first['text']
+#			result[:tag_uuid] = tag['uuid']
+			result[:concept_type_tags] = tag['labels'].first['text']
 			@parsed_results.push(result)
 
 		end
 		@parsed_results
-=end
+
 
 	end # EO search_by_tag
 

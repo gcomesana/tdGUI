@@ -63,8 +63,8 @@ Ext.define ('TDGUI.view.dropdowns.tdgui.CheckboxComboProteinLookup', {
     itemTpl: Ext.create('Ext.XTemplate',
       '<span style="font-family: verdana; color: grey; ">',
       '<small>Matches: {match}</small></span><br/>',
-      '<img id="img{concept_uuid}" src="' + Ext.BLANK_IMAGE_URL + '" class="combo-iconbox-unchecked">',
-      '<b>{concept_label}</b>&nbsp;&nbsp;',
+      '<img id="img{uuid}" src="' + Ext.BLANK_IMAGE_URL + '" class="combo-iconbox-unchecked">',
+      '<b>{pref_label}</b>&nbsp;&nbsp;',
 //      '<input id="{concept_uuid}" onclick=this.toString() type="checkbox" name="targetItem" value="{concept_uri}" />',
       {
         addListener: function () {
@@ -84,44 +84,10 @@ Ext.define ('TDGUI.view.dropdowns.tdgui.CheckboxComboProteinLookup', {
           console.info ('this is ok')
         }
       }
-    ),
-/*
+    )
 
-    getInnerTpl: function() {
-      var me = this // no access
-console.info ("this is me: "+me)
-      var onclickMsg = "onclick clicked :-S "
-      var btn = '<button onclick="console.info(' + onclickMsg + ');">Add</button>'
-      var chkbox = '<input id="{concept_uuid}" onclick="console.info('+onclickMsg+': '+ me + ')" type="checkbox" name="targetItem" value="{concept_uri}" />'
-
-      var xtpl = new Ext.XTemplate (
-        '<p><span style="font-family: verdana; color: grey; ">',
-        '<small>Match: {match}</small></span><br/>',
-        '<b>{concept_label}</b>&nbsp;&nbsp;',
-        '<input id="{concept_uuid}" type="checkbox" name="targetItem" value="{concept_uri}" />',
-        '</p>', {
-          chkOnClick: function () {
-            Ext.select('input[type=checkbox]').each (function (el, elemList, index) {
-              console.info ("element id: "+el.id)
-            })
-            console.info ("hasta aquí llego")
-          }
-
-        }
-      )
-
-
-      var tpl = '<p><span style="font-family: verdana; color: grey; ">' +
-        '<small>Match: {match}</small></span><br/>' +
-        '<b>{concept_label}</b>&nbsp;&nbsp;' +
-         chkbox +
-        '</p>';
-
-console.info (xtpl)
-      return xtpl
-    }
-*/
   }, // EO listConfig
+
 
 /**
  * @cfg {Object} listeners callback methods to respond to events
@@ -129,12 +95,12 @@ console.info (xtpl)
   listeners: {
     beforeselect: function (combo, recs, index, opts) {
 // console.info ('#'+index+'. '+recs.data.concept_url)
-      var urlDef = recs.data.concept_url
+      var urlDef = recs.data.pref_url
       var uniprotAcc
       if (urlDef.indexOf ('uniprot') != -1)
         uniprotAcc = urlDef.substring(urlDef.lastIndexOf('/') + 1)
 
-      var checkBoxId = recs.data.concept_uuid
+      var checkBoxId = recs.data.uuid
 // Image treatment
       var img = Ext.get('img'+checkBoxId)
 
@@ -142,7 +108,8 @@ console.info (xtpl)
 //      checkBox.dom.click()
 //      var theEl = new Ext.Element (checkBox)
 //      theEl.dom.click()
-      var recIndex = this.store.find ('concept_uuid', checkBoxId)
+      var recIndex = this.store.find('uuid', checkBoxId)
+      var recIndex = this.store.find('uuid', checkBoxId)
       var recSel = this.store.getAt(recIndex)
 
 // concept_uuid is better solution to further filtering
@@ -155,10 +122,6 @@ console.info (xtpl)
         img.dom.className = 'combo-iconbox-checked'
       }
 
-console.info ("*** Currently on the list")
-Ext.each (this.listSelected, function (item, index, listIt) {
-  console.info (index + ".-" + item)
-})
       return false
     },
 

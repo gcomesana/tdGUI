@@ -33,6 +33,9 @@ Ext.define('TDGUI.view.grid.PharmByTargetScrollingGrid', {
   */
 
 
+  viewConfig: {
+    enableTextSelection: true
+  },
 
 
   initComponent: function () {

@@ -56,7 +56,7 @@ console.info('accessions for selected one: '+gridAccs);
           var uniprotParam = 'http://www.uniprot.org/uniprot/'+primaryAcc;
 
           var conceptUUID = recs.data.concept_uuid;
-          var conceptURI = 'http://www.conceptwiki.org/concept/'+recs.data.concept_uuid;
+          var conceptURI = 'http://www.conceptwiki.org/concept/'+conceptUUID;
 
 // get the accession from the table/grid
 //          var accessions = record.data.accessions.join(',')

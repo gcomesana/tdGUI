@@ -15,6 +15,7 @@ defaults: &defaults
     tsv_rails_host: "localhost"
     tsv_rails_port: "3003"
     tsv_rails_path: "/core_api_calls/protein_info"
+    tsv_pharm_rails_path: "/core_api_calls/pharm_by_protein_name"
 
 
 development:

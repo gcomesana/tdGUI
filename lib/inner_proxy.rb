@@ -14,6 +14,7 @@ class InnerProxy
 	# http://api.openphacts.org/target?_format=json&uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fd76e4a78-c06c-416e-a0fc-c073a69000d5
 	# Mind the uri parameter: URL HAS TO BE ESCAPED
 	OPSAPI_TARGET_URL = 'http://api.openphacts.org/target'
+	OPSAPI_PHARMA_URL = 'http://api.openphacts.org/target/pharmacology/pages'
 
 
 # URL for conceptwiki
@@ -88,6 +89,11 @@ class InnerProxy
 
 	def ops_api_target
 		OPSAPI_TARGET_URL
+	end
+
+
+	def ops_api_target_pharma
+		OPSAPI_PHARMA_URL
 	end
 
 

@@ -90,7 +90,8 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 					items: [{
 						xtype: 'displayfield',
 						anchor: '100%',
-						itemId: 'target_name',
+//						itemId: 'target_name',
+            itemId: 'prefLabel',
 						fieldCls: 'target-title'
 					}, {
             xtype:'button',
@@ -114,7 +115,9 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 						anchor: '100%',
 						itemId: 'target_type',
 						fieldLabel: 'Target Type',
-						cls: 'target-field-label'
+						cls: 'target-field-label',
+            hidden: true
+
 					}, {
 						xtype: 'displayfield',
 						anchor: '100%',
@@ -126,7 +129,8 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 						anchor: '100%',
 						itemId: 'description',
 						fieldLabel: 'Description',
-						cls: 'target-field-label'
+						cls: 'target-field-label',
+            hidden: true
 					}, {
 						xtype: 'displayfield',
 						anchor: '100%',
@@ -136,14 +140,16 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 					}, {
 						xtype: 'displayfield',
 						anchor: '100%',
-						itemId: 'specificFunction',
+						itemId: 'specific_function',
 						fieldLabel: 'Specific Function',
 						cls: 'target-field-label'
 					}, {
 						xtype: 'displayfield',
 						anchor: '100%',
-						itemId: 'cellularLocations',
-						fieldLabel: 'Cellular Location(s)',
+//						itemId: 'cellularLocations',
+//						fieldLabel: 'Cellular Location(s)',
+            itemId: 'cellular_function',
+            fieldLabel: 'Cellular Function',
 						cls: 'target-field-label'
 					}, {
 						xtype: 'displayfield',
@@ -154,7 +160,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 					}, {
 						xtype: 'displayfield',
 						anchor: '100%',
-						itemId: 'pdbIdPage',
+						itemId: 'pdb_id_page',
 						fieldLabel: 'PDB Entry',
 						cls: 'target-field-label'
 					}, {
@@ -167,28 +173,31 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 
 						items: [{
 							xtype: 'displayfield',
-							itemId: 'molecularWeight',
+							itemId: 'molecular_weight',
 							columnWidth: 0.33,
 							fieldLabel: 'Molecular Weight',
 							cls: 'target-field-bottom',
 							fieldCls: 'target-field-bottom-field',
-							labelAlign: 'top'
+							labelAlign: 'top',
+              hidden: true
 						}, {
 							xtype: 'displayfield',
-							itemId: 'numberOfResidues',
+							itemId: 'number_of_residues',
 							columnWidth: 0.33,
 							fieldLabel: 'Number of Residues',
 							cls: 'target-field-bottom',
 							fieldCls: 'target-field-bottom-field',
-							labelAlign: 'top'
+							labelAlign: 'top',
+              hidden: true
 						}, {
 							xtype: 'displayfield',
-							itemId: 'theoreticalPi',
+							itemId: 'theoretical_pi',
 							columnWidth: 0.33,
 							fieldLabel: 'Theoretical Pi',
 							cls: 'target-field-bottom',
 							fieldCls: 'target-field-bottom-field',
-							labelAlign: 'top'
+							labelAlign: 'top',
+              hidden: true
 						}]
 					}]
 				}
@@ -214,12 +223,12 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 // Mind the name of the fields in the store are the same than the names of the
 // displayfields in here!!!!
 //		var store = Ext.data.StoreManager.lookup('Targets');
-    var store = Ext.create ('TDGUI.store.Targets')
-    // var store = Ext.create ('TDGUI.store.lda.TargetStore');
+//    var store = Ext.create ('TDGUI.store.Targets');
+    var store = Ext.create ('TDGUI.store.lda.TargetStore');
     this.targetInfoStore = store;
 //		store.addListener('load', this.showData, this);
-//    this.targetInfoStore.addListener('load', this.showData, this)
-    this.targetInfoStore.addListener('load', this.displayData, this)
+    this.targetInfoStore.addListener('load', this.showData, this)
+//    this.targetInfoStore.addListener('load', this.displayData, this);
 		this.callParent(arguments);
 	},
 	// EO initComponent
@@ -340,14 +349,15 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 
 
   /**
-   * Set the data for the current target on the rigth display fields. This is usually
+   * Set the data for the current target on the right display fields. This is usually
    * a callback method for some store event (as onload event, i.e.)
    * @param {Ext.data.Store} store the store where the data is to be retrieved
    * @param {Array} records the records of teh store as a Ext.data.Model array
    * @param {Boolean} successful
+   * @deprecated just used at coreGUI application, not in TDGUI
    */
   displayData:function (store, records, successful) {
-    if (successful && records[0].data.hasOwnProperty('target_name')) {
+    if (successful) { // not necessary after LDA-> && records[0].data.hasOwnProperty('target_name')) {
 //      if (records.length > 0) {
       var dp = this.down('#dp');
       var msg = this.down('#msg');
@@ -365,7 +375,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
       var nextReq = this.queryParam.split(',')
       if (nextReq.length > 1 && nextReq != prevReq) {
         this.numOfReqs++
-        this.fireEvent('opsFailed', this, {concept_req:nextReq[this.numOfReqs]})
+        this.fireEvent('opsFailed', this, {concept_req: nextReq[this.numOfReqs]})
       }
       // else raise a message with no information found...
     }
@@ -382,14 +392,12 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
    * @param store
    * @param records
    * @param successful
-   * @deprecated just used at coreGUI application, not in TDGUI
    */
   showData: function (store, records, successful) {
     if (successful) {
-
       var td = store.first().data;
 
-      if (records.length > 0 && td.hasOwnProperty('target_name')) { // TEMP FIX -- new coreAPI's returning an empty object
+      if (records.length > 0 && td.hasOwnProperty('prefLabel')) { // TEMP FIX -- new coreAPI's returning an empty object
 
         var dp = this.down('#dp');
         var msg = this.down('#msg');
@@ -397,14 +405,17 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
         this.setValues(store.first());
         dp.setVisible(true);
 
-      } else {
+      }
+      else {
         this.showMessage('No records found within OPS for this search');
       }
-    } else {
-      this.showMessage('Server did not respond');
     }
-    this.up('TargetByNameForm').setLoading(false);
-    var searchButton = Ext.ComponentQuery.query('#TargetByNameSubmit_id')[0].enable();
+    else
+      this.showMessage('Server did not respond');
+
+    this.endLoading();
+//    this.up('TargetInfo').setLoading(false);
+//    var searchButton = Ext.ComponentQuery.query('#TargetByNameSubmit_id')[0].enable();
   },
 
 
@@ -507,7 +518,10 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 		var stringURL = new String(pdbIdPage);
 		var img = this.down('#target_image');
 		var pdbID = stringURL.substr(stringURL.lastIndexOf('=') + 1);
-		var pdbField = this.down('#pdbIdPage');
+    if (pdbID == pdbIdPage)
+      pdbID = stringURL.substr(stringURL.lastIndexOf('/') + 1);
+
+		var pdbField = this.down('#pdb_id_page');
 		pdbField.setRawValue('<a target=\'_blank\' href=\'' + pdbIdPage + '\'>' + pdbID + '</a>');
 		pdbField.show();
 		img.setSrc('http://www.rcsb.org/pdb/images/' + pdbID + '_asr_r_250.jpg');
@@ -523,20 +537,22 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 	setFieldValue: function(fieldId, value) {
 		if (fieldId == 'synonyms') {
 			//            console.log('synonyms');
-      if (value.length > 0)
+      if (value != null && value.length > 0)
 			  this.addSynonyms(value);
 		}
     else if (fieldId == 'keywords') {
 			//            console.log('keywords');
-      if (value.length > 0)
+      if (value != null && value.length > 0)
 			  this.addKeywords(value);
 		}
     else if (fieldId == 'organism') {
 			//            console.log('organism');
-			this.addOrganism(value);
+			if (value != null && value.length > 0)
+        this.addOrganism(value);
 		}
-    else if (fieldId == 'pdbIdPage') {
-			this.addPDBImage(value);
+    else if (fieldId == 'pdb_id_page') {
+			if (value != null && value.length > 0)
+        this.addPDBImage(value);
 		}
     else {
 console.log('standard field: '+fieldId+' -> '+value);
@@ -544,6 +560,7 @@ console.log('standard field: '+fieldId+' -> '+value);
 			if (field != null) {
         field.setValue(value);
         field.show();
+        field.setVisible(true);
       }
 
 		}
@@ -568,8 +585,8 @@ console.log('standard field: '+fieldId+' -> '+value);
 
 //    if (protein_uri.indexOf("uniprot") == -1) {
     if (this.concept_uuid != undefined && this.concept_uuid.length > 0) {
-      var targetName = target.get('target_name')
-      var pharmaURI = 'http://www.conceptwiki.org/concept/'+this.concept_uuid
+      var targetName = target.get('target_name') || target.get('prefLabel');
+      var pharmaURI = 'http://www.conceptwiki.org/concept/'+this.concept_uuid;
 
       pharmButton.hide();
       pharmButton.setHandler(function () {

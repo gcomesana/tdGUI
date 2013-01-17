@@ -79,6 +79,9 @@ Ext.define('TDGUI.view.grid.DynamicGrid3', {
   csid_column:false,
   contextMenu:null,
 
+  columns:[
+    {name:'temp', hidden:true}
+  ],
 
 
 
@@ -101,16 +104,14 @@ Ext.define('TDGUI.view.grid.DynamicGrid3', {
       id:'selectable'
     };
 
-    var grid_store = Ext.create('TDGUI.store.DynamicGrid');
+//    var grid_store = Ext.create('TDGUI.store.DynamicGrid');
+    console.log ("DynamicGrid3.initComponent!!!");
     var config = {
-
-      store: grid_store,
-
-
+/*      store: grid_store,
       columns:[
         {name:'temp', hidden:true}
       ],
-
+*/
       rowNumberer:true,
       defaultWidth:200,
       features: [groupingFeature, filters, cellTextSelector]

@@ -15,7 +15,8 @@ describe('Searching for target information', function () {
       name: 'TDGUI',
       appFolder: 'javascripts/app',
       requires: ['LDA.helper.LDAConstants', 'LDA.store.TargetStore',
-        'TDGUI.util.LDAConstants', 'TDGUI.store.lda.TargetStore', 'TDGUI.util.TargetReader'],
+        'TDGUI.util.LDAConstants', 'TDGUI.store.lda.TargetStore', 'TDGUI.util.TargetReader',
+        'TDGUI.store.lda.TargetPharmacologyStore', 'TDGUI.util.TargetPharmacologyReader'],
 
       launch: function () {
         console.log("launchinnnnnnnnng: "+TDGUI.util.LDAConstants.LDA_COMPOUND_PHARMACOLOGY_COUNT);

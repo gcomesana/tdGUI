@@ -38,7 +38,7 @@ puts "json_entries: #{json_entries}\n"
 #		uuids_arr = uuids_query.split(',')
 		index_ops = 0
 		index_uuid = 0
-# Got the rest of information from conceptwiki based on the collected uuids
+# Get the rest of information from conceptwiki based on the collected uuids
 		uuids_arr.each { |uuid|
 			next if uuid.nil?
 			options = Hash.new

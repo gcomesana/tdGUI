@@ -123,6 +123,7 @@ class ConceptWikiApiCall
 		options[:q] = substring.strip   # + '*'
 		options[:query] = substring.strip
 		options[:uuid] = tag_uuid
+		options[:branch] = 3
 #		url = URI.parse(CONCEPT_WIKI_API_BY_TAG_URL)
 		url = CONCEPT_WIKI_API_BY_TAG_URL
 		results = request(url, options)
@@ -136,9 +137,14 @@ class ConceptWikiApiCall
 		elsif results.nil? then
 			puts "Concept wiki not responding correctly!"
 			return nil
+
+		else # everything is supposedly normal
+			results
 		end
-																	# puts "results:\n#{results.inspect}"
-																	# parsing the response
+
+
+
+=begin
 		@parsed_results = Array.new
 		if results[0]['source'].nil? == false
 			results.delete_at(0)
@@ -196,6 +202,8 @@ class ConceptWikiApiCall
 
 		end
 		@parsed_results
+=end
+
 	end # EO search_by_tag
 
 

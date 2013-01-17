@@ -15,9 +15,11 @@
     var ldaBaseUrl = '<%= "http://" + AppSettings.config["tsv"]["tsv_url"] -%>';
     var host = '<%= AppSettings.config["tsv"]["tsv_rails_host"] -%>',
       port = '<%= AppSettings.config["tsv"]["tsv_rails_port"] -%>',
-      rails_path = '<%= AppSettings.config["tsv"]["tsv_rails_path"] -%>';
+      rails_path = '<%= AppSettings.config["tsv"]["tsv_rails_path"] -%>',
+      rails_pharma_path = '<%= AppSettings.config["tsv"]["tsv_pharm_rails_path"] -%>';
 
     var proteinInfoBaseUrl = "http://"+host+':'+port+rails_path;
+    var proteinPharmBaseUrl = "http://" + host+':'+port+rails_pharma_path;
   </script>
 
   <script type="text/javascript">
@@ -38,6 +40,7 @@
   <script type="text/javascript" src="app-test/spec/PharmacologyByTargetTest.js"></script>
   -->
   <script type="text/javascript" src="/javascripts/app-test/spec/TargetStoreLDATest.js"></script>
+  <script type="text/javascript" src="/javascripts/app-test/spec/TargetPharmacologyTest.js"></script>
 
 </head>
 <body>

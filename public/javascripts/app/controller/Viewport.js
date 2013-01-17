@@ -90,18 +90,18 @@ console.info ("A element was added to history: -> "+token)
  * and some parameter values to config the widget.
  */ 
   handleHistoryToken: function (token) {
-    var tabsPanel = this.getContentTabs()
-    var tokenObj = this.parseHistoryToken(token)
-    var xtype = tokenObj.xt
-    var newPanel
+    var tabsPanel = this.getContentTabs();
+    var tokenObj = this.parseHistoryToken(token);
+    var xtype = tokenObj.xt;
+    var newPanel;
 
     switch (xtype) {
       case 'tdgui-multitargetpanel':
-        var listStore = this.getTargetList().getStore()
-        var listStoreClone = listStore.clone() // as it is an ListTargets store
+        var listStore = this.getTargetList().getStore();
+        var listStoreClone = listStore.clone(); // as it is an ListTargets store
 
 // get concept_uuids to get info from coreAPI as well
-        var concept_uuids = this.getItemList().getStoreItems('concept_uuid')
+        var concept_uuids = this.getItemList().getStoreItems('concept_uuid');
 
         newPanel = Ext.createByAlias ('widget.'+xtype, {
           closable: true,
@@ -111,28 +111,33 @@ console.info ("A element was added to history: -> "+token)
           },
           title: "Multiple targets",
           storeListTargets: listStore
-        })
-        break
+        });
+        break;
 
       case 'tdgui-targetinfopanel':
 
         newPanel = Ext.createByAlias ('widget.'+xtype, {
           closable: true,
           queryParam: tokenObj.qp
-        }) /*
+        }); /*
         var store = this.getTargetsStore();
         if (tokenObj.qp != store.proxy.extraParams.protein_uri) {
           store.proxy.extraParams.protein_uri = tokenObj.qp;
 //          this.getFormView().setLoading(true);
           store.load();
         }    */
-        break
+        break;
 
       case 'tdgui-pharmbytargetpanel':
 // console.info ("raising Pharm By Target panel")
         newPanel = Ext.createByAlias('widget.'+xtype, {
           closeable: true,
-          gridParams: { protein_uri: tokenObj.qp },
+          gridParams: {
+            protein_uri: tokenObj.qp,
+            limit: 10,
+            start: 0,
+            page: 1
+          },
           targetName: tokenObj.tg,
           title: "Pharmacology for "+ window.decodeURI(tokenObj.tg)
         })
@@ -152,7 +157,6 @@ console.info ("raising interactions for Target panel")
           id: 'tdgui-graphtabpanel-'+uniprotAcc
         })
         break
-
 
     }
 /*

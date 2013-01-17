@@ -9,28 +9,30 @@ Ext.define('TDGUI.util.TargetReader', {
   extend: 'Ext.data.reader.Json',
   requires: ['TDGUI.util.LDAConstants'],
 
-/*
-  constructor: function (config, arguments) {
-    console.log ('constructor TDGUI.util.TargetReader...');
+  /*
+   constructor: function (config, arguments) {
+   console.log ('constructor TDGUI.util.TargetReader...');
 
-    this.callParent(arguments);
-  },
-*/
+   this.callParent(arguments);
+   },
+   */
   readRecords: function (data) {
     var pt = data[TDGUI.util.LDAConstants.LDA_RESULT][TDGUI.util.LDAConstants.LDA_PRIMARY_TOPIC];
     var em = pt[TDGUI.util.LDAConstants.LDA_EXACT_MATCH];
     // var chemblData = em[0];
     // var drugBankData = em[1];
-    var chemblData;
-    var drugBankData;
-    var uniprotData;
+    var chemblData = null;
+    var drugBankData = null;
+    var uniprotData = null;
     Ext.each(em, function (match, index, matches) {
       var src = match[TDGUI.util.LDAConstants.LDA_IN_DATASET];
       if (TDGUI.util.LDAConstants.LDA_SRC_CLS_MAPPINGS[src] == 'chemblValue') {
         chemblData = match;
-      } else if (TDGUI.util.LDAConstants.LDA_SRC_CLS_MAPPINGS[src] == 'drugbankValue') {
+      }
+      else if (TDGUI.util.LDAConstants.LDA_SRC_CLS_MAPPINGS[src] == 'drugbankValue') {
         drugBankData = match;
-      } else if (TDGUI.util.LDAConstants.LDA_SRC_CLS_MAPPINGS[src] == 'uniprotValue') {
+      }
+      else if (TDGUI.util.LDAConstants.LDA_SRC_CLS_MAPPINGS[src] == 'uniprotValue') {
         uniprotData = match;
       }
 
@@ -64,7 +66,8 @@ Ext.define('TDGUI.util.TargetReader', {
 
     var conceptWikiUri = pt[TDGUI.util.LDAConstants.LDA_ABOUT];
 
-    var pdb = uniprotData['seeAlso'];
+    var pdb = null;
+    pdb = uniprotData != null? uniprotData['seeAlso']: null;
     var pdbLink;
     if (pdb) {
       //console.log(" PDB " + pdb[0]);
@@ -72,7 +75,7 @@ Ext.define('TDGUI.util.TargetReader', {
     }
 
 
-    var record = Ext.create('LDA.model.TargetModel', {
+    var record = Ext.create('TDGUI.model.lda.TargetModel', {
       cw_target_uri: pt[TDGUI.util.LDAConstants.LDA_ABOUT],
       chembl_target_uri: chemblData != null ? chemblData[TDGUI.util.LDAConstants.LDA_ABOUT] : null,
       drugbank_target_uri: drugBankData != null ? drugBankData[TDGUI.util.LDAConstants.LDA_ABOUT] : null,

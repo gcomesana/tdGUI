@@ -54,7 +54,7 @@ TdGUI::Application.routes.draw do
 		collection do
 			get :protein_info
 #			get :protein_lookup
-			post :pharm_by_protein_name
+			get :pharm_by_protein_name
 			get :wiki_pathway_protein_lookup
 			get :wiki_pathways_by_protein
 

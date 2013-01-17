@@ -8,6 +8,8 @@ describe CoreApiCallsController do
 
 		@coreApi_opts = {:uri=>"http://www.conceptwiki.org/concept/70dafe2f-2a08-43f7-b337-7e31fb1d67a8",
 						 :limit=>"25", :offset=>0, :method=>"proteinInfo"}
+		@coreApi_pharma_opts = {:uri=>"http://www.conceptwiki.org/concept/59aabd64-bee9-45b7-bbe0-9533f6a1f6bc",
+						:limit=>"15", :offset=>0, :method=>"proteinPharmacology"}
 		@bad_uniprot_opts = {:uri=>"Q13362",
 										 :limit=>"25", :offset=>nil} #, :method=>"proteinInfo"}
 
@@ -56,6 +58,25 @@ puts "**==> uniprot protein_info: #{response.body}"
 		end
 	end
 
+
+	describe 'protein pharmacology action' do
+		it "should make a request to LDA API for pharmacology info for a target" do
+			get :pharm_by_protein_name, :protein_uri => @coreApi_pharma_opts[:uri]
+
+			puts "**==> coreAPI protein_pharma: #{response.body}"
+			json_resp = JSON.parse(response.body)
+
+			json_resp['ops_records'].should be_nil
+#			json_resp['ops_records'].should be_kind_of Array
+			json_resp['format'].should be == "linked-data-api"
+			json_resp['result']['items'].should be_kind_of Array
+			json_resp['result']['items'].length.should be == 10
+			json_resp['result']['items'].each { |item|
+				item['forMolecule'].should_not be nil
+			}
+		end
+
+	end
 
 
 	describe "check action" do

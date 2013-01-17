@@ -213,7 +213,9 @@ public
 		if api_endpoints_ok
 			if is_uri
 				if url_or_method.include?(@myProxy.conceptwiki_ep_search)
-					url = url_or_method + "?uuid=#{opts[:uuid]}&q=#{opts[:query]}"
+					branch = ''
+					branch = "&branch=#{opts[:branch]}" unless opts[:branch].nil?
+					url = url_or_method + "?uuid=#{opts[:uuid]}&q=#{opts[:query]}#{branch}"
 				end
 
 				if url_or_method.include?(@myProxy.conceptwiki_ep_get)
@@ -221,8 +223,9 @@ public
 				end
 
 			else # url_or_method is method... proteinInfo, ...
-				if url_or_method == 'proteinInfo'
-					url = @myProxy.ops_api_target + "?_format=json&uri="
+				if url_or_method == 'proteinInfo' || url_or_method == 'proteinPharmacology' then
+					url = url_or_method == 'proteinInfo'? @myProxy.ops_api_target: @myProxy.ops_api_target_pharma
+					url = url + "?_format=json&uri="
 					conceptwiki_uri = opts[:uri].scan(/[^<].*[^>]/).length == 0 ?
 										opts[:uri]:
 										opts[:uri].scan(/[^<].*[^>]/)[0]
@@ -250,7 +253,7 @@ public
 		end
 
 #		my_url = URI.parse(url) rescue URI.parse(URI.encode(url)) rescue url
-
+		puts "def url: #{url}"
 		@myProxy.request(url)
 
 

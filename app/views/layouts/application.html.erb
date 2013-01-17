@@ -34,6 +34,19 @@
   <%#= javascript_include_tag '/downloadify/swfobject.js' %>
 
   <%= csrf_meta_tags %>
+
+  <script type="text/javascript">
+    var simSearchUrl;
+    var ldaBaseUrl = '<%= "http://" + AppSettings.config["tsv"]["tsv_url"] -%>';
+    var host = '<%= AppSettings.config["tsv"]["tsv_rails_host"] -%>',
+      port = '<%= AppSettings.config["tsv"]["tsv_rails_port"] -%>',
+      info_rails_path = '<%= AppSettings.config["tsv"]["tsv_rails_path"] -%>',
+      pharm_rails_path = '<%= AppSettings.config["tsv"]["tsv_pharm_rails_path"] -%>';
+
+    var proteinInfoBaseUrl = "http://"+host+':'+port+info_rails_path;
+    var proteinPharmBaseUrl = "http://"+host+':'+port+pharm_rails_path;
+  </script>
+
 </head>
 <body>
 

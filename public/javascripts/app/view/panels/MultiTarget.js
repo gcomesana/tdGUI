@@ -10,7 +10,7 @@ Ext.define('TDGUI.view.panels.MultiTarget', {
   extend:'Ext.panel.Panel',
   alias:'widget.tdgui-multitargetpanel',
 
-  requires:['TDGUI.view.grid.DynamicGrid3'],
+  requires:['TDGUI.view.grid.DynamicGrid3', 'TDGUI.store.DynamicGrid'],
 
   /**
    * @cfg {Object} layout see TDGUI.view.panels.LogosPanel#layout
@@ -37,11 +37,11 @@ Ext.define('TDGUI.view.panels.MultiTarget', {
 
 
   initComponent:function () {
-    var me = this
+    var me = this;
 
-    this.theGrid = this.createGrid()
-    this.items = [this.theGrid]
-    this.callParent(arguments)
+    this.theGrid = this.createGrid();
+    this.items = [this.theGrid];
+    this.callParent(arguments);
   },
 
 
@@ -51,15 +51,16 @@ Ext.define('TDGUI.view.panels.MultiTarget', {
    * @return {TDGUI.view.grid.DynamicGrid3} an instance of thrid
    */
   createGrid:function (config) {
-    config = config || {
+    var myConfig = config || {
       title:'Multiple target results',
       gridBaseTitle:'Group targets features',
       margin:'5 5 5 5',
 //      border: '1 1 1 1',
-      flex:1, // needed to fit all container
+      flex: 1, // needed to fit all container
 //      readUrl: 'resources/datatest/yaut.json'
 //      readUrl: 'tdgui_proxy/multiple_entries_retrieval?entries=Q13362,P0AEN2,P0AEN3'
       readUrl:'tdgui_proxy/multiple_entries_retrieval',
+      store: Ext.create('TDGUI.store.DynamicGrid'),
       queryParams: this.gridParams,
       forceFit: true,
 //      id: 'dyngrid'+(new Date()).getMilliseconds(),
@@ -72,7 +73,7 @@ Ext.define('TDGUI.view.panels.MultiTarget', {
       }
     }
 
-    var theGrid = Ext.create('widget.dynamicgrid3', config)
+    var theGrid = Ext.create('widget.dynamicgrid3', myConfig)
 
     return theGrid
   },

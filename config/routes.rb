@@ -1,7 +1,11 @@
 
 TdGUI::Application.routes.draw do
 
-  get "home/index" #, :as => :home
+	get "home/index", :as => :home
+
+	if Rails.env.development?
+		match 'test' => 'home#test'
+	end
 #  get "home/test"
 
 =begin
@@ -32,6 +36,7 @@ TdGUI::Application.routes.draw do
 			get :multiple_entries_retrieval
 			get :interactions_retrieval
 			get :get_uniprot_by_name
+			get :get_uniprot_by_acc
 			post :send_feedback
 		end
 	end
@@ -48,9 +53,9 @@ TdGUI::Application.routes.draw do
 
 	resources :core_api_calls do
 		collection do
-			post :protein_info
+			get :protein_info
 #			get :protein_lookup
-			post :pharm_by_protein_name
+			get :pharm_by_protein_name
 			get :wiki_pathway_protein_lookup
 			get :wiki_pathways_by_protein
 

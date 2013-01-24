@@ -379,7 +379,6 @@ sub {
 
 }
 
-
 /* miscellaneous */
 a, a:hover {
 	color: #c64b34;
@@ -391,11 +390,10 @@ a, a:hover {
 	background-color: #c64b34;
 }
 
-
 .well {
 	min-height: 20px;
-/*	padding: 19px;
-	margin-bottom: 20px; */
+	/*	padding: 19px;
+	 margin-bottom: 20px; */
 	background-color: #f5f5f5;
 	border: 1px solid #e3e3e3;
 	-webkit-border-radius: 4px;
@@ -411,4 +409,12 @@ a, a:hover {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
+}
+
+.x-column-header-inner {
+	line-height: normal;
+	padding-top: 3px !important;
+	padding-bottom: 3px !important;
+	text-align: center;
+	top: 20%;
 }

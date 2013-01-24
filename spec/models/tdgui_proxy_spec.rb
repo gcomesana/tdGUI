@@ -34,13 +34,32 @@ puts "Fucking end\n\n"
 	end
 
 
+
+	it "should return a hash with 3 elements got from conceptWiki" do
+		proxy = TdguiProxy.new
+		target_uuid = 'd76e4a78-c06c-416e-a0fc-c073a69000d5'
+
+		proxy.should_not be_nil
+		hash_res = proxy.get_target_by_uuid(target_uuid)
+
+		hash_res.should_not be_nil
+		hash_res.should have(3).items
+		hash_res[:uniprot_url].should match(/uniprot/)
+		hash_res.should have_key(:uuid)
+	end
+
+
+
+
 	it "should return a hash from a target label" do
 		proxy = TdguiProxy.new
 
 		proxy.should_not be_nil
+		target_uuid = 'd76e4a78-c06c-416e-a0fc-c073a69000d5'
+		target_label = 'Breast cancer type 2 susceptibility protein'
 
-		target_label = 'Deleted in bladder cancer protein 1'
-		target_hash = proxy.get_uniprot_by_name(target_label)
+#		target_label = 'Deleted in bladder cancer protein 1'
+		target_hash = proxy.get_uniprot_by_name(target_label, target_uuid)
 
 		target_hash.should_not be_nil
 		target_hash.length.should be > 0
@@ -51,7 +70,30 @@ puts "Fucking end\n\n"
 	end
 
 
-=begin
+	it "should return a hash from a target accession" do
+		proxy = TdguiProxy.new
+
+		proxy.should_not be_nil
+		target_acc = 'Q5H943'
+		target_label = 'Breast cancer type 2 susceptibility protein'
+
+#		target_label = 'Deleted in bladder cancer protein 1'
+		target_hash = proxy.get_uniprot_by_acc(target_acc)
+
+		target_hash.should_not be_nil
+		target_hash.length.should be > 0
+		puts "\nget_uniprot_by_acc(#{target_acc})\n"
+		target_hash.each_key { |key| puts "#{key} -> #{target_hash[key]}" }
+
+		target_hash['accessions'].should be_instance_of Array
+		target_hash.should_not be_nil
+		target_hash['accessions'].should be_kind_of Array
+		target_hash['pdbimg'].should_not be_empty
+		target_hash.should have_key('proteinFullName')
+		target_hash.should have(6).items
+
+	end
+
 	it "should return an array with info for entries" do
 
 		accs = 'P08913,Q14596,Q5H943,P29274,P42345'
@@ -69,16 +111,16 @@ puts "Fucking end\n\n"
 			index += 1
 		}
 
-		target_str = target_str[0..(target_str.length-1)]
+		target_str = target_str[0..(target_str.length-2)]
 		td_proxy = TdguiProxy.new
 puts "target ids: #{target_str}\n\n"
 		hash = td_proxy.get_multiple_entries(target_str)
 
 		hash.should_not be_nil
 		hash.size.should be > 0
+		hash.size.should be == 5
 
 	end
-=end
 
 =begin
 	it "should send an email" do

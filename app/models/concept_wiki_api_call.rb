@@ -120,9 +120,10 @@ class ConceptWikiApiCall
 		if options[:limit].nil? then
 			options[:limit] = @limit
 		end
-		options[:q] = substring.strip # + '*'
+		options[:q] = substring.strip   # + '*'
 		options[:query] = substring.strip
 		options[:uuid] = tag_uuid
+		options[:branch] = 3
 #		url = URI.parse(CONCEPT_WIKI_API_BY_TAG_URL)
 		url = CONCEPT_WIKI_API_BY_TAG_URL
 		results = request(url, options)
@@ -137,8 +138,7 @@ class ConceptWikiApiCall
 			puts "Concept wiki not responding correctly!"
 			return nil
 		end
-																	# puts "results:\n#{results.inspect}"
-																	# parsing the response
+
 		@parsed_results = Array.new
 		if results[0]['source'].nil? == false
 			results.delete_at(0)
@@ -153,30 +153,30 @@ class ConceptWikiApiCall
 			result[:match].gsub!(/<em>/, '<b>')
 			result[:match].gsub!(/<\/em>/, '</b>')
 			# concept uuid
-			result[:concept_uuid] = concept['uuid']
+			result[:uuid] = concept['uuid']
 			# construct concept uri to LDC
-			result[:concept_url] = 'http://www.conceptwiki.org/concept/' + (concept['uuid'] ? concept['uuid']: '')
+			result[:ops_uri] = "http://ops.conceptwiki.org/wiki/#/concept/#{(concept['uuid'] ? concept['uuid']: '')}/view"
 
 			# urls
 			if concept['urls'].nil? then
 				next
 			else
 #				result[:define_url] = 'http://staging.conceptwiki.org/wiki/#/concept/' + concept['uuid'] + '/view'
-				result[:define_url] = 'http://ops.conceptwiki.org/wiki/#/concept/' + concept['uuid'] + '/view'
+				result[:pref_url] = 'http://ops.conceptwiki.org/wiki/#/concept/' + concept['uuid'] + '/view'
 			end
 
 			# labels
-			result[:concept_label] = nil
+			result[:pref_label] = nil
 			alt_labels = Array.new
 			concept['labels'].each do |label|
 				if not label['language']['code'] == 'en' then # only use english labels
 					next # we skip all non english labels
 				end
-				if result[:concept_label].nil? then
-					result[:concept_label] = label['text'] # In case there is no preferred label we use the first one
+				if result[:pref_label].nil? then
+					result[:pref_label] = label['text'] # In case there is no preferred label we use the first one
 				end
 				if label['type'] == "PREFERRED"
-					result[:concept_label] = label['text']
+					result[:pref_label] = label['text']
 				end
 				if label['type'] == "ALTERNATIVE"
 					#this line causes errors if the submitted string does not compile as a regex
@@ -186,16 +186,18 @@ class ConceptWikiApiCall
 					alt_labels.push(alt_label)
 				end
 			end
-			result[:concept_alt_labels] = alt_labels.join('; ')
+			result[:alt_labels] = alt_labels.join('; ')
 
 			#tags
 			tag = concept['tags'].first
-			result[:tag_uuid] = tag['uuid']
-			result[:tag_label] = tag['labels'].first['text']
+#			result[:tag_uuid] = tag['uuid']
+			result[:concept_type_tags] = tag['labels'].first['text']
 			@parsed_results.push(result)
 
 		end
 		@parsed_results
+
+
 	end # EO search_by_tag
 
 
@@ -238,16 +240,18 @@ class ConceptWikiApiCall
 private
 	def request(url, options)
 #		puts "\nIssues call to ConceptWiki API \"#{p url}\" with options: \"#{p options}\"\n"
-
-		conceptApiOk = EndpointsProxy.checkConceptWiki
-		coreApiOk = EndpointsProxy.check_coreAPI
+=begin
+		conceptApiOk = EndpointsProxy.checkConceptWiki()
+		coreApiOk = EndpointsProxy.check_ops_api
 		endpoint_ok = conceptApiOk && coreApiOk
 		url = endpoint_ok ? url: EndpointsProxy.get_uniprot_concept_endpoint
-
+=end
 		puts "got endpoint: #{url}"
 #		url = URI.parse(url)
 		@request_time = Time.now
 #		@response = Net::HTTP.post_form(url, options)
+# url="http://ops.conceptwiki.org/web-ws/concept/search/byTag"
+# opttions=[uuid:tolchurro, query:term, limit, offset]
 		@response = EndpointsProxy.make_request(url, options)
 		@response_time = Time.now
 		@query_time = @response_time - @request_time

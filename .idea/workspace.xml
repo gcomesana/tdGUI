@@ -7,20 +7,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ac4d959b-7041-4845-b29b-39d7db68b813" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/doc/README_FOR_APP" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/tdgui_proxy_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/tdgui_proxy_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/tdgui_proxy.rb" afterPath="$PROJECT_DIR$/app/models/tdgui_proxy.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/test_runner.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/test_runner.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app-test/spec/TargetStoreLDATest.js" afterPath="$PROJECT_DIR$/public/javascripts/app-test/spec/TargetStoreLDATest.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app.js" afterPath="$PROJECT_DIR$/public/javascripts/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/controller/Viewport.js" afterPath="$PROJECT_DIR$/public/javascripts/app/controller/Viewport.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/store/lda/TargetStore.js" afterPath="$PROJECT_DIR$/public/javascripts/app/store/lda/TargetStore.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/util/TargetReader.js" afterPath="$PROJECT_DIR$/public/javascripts/app/util/TargetReader.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/controllers/tdgui_proxy_controller_spec.rb" afterPath="$PROJECT_DIR$/spec/controllers/tdgui_proxy_controller_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/tdgui_proxy_spec.rb" afterPath="$PROJECT_DIR$/spec/models/tdgui_proxy_spec.rb" />
     </list>
     <ignored path="tdGUI.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -55,7 +42,7 @@
       <file leaf-file-name="Viewport.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/Viewport.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="304" column="70" selection-start="9315" selection-end="9315" vertical-scroll-proportion="0.55609757">
+            <state line="276" column="76" selection-start="8363" selection-end="8363" vertical-scroll-proportion="0.14634146">
               <folding />
             </state>
           </provider>
@@ -1325,7 +1312,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/Viewport.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="304" column="70" selection-start="9315" selection-end="9315" vertical-scroll-proportion="0.55609757">
+        <state line="276" column="76" selection-start="8363" selection-end="8363" vertical-scroll-proportion="0.14634146">
           <folding />
         </state>
       </provider>

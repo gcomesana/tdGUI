@@ -271,14 +271,10 @@ console.info ("raising interactions for Target panel")
         entries: qParams
       }
     }
-/*
-    return {
-      url: theUrl,
-      params: theParams
-    }
-*/
 
 
+
+    // Modifying the store associated to the list component refresh the list
     targetListStore.removeAll(true);
     Ext.Ajax.request({
       url: theUrl,

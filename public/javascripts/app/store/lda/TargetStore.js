@@ -4,7 +4,7 @@
  */
 Ext.define('TDGUI.store.lda.TargetStore', {
 //  extend: 'LDA.store.basestores.BaseStore',
-  require: ['TDGUI.util.TargetReader'],
+  requires: ['TDGUI.util.LDAConstants', 'TDGUI.util.TargetReader'],
   extend: 'Ext.data.Store',
   model: 'TDGUI.model.lda.TargetModel',
   storeId: 'TDGUITargetStore',

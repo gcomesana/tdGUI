@@ -73,7 +73,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
 
 
-// METHODS TO CREATE COMPONENTS ////////////////////////////////////////////////////
+// METHODS TO CREATE INNER COMPONENTS ////////////////////////////////////////
   /**
    * Creates a Ext.form.Label component and set a property on this class referencing the
    * label.
@@ -103,6 +103,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
     return this.exampleLabel
   },
+
 
 
   /**
@@ -145,7 +146,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
         }] // EO items
 
       }]
-    })
+    });
 
     return this.searchTab
   },
@@ -274,6 +275,16 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
 
   /**
+   *
+   * @param strTargets
+   */
+  setTargetList: function (strTargets) {
+
+  },
+
+
+
+  /**
    * Creates the panel supporting the list returned by
    * {@see TDGUI.view.panels.wes.SearchPanel#createTargetList}
    * @return {Ext.panel.Panel} a new panel for the target list plus search button
@@ -290,8 +301,9 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       border: false,
 //      closable: true,
 
+
       items: [
-        this.createTargetList(),
+        this.createTargetList()
         /*
         me.retrievingButtons = Ext.widget ('tdgui-panelbuttons', {
           anchor: '100%',

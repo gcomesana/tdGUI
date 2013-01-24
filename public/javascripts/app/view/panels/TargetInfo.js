@@ -9,6 +9,7 @@
 Ext.define('TDGUI.view.panels.TargetInfo', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.tdgui-targetinfopanel',
+  requires: ['TDGUI.store.lda.TargetStore'],
   
 	title: 'Target Info',
 
@@ -410,8 +411,10 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
         this.showMessage('No records found within OPS for this search');
       }
     }
-    else
-      this.showMessage('Server did not respond');
+    else {
+      this.showMessage('Server did not respond properly');
+    }
+
 
     this.endLoading();
 //    this.up('TargetInfo').setLoading(false);

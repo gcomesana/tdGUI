@@ -104,6 +104,28 @@ puts "get_multiple_entries: #{entries}"
 
 
 
+# Builds up a hash with properties extracted out of a single uniprot xml file.
+# This goes straight to get a single uniprot entry
+# @param [String] accession the accession of the target
+# @return [Hash] a hash object filled with uniprot properties
+	def get_uniprot_by_acc (accession)
+		url = "http://www.uniprot.org/uniprot/#{accession}.xml"
+		options = {}
+
+		results = request(url, options)
+		if results.code.to_i != 200
+			puts "Uniprot fetch service not working properly right now!"
+			nil
+
+		else
+			xmldoc = Document.new results.body
+			entries = xmldoc.elements.collect('uniprot/entry') { |ent| ent }
+			first_entry = entries[0]
+
+			entry_hash = decode_uniprot_entry(first_entry)
+		end
+	end
+
 
 
 # Builds up a hash with properties extracted out of a uniprot xml file
@@ -151,7 +173,8 @@ puts "the url: #{url}"
 # basic information about a target based on the uuid returned by a previous
 # search by tag.
 # @param [String] uuid the uuid for the target
-# @return
+# @return [Hash] a hash object with uuid, pref_label and uniprot_url as keys (with
+# realted values)
 	def get_target_by_uuid (uuid)
 		inner_proxy = InnerProxy.new
 		url = inner_proxy.conceptwiki_ep_get + "?uuid=#{uuid}"

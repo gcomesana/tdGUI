@@ -35,25 +35,61 @@ describe TdguiProxyController do
 #	end
 
 
-	it "should retrieve an uniprot result from a name" do
-#		thelabel = 'TP53-regulated inhibitor of apoptosis 1'
-#		thelabel = 'Next to BRCA1 gene 1 protein (Homo sapiens)'
-		params = {:thelabel => 'TP53-regulating kinase',
-							:uuid => '2e7a6477-b144-4911-942d-4ccd3ecfbb1a'}
-		thelabel = params[:thelabel]
-		uuid = params[:uuid]
-		get :get_uniprot_by_name, :label => thelabel, :uuid => uuid
+	describe "single target retrieval methods" do
+		it "should retrieve an uniprot result from a name" do
+	#		thelabel = 'TP53-regulated inhibitor of apoptosis 1'
+	#		thelabel = 'Next to BRCA1 gene 1 protein (Homo sapiens)'
+			params = {:thelabel => 'TP53-regulating kinase',
+								:uuid => '2e7a6477-b144-4911-942d-4ccd3ecfbb1a'}
+			thelabel = params[:thelabel]
+			uuid = params[:uuid]
+			get :get_uniprot_by_name, :label => thelabel, :uuid => uuid
 
-# puts "result from name:\n#{response.body}\n"
-		json_resp = JSON.parse(response.body)
-		json_resp.should_not be_nil
-		json_resp.length.should be > 0
+	# puts "result from name:\n#{response.body}\n"
+			json_resp = JSON.parse(response.body)
+			json_resp.should_not be_nil
+			json_resp.length.should be > 0
 
-		json_resp['accessions'].length.should be > 0
-		json_resp['proteinFullName'].should_not be_empty
-		json_resp['proteinFullName'].index(thelabel).should_not be_nil
+			json_resp['accessions'].length.should be > 0
+			json_resp['proteinFullName'].should_not be_empty
+			json_resp['proteinFullName'].index(thelabel).should_not be_nil
+		end
+
+
+		it "should retrieve an uniprot result from an uuid and no label" do
+	#		thelabel = 'TP53-regulated inhibitor of apoptosis 1'
+	#		thelabel = 'Next to BRCA1 gene 1 protein (Homo sapiens)'
+			params = {:thelabel => '',
+								:uuid => '2e7a6477-b144-4911-942d-4ccd3ecfbb1a'}
+			thelabel = params[:thelabel]
+			uuid = params[:uuid]
+			get :get_uniprot_by_name, :label => thelabel, :uuid => uuid
+
+	# puts "result from name:\n#{response.body}\n"
+			json_resp = JSON.parse(response.body)
+			json_resp.should_not be_nil
+			json_resp.length.should be > 0
+
+			json_resp['accessions'].length.should be > 0
+			json_resp['proteinFullName'].should_not be_empty
+			json_resp['proteinFullName'].index(thelabel).should_not be_nil
+		end
+
+
+		it "should retrieve an uniprot result from an accession" do
+			params = {:acc => 'Q5H943'}
+			get :get_uniprot_by_acc, :acc => params[:acc]
+
+			response.should_not be_nil
+
+			json_resp = JSON.parse(response.body)
+			json_resp['accessions'].length.should be > 0
+			json_resp['proteinFullName'].should_not be_empty
+			json_resp['pdbimg'].should_not be_empty
+
+		end
+
 	end
-
 
 
 	describe "multiple targets retrieval" do
@@ -83,7 +119,8 @@ describe TdguiProxyController do
 	#				:uuids => 'd593db45-e954-4e97-94f7-c039350f97f4,ec79efff-65cb-45b1-a9f5-dddfc1c4025c,eeaec894-d856-4106-9fa1-662b1dc6c6f1,979f02c6-3986-44d6-b5e8-308e89210c8d,31dd02fa-3522-438e-bef5-da14902f6c1b'
 
 			get :multiple_entries_retrieval, :entries => target_ids.join(',')
-	puts "\n#{response.body}\n"
+	puts "\n\nentries: #{target_ids.join(',')}\n";
+	puts "\n#{response.body}\n\n"
 			json_resp = JSON.parse(response.body)
 			json_resp.should_not be_nil
 			json_resp['ops_records'].should_not be_empty

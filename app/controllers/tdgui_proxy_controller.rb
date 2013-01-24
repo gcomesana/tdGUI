@@ -161,12 +161,28 @@ puts "Getting interactions for '#{target_id}' from Intact with conf_val=#{conf_v
 	def get_uniprot_by_name (target_label = params[:label], target_uuid = params[:uuid])
 
 		proxy = TdguiProxy.new
-		return '[]' unless target_label != nil && target_label != ''
+#		return '[]' unless target_label != nil && target_label != ''
 
 		entry_hash = proxy.get_uniprot_by_name(target_label, target_uuid)
 
 		render :json => entry_hash.to_json, :layout => false
 	end
+
+
+# Gets a uniprot target out of a accession. It makes a simple get request to uniprot
+# @param [String] target_acc the accesion to get the target from uniprot
+# @return a json string
+	def get_uniprot_by_acc (target_acc = params[:acc])
+		proxy = TdguiProxy.new
+		return '[]' unless target_acc != nil && target_acc != ''
+
+		entry_hash = proxy.get_uniprot_by_acc(target_acc)
+
+		render :json => entry_hash.to_json, :layout => false
+	end
+
+
+
 
 
 # Sends an email feedback to admin from the feedback window on GUI

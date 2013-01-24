@@ -70,6 +70,30 @@ puts "Fucking end\n\n"
 	end
 
 
+	it "should return a hash from a target accession" do
+		proxy = TdguiProxy.new
+
+		proxy.should_not be_nil
+		target_acc = 'Q5H943'
+		target_label = 'Breast cancer type 2 susceptibility protein'
+
+#		target_label = 'Deleted in bladder cancer protein 1'
+		target_hash = proxy.get_uniprot_by_acc(target_acc)
+
+		target_hash.should_not be_nil
+		target_hash.length.should be > 0
+		puts "\nget_uniprot_by_acc(#{target_acc})\n"
+		target_hash.each_key { |key| puts "#{key} -> #{target_hash[key]}" }
+
+		target_hash['accessions'].should be_instance_of Array
+		target_hash.should_not be_nil
+		target_hash['accessions'].should be_kind_of Array
+		target_hash['pdbimg'].should_not be_empty
+		target_hash.should have_key('proteinFullName')
+		target_hash.should have(6).items
+
+	end
+
 	it "should return an array with info for entries" do
 
 		accs = 'P08913,Q14596,Q5H943,P29274,P42345'
@@ -94,6 +118,7 @@ puts "target ids: #{target_str}\n\n"
 
 		hash.should_not be_nil
 		hash.size.should be > 0
+		hash.size.should be == 5
 
 	end
 

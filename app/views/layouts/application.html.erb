@@ -44,7 +44,9 @@
       pharm_rails_path = '<%= AppSettings.config["tsv"]["tsv_pharm_rails_path"] -%>';
 
     var proteinInfoBaseUrl = "http://" + host + ':' + port + info_rails_path;
+    proteinInfoBase = info_rails_path;
     var proteinPharmBaseUrl = "http://" + host + ':' + port + pharm_rails_path;
+    proteinPharmBaseUrl = pharm_rails_path;
   </script>
 
   <script type="text/javascript">

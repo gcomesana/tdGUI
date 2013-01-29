@@ -6,24 +6,24 @@ class CoreApiCall
 	include ActiveModel::Validations
 	extend ActiveModel::Naming
 
-	CORE_API_URL = "http://ops.few.vu.nl:9184/opsapi"
+	CORE_API_URL_OLD = "http://ops.few.vu.nl:9184/opsapi"
+	CORE_API_URL = "http://api.openphacts.org"
 	OP_PROTEIN_INFO = 'proteinInfo'
 
 	def initialize(url = CORE_API_URL, open_timeout = 60, read_timeout = 60)
-		# Configuring the connection
+# Configuring the connection
 		@uri = URI.parse(url)
 		@http = Net::HTTP.new(@uri.host, @uri.port)
 		@http.open_timeout = open_timeout # in seconds
 		@http.read_timeout = read_timeout # in seconds
 
-		# For timing the transaction
+# For timing the transaction
 		@request_time = nil
 		@response_time = nil
 		@query_time = nil
 		@success = false
 		@http_error = nil
 
-		response = nil
 		@api_method = nil
 		@limit = 100
 		@offset = 0
@@ -31,75 +31,74 @@ class CoreApiCall
 		@results = nil
 	end
 
+
+# Gets the value of the success attribute
+# @return [Object] the value of success attribute
 	def success
 		@success
 	end
 
+
+# Gets the value of the http_error attribute
+# @return [Object] the value of http_error attribute
 	def http_error
 		@http_error
 	end
 
 
-# alt_endpoint_req method
-# makes a request to an alternative url different from coreAPI
-# @param op, the operation to perform. Similar to coreAPI calls
-# @param url, the url to make de request
-# @param params, the url query params as a hash structure
-# @param http_method, the request method. GET by default.
-	def alt_endpoint_req (op, url, params, http_method="GET")
 
-
-	end
-
-
+# Performs a HTTP request based on the paremeters
+# @param [String] api_method the method to perform against the core API
+# @param [Hash] options the parameters or options for the API call
+# @return [Array] an array with the results or nil if something went wrong
 	def request(api_method, options)
 puts ("coreAPi.request(#{api_method.to_s}, opts=#{options.to_s})")
-=begin
-		@method = api_method
-		if @method.nil? then
-			raise "No method API method selected! Please specify a OPS coreAPI method"
-		end
-		options[:method] = @method
 
-		if options[:limit].nil? then
-			options[:limit] = @limit
-		end
-		if options[:offset].nil? then
-			options[:offset] = @offset
-		end
-		# we store the settings for a possible later call
-		if not options[:named_graph_uri].nil? then
-			@named_graph_uri = options[:named_graph_uri]
-		end
-		if not options[:default_graph_uri] then
-			@default_graph_uri = options[:default_graph_uri]
-		end
-		puts "\nIssues call to coreAPI on #{@uri.inspect} with options: #{options.inspect}\n"
+#		@method = api_method
+#		if @method.nil? then
+#			raise "No method API method selected! Please specify a OPS coreAPI method"
+#		end
+#		options[:method] = @method
+#
+#		if options[:limit].nil? then
+#			options[:limit] = @limit
+#		end
+#		if options[:offset].nil? then
+#			options[:offset] = @offset
+#		end
+#		# we store the settings for a possible later call
+#		if not options[:named_graph_uri].nil? then
+#			@named_graph_uri = options[:named_graph_uri]
+#		end
+#		if not options[:default_graph_uri] then
+#			@default_graph_uri = options[:default_graph_uri]
+#		end
+#		puts "\nIssues call to coreAPI on #{@uri.inspect} with options: #{options.inspect}\n"
+#
+#		request = Net::HTTP::Post.new(@uri.path)
+#		# Tweak headers, removing this will default to application/x-www-form-urlencoded
+#		request["Content-Type"] = "application/json"
+#		request.form_data = options
+## puts ("[*** coreAPI request] response = EndpointsProxy.make_request(#{api_method.to_s}, #{options.to_s})")
+#
+#		response = nil
+#		start_time = Time.now
+#		begin
+#			@http.start do |http|
+#				response = http.request(request)
+#			end
+#		rescue Timeout::Error
+#			query_time = Time.now - start_time
+#			puts "Timeout after #{query_time} seconds"
+#			raise Timeout::Error
+#		end
+#
+#		@query_time = Time.now - start_time
+#
+#		puts "Call took #{@query_time} seconds"
 
-		request = Net::HTTP::Post.new(@uri.path)
-		# Tweak headers, removing this will default to application/x-www-form-urlencoded
-		request["Content-Type"] = "application/json"
-		request.form_data = options
-# puts ("[*** coreAPI request] response = EndpointsProxy.make_request(#{api_method.to_s}, #{options.to_s})")
-
-		response = nil
-		start_time = Time.now
-		begin
-			@http.start do |http|
-				response = http.request(request)
-			end
-		rescue Timeout::Error
-			query_time = Time.now - start_time
-			puts "Timeout after #{query_time} seconds"
-			raise Timeout::Error
-		end
-
-		@query_time = Time.now - start_time
-
-		puts "Call took #{@query_time} seconds"
-=end
-
-
+# api_method: proteinInfo or similar
+# options = [url: http://conceptwiki/concept/..., method->proteinInfo]
 		response = EndpointsProxy.make_request(api_method, options)
 # below would be EndpointsProxy.make_request ('proteinInfo', {protein_uri:...} )
 #		response = EndpointsProxy.make_request(api_method, options)
@@ -110,17 +109,8 @@ puts ("coreAPi.request(#{api_method.to_s}, opts=#{options.to_s})")
 								 return nil
 							 when 200 then #HTTPOK => Success
 								 @success = true
-								 parsed_response = CoreApiResponseParser.parse_response(response)
-								 if parsed_response.instance_of?(Hash)
-									 return [parsed_response]
-								 end
-								 @results = Array.new
-								 parsed_response.each do |solution|
-									 rdf = solution.to_hash
-									 rdf.each { |key, value| rdf[key] = value.to_s }
-									 @results.push(rdf)
-								 end
-								 return @results
+
+								 return response.body
 							 when 201..407 then
 								 @http_error = "HTTP #{status.to_s}-error"
 								 puts @http_error

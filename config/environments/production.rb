@@ -57,4 +57,15 @@ TdGUI::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+	config.action_mailer.smtp_settings = {
+		:address              => "webmail.cnio.es",
+		:port                 => 25, #587,
+		:domain								=> 'cnio.es',
+		:user_name            => 'gcomesana',
+		:password             => 'Run3ks_3',
+		:authentication       => :login,
+#		:enable_starttls_auto => true
+	}
+
 end

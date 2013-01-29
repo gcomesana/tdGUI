@@ -1,6 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 
-# require 'rails/all'
+require 'rails/all'
 
 # !!!!! to avoid to use activeRecord (and, then, any db)
 require "action_controller/railtie"
@@ -8,10 +8,15 @@ require "action_mailer/railtie"
 require "active_resource/railtie"
 require "rails/test_unit/railtie"
 require "sprockets/railtie"
+require "ostruct"
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
   Bundler.require(*Rails.groups(:assets => %w(development test)))
+	#Bundle.with_clean_env do
+	#	system("ruby pgm.rb")
+	#end
+
   # If you want your assets lazily compiled in production, use this line
   # Bundler.require(:default, :assets, Rails.env)
 end
@@ -48,9 +53,20 @@ module TdGUI
     config.filter_parameters += [:password]
 
     # Enable the asset pipeline
-    config.assets.enabled = false
+#    config.assets.enabled = false
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
-  end
+
+		# IntAct db configuration
+		opts = {:intact_server => 'localhost', :intact_user => 'intact',
+						:intact_pass => '1ntakt', :intact_port => '5432'}
+		opts = {:intact_server => 'padme.cnio.es', :intact_user => 'gcomesana',
+						:intact_pass => 'appform', :intact_port => '5432'}
+		config.intactdb = OpenStruct.new(opts)
+
+		require File.expand_path(File.join(File.dirname(__FILE__), '../lib/app_settings'))
+		AppSettings.config = YAML.load_file("config/app_settings.yml")[Rails.env]
+	end
+
 end

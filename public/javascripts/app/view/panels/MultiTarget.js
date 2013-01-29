@@ -1,57 +1,79 @@
 /**
- * TDGUI.view.panels.MultiTarget
- * A panel containing a DyanmicGrid and methods to support multitarget plans
+ * @class TDGUI.view.panels.MultiTarget
+ * @extends Ext.panel.Panel,
+ * @alias widget.tdgui-multitargetpanel
  *
- *
+ * A panel containing a {@link TDGUI.view.grid.DynamicGrid3 grid} and methods to
+ * support a mutiple target joint view
  */
 Ext.define('TDGUI.view.panels.MultiTarget', {
   extend:'Ext.panel.Panel',
   alias:'widget.tdgui-multitargetpanel',
 
-  requires:['TDGUI.view.grid.DynamicGrid3'],
+  requires:['TDGUI.view.grid.DynamicGrid3', 'TDGUI.store.DynamicGrid'],
 
+  /**
+   * @cfg {Object} layout see TDGUI.view.panels.LogosPanel#layout
+   */
   layout:{
     type:'vbox',
     align:'stretch'
   },
-  gridParams:null, // an object to set/add grid.proxy.extraParams
 
-// a copy of the list targets store in order to get the concept_uuid
-// and the concept_uri for coreAPI
-  storeListTargets:null,
+  /**
+   * @cfg {Object} gridParams an object to set/add grid.proxy.extraParams
+   */
+  gridParams:null,
+  /**
+   * @cfg {Boolean} border see TDGUI.view.Viewport#border
+   */
+  border: false,
+
+/**
+ * @cfg {Object} storeListTargets a copy of the list targets store in order to get the concept_uuid
+ * and the concept_uri for coreAPI
+ */
+  storeListTargets: null,
 
 
   initComponent:function () {
-    var me = this
+    var me = this;
 
-    this.theGrid = this.createGrid()
-    this.items = [this.theGrid]
-    this.callParent(arguments)
+    this.theGrid = this.createGrid();
+    this.items = [this.theGrid];
+    this.callParent(arguments);
   },
 
 
 
   /**
    * Creates an instance of dynamicgrid3 grid component an returns it.
-   * @return {grid} an instance of thrid
+   * @return {TDGUI.view.grid.DynamicGrid3} an instance of thrid
    */
   createGrid:function (config) {
-    config = config || {
+    var myConfig = config || {
       title:'Multiple target results',
       gridBaseTitle:'Group targets features',
       margin:'5 5 5 5',
 //      border: '1 1 1 1',
-      flex:1, // needed to fit all container
+      flex: 1, // needed to fit all container
 //      readUrl: 'resources/datatest/yaut.json'
 //      readUrl: 'tdgui_proxy/multiple_entries_retrieval?entries=Q13362,P0AEN2,P0AEN3'
       readUrl:'tdgui_proxy/multiple_entries_retrieval',
+      store: Ext.create('TDGUI.store.DynamicGrid'),
       queryParams: this.gridParams,
-      forceFit: true
+      forceFit: true,
 //      id: 'dyngrid'+(new Date()).getMilliseconds(),
 //      itemId: 'dyngrid'+(new Date()).getMilliseconds()
+
+      listeners: {
+        itemmouseenter: function(view, record, item) {
+          Ext.fly(item).set({'data-qtip': '<b>Double click</b> to get extended information about this target'});
+        }
+      }
     }
 
-    var theGrid = Ext.create('widget.dynamicgrid3', config)
+    var theGrid = Ext.create('widget.dynamicgrid3', myConfig)
 
     return theGrid
   },

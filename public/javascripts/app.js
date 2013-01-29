@@ -1,41 +1,50 @@
 
-
-
-
+/**
+ * Main ExtJs 4 application file. Create a Viewport and set the three main panels
+ * in it.
+ * Loads ExtJs 4 application controllers and init tooltips and history components
+ */
 Ext.Loader.setConfig({
   enabled:true,
   disableCaching:false
 });
 
-Ext.Loader.setPath('Ext.ux', '/javascripts/extjs4.0.7/ux')
+
+Ext.Loader.setPath('Ext.ux', '/javascripts/extjs4.0.7/ux');
+// Ext.Loader.setPath('LDA', '/javascripts/LinkedDataAPIParser/lib');
+
+Ext.ns('TDGUI.Globals');
+TDGUI.Globals.firstTime = true;
 
 // Ext.Ajax.disableCaching = false
 Ext.create('Ext.app.Application', {
 // Ext.Application ({
   name: 'TDGUI',
   appFolder: 'javascripts/app',
+//  requires: ['LDA.helper.LDAConstants'],
+  requires: ['TDGUI.util.LDAConstants'],
 
 // Define all the controllers that should initialize at boot up of your application
 
   controllers: [
     'TDGUI.controller.SearchPanel', // not working in rails3 if not qualified
-    'TDGUI.controller.Viewport',
     'TDGUI.controller.grid.DynamicGrid',
     'TDGUI.controller.panels.MultiTarget',
     'TDGUI.controller.panels.TargetInfo',
-    'TDGUI.controller.common.panels.TextImagePanel'
+    'TDGUI.controller.panels.GraphTabPanel',
+    'TDGUI.controller.common.panels.TextImagePanel',
+    'TDGUI.controller.Viewport'
   ],
 
   autoCreateViewport: true,
 
   launch: function() {
-    console.info("Starting TDGUI...")
+    console.info("Starting TDGUI...");
+
 
     Ext.QuickTips.init();
 
     Ext.History.init()
-
-//    Ext.history.init()
 
     /*
      Ext.Loader.setConfig({

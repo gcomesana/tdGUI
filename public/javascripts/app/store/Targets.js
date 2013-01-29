@@ -1,5 +1,8 @@
 
 /**
+ * @class TDGUI.store.Targets
+ * @extend Ext.data.Store
+ * 
  * Store to retrieve the proteinInfo data for the targets
  */
 Ext.define('TDGUI.store.Targets', {

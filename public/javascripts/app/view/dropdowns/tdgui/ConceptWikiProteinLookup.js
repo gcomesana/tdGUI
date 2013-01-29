@@ -1,5 +1,9 @@
 
 /**
+	* @class TDGUI.view.dropdowns.tdgui.ConceptWikiProteinLookup
+	* @extend TDGUI.view.dropdowns.conceptWikiProteinLookup
+	* @alias widget.tdgui-conceptwiki-protein-lookup
+	*
 	* Extends the original coreGUI conceptWikiLookupProtein component in order to customize
 	* to fit the new layout.
 	* The original layout:

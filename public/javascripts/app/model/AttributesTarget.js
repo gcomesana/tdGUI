@@ -1,7 +1,15 @@
 
 
 /**
- * This is the model to keep the data returned by calls to proteinInfo service
+ * @class TDGUI.model.AttributesTarget
+ * @extend Ext.data.Model 
+ * 
+ * This is the model to keep the data returned by calls to proteinInfo service. Fields are:
+ * name
+ * concept_uuid
+ * concept_uri
+ * uniprot_acc
+ * uniprot_id
  */
 Ext.define('TDGUI.model.AttributesTarget', {
   extend:'Ext.data.Model',

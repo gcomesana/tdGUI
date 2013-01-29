@@ -1,5 +1,10 @@
-
-
+/**
+ * @class TDGUI.view.panels.BorderEast
+ * @extends Ext.panel.Panel
+ * @alias widget.tdgui-border-east
+ *
+ * Panel to set in the east region of the viewport in the case of using it
+ */
 Ext.define ('TDGUI.view.panels.BorderEast', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.tdgui-border-east',

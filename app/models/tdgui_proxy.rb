@@ -1,10 +1,19 @@
+
+
 require 'rexml/document'
 require 'net/http'
+require 'net/smtp'
 require 'uri'
 
-#
+
 # It does requests to endpoints different than coreAPI endpoints
+# This is a proxy to perform different things the coreAPI does not support, either
+# they are not supported by coreAPI itself or the coreAPI endpoints are down and
+# we need new information sources to pull the information which is interesting/necessary
+# for the application
 #
+# It is set as a model in order to have got a straight controller to perform
+# the actions
 class TdguiProxy
 	include ActiveModel::Validations
 	include EndpointsProxy
@@ -12,10 +21,12 @@ class TdguiProxy
 	extend ActiveModel::Naming
 
 
-	DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch/uniprotkb/xxxx/uniprotxml'
+	OLD_DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch/uniprotkb/xxxx/uniprotxml'
 	UNIPROT_BY_NAME = 'http://www.uniprot.org/uniprot/?query=xxxx+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
 
-# Constructor
+	DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=uniprotkb&id=xxxx&format=xml'
+
+# Proxy/Model constructor
 	def initialize
 		@parsed_results = nil
 		@uniprot_name = nil
@@ -23,26 +34,33 @@ class TdguiProxy
 
 
 
+# Builds up a graph (array of hashes) for the uniprot accession taking into account
+# a maximun number of nodes in the graph and a minimum score the interactions have to accomplish.
+# @param [String] target_id an uniprot accession
+# @param [Float] conf_val a confidence value threshold
+# @param [Integer] max_nodes the max number of nodes for the graph
+# @return [Array] the graph as an array of hashes
+	def get_target_interactions (target_id, conf_val = 0.5, max_nodes = 6)
 
-	def get_target_interactions(target_id, conf_val = 0.5, max_nodes = 6)
-
+		target_graph = nil
 		if target_id.nil? || target_id.empty? then
 			nil
 
 		else
 			intact_proxy = IntactProxy.new
-#			target_graph = intact_proxy.get_interaction_graph(target_id)
-			target_graph = intact_proxy.get_super_interaction_graph(target_id, max_nodes, conf_val)
-
+			target_graph = intact_proxy.get_interaction_graph(target_id, conf_val, max_nodes)
+#			target_graph = intact_proxy.get_super_interaction_graph(target_id, max_nodes, conf_val)
 		end
+
+		target_graph
 	end
 
 
-# getMultipleEntries method
+
 # Request for entries to ebi and returns a hash properly formatted to be able
 # to be converted to json with a single method call .to_json
-# @param entries, a comma separeted uniprot accessions
-# @return a hash with the proper format to be converted into json
+# @param [String] entries a comma separeted uniprot accessions
+# @return [Hash] a hash with the proper format to be converted into json
 	def get_multiple_entries (entries)
 
 		if entries.nil? then
@@ -51,7 +69,11 @@ class TdguiProxy
 
 puts "get_multiple_entries: #{entries}"
 #		q_string = entries[:uniprotIds].join(',')
-		q_string = entries
+		entries_pairs = entries.split(',')
+		accessions = entries_pairs.map { |it|
+			it.split(';')[0]
+		}
+		q_string = accessions.join(',')
 		url = DBFETCH_URL.gsub(/xxxx/, q_string)
 
 		options = {}
@@ -82,21 +104,55 @@ puts "get_multiple_entries: #{entries}"
 
 
 
+# Builds up a hash with properties extracted out of a single uniprot xml file.
+# This goes straight to get a single uniprot entry
+# @param [String] accession the accession of the target
+# @return [Hash] a hash object filled with uniprot properties
+	def get_uniprot_by_acc (accession)
+		url = "http://www.uniprot.org/uniprot/#{accession}.xml"
+		options = {}
 
-# get_uniprot_by_name
-#
-	def get_uniprot_by_name (name)
+		results = request(url, options)
+		if results.code.to_i != 200
+			puts "Uniprot fetch service not working properly right now!"
+			nil
+
+		else
+			xmldoc = Document.new results.body
+			entries = xmldoc.elements.collect('uniprot/entry') { |ent| ent }
+			first_entry = entries[0]
+
+			entry_hash = decode_uniprot_entry(first_entry)
+		end
+	end
+
+
+
+# Builds up a hash with properties extracted out of a uniprot xml file
+# @param [String] name a name of a target (no accession, just a name)
+# @param [String uuid the uuid for the target as returned by conceptWiki]
+# @return [Hash] a hash object filled with uniprot properties
+# TODO it should be adapted to ops.conceptwiki.org/.../get?
+# TODO then uniprot again to get the properties!!
+	def get_uniprot_by_name (name, uuid)
 		@uniprot_name = name
+		concept_hash = nil
+		url = nil
+		if (uuid.nil? == false || uuid.empty? == false) # we have uuid
+			concept_hash = get_target_by_uuid(uuid)
+			url = concept_hash[:uniprot_url]+'.xml'
 
-		url = UNIPROT_BY_NAME.gsub(/xxxx/, name)
+		else
+			url = UNIPROT_BY_NAME.gsub(/xxxx/, name)
+		end
+
 puts "the url: #{url}"
 		options = {}
 
 #		url =  URI.encode(url)
 # puts "the url encoded: #{url}"
-
 		results = request(url, options)
-		if results.code.to_i != 200 then
+		if results.code.to_i != 200
 			puts "Uniprot fetch service not working properly right now!"
 			return nil
 
@@ -113,13 +169,94 @@ puts "the url: #{url}"
 
 
 
+# Uses the http://ops.conceptwiki.org/web-ws/concept/get?uuid endpoint to get
+# basic information about a target based on the uuid returned by a previous
+# search by tag.
+# @param [String] uuid the uuid for the target
+# @return [Hash] a hash object with uuid, pref_label and uniprot_url as keys (with
+# realted values)
+	def get_target_by_uuid (uuid)
+		inner_proxy = InnerProxy.new
+		url = inner_proxy.conceptwiki_ep_get + "?uuid=#{uuid}"
+
+		response = request(url, [])
+		if response.code.to_i != 200
+			puts "ConceptWiki get service not working properly right now!"
+			nil
+
+		else
+			json_hash = JSON.parse(response.body)
+			result = Hash.new
+			result[:uuid] = json_hash['uuid']
+
+			labels = json_hash['labels']
+			pref_label = labels.select { |lb| lb['type'] == 'PREFERRED' }
+			result[:pref_label] = pref_label[0]['text']
+
+			urls = json_hash['urls']
+			uniprot_url = urls.select { |url| url['value'] =~ /uniprot/ }
+			result[:uniprot_url] = uniprot_url[0]['value']
+
+			result
+		end
+	end
+
+
+# Send an email as feedback. Use the standard Net::SMTP ruby class to make the sending
+# @param [String] from  the sender of the email
+# @param [String] subject the subject of the email
+# @param [String] msg the body
+# @return [Boolean] true if everything was ok; false otherwise
+	def send_feedback (from, subject, msg)
+		opts = Hash.new
+		opts[:server]      ||= 'webmail.cnio.es'
+		opts[:from]        ||= from
+#		opts[:from_alias]  ||= ''
+		opts[:subject]     ||= subject
+		opts[:body]        ||= msg
+
+		email_to = 'gcomesana@cnio.es'
+		email_from = 'gcomesana@cnio.es'
+		msg_date = Time.now.strftime("%a, %d %b %Y %H:%M:%S +0800")
+=begin
+		body_message = <<END_OF_MESSAGE
+			From: #{opts[:from]}
+			To: <#{email_to}>
+			Subject: #{opts[:subject]}
+			Date: #{msg_date}
+
+			#{opts[:body]}
+		END_OF_MESSAGE
+=end
+		msgstr = <<-END_OF_MESSAGE
+		From: Your Name <your@mail.address>
+		To: Destination Address <someone@example.com>
+		Subject: test message
+		Date: Sat, 23 Jun 2001 16:26:43 +0900
+		Message-Id: <unique.message.id.string@example.com>
+
+		This is a test message.
+		END_OF_MESSAGE
+
+		begin
+			Net::SMTP.start(opts[:server]) do |smtp|
+				smtp.send_message msgstr, email_from, email_to
+			end
+			return true
+
+		rescue Exception => ex
+			return false
+		end
+	end
+
+
+
 
 	private
-# uniprotxml2json
 # Filter and translate to json an uniprotxml response from EBI upon request for
 # multiple uniprot entries retrieval based on accessions
-# @param xmlRes, the body of the request performed elsewhere
-# @return a json object with the corresponding fields
+# @param [String] xmlRes the body of the request performed elsewhere
+# @return [Hash] a hash object with the corresponding fields
 	def uniprotxml2json (xmlRes)
 		xmlDoc = Document.new xmlRes
 		entries = xmlDoc.elements.collect('uniprot/entry') { |ent| ent }
@@ -194,7 +331,14 @@ puts "Filling columns..."
 	end
 
 
-# Builds a column definition ready to be integrated with some grid
+# Builds a column definition ready to be integrated with some extjs 4 grid
+# @param [String] text the content of the cell in the extjs grid
+# @param [Integer] data_index necessary for extjs 4 grid
+# @param [String] filter filter for the grid data
+# @param [String] xtype the type of the extjs component
+# @param [String] tpl the template to render for this column
+# @param [String] renderer a render method to override the default one
+# @return [Hash]
 	def set_column (text, data_index, filter=nil, xtype=nil, tpl=nil, renderer=nil)
 		columnHash = {
 			'text' => '', 'dataIndex' => '',
@@ -221,6 +365,9 @@ puts "Filling columns..."
 
 
 
+# Extracts properties or features out of a uniprot entry for get_uniprot_by_name
+# @param [REXML::Element] ent an xml element out of a uniprot response xml file
+# @return [Hash] an object with the features for the target
 	def decode_uniprot_entry (ent)
 		entryHash = Hash.new
 
@@ -284,13 +431,13 @@ puts "Filling columns..."
 	end
 
 
-#
+
 # This method does a get request to an uri
-# @param url, the target url
-# @param options, parameters and other options for the request
-# @return the object response
+# @param [String] url the target url
+# @param [Hash] options parameters and other options for the request
+# @return [Net::HTTPResponse] the object response
 	def request(url, options)
-#		my_url = URI.parse(URI.encode(url))
+		my_url = URI.parse(URI.encode(url))
 
 		begin
 			my_url = URI.parse(url)
@@ -298,12 +445,42 @@ puts "Filling columns..."
 			my_url = URI.parse(URI.encode(url))
 		end
 
+start_time = Time.now
+		proxy_host = 'ubio.cnio.es'
+		proxy_port = 3128
 		req = Net::HTTP::Get.new(my_url.request_uri)
+#		res = Net::HTTP.start(my_url.host, my_url.port, proxy_host, proxy_port) { |http|
 		res = Net::HTTP.start(my_url.host, my_url.port) { |http|
 			http.request(req)
 		}
 
-puts "response code: #{res.code}"
+
+
+		#http_session = proxy.new(my_url.host, my_url.port)
+		#
+		#res = nil
+		#proxy.new(my_url.host, my_url.port).start { |http|
+		#Net::HTTP::Proxy(proxy_host, proxy_port).start(my_url.host) { |http|
+		#	req = Net::HTTP::Get.new(my_url.request_uri)
+		#	res, data = http.request(req)
+		#
+		#	puts "shitting data: #{data}\n"
+		#	puts "res.code: #{res.code}\n"
+		#}
+		#
+		#
+		#res = Net::HTTP.start(my_url.host, my_url.port) { |http|
+		#	req = Net::HTTP::Get.new(my_url.request_uri)
+		#	http.request(req)
+		#}
+
+
+#end_time = Time.now
+#elapsed_time = (end_time - start_time) * 1000
+#puts "***=> Time elapsed for #{url}: #{elapsed_time} ms\n"
+#
+#puts "response code: #{res ? res.code: 'res not available here'}"
+
 		res
 	end
 

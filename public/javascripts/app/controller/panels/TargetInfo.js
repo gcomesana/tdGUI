@@ -1,5 +1,11 @@
 
-
+/**
+ * @class TDGUI.controller.panels.TargetInfo
+ * @extends Ext.app.Controller
+ * 
+ * Controller for the {@link TDGUI.view.panel.TargetInfo TargetInfo panel} on the content area.
+ *
+ */
 Ext.define("TDGUI.controller.panels.TargetInfo", {
   extend:'Ext.app.Controller',
 
@@ -10,6 +16,9 @@ Ext.define("TDGUI.controller.panels.TargetInfo", {
   refs: [{
     ref: 'targetinfopanel',
     selector: 'tdgui-targetinfopanel'
+  }, {
+    ref: 'interactionsForm',
+    selector: 'window#interactionsDlg form'
   }],
 
 
@@ -17,14 +26,33 @@ Ext.define("TDGUI.controller.panels.TargetInfo", {
 
   init:function () {
 console.info ("Initializing TargetInfo controller...")
+
     this.control({
       'tdgui-targetinfopanel':{
         afterrender: this.initTargetInfoPanel,
         opsFailed: this.retryTargetInfoPanel
       },
 
-      'tdgui-targetinfopanel #stringdbTargetButton': {
-        click: this.onClickInteractionsBtn
+//      'tdgui-targetinfopanel #stringdbTargetButton': {
+      'window#interactionsDlg form button#interactionSendBtn': {
+//        click: this.onClickInteractionsBtn
+
+        click: function (comp, opts) {
+          var form = comp.up('form')
+          var formVals = form.getForm().getValues()
+
+          this.onClickInteractionsBtn (formVals.uniprotAcc, formVals.conf_val, formVals.max_nodes)
+          comp.up('window').hide()
+        }
+
+      },
+
+      'window#interactionsDlg': {
+        show: function (win, opts) {
+          var mywin = win
+
+          console.info ("window raised!!")
+        }
       }
 
     })
@@ -38,18 +66,19 @@ console.info ("Initializing TargetInfo controller...")
 
 
 /**
- * Callback on interactions button click.
- * Keep in mind the protein_uri param, which is a uniprot url if coreApi
- * is not working or a conceptwiki url otherwise.
- * @param btn
- * @param ev
- * @param opts
+ * Method to process interactions button click. This is not a callback method rather than a controller method to
+ * do the business logic. The actual callback function is implemented as a anoymous function inside the 
+ * {@link Ext.app.Controller#control control method}
+ * 
+ * @param {Ext.Component} targetAcc the accession of the target displayed on proteinInfo panel
+ * @param {Event} confVal the confidence value to select the right interactions
+ * @param {Object} maxNodes the maximun number of node for the interactions graph
  */
-  onClickInteractionsBtn: function (btn, ev, opts) {
+  onClickInteractionsBtn: function (targetAcc, confVal, maxNodes) {
 
     var theStore = this.getTargetinfopanel().targetInfoStore
 //    var targetAcc = theStore.proxy.extraParams.protein_uri
-    var targetAcc = this.getTargetinfopanel().uniprot_acc
+//    var targetAcc = this.getTargetinfopanel().uniprot_acc
 /*
     if (targetAcc.indexOf ('uniprot') != -1)
       targetAcc = targetAcc.substring(targetAcc.lastIndexOf('/')+1)
@@ -57,49 +86,50 @@ console.info ("Initializing TargetInfo controller...")
     if (targetAcc.indexOf ('conceptWiki') != -1)
       return
 */
+//    var targetName = this.getTargetinfopanel().down('#target_name').getRawValue()
 
-    var targetName = this.getTargetinfopanel().down('#target_name').getRawValue()
-    var historyParams = '!xt=tdgui-graphdatapanel&qp=' + targetAcc +
-                '&tg='+targetName
+    var targetName = this.getTargetinfopanel().down('#prefLabel').getRawValue();
+    var historyParams = '!xt=tdgui-graphtabpanel&qp=' + targetAcc + '&cv=' + confVal +
+                '&mn=' + maxNodes + '&tg='+targetName;
 
-    var dcParam = '&dc='+Math.random()
-    Ext.History.add (historyParams + dcParam)
+    var dcParam = '&dc='+Math.random();
+    Ext.History.add (historyParams + dcParam);
 
 //    console.info ('clicked for: '+historyParams)
   },
 
 
 /**
- * Decodes the token param (uniprot,ops) to load the panel-associated-store by
+ * Thisis is a method to initialize the {@link TDGUI.view.panels.TargetInfo TargetInfo} panel component
+ * So, this method decodes the token param (uniprot,ops) to load the panel-associated-store by
  * requesting data to ops or uniprot if the latter is not working
- * @param comp, the component which yields the event
- * @param opts, options
+ * @param {Ext.Component} comp the component which yields the event
+ * @param {Object} opts options
  */
   initTargetInfoPanel: function (comp, opts) {
 //    var store = this.getTargetsStore();
 console.info ('initTargetInfoPanel from TargetInfo controller')
-    var store = comp.targetInfoStore
-    var tokenObjQp = comp.queryParam
+    var store = comp.targetInfoStore;
+    var tokenObjQp = comp.queryParam;
     var tokenParams = tokenObjQp.split(',') // returns always a array
-console.info ('TargetInfo.initTargetInfoPanel tokenParams: '+tokenParams)
+console.info ('TargetInfo.initTargetInfoPanel tokenParams: '+tokenParams);
 
-    myMask.bindStore(store)
+    myMask.bindStore(store);
 
 // get the conceptUUID
     Ext.each (tokenParams, function (token, index, tokens) {
       if (token.indexOf('conceptwiki') != -1) {
-        var lastSlash = token.lastIndexOf('/')
-        comp.concept_uuid = token.substring(lastSlash+1)
+        var lastSlash = token.lastIndexOf('/');
+        comp.concept_uuid = token.substring(lastSlash+1);
       }
 
       if (token.indexOf ('uniprot') != -1) {
-        var lastSlash = token.lastIndexOf('/')
-        comp.uniprot_acc = token.substring(lastSlash+1)
+        var lastSlash = token.lastIndexOf('/');
+        comp.uniprot_acc = token.substring(lastSlash+1);
       }
-    })
+    });
 
 // get the uniprot accession from query string
-
 
 //    if (tokenParams[0] != store.proxy.extraParams.protein_uri) {
       store.proxy.extraParams.protein_uri = tokenParams[0];
@@ -107,6 +137,7 @@ console.info ('TargetInfo.initTargetInfoPanel tokenParams: '+tokenParams)
       store.load();
 //    }
   },
+
 
 
   retryTargetInfoPanel: function (comp, opts) {

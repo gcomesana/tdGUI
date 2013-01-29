@@ -1,13 +1,20 @@
 
-
+/**
+ * @class TDGUI.view.panels.west.SearchPanel
+ * @extends Ext.panel.Panel
+ * @alias widget.tdgui-west-search
+ *
+ * This panel supports all components at the left of the page ('west' region in
+ * an border layout).
+ */
 Ext.define ('TDGUI.view.panels.west.SearchPanel', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.tdgui-west-search',
 	requires: ['TDGUI.view.dropdowns.tdgui.ConceptWikiProteinLookup',
              'TDGUI.view.dropdowns.tdgui.CheckboxComboProteinLookup',
              'TDGUI.view.common.Textarea',
-             'Ext.ux.form.MultiSelect', 'TDGUI.view.common.ItemMultilist',
-             'TDGUI.view.panels.PanelButtons'],
+             'Ext.ux.form.MultiSelect', 'TDGUI.view.common.ItemMultilist'],
+//             'TDGUI.view.panels.PanelButtons'],
 
 //	region: 'west',
 //  collapsible: true,
@@ -15,11 +22,27 @@ Ext.define ('TDGUI.view.panels.west.SearchPanel', {
 //  split: true,
 //  width: '20%',
 //  minWidth: 300,
-  minHeight: 200,
+//  minHeight: 500,
+  /**
+   * @cfg {Boolean} [border=false] the border of this panel
+   */
   border: false,
+  /**
+   * @cfg {String} margin the margin values applied to the HTML element supporting this panel
+   */
+  margin: '30px 0px 0px 0px',
 
-  anchor: '100% 70%',
+  /**
+   * @cfg {String} anchor As this component is defined as an item at {@link TDGUI.view.Viewport}
+   * the configured layout is Anchor layout and this is the property to configure this
+   * component using that anchor. In this case, the component expanda all along and
+   * wide the west border of the container
+   */
+  anchor: '100% 100%',
 
+  /**
+   * @cfg defaults Same as {@link TDGUI.view.Viewport#defaults}
+   */
   defaults: {
     border: false
   },
@@ -39,17 +62,26 @@ this.callParent(arguments);
 console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
 //    me.items = [this.createTabs()]
-    me.items = [this.createSearchTab(), this.createRetrievingTab()]
+    me.items = [
+      this.createLabel(),
+      this.createSearchTab(),
+      this.createRetrievingTab()
+    ]
     me.callParent (arguments)
   }, // EO initComponent
 
 
 
 
-// METHODS TO CREATE COMPONENTS ////////////////////////////////////////////////////
+// METHODS TO CREATE INNER COMPONENTS ////////////////////////////////////////
+  /**
+   * Creates a Ext.form.Label component and set a property on this class referencing the
+   * label.
+   * @return {Ext.form.Label} the created label
+   */
   createLabel: function () {
     this.exampleLabel = Ext.create ('Ext.form.Label', {
-      text: 'Target List',
+      text: 'Semantic search',
       margin: 10,
 
       listeners: {
@@ -63,23 +95,30 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       },
 
       initComponent: function () {
-        this.addEvents ('click')
+//        this.addEvents ('click')
 
         this.callParent (arguments)
       }
     })
+
     return this.exampleLabel
   },
 
 
 
+  /**
+   * Actually, it creates a Ext.panel.Panel to support a {@link TDGUI.view.dropdowns.tdgui.CheckboxComboProteinLookup}
+   * and a button and return the created component to be a property of the main panel
+   * The search panel features a column layout
+   * @return {Ext.panel.Panel} the panel with a combo-textfield and a button
+   */
   createSearchTab: function () {
     this.searchTab = Ext.create ('Ext.panel.Panel', {
 //      title: 'Search',
 //      renderTo: Ext.getBody(),
 //      width: 400,
 //      height: 200,
-      bodyPadding: '15 0 10 0',
+      bodyPadding: '0 0 10 0',
       border: false,
 
 //      closable: true,
@@ -107,13 +146,19 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
         }] // EO items
 
       }]
-    })
+    });
 
     return this.searchTab
   },
 
 
-
+  /**
+   * As for exemplar purposes, we create a initial list of targets and initialize
+   * a {@see TDGUI.store.ListTargets} with the targets.
+   * In addition and using the store, a {@see TDGUI.view.common.ItemMultilist}
+   * is created and returned
+   * @return {TDGUI.view.common.ItemMultilist} a item list to show the target list elements
+   */
   createTargetList: function () {
     var myData = [{
       name: "TP53-regulated inhibitor of apoptosis 1",
@@ -156,10 +201,12 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       uniprot_name: "AA2AR_HUMAN"
     }]
 
+
+//////////////////////////////////////////////////////////////
     myData = [{
       name: "Alpha-2A adrenergic receptor",
-      concept_uuid: "d593db45-e954-4e97-94f7-c039350f97f4",
-      concept_uri: "http://www.conceptwiki.org/concept/d593db45-e954-4e97-94f7-c039350f97f4",
+      concept_uuid: "59aabd64-bee9-45b7-bbe0-9533f6a1f6bc",
+      concept_uri: "http://www.conceptwiki.org/concept/59aabd64-bee9-45b7-bbe0-9533f6a1f6bc",
       uniprot_acc: ["P08913",     "B0LPF6",    "Q2I8G2",  "Q2XN99","Q86TH8","Q9BZK1"],
       uniprot_id: "TRIA1_HUMAN",
       uniprot_name: "TRIA1_HUMAN"
@@ -192,23 +239,25 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       ], // uniprot_acc: "Q5H943",
       uniprot_id: "AA2AR_HUMAN", // uniprot_id: "KKLC1_HUMAN"
       uniprot_name: "AA2AR_HUMAN"
-    }]
+    }];
 
-    var initStore = Ext.create('TDGUI.store.ListTargets')
-    initStore.loadData(myData)
+    var initStore = Ext.create('TDGUI.store.ListTargets');
+    initStore.loadData(myData);
 
-    this.targetList = Ext.widget ('tdgui-item-multilist', {
+    this.targetList = Ext.create ('TDGUI.view.common.ItemMultilist', {
       listName: 'Target List',
+      id: 'targetListId',
       store: initStore,
       displayField: 'display_field',
       valueField: 'uniprot_acc'
-    })
+    });
 
     this.targetList.addDockedItem({
       xtype: 'button',
       text: 'Search'
-    })
-    return this.targetList
+    });
+
+    return this.targetList;
   },
 
 
@@ -225,6 +274,21 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 */
 
 
+  /**
+   *
+   * @param strTargets
+   */
+  setTargetList: function (strTargets) {
+
+  },
+
+
+
+  /**
+   * Creates the panel supporting the list returned by
+   * {@see TDGUI.view.panels.wes.SearchPanel#createTargetList}
+   * @return {Ext.panel.Panel} a new panel for the target list plus search button
+   */
   createRetrievingTab: function () {
     var me = this
     this.retrievingTab = Ext.create ('Ext.panel.Panel', {
@@ -237,8 +301,9 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       border: false,
 //      closable: true,
 
+
       items: [
-        this.createTargetList(),
+        this.createTargetList()
         /*
         me.retrievingButtons = Ext.widget ('tdgui-panelbuttons', {
           anchor: '100%',

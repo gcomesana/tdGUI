@@ -1,13 +1,32 @@
 
-
+/**
+ * @class TDGUI.view.panels.BorderCenter
+ * @extends Ext.tab.Panel
+ * @alias widget.tdgui-border-center
+ *
+ * The tab-panel supporting the content area of the viewport
+ */
 Ext.define ('TDGUI.view.panels.BorderCenter', {
 	extend: 'Ext.tab.Panel',
 	alias: 'widget.tdgui-border-center',
-//  requires: ['TDGUI.view.grid.DynamicGrid3'],
+  requires: ['TDGUI.view.panels.WelcomePanel'],
 
+  /**
+   * @cfg {String} [region=center] the position inside the border layout
+   */
 	region: 'center',
   layout: 'border',
+  /**
+   * @cfg {Boolean} border see TDGUI.view.Viewport#border
+   */
   border: false,
+
+  /**
+   * @cfg {String} [padding='10 0 0 0'] the padding values applied to the HTML element
+   * supporting this component
+   */
+  padding: '10 0 0 0',
+
 
 
   listeners: {
@@ -25,6 +44,10 @@ Ext.define ('TDGUI.view.panels.BorderCenter', {
   initComponent: function () {
   	var me = this
 console.info ("Initializing panels.BorderCenter comp..." + this.nombre)
+
+    me.items = [{
+      xtype: 'tdgui-welcomepanel'
+    }]
 /*
 	  me.items = [{
       xtype: 'panel',
@@ -95,6 +118,12 @@ console.info ("Initializing panels.BorderCenter comp..." + this.nombre)
 	}, // EO initComponent
 
 
+
+  /**
+   * Creates a grid ({@link TDGUI.view.grid.DynamicGrid3}), in this case to
+   * display multiple entries.
+   * @return {Object} the created grid
+   */
   createGrid: function () {
     var theGrid = Ext.widget ('dynamicgrid3', {
       title: 'Testis DynamicGrid',
@@ -170,7 +199,7 @@ console.info ("Initializing panels.BorderCenter comp..." + this.nombre)
 
 
 
-// TODO ver si aquí llega el store con datos y eso... y al loro con todo el mogollón de history y views...
+
   storeLoadComplete:function (store, records, success) {
     console.log('PharmByTargetNameForm: storeLoadComplete(): ' + (new Date()).getUTCMilliseconds());
 //    var controller = this.getController('LSP.controller.grids.DynamicGrid');

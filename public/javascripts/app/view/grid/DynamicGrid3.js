@@ -41,6 +41,15 @@
 // Ext.Loader.setConfig({enabled:true});
 Ext.Loader.setPath('Ext.ux.grid', 'javascripts/extjs4.0.7/examples/ux/grid');
 
+/**
+ * @class TDGUI.view.grid.DynamicGrid3
+ * @extend Ext.grid.Panel
+ * @alias widget.dynamicgrid3
+ *
+ * Specialization of the {@link Ext.grid.Panel ExtJs 4 gridpanel}. This grid
+ * is dynamically built upon data response. {@link TDGUI.controller.grid.DynamicGrid}
+ * loads the store, set up the columns and fill the grid.
+ */
 Ext.define('TDGUI.view.grid.DynamicGrid3', {
   extend:'Ext.grid.Panel',
   alias:'widget.dynamicgrid3',
@@ -55,15 +64,24 @@ Ext.define('TDGUI.view.grid.DynamicGrid3', {
 
   autoScroll:true,
   layout:'fit',
+  /**
+   * @cfg {String} gridBaseTitle the title for the grid (on top)
+   */
   gridBaseTitle:'',
+
+  /**
+   * @cfg {String} readUrl It is used as url to pass through the controller an load the store
+   */
   readUrl:'', // It is used as url to pass through the controller an load the store
   limit:100,
   recordsLoaded:0,
+
   csid_column:false,
   contextMenu:null,
 
-
-
+  columns:[
+    {name:'temp', hidden:true}
+  ],
 
   initComponent: function () {
 
@@ -84,61 +102,14 @@ Ext.define('TDGUI.view.grid.DynamicGrid3', {
       id:'selectable'
     };
 
-    var grid_store = Ext.create('TDGUI.store.DynamicGrid');
+//    var grid_store = Ext.create('TDGUI.store.DynamicGrid');
+    console.log ("DynamicGrid3.initComponent!!!");
     var config = {
-
-      store: grid_store,
-/*
-    tbar: [
-      {
-        xtype:'button',
-        text:'Retrieve next 100 records',
-        tooltip:'On each click 100 additional records\nare added to the resultset',
-        itemId:'nextRecords',
-        iconCls:'icon-new',
-        disabled:true
-      },
-      { xtype:'tbseparator' },
-      {
-        xtype:'exporterbutton',
-        store:grid_store,
-        formatter:'csv',
-        swfPath:'app/view/ux/exporter/downloadify.swf',
-        downloadImage:'app/view/ux/exporter/csv_button.png',
-        itemId:'csvDownload_id',
-        width:117,
-        height:22,
-          hidden:false
-        },
-        { xtype:'tbseparator' },
-        {
-          xtype:'button',
-          text:'Prepare SD-file download',
-          tooltip:'Starts a two steep process to download the SD-file. This may take a while...',
-          itemId:'sdfDownloadProxy_id',
-//                        width: 155,
-          iconCls:'icon-sdf',
-          hidden:false,
-          disabled:true
-        },
-        {
-          xtype:'exporterbutton',
-          store:grid_store,
-          formatter:'sdf',
-          swfPath:'app/view/ux/exporter/downloadify.swf',
-          downloadImage:'app/view/ux/exporter/sdf_button.png',
-          itemId:'sdfDownload_id',
-          width:111,
-          height:22,
-          hidden:false,
-          disabled:true
-        }
-      ],
-   */
+/*      store: grid_store,
       columns:[
         {name:'temp', hidden:true}
       ],
-
+*/
       rowNumberer:true,
       defaultWidth:200,
       features: [groupingFeature, filters, cellTextSelector]
@@ -152,8 +123,12 @@ Ext.define('TDGUI.view.grid.DynamicGrid3', {
   },
 
 
-
-
+  /**
+   * Shows a contextual grid menu based on the data the grid holds
+   * @param {Number} x the X coordinate for the menu raising
+   * @param {Number} y the Y coordinate for the menu raising
+   * @param {Ext.data.Model} the record selected
+   */
   showMenu: function (x, y, record) {
     var cmp = record.data.compound_name;
     var tar = record.data.target_name;

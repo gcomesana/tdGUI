@@ -1,3 +1,10 @@
+/**
+ * @class TDGUI.view.dropdowns.conceptWikiProteinLookup
+ * @extends Ext.form.ComboBox
+ * @alias widget.conceptWikiProteinLookup
+ *
+ * This is a base class to build a custom combobox which display results based on the input text.
+ */
 Ext.define('TDGUI.view.dropdowns.conceptWikiProteinLookup', {
 	extend: 'Ext.form.ComboBox',
 	alias: 'widget.conceptWikiProteinLookup',
@@ -5,25 +12,22 @@ Ext.define('TDGUI.view.dropdowns.conceptWikiProteinLookup', {
 	store: Ext.create('Ext.data.Store', {
 		fields: [{
 				type: 'string',
-				name: 'concept_label'
+				name: 'concept_type_tags'
 			}, {
 				type: 'string',
-				name: 'concept_url'
+				name: 'ops_uri'
 			}, {
 				type: 'string',
-				name: 'define_url'
+				name: 'pref_url'
 			}, {
 				type: 'string',
-				name: 'concept_uuid'
+				name: 'alt_labels'
 			}, {
 				type: 'string',
-				name: 'concept_alt_labels'
+				name: 'pref_label'
 			}, {
 				type: 'string',
-				name: 'tag_label'
-			}, {
-				type: 'string',
-				name: 'tag_uuid'
+				name: 'uuid'
 			}, {
 				type: 'string',
 				name: 'match'
@@ -56,10 +60,10 @@ Ext.define('TDGUI.view.dropdowns.conceptWikiProteinLookup', {
 	labelWidth: 120,
 	listConfig: {
 		loadingText: 'Searching...',
-		emptyText: 'No matching proteins found.',
+    emptyText:'Nothing found which matches your text, you may need to enter more text or try something different.',
 		getInnerTpl: function() {
-			//                    return '<p><font face="verdana" color="grey"><small>Match: {match}</small></font><br/><b>{concept_label}</b> <a href="{define_url}" target="_blank">(definition)</a><br/ ><small>Alt. terms: <i>{concept_alt_labels}</i></small></p>';
-			return '<p><span style="font-family: verdana; color: grey; "><small>Match: {match}</small></span><br/><b>{concept_label}</b> <a href="{define_url}" target="_blank">(definition)</a></p>';
+//			return '<p><span style="font-family: verdana; color: grey; "><small>Match: {match}</small></span><br/><b>{concept_label}</b> <a href="{define_url}" target="_blank">(definition)</a></p>';
+      return '<p><span style="font-family: verdana; color: grey; "><small>Match: {match}</small></span><br/><b>{pref_label}</b> <a href="http://ops.conceptwiki.org/wiki/#/concept/{uuid}/view" target="_blank">(definition)</a></p>';
 		}
 	}
 });

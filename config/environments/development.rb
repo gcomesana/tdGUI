@@ -27,4 +27,27 @@ TdGUI::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+	config.action_mailer.delivery_method = :smtp
+
+	config.action_mailer.smtp_settings = {
+		:address              => "webmail.cnio.es",
+		:port                 => 25, # 587,
+		:user_name            => 'gcomesana@cnio.es',
+		:password             => 'Run3ks_3',
+		:domain								=> 'cnio.es',
+		:authentication       => :login
+#		:enable_starttls_auto => true
+	}
+
+=begin
+	config.action_mailer.smtp_settings = {
+	  :address              => "smtp.gmail.com",
+	  :port                 => 587,
+	  :user_name            => 'haleboppp',
+	  :password             => 'WallaCh9',
+	  :authentication       => :plain,
+	  :enable_starttls_auto => true
+	}
+=end
 end

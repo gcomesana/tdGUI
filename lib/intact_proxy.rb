@@ -46,6 +46,7 @@ class IntactProxy
 #		xmlFile = File.new('../data/q13362-stringdb-interactions.xml') # psi-mi xml file
 
 #		myuri = INTACT_URL.gsub(/xxxx/, target_id)
+		puts "get_interaction_graph -> params: accession: #{target_id}; threshold: #{conf_threshold}; neighs: #{num_neighbours}"
 		dbhost = TdGUI::Application.config.intactdb.intact_server
 		dbport = TdGUI::Application.config.intactdb.intact_port
 		dbuser = TdGUI::Application.config.intactdb.intact_user

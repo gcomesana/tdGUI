@@ -137,18 +137,18 @@ puts "json_entries: #{json_entries}\n"
 # @param [Float] conf_val the confidence value. Intact assigns a score to every interaction.
 # This parameter is used to screen interactions below this threshold (defautl is 0.5)
 # @return [String] the json object to feed the javascript graph
-	def interactions_retrieval (target_id = params[:target], max_nodes = 6, conf_val = 0.5)
+	def interactions_retrieval (target_id = params[:target], max_nodes = params[:max_nodes],
+		conf_val = params[:conf_val])
 		intact_proxy = TdguiProxy.new
 
-		conf_param = params[:conf_val]
-		conf_val = conf_param.to_f == 0.0 ? conf_val: conf_param.to_f
-		max_nodes_param = params[:max_nodes] ? 0: params[:max_nodes].to_i
-		max_nodes = max_nodes_param == 0 ? max_nodes: max_nodes_param
-puts "Getting interactions for '#{target_id}' from Intact with conf_val=#{conf_val} & max_nodes=#{max_nodes}\n"
-		return '[]' unless target_id != nil && target_id != ''
+		conf_param = params[:conf_val] # string!!!
+		conf_val = conf_param.to_f
+		max_nodes_param = params[:max_nodes] ? params[:max_nodes].to_i : 0
+puts "Getting interactions for '#{params[:target]}' from Intact with conf_val=#{params[:conf_val]} & max_nodes=#{params[:max_nodes]}\n"
+		return '[]' unless params[:target] != nil && params[:target] != ''
 #		graph = stringdb_proxy.get_target_interactions(target_id)
-		graph = intact_proxy.get_target_interactions(target_id, conf_val, max_nodes)
-
+		graph = intact_proxy.get_target_interactions(params[:target], conf_val,
+																								 max_nodes_param)
 		render :json => graph.to_json, :layout => false
 	end
 

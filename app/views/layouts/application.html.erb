@@ -7,10 +7,13 @@
 
   <%= stylesheet_link_tag :all %>
   <%= stylesheet_link_tag '/javascripts/extjs4.0.7/resources/css/ext-all-gray.css' %>
-  <%= stylesheet_link_tag '/stylesheets/tdgui.css' %>
+
   <%= stylesheet_link_tag '/stylesheets/sbuttons.css' %>
   <%= stylesheet_link_tag '/stylesheets/jit.css' %>
+  <%# stylesheet_link_tag '/stylesheets/clifton-theme-1.1/css/clifton-blue.css' %>
+  <%= stylesheet_link_tag '/stylesheets/tdgui.css' %>
 
+  <!-- environment: <%= ENV['RAILS_ENV'] %> -->
   <% if ENV['RAILS_ENV'] != 'production' %>
     <%= javascript_include_tag '/javascripts/extjs4.0.7/ext-all-debug.js' %>
     <%#= javascript_include_tag "extjs4.0.7/bootstrap.js" %>
@@ -20,10 +23,10 @@
     <%= javascript_include_tag '/javascripts/app.js' %>
 
   <% else %>
-      <%= javascript_include_tag '/ext/ext-all.js' %>
-      <%= javascript_include_tag 'prototype' %>
-      <%= javascript_include_tag '/all-classes.js' %>
-      <%= javascript_include_tag '/app-all.js' %>
+    <%= javascript_include_tag '/ext/ext-all.js' %>
+    <%= javascript_include_tag 'prototype' %>
+    <%= javascript_include_tag '/all-classes.js' %>
+    <%= javascript_include_tag '/app-all.js' %>
   <% end %>
 
   <%#= javascript_include_tag '/app/view/ux/exporter/Exporter.js' %>
@@ -31,12 +34,62 @@
   <%#= javascript_include_tag '/downloadify/swfobject.js' %>
 
   <%= csrf_meta_tags %>
+
+  <script type="text/javascript">
+    var simSearchUrl;
+    var ldaBaseUrl = '<%= "http://" + AppSettings.config["tsv"]["tsv_url"] -%>';
+    var host = '<%= AppSettings.config["tsv"]["tsv_rails_host"] -%>',
+      port = '<%= AppSettings.config["tsv"]["tsv_rails_port"] -%>',
+      info_rails_path = '<%= AppSettings.config["tsv"]["tsv_rails_path"] -%>',
+      pharm_rails_path = '<%= AppSettings.config["tsv"]["tsv_pharm_rails_path"] -%>';
+
+    var proteinInfoBaseUrl = "http://" + host + ':' + port + info_rails_path;
+    var proteinPharmBaseUrl = "http://" + host + ':' + port + pharm_rails_path;
+  </script>
+
+  <script type="text/javascript">
+    //TODO remove this when the firefox bug is sorted
+    // Firefox 18 bug - https://bugzilla.mozilla.org/show_bug.cgi?id=828319
+    // fix by http://www.sencha.com/forum/member.php?5833-Holger & http://www.sencha.com/forum/member.php?60876-Tyler___Durden
+    // from http://www.sencha.com/forum/showthread.php?253345-FF-18-problem
+
+    Ext.onReady(function () {
+
+      if (Ext.firefoxVersion >= 18) {
+        var noArgs = [];
+        Ext.override(Ext.Base, {
+          callParent: function (args) {
+            var method, superMethod = (method = this.callParent.caller) && (method.$previous || ((method = method.$owner ?
+              method :
+              method.caller) && method.$owner.superclass[method.$name]));
+
+            // Workarround for Firefox 18. I don't know why this works, but it does. Perhaps functions wich have
+            // a try-catch block are handled differently - additional comment by IAN - functions with try catch are not compiled by Ion Monkey
+            try {
+            }
+            catch (e) {
+            }
+
+            return superMethod.apply(this, args || noArgs);
+          }
+        });
+      }
+    });
+  </script>
+
+  <script type="text/javascript">
+    if (!String.prototype.trim) {
+      String.prototype.trim = function () {
+        return this.replace(/^\s+|\s+$/g, '');
+      }
+    }
+  </script>
 </head>
 <body>
 
 <form id="history-form" class="x-hide-display">
-    <input type="hidden" id="x-history-field" />
-    <iframe id="x-history-frame"></iframe>
+  <input type="hidden" id="x-history-field"/>
+  <iframe id="x-history-frame"></iframe>
 </form>
 
 <%= yield %>

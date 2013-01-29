@@ -43,7 +43,7 @@ puts "ThrashcanCtrl.test, @template: #{@template.inspect}"
 
   def ping
   	paramIn = params[:query]
-  	@ping = "Ping back: #{paramIn}"
+  	@ping = "Ping back: #{paramIn} with #{TdGUI::Application.config.intactdb.to_s}"
 
     render :json => {'ping_back'=> @ping, 'time' => "#{@now}"}, :layout => false
   end

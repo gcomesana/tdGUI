@@ -9,12 +9,13 @@ describe "inner_proxy 'helper' class behaviour" do
 		end
 
 		it "should check conceptWiki" do
-			concept_wiki_check = @inner_proxy.checkConceptWiki
+			concept_wiki_check = @inner_proxy.check_conceptwiki
 
 			concept_wiki_check.should_not be_nil
 			concept_wiki_check.should satisfy { |concept_w|
 				(concept_w.is_a? FalseClass) || (concept_w.is_a? TrueClass)
 			}
+puts "concept_wiki ok? #{concept_wiki_check}\n"
 
 		end
 

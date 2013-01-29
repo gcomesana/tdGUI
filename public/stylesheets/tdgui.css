@@ -275,10 +275,6 @@ sub {
 	vertical-align: text-bottom;
 }
 
-
-
-
-
 /* Welcome style classes */
 .speech-tit {
 	font-size: x-large;
@@ -289,13 +285,10 @@ sub {
 	margin-top: 20px;
 }
 
-
 .speech-div {
 	padding: 10px 40px 10px 40px;
 	margin-bottom: 20px;
 }
-
-
 
 .feats-container-odd {
 	width: 430px;
@@ -304,7 +297,6 @@ sub {
 	margin-left: 20px;
 }
 
-
 .welcome-img {
 	width: 200px;
 	margin-right: 20px;
@@ -312,7 +304,6 @@ sub {
 	float: left;
 	border: 1px solid #CCC;
 }
-
 
 .welcome-tit {
 	font-weight: bold;
@@ -324,17 +315,12 @@ sub {
 	margin-top: 5px;
 }
 
-
-
-
-
-
-
 /* layout */
 .x-panel-body-default {
 	background: transparent;
 }
-.x-body{
+
+.x-body {
 	font-family: Arial;
 }
 
@@ -352,32 +338,46 @@ sub {
 	border: 0px !important;
 }
 
-
 /* Left */
 #td-left {
 	background: #EAEBEC url(/images/tree-bg.png) repeat-x fixed;
-	border:none !important;
+	border: none !important;
 }
 
 #td-left .x-panel-header {
 	display: none !important;
 }
-#td-left-body{
+
+#td-left-body {
 	border-width: 0px 1px 0px 0px;
 	border-right-color: #AEB0B5;
 }
 
-.x-splitter-vertical{
+.x-splitter-vertical {
 	background: white url(/images/main-bg.png) repeat-x;
 }
-.x-splitter-vertical .x-collapse-el{display: none;}
+
+.x-splitter-vertical .x-collapse-el {
+	display: none;
+}
 
 /* Main */
 #td-main {
 	background: white url(/images/main-bg.png) repeat-x;
 }
-#td-main .x-tab-bar{background: transparent;}
-#td-main .x-tab-bar-body{border: none;}
+
+#td-main .x-tab-bar {
+	background: transparent;
+}
+
+#td-main .x-tab-bar-body {
+	border: none;
+}
+
+/* Interactions panel */
+.app-interactions-help-div {
+
+}
 
 /* miscellaneous */
 a, a:hover {
@@ -388,4 +388,33 @@ a, a:hover {
 .synonym, .keyword {
 	color: #FFF;
 	background-color: #c64b34;
+}
+
+.well {
+	min-height: 20px;
+	/*	padding: 19px;
+	 margin-bottom: 20px; */
+	background-color: #f5f5f5;
+	border: 1px solid #e3e3e3;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.well-small {
+	padding: 9px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.x-column-header-inner {
+	line-height: normal;
+	padding-top: 3px !important;
+	padding-bottom: 3px !important;
+	text-align: center;
+	top: 20%;
 }

@@ -2,12 +2,15 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
   extend:'Ext.app.Controller',
 
   views:[
-    'grid.DynamicGrid3'
+    'grid.DynamicGrid'
   ],
 
   models:['DynamicGrid'],
 
   refs:[{
+      ref: 'pharmaGrid',
+      selector: 'tdgui-pharmbytargetscroll-grid'
+    },{
       ref:'gridView',
       selector:'dynamicgrid3'
     }, {
@@ -23,11 +26,24 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
 
 
   init: function () {
+    this.myMask = 'cagallon'
+    console.log ("DynamicGrid3.Controller.init... myMask: "+this.myMask)
     this.control ({
+
+      'tdgui-pharmbytargetpanel tdgui-pharmbytargetscroll-grid': {
+        afterrender: function (comp, opts) {
+          comp.columns[0].setHeight(25);
+          this.prepPharmaGrid(comp, opts);
+        },
+        beforerender: function (comp, opts) {
+          comp.columns[0].setHeight(25);
+        }
+      },
+
       'dynamicgrid3': {
         afterrender: function (comp, opts) {
-          this.initGrid(comp, opts)
-        },
+          this.initGrid(comp, opts);
+        }
 /*
         itemdblclick: function (view, record, item, index, e, opts) {
 console.info ("item double clicked!!!")
@@ -47,15 +63,17 @@ console.info ("item double clicked!!!")
  */
       }, // EO dynamicgrid3
 
-      'dynamicgrid3 toolbar #sdfDownloadProxy_id':{
+      'genecir-simple-grid toolbar #sdfDownloadProxy_id': {
         click:this.prepSDFile
       }
+
     })
   },
 
 
   onLaunch:function () {
-    myMask = new Ext.LoadMask(Ext.getBody(), {
+    console.log ("DynamicGrid3.Controller.onLaunch")
+    this.myMask = new Ext.LoadMask(Ext.getBody(), {
       msg:'Loading data...'
     })
   },
@@ -70,10 +88,11 @@ console.info ("item double clicked!!!")
     this_gridview.down('#sdfDownload_id').disable();
 
     var this_store = this_gridview.store;
-    myMask.bindStore(this_store)
+    this.myMask.bindStore(this_store)
 
     var this_controller = this;
-    var temp_store = Ext.create('LSP.store.DynamicGrid');
+//    var temp_store = Ext.create('LSP.store.DynamicGrid');
+    var temp_store = Ext.create('TDGUI.store.DynamicGrid');
     // configure copy store:
     temp_store.proxy.extraParams = extraParams;
     temp_store.proxy.api.read = this_gridview.readUrl;
@@ -119,24 +138,87 @@ console.info ("item double clicked!!!")
 
 
   /**
+   * Initializes the pharmacology grid component.
+   * TODO [This should be changed in order to support deep linking (not depending on comp)]
+   * @param {Object} comp the grid component which triggered the event
+   * @param {Object} opts passed options
+   */
+  prepPharmaGrid: function (comp, opts) {
+    console.info("Prepping pharmaGrid!!");
+    var grid_view = this.getPharmaGrid();
+    var grid_store = grid_view.getStore();
+
+// it is suppossed gridParams has the configuration parameters needed
+    comp.store.proxy.extraParams = comp.queryParams;
+    comp.store.on('load', this.pharmaStoreLoadComplete, comp);
+    comp.store.load();
+  },
+
+
+
+  /**
+   * Sets the grid data, callback function for pharma store loading
+   * providde by the store associated to the pharma grid.
+   * NOTE!!!! The scope is the grid instance (PharByTargetScrollingGrid)
+   *
+   * @param {Ext.data.Store} store a reference to the grid component store
+   * @param {Array} recs
+   * @param {boolean} success true if request to backend was successful; false otherwise
+   */
+  pharmaStoreLoadComplete: function (store, recs, success) {
+    console.log("pharma store completed...");
+    var grid_view = this;
+    var grid_store = grid_view.getStore();
+    if (success) {
+      // If some records are coming back then set the tsv download params
+//      this.setTSVDownloadParams();
+      //grid_view.down('#sdfDownload_id').disable();
+      //grid_view.down('#sdfDownloadProxy_id').setText('Prepare SD-file download');
+//      grid_view.down('#sdfDownloadProxy_id').enable();
+
+//      grid_view.down('#tsvDownloadProxy_id').enable();
+//      this.getSubmitButton().enable();
+      grid_view.reconfigure();
+      grid_view.setLoading(false);
+      grid_view.setTitle(grid_view.gridBaseTitle + ' - Total Records: ' + grid_store.getCount());
+    }
+    else {
+      console.log(this.$className + ': possible timeout for with uri ' + grid_store.proxy.url);
+//      this.getSubmitButton().enable();
+      grid_view.setLoading(false);
+//      grid_view.setTitle(grid_view.gridBaseTitle + ' ---- There was an error retrieving some of the records ----');
+      Ext.MessageBox.show({
+          title: 'Info',
+          msg: 'We are sorry but the OPS system returned an error.',
+          buttons: Ext.MessageBox.OK,
+          icon: Ext.MessageBox.INFO
+      });
+    }
+  },
+
+
+
+  /**
    * Initialize the grid mostly on regards to the grid's store
    * @param comp
    * @param opts the options to configure the proxy to set up the grid. It should
    * be something like { actionMethods: { read: 'GET' }, api-read: 'urlread', params: {param1:val1, param2: val2}}
    */
   initGrid: function (comp, opts) {
+    console.log("DynamicGrid controller: initGrid for "+comp.getXType());
+    if (comp.getXType().match(/dynamicgrid3/) == null)
+      return;
 
-    var me = this
-    var compActionMethods = comp.storeActionMethods
+    var me = this;
+    var compActionMethods = comp.storeActionMethods;
     var theActionMethods =
       (compActionMethods === undefined || compActionMethods == null)? {read: "GET"}: compActionMethods
 
-    myMask.bindStore(comp.store)
-
+    me.myMask.bindStore(comp.store);
     var defOpts = {
       actionMethods: theActionMethods,
       apiread: comp.readUrl,
-      params:{
+      params: {
         offset:0,
         limit:50
       }
@@ -147,7 +229,7 @@ console.info ("item double clicked!!!")
       for (attrs in defOpts)
         if (props == attrs) defOpts[attrs] = opts[props];
 
-    opts = defOpts
+    opts = defOpts;
 
 //    var grid_view = this.query('dynamicgrid3')[0]
     /*
@@ -161,11 +243,12 @@ console.info ("item double clicked!!!")
     comp.store.proxy.api.read = opts.apiread;
     comp.store.proxy.params = opts.params;
     comp.store.on('load', this.setAndFillGrid, comp);
-    comp.store.proxy.extraParams = comp.queryParams
+    comp.store.proxy.extraParams = comp.queryParams;
 //    comp.store.proxy.extraParams = {entries: 'Q13362,P12345,P0AEN3,P0AEN2,P0AEN1'}
 
     comp.store.load()
   },
+
 
 
   /**
@@ -179,7 +262,7 @@ console.info ("item double clicked!!!")
    */
   setAndFillGrid: function (store, records, success) { // scope: grid instance
 
-    var this_gridview = this
+    var this_gridview = this;
     var listitems = this_gridview.up('viewport').down('tdgui-item-multilist')
     var numListItems = listitems.getStore().count()
     var numGridItems = store.count()
@@ -195,7 +278,9 @@ console.info ("item double clicked!!!")
       return false;
     }
 
-    if (numGridItems < numListItems) {
+// Check for results correctness for multiple target retrieval (comparing with list of targets)
+    if (numGridItems < numListItems &&
+        this.up().getXType('panel').match(/multiple/) != null) {
       Ext.MessageBox.show({
         title:'Error',
         msg:'Data for all required targets could not be found: Missing data',

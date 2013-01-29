@@ -79,8 +79,9 @@ Ext.define('TDGUI.view.grid.DynamicGrid3', {
   csid_column:false,
   contextMenu:null,
 
-
-
+  columns:[
+    {name:'temp', hidden:true}
+  ],
 
   initComponent: function () {
 
@@ -101,61 +102,14 @@ Ext.define('TDGUI.view.grid.DynamicGrid3', {
       id:'selectable'
     };
 
-    var grid_store = Ext.create('TDGUI.store.DynamicGrid');
+//    var grid_store = Ext.create('TDGUI.store.DynamicGrid');
+    console.log ("DynamicGrid3.initComponent!!!");
     var config = {
-
-      store: grid_store,
-/*
-    tbar: [
-      {
-        xtype:'button',
-        text:'Retrieve next 100 records',
-        tooltip:'On each click 100 additional records\nare added to the resultset',
-        itemId:'nextRecords',
-        iconCls:'icon-new',
-        disabled:true
-      },
-      { xtype:'tbseparator' },
-      {
-        xtype:'exporterbutton',
-        store:grid_store,
-        formatter:'csv',
-        swfPath:'app/view/ux/exporter/downloadify.swf',
-        downloadImage:'app/view/ux/exporter/csv_button.png',
-        itemId:'csvDownload_id',
-        width:117,
-        height:22,
-          hidden:false
-        },
-        { xtype:'tbseparator' },
-        {
-          xtype:'button',
-          text:'Prepare SD-file download',
-          tooltip:'Starts a two steep process to download the SD-file. This may take a while...',
-          itemId:'sdfDownloadProxy_id',
-//                        width: 155,
-          iconCls:'icon-sdf',
-          hidden:false,
-          disabled:true
-        },
-        {
-          xtype:'exporterbutton',
-          store:grid_store,
-          formatter:'sdf',
-          swfPath:'app/view/ux/exporter/downloadify.swf',
-          downloadImage:'app/view/ux/exporter/sdf_button.png',
-          itemId:'sdfDownload_id',
-          width:111,
-          height:22,
-          hidden:false,
-          disabled:true
-        }
-      ],
-   */
+/*      store: grid_store,
       columns:[
         {name:'temp', hidden:true}
       ],
-
+*/
       rowNumberer:true,
       defaultWidth:200,
       features: [groupingFeature, filters, cellTextSelector]

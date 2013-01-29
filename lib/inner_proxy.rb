@@ -9,17 +9,26 @@ class InnerProxy
 	include REXML
 
 	private
-# Suppossed endpoints for coreApi
-	CORE_API_URL_83 = "http://ops.few.vu.nl:8183/opsapi"
-	CORE_API_URL_84 = "http://ops.few.vu.nl:8184/opsapi"
-	CORE_API_URL_85 = "http://ops.few.vu.nl:8185/opsapi"
-	CORE_API_URL_86 = "http://ops.few.vu.nl:8186/opsapi"
-	CORE_API_URL_87 = "http://ops.few.vu.nl:8187/opsapi"
+# OPS
+	# Gets complete information about a target from its conceptWiki URI, such that
+	# http://api.openphacts.org/target?_format=json&uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fd76e4a78-c06c-416e-a0fc-c073a69000d5
+	# Mind the uri parameter: URL HAS TO BE ESCAPED
+	OPSAPI_TARGET_URL = 'http://api.openphacts.org/target'
+	OPSAPI_PHARMA_URL = 'http://api.openphacts.org/target/pharmacology/pages'
+
 
 # URL for conceptwiki
-	CONCEPT_WIKI_API_SEARCH_URL = "http://staging.conceptwiki.org/web-ws/concept/search/"
+	# Search a concept byTag or byWhatever
+#	CONCEPT_WIKI_API_SEARCH_URL = "http://ops.conceptwiki.org/web-ws/concept/search/"
+	CONCEPT_WIKI_API_SEARCH_URL = "http://ops.conceptwiki.org/web-ws/concept/search/byTag"
+	# Get information for a concept from its uuid
+	CONCEPT_WIKI_API_GET_URL = "http://ops.conceptwiki.org/web-ws/concept/get"
 
-	TIMEOUT = 1.5 # arbitrary timeout to ping endpoints
+	CONCEPTWIKI_CONCEPT_URI = 'http://www.conceptwiki.org/concept/'
+	CONCEPT_WIKI_TP53_UUID = '62bf09e5-4909-4de8-b18d-885f95cdb3e4'
+
+
+	TIMEOUT = 2.5 # arbitrary timeout to ping endpoints
 
 	UNIPROT_PROTEIN_LOOKUP = 'http://www.uniprot.org/uniprot/?query=organism:9606+AND+xxxx&format=tab&columns=id,protein%20names,citation,comments,genes&sort=score&limit=25'
 	UNIPROT_PROTEIN_LOOKUP_SHORT = 'http://www.uniprot.org/uniprot/?format=tab&columns=id,protein%20names,citation,comments,genes&sort=score&limit=25'
@@ -31,8 +40,7 @@ class InnerProxy
 	public
 	def initialize ()
 #		@coreApiEndpoints =[CORE_API_URL_83]
-		@coreApiEndpoints = [CORE_API_URL_83, CORE_API_URL_84, CORE_API_URL_85,
-												 CORE_API_URL_86, CORE_API_URL_87]
+		@conceptWikiEndpoints = [CONCEPT_WIKI_API_SEARCH_URL, CONCEPT_WIKI_API_GET_URL]
 
 		@coreApi_method = 'proteinInfo'
 		@coreApi_uri = 'http://chem2bio2rdf.org/chembl/resource/chembl_targets/12261'
@@ -45,10 +53,11 @@ class InnerProxy
 			CONCEPT_WIKI_API_SEARCH_URL => UNIPROT_PROTEIN_LOOKUP_SHORT
 		}
 
-		@coreApiEndpoints.each { |endpoint|
-			@urlMap[endpoint] = UNIPROT_PROTEIN_INFO
-		}
+#		@coreApiEndpoints.each { |endpoint|
+#			@urlMap[endpoint] = UNIPROT_PROTEIN_INFO
+#		}
 	end
+
 
 # Checks whether the endpoint for coreAPI is alive
 # @return [Boolean] true if the endpoint is alive; false otherwise
@@ -68,10 +77,24 @@ class InnerProxy
 
 # Gets the concept wiki search URI
 # @return [String] a conceptWiki url
-	def conceptwiki_ep
+	def conceptwiki_ep_search
 		CONCEPT_WIKI_API_SEARCH_URL
 	end
 
+
+	def conceptwiki_ep_get
+		CONCEPT_WIKI_API_GET_URL
+	end
+
+
+	def ops_api_target
+		OPSAPI_TARGET_URL
+	end
+
+
+	def ops_api_target_pharma
+		OPSAPI_PHARMA_URL
+	end
 
 
 # Gets the uniprot url used to get entries based on a term (ej. brca2)
@@ -91,28 +114,33 @@ class InnerProxy
 
 # Checks the conceptWiki endpoint, which is different of the coreApi endpoint
 # @return [Boolean] true if the conceptWiki endpoint is reachable; false otherwise
-	def checkConceptWiki ()
+	def check_conceptwiki ()
+	puts "InnerProxy.check_conceptwiki..."
 		# check to see if endpoint is responding
 		#		api_method = 'proteinInfo'
 		#		prot_uri = 'http://chem2bio2rdf.org/chembl/resource/chembl_targets/12261'
 		prot_uri = CONCEPT_WIKI_API_SEARCH_URL
+#		prot_uri = prot_uri + 'byTag'
 		options = Hash.new
 		options[:limit] = 1
 		options[:offset] = 0
 		options[:q] = 'tp53' # default test
+		options[:uuid] = CONCEPT_WIKI_TP53_UUID
 
-		url = URI.parse(prot_uri)
-												 #		 url = checkEndpoints()
+		prot_uri = prot_uri+ "?uuid=#{options[:uuid]}&q=#{options[:q]}"
+#		url = URI.parse(prot_uri) rescue prot_uri
+#		 url = checkEndpoints()
 		result = nil
 		Timeout::timeout (TIMEOUT) do
-			result = request(url, options)
+			result = request(prot_uri)
 		end
 
 # OJO
 #		@endpoint_ready = @urlMap[CONCEPT_WIKI_API_SEARCH_URL]
 #		return false
 # EO OJO
-		if result == nil || result < 0
+		puts "checkConceptWiki result: #{result} for #{prot_uri}"
+		if result == nil || result.code.to_i < 0
 			@endpoint_ready = @urlMap[CONCEPT_WIKI_API_SEARCH_URL]
 			false
 		else
@@ -142,11 +170,11 @@ class InnerProxy
 			begin
 			Timeout::timeout (TIMEOUT) do
 				@coreEndpointsChecked += 1 # checkpoint will be checked no matter it is dead or alive
-				alive = request(endpoint, options)
-			end
+				alive = request_post(endpoint, options)
+			end # EO Timeout ...do
 			rescue Timeout::Error => e
 				alive = 0
-			end
+			end # EO begin
 # OJO
 # 			@endpoint_ready = nil
 #			return false
@@ -168,6 +196,26 @@ puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '
 	end
 # EO checkCoreApi
 
+
+
+# Check if the OPS API endpoint (domain api.openphacts.org) is alive and responding
+# requests. To do that, a trivial request using uuid: 62bf09e5-4909-4de8-b18d-885f95cdb3e4
+# is performed, expectin a 200 result code
+	def check_OPS_api ()
+		uri_param = CGI.escape(CONCEPTWIKI_CONCEPT_URI+CONCEPT_WIKI_TP53_UUID)
+		ops_api_fulluri = OPSAPI_TARGET_URL + "?uri=#{uri_param}"
+		alive = 0
+		@endpoint_ready = nil
+
+		result = request(ops_api_fulluri)
+		alive = result.code.to_i
+		if alive > 0
+			@endpoint_ready = OPSAPI_TARGET_URL # any of them from 83 to 87
+		end
+
+		alive > 0 ? true : false
+
+	end
 
 
 
@@ -197,7 +245,7 @@ puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '
 		end # EO if
 
 		json_str += "]"
-puts "inner_proxy.uniprot2json:\n#{json_str}\n"
+# puts "inner_proxy.uniprot2json:\n#{json_str}\n"
 		json_str
 	end
 
@@ -265,39 +313,6 @@ puts "inner_proxy.uniprot2json:\n#{json_str}\n"
 		end
 
 
-
-#		recommended_name = main_entry.elements.collect('//protein//recommendedName/fullName') {
-#			|recName| recName.text
-#		}
-#		synonyms = main_entry.elements.collect('//protein//alternativeName/fullName') {
-#			|alt_name| alt_name.text
-#		}
-#		keywords = main_entry.elements.collect('//keyword') { |keyw| keyw.text }
-#
-#		organism = main_entry.elements.collect('//organism/name') { |org|
-#			if (org.attributes['type'] == 'synonym') then org.text end
-#		}
-#		function = main_entry.elements.collect("//comment[@type='function']") { |func|
-#			func.text
-#		}
-#		location = main_entry.elements.collect("//comment[@type='subcellular location']") { |func|
-#			func.text
-#		}
-#
-#		molWeight = nil
-#		seqLength = nil
-#		seq = nil
-#		main_entry.elements.collect("//sequence") { |theSeq|
-#			molWeight = theSeq.attributes['mass']
-#			seqLength = theSeq.attributes['length']
-#			seq = theSeq.text
-#		}
-#
-## the very first pdb reference is got. a comparison based on resolution can improve the choice
-#		pdbs = main_entry.elements.collect("//dbReference[@type='PDB']") { |pdb|
-#			pdb
-#		}
-
 		pdbResult = ''
 		if pdbs.empty? == false
 			pdbResult = 'http://www.pdb.org/pdb/explore/explore.do?structureId='
@@ -323,19 +338,43 @@ puts "inner_proxy.uniprot2json:\n#{json_str}\n"
 	end
 
 
+
+# Makes a get request guarded by a timeout
+# @param [String] addrs the URL where make the request
+# @return the response object or an negative integer if an exception was raised
+	def request (addrs)
+		uri = URI.parse(addrs) rescue addrs
+		http = Net::HTTP.new(uri.host, uri.port)
+		req = Net::HTTP::Get.new(uri.request_uri)
+		begin
+			response = Timeout::timeout(TIMEOUT) {
+				http.request(req)
+			}
+		rescue Timeout::Error => exc
+			@requestErrMsg = "ERROR: #{exc.message}"
+			-1
+
+		rescue Errno::ETIMEDOUT => exc
+			@requestErrMsg = "ERROR: #{exc.message}"
+			-2
+
+		rescue Errno::ECONNREFUSED => exc
+			@requestErrMsg = "ERROR: #{exc.message}"
+			-3
+
+		else
+			#    puts "Response is..."
+			#    puts response.code.to_i
+			response
+		end
+	end
+
+
+
 	private
 # request (addrs, opts)
 # Make a simple http POST request and returns the response code
-	def request (addrs, opts)
-
-			# uri = URI.parse (addrs)
-			#myHttp = Net::HTTP.new(uri.host, uri.port)
-			#request = Net::HTTP::Post.new(uri.request_uri)
-			#request["Content-Type"] = "application/json"
-			#
-			#request.set_form_data(opts)
-			#response = Net::HTTP::post_form(uri, opts)
-
+	def request_post (addrs, opts)
 
 		uri = URI.parse (addrs) rescue addrs
 puts "InnerProxy.request (#{addrs.to_s})\n"
@@ -357,6 +396,7 @@ puts "InnerProxy.request (#{addrs.to_s})\n"
 			#    puts response.code.to_i
 			response.code.to_i
 	end
+
 
 
 

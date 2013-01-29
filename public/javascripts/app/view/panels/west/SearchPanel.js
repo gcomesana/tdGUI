@@ -73,7 +73,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
 
 
-// METHODS TO CREATE COMPONENTS ////////////////////////////////////////////////////
+// METHODS TO CREATE INNER COMPONENTS ////////////////////////////////////////
   /**
    * Creates a Ext.form.Label component and set a property on this class referencing the
    * label.
@@ -103,6 +103,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
 
     return this.exampleLabel
   },
+
 
 
   /**
@@ -145,7 +146,7 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
         }] // EO items
 
       }]
-    })
+    });
 
     return this.searchTab
   },
@@ -200,6 +201,8 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       uniprot_name: "AA2AR_HUMAN"
     }]
 
+
+//////////////////////////////////////////////////////////////
     myData = [{
       name: "Alpha-2A adrenergic receptor",
       concept_uuid: "59aabd64-bee9-45b7-bbe0-9533f6a1f6bc",
@@ -236,24 +239,25 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       ], // uniprot_acc: "Q5H943",
       uniprot_id: "AA2AR_HUMAN", // uniprot_id: "KKLC1_HUMAN"
       uniprot_name: "AA2AR_HUMAN"
-    }]
+    }];
 
-    var initStore = Ext.create('TDGUI.store.ListTargets')
-    initStore.loadData(myData)
+    var initStore = Ext.create('TDGUI.store.ListTargets');
+    initStore.loadData(myData);
 
-    this.targetList = Ext.widget ('tdgui-item-multilist', {
+    this.targetList = Ext.create ('TDGUI.view.common.ItemMultilist', {
       listName: 'Target List',
+      id: 'targetListId',
       store: initStore,
       displayField: 'display_field',
       valueField: 'uniprot_acc'
-    })
+    });
 
     this.targetList.addDockedItem({
       xtype: 'button',
       text: 'Search'
-    })
+    });
 
-    return this.targetList
+    return this.targetList;
   },
 
 
@@ -268,6 +272,16 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
     return this.textareaCode
   },
 */
+
+
+  /**
+   *
+   * @param strTargets
+   */
+  setTargetList: function (strTargets) {
+
+  },
+
 
 
   /**
@@ -287,8 +301,9 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       border: false,
 //      closable: true,
 
+
       items: [
-        this.createTargetList(),
+        this.createTargetList()
         /*
         me.retrievingButtons = Ext.widget ('tdgui-panelbuttons', {
           anchor: '100%',

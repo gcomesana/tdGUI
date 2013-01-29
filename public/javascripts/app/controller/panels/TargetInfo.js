@@ -26,6 +26,7 @@ Ext.define("TDGUI.controller.panels.TargetInfo", {
 
   init:function () {
 console.info ("Initializing TargetInfo controller...")
+
     this.control({
       'tdgui-targetinfopanel':{
         afterrender: this.initTargetInfoPanel,
@@ -40,7 +41,6 @@ console.info ("Initializing TargetInfo controller...")
           var form = comp.up('form')
           var formVals = form.getForm().getValues()
 
-console.info ('Yes, button send interactions clicked')
           this.onClickInteractionsBtn (formVals.uniprotAcc, formVals.conf_val, formVals.max_nodes)
           comp.up('window').hide()
         }
@@ -86,13 +86,14 @@ console.info ('Yes, button send interactions clicked')
     if (targetAcc.indexOf ('conceptWiki') != -1)
       return
 */
+//    var targetName = this.getTargetinfopanel().down('#target_name').getRawValue()
 
-    var targetName = this.getTargetinfopanel().down('#target_name').getRawValue()
-    var historyParams = '!xt=tdgui-graphdatapanel&qp=' + targetAcc + '&cv=' + confVal +
-                '&mn=' + maxNodes + '&tg='+targetName
+    var targetName = this.getTargetinfopanel().down('#prefLabel').getRawValue();
+    var historyParams = '!xt=tdgui-graphtabpanel&qp=' + targetAcc + '&cv=' + confVal +
+                '&mn=' + maxNodes + '&tg='+targetName;
 
-    var dcParam = '&dc='+Math.random()
-    Ext.History.add (historyParams + dcParam)
+    var dcParam = '&dc='+Math.random();
+    Ext.History.add (historyParams + dcParam);
 
 //    console.info ('clicked for: '+historyParams)
   },
@@ -108,28 +109,27 @@ console.info ('Yes, button send interactions clicked')
   initTargetInfoPanel: function (comp, opts) {
 //    var store = this.getTargetsStore();
 console.info ('initTargetInfoPanel from TargetInfo controller')
-    var store = comp.targetInfoStore
-    var tokenObjQp = comp.queryParam
+    var store = comp.targetInfoStore;
+    var tokenObjQp = comp.queryParam;
     var tokenParams = tokenObjQp.split(',') // returns always a array
-console.info ('TargetInfo.initTargetInfoPanel tokenParams: '+tokenParams)
+console.info ('TargetInfo.initTargetInfoPanel tokenParams: '+tokenParams);
 
-    myMask.bindStore(store)
+    myMask.bindStore(store);
 
 // get the conceptUUID
     Ext.each (tokenParams, function (token, index, tokens) {
       if (token.indexOf('conceptwiki') != -1) {
-        var lastSlash = token.lastIndexOf('/')
-        comp.concept_uuid = token.substring(lastSlash+1)
+        var lastSlash = token.lastIndexOf('/');
+        comp.concept_uuid = token.substring(lastSlash+1);
       }
 
       if (token.indexOf ('uniprot') != -1) {
-        var lastSlash = token.lastIndexOf('/')
-        comp.uniprot_acc = token.substring(lastSlash+1)
+        var lastSlash = token.lastIndexOf('/');
+        comp.uniprot_acc = token.substring(lastSlash+1);
       }
-    })
+    });
 
 // get the uniprot accession from query string
-
 
 //    if (tokenParams[0] != store.proxy.extraParams.protein_uri) {
       store.proxy.extraParams.protein_uri = tokenParams[0];

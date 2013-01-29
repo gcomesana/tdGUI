@@ -1,7 +1,7 @@
 
 
 /**
- * @class TDGUI.model.DynamicGrid
+ * @class TDGUI.model.DynamicGrid3
  * @extend Ext.data.Model 
  *
  * The model 'template' for the store associated with {@link TDGUI.view.grid.DynamicGrid}

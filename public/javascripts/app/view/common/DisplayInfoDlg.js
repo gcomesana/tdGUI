@@ -45,12 +45,12 @@ Ext.define('TDGUI.view.common.DisplayInfoDlg', {
   initComponent: function () {
   	var me = this
 
-  	this.title = this.data.nodename
+  	this.title = this.data.nodename // Window title parametrized!!!
   	var displayWidth = this.width-15
 
   	var displayArea = Ext.create ('TDGUI.view.common.panels.TextImagePanel', {
   		data: me.data, // data is {nodename: ..., numconnections: ...}
-  		tpl: me.tpl
+  		tpl: me.tpl // matching the template
 //      imagePath: 'http://www.rcsb.org/pdb/images/' + pdbID + '_asr_r_250.jpg'
 //  		autoScroll: true
 //  		imagePath: 'resources/images/4e99_bio_r_500.jpg',

@@ -6,7 +6,8 @@ class CoreApiCall
 	include ActiveModel::Validations
 	extend ActiveModel::Naming
 
-	CORE_API_URL = "http://ops.few.vu.nl:9184/opsapi"
+	CORE_API_URL_OLD = "http://ops.few.vu.nl:9184/opsapi"
+	CORE_API_URL = "http://api.openphacts.org"
 	OP_PROTEIN_INFO = 'proteinInfo'
 
 	def initialize(url = CORE_API_URL, open_timeout = 60, read_timeout = 60)
@@ -96,8 +97,8 @@ puts ("coreAPi.request(#{api_method.to_s}, opts=#{options.to_s})")
 #
 #		puts "Call took #{@query_time} seconds"
 
-
-
+# api_method: proteinInfo or similar
+# options = [url: http://conceptwiki/concept/..., method->proteinInfo]
 		response = EndpointsProxy.make_request(api_method, options)
 # below would be EndpointsProxy.make_request ('proteinInfo', {protein_uri:...} )
 #		response = EndpointsProxy.make_request(api_method, options)
@@ -108,17 +109,8 @@ puts ("coreAPi.request(#{api_method.to_s}, opts=#{options.to_s})")
 								 return nil
 							 when 200 then #HTTPOK => Success
 								 @success = true
-								 parsed_response = CoreApiResponseParser.parse_response(response)
-								 if parsed_response.instance_of?(Hash)
-									 return [parsed_response]
-								 end
-								 @results = Array.new
-								 parsed_response.each do |solution|
-									 rdf = solution.to_hash
-									 rdf.each { |key, value| rdf[key] = value.to_s }
-									 @results.push(rdf)
-								 end
-								 return @results
+
+								 return response.body
 							 when 201..407 then
 								 @http_error = "HTTP #{status.to_s}-error"
 								 puts @http_error

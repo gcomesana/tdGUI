@@ -71,7 +71,8 @@ class CoreApiCallsController < ApplicationController
         return
       end
       render :json => ResultsFormatter.construct_column_objects(ResultsFormatter.format_chemspider_results(ResultsFormatter.format_pubmed_id(results))).to_json, :layout => false    
-  end
+	end
+
   
   # Main search for pharmacology by protein/target name.
 	# The input parameter is the cmpd_url returned by cmdp_name_lookup
@@ -92,9 +93,11 @@ class CoreApiCallsController < ApplicationController
         render :json => {:success => false, :error_text => "System timeout"}.to_json, :layout => false
         return
       end
-      render :json => ResultsFormatter.construct_column_objects(ResultsFormatter.format_chemspider_results(ResultsFormatter.format_pubmed_id(results))).to_json, :layout => false    
+#      render :json => ResultsFormatter.construct_column_objects(ResultsFormatter.format_chemspider_results(ResultsFormatter.format_pubmed_id(results))).to_json, :layout => false
+			render :json => results, :layout => false
   end
-  
+
+
   
   # Query for the substructure/exact and similarity search by smiles string from the drawn structure
   # search_types: 1 = exact match, 2 = substructure search, 3 = similarity search
@@ -130,9 +133,11 @@ class CoreApiCallsController < ApplicationController
 		if results.nil? then
 		  render :json => {:success => false}.to_json, :layout => false
 		else
-    	render :json => ResultsFormatter.construct_column_objects(results).to_json, :layout => false
+#    	render :json => ResultsFormatter.construct_column_objects(results).to_json, :layout => false
+			render :json => results, :layout => false
 		end
   end
+
 
 # Checks whether or not endpoint is responding
    def check

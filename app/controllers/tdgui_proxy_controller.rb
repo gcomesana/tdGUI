@@ -38,32 +38,61 @@ puts "json_entries: #{json_entries}\n"
 #		uuids_arr = uuids_query.split(',')
 		index_ops = 0
 		index_uuid = 0
+# Get the rest of information from conceptwiki based on the collected uuids
 		uuids_arr.each { |uuid|
+			next if uuid.nil?
 			options = Hash.new
 			api_method = 'proteinInfo'
 			prot_uri = 'http://www.conceptwiki.org/concept/'+uuid
+			options[:uuid] = uuid
 			options[:uri] = '<' + prot_uri + '>'
 			options[:limit] =  params[:limit]
 			options[:offset] = params[:offset]
 			api_call = CoreApiCall.new
 			results = api_call.request( api_method, options)
 
-# Fusion the information got from uniprot with info we gotta get from coreAPI (if existing, if working)
-			if (results.nil? || results[0].empty?) && accs[index_uuid] == '-'
+			json_result = JSON.parse(results) rescue nil
+			result_topic = json_result['result']['primaryTopic'] rescue nil
+			# resulta_match is an array with undefined, unordered number of hash elements
+			result_match = result_topic['exactMatch'] rescue nil
+
+# results is now a json string (from OPS api)
+			if (results.nil? || results.empty?) && accs[index_uuid] == '-'
 				index_uuid += 1
 
-			elsif (results.nil? || results[0].empty?) && accs[index_uuid] != '-'
+			elsif (results.nil? || results.empty?) && accs[index_uuid] != '-'
 				index_ops += 1
 				index_uuid += 1
 
-			elsif results[0].empty? == false && accs[index_uuid] == '-'
+			elsif results.nil? == false && results.empty? == false && accs[index_uuid] == '-'
 				concept_item = Hash.new
-				concept_item['proteinFullName'] = results[0][:target_name]
-				concept_item['function'] = results[0][:description]
-				concept_item['organismSciName'] = results[0][:organism]
-				concept_item['pdbImg'] = "<img src=\"/images/target_placeholder.png\" width=\"80\" height=\"80\" />"
-				concept_item['genes'] = []
-				concept_item['accessions'] = []
+				if json_result.nil? == false
+					concept_item['proteinFullName'] = result_topic['prefLabel'] unless result_topic['prefLabel'].nil?
+					function_got = false
+					organism_got = false
+
+					if result_match.nil? == false
+						result_match.each { |el|
+							if el.is_a?(Hash)
+								el.each { |k, v|
+									if k == 'Function_Annotation'
+										uniprot_item['function'] == v
+										function_got = true
+									end
+									if k == 'organism'
+										concept_item['organismSciName'] = v
+										organism_got = true
+									end
+								}
+							end
+							break if function_got && organism_got
+						}
+					end
+
+					concept_item['pdbImg'] = "<img src=\"/images/target_placeholder.png\" width=\"80\" height=\"80\" />"
+					concept_item['genes'] = []
+					concept_item['accessions'] = []
+				end
 
 				json_entries['ops_records'].insert(index_ops, concept_item)
 				json_entries['totalCount'] += 1
@@ -71,10 +100,22 @@ puts "json_entries: #{json_entries}\n"
 				index_ops += 1
 				index_uuid += 1
 
-			elsif results[0].empty? == false && accs[index_uuid] != '-'
+			elsif results.empty? == false && accs[index_uuid] != '-'
 				uniprot_item = json_entries['ops_records'][index_ops]
-				uniprot_item['proteinFullName'] = results[0][:target_name] unless results[0][:target_name].empty?
-				uniprot_item['function'] = results[0][:description] unless results[0][:description].empty?
+				uniprot_item['proteinFullName'] = result_topic['prefLabel'] unless result_topic['prefLabel'].nil?
+				if result_match.nil? == false
+					result_match.each { |el|
+						if el.is_a?(Hash)
+							el.each { |k, v|
+								if k == 'Function_Annotation'
+									uniprot_item['function'] == v
+									break
+								end
+							}
+						end
+					}
+				end
+
 #				uniprot_item[:organismSciName] = results[0][:organism] unless results[0][:organism].empty?
 
 				index_uuid += 1
@@ -103,7 +144,7 @@ puts "json_entries: #{json_entries}\n"
 		conf_val = conf_param.to_f == 0.0 ? conf_val: conf_param.to_f
 		max_nodes_param = params[:max_nodes] ? 0: params[:max_nodes].to_i
 		max_nodes = max_nodes_param == 0 ? max_nodes: max_nodes_param
-puts "Getting interactions from Intact with conf_val=#{conf_val} & max_nodes=#{max_nodes}\n"
+puts "Getting interactions for '#{target_id}' from Intact with conf_val=#{conf_val} & max_nodes=#{max_nodes}\n"
 		return '[]' unless target_id != nil && target_id != ''
 #		graph = stringdb_proxy.get_target_interactions(target_id)
 		graph = intact_proxy.get_target_interactions(target_id, conf_val, max_nodes)
@@ -117,15 +158,31 @@ puts "Getting interactions from Intact with conf_val=#{conf_val} & max_nodes=#{m
 # get information about a target from uniprot but only a name exists
 # @param [String] target_label the name or label to get the target from uniprot
 # @return a json string
-	def get_uniprot_by_name (target_label = params[:label])
+	def get_uniprot_by_name (target_label = params[:label], target_uuid = params[:uuid])
 
 		proxy = TdguiProxy.new
-		return '[]' unless target_label != nil && target_label != ''
+#		return '[]' unless target_label != nil && target_label != ''
 
-		entry_hash = proxy.get_uniprot_by_name(target_label)
+		entry_hash = proxy.get_uniprot_by_name(target_label, target_uuid)
 
 		render :json => entry_hash.to_json, :layout => false
 	end
+
+
+# Gets a uniprot target out of a accession. It makes a simple get request to uniprot
+# @param [String] target_acc the accesion to get the target from uniprot
+# @return a json string
+	def get_uniprot_by_acc (target_acc = params[:acc])
+		proxy = TdguiProxy.new
+		return '[]' unless target_acc != nil && target_acc != ''
+
+		entry_hash = proxy.get_uniprot_by_acc(target_acc)
+
+		render :json => entry_hash.to_json, :layout => false
+	end
+
+
+
 
 
 # Sends an email feedback to admin from the feedback window on GUI

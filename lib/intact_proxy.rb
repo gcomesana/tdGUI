@@ -5,6 +5,8 @@ require 'cgi'
 require 'nokogiri'
 require 'JSON'
 
+require 'intact/jit_graph'
+require 'intact/intact_dao'
 
 # This class encapsulates the methods to get an protein interaction networks from
 # Intact database (<a href="http://www.ebi.ac.uk/intact" target="_blank">link</a>)
@@ -14,6 +16,7 @@ class IntactProxy
 	STRING_DB_URL = 'http://string-db.org/api/psi-mi/interactions?identifier=xxxx&required_score=900&limit=5&network_flavor=confidence'
 	INTACT_URL = 'http://www.ebi.ac.uk/Tools/webservices/psicquic/intact/webservices/current/search/query/xxxx?format=xml25&species=9606'
 	CONFIDENCE_VAL_THRESHOLD = 0.4
+	MAX_NEIGHBOURS = 6
 	MAX_EDGE_WIDTH = 10
 
 	def initialize
@@ -38,58 +41,23 @@ class IntactProxy
 # value is below this parameter will be discarded
 # @return [Hash] a hash object ready to be converted in to a json object suitable
 # to configure a force directed graph as indicated above
-	def get_interaction_graph (target_id = 'Q13362', conf_threshold = 0.5)
+	def get_interaction_graph (target_id = 'Q13362', conf_threshold = CONFIDENCE_VAL_THRESHOLD,
+					num_neighbours = MAX_NEIGHBOURS)
 #		xmlFile = File.new('../data/q13362-stringdb-interactions.xml') # psi-mi xml file
 
-		myuri = INTACT_URL.gsub(/xxxx/, target_id)
-		psimiResp = request(myuri, {})
-		xmlDoc = Nokogiri::XML(psimiResp.body)
+#		myuri = INTACT_URL.gsub(/xxxx/, target_id)
+		dbhost = TdGUI::Application.config.intactdb.intact_server
+		dbport = TdGUI::Application.config.intactdb.intact_port
+		dbuser = TdGUI::Application.config.intactdb.intact_user
+		dbpasswd = TdGUI::Application.config.intactdb.intact_pass
+		dbname = 'intact'
 
-		experiments = Array.new
-		expList = xmlDoc.css('experimentDescription')
-		expList.each { |exp|
-			experiment = def_experiment(exp)
-			experiments << experiment
-		}
-#		puts "Retrieved experiments (#{experiments.length})\n"
-#		experiments.each { |one| puts("#{one[:desc]}\n")}
+		graph_jit = JitGraph.new
+#		dao = IntactDao.new(dbhost, dbport, dbname, dbuser, dbpasswd)
+		graph_jit.set_db_params(dbhost, dbport, dbname, dbuser, dbpasswd)
+		graph_ary = graph_jit.yield_graph(target_id, conf_threshold, num_neighbours)
 
-		interactors = Array.new
-		interactors = build_interactors(xmlDoc)
-
-		#interactorList = xmlDoc.css('interactor')
-		#interactorList.each { |elem|
-		#	interactor = def_interactor(elem)
-		#	interactors << interactor
-		#
-		#	#	interactionList = xmlDoc.css('interaction')
-		#}
-
-# puts "***************************\nRetrieved interactors (#{interactors.length})\n"
-		interactors.each { |intrctr| puts("#{intrctr.to_json}\n") }
-
-
-		interactionList = xmlDoc.css('interaction')
-		adjacencies = Array.new
-		color = "white"
-		interactionList.each { |intr|
-
-			adjacency = def_interaction(intr, conf_threshold)
-			adjacencies << adjacency
-		}
-
-
-		#puts "adjacencies is #{adjacencies.length} long\n"
-		adjacencies.each { |edge|
-			#	puts("#{edge.to_json}\n")
-		}
-
-		# $edges_counter.each { |k, v| puts "#{k} -> #{v}\n" }
-
-		puts "\n buildup_graph\n"
-		graph = buildup_graph(experiments, interactors, adjacencies)
-
-		graph
+		graph_ary
 	end
 
 
@@ -107,7 +75,9 @@ class IntactProxy
 		xmlDoc = Nokogiri::XML(psimiResp.body)
 #		xmlDoc = Nokogiri::XML(intact_file)
 
-		main_interactors = build_interactors (xmlDoc)
+# main_interactors is an array of hashes
+		main_interactors = build_interactors(xmlDoc)
+puts "\nmain_interactors:\n#{main_interactors.to_s}\n\n"
 
 		if main_interactors.length == 0
 			return []
@@ -124,14 +94,26 @@ puts "\n#{main_interactions.to_s}\n"
 		end
 		main_ids = main_interactors.collect { |item| item[:id][4..(item[:id].length-1)] }
 
+		main_accs = Array.new
+		main_interactors.each { |intr|
+			main_accs << intr[:name]
+		}
+		intact_xml_resps = perform_intact_reqs(main_accs) # return a Hash {:acc => :http_response}
+
+puts "** main_ids: #{main_ids.to_s}\n"
+main_interactors.each { |intrc|
+	puts "** interactor: name=#{intrc[:name]} vs id=#{intrc[:id]}\n"
+}
+puts "** and main_accs: #{main_accs.to_s}\n"
+
 # START loop over main interactors to build the 'supergraph'
 		main_interactors.each { |interactor|
 			accession = interactor[:name]
-			my_intactUri = INTACT_URL.sub('xxxx', accession)
-# puts "\nnew accession #{accession}\n"
-			xmlstr = request(my_intactUri, [])
-start_time = Time.now
-			inner_xml_doc = Nokogiri::XML(xmlstr.body)
+
+# thread issue
+      xmlstr_thr = intact_xml_resps[accession]
+			inner_xml_doc = Nokogiri::XML(xmlstr_thr.body)
+
 
 # get the nodes subset for the current target
 			new_subset = get_interactors_subset(inner_xml_doc, main_interactors)
@@ -151,8 +133,7 @@ start_time = Time.now
 # get the interactions of interest for the current target
 			interactions_subset = get_interactions_subset(inner_xml_doc, new_subset, conf_threshold)
 
-# Convert interactions ids for nodeFrom and nodeTo fields
-# as well as edges_counter references
+# Convert interactions ids for nodeFrom and nodeTo fields as well as edges_counter references
 			interactions_subset.collect! { |intrcn|
 # remove this interaction from the @edges_counter
 				num_edges = @edges_counter.delete([intrcn[:nodeFrom],intrcn[:nodeTo]])
@@ -190,7 +171,6 @@ start_time = Time.now
 # get the experiment ids for this interaction subnet in order to exclude
 # experiments not involved on these interactions
 			exp_ids = interactions_subset.collect { |intrcn|
-#				intrcn[:interactionData][:experimentRef]
 				intrcn[:interactionData].collect { |data|
 					data[:experimentRef]
 				}
@@ -203,11 +183,8 @@ start_time = Time.now
 			full_interactions = merge_interactions(interactions_subset, full_interactions)
 
 			full_interactions
-end_time = Time.now
-elapsed_time = (end_time - start_time) * 1000
-puts "///=> Elapsed time in processing '#{accession}' was #{elapsed_time} ms\n\n"
-		} # EO main_interactions each
 
+		} # EO main_interactions each
 
 		super_graph = buildup_graph(full_experiments, main_interactors, full_interactions)
 puts "\n#{super_graph.to_json}\n\n"
@@ -704,20 +681,64 @@ puts "\norphans: #{orphans}\n"
 
 
 
+# Performs a concurrent intact requests in order to dramatically decrease the
+# response time... lets see
+# @param [Array] main_accs array of strings containing the uniprot_acc for the interactors
+# @return [Hash] a hash where key is an uniprot accession and value will be the reponse
+# got from IntAct for that accession
+	def perform_intact_reqs (main_accs)
+
+		threads = []
+		responses = Hash.new
+		for an_acc in main_accs
+	puts "main_accs: #{main_accs.to_s} -> an_acc: #{an_acc}\n"
+#			my_intactUri = INTACT_URL.sub('xxxx', an_acc)
+#			xmlstr = request(my_intactUri, [])
+			threads << Thread.new(an_acc) do |accession|
+				my_intactUri = INTACT_URL.sub('xxxx', accession)
+				res = request(my_intactUri, [])
+				responses[accession] = res
+=begin
+				inner_start_time = Time.now
+
+				my_url = URI.parse(url)
+				print "Fetching: #{url}\n"
+				req = Net::HTTP::Get.new(my_url.request_uri)
+				resp = Net::HTTP.start(my_url.host, my_url.port) { |http|
+					http.request(req)
+				}
+				responses[an_id] = resp.body
+				inner_end_time = Time.now
+				inner_elapsed = (inner_end_time - inner_start_time) * 1000
+				print "Elapsed time: #{inner_elapsed} ms\n\n"ç
+=end
+			end
+
+		end # EO for
+
+		threads.each {|thr|
+			thr.join
+		}
+
+		responses
+	end
+
+
+
 #
 # This method does a http get request to an uri
 # @param [String] url the target url
 # @param [Hash] options parameters and other options for the request (query string, ...)
 # @return [Net::HTTPResponse] the object response
 	def request(url, options)
-		puts "IntactProxy.request (#{url}, #{options.inspect})\n"
+puts "IntactProxy.request (#{url}, #{options.inspect})\n"
 		my_url = URI.parse(url)
 start_time = Time.now
 
 		proxy_host = 'ubio.cnio.es'
 		proxy_port = 3128
 		req = Net::HTTP::Get.new(my_url.request_uri)
-		res = Net::HTTP.start(my_url.host, my_url.port, proxy_host, proxy_port) { |http|
+		res = Net::HTTP.start(my_url.host, my_url.port) { |http|
 			http.request(req)
 		}
 end_time = Time.now

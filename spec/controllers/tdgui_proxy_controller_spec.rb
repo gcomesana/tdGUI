@@ -199,6 +199,21 @@ describe TdguiProxyController do
 	end
 
 
+	describe "should deal with interactions" do
+
+		it "to get exactly a interaction network with 4 nodes" do
+			get :interactions_retrieval, :conf_val => 0.32, :target => 'P29274', :max_nodes => 3
+
+			response.body.should_not be_nil
+			response.status.should be == 200
+			json_resp = JSON.parse(response.body)
+			json_resp.should be_kind_of Array
+			json_resp.should have(4).items
+
+		end
+
+	end
+
 
 	it "should send an email" do
 		params = Hash.new

@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe "TdguiProxy model actions" do
 
-	it "should return a non empty hash for Q13362" do
+	it "should get intractions as a hash for Q13362" do
 		tdguiproxy = TdguiProxy.new
 		target_acc = 'Q13362'
 
@@ -18,7 +18,7 @@ puts "Fucking end\n\n"
 	end
 
 
-	it "should have the right structure for JIT" do
+	it "should the interations retrieved have the right structure for JIT" do
 		tdguiproxy = TdguiProxy.new
 		target_acc = 'Q9BXW4'
 

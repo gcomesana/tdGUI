@@ -109,28 +109,12 @@ puts "** and main_accs: #{main_accs.to_s}\n"
 # START loop over main interactors to build the 'supergraph'
 		main_interactors.each { |interactor|
 			accession = interactor[:name]
-=begin
-			my_intactUri = INTACT_URL.sub('xxxx', accession)
-			xmlstr = request(my_intactUri, [])
-			inner_xml_doc = Nokogiri::XML(xmlstr.body)
-=end
+
 # thread issue
       xmlstr_thr = intact_xml_resps[accession]
 			inner_xml_doc = Nokogiri::XML(xmlstr_thr.body)
 
-=begin
-			xmlstrEq = xmlstr_thr.to_s == xmlstr.body
-			nokogiriEq = inner_xml_doc == inner_xml_doc_thr
-if !xmlstrEq
-	diffStr = if xmlstr.body.size <= xmlstr_thr.size
-							xmlstr_thr.index(xmlstr.body) == 0? xmlstr_thr[xmlstr.body.size()..xmlstr_thr.size()]: nil
-						else
-							xmlstr.body.index(xmlstr_thr) == 0? xmlstr.body[xmlstr_thr.size()..xmlstr.body.size()]: nil
-						end
 
-	puts "lengths (xmlstr vs xmlstr_thr): #{xmlstr.body.size}vs #{xmlstr_thr.size} => #{diffStr}\n"
-end
-=end
 # get the nodes subset for the current target
 			new_subset = get_interactors_subset(inner_xml_doc, main_interactors)
 
@@ -754,7 +738,7 @@ start_time = Time.now
 		proxy_host = 'ubio.cnio.es'
 		proxy_port = 3128
 		req = Net::HTTP::Get.new(my_url.request_uri)
-		res = Net::HTTP.start(my_url.host, my_url.port, proxy_host, proxy_port) { |http|
+		res = Net::HTTP.start(my_url.host, my_url.port) { |http|
 			http.request(req)
 		}
 end_time = Time.now

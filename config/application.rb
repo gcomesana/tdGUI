@@ -61,6 +61,8 @@ module TdGUI
 		# IntAct db configuration
 		opts = {:intact_server => 'localhost', :intact_user => 'intact',
 						:intact_pass => '1ntakt', :intact_port => '5432'}
+		opts = {:intact_server => 'padme.cnio.es', :intact_user => 'gcomesana',
+						:intact_pass => 'appform', :intact_port => '5432'}
 		config.intactdb = OpenStruct.new(opts)
 
 		require File.expand_path(File.join(File.dirname(__FILE__), '../lib/app_settings'))

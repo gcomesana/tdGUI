@@ -134,6 +134,7 @@ private
 # @param [Array] node_interactions this is a subset of the full interaction set,
 # where the first node (kind of origin) is always the same. So, this interaction subset
 # represents interactions from one node to whatever else
+# @param [Array] interactors the array of the interactors, will be uniprot accessions
 # @return an array of interactions ready to be converted in a valid JSON for jit.org FD graph
 	def build_graph_adjacencies (node_interactions, interactors)
 		adjacencies = Array.new

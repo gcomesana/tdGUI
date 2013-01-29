@@ -217,17 +217,30 @@ puts "the url: #{url}"
 
 		email_to = 'gcomesana@cnio.es'
 		email_from = 'gcomesana@cnio.es'
-		body_message = <<-EOF
+		msg_date = Time.now.strftime("%a, %d %b %Y %H:%M:%S +0800")
+=begin
+		body_message = <<END_OF_MESSAGE
 			From: #{opts[:from]}
 			To: <#{email_to}>
 			Subject: #{opts[:subject]}
+			Date: #{msg_date}
 
 			#{opts[:body]}
-		EOF
+		END_OF_MESSAGE
+=end
+		msgstr = <<-END_OF_MESSAGE
+		From: Your Name <your@mail.address>
+		To: Destination Address <someone@example.com>
+		Subject: test message
+		Date: Sat, 23 Jun 2001 16:26:43 +0900
+		Message-Id: <unique.message.id.string@example.com>
+
+		This is a test message.
+		END_OF_MESSAGE
 
 		begin
 			Net::SMTP.start(opts[:server]) do |smtp|
-				smtp.send_message body_message, email_from, email_to
+				smtp.send_message msgstr, email_from, email_to
 			end
 			return true
 

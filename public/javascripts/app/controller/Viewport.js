@@ -312,19 +312,6 @@ console.info ("raising interactions for Target panel")
 
     });
 
-
-
-
-    // Multiple requests should be done in order to get basic information about
-    // targets.
-    // If uniprot is available, /tdgui_proxy/
-    // If uuid is available, /tdgui_proxy/get_target_by_uuid
-    // This means targets.length requests
-    // By using /tdgui_proxy/multiple_targets_retrieval, only one request is needed
-    // and actual results can be found in hash['ops_records'], which is an array
-    // of hashes: target = hash['ops_records'][i]
-    // The interesting elements are: target['accessions'], target['proteinfullName']
-    // and function and/or organismSciName
   }
 
 })

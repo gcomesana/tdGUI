@@ -65,6 +65,12 @@ TdGUI::Application.routes.draw do
 	end
 
 
+	resources :feedback do
+		collection do
+			post :feedback
+		end
+	end
+
 =begin
     resources :thrashcan do
       collection do

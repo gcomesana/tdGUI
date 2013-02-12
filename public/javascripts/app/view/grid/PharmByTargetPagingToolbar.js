@@ -1,20 +1,10 @@
-/**
- * Created with JetBrains RubyMine.
- * User: jameseales
- * Date: 12/07/2012
- * Time: 14:10
- * To change this template use File | Settings | File Templates.
- */
-Ext.define('TDGUI.view.grid.PharmByTargetScrollingGrid', {
+
+Ext.define('TDGUI.view.grid.PharmByTargetPagingToolbar', {
   extend: 'TDGUI.view.grid.DynamicGrid3',
-  alias: 'widget.tdgui-pharmbytargetscroll-grid',
+  alias: 'widget.tdgui-pharmbytarget-toolbar-grid',
 
   layout: 'fit',
   // verticalScrollerType:Ext.create('LDA.helper.DynamicPagingToolbar', {itemId:'pager_id'}),
-  verticalScrollerType: 'paginggridscroller',
-  loadMask: true,
-  disableSelection: true,
-  invalidateScrollerOnRefresh: false,
 
   listeners: {
     'sortchange': function (ct, column, direction, eOpts) {
@@ -35,12 +25,15 @@ Ext.define('TDGUI.view.grid.PharmByTargetScrollingGrid', {
   */
 
 
+
   viewConfig: {
     enableTextSelection: true
   },
 
 
   initComponent: function () {
+
+    var me = this;
     /*
     var myConfig = {
     };
@@ -176,8 +169,17 @@ Ext.define('TDGUI.view.grid.PharmByTargetScrollingGrid', {
     ];
 
 
+    this.dockedItems = [{
+      xtype: 'pagingtoolbar',
+      store: me.store,   // same store GridPanel is using
+      dock: 'bottom',
+      displayInfo: true
+    }]
+
     this.callParent(arguments);
   },
+
+
 
   target_prov: false,
   toggleProv: function (val) {
@@ -190,12 +192,10 @@ Ext.define('TDGUI.view.grid.PharmByTargetScrollingGrid', {
 
 
 function targetProvenanceRenderer(data, cell, record, rowIndex, columnIndex, store) {
-//  console.log("Target Pharmacology provenance renderer");
 
   //if (LDAProvenanceMode != LDA.helper.LDAConstants.LDA_PROVENANCE_OFF) {
   if (this.target_prov) {
-    console.log("cell rendered using targetProvenanceRenderer...");
-
+    console.log("Target Pharmacology provenance renderer");
     var recdata = this.columns[columnIndex].dataIndex;
     var itemdata = recdata + '_item';
     recdata += '_src';

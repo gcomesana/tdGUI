@@ -12,7 +12,8 @@ Ext.define ('TDGUI.view.panels.PharmByTarget', {
 
   requires: ['TDGUI.view.grid.DynamicGrid3',
             'TDGUI.view.grid.PharmByTargetScrollingGrid',
-            'TDGUI.store.lda.TargetPharmacologyStore'],
+            'TDGUI.store.lda.TargetPharmacologyStore',
+            'TDGUI.store.lda.TargetPharmacologyCountStore'],
 
   /**
    * @cfg {Object} layout see TDGUI.view.Viewport#layout
@@ -32,6 +33,9 @@ Ext.define ('TDGUI.view.panels.PharmByTarget', {
     var me = this
 
 //    this.theGrid = this.createGrid()
+
+    this.testStores();
+
     this.theGrid = this.createPharmGrid();
     this.items = [this.theGrid];
     this.callParent(arguments);
@@ -98,6 +102,51 @@ Ext.define ('TDGUI.view.panels.PharmByTarget', {
         });
 
     return theGrid;
+  },
+
+
+
+  testStores: function () {
+    var me = this;
+    var conceptwiki_uri_mock = 'http://www.conceptwiki.org/concept/70dafe2f-2a08-43f7-b337-7e31fb1d67a8';
+    conceptwiki_uri_mock = 'http://www.conceptwiki.org/concept/979f02c6-3986-44d6-b5e8-308e89210c8d';
+    var myStore = Ext.create('TDGUI.store.lda.TargetPharmacologyStore');
+    myStore.proxy.extraParams = {
+      uri: conceptwiki_uri_mock
+    };
+
+    var countStore = Ext.create('TDGUI.store.lda.TargetPharmacologyCountStore');
+    countStore.proxy.extraParams = {
+      _format: 'json',
+      uri: conceptwiki_uri_mock
+    };
+
+    countStore.load (function (recs, op, success) {
+      if (success) {
+        console.log("countStore load ok");
+        if (recs[0].data.count > 0) {
+          myStore.addListener('load', me.pharmaLoaded, me);
+          myStore.load();
+        }
+      }
+      else
+        console.log("no success when loading countStore");
+
+    });
+  },
+
+
+
+  pharmaLoaded: function (store, recs, success, op) {
+    if (success) {
+      console.log("recs retrieved: "+recs.length);
+
+    }
+    else
+      console.log ("Failed to load target compounds");
+
   }
+
+
 
 })

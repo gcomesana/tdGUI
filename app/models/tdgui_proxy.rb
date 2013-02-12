@@ -33,6 +33,11 @@ class TdguiProxy
 	end
 
 
+	def test (test_param = nil)
+		string_param = test_param.nil? ? 'nil': test_param
+		{:resp => "TdguiProxy.test method. testParam is: #{string_param}"}
+	end
+
 
 # Builds up a graph (array of hashes) for the uniprot accession taking into account
 # a maximun number of nodes in the graph and a minimum score the interactions have to accomplish.
@@ -247,6 +252,46 @@ puts "the url: #{url}"
 		rescue Exception => ex
 			return false
 		end
+	end
+
+
+# It gets the number of results to be fetched when getting results for the concept
+# uri defined by the uri param
+# @param [String] uri the concept wiki uri
+	def get_pharm_count (uri)
+		inner_proxy = InnerProxy.new
+
+		esc_uri = CGI::escape(uri)
+		url = inner_proxy.ops_api_count_pharma + "?uri=#{esc_uri}&_format=json"
+		response = request(url, [])
+		if response.code.to_i != 200
+			puts "ConceptWiki get service not working properly right now!"
+			nil
+
+		else
+			json_hash = JSON.parse(response.body)
+			json_hash
+		end
+	end
+
+
+	def get_pharm_results_by_page (concept_uri, page, pageSize)
+		inner_proxy = InnerProxy.new
+
+		esc_uri = CGI::escape(concept_uri)
+		url = inner_proxy.ops_api_pharma_page_results + "?_format=json&uri=#{esc_uri}"
+		url = url + "&_page=#{page}&_pageSize=#{pageSize}"
+		response = request(url, [])
+
+		if response.code.to_i != 200
+			puts "ConceptWiki get service not working properly right now!"
+			nil
+
+		else
+			json_hash = JSON.parse(response.body)
+			json_hash
+		end
+
 	end
 
 

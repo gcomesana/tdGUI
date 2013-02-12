@@ -214,13 +214,14 @@ Ext.define('TDGUI.util.TargetPharmacologyReader', {
     });
     var total_count = this.total_count;
     console.log ("TargetPharmacologyReader: totalcount = "+records.length);
-    return new Ext.data.ResultSet(
-      {
-        total: total_count,
-        count: records.length,
-        records: records,
-        success: true,
-        message: 'loaded'
-      });
+    
+    var rs = new Ext.data.ResultSet({
+      total: total_count,
+      count: records.length,
+      records: records,
+      success: true,
+      message: 'loaded'
+    });
+    return rs;
   }
 });

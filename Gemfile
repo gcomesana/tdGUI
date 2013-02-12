@@ -14,6 +14,7 @@ gem 'dbd-pg'
 gem 'pg' # , '~> 0.11.1'
 gem 'rdf'
 gem 'sparql-client'
+gem 'grape'
 
 gem 'nokogiri', '~> 1.5.4'
 

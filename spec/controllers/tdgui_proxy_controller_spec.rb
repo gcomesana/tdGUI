@@ -215,6 +215,47 @@ describe TdguiProxyController do
 	end
 
 
+	describe "should deal with pharma information" do
+
+		it "to get the number of results to be fetched" do
+			uri = 'http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+			uri = 'http://www.conceptwiki.org/concept/59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+#			uri = 'http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F70dafe2f-2a08-43f7-b337-7e31fb1d67a8'
+			get :get_pharm_count, :uri => uri
+
+			response.should_not be_nil
+			response.code.to_i.should be == 200
+			response.body.should_not be == ''
+
+			json_resp = JSON.parse(response.body)
+			json_resp.should be_kind_of Hash
+			json_resp['result'].should be_kind_of Hash
+			json_resp['result']['primaryTopic']['targetPharmacologyTotalResults'].should_not be_nil
+			json_resp['result']['primaryTopic']['targetPharmacologyTotalResults'].should be >= 0
+
+		end
+
+		it "to get pharma information results of drugs on a target" do
+			uri = 'http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+			#		uri = 'http://www.conceptwiki.org/concept/59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+
+			get :get_pharmtarget_page_results, :uri => uri, :page => 1, :pagesize => 50
+
+			response.should_not be_nil
+			response.code.to_i.should be == 200
+			response.body.should_not be == ''
+
+			json_resp = JSON.parse(response.body)
+			json_resp.should be_kind_of Hash
+			json_resp['result'].should be_kind_of Hash
+			json_resp['result']['items'].should be_kind_of Array
+			json_resp['result']['items'].should have(50).items
+			json_resp['result']['itemsPerPage'].should be == 50
+			json_resp['result']['items'].should have((json_resp['result']['itemsPerPage']).to_i).items
+		end
+	end
+
+
 	it "should send an email" do
 		params = Hash.new
 		params[:from] = 'manolo@eldelbombo.com'
@@ -229,5 +270,8 @@ describe TdguiProxyController do
 		json_resp['success'].should_not be_nil
 		json_resp['success'].should be_true
 	end
+
+
+
 
 end

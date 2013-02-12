@@ -1,7 +1,8 @@
 require "rspec"
 require 'spec_helper'
+require 'net/http'
 
-describe "TdguiProxy model actions" do
+describe "TdguiProxy model" do
 
 	it "should get intractions as a hash for Q13362" do
 		tdguiproxy = TdguiProxy.new
@@ -119,6 +120,58 @@ puts "target ids: #{target_str}\n\n"
 		hash.should_not be_nil
 		hash.size.should be > 0
 		hash.size.should be == 5
+
+	end
+
+
+	it "get_pharm_count should return a valid json with number of total results" do
+		uri = 'http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+#		uri = 'http://www.conceptwiki.org/concept/59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+
+		uri = URI.encode(uri)
+		td_proxy = TdguiProxy.new
+		resp = td_proxy.get_pharm_count uri
+
+		resp.should_not be_nil
+		resp.should be_kind_of Hash
+		resp['result'].should be_kind_of Hash
+		resp['result']['primaryTopic']['targetPharmacologyTotalResults'].should be == 2304
+	end
+
+
+	it "get_pharm_resutls_by_page should return similar large json with 25 results" do
+		uri = 'http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+#		uri = 'http://www.conceptwiki.org/concept/59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+
+		page_size = 25
+		page = 1
+
+		td_proxy = TdguiProxy.new
+		resp = td_proxy.get_pharm_results_by_page(uri, page, page_size)
+
+		resp.should_not be_nil
+		resp.should be_kind_of Hash
+		resp['result'].should be_kind_of Hash
+		resp['result']['items'].should be_kind_of Array
+		resp['result']['items'].should have(25).items
+	end
+
+
+	it "get_pharm_results_by_page should return only 4 results" do
+		uri = 'http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+		#		uri = 'http://www.conceptwiki.org/concept/59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+
+		page_size = 50
+		page = 47
+
+		td_proxy = TdguiProxy.new
+		resp = td_proxy.get_pharm_results_by_page(uri, page, page_size)
+
+		resp.should_not be_nil
+		resp.should be_kind_of Hash
+		resp['result'].should be_kind_of Hash
+		resp['result']['items'].should be_kind_of Array
+		resp['result']['items'].should have(4).items
 
 	end
 

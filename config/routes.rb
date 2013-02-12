@@ -1,3 +1,4 @@
+require 'grape'
 
 TdGUI::Application.routes.draw do
 
@@ -37,6 +38,9 @@ TdGUI::Application.routes.draw do
 			get :interactions_retrieval
 			get :get_uniprot_by_name
 			get :get_uniprot_by_acc
+
+			get :get_pharm_count
+			get :get_pharm_by_target_page
 			post :send_feedback
 		end
 	end
@@ -82,6 +86,8 @@ TdGUI::Application.routes.draw do
     end
 =end
   root :to => "home#index"
+
+	# mount GrapeApi::TestApi => "/td" # should be /grape/test-grape/api[/thisisonlyatest]
 
 #	match "home" => "home#index"
 

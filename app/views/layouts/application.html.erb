@@ -6,7 +6,7 @@
   <%#= javascript_include_tag "application" %>
 
   <%= stylesheet_link_tag :all %>
-  <%= stylesheet_link_tag '/javascripts/extjs4.0.7/resources/css/ext-all-gray.css' %>
+  <%= stylesheet_link_tag '/javascripts/extjs4.1/resources/css/ext-all-gray.css' %>
 
   <%= stylesheet_link_tag '/stylesheets/sbuttons.css' %>
   <%= stylesheet_link_tag '/stylesheets/jit.css' %>
@@ -15,7 +15,7 @@
 
   <!-- environment: <%= ENV['RAILS_ENV'] %> -->
   <% if ENV['RAILS_ENV'] != 'production' %>
-    <%= javascript_include_tag '/javascripts/extjs4.0.7/ext-all-debug.js' %>
+    <%= javascript_include_tag '/javascripts/extjs4.1/ext-all-debug.js' %>
     <%#= javascript_include_tag "extjs4.0.7/bootstrap.js" %>
     <%#= javascript_include_tag 'prototype.js' %>
     <%# = javascript_include_tag "borderbis" %>
@@ -46,7 +46,7 @@
     var proteinInfoBaseUrl = "http://" + host + ':' + port + info_rails_path;
     proteinInfoBase = info_rails_path;
     var proteinPharmBaseUrl = "http://" + host + ':' + port + pharm_rails_path;
-    proteinPharmBaseUrl = pharm_rails_path;
+    proteinPharmBaseUrl = '<%= AppSettings.config["tsv"]["tsv_pharm_page_results"] -%>';
   </script>
 
   <script type="text/javascript">
@@ -93,6 +93,8 @@
   <input type="hidden" id="x-history-field"/>
   <iframe id="x-history-frame"></iframe>
 </form>
+
+<div id="container" style="padding: 10px 10px 10px 10px"></div>
 
 <%= yield %>
 

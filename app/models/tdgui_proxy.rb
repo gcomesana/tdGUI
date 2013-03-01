@@ -45,7 +45,7 @@ class TdguiProxy
 # @param [Float] conf_val a confidence value threshold
 # @param [Integer] max_nodes the max number of nodes for the graph
 # @return [Array] the graph as an array of hashes
-	def get_target_interactions (target_id, conf_val = 0.5, max_nodes = 6)
+	def get_target_interactions (target_id, conf_val = 0.4, max_nodes = 6)
 
 		target_graph = nil
 		if target_id.nil? || target_id.empty? then
@@ -56,7 +56,7 @@ class TdguiProxy
 			target_graph = intact_proxy.get_interaction_graph(target_id, conf_val, max_nodes)
 #			target_graph = intact_proxy.get_super_interaction_graph(target_id, max_nodes, conf_val)
 		end
-
+	puts "target_graph length: #{target_graph.size()}\n"
 		target_graph
 	end
 
@@ -101,7 +101,7 @@ puts "get_multiple_entries: #{entries}"
 
 		else
 			# from dbfetch service, what we get is xml
-			uniprotxml2json (results.body)
+			uniprotxml2hash (results.body)
 #			return true
 		end
 
@@ -118,6 +118,7 @@ puts "get_multiple_entries: #{entries}"
 		options = {}
 
 		results = request(url, options)
+		puts "get_uniprot_by_acc req -> #{results.body.to_s}\n"
 		if results.code.to_i != 200
 			puts "Uniprot fetch service not working properly right now!"
 			nil
@@ -128,6 +129,7 @@ puts "get_multiple_entries: #{entries}"
 			first_entry = entries[0]
 
 			entry_hash = decode_uniprot_entry(first_entry)
+			entry_hash
 		end
 	end
 
@@ -143,7 +145,8 @@ puts "get_multiple_entries: #{entries}"
 		@uniprot_name = name
 		concept_hash = nil
 		url = nil
-		if (uuid.nil? == false || uuid.empty? == false) # we have uuid
+
+		if uuid.nil? == false && uuid.empty? == false # we have uuid
 			concept_hash = get_target_by_uuid(uuid)
 			url = concept_hash[:uniprot_url]+'.xml'
 
@@ -302,7 +305,7 @@ puts "the url: #{url}"
 # multiple uniprot entries retrieval based on accessions
 # @param [String] xmlRes the body of the request performed elsewhere
 # @return [Hash] a hash object with the corresponding fields
-	def uniprotxml2json (xmlRes)
+	def uniprotxml2hash (xmlRes)
 		xmlDoc = Document.new xmlRes
 		entries = xmlDoc.elements.collect('uniprot/entry') { |ent| ent }
 		fieldsArray = Array.new
@@ -372,8 +375,7 @@ puts "Filling columns..."
 
 		topHash
 #		topHash.to_json
-
-	end
+	end # EO uniprotxml2hash
 
 
 # Builds a column definition ready to be integrated with some extjs 4 grid

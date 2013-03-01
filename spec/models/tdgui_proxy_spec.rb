@@ -8,7 +8,7 @@ describe "TdguiProxy model" do
 		tdguiproxy = TdguiProxy.new
 		target_acc = 'Q13362'
 
-		target_int = tdguiproxy.get_target_interactions(target_acc, 0.3)
+		target_int = tdguiproxy.get_target_interactions(target_acc, 0.4)
 
 		target_int.should be_kind_of Array
 		target_int.length.should be > 0
@@ -43,6 +43,7 @@ puts "Fucking end\n\n"
 		proxy.should_not be_nil
 		hash_res = proxy.get_target_by_uuid(target_uuid)
 
+		puts "hash_res 2 json: #{hash_res.to_json}\n"
 		hash_res.should_not be_nil
 		hash_res.should have(3).items
 		hash_res[:uniprot_url].should match(/uniprot/)
@@ -60,6 +61,7 @@ puts "Fucking end\n\n"
 		target_label = 'Breast cancer type 2 susceptibility protein'
 
 #		target_label = 'Deleted in bladder cancer protein 1'
+		target_uuid = nil
 		target_hash = proxy.get_uniprot_by_name(target_label, target_uuid)
 
 		target_hash.should_not be_nil

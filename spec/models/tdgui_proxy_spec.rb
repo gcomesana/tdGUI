@@ -35,6 +35,32 @@ puts "Fucking end\n\n"
 	end
 
 
+	it "should return the genes found for a target from uniprot accession" do
+		tdguiproxy = TdguiProxy.new
+		target_acc = 'P0ABH8'
+#		target_acc = 'Q5H943'
+
+		target_int = tdguiproxy.get_uniprot_by_acc(target_acc)
+		target_int.should be_an_instance_of Hash
+		target_int['allgenes'].should_not be nil
+
+		target_int['allgenes'].should be_kind_of Array
+
+	end
+
+
+	it "should return the genes found for a target from uniprot accession" do
+		tdguiproxy = TdguiProxy.new
+		gene_name = 'CACNA1C'
+
+		target_int = tdguiproxy.get_uniprot_by_gene(gene_name)
+		target_int.should be_an_instance_of Hash
+		target_int['allgenes'].should_not be nil
+
+		target_int['allgenes'].should be_kind_of Array
+
+	end
+
 
 	it "should return a hash with 3 elements got from conceptWiki" do
 		proxy = TdguiProxy.new
@@ -93,7 +119,7 @@ puts "Fucking end\n\n"
 		target_hash['accessions'].should be_kind_of Array
 		target_hash['pdbimg'].should_not be_empty
 		target_hash.should have_key('proteinFullName')
-		target_hash.should have(6).items
+		target_hash.should have(7).items
 
 	end
 

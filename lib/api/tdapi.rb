@@ -19,6 +19,8 @@ module TargetDossierApi
 		before do
 			header['Access-Control-Allow-Origin'] = '*'
 			header['Access-Control-Request-Method'] = '*'
+			header['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS, PUT, PATCH, DELETE'
+			header['Access-Control-Allow-Headers'] = 'true'
 		end
 
 		helpers do
@@ -112,22 +114,26 @@ module TargetDossierApi
 		end # helpers
 
 
-		resource 'uniprot' do # /td/api/v1/uniprot...
 
-			# /td/api/v1/uniprot/test[?param_test=<something>]
+		resource '' do
+			# /api/status[?param_test=<something>]
 			params do
-				optional :param_test, :type => String, :desc => 'buffffffffff'
+				optional :param_test, :type => String, :desc => 'A ping string. It will be returned in the response'
 			end
-			desc 'this is only a test', {
+			desc 'this is only a API status test', {
 				:notes => 'Just a test with a fixed json response.'
 			}
-			get '/test' do
-				puts "/td/api/v1/def/test?param_test=#{params[:param_test]}"
+			get '/status' do
+				puts "/api/status?param_test=#{params[:param_test]}"
 				proxy = TdguiProxy.new
 
 				proxy.test(params[:param_test])
 			end
 
+		end
+
+
+		resource 'target' do # formerly uniprot, /td/api/v1/uniprot...
 
 			# /td/api/v1/uniprot/multiple?entries=<acc_1,acc_2, ..., acc_i>
 			params do
@@ -172,6 +178,31 @@ module TargetDossierApi
 
 				proxy.get_uniprot_by_acc(params[:acc])
 			end
+
+
+			params do
+				requires :acc, :type => String, :regexp => /[A-Z][A-Z0-9]{5}/, :desc => 'The uniprot accession'
+			end
+			desc 'Return an array the genes for the target. Along with the gene, the type of the id is sent back'
+			get '/genes/:acc' do
+				proxy = TdguiProxy.new
+				uniprot_hash = proxy.get_uniprot_by_acc(params[:acc])
+
+				uniprot_hash['allgenes']
+			end
+
+
+			params do
+				requires :gene, :type => String, :desc => 'A gene name'
+			end
+			desc 'Return information about the target yield from the gene name'
+			get '/bygene/:gene' do
+				proxy = TdguiProxy.new
+				uniprot_hash = proxy.get_uniprot_by_gene(params[:gene])
+
+				uniprot_hash
+			end
+
 
 		end # EO resource uniprot
 
@@ -269,26 +300,6 @@ module TargetDossierApi
 				resp
 			end
 
-
-=begin
-			params do
-				requires :protein_id, :type => String, :regexp => /([0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12})|([A-Z][A-Z0-9]{5})/
-			end
-			desc 'Gets a json representing the protein pharmacology info got from OPS API. Param can be either a uniprot accession or a concept uuid'
-			get '/protein/pharma/:protein_id' do
-				prot_uuid = protein_concept_uuid(params[:protein_id])
-				prot_uri = "http://www.conceptwiki.org/concept/#{prot_uuid}"
-				core_proxy = CoreApiCall.new
-				options = Hash.new
-				api_method = 'proteinPharmacology'
-				options[:uri] = '<' + prot_uri + '>'
-#				options[:limit] =  params[:limit]
-#				options[:offset] = params[:offset]
-				resp = core_proxy.request( api_method, options)
-
-				resp
-			end
-=end
 
 			params do
 				requires :protein_id, :type => String, :regexp => /([0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12})|([A-Z][A-Z0-9]{5})/

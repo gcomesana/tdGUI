@@ -10,7 +10,7 @@ Ext.Loader.setConfig({
 });
 
 
-Ext.Loader.setPath('Ext.ux', '/javascripts/extjs4.0.7/ux');
+Ext.Loader.setPath('Ext.ux', '/javascripts/extjs4.1/examples/ux');
 // Ext.Loader.setPath('LDA', '/javascripts/LinkedDataAPIParser/lib');
 
 Ext.ns('TDGUI.Globals');

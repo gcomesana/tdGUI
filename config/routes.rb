@@ -1,3 +1,7 @@
+require 'grape'
+require 'api/tdapi'
+require 'api/tdapi_pharma'
+require 'api/swagger-root'
 
 TdGUI::Application.routes.draw do
 
@@ -37,6 +41,9 @@ TdGUI::Application.routes.draw do
 			get :interactions_retrieval
 			get :get_uniprot_by_name
 			get :get_uniprot_by_acc
+
+			get :get_pharm_count
+			get :get_pharm_by_target_page
 			post :send_feedback
 		end
 	end
@@ -82,6 +89,11 @@ TdGUI::Application.routes.draw do
     end
 =end
   root :to => "home#index"
+
+	mount TargetDossierApi::TDApi => "/td" # should be /td/api/<resource>/<path_to_function>
+	mount TargetDossierPharmaApi::PharmaAPI => "/pharma" # ''
+	# mount GrapeApi::TestApi => "/grape" # should be /grape/api/<resource>/[/thisisonlyatest]
+	mount SwaggerGrapeMod::Root => "/" # FOR swagger!!!
 
 #	match "home" => "home#index"
 

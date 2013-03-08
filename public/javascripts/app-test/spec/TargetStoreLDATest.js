@@ -1,10 +1,10 @@
 
 
-var myApp = null;
 describe('Searching for target information', function () {
   var store_records, store_operation, store_success;
   var conceptwiki_uri_mock = 'http://www.conceptwiki.org/concept/70dafe2f-2a08-43f7-b337-7e31fb1d67a8';
   var utils;
+  var myApp = null;
 
   beforeEach (function () {
 //    console.log("INIT beforeEach: "+LDA.helper.LDAConstants.LDA_ASSAY_OF_ACTIVITY);
@@ -20,7 +20,7 @@ describe('Searching for target information', function () {
       requires: ['LDA.helper.LDAConstants', 'LDA.store.TargetStore',
         'TDGUI.util.LDAConstants', 'TDGUI.store.lda.TargetStore', 'TDGUI.util.TargetReader',
         'TDGUI.store.lda.TargetPharmacologyStore', 'TDGUI.util.TargetPharmacologyReader',
-        'TDGUI.controller.Viewport'],
+        'TDGUI.controller.Viewport', 'TDGUI.model.lda.TargetPharmacologyCountModel'],
 
       controllers: ['TDGUI.controller.Viewport', 'TDGUI.controller.SearchPanel'],
 
@@ -153,6 +153,7 @@ describe('Searching for target information', function () {
 
   it ('using TDGUI LDA adaptation (json) to get target information', function() {
     var targetInfoStore = Ext.create('TDGUI.store.lda.TargetStore');
+    var storeTest = Ext.create('TDGUI.store.lda.TargetPharmacologyCountStore');
 
     targetInfoStore.proxy.extraParams.protein_uri = conceptwiki_uri_mock;
 

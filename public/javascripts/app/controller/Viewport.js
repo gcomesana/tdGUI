@@ -229,7 +229,7 @@ console.info ("raising interactions for Target panel")
    * @param {Ext.data.Store} targetListStore the store with the targets
    */
   updateTargetList: function (qParams, targetListStore) {
-
+    console.log('updating target list for: '+qParams.split(','));
     var targets = qParams.split(',');
     var theUrl = targets.length == 1? '/tdgui_proxy/get_uniprot_by_acc':
         '/tdgui_proxy/multiple_entries_retrieval';

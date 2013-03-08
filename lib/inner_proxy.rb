@@ -15,7 +15,8 @@ class InnerProxy
 	# Mind the uri parameter: URL HAS TO BE ESCAPED
 	OPSAPI_TARGET_URL = 'http://api.openphacts.org/target'
 	OPSAPI_PHARMA_URL = 'http://api.openphacts.org/target/pharmacology/pages'
-
+	OPSAPI_PHARMA_COUNT_URL = 'http://api.openphacts.org/target/pharmacology/count'
+	OPSAPI_PHARMA_PAGE_RESULTS = 'http://api.openphacts.org/target/pharmacology/pages'
 
 # URL for conceptwiki
 	# Search a concept byTag or byWhatever
@@ -94,6 +95,15 @@ class InnerProxy
 
 	def ops_api_target_pharma
 		OPSAPI_PHARMA_URL
+	end
+
+	def ops_api_count_pharma
+		OPSAPI_PHARMA_COUNT_URL
+	end
+
+
+	def ops_api_pharma_page_results
+		OPSAPI_PHARMA_PAGE_RESULTS
 	end
 
 

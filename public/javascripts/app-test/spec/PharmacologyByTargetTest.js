@@ -1,21 +1,25 @@
-describe('Targets can be searched', function () {
+
+describe('Pharm compounds on a target can be searched', function () {
   var store_records, store_operation, store_success;
 
   beforeEach(function () {
     this.application = Ext.create('Ext.app.Application', {
       name: 'TDGUI',
-      appFolder: '../app',
-      requires: ['LDA.helper.LDAConstants'],
+      appFolder: 'javascripts/app',
+      requires: ['TDGUI.util.LDAConstants',
+        'TDGUI.store.lda.TargetPharmacologyCountStore',
+        'TDGUI.util.TargetPharmacologyCountReader'
+      ],
 
       // Define all the controllers that should initialize at boot up of your application
       controllers: [
 //        'LDAParserController',
 //        'Users',
-        'grids.DynamicGrid',
+        'grids.DynamicGrid'
         //     'grids.PharmaGridInf',
-//        'Grid',
+/*        'Grid',
         'NavigationTree',
-//        'Queryform',
+        'Queryform',
         'SimSearchForm',
         'CmpdByNameForm',
         'TargetByNameForm',
@@ -29,13 +33,14 @@ describe('Targets can be searched', function () {
 //        'pathwayByProteinForm',
 //        'PharmByTargetNameFormInf',
         'CW.controller.ConceptWikiLookup'
+*/
       ],
 
       // autoCreateViewport:true,
 
       launch: function () {
         console.log("launching app...");
-        console.log("ejemmmmmmm: "+LDA.helper.LDAConstants.LDA_COMPOUND_PHARMACOLOGY_COUNT);
+        console.log("ejemmmmmmm: "+TDGUI.util.LDAConstants.LDA_COMPOUND_PHARMACOLOGY_COUNT);
         //include the tests in the test.html head
         //jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
         //jasmine.getEnv().execute();
@@ -45,6 +50,33 @@ describe('Targets can be searched', function () {
   }); // EO beforeEach
 
 
+  it('should get the number of compounds for a target', function () {
+    var store = Ext.create('TDGUI.store.lda.TargetPharmacologyCountStore');
+    var conceptUri = 'http://www.conceptwiki.org/concept/b932a1ed-b6c3-4291-a98a-e195668eda49';
+    var loadSuccess, loadOp, loadRecs;
+    store.proxy.extraParams = {
+      uri: conceptUri,
+      _format: 'json'
+    };
+
+    store.load(function(recs, op, success) {
+      loadSuccess = success;
+      loadOp = op;
+      loadRecs = recs;
+    });
+
+    waitsFor(function () {
+      return !store.isLoading();
+    }, 'TargetPharmaCountStore not loaded :(', 4000);
+
+    runs(function () {
+      expect(loadSuccess).toBeTruthy();
+      expect(loadRecs.length).toEqual(1);
+    })
+
+  });
+
+/*
   it('and results can be paginated', function () {
     var store = Ext.create('LDA.store.TargetPharmacologyPaginatedStore', {});
     console.log("test ONE");
@@ -123,5 +155,5 @@ describe('Targets can be searched', function () {
       expect(store_success).toEqual(true);
     });
   }); // EO it...
-
+*/
 });

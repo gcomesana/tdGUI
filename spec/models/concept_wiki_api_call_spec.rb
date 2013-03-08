@@ -27,8 +27,11 @@ describe ConceptWikiApiCall do
 	it "make_request should return a valid Ruby Array from ops.conceptwiki" do
 #		res = @conceptWiki.request(@url, @opts)
 		@url = 'http://ops.conceptwiki.org/web-ws/concept/search/byTag'
-		res = @conceptWiki.search_by_tag(@opts[:uuid],@opts[:q],@opts)
+		res = @conceptWiki.search_by_tag(@opts[:uuid],@opts[:q],{})
+		res_bis = @conceptWiki.search_by_tag(@opts[:uuid],@opts[:q], @opts)
 		res.should be_kind_of Array
+		res.should be == res_bis
+
 puts "#{res}"
 	end
 
@@ -38,7 +41,15 @@ puts "#{res}"
 			res = @conceptWiki.search_by_tag(@opts[:uuid],@opts[:q],@opts)
 			res.should be_kind_of Array
 	puts "#{res}"
-		end
+	end
+
+
+	it "should try to get a url from a term or so" do
+		res = @conceptWiki.search_for_url(@opts[:q], {})
+		puts "#res:\n#{res}\n"
+
+	end
+
 
 end
 

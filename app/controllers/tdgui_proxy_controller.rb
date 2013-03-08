@@ -1,5 +1,6 @@
 
 
+
 # This is a 'custom' controller (which means is not derived from CoreGUI controllers)
 # to perform the actions triggered from application interface
 class TdguiProxyController < ApplicationController
@@ -198,6 +199,23 @@ puts "Getting interactions for '#{params[:target]}' from Intact with conf_val=#{
 		render :json => res ? '{"success": true}': '{"success":false}', :layout => false
 	end
 
+
+
+	def get_pharm_count (uri = params[:uri])
+		pharm_proxy = TdguiProxy.new
+
+		res = pharm_proxy.get_pharm_count uri
+		render :json => res.to_json, :layout => false
+	end
+
+
+
+	def get_pharm_by_target_page (uri = params[:uri], page = params[:_page], num_results=params[:_pageSize])
+		pharm_proxy = TdguiProxy.new
+
+		resp = pharm_proxy.get_pharm_results_by_page(uri, page, num_results)
+		render :json => resp.to_json, :layout => false
+	end
 
 
 end

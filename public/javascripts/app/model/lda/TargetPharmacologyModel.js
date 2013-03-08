@@ -5,7 +5,7 @@ Ext.define('TDGUI.model.lda.TargetPharmacologyModel', {
   extend: 'Ext.data.Model',
   fields: [
 
-    //for page
+    //for pagination
     'page_uri',
     'next_page',
     'previous_page',

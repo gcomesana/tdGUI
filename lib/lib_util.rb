@@ -1,6 +1,7 @@
 
 require 'rexml/document'
 require 'net/http'
+require 'net/https'
 require 'net/smtp'
 require 'uri'
 
@@ -197,7 +198,7 @@ class LibUtil
 # @param [String] url the target url
 # @param [Hash] options parameters and other options for the request
 # @return [Net::HTTPResponse] the object response
-	def request(url, options)
+	def self.request(url, options)
 		my_url = URI.parse(URI.encode(url))
 
 		begin
@@ -209,11 +210,21 @@ class LibUtil
 		start_time = Time.now
 		proxy_host = 'ubio.cnio.es'
 		proxy_port = 3128
-		req = Net::HTTP::Get.new(my_url.request_uri)
 		#		res = Net::HTTP.start(my_url.host, my_url.port, proxy_host, proxy_port) { |http|
-		res = Net::HTTP.start(my_url.host, my_url.port) { |http|
-			http.request(req)
-		}
+		res = nil
+		if url.index('https').nil?
+			req = Net::HTTP::Get.new(my_url.request_uri)
+			res = Net::HTTP.start(my_url.host, my_url.port) { |http|
+				http.request(req)
+			}
+		else
+			http = Net::HTTP.new(my_url.host, my_url.port)
+			http.use_ssl = true
+			http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+			request = Net::HTTP::Get.new(my_url.request_uri)
+			res = http.request(request)
+		end
 
 
 		#http_session = proxy.new(my_url.host, my_url.port)

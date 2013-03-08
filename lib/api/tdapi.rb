@@ -21,6 +21,8 @@ module TargetDossierApi
 			header['Access-Control-Request-Method'] = '*'
 			header['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS, PUT, PATCH, DELETE'
 			header['Access-Control-Allow-Headers'] = 'true'
+
+			@proxy = APIProxy.new
 		end
 
 		helpers do
@@ -133,6 +135,7 @@ module TargetDossierApi
 		end
 
 
+## target ##################################################################
 		resource 'target' do # formerly uniprot, /td/api/v1/uniprot...
 
 			# /td/api/v1/uniprot/multiple?entries=<acc_1,acc_2, ..., acc_i>
@@ -168,7 +171,6 @@ module TargetDossierApi
 			# /td/api/v1/uniprot/<accession>
 			params do
 				requires :acc, :type => String, :regexp => /[A-Z][A-Z0-9]{5}/
-#				optional :output, :type => String, :regexp => /xml|json/, :desc => 'The output format'
 			end
 			desc 'Gets an uniprot entry info from accession. Append .xml to the request to get XML output', {
 				:notes => 'accession'
@@ -204,10 +206,26 @@ module TargetDossierApi
 			end
 
 
+
+			desc 'Gets the targets involved in the given disease according to http://www.uniprot.org/faq/19'
+			params do
+				requires :disease, :type => String, :desc => 'A disease/disorder name, like asthma or anemia'
+				optional :callback, :type => String, :desc => 'A callback function for JSONP requests'
+				optional :offset, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
+				optional :limit, :type => Integer, :desc => 'The max number of results to send back'
+			end
+			get '/disease/:disease' do
+				targets_hash = @proxy.get_targets4disease(params[:disease], params[:offset], params[:limit])
+
+				targets_hash
+			end
+
+
 		end # EO resource uniprot
 
 
 
+## interactions ##############################################################
 		resource 'interactions' do
 
 			# /td/api/v1/interactions/<:acc>[?cv=<threshold>&neighs=<num_of_neighs>]
@@ -246,6 +264,8 @@ module TargetDossierApi
 		end # EO resource interactions
 
 
+
+## ops ###################################################################
 		resource 'ops' do
 
 			# /td/api/v1/ops/lookup?type=compound&term=term
@@ -337,7 +357,7 @@ module TargetDossierApi
 		end # EO resource ops
 
 
-
+## nexprot ##################################################################
 		resource 'nextprot' do
 # rest/protein/list?query=kinase&format=json
 # rest/entry/NX_P13051/localisation?format=json
@@ -403,7 +423,8 @@ module TargetDossierApi
 			end
 
 		end
-
 	end # EO class TDApi
+
+
 
 end

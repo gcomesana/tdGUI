@@ -3,7 +3,7 @@ require 'uri'
 require 'cgi'
 
 require 'nokogiri'
-require 'JSON'
+# require 'JSON'
 
 require 'intact/jit_graph'
 require 'intact/intact_dao'

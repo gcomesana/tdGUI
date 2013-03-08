@@ -23,7 +23,7 @@ class TdguiProxy
 
 	OLD_DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch/uniprotkb/xxxx/uniprotxml'
 	UNIPROT_BY_NAME = 'http://www.uniprot.org/uniprot/?query=xxxx+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
-	UNIPROT_BY_GENE = 'http://www.uniprot.org/uniprot/?query=organism:"Human+[9606]"+AND+gene:xxxx+AND+reviewed:yes&sort=score&format=xml'
+	UNIPROT_BY_GENE = 'http://www.uniprot.org/uniprot/?query=gene:xxxx+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
 
 	DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=uniprotkb&id=xxxx&format=xml'
 
@@ -90,7 +90,7 @@ puts "get_multiple_entries: #{entries}"
 		options[:q] = substring
 
 #		url = URI.parse(req_url)
-		results = request(url, options)
+		results = LibUtil.request(url, options)
 		if results.body == "" then # no concept found
 			puts "No concept found!"
 			@parsed_results = {:concept_uuid => nil, :concept_label => nil, :tag_uuid => nil, :tag_label => nil}
@@ -102,7 +102,7 @@ puts "get_multiple_entries: #{entries}"
 
 		else
 			# from dbfetch service, what we get is xml
-			uniprotxml2hash (results.body)
+			LibUtil.uniprotxml2hash (results.body)
 #			return true
 		end
 
@@ -118,7 +118,7 @@ puts "get_multiple_entries: #{entries}"
 		url = "http://www.uniprot.org/uniprot/#{accession}.xml"
 		options = {}
 
-		results = request(url, options)
+		results = LibUtil.request(url, options)
 #		puts "get_uniprot_by_acc req -> #{results.body.to_s}\n"
 		if results.code.to_i != 200
 			puts "Uniprot fetch service not working properly right now!"
@@ -145,7 +145,7 @@ puts "get_multiple_entries: #{entries}"
 		url = UNIPROT_BY_GENE.gsub(/xxxx/, gene)
 		options = {}
 
-		results = request(url, options)
+		results = LibUtil.request(url, options)
 		if results.code.to_i != 200
 			puts "Uniprot fetch service not working properly right now!"
 			nil
@@ -187,7 +187,7 @@ puts "the url: #{url}"
 
 #		url =  URI.encode(url)
 # puts "the url encoded: #{url}"
-		results = request(url, options)
+		results = LibUtil.request(url, options)
 		if results.code.to_i != 200
 			puts "Uniprot fetch service not working properly right now!"
 			return nil
@@ -215,7 +215,7 @@ puts "the url: #{url}"
 		inner_proxy = InnerProxy.new
 		url = inner_proxy.conceptwiki_ep_get + "?uuid=#{uuid}"
 
-		response = request(url, [])
+		response = LibUtil.request(url, [])
 		if response.code.to_i != 200
 			puts "ConceptWiki get service not working properly right now!"
 			nil
@@ -292,9 +292,10 @@ puts "the url: #{url}"
 	def get_pharm_count (uri)
 		inner_proxy = InnerProxy.new
 
-		esc_uri = CGI::escape(uri)
+		uri_unencoded = CGI::unescape(uri) == uri
+		esc_uri = uri_unencoded ? CGI::escape(uri) : uri
 		url = inner_proxy.ops_api_count_pharma + "?uri=#{esc_uri}&_format=json"
-		response = request(url, [])
+		response = LibUtil.request(url, [])
 		if response.code.to_i != 200
 			puts "ConceptWiki get service not working properly right now!"
 			nil
@@ -309,10 +310,11 @@ puts "the url: #{url}"
 	def get_pharm_results_by_page (concept_uri, page, pageSize)
 		inner_proxy = InnerProxy.new
 
-		esc_uri = CGI::escape(concept_uri)
+		uri_unencoded = CGI::unescape(concept_uri) == concept_uri
+		esc_uri = uri_unencoded ? CGI::escape(concept_uri) : concept_uri
 		url = inner_proxy.ops_api_pharma_page_results + "?_format=json&uri=#{esc_uri}"
 		url = url + "&_page=#{page}&_pageSize=#{pageSize}"
-		response = request(url, [])
+		response = LibUtil.request(url, [])
 
 		if response.code.to_i != 200
 			puts "ConceptWiki get service not working properly right now!"

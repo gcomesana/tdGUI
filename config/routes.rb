@@ -1,5 +1,6 @@
 require 'grape'
 require 'api/tdapi'
+require 'api/tdapi_pharma'
 require 'api/swagger-root'
 
 TdGUI::Application.routes.draw do
@@ -90,6 +91,7 @@ TdGUI::Application.routes.draw do
   root :to => "home#index"
 
 	mount TargetDossierApi::TDApi => "/td" # should be /td/api/<resource>/<path_to_function>
+	mount TargetDossierPharmaApi::PharmaAPI => "/pharma" # ''
 	# mount GrapeApi::TestApi => "/grape" # should be /grape/api/<resource>/[/thisisonlyatest]
 	mount SwaggerGrapeMod::Root => "/" # FOR swagger!!!
 

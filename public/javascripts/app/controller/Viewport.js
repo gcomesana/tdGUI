@@ -131,7 +131,7 @@ console.log("listStoreMain size: "+listStoreMain.getCount());
 //            uuids: concept_uuids.join(',')
           },
           title: "Multiple targets",
-          storeListTargets: listStore
+          storeListTargets: listStoreMain // listStore
         });
         break;
 
@@ -239,6 +239,7 @@ console.info ("raising interactions for Target panel")
     if (targets.length == 1) {
       var pair = targets[0].split(';');
 
+// flexibility: check if pair has only one of accession and uuid
       if (pair.length < 2) {
         var theindex = pair[0].search(/[A-Z][A-Z0-9]{5}/);
         if (theindex != -1) {
@@ -256,23 +257,51 @@ console.info ("raising interactions for Target panel")
             uuid: pair[0].substr(theindex, 36)
           }
         }
-      } // EO if
+      } // EO if pair.length > 2
       else {
-        var pair = target.split(';');
+        var localPair = target.split(';');
         theUrl ='/tdgui_proxy/get_uniprot_by_name';
         theParams = {
           label: '',
-          uuid: pair[1]
+          uuid: localPair[1]
         }
       } // EO else
-    } // EO if (pair...
+    } // EO if (target.length == 1...
     else {
       theParams = {
         entries: qParams
       }
     }
 
+    // Comparing params with store content: they can be the same
+    var equalContent = (targets.length == targetListStore.count());
+    if (equalContent) { // Check if the content is the same for both store and params
+      Ext.each (targets, function (target, index, targetParams){
+        var pair = target.split(';');
+        var accIndex = pair[0].search(/[A-Z][A-Z0-9]{5}/);
+        var uuidIndex = accIndex == -1? pair[0].search(/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}/):
+                        pair[1].search(/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}/);
 
+// Check the equality for both params, accession and uuid
+        var match_acc = null, match_uuid = null;
+        if (accIndex != -1) {
+          var accession = pair[0].substr(accIndex, 6)
+          match_acc = targetListStore.findRecord('uniprot_acc', accession);
+        }
+        if (uuidIndex != -1) {
+          var uuidNumber = pair[1].substr(uuidIndex, 36);
+          match_uuid = targetListStore.findRecord('concept_uuid', uuidNumber);
+        }
+
+        equalContent = equalContent && (match_acc != null && match_uuid != null);
+        return equalContent;
+      });
+
+    }
+
+// If targets in both parameters and store are the same, return and don't request anything
+    if (equalContent)
+      return;
 
     // Modifying the store associated to the list component refresh the list
     targetListStore.removeAll(true);

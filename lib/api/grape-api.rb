@@ -2,15 +2,21 @@
 
 module GrapeApi
 	class TestApi < Grape::API
-		prefix 'api' # prefix goes before version!!!!
+		prefix 'grape' # prefix goes before version!!!!
 #		version 'v1', :using => :path # host/td/api/v1...
 #		format :json
 
+=begin
 		before do
 			header['Access-Control-Allow-Origin'] = '*'
+			header['Access-Control-Allow-Methods'] = 'OPTIONS, GET, POST, DELETE, PUT'
+			header['Access-Control-Allow-Headers'] = 'Content-Type, api_key'
+			header['Content-Type'] = 'application/json; charset=utf-8'
 			header['Access-Control-Request-Method'] = '*'
-		end
 
+			header['Allow'] = 'OPTIONS,GET,HEAD'
+		end
+=end
 
 		resource 'test-grape' do # host/grape/[v1]/api/test-grape[/something]
 			desc 'Just a test with no params'
@@ -25,6 +31,7 @@ module GrapeApi
 			get ':string_param' do
 				{:res => "this is only a reverse test: #{params[:string_param]}"}
 			end
+
 		end
 
 

@@ -2,9 +2,10 @@
 
 require 'grape'
 require 'grape-swagger'
-require 'api/tdapi'
-require 'api/tdapi_pharma'
-require 'api/grape-api'
+require "#{Rails.root}/app/api/tdapi"
+# require 'api/tdapi'
+require "#{Rails.root}/app/api/tdapi_pharma"
+require "#{Rails.root}/app/api/grape-api"
 
 module SwaggerGrapeMod
 	class Root < Grape::API

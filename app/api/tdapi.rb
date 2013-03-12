@@ -122,8 +122,8 @@ module TargetDossierApi
 			params do
 				optional :param_test, :type => String, :desc => 'A ping string. It will be returned in the response'
 			end
-			desc 'this is only a API status test', {
-				:notes => 'Just a test with a fixed json response.'
+			desc 'Check the API status to see if the API functions are reachable', {
+				:notes => 'Returns an simple JSON object. If a param is passed in, it will be included in the response'
 			}
 			get '/status' do
 				puts "/api/status?param_test=#{params[:param_test]}"

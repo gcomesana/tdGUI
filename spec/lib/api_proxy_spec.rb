@@ -12,7 +12,7 @@ describe APIProxy do
 		disease = 'asthma'
 		resp = @apiproxy.get_targets4disease(disease, 0, 10)
 		resp.should be_kind_of Hash
-		resp[:process_term].should be == disease
+		resp[:query_term].should be == disease
 		resp[:targets].should have_at_least(1).items
 
 		resp[:targets][0].should be_kind_of Hash
@@ -24,8 +24,7 @@ describe APIProxy do
 		disease = 'asthma'
 		resp = @apiproxy.get_omim4disease(disease, 10)
 
-		resp.should be_kind_of Hash
-		resp['omim']['searchResponse']['entryList']['entry'].should be_kind_of Array
+		true.should be == true
 	end
 
 
@@ -34,5 +33,10 @@ describe APIProxy do
 		resp = @apiproxy.get_omim4disease(disease, 10)
 
 		resp.should be_kind_of Hash
+# 		resp['omim']['searchResponse']['entryList']['entry'].should be_kind_of Array
+		resp[:omim][:query_term].should be == disease
+		resp[:omim][:phenotype_list].should be_kind_of Array
+		resp[:omim][:phenotype_list].should have_at_least(1).items
+		resp[:omim][:phenotype_list][0].should be_kind_of Hash
 	end
 end

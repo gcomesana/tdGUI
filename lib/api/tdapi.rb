@@ -20,7 +20,7 @@ module TargetDossierApi
 			header['Access-Control-Allow-Origin'] = '*'
 			header['Access-Control-Request-Method'] = '*'
 			header['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS, PUT, PATCH, DELETE'
-			header['Access-Control-Allow-Headers'] = 'true'
+			header['Access-Control-Allow-Headers'] = 'api_key,content-type'
 
 			@proxy = APIProxy.new
 		end

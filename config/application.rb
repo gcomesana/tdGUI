@@ -67,6 +67,9 @@ module TdGUI
 
 		require File.expand_path(File.join(File.dirname(__FILE__), '../lib/app_settings'))
 		AppSettings.config = YAML.load_file("config/app_settings.yml")[Rails.env]
+
+		require 'middleware/access_control_allow_all_origin'
+		config.middleware.insert_after Rack::ETag, Middleware::AccessControlAllowAllOrigin
 	end
 
 end

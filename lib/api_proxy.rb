@@ -16,7 +16,7 @@ class APIProxy
 
 	OMIM_APIKEY = '7630D3726122E8FDCFD9465523A059918CA1258B'
 	OMIM_ENTRY_SEARCH = 'http://api.omim.org/api/entry/search?search=xxxx&filter=&fields=&retrieve=&start=0&limit=10&sort=&operator=&include=geneMap&format=xml&apiKey='
-	OMIM_GENEMAP_SEARCH = 'http://api.omim.org/api/geneMap/search?search=xxxx&filter=&fields=&start=0&limit=&sort=&operator=&format=xml'
+	OMIM_GENEMAP_SEARCH = 'http://api.omim.org/api/geneMap/search?search=xxxx&filter=&fields=&start=0&limit=&sort=&operator=&format=xml&apiKey='
 
 	GO_EVIDENCE_MAP = {
 		'EXP'=> 'Inferred from Experiment',
@@ -164,7 +164,7 @@ class APIProxy
 
 
 
-	# Makes an OMIM geneSearch request and yields a ruby Hash with the form
+	# Makes an OMIM geneSearch (geneMap/search?...) request and yields a ruby Hash with the form
 	# {omim => {query_term => disease,
 	#		genes => [{gene_id => [id1, id2,...], gene_name => name, chromosome => {},
 	#							phenotypes => [{name => pheno_name, mim_number => xxx}, {}] },
@@ -197,23 +197,30 @@ class APIProxy
 			entries.each { |entry|
 				ids = entry['geneSymbols'].split(',')
 				name = entry['geneName']
-				chromo = {}
+				chromo = {} # not filling by 03.2013, but ready for future filling
 				phenotypes = Array.new
-				entry['phenotypeMapList']['phenotypeMap'].each { |pheno|
-					pheno_name = pheno['phenotype']
-					mim_number = pheno['mimNumber']
-
-					phenotype = {:name => pheno_name, :mim_number => mim_number}
+				phenotype_map = entry['phenotypeMapList']['phenotypeMap'] # it can be a hash or an array!!!
+				if phenotype_map.is_a?(Hash)
+					phenotype = {:name => phenotype_map['phenotype'],
+											 :mim_number => phenotype_map['mimNumber']}
 					phenotypes << phenotype
-				}
+
+				else # otherwise, it is an Array
+					phenotype_map.each { |pheno|
+						pheno_name = pheno['phenotype']
+						mim_number = pheno['mimNumber']
+
+						phenotype = {:name => pheno_name, :mim_number => mim_number}
+						phenotypes << phenotype
+					}
+				end
 
 				this_entry = {:gene_id => ids, :gene_name => name, :chromosome => chromo,
 											:phenotypes => phenotypes}
 				entry_list << this_entry
 			}
 
-			entry_list
-
+			{:omim => {:query_term => disease, :phenotype_list => entry_list}}
 		end
 
 	end

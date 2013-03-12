@@ -17,7 +17,7 @@ module TargetDossierPharmaApi
 			header['Access-Control-Allow-Origin'] = '*'
 			header['Access-Control-Request-Method'] = '*'
 			header['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS, PUT, DELETE'
-			header['Access-Control-Allow-Headers'] = 'true'
+			header['Access-Control-Allow-Headers'] = 'api_key,content-type'
 
 			@proxy = APIProxy.new
 		end
@@ -72,12 +72,13 @@ module TargetDossierPharmaApi
 
 
 
-		desc 'Gets OMIM information about a disease. Information retrieved from OMIM is related to its phenotypical traits and chromosomal locations and genes for it'
+		desc 'Gets OMIM information about a disease. Information retrieved from OMIM is related to its phenotypical traits and genes for it'
 		params do
 			requires :disease, :type => String, :desc => 'The disease, disorder or phenotypical trait to be search for'
+			optional :limit, :type => Integer, :desc => 'The number of entries to be retrieved (default is 10)'
 		end
 		get '/disease/traits/:disease' do
-
+			omim_data = @proxy.get_omim4disease(params[:disease], params[:limit])
 		end
 
 	end # PharmaAPI class

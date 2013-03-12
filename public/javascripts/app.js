@@ -40,7 +40,25 @@ Ext.create('Ext.app.Application', {
 
   launch: function() {
     console.info("Starting TDGUI...");
+/*
+    Ext.Ajax.request({
+      url: '/api/status.json',
+      method: 'GET',
+      params: {
+        param_test: "just a param test"
+      },
+      success: function(response){
+        var text = response.responseText;
+        console.log("response from api: "+text)
+          // process server response here
+      },
 
+      failure: function(response, opts) {
+        console.log('server-side failure with status code ' + response.status);
+      }
+
+    });
+*/
 
     Ext.QuickTips.init();
 

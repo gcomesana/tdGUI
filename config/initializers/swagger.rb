@@ -10,7 +10,7 @@ require "#{Rails.root}/app/api/grape-api"
 module SwaggerGrapeMod
 	class Root < Grape::API
 		mount TargetDossierApi::TDApi
-		mount GrapeApi::TestApi
+#		mount GrapeApi::TestApi
 		mount TargetDossierPharmaApi::PharmaAPI
 
 		add_swagger_documentation :base_path => 'http://localhost:3003' # :api_version => 1

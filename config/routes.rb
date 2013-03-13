@@ -91,10 +91,10 @@ TdGUI::Application.routes.draw do
 =end
   root :to => "home#index"
 
-	mount TargetDossierApi::TDApi => "/td" # should be /td/api/<resource>/<path_to_function>
-	mount TargetDossierPharmaApi::PharmaAPI => "/pharma" # ''
+#	mount TargetDossierApi::TDApi => "/td" # should be /td/api/<resource>/<path_to_function>
+#	mount TargetDossierPharmaApi::PharmaAPI => "/pharma" # ''
 #	mount GrapeApi::TestApi => "/grape" # should be /grape/api/<resource>/[/thisisonlyatest]
-	mount SwaggerGrapeMod::Root => "/" # FOR swagger!!!
+	mount SwaggerGrapeAPI::Root => "/" # FOR swagger!!!
 
 #	match "home" => "home#index"
 

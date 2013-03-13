@@ -6,15 +6,27 @@ require 'uri'
 require 'grape-swagger'
 
 module TargetDossierApi
+
+	class InfoLogger
+		def info (msg)
+			puts "#{Time.now}.- #{msg}\n"
+		end
+	end
+
+
 	class TDApi < Grape::API
 		prefix 'api' # prefix goes before version!!!!
 #		version 'v1', :using => :path # host/td/api/v1...
 #		format :json
 
+		content_type :json, 'application/json'
+		content_type :xml, 'application/xml'
 		TIMEOUT = 2.5 # arbitrary timeout to ping endpoints
 
 		INTACT_CV_THRESHOLD = 0.3
 		INTACT_NUM_NEIGHS = 5
+
+		logger = InfoLogger.new
 
 		before do
 			header['Access-Control-Allow-Origin'] = '*'
@@ -26,6 +38,11 @@ module TargetDossierApi
 		end
 
 		helpers do
+
+			def logger
+				TDApi.logger
+			end
+
 
 # Checks if the parameter is an uniprot accession or an uuid. If the former, then
 # a request to concept wiki is carried out to get the uuid corresponding to the
@@ -119,14 +136,14 @@ module TargetDossierApi
 
 		resource '' do
 			# /api/status[?param_test=<something>]
+			desc 'Check the API status to see if the API functions are reachable', {
+				:notes => 'Returns an simple JSON object. If a param (/api/status?param_test=xxx) is passed in, it will be included in the response'
+			}
 			params do
 				optional :param_test, :type => String, :desc => 'A ping string. It will be returned in the response'
 			end
-			desc 'this is only a API status test', {
-				:notes => 'Just a test with a fixed json response.'
-			}
 			get '/status' do
-				puts "/api/status?param_test=#{params[:param_test]}"
+				logger.info "/api/status?param_test=#{params[:param_test]}"
 				proxy = TdguiProxy.new
 
 				proxy.test(params[:param_test])
@@ -139,28 +156,31 @@ module TargetDossierApi
 		resource 'target' do # formerly uniprot, /td/api/v1/uniprot...
 
 			# /td/api/v1/uniprot/multiple?entries=<acc_1,acc_2, ..., acc_i>
-			params do
-				requires :entries, :type => String, :regexp => /([A-Z][A-Z0-9]{5}\,?)+/, :desc => 'A comma separated list of uniprot acc and/or uuids'
-				optional :output, :type => String, :regexp => /xml|json/, :desc => 'The output format'
-			end
-			desc "Retrieve multiple uniprot entries through /td/api/v1/uniprot/multiple?<entries>", {
-				:notes => 'multiple'
+			desc "Retrieve multiple UniprotKB entries", {
+				:notes => 'Return a json array with information about the targets related to the parameters'
 			}
+			params do
+				requires :entries, :type => String, :regexp => /^([A-Z][A-Z0-9]{5}\,?)+$/, :desc => 'A comma separated list of uniprot acc and/or uuids'
+				# optional :output, :type => String, :regexp => /xml|json/, :desc => 'The output format'
+			end
 			get '/multiple/:entries' do
 				proxy = TdguiProxy.new
+				logger.info "Getting info for #{params[:entries]}"
 
-				proxy.get_multiple_entries(params[:entries])
+				resp = proxy.get_multiple_entries(params[:entries]) # this is a hash
+				{:totalcount => resp['totalCount'], :success => resp['success'],
+				 :entries => resp['ops_records']}
 			end
 
 
 			# /td/api/v1/uniprot/byname/<name>[.json]?uuid=<uuid>
+			desc 'Gets target info from a name. Append .xml to the request to get XML output', {
+				:notes => 'byname'
+			}
 			params do
 				requires :name, :type => String, :desc => "A name like 'adenosine recpetor...'"
 				optional :uuid, :type => String
 			end
-			desc 'Gets target info from a name. Append .xml to the request to get XML output', {
-				:notes => 'byname'
-			}
 			get '/byname/:name' do
 				proxy = TdguiProxy.new
 
@@ -169,23 +189,22 @@ module TargetDossierApi
 
 
 			# /td/api/v1/uniprot/<accession>
+			desc 'Gets an uniprot entry info from accession. Only few relevant fields are included in the response'
 			params do
-				requires :acc, :type => String, :regexp => /[A-Z][A-Z0-9]{5}/
+				requires :acc, :type => String, :regexp => /^[A-Z][A-Z0-9]{5}$/, :desc => 'An uniprot accession'
 			end
-			desc 'Gets an uniprot entry info from accession. Append .xml to the request to get XML output', {
-				:notes => 'accession'
-			}
 			get ':acc' do
 				proxy = TdguiProxy.new
+				logger.info "Getting info for Uniprot accession #{params[:acc]}"
 
 				proxy.get_uniprot_by_acc(params[:acc])
 			end
 
 
+			desc 'Return an array the genes for the uniprot accession. Along with the gene, the type of the id is included'
 			params do
-				requires :acc, :type => String, :regexp => /[A-Z][A-Z0-9]{5}/, :desc => 'The uniprot accession'
+				requires :acc, :type => String, :regexp => /^[A-Z][A-Z0-9]{5}$/, :desc => 'The uniprot accession'
 			end
-			desc 'Return an array the genes for the target. Along with the gene, the type of the id is sent back'
 			get '/genes/:acc' do
 				proxy = TdguiProxy.new
 				uniprot_hash = proxy.get_uniprot_by_acc(params[:acc])
@@ -194,10 +213,11 @@ module TargetDossierApi
 			end
 
 
+
+			desc 'Return information about the target related to the gene name'
 			params do
 				requires :gene, :type => String, :desc => 'A gene name'
 			end
-			desc 'Return information about the target yield from the gene name'
 			get '/bygene/:gene' do
 				proxy = TdguiProxy.new
 				uniprot_hash = proxy.get_uniprot_by_gene(params[:gene])
@@ -229,12 +249,14 @@ module TargetDossierApi
 		resource 'interactions' do
 
 			# /td/api/v1/interactions/<:acc>[?cv=<threshold>&neighs=<num_of_neighs>]
+			desc "Get a json response ready to use with a JIT graph", {
+				:notes => 'See http://philogb.github.com/jit/demos.html, ForceDirected for more info.'
+			}
 			params do
-				requires :acc, :type => String, :regexp => /[A-Z][A-Z0-9]{5}/, :desc => 'An uniprot accession'
+				requires :acc, :type => String, :regexp => /^[A-Z][A-Z0-9]{5}$/, :desc => 'An uniprot accession'
 				optional :cv, :type => Float, :desc => 'Confidence value for interactions'
 				optional :neighs, :type => Integer, :desc => 'Number of neighbours (close related targets) in the interaction network'
 			end
-			desc "Get a json response ready to use with a JIT graph"
 			get '/:acc' do
 				proxy = TdguiProxy.new
 				resp = nil
@@ -270,13 +292,13 @@ module TargetDossierApi
 
 			# /td/api/v1/ops/lookup?type=compound&term=term
 			# actually, compound is disallowed
+			desc "Gets an entry from concept wiki", {
+				:notes => 'Request should be /td/api/ops/lookup/<type>/<term>...'
+			}
 			params do
 				requires :type, :type => String, :regexp => /compound|protein|concept/
 				requires :term, :type => String
 			end
-			desc "Gets an entry from concept wiki", {
-				:notes => 'Request should be /td/api/ops/lookup/<type>/<term>...'
-			}
 			get '/lookup/:type/:term' do
 				proxy = ConceptWikiApiCall.new
 				resp = nil
@@ -301,11 +323,10 @@ module TargetDossierApi
 
 
 			# /td/api/v1/ops/protein/<[uuid|accession]>
-			# 
-			params do
-				requires :protein_id, :type => String, :regexp => /([0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12})|([A-Z][A-Z0-9]{5})/
-			end
 			desc 'Gets a json representing the protein_info got from OPS API. Param can be either a uniprot accession or a concept uuid'
+			params do
+				requires :protein_id, :type => String, :regexp => /^([0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12})|([A-Z][A-Z0-9]{5})$/
+			end
 			get '/protein/:protein_id' do
 				prot_uuid = protein_concept_uuid(params[:protein_id])
 				prot_uri = "http://ops.conceptwiki.org/wiki/#/concept/#{prot_uuid}/view"
@@ -321,10 +342,10 @@ module TargetDossierApi
 			end
 
 
-			params do
-				requires :protein_id, :type => String, :regexp => /([0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12})|([A-Z][A-Z0-9]{5})/
-			end
 			desc 'Gets a json representing the protein pharmacology info got from OPS API. Param can be either a uniprot accession or a concept uuid'
+			params do
+				requires :protein_id, :type => String, :regexp => /^([0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12})|([A-Z][A-Z0-9]{5})$/
+			end
 			get '/protein/pharma/:protein_id/count' do
 				prot_uuid = protein_concept_uuid(params[:protein_id])
 				prot_uri = "http://www.conceptwiki.org/concept/#{prot_uuid}"
@@ -336,13 +357,13 @@ module TargetDossierApi
 			end
 
 
-			params do
-				requires :protein_id, :type => String, :regexp => /([0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12})|([A-Z][A-Z0-9]{5})/
-				optional :page, :type => Integer, :desc => 'The number of the page of results'
-			end
 			desc 'Gets a json representing the protein pharmacology info got from OPS API. Param can be either a uniprot accession or a concept uuid', {
 				:notes => 'Request is like /td/api/ops/protein/pharma/uuid[?page=number]'
 			}
+			params do
+				requires :protein_id, :type => String, :regexp => /^([0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12})|([A-Z][A-Z0-9]{5})$/
+				optional :page, :type => Integer, :desc => 'The number of the page of results'
+			end
 			get '/protein/pharma/:protein_id' do
 				prot_uuid = protein_concept_uuid(params[:protein_id])
 				prot_uri = "http://www.conceptwiki.org/concept/#{prot_uuid}"
@@ -362,13 +383,13 @@ module TargetDossierApi
 # rest/protein/list?query=kinase&format=json
 # rest/entry/NX_P13051/localisation?format=json
 # rest/isoform/NX_O00142-2/variant?format=json
-			params do
-				requires :query_term, :type => String
-				optional :output, :type => String, :regexp => /xml|json/
-			end
 			desc 'Gets a list of proteins matching the query', {
 				:notes => 'Request should be like /td/api/nextprot/list/<term>[?format=[xml|json]]'
 			}
+			params do
+				requires :query_term, :type => String
+				optional :output, :type => String, :regexp => /^xml|json$/
+			end
 			get '/list/:query_term' do
 #				resp = nextprot_req('list', {'query'=>params[:query_term], 'format'=>params[:format]})
 				resp = nextprot_req('list', [params[:query_term], params[:output]])
@@ -379,9 +400,9 @@ module TargetDossierApi
 
 			desc "Gets information about a target's isoform. Features are allowed. Similarly to previous one, based on uniprot/nextprot acc"
 			params do
-				requires :acc, :type => String, :regexp => /(NX_)?[A-Z][A-Z0-9]{5}/
-				optional :feature, :type => String, :regexp => /ptrans-modif|variant|localisation/
-				optional :output, :type => String, :regexp => /xml|json/
+				requires :acc, :type => String, :regexp => /^(NX_)?[A-Z][A-Z0-9]{5}$/
+				optional :feature, :type => String, :regexp => /^ptrans-modif|variant|localisation$/
+				optional :output, :type => String, :regexp => /^xml|json$/
 			end
 			get '/isoform/:acc' do
 #				resp = nextprot_req('isoform', {:acc => params[:acc], :feat => params[:feature], :format=>params[:format]})
@@ -390,7 +411,7 @@ module TargetDossierApi
 				resp.body
 			end
 
-
+=begin
 			params do
 				requires :number, type: Integer, desc: 'A mandatory integer param'
 				optional :letter, type: String, desc: 'An optional string param'
@@ -400,20 +421,20 @@ module TargetDossierApi
 
 				resp.body
 			end
-
+=end
 
 			desc 'Gets information about a target based on a uniprot/nextprot accession', {
 				:notes => 'Requests should be /td/api/nextprot/<accession>[?feat=<feat>].xml|json'
 			}
 			params do
-				requires :acc, :type => String, :regexp => /(NX_)?[A-Z][A-Z0-9]{5}/
-				optional :feat, :type => String, :regexp => /ptrans-modif|variant|localisation|expression/
-				optional :output, :type => String, :regexp => /xml|json/
+				requires :acc, :type => String, :regexp => /^(NX_)?[A-Z][A-Z0-9]{5}$/
+				optional :feat, :type => String, :regexp => /^ptrans-modif|variant|localisation|expression$/
+				optional :output, :type => String, :regexp => /^xml|json$/
 			end
 			get ':acc' do
 #				resp = nextprot_req('', {:acc => params[:acc], :feat => params[:feature], :format=>params[:format]})
 				acc = params[:acc]
-				if (acc =~ /[A-Z][A-Z0-9]{5}/) == 0
+				if (acc =~ /^[A-Z][A-Z0-9]{5}$/) == 0
 					acc = "NX_#{acc}"
 				end
 

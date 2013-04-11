@@ -289,10 +289,17 @@ module TargetDossierApi
 				requires :interactor1, :type => String, :regexp => /^[A-Z][A-Z0-9]{5}$/, :desc => 'An uniprot accession as for the interactor one'
 				requires :interactor2, :type => String, :regexp => /^[A-Z][A-Z0-9]{5}$/, :desc => 'An uniprot accession as for the interactor two'
 				optional :threshold, :type => Float, :desc => 'A threshold value to filter the interactions'
-
 			end
 			get '/:interactor1/:interactor2' do
-			 {}
+			 # {:inter1 => params[:interactor1], :inter2 => params[:interactor2]}
+			 	proxy = TdguiProxy.new
+
+			 	if params[:threshold].nil?
+			 		interactions = proxy.get_interactions_for(params[:interactor1], params[:interactor2])
+			 	else
+			 		interactions = proxy.get_interactions_for(params[:interactor1], params[:interactor2], params[:threshold])
+			 	end	
+			 	interactions
 			end
 
 		end # EO resource interactions

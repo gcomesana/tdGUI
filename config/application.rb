@@ -71,6 +71,7 @@ module TdGUI
 		config.paths.add "app/api", :glob => "**/*.rb"
 		config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
 
+        # This is a middleware in order to the api works with swagger-ui
 		require 'middleware/access_control_allow_all_origin'
 		config.middleware.insert_after Rack::ETag, Middleware::AccessControlAllowAllOrigin
 	end

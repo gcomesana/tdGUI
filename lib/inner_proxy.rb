@@ -362,14 +362,17 @@ puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '
 			}
 		rescue Timeout::Error => exc
 			@requestErrMsg = "ERROR: #{exc.message}"
+			puts "#{@requestErrMsg}"
 			-1
 
 		rescue Errno::ETIMEDOUT => exc
 			@requestErrMsg = "ERROR: #{exc.message}"
+			puts "#{@requestErrMsg}"
 			-2
 
 		rescue Errno::ECONNREFUSED => exc
 			@requestErrMsg = "ERROR: #{exc.message}"
+			puts "#{@requestErrMsg}"
 			-3
 
 		else

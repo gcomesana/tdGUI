@@ -113,6 +113,7 @@ puts "Disconnecting #{@db}...\n"
 
 		rs_clear()
 		sth.fetch do |row|
+			puts "** row: #{row}\n"
 #		  printf "ID: %d, Name: %s, Height: %.1f\n", row[0], row[1], row[2]
 #			printf "interactionid: %s, %s -> %s (%.2f)\n", row[11], row[1], row[6], row[12]
 			row_cont += 1

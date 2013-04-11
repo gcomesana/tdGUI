@@ -283,6 +283,18 @@ module TargetDossierApi
 				resp
 			end
 
+
+			desc "Get a json response with interaction(s) information for the interactors; empty if no interaction was found"
+			params do
+				requires :interactor1, :type => String, :regexp => /^[A-Z][A-Z0-9]{5}$/, :desc => 'An uniprot accession as for the interactor one'
+				requires :interactor2, :type => String, :regexp => /^[A-Z][A-Z0-9]{5}$/, :desc => 'An uniprot accession as for the interactor two'
+				optional :threshold, :type => Float, :desc => 'A threshold value to filter the interactions'
+
+			end
+			get '/:interactor1/:interactor2' do
+			 {}
+			end
+
 		end # EO resource interactions
 
 

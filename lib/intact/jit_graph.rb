@@ -148,13 +148,13 @@ private
 
 			interaction_data = Array.new
 			elem[:info].each {|info|
-puts "** interactor ids: #{info[:intr_id]}\n"
+# puts "** interactor ids: #{info[:intr_id]}\n"
 				intr_ids = info[:intr_id].split('|')
 				intact_id = intr_ids[0][intr_ids[0].index(':')+1..intr_ids[0].length]
 				last_index = intr_ids.index('(').nil? ? intr_ids.length: intr_ids[1].rindex('(')-1
 				# iref = intr_ids[1][intr_ids[1].index(':')+1..last_index]
 				iref = intr_ids[1].nil? ? '': intr_ids[1][intr_ids[1].index(':')+1..last_index]
-puts "iref: #{iref}\n"
+# puts "iref: #{iref}\n"
 				interaction_data << {:confidenceVal => info[:conf_val],
 														 :intactid => intact_id, :iref => iref, :pubmed => (info[:pubmed].nil? ? "": info[:pubmed])}
 			}

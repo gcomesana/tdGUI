@@ -13,6 +13,15 @@
   <%# stylesheet_link_tag '/stylesheets/clifton-theme-1.1/css/clifton-blue.css' %>
   <%= stylesheet_link_tag '/stylesheets/tdgui.css' %>
 
+  <%= javascript_include_tag "/javascripts/cytoscapeweb1.0.3/js/min/json2.min.js" %>
+    
+  <!-- Flash embedding utility (needed to embed Cytoscape Web) -->
+  <%= javascript_include_tag "/javascripts/cytoscapeweb1.0.3/js/min/AC_OETags.min.js" %>
+  
+  <!-- Cytoscape Web JS API (needed to reference org.cytoscapeweb.Visualization) -->
+  <%= javascript_include_tag "/javascripts/cytoscapeweb1.0.3/js/min/cytoscapeweb.min.js" %>
+  <!-- EO cytoscape plugin -->
+
   <!-- environment: <%= ENV['RAILS_ENV'] %> -->
   <% if ENV['RAILS_ENV'] != 'production' %>
     <%= javascript_include_tag '/javascripts/extjs4.1/ext-all-debug.js' %>

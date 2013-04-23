@@ -13,6 +13,6 @@ module SwaggerGrapeAPI
 #		mount GrapeApi::TestApi
 		mount TargetDossierPharmaApi::PharmaAPI
 
-		add_swagger_documentation :base_path => 'http://localhost:3003', :hide_documentation_path => true # :api_version => 1
+		add_swagger_documentation :base_path => 'http://lady-qu.cnio.es:3003', :hide_documentation_path => true # :api_version => 1
 	end
 end

@@ -10,14 +10,14 @@ module GrapeApi
 		before do
 			header['Access-Control-Allow-Origin'] = '*'
 			header['Access-Control-Allow-Methods'] = 'OPTIONS, GET, POST, DELETE, PUT'
-			header['Access-Control-Allow-Headers'] = 'Content-Type, api_key'
-			header['Content-Type'] = 'application/json; charset=utf-8'
+			header['Access-Control-Allow-Headers'] = 'Content-Type, api_key, Authorization'
+			# header['Content-Type'] = 'application/json; charset=utf-8'
 			header['Access-Control-Request-Method'] = '*'
 
-			header['Allow'] = 'OPTIONS,GET,HEAD'
+
+			# header['Allow'] = 'OPTIONS,GET,HEAD'
 		end
 =end
-
 		resource 'test-grape' do # host/grape/[v1]/api/test-grape[/something]
 			desc 'Just a test with no params'
 			get do

@@ -63,6 +63,26 @@ class TdguiProxy
 
 
 
+# Returns information about the (possible) interactions between the two target parameters within the
+# confidence value threshold
+
+	def get_interactions_for (intrtr1, intrtr2, threshold = 0.3)
+		interactions = nil
+		if intrtr1.nil? || intrtr1.empty? || intrtr2.nil? || intrtr2.empty? then
+			nil
+
+		else
+			intact_proxy = IntactProxy.new
+			puts "TdguiProxy.get_interactions_for... threshold is #{threshold}\n"
+			
+			interactions = intact_proxy.get_interactions_for(intrtr1, intrtr2, threshold)
+#			target_graph = intact_proxy.get_super_interaction_graph(target_id, max_nodes, conf_val)
+			interactions
+		end
+
+	end
+
+
 # Request for entries to ebi and returns a hash properly formatted to be able
 # to be converted to json with a single method call .to_json
 # @param [String] entries a comma separeted uniprot accessions

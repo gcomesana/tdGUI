@@ -63,6 +63,59 @@ class IntactProxy
 
 
 
+
+# Performs a search for interactions between target1 and target2 with a defined confidence value
+# @param [String] target1, an interactor which will be a uniprot accession
+# @param [String] target2, another interactor
+# @param [Float] conf_threshold the confidence value threshold: all interactions whose confidence
+# value is below this parameter will be discarded
+# @return [Hash] a hash object ready to be converted into a json object
+	def get_interactions_for (target1, target2, conf_threshold)
+		dbhost = TdGUI::Application.config.intactdb.intact_server
+		dbport = TdGUI::Application.config.intactdb.intact_port
+		dbuser = TdGUI::Application.config.intactdb.intact_user
+		dbpasswd = TdGUI::Application.config.intactdb.intact_pass
+		dbname = 'intact'
+
+		dao = IntactDao.new dbhost, dbport, dbname, dbuser, dbpasswd
+		num_rows = dao.fetch_interactions_for(target1, target2, conf_threshold)
+
+		interactions = {:totalCount => num_rows}
+		interaction_items = Array.new
+		
+		dao.interaction_net.each { |row|
+			intr_type_val = row['interaction_type']
+			interaction_type = {
+				name: intr_type_val[intr_type_val.index('(')..(intr_type_val.length-1)],
+				ref: intr_type_val[0..intr_type_val.index('(')]
+			}
+			
+			det_method = row['detection_method']
+			detection_method = {
+				name: det_method[det_method.index('(')..(det_method.length-1)],
+				ref: det_method[0..det_method.index('(')]	
+			}
+
+			my_interaction = {
+				:interactor1 => row['uniprot1id'],
+				:interactor2 => row['uniprot2id'],
+				:conf_value => row['conf_value'],
+				:interaction_id => row['interactionid'],
+				:interaction_type => interaction_type,
+				:detection_method => detection_method,
+				:pubmed_ref => row['pubmed']
+			}
+
+			interaction_items << my_interaction
+		} # EO dao each
+
+		interactions[:interactions] = interaction_items
+		interactions
+	end	
+
+
+
+
 # Builds up a interaction graph starting off a uniprot accession target but getting
 # additional first level deep interactions amid the closer neighbors
 # @param [String] target_id the main target which the interactions wants to be yield of

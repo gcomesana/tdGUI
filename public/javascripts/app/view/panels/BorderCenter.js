@@ -9,7 +9,7 @@
 Ext.define ('TDGUI.view.panels.BorderCenter', {
 	extend: 'Ext.tab.Panel',
 	alias: 'widget.tdgui-border-center',
-  requires: ['TDGUI.view.panels.WelcomePanel'],
+  requires: ['TDGUI.view.panels.WelcomePanel', 'HT.view.panels.MainCenter'],
 
   /**
    * @cfg {String} [region=center] the position inside the border layout
@@ -47,6 +47,9 @@ console.info ("Initializing panels.BorderCenter comp..." + this.nombre)
 
     me.items = [{
       xtype: 'tdgui-welcomepanel'
+    }, {
+      xtype: 'cytopanel',
+      title: 'Hypothesis tester'
     }]
 /*
 	  me.items = [{

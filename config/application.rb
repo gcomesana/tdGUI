@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'rack/jsonp' # for jsonp middleware!!!!
 
 # !!!!! to avoid to use activeRecord (and, then, any db)
 require "action_controller/railtie"
@@ -71,8 +72,11 @@ module TdGUI
 		config.paths.add "app/api", :glob => "**/*.rb"
 		config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
 
+        # This is a middleware in order to the api works with swagger-ui
 		require 'middleware/access_control_allow_all_origin'
 		config.middleware.insert_after Rack::ETag, Middleware::AccessControlAllowAllOrigin
-	end
+
+		config.middleware.use Rack::JSONP
+  end
 
 end

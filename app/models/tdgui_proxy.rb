@@ -314,7 +314,8 @@ puts "the url: #{url}"
 
 		uri_unencoded = CGI::unescape(uri) == uri
 		esc_uri = uri_unencoded ? CGI::escape(uri) : uri
-		url = inner_proxy.ops_api_count_pharma + "?uri=#{esc_uri}&_format=json"
+		url = inner_proxy.ops_api_count_pharma + "?app_id=#{inner_proxy.get_app_id}"
+		url = url + "&app_key=#{inner_proxy.get_app_key}&uri=#{esc_uri}&_format=json"
 		response = LibUtil.request(url, [])
 		if response.code.to_i != 200
 			puts "ConceptWiki get service not working properly right now!"
@@ -330,10 +331,13 @@ puts "the url: #{url}"
 	def get_pharm_results_by_page (concept_uri, page, pageSize)
 		inner_proxy = InnerProxy.new
 
+		page = page.nil? ? 1: page
+		pageSize = pageSize.nil? ? 10: pageSize
 		uri_unencoded = CGI::unescape(concept_uri) == concept_uri
 		esc_uri = uri_unencoded ? CGI::escape(concept_uri) : concept_uri
 		url = inner_proxy.ops_api_pharma_page_results + "?_format=json&uri=#{esc_uri}"
 		url = url + "&_page=#{page}&_pageSize=#{pageSize}"
+		url = url + "&app_id=#{inner_proxy.get_app_id}&app_key=#{inner_proxy.get_app_key}"
 		response = LibUtil.request(url, [])
 
 		if response.code.to_i != 200

@@ -13,7 +13,7 @@ var graphModel = {
 			type: 'object'
 		}, {
 			name: 'entity',
-			type: 'number'
+			type: 'string' // type: 'number'
 		}],
 
 		edges: [{

@@ -7,49 +7,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac4d959b-7041-4845-b29b-39d7db68b813" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.generators" afterPath="$PROJECT_DIR$/.idea/.generators" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/view/panels/CytoPanel.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/view/panels/CytoPanel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/controller/Panels.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/controller/Panels.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/concept_wiki_api_call.rb" afterPath="$PROJECT_DIR$/app/models/concept_wiki_api_call.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/concept_wiki_api_call_spec.rb" afterPath="$PROJECT_DIR$/spec/models/concept_wiki_api_call_spec.rb" />
+<<<<<<< HEAD
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/core_api_call.rb" afterPath="$PROJECT_DIR$/app/models/core_api_call.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/inner_proxy.rb" afterPath="$PROJECT_DIR$/lib/inner_proxy.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/lib/inner_proxy_spec.rb" afterPath="$PROJECT_DIR$/spec/lib/inner_proxy_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/tdGUI.iml" afterPath="$PROJECT_DIR$/.idea/tdGUI.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/tdgui_proxy.rb" afterPath="$PROJECT_DIR$/app/models/tdgui_proxy.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/tdgui_proxy_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/tdgui_proxy_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/controllers/tdgui_proxy_controller_spec.rb" afterPath="$PROJECT_DIR$/spec/controllers/tdgui_proxy_controller_spec.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/initializers/swagger.rb" afterPath="$PROJECT_DIR$/config/initializers/swagger.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/core_api_call.rb" afterPath="$PROJECT_DIR$/app/models/core_api_call.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/initializers/swagger.rb" afterPath="$PROJECT_DIR$/config/initializers/swagger.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/inner_proxy.rb" afterPath="$PROJECT_DIR$/lib/inner_proxy.rb" />
+>>>>>>> f4fa0e9ee352a77ded3e82200394a913bfeb4636
     </list>
     <ignored path="tdGUI.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366903454200" ignored="false" />
-    <file path="/a.rxml" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366717189295" ignored="false" />
-    <file path="/a.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366716993284" ignored="false" />
-    <file path="/a.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366717085203" ignored="false" />
-    <file path="/concept_wiki_api_call.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366802942033" ignored="false" />
-    <file path="/ops_wiki_api_call.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366899951280" ignored="false" />
-    <file path="/a.dummy" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366904553639" ignored="false" />
-    <file path="/ops_endpoints_proxy.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366965055947" ignored="false" />
-    <file path="/inner_proxy.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366970772667" ignored="false" />
-    <file path="/ops_endpoints_proxy_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366817187288" ignored="false" />
-    <file path="/temp.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366819863044" ignored="false" />
-    <file path="/inner_proxy_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366819403843" ignored="false" />
-    <file path="/ops_wiki_api_call_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366898325910" ignored="false" />
-    <file path="/ops_api_call.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366909748753" ignored="false" />
-    <file path="/ops_api_call_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366965553431" ignored="false" />
-    <file path="/ops_wiki_api_calls_controller.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366884200038" ignored="false" />
-    <file path="/ops_wiki_api_calls_controller_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366884252897" ignored="false" />
-    <file path="/routes.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366971027017" ignored="false" />
-    <file path="/ops_api_calls_controller.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366967849229" ignored="false" />
-    <file path="/fragment.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366970149501" ignored="false" />
-    <file path="/ops_api_calls_controller_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366967393561" ignored="false" />
-    <file path="/tdgui_proxy_controller_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366971112846" ignored="false" />
-    <file path="/tdgui_proxy.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366972239555" ignored="false" />
-    <file path="/tdgui_proxy_controller.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366972494276" ignored="false" />
+    <file path="/Dummy.txt" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366652360143" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,46 +51,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ops_api_calls_controller.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/ops_api_calls_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="28" selection-start="3151" selection-end="3151" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="endpoints_proxy.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/endpoints_proxy.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="203" column="0" selection-start="6203" selection-end="6203" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tdgui_proxy_controller_spec.rb" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/spec/controllers/tdgui_proxy_controller_spec.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="246" column="37" selection-start="9056" selection-end="9056" vertical-scroll-proportion="0.4528">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/routes.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="33" selection-start="1022" selection-end="1022" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="tdgui_proxy.rb" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/tdgui_proxy.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="330" column="6" selection-start="9688" selection-end="9688" vertical-scroll-proportion="0.0">
+            <state line="35" column="54" selection-start="1179" selection-end="1179" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tdgui_proxy_controller.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/controllers/tdgui_proxy_controller.rb">
+          <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state line="76" column="73" selection-start="2787" selection-end="2787" vertical-scroll-proportion="0.7599518">
+=======
+            <state line="35" column="43" selection-start="1371" selection-end="1371" vertical-scroll-proportion="0.21901324">
+>>>>>>> f4fa0e9ee352a77ded3e82200394a913bfeb4636
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BaseStore.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/store/lda/BaseStore.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PharmByTargetScrollingGrid.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/grid/PharmByTargetScrollingGrid.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="42" selection-start="288" selection-end="307" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lib_util.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/lib/lib_util.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="223" column="61" selection-start="8214" selection-end="8214" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TargetInfo.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="315" column="75" selection-start="8424" selection-end="8424" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -145,22 +130,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/controllers/ops_wiki_api_calls_controller.rb" />
-        <option value="$PROJECT_DIR$/spec/controllers/ops_wiki_api_calls_controller_spec.rb" />
-        <option value="$PROJECT_DIR$/spec/ops_api_call_spec.rb" />
-        <option value="$PROJECT_DIR$/public/resources/datatest/bytag-new.json" />
-        <option value="$PROJECT_DIR$/spec/models/ops_wiki_api_call_spec.rb" />
-        <option value="$PROJECT_DIR$/app/models/ops_wiki_api_call.rb" />
-        <option value="$PROJECT_DIR$/app/models/ops_api_call.rb" />
-        <option value="$PROJECT_DIR$/lib/ops_endpoints_proxy.rb" />
-        <option value="$PROJECT_DIR$/spec/models/ops_api_call_spec.rb" />
-        <option value="$PROJECT_DIR$/spec/controllers/ops_api_calls_controller_spec.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/ops_api_calls_controller.rb" />
-        <option value="$PROJECT_DIR$/lib/inner_proxy.rb" />
-        <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/spec/controllers/tdgui_proxy_controller_spec.rb" />
+        <option value="$PROJECT_DIR$/spec/models/tdgui_proxy_spec.rb" />
+        <option value="$PROJECT_DIR$/public/resources/datatest/CHEMBL1940-bioactivities.xml" />
         <option value="$PROJECT_DIR$/app/models/tdgui_proxy.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/tdgui_proxy_controller.rb" />
+        <option value="$PROJECT_DIR$/lib/lib_util.rb" />
+        <option value="$PROJECT_DIR$/spec/lib/api/lib_util_spec.rb" />
+        <option value="$PROJECT_DIR$/lib/api/tdapi.rb" />
+        <option value="$PROJECT_DIR$/lib/api/tdapi_pharma.rb" />
+        <option value="$PROJECT_DIR$/public/resources/datatest/omim-asthma.xml" />
+        <option value="$PROJECT_DIR$/lib/api_proxy.rb" />
+        <option value="$PROJECT_DIR$/spec/lib/api_proxy_spec.rb" />
+        <option value="$PROJECT_DIR$/lib/intact_proxy.rb" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/controller/Viewport.js" />
+        <option value="$PROJECT_DIR$/config/app_settings.yml" />
+        <option value="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
+        <option value="$PROJECT_DIR$/lib/inner_proxy.rb" />
+        <option value="$PROJECT_DIR$/app/models/core_api_call.rb" />
       </list>
     </option>
   </component>
@@ -174,7 +159,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="92" />
     <option name="y" value="22" />
-    <option name="width" value="1303" />
+    <option name="width" value="1408" />
     <option name="height" value="990" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -182,27 +167,38 @@
       <profile-state>
         <expanded-state>
           <State>
-            <id>Cucumber</id>
-          </State>
-          <State>
-            <id>Gems</id>
-          </State>
-          <State>
-            <id>GeneralJavaScript</id>
-          </State>
-          <State>
-            <id>HTML</id>
+            <id />
           </State>
           <State>
             <id>JavaScript</id>
           </State>
           <State>
+            <id>LESS</id>
+          </State>
+          <State>
+            <id>Naming ConventionsRuby</id>
+          </State>
+          <State>
+            <id>RELAX NG</id>
+          </State>
+          <State>
             <id>Ruby</id>
+          </State>
+          <State>
+            <id>SCSS</id>
           </State>
           <State>
             <id>SQL</id>
           </State>
+          <State>
+            <id>XML</id>
+          </State>
         </expanded-state>
+        <selected-state>
+          <State>
+            <id>RubyStringKeysInHashInspection</id>
+          </State>
+        </selected-state>
       </profile-state>
     </entry>
   </component>
@@ -232,6 +228,17 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="RailsProjectView">
+<<<<<<< HEAD
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -242,192 +249,98 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="RailsProjectView">
+      <pane id="ProjectPane">
+=======
+>>>>>>> f4fa0e9ee352a77ded3e82200394a913bfeb4636
         <subPane>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="models" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
           <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spec" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spec" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spec" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -443,7 +356,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="128" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/javascripts/extjs4.1" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Documents/inb/openphacts" />
     <property name="RakeTaksPopup.undocumentedIncluded" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="135" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="928" />
@@ -460,7 +373,7 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.General" />
+    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.XML" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
     <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
@@ -474,15 +387,15 @@
       <recent name="$PROJECT_DIR$/public/javascripts/lib" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/spec/models" />
       <recent name="$PROJECT_DIR$/spec/lib" />
       <recent name="$PROJECT_DIR$/lib" />
       <recent name="$PROJECT_DIR$/lib/api" />
       <recent name="$PROJECT_DIR$/public/javascripts" />
+      <recent name="$PROJECT_DIR$/lib/intact" />
     </key>
   </component>
-  <component name="RunManager" selected="RSpec.tdgui_proxy_spec">
-    <configuration default="false" name="tdgui_proxy_controller_spec" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
+  <component name="RunManager" selected="RSpec.APIProxy should get a ruby hash structure straight from an entry search at OMIM">
+    <configuration default="false" name="APIProxy" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
       <predefined_log_file id="RUBY_RSPEC" enabled="true" />
       <module name="tdGUI" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -503,10 +416,10 @@
       </EXTENSION>
       <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/controllers/tdgui_proxy_controller_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/lib/api_proxy_spec.rb" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="APIProxy" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
@@ -517,7 +430,7 @@
       <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
     </configuration>
-    <configuration default="false" name="TdguiProxyController should deal with pharma information to get pharma information results of drugs on a target" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
+    <configuration default="false" name="APIProxy should should get targets for asthma disease from uniprot" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
       <predefined_log_file id="RUBY_RSPEC" enabled="true" />
       <module name="tdGUI" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -538,10 +451,45 @@
       </EXTENSION>
       <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/controllers/tdgui_proxy_controller_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/lib/api_proxy_spec.rb" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="TdguiProxyController should deal with pharma information to get pharma information results of drugs on a target" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="APIProxy should should get targets for asthma disease from uniprot" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="APIProxy should get a ruby hash structure straight from OMIM" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
+      <predefined_log_file id="RUBY_RSPEC" enabled="true" />
+      <module name="tdGUI" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs>
+        <env name="RAILS_ENV" value="test" />
+        <env name="JRUBY_OPTS" value="-X+O" />
+      </envs>
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/lib/api_proxy_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="APIProxy should get a ruby hash structure straight from OMIM" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
@@ -554,7 +502,7 @@
       <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
     </configuration>
-    <configuration default="false" name="ops_api_call_spec" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
+    <configuration default="false" name="APIProxy should get a ruby structure from a geneMap search on OMIM" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
       <predefined_log_file id="RUBY_RSPEC" enabled="true" />
       <module name="tdGUI" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -575,10 +523,10 @@
       </EXTENSION>
       <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/models/ops_api_call_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/lib/api_proxy_spec.rb" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="APIProxy should get a ruby structure from a geneMap search on OMIM" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
@@ -589,7 +537,7 @@
       <ConfigurationWrapper RunnerId="RubyRunner" />
       <method />
     </configuration>
-    <configuration default="false" name="ops_wiki_api_call_spec" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
+    <configuration default="false" name="APIProxy should get a ruby hash structure straight from an entry search at OMIM" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
       <predefined_log_file id="RUBY_RSPEC" enabled="true" />
       <module name="tdGUI" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -610,53 +558,18 @@
       </EXTENSION>
       <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/models/ops_wiki_api_call_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/lib/api_proxy_spec.rb" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="APIProxy should get a ruby hash structure straight from an entry search at OMIM" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
-      <RunnerSettings RunnerId="RubyRunner" />
-      <ConfigurationWrapper RunnerId="RubyRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="tdgui_proxy_spec" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
-      <predefined_log_file id="RUBY_RSPEC" enabled="true" />
-      <module name="tdGUI" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
-      <envs>
-        <env name="RAILS_ENV" value="test" />
-        <env name="JRUBY_OPTS" value="-X+O" />
-      </envs>
-      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" track_test_folders="true" runner="rcov">
-        <COVERAGE_PATTERN ENABLED="true">
-          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
-        </COVERAGE_PATTERN>
-      </EXTENSION>
-      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/models/tdgui_proxy_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
-      <RunnerSettings RunnerId="RubyRunner" />
-      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <RunnerSettings RunnerId="RubyDebugRunner" />
+      <ConfigurationWrapper RunnerId="RubyDebugRunner" />
       <method />
     </configuration>
     <configuration default="true" type="RakeRunConfigurationType" factoryName="Rake">
@@ -947,21 +860,12 @@
       <item index="1" class="java.lang.String" itemvalue="Rails.Production: tdGUI" />
       <item index="2" class="java.lang.String" itemvalue="Rake.spec" />
       <item index="3" class="java.lang.String" itemvalue="Rake.test" />
-      <item index="4" class="java.lang.String" itemvalue="RSpec.tdgui_proxy_controller_spec" />
-      <item index="5" class="java.lang.String" itemvalue="RSpec.TdguiProxyController should deal with pharma information to get pharma information results of drugs on a target" />
-      <item index="6" class="java.lang.String" itemvalue="RSpec.ops_api_call_spec" />
-      <item index="7" class="java.lang.String" itemvalue="RSpec.ops_wiki_api_call_spec" />
-      <item index="8" class="java.lang.String" itemvalue="RSpec.tdgui_proxy_spec" />
+      <item index="4" class="java.lang.String" itemvalue="RSpec.APIProxy" />
+      <item index="5" class="java.lang.String" itemvalue="RSpec.APIProxy should should get targets for asthma disease from uniprot" />
+      <item index="6" class="java.lang.String" itemvalue="RSpec.APIProxy should get a ruby hash structure straight from OMIM" />
+      <item index="7" class="java.lang.String" itemvalue="RSpec.APIProxy should get a ruby structure from a geneMap search on OMIM" />
+      <item index="8" class="java.lang.String" itemvalue="RSpec.APIProxy should get a ruby hash structure straight from an entry search at OMIM" />
     </list>
-    <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="RSpec.tdgui_proxy_spec" />
-        <item index="1" class="java.lang.String" itemvalue="RSpec.ops_wiki_api_call_spec" />
-        <item index="2" class="java.lang.String" itemvalue="RSpec.ops_api_call_spec" />
-        <item index="3" class="java.lang.String" itemvalue="RSpec.TdguiProxyController should deal with pharma information to get pharma information results of drugs on a target" />
-        <item index="4" class="java.lang.String" itemvalue="RSpec.tdgui_proxy_controller_spec" />
-      </list>
-    </recent_temporary>
     <configuration default="true" type="TestUnitRunConfigurationType" factoryName="Test::Unit/Shoulda">
       <predefined_log_file id="RUBY_TESTUNIT" enabled="true" />
       <module name="" />
@@ -1021,8 +925,6 @@
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="StructureViewFactory">
     <option name="AUTOSCROLL_MODE" value="false" />
-    <option name="ACTIVE_ACTIONS" value="SHOW_INHERITED_FROM_OBJECT" />
-    <option name="SHOW_TOOLBAR" value="true" />
   </component>
   <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false">
     <option name="USER" value="" />
@@ -1071,25 +973,33 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="92" y="22" width="1303" height="990" extended-state="0" />
-    <editor active="false" />
+    <frame x="92" y="22" width="1408" height="990" extended-state="0" />
+    <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24036281" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19484882" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23070803" sideWeight="0.77155656" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26252982" sideWeight="0.77155656" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2575588" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="319" y="518" width="1355" height="431" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2503671" sideWeight="0.6651736" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24743025" sideWeight="0.0" order="0" side_tool="false" content_ui="combo" />
+=======
+      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2503671" sideWeight="0.32698768" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24036281" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2503671" sideWeight="0.6651736" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2400881" sideWeight="0.0" order="0" side_tool="false" content_ui="combo" />
+>>>>>>> f4fa0e9ee352a77ded3e82200394a913bfeb4636
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26203808" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="319" y="518" width="1355" height="431" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26632047" sideWeight="0.18820861" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32993197" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22844344" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="515" y="551" width="1155" height="374" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22844344" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="515" y="551" width="1155" height="374" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32922733" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32993197" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="93" y="366" width="1586" height="450" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2503671" sideWeight="0.32698768" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23180291" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3281075" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -1154,11 +1064,11 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/lib/intact_proxy.rb</url>
-          <line>167</line>
+          <line>114</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/lib/intact_proxy.rb</url>
-          <line>772</line>
+          <line>719</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/spec/mailers/feedback_mailer_spec.rb</url>
@@ -1170,179 +1080,170 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/app/models/tdgui_proxy.rb</url>
-          <line>337</line>
+          <line>314</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/spec/controllers/tdgui_proxy_controller_spec.rb</url>
+          <line>227</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/spec/lib/api/tdapi_spec.rb</url>
           <line>8</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/app/models/tdgui_proxy.rb</url>
+          <line>294</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
           <url>file://$PROJECT_DIR$/spec/lib/api_proxy_spec.rb</url>
           <line>26</line>
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/app/models/ops_wiki_api_call.rb</url>
-          <line>89</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/spec/models/ops_wiki_api_call_spec.rb</url>
-          <line>39</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/app/controllers/ops_wiki_api_calls_controller.rb</url>
-          <line>30</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/app/models/ops_wiki_api_call.rb</url>
-          <line>189</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/app/models/ops_api_call.rb</url>
-          <line>77</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/app/models/ops_api_call.rb</url>
-          <line>84</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/lib/ops_endpoints_proxy.rb</url>
-          <line>312</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/spec/models/ops_api_call_spec.rb</url>
-          <line>36</line>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/app/models/ops_api_call.rb</url>
-          <line>95</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="ruby-line">
-          <url>file://$PROJECT_DIR$/spec/controllers/ops_api_calls_controller_spec.rb</url>
-          <line>64</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="35" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/spec/controllers/core_api_call_controllers_spec.rb">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/model/ListTarget.js">
+<<<<<<< HEAD
+=======
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="2824" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/models/ops_wiki_api_call_spec.rb">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/util/Utils.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="26" selection-start="1384" selection-end="1384" vertical-scroll-proportion="0.69139963">
-          <folding />
-        </state>
+        <state line="1" column="38" selection-start="38" selection-end="39" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/ops_wiki_api_calls_controller.rb">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/Viewport.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="1211" selection-end="1211" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="307" column="55" selection-start="9889" selection-end="9889" vertical-scroll-proportion="0.50541514" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/ops_endpoints_proxy.rb">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js">
+>>>>>>> f4fa0e9ee352a77ded3e82200394a913bfeb4636
       <provider selected="true" editor-type-id="text-editor">
-        <state line="312" column="0" selection-start="10026" selection-end="10026" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="161" column="18" selection-start="4454" selection-end="4470" vertical-scroll-proportion="0.016847173" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/ops_api_call.rb">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/ItemMultilist.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="0" selection-start="2866" selection-end="2866" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="29" column="7" selection-start="783" selection-end="788" vertical-scroll-proportion="0.016847173" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/lib/lib_util_spec.rb">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/panels/MultiTarget.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+<<<<<<< HEAD
+        <state line="307" column="55" selection-start="9889" selection-end="9889" vertical-scroll-proportion="0.50541514" />
+=======
+        <state line="45" column="35" selection-start="1376" selection-end="1376" vertical-scroll-proportion="0.14654163" />
+>>>>>>> f4fa0e9ee352a77ded3e82200394a913bfeb4636
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="33" selection-start="1022" selection-end="1022" vertical-scroll-proportion="0.0">
+<<<<<<< HEAD
+        <state line="161" column="18" selection-start="4454" selection-end="4470" vertical-scroll-proportion="0.016847173" />
+=======
+        <state line="17" column="53" selection-start="656" selection-end="656" vertical-scroll-proportion="0.29455444" />
+>>>>>>> f4fa0e9ee352a77ded3e82200394a913bfeb4636
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/tdgui_proxy.rb">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state line="29" column="7" selection-start="783" selection-end="788" vertical-scroll-proportion="0.016847173" />
+=======
+        <state line="35" column="54" selection-start="1179" selection-end="1179" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+>>>>>>> f4fa0e9ee352a77ded3e82200394a913bfeb4636
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/store/lda/BaseStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state line="45" column="35" selection-start="1376" selection-end="1376" vertical-scroll-proportion="0.14654163" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="53" selection-start="656" selection-end="656" vertical-scroll-proportion="0.29455444" />
+=======
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/grid/PharmByTargetScrollingGrid.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="42" selection-start="288" selection-end="307" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/lib_util.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="223" column="61" selection-start="8214" selection-end="8214" vertical-scroll-proportion="0.0" />
+>>>>>>> f4fa0e9ee352a77ded3e82200394a913bfeb4636
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="315" column="75" selection-start="8424" selection-end="8424" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/core_api_call.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="108" column="43" selection-start="3235" selection-end="3235" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/inner_proxy.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="6" selection-start="3411" selection-end="3411" vertical-scroll-proportion="0.9368771">
+        <state line="368" column="30" selection-start="11153" selection-end="11153" vertical-scroll-proportion="0.6266996">
           <folding />
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/lib/lib_util.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="223" column="61" selection-start="8214" selection-end="8214" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/ops_api_calls_controller.rb">
+    <entry file="file://$PROJECT_DIR$/app/models/core_api_call.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="28" selection-start="3151" selection-end="3151" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="108" column="43" selection-start="3235" selection-end="3235" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/inner_proxy.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="368" column="30" selection-start="11153" selection-end="11153" vertical-scroll-proportion="0.6266996" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/endpoints_proxy.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="203" column="0" selection-start="6203" selection-end="6203" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="256" column="19" selection-start="8104" selection-end="8104" vertical-scroll-proportion="0.7713598" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/tdgui_proxy.rb">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="330" column="6" selection-start="9688" selection-end="9688" vertical-scroll-proportion="0.0">
+        <state line="315" column="75" selection-start="8424" selection-end="8424" vertical-scroll-proportion="0.0">
+=======
+    <entry file="file://$PROJECT_DIR$/lib/endpoints_proxy.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="256" column="19" selection-start="8104" selection-end="8104" vertical-scroll-proportion="0.7713598">
+>>>>>>> f4fa0e9ee352a77ded3e82200394a913bfeb4636
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/tdgui_proxy_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="212" column="99" selection-start="7260" selection-end="7260" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/controllers/ops_wiki_api_calls_controller_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="65" selection-start="199" selection-end="199" vertical-scroll-proportion="0.16747968">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/controllers/ops_api_calls_controller_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="0" selection-start="2048" selection-end="2048" vertical-scroll-proportion="0.1488">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/controllers/tdgui_proxy_controller_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="246" column="37" selection-start="9056" selection-end="9056" vertical-scroll-proportion="0.4528">
+<<<<<<< HEAD
+        <state line="76" column="73" selection-start="2787" selection-end="2787" vertical-scroll-proportion="0.7599518">
+=======
+        <state line="35" column="43" selection-start="1371" selection-end="1371" vertical-scroll-proportion="0.21901324">
+>>>>>>> f4fa0e9ee352a77ded3e82200394a913bfeb4636
           <folding />
         </state>
       </provider>

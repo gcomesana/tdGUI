@@ -210,7 +210,7 @@ puts "Getting interactions for '#{params[:target]}' from Intact with conf_val=#{
 
 
 
-	def get_pharm_by_target_page (uri = params[:uri], page = params[:_page], num_results=params[:_pageSize])
+	def get_pharm_by_target_page (uri = params[:uri], page = params[:page], num_results=params[:pagesize])
 		pharm_proxy = TdguiProxy.new
 
 		resp = pharm_proxy.get_pharm_results_by_page(uri, page, num_results)

@@ -38,6 +38,15 @@ describe "should call uniprot" do
 		puts ("Spec1: #{res[0].to_s}")
 	end
 
+
+
+	it "should return a crap as the concept can not be found" do
+		concept_uri = "http://www.conceptwiki.org/concept/00c2bcb8-f9dd-4477-999e-74746a3f8517"
+		@coreApi_opts[:uri] = concept_uri
+
+		res = @coreApi.request(@api_method, @coreApi_opts)
+		res.should be_nil
+	end
 =begin PENDING FOR UNIPROT AS DOES NOT FIT WITH NEW API
 	it "should make a uniprot call" do
 		res = @coreApi.request(@api_method, @uniprot_opts)

@@ -27,6 +27,9 @@ class TdguiProxy
 
 	DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=uniprotkb&id=xxxx&format=xml'
 
+	CHEMBL_TARGET_URL = 'https://www.ebi.ac.uk/chemblws/targets/uniprot/xxxx'
+	CHEMBL_BIOACT_URL = 'https://www.ebi.ac.uk/chemblws/targets/xxxx/bioactivities'
+
 # Proxy/Model constructor
 	def initialize
 		@parsed_results = nil
@@ -221,6 +224,57 @@ puts "the url: #{url}"
 			entry_hash
 		end
 
+	end
+
+
+
+# it queries chembl in order to get the bioactivities for a target
+# @oaram [String] acc the accession or chemblId
+# @return the compounds and chemblId for the target
+# which are involved in the bioactivities...
+	def get_bioactivities_from_acc(acc)
+		is_accession = (protein_id =~ /[A-Z][A-Z0-9]{5}/) == 0
+
+		chemblId = ''
+		if is_accession
+			chemblId = get_chemblid_from_acc(acc)
+		end
+
+		url = CHEMBL_BIOACT_URL.gsub(/xxxx/, chemblId)
+		results = LibUtil.request(url, [])
+		if results.code.to_i != 200
+			puts "CHEMBL fetch service not working properly right now!"
+			nil
+
+		else # here we get a json
+			jsonObj = JSON.parse(results.body)
+			bioactivities = jsonObj['bioactivities']
+
+			result = bioactivities.collect {|act|
+				{:compound => act['ingredient_cmpd_chemblid'], :target_chembl_id => chemblId}
+			}
+			result
+		end
+	end
+
+
+
+
+	def get_chemblid_from_acc (acc)
+
+		url = CHEMBL_TARGET_URL.gsub(/xxxx/, acc)
+		options = {}
+
+		results = LibUtil.request(url, [])
+		if results.code.to_i != 200
+			puts "CHEMBL fetch service not working properly right now!"
+			nil
+
+		else # here we get a json
+			obj = JSON.parse(results.body)
+			chemblId = obj['target']['chemblId']
+			chemblId
+		end
 	end
 
 

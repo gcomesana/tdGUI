@@ -82,7 +82,7 @@ class OpsApiCall
 
 # Check for error when the returned value is not the response itself but a
 # negative number as timeout got a kind of connection error
-		if response.is_a?(Fixnum)
+		if response.is_a?(Fixnum) or response.is_a?(Net::HTTPNotFound)
 # See the log as InnerProxy class spits out the error there
 			return nil
 		end

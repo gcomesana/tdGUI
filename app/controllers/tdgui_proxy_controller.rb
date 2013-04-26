@@ -185,6 +185,16 @@ puts "Getting interactions for '#{params[:target]}' from Intact with conf_val=#{
 
 
 
+	def get_bioactivities_from_accession (target_acc = params[:acc])
+		proxy = TdguiProxy.new
+		return '[]' unless target_acc != nil && target_acc != ''
+
+		entry_hash = proxy.get_bioactivities_from_acc(target_acc)
+
+		render :json => entry_hash.to_json, :layout => false
+	end
+
+
 
 # Sends an email feedback to admin from the feedback window on GUI
 # @param [String] from the sender

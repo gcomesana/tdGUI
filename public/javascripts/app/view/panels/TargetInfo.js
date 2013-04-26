@@ -9,6 +9,7 @@
 Ext.define('TDGUI.view.panels.TargetInfo', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.tdgui-targetinfopanel',
+  requires: ['TDGUI.store.lda.TargetStore'],
   
 	title: 'Target Info',
 
@@ -410,8 +411,10 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
         this.showMessage('No records found within OPS for this search');
       }
     }
-    else
-      this.showMessage('Server did not respond');
+    else {
+      this.showMessage('Server did not respond properly');
+    }
+
 
     this.endLoading();
 //    this.up('TargetInfo').setLoading(false);
@@ -591,11 +594,11 @@ console.log('standard field: '+fieldId+' -> '+value);
       pharmButton.hide();
       pharmButton.setHandler(function () {
   // console.info('pharmButton.setHandler -> !xt=tdgui-pharmbytargetpanel&qp=' + target.store.proxy.extraParams.protein_uri)
-        var historyParams = '!xt=tdgui-pharmbytargetpanel&qp=' +pharmaURI
-        historyParams += '&tg=' + targetName
-        historyParams += '&dc=' + Math.random()
+        var historyParams = '!xt=tdgui-pharmbytargetpanel&qp=' +pharmaURI;
+        historyParams += '&tg=' + targetName;
+        historyParams += '&dc=' + Math.random();
 
-        Ext.History.add(historyParams)
+        Ext.History.add(historyParams);
       });
     }
     else

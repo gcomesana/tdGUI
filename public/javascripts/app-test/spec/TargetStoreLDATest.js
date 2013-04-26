@@ -1,7 +1,10 @@
 
+
 describe('Searching for target information', function () {
   var store_records, store_operation, store_success;
   var conceptwiki_uri_mock = 'http://www.conceptwiki.org/concept/70dafe2f-2a08-43f7-b337-7e31fb1d67a8';
+  var utils;
+  var myApp = null;
 
   beforeEach (function () {
 //    console.log("INIT beforeEach: "+LDA.helper.LDAConstants.LDA_ASSAY_OF_ACTIVITY);
@@ -11,16 +14,20 @@ describe('Searching for target information', function () {
       }
     })
 
-    this.application = Ext.create('Ext.app.Application', {
+    myApp = Ext.create('Ext.app.Application', {
       name: 'TDGUI',
       appFolder: 'javascripts/app',
       requires: ['LDA.helper.LDAConstants', 'LDA.store.TargetStore',
         'TDGUI.util.LDAConstants', 'TDGUI.store.lda.TargetStore', 'TDGUI.util.TargetReader',
-        'TDGUI.store.lda.TargetPharmacologyStore', 'TDGUI.util.TargetPharmacologyReader'],
+        'TDGUI.store.lda.TargetPharmacologyStore', 'TDGUI.util.TargetPharmacologyReader',
+        'TDGUI.controller.Viewport', 'TDGUI.model.lda.TargetPharmacologyCountModel'],
+
+      controllers: ['TDGUI.controller.Viewport', 'TDGUI.controller.SearchPanel'],
 
       launch: function () {
-        console.log("launchinnnnnnnnng: "+TDGUI.util.LDAConstants.LDA_COMPOUND_PHARMACOLOGY_COUNT);
+        console.log("launchinnnnnnnnng: "+TDGUI.util.LDAConstants.LDA_FOR_MOLECULE);
       }
+
     }); // EO Ext.create...
 
 //    console.log("EO beforeEach: "+TDGUI.util.LDAConstants.LDA_COMPOUND_PHARMACOLOGY_COUNT);
@@ -31,8 +38,16 @@ describe('Searching for target information', function () {
   describe ('Doing preliminary tests', function () {
     it ('makes a tautology test: true is true', function () {
       expect(true).toEqual(true);
-    }); // EO it
 
+      expect(Ext).toBeDefined();
+      expect(Ext.getVersion()).toBeTruthy();
+      expect(Ext.getVersion().major).toEqual(4);
+
+      expect(myApp).toBeDefined();
+      expect(myApp.getController).toBeDefined();
+//      var crap = myApp.getController('TDGUI.controller.Viewport');
+//      expect(crap).toBeDefined();
+    }); // EO it
 
 
     it ('getting just a test json response from controller', function () {
@@ -97,6 +112,18 @@ describe('Searching for target information', function () {
 
   it ('using LDA API (jsonp) to get target information', function () {
     console.log('targetStore base_url: '+ldaBaseUrl);
+    /*
+    var myCrap = Ext.create('TDGUI.store.lda.TargetPharmacologyStore');
+    myCrap = Ext.create('TDGUI.store.lda.TargetStore');
+
+    var arron = Ext.create('TDGUI.util.Person', 'arron');
+    arron.eat("Fish");
+
+    if (!utils)
+      utils = Ext.create('TDGUI.util.Utils');
+    expect(utils).toBeDefined();
+    */
+
     var targetInfoStore = Ext.create('LDA.store.TargetStore', {
       storeId: 'TargetStoreBis'
     });
@@ -126,6 +153,7 @@ describe('Searching for target information', function () {
 
   it ('using TDGUI LDA adaptation (json) to get target information', function() {
     var targetInfoStore = Ext.create('TDGUI.store.lda.TargetStore');
+    var storeTest = Ext.create('TDGUI.store.lda.TargetPharmacologyCountStore');
 
     targetInfoStore.proxy.extraParams.protein_uri = conceptwiki_uri_mock;
 

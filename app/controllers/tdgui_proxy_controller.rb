@@ -1,5 +1,6 @@
 
 
+
 # This is a 'custom' controller (which means is not derived from CoreGUI controllers)
 # to perform the actions triggered from application interface
 class TdguiProxyController < ApplicationController
@@ -137,18 +138,18 @@ puts "json_entries: #{json_entries}\n"
 # @param [Float] conf_val the confidence value. Intact assigns a score to every interaction.
 # This parameter is used to screen interactions below this threshold (defautl is 0.5)
 # @return [String] the json object to feed the javascript graph
-	def interactions_retrieval (target_id = params[:target], max_nodes = 6, conf_val = 0.5)
+	def interactions_retrieval (target_id = params[:target], max_nodes = params[:max_nodes],
+		conf_val = params[:conf_val])
 		intact_proxy = TdguiProxy.new
 
-		conf_param = params[:conf_val]
-		conf_val = conf_param.to_f == 0.0 ? conf_val: conf_param.to_f
-		max_nodes_param = params[:max_nodes] ? 0: params[:max_nodes].to_i
-		max_nodes = max_nodes_param == 0 ? max_nodes: max_nodes_param
-puts "Getting interactions for '#{target_id}' from Intact with conf_val=#{conf_val} & max_nodes=#{max_nodes}\n"
-		return '[]' unless target_id != nil && target_id != ''
+		conf_param = params[:conf_val] # string!!!
+		conf_val = conf_param.to_f
+		max_nodes_param = params[:max_nodes] ? params[:max_nodes].to_i : 0
+puts "Getting interactions for '#{params[:target]}' from Intact with conf_val=#{params[:conf_val]} & max_nodes=#{params[:max_nodes]}\n"
+		return '[]' unless params[:target] != nil && params[:target] != ''
 #		graph = stringdb_proxy.get_target_interactions(target_id)
-		graph = intact_proxy.get_target_interactions(target_id, conf_val, max_nodes)
-
+		graph = intact_proxy.get_target_interactions(params[:target], conf_val,
+																								 max_nodes_param)
 		render :json => graph.to_json, :layout => false
 	end
 
@@ -161,12 +162,28 @@ puts "Getting interactions for '#{target_id}' from Intact with conf_val=#{conf_v
 	def get_uniprot_by_name (target_label = params[:label], target_uuid = params[:uuid])
 
 		proxy = TdguiProxy.new
-		return '[]' unless target_label != nil && target_label != ''
+#		return '[]' unless target_label != nil && target_label != ''
 
 		entry_hash = proxy.get_uniprot_by_name(target_label, target_uuid)
 
 		render :json => entry_hash.to_json, :layout => false
 	end
+
+
+# Gets a uniprot target out of a accession. It makes a simple get request to uniprot
+# @param [String] target_acc the accesion to get the target from uniprot
+# @return a json string
+	def get_uniprot_by_acc (target_acc = params[:acc])
+		proxy = TdguiProxy.new
+		return '[]' unless target_acc != nil && target_acc != ''
+
+		entry_hash = proxy.get_uniprot_by_acc(target_acc)
+
+		render :json => entry_hash.to_json, :layout => false
+	end
+
+
+
 
 
 # Sends an email feedback to admin from the feedback window on GUI
@@ -182,6 +199,23 @@ puts "Getting interactions for '#{target_id}' from Intact with conf_val=#{conf_v
 		render :json => res ? '{"success": true}': '{"success":false}', :layout => false
 	end
 
+
+
+	def get_pharm_count (uri = params[:uri])
+		pharm_proxy = TdguiProxy.new
+
+		res = pharm_proxy.get_pharm_count uri
+		render :json => res.to_json, :layout => false
+	end
+
+
+
+	def get_pharm_by_target_page (uri = params[:uri], page = params[:page], num_results=params[:pagesize])
+		pharm_proxy = TdguiProxy.new
+
+		resp = pharm_proxy.get_pharm_results_by_page(uri, page, num_results)
+		render :json => resp.to_json, :layout => false
+	end
 
 
 end

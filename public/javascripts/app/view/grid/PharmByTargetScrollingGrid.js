@@ -11,6 +11,8 @@ Ext.define('TDGUI.view.grid.PharmByTargetScrollingGrid', {
 
   layout: 'fit',
   // verticalScrollerType:Ext.create('LDA.helper.DynamicPagingToolbar', {itemId:'pager_id'}),
+  verticalScrollerType: 'paginggridscroller',
+  loadMask: true,
   disableSelection: true,
   invalidateScrollerOnRefresh: false,
 
@@ -177,8 +179,6 @@ Ext.define('TDGUI.view.grid.PharmByTargetScrollingGrid', {
     this.callParent(arguments);
   },
 
-
-
   target_prov: false,
   toggleProv: function (val) {
     this.target_prov = val;
@@ -190,10 +190,12 @@ Ext.define('TDGUI.view.grid.PharmByTargetScrollingGrid', {
 
 
 function targetProvenanceRenderer(data, cell, record, rowIndex, columnIndex, store) {
-  console.log("Target Pharmacology provenance renderer");
+//  console.log("Target Pharmacology provenance renderer");
 
   //if (LDAProvenanceMode != LDA.helper.LDAConstants.LDA_PROVENANCE_OFF) {
   if (this.target_prov) {
+    console.log("cell rendered using targetProvenanceRenderer...");
+
     var recdata = this.columns[columnIndex].dataIndex;
     var itemdata = recdata + '_item';
     recdata += '_src';

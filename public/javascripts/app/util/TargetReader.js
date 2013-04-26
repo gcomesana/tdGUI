@@ -17,6 +17,17 @@ Ext.define('TDGUI.util.TargetReader', {
    },
    */
   readRecords: function (data) {
+
+    if (data[TDGUI.util.LDAConstants.LDA_RESULT] === undefined) {
+      return new Ext.data.ResultSet({
+            total: 0,
+            count: 0,
+            records: [],
+            success: false,
+            message: 'Fail to get target information'
+          });
+    }
+
     var pt = data[TDGUI.util.LDAConstants.LDA_RESULT][TDGUI.util.LDAConstants.LDA_PRIMARY_TOPIC];
     var em = pt[TDGUI.util.LDAConstants.LDA_EXACT_MATCH];
     // var chemblData = em[0];

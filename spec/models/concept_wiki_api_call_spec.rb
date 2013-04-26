@@ -4,7 +4,7 @@ require 'spec_helper'
 describe ConceptWikiApiCall do
 
 	before (:all) do
-		@conceptWiki = ConceptWikiApiCall.new
+		@ops_wiki_api_call = ConceptWikiApiCall.new
 
 		@url = 'http://staging.conceptwiki.org/web-ws/concept/search/byTag'
 		@url = 'http://ops.conceptwiki.org/web-ws/concept/search/byTag' # last one
@@ -19,7 +19,7 @@ describe ConceptWikiApiCall do
 
 
 	it "it should exists" do
-		@conceptWiki.should_not be_nil
+		@ops_wiki_api_call.should_not be_nil
 	end
 
 
@@ -27,18 +27,29 @@ describe ConceptWikiApiCall do
 	it "make_request should return a valid Ruby Array from ops.conceptwiki" do
 #		res = @conceptWiki.request(@url, @opts)
 		@url = 'http://ops.conceptwiki.org/web-ws/concept/search/byTag'
-		res = @conceptWiki.search_by_tag(@opts[:uuid],@opts[:q],@opts)
+		res = @ops_wiki_api_call.search_by_tag(@opts[:uuid],@opts[:q],{})
+		res_bis = @ops_wiki_api_call.search_by_tag(@opts[:uuid],@opts[:q], @opts)
 		res.should be_kind_of Array
+		res.should be == res_bis
+
 puts "#{res}"
 	end
 
 
 	it "make_request should return a valid Ruby Array from stagin.conceptwiki" do
 	#		res = @conceptWiki.request(@url, @opts)
-			res = @conceptWiki.search_by_tag(@opts[:uuid],@opts[:q],@opts)
+			res = @ops_wiki_api_call.search_by_tag(@opts[:uuid],@opts[:q],@opts)
 			res.should be_kind_of Array
 	puts "#{res}"
-		end
+	end
+
+
+	it "should try to get a url from a term or so" do
+		res = @ops_wiki_api_call.search_for_url(@opts[:q], {})
+		puts "#res:\n#{res}\n"
+
+	end
+
 
 end
 

@@ -134,6 +134,7 @@ private
 # @param [Array] node_interactions this is a subset of the full interaction set,
 # where the first node (kind of origin) is always the same. So, this interaction subset
 # represents interactions from one node to whatever else
+# @param [Array] interactors the array of the interactors, will be uniprot accessions
 # @return an array of interactions ready to be converted in a valid JSON for jit.org FD graph
 	def build_graph_adjacencies (node_interactions, interactors)
 		adjacencies = Array.new
@@ -147,11 +148,13 @@ private
 
 			interaction_data = Array.new
 			elem[:info].each {|info|
-# puts "pubmed: #{info[:pubmed]}\n"
+# puts "** interactor ids: #{info[:intr_id]}\n"
 				intr_ids = info[:intr_id].split('|')
 				intact_id = intr_ids[0][intr_ids[0].index(':')+1..intr_ids[0].length]
 				last_index = intr_ids.index('(').nil? ? intr_ids.length: intr_ids[1].rindex('(')-1
-				iref = intr_ids[1][intr_ids[1].index(':')+1..last_index]
+				# iref = intr_ids[1][intr_ids[1].index(':')+1..last_index]
+				iref = intr_ids[1].nil? ? '': intr_ids[1][intr_ids[1].index(':')+1..last_index]
+# puts "iref: #{iref}\n"
 				interaction_data << {:confidenceVal => info[:conf_val],
 														 :intactid => intact_id, :iref => iref, :pubmed => (info[:pubmed].nil? ? "": info[:pubmed])}
 			}

@@ -6,11 +6,16 @@
  */
 Ext.Loader.setConfig({
   enabled:true,
-  disableCaching:false
+  disableCaching: false
 });
 
-Ext.Loader.setPath('Ext.ux', '/javascripts/extjs4.0.7/ux');
-Ext.Loader.setPath('LDA', '/javascripts/LinkedDataAPIParser/lib');
+
+Ext.Loader.setPath('Ext.ux', '/javascripts/extjs4.1/examples/ux');
+Ext.Loader.setPath('HT', '/javascripts/ht');
+// Ext.Loader.setPath('LDA', '/javascripts/LinkedDataAPIParser/lib');
+
+Ext.ns('TDGUI.Globals');
+TDGUI.Globals.firstTime = true;
 
 // Ext.Ajax.disableCaching = false
 Ext.create('Ext.app.Application', {
@@ -29,13 +34,33 @@ Ext.create('Ext.app.Application', {
     'TDGUI.controller.panels.TargetInfo',
     'TDGUI.controller.panels.GraphTabPanel',
     'TDGUI.controller.common.panels.TextImagePanel',
-    'TDGUI.controller.Viewport'
+    'TDGUI.controller.Viewport',
+    'HT.controller.Panels'
   ],
 
   autoCreateViewport: true,
 
   launch: function() {
     console.info("Starting TDGUI...");
+/*
+    Ext.Ajax.request({
+      url: '/api/status.json',
+      method: 'GET',
+      params: {
+        param_test: "just a param test"
+      },
+      success: function(response){
+        var text = response.responseText;
+        console.log("response from api: "+text)
+          // process server response here
+      },
+
+      failure: function(response, opts) {
+        console.log('server-side failure with status code ' + response.status);
+      }
+
+    });
+*/
 
     Ext.QuickTips.init();
 

@@ -3,7 +3,7 @@ require 'uri'
 require 'cgi'
 
 require 'nokogiri'
-require 'JSON'
+# require 'JSON'
 
 require 'intact/jit_graph'
 require 'intact/intact_dao'
@@ -46,6 +46,7 @@ class IntactProxy
 #		xmlFile = File.new('../data/q13362-stringdb-interactions.xml') # psi-mi xml file
 
 #		myuri = INTACT_URL.gsub(/xxxx/, target_id)
+		puts "get_interaction_graph -> params: accession: #{target_id}; threshold: #{conf_threshold}; neighs: #{num_neighbours}"
 		dbhost = TdGUI::Application.config.intactdb.intact_server
 		dbport = TdGUI::Application.config.intactdb.intact_port
 		dbuser = TdGUI::Application.config.intactdb.intact_user
@@ -59,6 +60,59 @@ class IntactProxy
 
 		graph_ary
 	end
+
+
+
+
+# Performs a search for interactions between target1 and target2 with a defined confidence value
+# @param [String] target1, an interactor which will be a uniprot accession
+# @param [String] target2, another interactor
+# @param [Float] conf_threshold the confidence value threshold: all interactions whose confidence
+# value is below this parameter will be discarded
+# @return [Hash] a hash object ready to be converted into a json object
+	def get_interactions_for (target1, target2, conf_threshold)
+		dbhost = TdGUI::Application.config.intactdb.intact_server
+		dbport = TdGUI::Application.config.intactdb.intact_port
+		dbuser = TdGUI::Application.config.intactdb.intact_user
+		dbpasswd = TdGUI::Application.config.intactdb.intact_pass
+		dbname = 'intact'
+
+		dao = IntactDao.new dbhost, dbport, dbname, dbuser, dbpasswd
+		num_rows = dao.fetch_interactions_for(target1, target2, conf_threshold)
+
+		interactions = {:totalCount => num_rows}
+		interaction_items = Array.new
+		
+		dao.interaction_net.each { |row|
+			intr_type_val = row['interaction_type']
+			interaction_type = {
+				name: intr_type_val[intr_type_val.index('(')..(intr_type_val.length-1)],
+				ref: intr_type_val[0..intr_type_val.index('(')]
+			}
+			
+			det_method = row['detection_method']
+			detection_method = {
+				name: det_method[det_method.index('(')..(det_method.length-1)],
+				ref: det_method[0..det_method.index('(')]	
+			}
+
+			my_interaction = {
+				:interactor1 => row['uniprot1id'],
+				:interactor2 => row['uniprot2id'],
+				:conf_value => row['conf_value'],
+				:interaction_id => row['interactionid'],
+				:interaction_type => interaction_type,
+				:detection_method => detection_method,
+				:pubmed_ref => row['pubmed']
+			}
+
+			interaction_items << my_interaction
+		} # EO dao each
+
+		interactions[:interactions] = interaction_items
+		interactions
+	end	
+
 
 
 
@@ -109,28 +163,12 @@ puts "** and main_accs: #{main_accs.to_s}\n"
 # START loop over main interactors to build the 'supergraph'
 		main_interactors.each { |interactor|
 			accession = interactor[:name]
-=begin
-			my_intactUri = INTACT_URL.sub('xxxx', accession)
-			xmlstr = request(my_intactUri, [])
-			inner_xml_doc = Nokogiri::XML(xmlstr.body)
-=end
+
 # thread issue
       xmlstr_thr = intact_xml_resps[accession]
 			inner_xml_doc = Nokogiri::XML(xmlstr_thr.body)
 
-=begin
-			xmlstrEq = xmlstr_thr.to_s == xmlstr.body
-			nokogiriEq = inner_xml_doc == inner_xml_doc_thr
-if !xmlstrEq
-	diffStr = if xmlstr.body.size <= xmlstr_thr.size
-							xmlstr_thr.index(xmlstr.body) == 0? xmlstr_thr[xmlstr.body.size()..xmlstr_thr.size()]: nil
-						else
-							xmlstr.body.index(xmlstr_thr) == 0? xmlstr.body[xmlstr_thr.size()..xmlstr.body.size()]: nil
-						end
 
-	puts "lengths (xmlstr vs xmlstr_thr): #{xmlstr.body.size}vs #{xmlstr_thr.size} => #{diffStr}\n"
-end
-=end
 # get the nodes subset for the current target
 			new_subset = get_interactors_subset(inner_xml_doc, main_interactors)
 
@@ -754,7 +792,7 @@ start_time = Time.now
 		proxy_host = 'ubio.cnio.es'
 		proxy_port = 3128
 		req = Net::HTTP::Get.new(my_url.request_uri)
-		res = Net::HTTP.start(my_url.host, my_url.port, proxy_host, proxy_port) { |http|
+		res = Net::HTTP.start(my_url.host, my_url.port) { |http|
 			http.request(req)
 		}
 end_time = Time.now

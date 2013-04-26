@@ -1,13 +1,14 @@
 require "rspec"
 require 'spec_helper'
+require 'net/http'
 
-describe "TdguiProxy model actions" do
+describe "TdguiProxy model" do
 
-	it "should return a non empty hash for Q13362" do
+	it "should get intractions as a hash for Q13362" do
 		tdguiproxy = TdguiProxy.new
 		target_acc = 'Q13362'
 
-		target_int = tdguiproxy.get_target_interactions(target_acc, 0.3)
+		target_int = tdguiproxy.get_target_interactions(target_acc, 0.4)
 
 		target_int.should be_kind_of Array
 		target_int.length.should be > 0
@@ -18,7 +19,7 @@ puts "Fucking end\n\n"
 	end
 
 
-	it "should have the right structure for JIT" do
+	it "should the interations retrieved have the right structure for JIT" do
 		tdguiproxy = TdguiProxy.new
 		target_acc = 'Q9BXW4'
 
@@ -34,6 +35,32 @@ puts "Fucking end\n\n"
 	end
 
 
+	it "should return the genes found for a target from uniprot accession" do
+		tdguiproxy = TdguiProxy.new
+		target_acc = 'P0ABH8'
+#		target_acc = 'Q5H943'
+
+		target_int = tdguiproxy.get_uniprot_by_acc(target_acc)
+		target_int.should be_an_instance_of Hash
+		target_int['allgenes'].should_not be nil
+
+		target_int['allgenes'].should be_kind_of Array
+
+	end
+
+
+	it "should return the genes found for a target from uniprot accession" do
+		tdguiproxy = TdguiProxy.new
+		gene_name = 'CACNA1C'
+
+		target_int = tdguiproxy.get_uniprot_by_gene(gene_name)
+		target_int.should be_an_instance_of Hash
+		target_int['allgenes'].should_not be nil
+
+		target_int['allgenes'].should be_kind_of Array
+
+	end
+
 
 	it "should return a hash with 3 elements got from conceptWiki" do
 		proxy = TdguiProxy.new
@@ -42,6 +69,7 @@ puts "Fucking end\n\n"
 		proxy.should_not be_nil
 		hash_res = proxy.get_target_by_uuid(target_uuid)
 
+		puts "hash_res 2 json: #{hash_res.to_json}\n"
 		hash_res.should_not be_nil
 		hash_res.should have(3).items
 		hash_res[:uniprot_url].should match(/uniprot/)
@@ -59,6 +87,7 @@ puts "Fucking end\n\n"
 		target_label = 'Breast cancer type 2 susceptibility protein'
 
 #		target_label = 'Deleted in bladder cancer protein 1'
+		target_uuid = nil
 		target_hash = proxy.get_uniprot_by_name(target_label, target_uuid)
 
 		target_hash.should_not be_nil
@@ -69,6 +98,30 @@ puts "Fucking end\n\n"
 		target_hash.each_key { |key| puts "#{key} -> #{target_hash[key]}" }
 	end
 
+
+	it "should return a hash from a target accession" do
+		proxy = TdguiProxy.new
+
+		proxy.should_not be_nil
+		target_acc = 'Q5H943'
+		target_label = 'Breast cancer type 2 susceptibility protein'
+
+#		target_label = 'Deleted in bladder cancer protein 1'
+		target_hash = proxy.get_uniprot_by_acc(target_acc)
+
+		target_hash.should_not be_nil
+		target_hash.length.should be > 0
+		puts "\nget_uniprot_by_acc(#{target_acc})\n"
+		target_hash.each_key { |key| puts "#{key} -> #{target_hash[key]}" }
+
+		target_hash['accessions'].should be_instance_of Array
+		target_hash.should_not be_nil
+		target_hash['accessions'].should be_kind_of Array
+		target_hash['pdbimg'].should_not be_empty
+		target_hash.should have_key('proteinFullName')
+		target_hash.should have(7).items
+
+	end
 
 	it "should return an array with info for entries" do
 
@@ -94,6 +147,59 @@ puts "target ids: #{target_str}\n\n"
 
 		hash.should_not be_nil
 		hash.size.should be > 0
+		hash.size.should be == 5
+
+	end
+
+
+	it "get_pharm_count should return a valid json with number of total results" do
+		uri = 'http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+		uri = 'http://www.conceptwiki.org/concept/59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+
+		uri = URI.encode(uri)
+		td_proxy = TdguiProxy.new
+		resp = td_proxy.get_pharm_count uri
+
+		resp.should_not be_nil
+		resp.should be_kind_of Hash
+		resp['result'].should be_kind_of Hash
+		resp['result']['primaryTopic']['targetPharmacologyTotalResults'].should be == 2304
+	end
+
+
+	it "get_pharm_resutls_by_page should return similar large json with 25 results" do
+		uri = 'http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+		uri = 'http://www.conceptwiki.org/concept/59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+
+		page_size = 25
+		page = 1
+
+		td_proxy = TdguiProxy.new
+		resp = td_proxy.get_pharm_results_by_page(uri, page, page_size)
+
+		resp.should_not be_nil
+		resp.should be_kind_of Hash
+		resp['result'].should be_kind_of Hash
+		resp['result']['items'].should be_kind_of Array
+		resp['result']['items'].should have(25).items
+	end
+
+
+	it "get_pharm_results_by_page should return only 4 results" do
+		uri = 'http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+		#		uri = 'http://www.conceptwiki.org/concept/59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+
+		page_size = 50
+		page = 47
+
+		td_proxy = TdguiProxy.new
+		resp = td_proxy.get_pharm_results_by_page(uri, page, page_size)
+
+		resp.should_not be_nil
+		resp.should be_kind_of Hash
+		resp['result'].should be_kind_of Hash
+		resp['result']['items'].should be_kind_of Array
+		resp['result']['items'].should have(4).items
 
 	end
 

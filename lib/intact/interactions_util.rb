@@ -62,6 +62,7 @@ module InteractionsUtil
 				(elem[:intr1] == intr1 && elem[:intr2] == intr2) ||
 				(elem[:intr1] == intr2 && elem[:intr2] == intr1)
 			}
+
 			if exist_intr.empty? && new_rs.length < max_interactors
 				info_hash =  {:conf_val => row["conf_value"], :intr_id => row["interactionid"]}
 				new_rs << {:intr1 => intr1, :intr2 => intr2, :info => Array.[](info_hash)}
@@ -70,7 +71,6 @@ module InteractionsUtil
 				new_elem = {:conf_val => row["conf_value"], :intr_id => row["interactionid"], :pubmed => row["pubmed"]}
 				new_rs[index_elem][:info] << new_elem
 			end
-
 		}
 		new_rs
 

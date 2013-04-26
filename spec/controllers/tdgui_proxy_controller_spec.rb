@@ -35,25 +35,62 @@ describe TdguiProxyController do
 #	end
 
 
-	it "should retrieve an uniprot result from a name" do
-#		thelabel = 'TP53-regulated inhibitor of apoptosis 1'
-#		thelabel = 'Next to BRCA1 gene 1 protein (Homo sapiens)'
-		params = {:thelabel => 'TP53-regulating kinase',
-							:uuid => '2e7a6477-b144-4911-942d-4ccd3ecfbb1a'}
-		thelabel = params[:thelabel]
-		uuid = params[:uuid]
-		get :get_uniprot_by_name, :label => thelabel, :uuid => uuid
+	describe "single target retrieval methods" do
+		it "should retrieve an uniprot result from a name" do
+	#		thelabel = 'TP53-regulated inhibitor of apoptosis 1'
+	#		thelabel = 'Next to BRCA1 gene 1 protein (Homo sapiens)'
 
-# puts "result from name:\n#{response.body}\n"
-		json_resp = JSON.parse(response.body)
-		json_resp.should_not be_nil
-		json_resp.length.should be > 0
+			params = {:thelabel => 'TP53-regulating kinase',
+								:uuid => '2e7a6477-b144-4911-942d-4ccd3ecfbb1a'}
+			thelabel = params[:thelabel]
+			uuid = params[:uuid]
+			get :get_uniprot_by_name, :label => thelabel, :uuid => uuid
 
-		json_resp['accessions'].length.should be > 0
-		json_resp['proteinFullName'].should_not be_empty
-		json_resp['proteinFullName'].index(thelabel).should_not be_nil
+	# puts "result from name:\n#{response.body}\n"
+			json_resp = JSON.parse(response.body)
+			json_resp.should_not be_nil
+			json_resp.length.should be > 0
+
+			json_resp['accessions'].length.should be > 0
+			json_resp['proteinFullName'].should_not be_empty
+			json_resp['proteinFullName'].index(thelabel).should_not be_nil
+		end
+
+
+		it "should retrieve an uniprot result from an uuid and no label" do
+	#		thelabel = 'TP53-regulated inhibitor of apoptosis 1'
+	#		thelabel = 'Next to BRCA1 gene 1 protein (Homo sapiens)'
+			params = {:thelabel => '',
+								:uuid => '2e7a6477-b144-4911-942d-4ccd3ecfbb1a'}
+			thelabel = params[:thelabel]
+			uuid = params[:uuid]
+			get :get_uniprot_by_name, :label => thelabel, :uuid => uuid
+
+	# puts "result from name:\n#{response.body}\n"
+			json_resp = JSON.parse(response.body)
+			json_resp.should_not be_nil
+			json_resp.length.should be > 0
+
+			json_resp['accessions'].length.should be > 0
+			json_resp['proteinFullName'].should_not be_empty
+			json_resp['proteinFullName'].index(thelabel).should_not be_nil
+		end
+
+
+		it "should retrieve an uniprot result from an accession" do
+			params = {:acc => 'Q5H943'}
+			get :get_uniprot_by_acc, :acc => params[:acc]
+
+			response.should_not be_nil
+
+			json_resp = JSON.parse(response.body)
+			json_resp['accessions'].length.should be > 0
+			json_resp['proteinFullName'].should_not be_empty
+			json_resp['pdbimg'].should_not be_empty
+
+		end
+
 	end
-
 
 
 	describe "multiple targets retrieval" do
@@ -83,7 +120,8 @@ describe TdguiProxyController do
 	#				:uuids => 'd593db45-e954-4e97-94f7-c039350f97f4,ec79efff-65cb-45b1-a9f5-dddfc1c4025c,eeaec894-d856-4106-9fa1-662b1dc6c6f1,979f02c6-3986-44d6-b5e8-308e89210c8d,31dd02fa-3522-438e-bef5-da14902f6c1b'
 
 			get :multiple_entries_retrieval, :entries => target_ids.join(',')
-	puts "\n#{response.body}\n"
+	puts "\n\nentries: #{target_ids.join(',')}\n";
+	puts "\n#{response.body}\n\n"
 			json_resp = JSON.parse(response.body)
 			json_resp.should_not be_nil
 			json_resp['ops_records'].should_not be_empty
@@ -162,6 +200,63 @@ describe TdguiProxyController do
 	end
 
 
+	describe "should deal with interactions" do
+
+		it "to get exactly a interaction network with 4 nodes" do
+			get :interactions_retrieval, :conf_val => 0.32, :target => 'P29274', :max_nodes => 3
+
+			response.body.should_not be_nil
+			response.status.should be == 200
+			json_resp = JSON.parse(response.body)
+			json_resp.should be_kind_of Array
+			json_resp.should have(4).items
+
+		end
+
+	end
+
+
+	describe "should deal with pharma information" do
+
+		it "to get the number of results to be fetched" do
+			uri = 'http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+			uri = 'http://www.conceptwiki.org/concept/59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+#			uri = 'http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F70dafe2f-2a08-43f7-b337-7e31fb1d67a8'
+			get :get_pharm_count, :uri => uri
+
+			response.should_not be_nil
+			response.code.to_i.should be == 200
+			response.body.should_not be == ''
+
+			json_resp = JSON.parse(response.body)
+			json_resp.should be_kind_of Hash
+			json_resp['result'].should be_kind_of Hash
+			json_resp['result']['primaryTopic']['targetPharmacologyTotalResults'].should_not be_nil
+			json_resp['result']['primaryTopic']['targetPharmacologyTotalResults'].should be >= 0
+
+		end
+
+		it "to get pharma information results of drugs on a target" do
+			uri = 'http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+			#		uri = 'http://www.conceptwiki.org/concept/59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+
+			# get :get_pharmtarget_page_results, :uri => uri, :page => 1, :pagesize => 50
+			get :get_pharm_by_target_page, :uri => uri, :page => 1, :pagesize => 50
+
+			response.should_not be_nil
+			response.code.to_i.should be == 200
+			response.body.should_not be == ''
+
+			json_resp = JSON.parse(response.body)
+			json_resp.should be_kind_of Hash
+			json_resp['result'].should be_kind_of Hash
+			json_resp['result']['items'].should be_kind_of Array
+			json_resp['result']['items'].should have(50).items
+			json_resp['result']['itemsPerPage'].should be == 50
+			json_resp['result']['items'].should have((json_resp['result']['itemsPerPage']).to_i).items
+		end
+	end
+
 
 	it "should send an email" do
 		params = Hash.new
@@ -177,5 +272,8 @@ describe TdguiProxyController do
 		json_resp['success'].should_not be_nil
 		json_resp['success'].should be_true
 	end
+
+
+
 
 end

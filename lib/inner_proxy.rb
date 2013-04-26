@@ -8,19 +8,23 @@ require 'uri'
 class InnerProxy
 	include REXML
 
-	private
+private
+	OPS_API_ID = '86bb218b'
+	OPS_API_KEY = '29493600307b1fbd0cec49cbee447073'
+
 # OPS
 	# Gets complete information about a target from its conceptWiki URI, such that
 	# http://api.openphacts.org/target?_format=json&uri=http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2Fd76e4a78-c06c-416e-a0fc-c073a69000d5
 	# Mind the uri parameter: URL HAS TO BE ESCAPED
-	OPSAPI_TARGET_URL = 'http://api.openphacts.org/target'
-	OPSAPI_PHARMA_URL = 'http://api.openphacts.org/target/pharmacology/pages'
-
+	OPSAPI_TARGET_URL = 'https://beta.openphacts.org/target' # 'http://api.openphacts.org/target'
+	OPSAPI_PHARMA_URL = 'https://beta.openphacts.org/target/pharmacology/pages' # 'http://api.openphacts.org/target/pharmacology/pages'
+	OPSAPI_PHARMA_COUNT_URL = 'https://beta.openphacts.org/target/pharmacology/count'
+	OPSAPI_PHARMA_PAGE_RESULTS = 'https://beta.openphacts.org/target/pharmacology/pages'
 
 # URL for conceptwiki
 	# Search a concept byTag or byWhatever
-#	CONCEPT_WIKI_API_SEARCH_URL = "http://ops.conceptwiki.org/web-ws/concept/search/"
-	CONCEPT_WIKI_API_SEARCH_URL = "http://ops.conceptwiki.org/web-ws/concept/search/byTag"
+	OPS_API_FREETEXT_SEARCH_URL = "http://beta.openphacts.org/search/freetext"
+#	CONCEPT_WIKI_API_SEARCH_URL = "http://ops.conceptwiki.org/web-ws/concept/search/byTag"
 	# Get information for a concept from its uuid
 	CONCEPT_WIKI_API_GET_URL = "http://ops.conceptwiki.org/web-ws/concept/get"
 
@@ -37,10 +41,10 @@ class InnerProxy
 	URL_FETCH_ENTRY = 'http://www.uniprot.org/uniprot/'
 
 
-	public
+public
 	def initialize ()
 #		@coreApiEndpoints =[CORE_API_URL_83]
-		@conceptWikiEndpoints = [CONCEPT_WIKI_API_SEARCH_URL, CONCEPT_WIKI_API_GET_URL]
+		@conceptWikiEndpoints = [OPS_API_FREETEXT_SEARCH_URL] #, CONCEPT_WIKI_API_GET_URL]
 
 		@coreApi_method = 'proteinInfo'
 		@coreApi_uri = 'http://chem2bio2rdf.org/chembl/resource/chembl_targets/12261'
@@ -50,7 +54,7 @@ class InnerProxy
 		@requestErrMsg = ''
 
 		@urlMap = {
-			CONCEPT_WIKI_API_SEARCH_URL => UNIPROT_PROTEIN_LOOKUP_SHORT
+			OPS_API_FREETEXT_SEARCH_URL => UNIPROT_PROTEIN_LOOKUP_SHORT
 		}
 
 #		@coreApiEndpoints.each { |endpoint|
@@ -58,6 +62,14 @@ class InnerProxy
 #		}
 	end
 
+
+	def get_app_id
+		OPS_API_ID
+	end
+
+	def get_app_key
+		OPS_API_KEY
+	end
 
 # Checks whether the endpoint for coreAPI is alive
 # @return [Boolean] true if the endpoint is alive; false otherwise
@@ -78,7 +90,7 @@ class InnerProxy
 # Gets the concept wiki search URI
 # @return [String] a conceptWiki url
 	def conceptwiki_ep_search
-		CONCEPT_WIKI_API_SEARCH_URL
+		OPS_API_FREETEXT_SEARCH_URL
 	end
 
 
@@ -96,11 +108,20 @@ class InnerProxy
 		OPSAPI_PHARMA_URL
 	end
 
+	def ops_api_count_pharma
+		OPSAPI_PHARMA_COUNT_URL
+	end
+
+
+	def ops_api_pharma_page_results
+		OPSAPI_PHARMA_PAGE_RESULTS
+	end
+
 
 # Gets the uniprot url used to get entries based on a term (ej. brca2)
 # @return [String] a uniprot endpoint
 	def concept_uniprot_ep
-		@urlMap[CONCEPT_WIKI_API_SEARCH_URL]
+		@urlMap[OPS_API_FREETEXT_SEARCH_URL]
 	end
 
 # Returns one of the five supposed coreAPI endpoints.
@@ -119,7 +140,7 @@ class InnerProxy
 		# check to see if endpoint is responding
 		#		api_method = 'proteinInfo'
 		#		prot_uri = 'http://chem2bio2rdf.org/chembl/resource/chembl_targets/12261'
-		prot_uri = CONCEPT_WIKI_API_SEARCH_URL
+		prot_uri = OPS_API_FREETEXT_SEARCH_URL
 #		prot_uri = prot_uri + 'byTag'
 		options = Hash.new
 		options[:limit] = 1
@@ -128,6 +149,7 @@ class InnerProxy
 		options[:uuid] = CONCEPT_WIKI_TP53_UUID
 
 		prot_uri = prot_uri+ "?uuid=#{options[:uuid]}&q=#{options[:q]}"
+		prot_uri = prot_uri + "&app_id=#{OPS_API_ID}&app_key=#{OPS_API_KEY}"
 #		url = URI.parse(prot_uri) rescue prot_uri
 #		 url = checkEndpoints()
 		result = nil
@@ -141,10 +163,10 @@ class InnerProxy
 # EO OJO
 		puts "checkConceptWiki result: #{result} for #{prot_uri}"
 		if result == nil || result.code.to_i < 0
-			@endpoint_ready = @urlMap[CONCEPT_WIKI_API_SEARCH_URL]
+			@endpoint_ready = @urlMap[OPS_API_FREETEXT_SEARCH_URL]
 			false
 		else
-			@endpoint_ready = CONCEPT_WIKI_API_SEARCH_URL
+			@endpoint_ready = OPS_API_FREETEXT_SEARCH_URL
 			true
 		end
 	end
@@ -156,6 +178,7 @@ class InnerProxy
 # first endpoint in replying
 # Otherwise, the method returns nil and en endpoint_ready is reset to nil
 # @return [Boolean] true if any of the endpoints is alive; false otherwise
+=begin
 	def checkCoreAPI ()
 		options = Hash.new
 		options[:uri] = '<' + @coreApi_uri + '>'
@@ -195,6 +218,7 @@ puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '
 		alive > 0 ? true : false
 	end
 # EO checkCoreApi
+=end
 
 
 
@@ -345,6 +369,10 @@ puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '
 	def request (addrs)
 		uri = URI.parse(addrs) rescue addrs
 		http = Net::HTTP.new(uri.host, uri.port)
+		if addrs.index('https').nil? == false # it is an secure connection
+			http.use_ssl = true
+		end
+#		http.verify_mode = OpenSSL::SSL::VERIFY_NONE # read into this
 		req = Net::HTTP::Get.new(uri.request_uri)
 		begin
 			response = Timeout::timeout(TIMEOUT) {
@@ -352,14 +380,17 @@ puts "### checkCoreApi discover endpoint #{endpoint} for ''#{@coreApi_uri}'' & '
 			}
 		rescue Timeout::Error => exc
 			@requestErrMsg = "ERROR: #{exc.message}"
+			puts "#{@requestErrMsg}"
 			-1
 
 		rescue Errno::ETIMEDOUT => exc
 			@requestErrMsg = "ERROR: #{exc.message}"
+			puts "#{@requestErrMsg}"
 			-2
 
 		rescue Errno::ECONNREFUSED => exc
 			@requestErrMsg = "ERROR: #{exc.message}"
+			puts "#{@requestErrMsg}"
 			-3
 
 		else

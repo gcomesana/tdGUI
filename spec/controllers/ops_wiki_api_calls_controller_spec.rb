@@ -5,7 +5,7 @@ describe OpsWikiApiCallsController do
 
 	before (:all) do
 		@substring = 'breast'
-		@substring = 'brca'
+		# @substring = 'brca'
 #		@substring = 'Ubiquitin carboxyl-terminal hydrolase 4'
 #		@substring = CGI.escape(@substring)
 	end
@@ -24,6 +24,8 @@ describe OpsWikiApiCallsController do
 		response.code.to_i.should eq(200)
 		JSON.parse(response.body).should be_kind_of Array
 
+		parsed_resp = JSON.parse(response.body)
+		parsed_resp.length.should be > 0
 	end
 
 

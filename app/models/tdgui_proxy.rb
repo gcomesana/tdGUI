@@ -22,7 +22,7 @@ class TdguiProxy
 
 
 	OLD_DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch/uniprotkb/xxxx/uniprotxml'
-	UNIPROT_BY_NAME = 'http://www.uniprot.org/uniprot/?query=xxxx+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
+	UNIPROT_BY_NAME = 'http://www.uniprot.org/uniprot/?query=name:"xxxx"+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
 	UNIPROT_BY_GENE = 'http://www.uniprot.org/uniprot/?query=gene:xxxx+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
 
 	DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=uniprotkb&id=xxxx&format=xml'
@@ -199,7 +199,11 @@ puts "get_multiple_entries: #{entries}"
 
 		if uuid.nil? == false && uuid.empty? == false # we have uuid
 			concept_hash = get_target_by_uuid(uuid)
-			url = concept_hash[:uniprot_url]+'.xml'
+			if concept_hash[:uniprot_url] != ''
+				url = concept_hash[:uniprot_url]+'.xml'
+			else
+				url = UNIPROT_BY_NAME.gsub(/xxxx/, name)
+			end
 
 		else
 			url = UNIPROT_BY_NAME.gsub(/xxxx/, name)
@@ -304,8 +308,8 @@ puts "the url: #{url}"
 			result[:pref_label] = pref_label[0]['text']
 
 			urls = json_hash['urls']
-			uniprot_url = urls.select { |url| url['value'] =~ /uniprot/ }
-			result[:uniprot_url] = uniprot_url[0]['value']
+			uniprot_url = urls.select { |url| url['value'] =~ /uniprot/ } rescue []
+			result[:uniprot_url] = uniprot_url[0]['value'] rescue ''
 
 			result
 		end

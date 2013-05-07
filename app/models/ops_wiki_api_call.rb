@@ -227,7 +227,8 @@ private
 			end
 
 			# labels
-			result[:pref_label] = semanticTagHash['prefLabel']
+			# result[:pref_label] = semanticTagHash['prefLabel']
+			result[:pref_label] = concept['match']
 
 			alt_labels = Array.new
 			if concept['altLabel'].nil? == false and concept['altLabel'].is_a?(Array)

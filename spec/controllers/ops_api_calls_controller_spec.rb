@@ -19,6 +19,8 @@ describe OpsApiCallsController do
 		@bad_uniprot_uri = @bad_uniprot_opts[:uri]
 		@ok_uniprot_uri = @ok_uniprot_opts[:uri]
 		@coreApi_uri = @coreApi_opts[:uri]
+
+
 	end
 
 
@@ -27,13 +29,40 @@ describe OpsApiCallsController do
 		it "should make a request to coreApi for proteinInfo" do
 			get :protein_info, :protein_uri => @coreApi_uri
 			puts "**==> coreAPI protein_info: #{response.body}"
+			response.code.to_i.should be == 200
 			json_resp = JSON.parse(response.body)
 
 			json_resp['ops_records'].should be_nil
 #			json_resp['ops_records'].should be_kind_of Array
 			json_resp['format'].should be == "linked-data-api"
+			json_resp['result']['primaryTopic']['exactMatch'][0].should be_kind_of(Hash)
+
+			exactMatch = json_resp['result']['primaryTopic']['exactMatch'][0]
+			exactMatch['_about'].should include("uniprot")
 
 		end
+
+
+
+		it "should make a protein_info request with no result despite conceptWiki uri" do
+			concept_uri = "http://www.conceptwiki.org/concept/5c6405bd-2b3d-4165-b521-8bb1d35b49c6"
+			get :protein_info, :protein_uri => concept_uri
+
+			response.code.to_i.should be == 200
+			parsed_resp = JSON.parse(response.body)
+			parsed_resp['result'].should be_nil
+			parsed_resp['success'].should_not be_nil
+			parsed_resp['success'].should be_false
+		end
+
+
+
+		it "should perform the sequence for a target: lookup and info w/o resorting uniprot" do
+			mock_prefLabel_en = "Breast cancer type 1 susceptibility protein"
+			mock_about = "http://www.conceptwiki.org/concept/5c6405bd-2b3d-4165-b521-8bb1d35b49c6"
+
+		end
+
 
 =begin UNIPROT not used so far
 		it "should get a response but not data on it" do

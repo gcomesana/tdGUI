@@ -1,5 +1,5 @@
 
-Ext.require('TDGUI.model.ListTarget');
+Ext.require(['TDGUI.model.ListTarget', 'HT.lib.Util']);
 
 Ext.define('TDGUI.util.Utils', {
 

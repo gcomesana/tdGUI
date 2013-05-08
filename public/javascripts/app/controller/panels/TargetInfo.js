@@ -42,7 +42,7 @@ console.info ("Initializing TargetInfo controller...")
           var formVals = form.getForm().getValues()
 
           this.onClickInteractionsBtn (formVals.uniprotAcc, formVals.conf_val, formVals.max_nodes)
-          comp.up('window').hide()
+          comp.up('window').close();
         }
 
       },

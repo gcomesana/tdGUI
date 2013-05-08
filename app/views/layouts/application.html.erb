@@ -24,6 +24,7 @@
 
   <!-- environment: <%= ENV['RAILS_ENV'] %> -->
   <% if ENV['RAILS_ENV'] != 'production' %>
+		<!-- using extjs 4.1 -->
     <%= javascript_include_tag '/javascripts/extjs4.1/ext-all-debug.js' %>
     <%#= javascript_include_tag "extjs4.0.7/bootstrap.js" %>
     <%#= javascript_include_tag 'prototype.js' %>

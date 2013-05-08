@@ -202,7 +202,8 @@ private
 				semanticTagHash = concept['semanticTag']
 			end
 
-			result[:uuid] = semanticTagHash['uuid']
+			concept_uuid = concept['_about'][concept['_about'].rindex('/')+1..concept['_about'].length]
+			result[:uuid] = concept_uuid
 			# construct concept uri to LDC
 			# result[:ops_uri] = "http://ops.conceptwiki.org/wiki/#/concept/#{(concept['uuid'] ? concept['uuid']: '')}/view"
 
@@ -228,7 +229,7 @@ private
 
 			# labels
 			# result[:pref_label] = semanticTagHash['prefLabel']
-			result[:pref_label] = concept['match']
+			result[:pref_label] = concept['prefLabel_en']
 
 			alt_labels = Array.new
 			if concept['altLabel'].nil? == false and concept['altLabel'].is_a?(Array)

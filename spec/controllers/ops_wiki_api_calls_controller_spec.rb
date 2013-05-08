@@ -26,6 +26,10 @@ describe OpsWikiApiCallsController do
 
 		parsed_resp = JSON.parse(response.body)
 		parsed_resp.length.should be > 0
+		parsed_resp[0].should be_kind_of(Hash)
+		parsed_resp[0]['uuid'].should be_kind_of(String)
+		(parsed_resp[0]['uuid'] == parsed_resp[1]['uuid']).should be_false
+		(parsed_resp[0]['match'] != parsed_resp[0]['pref_label']).should be_true
 	end
 
 

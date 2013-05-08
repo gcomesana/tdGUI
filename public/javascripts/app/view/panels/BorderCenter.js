@@ -47,10 +47,10 @@ console.info ("Initializing panels.BorderCenter comp..." + this.nombre)
 
     me.items = [{
       xtype: 'tdgui-welcomepanel'
-    }, {
+    }] /*, {
       xtype: 'cytopanel',
       title: 'Hypothesis tester'
-    }]
+    }]   */
 /*
 	  me.items = [{
       xtype: 'panel',

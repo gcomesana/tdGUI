@@ -22,7 +22,8 @@ class TdguiProxy
 
 
 	OLD_DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch/uniprotkb/xxxx/uniprotxml'
-	UNIPROT_BY_NAME = 'http://www.uniprot.org/uniprot/?query=name:"xxxx"+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
+	UNIPROT_BY_NAME = 'http://www.uniprot.org/uniprot/?query=name:"xxxx"+AND+reviewed:yes&sort=score&format=xml'
+	UNIPROT_BY_NAME_HUMAN = 'http://www.uniprot.org/uniprot/?query=name:"xxxx"+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
 	UNIPROT_BY_GENE = 'http://www.uniprot.org/uniprot/?query=gene:xxxx+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
 
 	DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=uniprotkb&id=xxxx&format=xml'
@@ -201,12 +202,16 @@ puts "get_multiple_entries: #{entries}"
 			concept_hash = get_target_by_uuid(uuid)
 			if concept_hash[:uniprot_url] != ''
 				url = concept_hash[:uniprot_url]+'.xml'
+				url_human = url
 			else
 				url = UNIPROT_BY_NAME.gsub(/xxxx/, name)
+				url_human = UNIPROT_BY_NAME_HUMAN.gsub(/xxxx/, name)
+
 			end
 
 		else
 			url = UNIPROT_BY_NAME.gsub(/xxxx/, name)
+			url_human = UNIPROT_BY_NAME_HUMAN.gsub(/xxxx/, name)
 		end
 
 puts "the url: #{url}"
@@ -214,7 +219,11 @@ puts "the url: #{url}"
 
 #		url =  URI.encode(url)
 # puts "the url encoded: #{url}"
-		results = LibUtil.request(url, options)
+		results = LibUtil.request(url_human, options)
+		if results.body == ''
+			results = LibUtil.request(url, options)
+		end
+
 		if results.code.to_i != 200
 			puts "Uniprot fetch service not working properly right now!"
 			return nil

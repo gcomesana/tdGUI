@@ -9,7 +9,7 @@
 Ext.define('TDGUI.view.panels.TargetInfo', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.tdgui-targetinfopanel',
-  requires: ['TDGUI.store.lda.TargetStore'],
+  requires: ['TDGUI.store.lda.TargetStore', 'HT.lib.Util'],
   
 	title: 'Target Info',
 
@@ -228,7 +228,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
     var store = Ext.create ('TDGUI.store.lda.TargetStore');
     this.targetInfoStore = store;
 //		store.addListener('load', this.showData, this);
-    this.targetInfoStore.addListener('load', this.showData, this)
+    this.targetInfoStore.addListener('load', this.showData, this);
 //    this.targetInfoStore.addListener('load', this.displayData, this);
 		this.callParent(arguments);
 	},
@@ -243,9 +243,10 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
    */
   raiseInteractionParams: function (btn, ev) {
 
-    var panel = btn.up('tdgui-targetinfopanel')
+    var panel = btn.up('tdgui-targetinfopanel');
 
-    var me = panel
+    var me = panel;
+    console.info('accession for targetinfo-panel: '+me.uniprot_acc);
     var form = Ext.createWidget('form', {
       bodyPadding: 5,
       frame: true,
@@ -293,7 +294,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
           handler: function () {
             var me = this
             me.up('form').getForm().reset();
-            me.up('window').hide();
+            me.up('window').close();
           }
         }, {
           text: 'Send',
@@ -303,19 +304,26 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
     });
 
 
-    this.interactionDlg = Ext.widget('window', {
-      title: 'Interactions parameters',
-      closeAction: 'hide',
-      id: 'interactionsDlg',
-      width: 250,
-      height: 150,
-//      height: 400,
-//      minHeight: 400,
-      layout: 'fit',
-      resizable: true,
-      modal: true,
-      items: form
-    });
+		var interactionDlgId = 'interactionsDlg';
+/*		var myInteractionsDlg = Ext.getCmp(interactionDlgId);
+		if (myInteractionsDlg !== undefined && this.interactionDlg === undefined)
+			this.interactionDlg = myInteractionsDlg;
+
+		else if (this.interactionDlg === undefined) {
+*/
+			this.interactionDlg = Ext.widget('window', {
+				title: 'Interactions parameters',
+				closeAction: 'destroy',
+				id: interactionDlgId,
+				width: 250,
+				height: 150,
+	//      height: 400,
+	//      minHeight: 400,
+				layout: 'fit',
+				resizable: true,
+				modal: true,
+				items: form
+			});
 
     this.interactionDlg.show()
 
@@ -440,7 +448,12 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
    * @param {String} keywords a semi-colon separated list of keywords
    */
 	addKeywords: function(keywords) {
-		var bits = keywords.split('; ');
+		var bits;
+		if (HT.lib.Util.isClassOf(keywords, 'String'))
+			bits = keywords.split('; ');
+		else
+			bits = keywords;
+		
 		var keywordDisplayField = this.down('#keywords');
 		var bodyEl = keywordDisplayField.bodyEl;
 		var domElem = bodyEl.dom;

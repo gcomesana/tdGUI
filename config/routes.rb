@@ -61,6 +61,7 @@ TdGUI::Application.routes.draw do
 
 	resources :ops_wiki_api_calls do
 		collection do
+			get :status
 			get :protein_lookup
 			get :compound_lookup
 			get :test
@@ -83,6 +84,7 @@ TdGUI::Application.routes.draw do
 
 	resource :ops_api_calls do
 		collection do
+			get :status
 			get :protein_info
 	#			get :protein_lookup
 			get :pharm_by_protein_name

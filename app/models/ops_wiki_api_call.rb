@@ -22,6 +22,8 @@ class OpsWikiApiCall
 	# "&limit=5&uuid=eeaec894-d856-4106-9fa1-662b1dc6c6f1&_format=json"
 	CONCEPT_WIKI_API_FOR_URL_URL = "http://ops.conceptwiki.org/web-ws/concept/search/forUrl"
 
+	TARGET_SEMANTIC_TAG = 'eeaec894-d856-4106-9fa1-662b1dc6c6f1'
+	COMPOUND_SEMANTIC_TAG = '07a84994-e464-4bbf-812a-a4b96fa3d197'
 
 	def initialize
 		# For timing the transaction
@@ -200,7 +202,8 @@ private
 				semanticTagHash = concept['semanticTag']
 			end
 
-			result[:uuid] = semanticTagHash['uuid']
+			concept_uuid = concept['_about'][concept['_about'].rindex('/')+1..concept['_about'].length]
+			result[:uuid] = concept_uuid
 			# construct concept uri to LDC
 			# result[:ops_uri] = "http://ops.conceptwiki.org/wiki/#/concept/#{(concept['uuid'] ? concept['uuid']: '')}/view"
 
@@ -225,7 +228,8 @@ private
 			end
 
 			# labels
-			result[:pref_label] = semanticTagHash['prefLabel']
+			# result[:pref_label] = semanticTagHash['prefLabel']
+			result[:pref_label] = concept['prefLabel_en']
 
 			alt_labels = Array.new
 			if concept['altLabel'].nil? == false and concept['altLabel'].is_a?(Array)

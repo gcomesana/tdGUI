@@ -1,4 +1,9 @@
 class OpsWikiApiCallsController < ApplicationController
+
+
+	def status
+		render :json => {:status => 'online', :success => true}, :layout => false
+	end
 =begin
 	def concept_lookup(substring = params[:query])
 		options = Hash.new

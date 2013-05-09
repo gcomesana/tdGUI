@@ -61,7 +61,7 @@ Ext.define ('TDGUI.view.dropdowns.tdgui.CheckboxComboProteinLookup', {
     emptyText: 'No matching proteins found.',
 
     itemTpl: Ext.create('Ext.XTemplate',
-      '<span style="font-family: verdana; color: grey; ">',
+      '<span style="font-family: verdana; color: red;">',
       '<small>Matches: {match}</small></span><br/>',
       '<img id="img{uuid}" src="' + Ext.BLANK_IMAGE_URL + '" class="combo-iconbox-unchecked">',
       '<b>{pref_label}</b>&nbsp;&nbsp;',
@@ -69,7 +69,7 @@ Ext.define ('TDGUI.view.dropdowns.tdgui.CheckboxComboProteinLookup', {
       {
         addListener: function () {
           Ext.select('input[type=checkbox]').on('click', function (event, target) {
-            console.log(target);
+            console.log('itemTpl XTemplate addListener: '+ target);
           }, null, {delegate: 'a'});
         },
 
@@ -108,7 +108,6 @@ Ext.define ('TDGUI.view.dropdowns.tdgui.CheckboxComboProteinLookup', {
 //      checkBox.dom.click()
 //      var theEl = new Ext.Element (checkBox)
 //      theEl.dom.click()
-      var recIndex = this.store.find('uuid', checkBoxId)
       var recIndex = this.store.find('uuid', checkBoxId)
       var recSel = this.store.getAt(recIndex)
 

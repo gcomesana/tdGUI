@@ -3,6 +3,10 @@ require 'results_formatter'
 class OpsApiCallsController < ApplicationController
 	NO_EXPANDER_CORE_API_URL = "http://ops.few.vu.nl:9188/opsapi"
 
+	def status
+		render :json => {:status => 'online', :success => true}, :layout => false
+	end
+
 =begin
 	def cmpd_name_lookup(substring = params[:query])
 		options = Hash.new
@@ -125,6 +129,7 @@ d
 	end
 =end
 
+
 # Main method to get information about a target from ConceptWiki
 # @param [String] prot_uri the protein uri of concept wiki to make the query request
 	def protein_info(prot_uri = params[:protein_uri])
@@ -136,6 +141,8 @@ d
 		options[:format] = 'json'
 		api_call = OpsApiCall.new
 		results = api_call.request(api_method, options)
+		# here the right response format should be built up
+		# formatted_hash = ResultsFormatter.construct_column_objects(results)
 		if results.nil? then
 			render :json => {:success => false}.to_json, :layout => false
 		else

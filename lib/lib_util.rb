@@ -69,7 +69,7 @@ class LibUtil
 			#	 		pdbs = ent.elements.collect ("dbReference[@type='PDB']") {|pdb| pdb.attributes['id'] } # pdbs[i].elements[j>1]
 			#		  entryHash['pdbs'] = pdbs
 
-			entryHash = self.decode_uniprot_entry (ent)
+			entryHash = self.decode_uniprot_entry(ent)
 			recordsArray << entryHash
 		} # EO entries loop
 

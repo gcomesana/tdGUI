@@ -53,6 +53,9 @@ describe ConceptWikiApiCall do
 		puts "#{res}"
 	end
 
+
+
+
 =begin
 	it "should try to get a url from a term or so" do
 		res = @ops_wiki_api_call.search_for_url(@opts[:q], {})

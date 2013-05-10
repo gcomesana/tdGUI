@@ -16,7 +16,7 @@ describe TargetDossierApi do
 
 	describe "Uniprot API" do
 		it "/api/status.json should return the simplest json possible on request" do
-			get "#{@api_prefix}/status.json"
+			get "#{@api_prefix}/status.json?param_test=thisisaparamTest"
 
 			response.status.should == 200
 			parsed_resp = JSON.parse(response.body)
@@ -46,7 +46,7 @@ describe TargetDossierApi do
 			get "#{@api_prefix}/target/multiple/#{accs}.xml"
 
 			response.status.should == 200
-puts "#{response.body}\n"
+# puts "#{response.body}\n"
 			xmlDoc = Nokogiri::XML(response.body)
 			xmlDoc.should_not be_nil
 
@@ -60,6 +60,16 @@ puts "#{response.body}\n"
 			parsed_resp = JSON.parse(response.body)
 			parsed_resp.should be_kind_of(Hash)
 
+		end
+
+
+		it "#{@api_prefix}/target/bygene/<genename> should return a valid json" do
+			mock_gene = 'runx1'
+			get "#{@api_prefix}/target/bygene/#{mock_gene}.json"
+
+			response.status.should == 200
+			parsed_resp = JSON.parse(response.body)
+			parsed_resp.should be_kind_of(Hash)
 		end
 
 
@@ -91,11 +101,59 @@ puts "#{response.body}\n"
 	end
 
 
-	describe "OPS APi" do
+	describe "OPS API" do
 
 		it "lookup should get a list of entries from a term" do
+			lookup_concept = 'protein'
+			lookup_term = 'breast'
+			get "#{@api_prefix}/ops/lookup/#{lookup_concept}/#{lookup_term}.json"
 
+			response.status.should == 200
+			parsed_resp = JSON.parse(response.body)
+			parsed_resp.should_not be_nil
+			parsed_resp.should be_kind_of(Array)
+			parsed_resp.length.should be > 0
+			parsed_resp[0].should be_kind_of(Hash)
+			(parsed_resp[0]['uuid'] == parsed_resp[1]['uuid']).should be_false
 		end
+
+
+		it "gets a protein info for a target from an uuid should be nil" do
+			test_uuid = '09391f66-0728-4047-9116-2c7ebfaebde6'
+			get "#{@api_prefix}/ops/protein/#{test_uuid}.json"
+
+			response.status.should == 200
+			response.body.should == 'null' # nothing found for this uuid
+			# nothing else to test
+		end
+
+
+		it "gets protein information for a target from an uuid" do
+			mock_uri = "http://www.conceptwiki.org/concept/bf5c71f6-211b-4ba4-b37d-f6dd1623b036"
+			mock_uuid = "bf5c71f6-211b-4ba4-b37d-f6dd1623b036"
+
+			get "#{@api_prefix}/ops/protein/#{mock_uuid}.json"
+			response.status.should == 200
+			parsed_resp = JSON.parse(response.body)
+			parsed_resp.should_not be_nil
+			parsed_resp.should be_kind_of(Hash)
+			primary_topic = parsed_resp['result']['primaryTopic']
+			primary_topic.should be_kind_of(Hash)
+			primary_topic['prefLabel'].should_not be_nil
+		end
+=begin
+		# not working, use /api/target/accession.json instead
+		it "gets protein info from an accession" do
+			test_acc = "P29274" # random accession
+			get "#{@api_prefix}/ops/protein/#{test_acc}.json"
+
+			response.status.should == 200
+			response.body.should_not == 'null'
+			parse_resp = JSON.parse(response.body)
+			parse_resp.should be_kind_of(Hash)
+			parse_resp['pref_label'].should_not be_nil
+		end
+=end
 	end
 
 end

@@ -161,7 +161,8 @@ Ext.define('HT.view.panels.CytoPanel', {
 		// html: 'controls here',
 		flex: 3,
 		layout: {
-			type: 'vbox'
+			type: 'vbox',
+			autoSize: true
 		},
 		items: [{
 			xtype: 'container',
@@ -188,7 +189,7 @@ Ext.define('HT.view.panels.CytoPanel', {
 				strokeColor: 'black',
 				pos: {x: 20, y: 20}
 			}
-		}, { // EO entity-lookup 1
+		}, { // EO entity-lookup compound
 			xtype: 'entity-lookup',
 			id: 'entityComp',
 			entity: 'compound',
@@ -202,12 +203,12 @@ Ext.define('HT.view.panels.CytoPanel', {
 				strokeColor: 'darkblue',
 				pos: {x: 5, y: 5}
 			}
-		}, { // EO entity-lookup 1
+		}, { // EO entity-lookup disease
 			xtype: 'entity-lookup',
 			style: {
 				// backgroundColor: 'yellow'
 			},
-			id: 'entityDise',
+			id: 'entityDisease',
 			entity: 'disease',
 			btnText: 'Add',
 			emptyText: 'Disease...',

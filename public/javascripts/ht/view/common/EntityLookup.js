@@ -2,28 +2,36 @@
 Ext.define('HT.view.common.EntityLookup', {
 	extend: 'Ext.container.Container',
 	alias: 'widget.entity-lookup',
-	requires: ['HT.view.common.TextboxButton'],
+	requires: ['HT.view.common.TextboxButton', 'HT.view.common.ComboLookupButton',
+				'HT.store.CWEntries'],
 
 	layout: 'column',
+	/*
+	layout: {
+		type: 'hbox',
+				padding: '5',
+				align: 'middle'
+	},
+	*/
 	width: '99%',
-	// width: '80%',
+	//width: '80%',
 	// margin: 1,
 	style: {
-		// backgroundColor:'yellow',
-		marginLeft: 1
+		// borderColor: 'red',
+		// borderStyle: 'solid',
+		// borderWidth: '1px'
 	},
-
 
 	GENE: 1,
 	PROTEIN: 2,
 	COMPOUND: 3,
 	DISEASE: 4,
 
-
 	config: {
-		emptyText: 'nothing', // for the textbox-button's textfield
+		// button configs
 		btnCallback: undefined, // callback button for the textbox-button's button
 		btnText: '_', // text for the button
+		// entity configs
 		entity: 'protein', // the entity of this instance, will be the meta in textbox-button
 		shape: {
 			type: 'circle',
@@ -32,7 +40,15 @@ Ext.define('HT.view.common.EntityLookup', {
 			size: {w:10, h:10},
 			strokeColor: 'green',
 			fillColor: 'grey'
-		}
+		},
+
+		emptyText: 'nothing', // for the textbox-button's textfield
+
+		// combobox configs
+		// comboStore: undefined, // deduced from entity config
+		comboValueField: undefined,
+		comboDislayField: undefined,
+		comboName: 'entityLookup'
 	},
 
 	constructor: function (config) {
@@ -67,14 +83,87 @@ Ext.define('HT.view.common.EntityLookup', {
 	initComponent: function () {
 		var sprite = this.getShapeConfig();
 
+// ComboLookupButton configuration /////////////////////////////////////////
+		var comboStore = Ext.create('HT.store.CWEntries');
+		var myEntity = this.getEntity();
+		var remoteUrl, queryParam;
+
+		switch (myEntity) {
+			case 'protein':
+				remoteUrl = 'http://localhost:3003/ops_wiki_api_calls/protein_lookup.jsonp';
+				comboStore.storeId = 'comboStore-target';
+				queryParam = 'query';
+				break;
+
+			case 'compound':
+				remoteUrl = 'http://localhost:3003/ops_wiki_api_calls/compound_lookup.jsonp';
+				comboStore.storeId = 'comboStore-compound';
+				queryParam = 'query';
+				break;
+
+			case 'gene':
+				remoteUrl = 'http://localhost:3003/api/gene/lookup.jsonp'; // need to complete the url
+				comboStore.storeId = 'comboStore-gene';
+				queryParam = 'term';
+				break;
+
+			case 'disease':
+				// remoteUrl = 'http://localhost:3003/api/target/by_disease.jsonp'; // idem
+				remoteUrl = 'http://localhost:3003/pharma/disease/by_name.jsonp';
+				comboStore.storeId = 'comboStore-disease';
+				queryParam = 'disease';
+				break;
+
+			default:
+				remoteUrl = 'http://localhost:3003/ops_wiki_api_calls/protein_lookup.jsonp';
+				comboStore.storeId = 'comboStore-target';
+				queryParam = 'query';
+				break;
+		}
+
+		comboStore.setProxy({
+			type: 'jsonp',
+			url: remoteUrl,
+			reader: {
+				type: 'json'
+			}
+		});
+		comboStore.on('beforeload', function (store, op, evOpts) {
+			console.log('loading from: '+store.storeId);
+			console.log('using remote: '+store.getProxy().url);
+		});
+
+
+		var comboLookup = Ext.create('HT.view.common.ComboLookupButton', {
+			metaInfo: this.getEntity(),
+			columnWidth: 0.8,
+			margin: '3 5 0 5',
+			btnText: this.getBtnText(),
+			// id: 'txtBtnId',
+			emptyText: this.getEmptyText(),
+			queryParam: queryParam,
+			comboStore: comboStore,
+			comboDislayField: 'pref_label',
+			comboValueField: 'uuid',
+			btnCallback: function (btn, evOpts) {
+				console.info('combo btnCallback!!!');
+				var thisCmp = btn.up();
+				var theCombo = thisCmp.getComponent(0);
+				var selValue = theCombo.getValue();
+				console.info("After clicking button, value from combo is: "+selValue);
+			}
+		});
+
+
+// Items for this container ////////////////////////////////////////////////
 //		console.log ('fill is :  '+spriteCfg.fill+' = '+this.getShape().fillColor);
 		this.items = [{
 			xtype: 'draw',
 			autoSize: false,
 			viewBox: false,
-			columnWidth: 0.3,
+			columnWidth: 0.2,
 			height: 40,
-			width: 50,
+			// width: 50,
 			style: {
 				// backgroundColor: 'lightgray',
 				paddingLeft: 10,
@@ -82,8 +171,10 @@ Ext.define('HT.view.common.EntityLookup', {
 			},
 			items: [sprite]
 
-		}, {
-			xtype: 'textbox-btn',
+		}, comboLookup
+		/* {
+			// xtype: 'textbox-btn',
+			xtype: 'combo-lookup-btn',
 			metaInfo: this.getEntity(),
 			columnWidth:  0.7,
 			margin: '10 10 0 0',
@@ -94,10 +185,11 @@ Ext.define('HT.view.common.EntityLookup', {
 			btnCallback: function (btn, ev) {
 				console.log('textbox-btn btnCallback');
 			}
-			*/
-		}];
+			*
+		}*/ ];
 
 		this.callParent(arguments);
+		var combostoreId = this.getComponent(1).comboStore.storeId;
 	},
 
 

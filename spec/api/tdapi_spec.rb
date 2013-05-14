@@ -68,7 +68,6 @@ describe TargetDossierApi do
 			json[0].should be_kind_of(Hash)
 			json[0]['match'].downcase.should include(mock_term)
 
-
 		end
 
 

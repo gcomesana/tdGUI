@@ -58,7 +58,8 @@ module TargetDossierApi
 
 				if is_accession
 					protein_tag = 'eeaec894-d856-4106-9fa1-662b1dc6c6f1'
-					concept_proxy = ConceptWikiApiCall.new
+					# concept_proxy = ConceptWikiApiCall.new
+					concept_proxy = OpsWikiApiCall.new
 					resp = concept_proxy.search_by_tag(protein_tag, params[:protein_id], {})
 					uuid = resp[0][:uuid]
 					prot_uri = resp[0][:ops_uri]
@@ -130,6 +131,25 @@ module TargetDossierApi
 				end
 			end # nextprot_req helper
 
+
+			# Convert source format into a format to be processed by extjs custom component
+			# @param [Array] array_targets is an array of hashes
+			def convert_by_disease (array_targets)
+				result = Array.new
+
+				array_targets.each { |target|
+					target_hash = Hash.new
+
+					target_hash[:pref_label] = target['name']
+					target_hash[:match] = ''
+					target_hash[:pref_url] = 'http://www.uniprot.org/uniprot'+target['acc']
+					target_hash[:uuid] = ''
+
+					result << target_hash
+				}
+				result
+			end
+
 		end # helpers
 
 
@@ -149,7 +169,29 @@ module TargetDossierApi
 				proxy.test(params[:param_test])
 			end
 
+
+
+			desc 'Return gene names from a text search on Uniprot'
+			params do
+				requires :term, :type => String, :desc => 'The term search'
+				optional :offset, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
+				optional :limit, :type => Integer, :desc => 'The max number of results to send back'
+				optional :callback, :type => String, :desc => 'A callback function for JSONP requests'
+			end
+			get '/gene/lookup' do
+				proxy = TdguiProxy.new
+				res = proxy.gene_lookup(params[:term], params[:limit])
+
+				res
+			end
+
+
+
+
+
+
 		end
+
 
 
 ## target ##################################################################
@@ -222,7 +264,7 @@ module TargetDossierApi
 				:notes => 'byname'
 			}
 			params do
-				requires :name, :type => String, :desc => "A name like 'adenosine recpetor...'"
+				requires :name, :type => String, :desc => "A name like 'adenosine receptor...'"
 				optional :uuid, :type => String
 			end
 			get '/byname/:name' do

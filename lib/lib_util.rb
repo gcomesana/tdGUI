@@ -194,6 +194,41 @@ class LibUtil
 	end
 
 
+
+	# Returns an array of gene results from a tabbed response from Uniprot
+	# @param [Array] lines the tab-separated lines returned from the request
+	# @param [String] term the search term to highlight
+	def self.decode_tab_uniprot4gene (lines, term)
+		result = Array.new
+		first = true
+		lines.each { |line|
+			if first
+				first = false
+				next
+			end
+			hash = Hash.new
+
+			hash[:match] = ''
+			hash[:pref_url] = ''
+			hash[:pref_label] = ''
+			hash[:uuid] = ''
+
+			fields = line.split(/\t/)
+			hash[:match] = fields[1]
+			hash[:match].gsub!(/(#{term})/i, '<b>\1</b>')
+			# hash[:match].gsub!(/<\/em>/, '</b>')
+			hash[:pref_url] = 'http://www.uniprot.org/uniprot/'+fields[0]
+			hash[:pref_label] = fields[1] + ' (' + fields[4] + ')'
+			hash[:uuid] = fields[0]
+
+			result << hash
+		}
+
+		result
+	end
+
+
+
 # This method does a get request to an uri
 # @param [String] url the target url
 # @param [Hash] options parameters and other options for the request

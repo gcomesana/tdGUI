@@ -8,16 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ac4d959b-7041-4845-b29b-39d7db68b813" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/api_proxy.rb" afterPath="$PROJECT_DIR$/lib/api_proxy.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/lib_util.rb" afterPath="$PROJECT_DIR$/lib/lib_util.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/ops_wiki_api_call.rb" afterPath="$PROJECT_DIR$/app/models/ops_wiki_api_call.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/ops_wiki_api_call_spec.rb" afterPath="$PROJECT_DIR$/spec/models/ops_wiki_api_call_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/api/tdapi.rb" afterPath="$PROJECT_DIR$/app/api/tdapi.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/api/tdapi_pharma.rb" afterPath="$PROJECT_DIR$/app/api/tdapi_pharma.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/api/tdapi_spec.rb" afterPath="$PROJECT_DIR$/spec/api/tdapi_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/tdgui_proxy.rb" afterPath="$PROJECT_DIR$/app/models/tdgui_proxy.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/tdgui_proxy_spec.rb" afterPath="$PROJECT_DIR$/spec/models/tdgui_proxy_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tdGUI.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -45,7 +36,7 @@
     <file path="/tdgui_proxy_controller_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368007731269" ignored="false" />
     <file path="/tdgui_proxy.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368525333520" ignored="false" />
     <file path="/tdgui_proxy_controller.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366987846877" ignored="false" />
-    <file path="/tdapi_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368527608696" ignored="false" />
+    <file path="/tdapi_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368528659515" ignored="false" />
     <file path="/api_interactions_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1367920487313" ignored="false" />
     <file path="/target_lookup_info_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1367943108951" ignored="false" />
     <file path="/conceptWikiProteinLookup.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1367945588507" ignored="false" />
@@ -105,7 +96,7 @@
       <file leaf-file-name="tdapi_spec.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/spec/api/tdapi_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="89" column="57" selection-start="2614" selection-end="2614" vertical-scroll-proportion="0.89751554">
+            <state line="56" column="34" selection-start="1618" selection-end="1618" vertical-scroll-proportion="0.45652175">
               <folding />
             </state>
           </provider>
@@ -1004,7 +995,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2206047" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="319" y="518" width="1355" height="431" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26632047" sideWeight="0.18820861" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22396417" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20716685" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="515" y="551" width="1155" height="374" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20716685" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="515" y="551" width="1155" height="374" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32922733" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32993197" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" x="93" y="366" width="1586" height="450" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2503671" sideWeight="0.32698768" order="3" side_tool="false" content_ui="tabs" />
@@ -1212,7 +1203,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/api/tdapi_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="57" selection-start="2614" selection-end="2614" vertical-scroll-proportion="0.89751554">
+        <state line="56" column="34" selection-start="1618" selection-end="1618" vertical-scroll-proportion="0.45652175">
           <folding />
         </state>
       </provider>

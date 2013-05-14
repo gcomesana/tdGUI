@@ -54,7 +54,7 @@ describe TargetDossierApi do
 
 
 
-		it "#{@api_prefix}/lookup/gene.json?term=<term> should return a list of entries for combos with matching genes" do
+		it "#{@api_prefix}/gene/lookup.json?term=<term> should return a list of entries for combos with matching genes" do
 			mock_term = 'breast'
 			get "#{@api_prefix}/gene/lookup.json?term=#{mock_term}"
 

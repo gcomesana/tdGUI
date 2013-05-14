@@ -81,6 +81,21 @@ module TargetDossierPharmaApi
 			omim_data = @proxy.get_omim4disease(params[:disease], params[:limit])
 		end
 
+
+		desc 'GETS a list of diseases from OMIM.'
+		params do
+			requires :disease, :type => String, :desc => 'A disease name'
+			optional :offset, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
+			optional :limit, :type => Integer, :desc => 'The max number of results to send back'
+			optional :callback, :type => String, :desc => 'A callback function for JSONP requests'
+		end
+		get '/disease/by_name' do
+			resp = @proxy.omim_disease_lookup(params[:disease], params[:limit])
+
+			resp
+		end
+
+
 	end # PharmaAPI class
 
 end

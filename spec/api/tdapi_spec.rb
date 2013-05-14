@@ -53,6 +53,25 @@ describe TargetDossierApi do
 		end
 
 
+
+		it "#{@api_prefix}/gene/lookup.json?term=<term> should return a list of entries for combos with matching genes" do
+			mock_term = 'breast'
+			get "#{@api_prefix}/gene/lookup.json?term=#{mock_term}"
+
+			response.status.should == 200
+			response.body.should_not be == ''
+			json = JSON.parse(response.body)
+
+			json.should be_kind_of(Array)
+			json.length.should be > 0
+
+			json[0].should be_kind_of(Hash)
+			json[0]['match'].downcase.should include(mock_term)
+
+
+		end
+
+
 		it "#{@api_prefix}/target/byname/<a name>.json should return a json with info about target" do
 			get "#{@api_prefix}/target/byname/Breast%20cancer%20type%202%20susceptibility%20protein.json"
 
@@ -62,7 +81,7 @@ describe TargetDossierApi do
 
 		end
 
-
+=begin
 		it "#{@api_prefix}/target/bygene/<genename> should return a valid json" do
 			mock_gene = 'runx1'
 			get "#{@api_prefix}/target/bygene/#{mock_gene}.json"
@@ -71,7 +90,7 @@ describe TargetDossierApi do
 			parsed_resp = JSON.parse(response.body)
 			parsed_resp.should be_kind_of(Hash)
 		end
-
+=end
 
 		it "/td/api/v1/uniprot/<accession> should be return a json with uniprot info about accesssion" do
 			get "#{@api_prefix}/target/Q13362.json"

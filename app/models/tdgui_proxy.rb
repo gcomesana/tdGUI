@@ -22,8 +22,9 @@ class TdguiProxy
 
 
 	OLD_DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch/uniprotkb/xxxx/uniprotxml'
-	UNIPROT_BY_NAME = 'http://www.uniprot.org/uniprot/?query=name:"xxxx"+AND+reviewed:yes&sort=score&format=xml'
-	UNIPROT_BY_NAME_HUMAN = 'http://www.uniprot.org/uniprot/?query=name:"xxxx"+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
+	UNIPROT_BY_NAME = 'http://www.uniprot.org/uniprot/?query=name:"xxxx"+AND+reviewed:yes&limit=25&offset=0&sort=score&format=xml'
+	UNIPROT_BY_NAME_HUMAN = 'http://www.uniprot.org/uniprot/?query=name:"xxxx"+AND+organism:"Human+[9606]"+AND+reviewed:yes&limit=25&offset=0&sort=score&format=xml'
+
 	UNIPROT_BY_GENE = 'http://www.uniprot.org/uniprot/?query=gene:xxxx+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
 
 	DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=uniprotkb&id=xxxx&format=xml'
@@ -43,6 +44,45 @@ class TdguiProxy
 		{:resp => "TdguiProxy.test method. testParam is: #{string_param}"}
 	end
 
+
+
+# Gets a list of genes from a term search on Uniprot
+# @param [String] term the search term
+# @param [Number] limit the maximun number of results returned
+	def gene_lookup (term, limit = 25)
+		url = UNIPROT_BY_NAME.gsub(/xxxx/, term)
+		url = url.gsub(/format=xml/, 'format=tab')
+		url_human = UNIPROT_BY_NAME_HUMAN.gsub(/xxxx/, term)
+		url_human = url_human.gsub(/format=xml/, 'format=tab')
+
+		if limit != 25
+			url = url.gsub(/limit=25/, "limit=#{limit}")
+			url_human = url_human.gsub(/limit=25/, "limit=#{limit}")
+		end
+
+		url = "#{url}&columns=id,protein names,citation,comments,genes"
+		url_human = "#{url_human}&columns=id,protein names,citation,comments,genes"
+		puts "gene_lookup url: #{url}"
+		options = {}
+
+	#		url =  URI.encode(url)
+	# puts "the url encoded: #{url}"
+		results = LibUtil.request(url_human, options)
+		if results.body == ''
+			results = LibUtil.request(url, options)
+		end
+
+		if results.code.to_i != 200
+			puts "Uniprot fetch service not working properly right now!"
+			return nil
+
+		else
+			lines = results.body.split(/\n/)
+			lookup_arr = LibUtil.decode_tab_uniprot4gene(lines, term)
+			lookup_arr
+		end
+
+	end
 
 # Builds up a graph (array of hashes) for the uniprot accession taking into account
 # a maximun number of nodes in the graph and a minimum score the interactions have to accomplish.

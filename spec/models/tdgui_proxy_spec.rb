@@ -203,6 +203,40 @@ puts "target ids: #{target_str}\n\n"
 
 	end
 
+
+	it "gene_lookup should return an array of 25 fomatting objects after looking up uniprot" do
+		mock_term = 'lung'
+
+		td_proxy = TdguiProxy.new
+		res = td_proxy.gene_lookup(mock_term)
+
+		res.should be_kind_of(Array)
+		res.length.should be == 25
+		res[0].should be_kind_of(Hash)
+		res[0][:match].downcase.should include(mock_term.downcase)
+		res[1][:pref_url].should include('uniprot')
+		(res[0][:uuid] == res[1][:uuid]).should be_false
+		res[25].should be_nil
+	end
+
+
+
+	it "gene_lookup should return 35 resuls as limit was passed in as parameter" do
+		mock_term = 'lung'
+		mock_limit = 35
+
+		td_proxy = TdguiProxy.new
+		res = td_proxy.gene_lookup(mock_term, mock_limit)
+
+		res.should be_kind_of(Array)
+		res.length.should be == mock_limit
+		res[0].should be_kind_of(Hash)
+		res[0][:match].downcase.should include(mock_term.downcase)
+		res[1][:pref_url].should include('uniprot')
+		(res[2][:uuid] == res[3][:uuid]).should be_false
+		res[mock_limit].should be_nil
+	end
+
 =begin
 	it "should send an email" do
 		email_proxy = TdguiProxy.new

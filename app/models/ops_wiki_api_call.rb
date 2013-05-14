@@ -128,6 +128,9 @@ private
 # url="http://ops.conceptwiki.org/web-ws/concept/search/byTag"
 # opttions=[uuid:tolchurro, query:term, limit, offset]
 		@response = OpsEndpointsProxy.make_request(url, options)
+		if @response.is_a?(Fixnum)
+			@response = OpsEndpointsProxy.make_request(url, options) # preventing connection errors
+		end	
 		@response_time = Time.now
 		@query_time = @response_time - @request_time
 		puts "Call tooooooook #{@query_time} seconds"

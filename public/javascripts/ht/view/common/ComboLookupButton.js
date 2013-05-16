@@ -29,6 +29,7 @@ Ext.define('HT.view.common.ComboLookupButton', {
 			btn.suspendEvents();
 			var myEvOpts = {
 				value: thisComp.getComponent(0).getValue(),
+				label: thisComp.getComponent(0).getRawValue(),
 				meta: thisComp.getMetaInfo(),
 				id: thisComp.getId()
 			};

@@ -50,8 +50,10 @@ print "IntactDao() conn_str: #{conn_str}"
 
 		interactions_qry = "select id, uniprot1id, uniprot2id, interactionid, interaction_type, detection_method, conf_value, pubmed " 
 		interactions_qry += "from interactions "
-		interactions_qry += "where (uniprot1id = ? or uniprot1id = ?) "
-		interactions_qry += "and (uniprot2id = ? or uniprot2id = ?) "
+		# interactions_qry += "where (uniprot1id = ? or uniprot1id = ?) "
+		# interactions_qry += "and (uniprot2id = ? or uniprot2id = ?) "
+		interactions_qry += "where (uniprot1id = ? and uniprot2id = ?) "
+		interactions_qry += "or (uniprot2id = ? and uniprot1id = ?) "
 		interactions_qry += "and conf_value > ? order by conf_value desc;"
 		@interactions_qry = interactions_qry
 

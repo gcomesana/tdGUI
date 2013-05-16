@@ -72,8 +72,8 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 
 
 
-	var interactionOp = Ext.create('HT.lib.RuleOperation', {});
-	var operationStore = [interactionOp];
+	var interactionOp = Ext.create('HT.lib.InteractionsRuleOperation', {});
+	var operationStore = [interactionOp]; // Actual logic for rule operations come from here!!!!
 
 
 
@@ -86,12 +86,14 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 
 	return {
 
-		requires: ['HT.lib.Util', 'HT.lib.RuleOperation'],
+		requires: ['HT.lib.Util', 'HT.lib.RuleOperation', 'HT.lib.InteractionsRuleOperation'],
 
 		constructor: function () {
 			this.callParent(arguments);
 
-			var op = Ext.create('HT.lib.RuleOperation', {});
+			// var op = Ext.create('HT.lib.RuleOperation', {});
+			var op = Ext.create('HT.lib.InteractionsRuleOperation', {});
+			console.log('op.alias: '+op.alias);
 			operationStore.push(op);
 		},
 

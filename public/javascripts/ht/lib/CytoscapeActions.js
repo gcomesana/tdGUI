@@ -153,6 +153,24 @@ Ext.define('HT.lib.CytoscapeActions', {
 			var runner = Ext.create('HT.lib.HypothesisRunner', edges, nodes);
 			var paths = runner.graphWalker();
 
+			// This is to paint the edge on operation completion
+			vis.visualStyleBypass(null);
+			var bypassEdge = function (edge, color) {
+				// var cytovis = vis;
+				var bypass = {
+					nodes: {},
+					edges: {
+					}
+				};
+
+				bypass.edges[edge.id] = {
+					color: color
+				};
+
+				vis.visualStyleBypass(bypass);
+				// console.info('suppossedly only callback funcion for every rule...');
+			}
+
 			// There are several paths in a graph, with several edges for every path
 			// and one rule for every edges, with several function every rule
 			Ext.each(paths, function(path, index, pathList) {
@@ -162,14 +180,22 @@ Ext.define('HT.lib.CytoscapeActions', {
 
 					Ext.each(aliases, function(aliasObj, indexFunc, functionsList) {
 						var opObj = HT.lib.RuleFunctions.getOperationFromAlias(aliasObj.alias);
+
+						opObj.clearListeners();
 						opObj.on('operationComplete', function (result) {
-							console.log('operationComplete:'+aliasObj.result+ ' vs '+result);
+							console.log('operationComplete:'+aliasObj.result+ ' vs '+result.result);
+
+							if (result.hypothesis)
+								bypassEdge(edge, 'green');
+							else
+								bypassEdge(edge, 'red');
+
 							var labelResult = Ext.getCmp('labelResult');
 							if (labelResult == null)
-								alert ('No component was found');
+								console.log('No component was found');
 
 							else if (labelResult === undefined)
-								alert('A "class" was found...'+labelResult.toString());
+								console.log('A "class" was found...'+labelResult.toString());
 
 							else // labelResult is an object
 								labelResult.setText('result: '+aliasObj.result);

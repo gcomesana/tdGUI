@@ -36,8 +36,8 @@ Ext.define('TDGUI.view.panels.LogosPanel', {
     var me = this
 
     this.items = [
-      this.createLeftLogo(),
-      this.createRightLogos()
+      this.createLeftLogo()
+      // this.createRightLogos()
     ]
 
     this.callParent(arguments)

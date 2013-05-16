@@ -13,27 +13,29 @@
  * /////
  * rfe.fireEvent('operationComplete');
  */
-Ext.define('HT.lib.RuleOperation', {
-	// extend: 'Ext.util.Observable',
+Ext.define('HT.lib.InteractionsRuleOperation', {
+	extend: 'HT.lib.RuleOperation',
 	mixins: {
 		observable: 'Ext.util.Observable'
 	},
 
 	constructor: function (config) {
 		// this.initConfig(config);
-
-		this.evName = 'operationComplete';
-		this.alias = 'operation-alias';
-		this.result = null;
-		this.threshold = null;
-
-		this.mixins.observable.constructor.call(this, config);
-		this.addEvents({
-			'operationCompleted': true
-		});
-
-		this.listeners = config.listeners;
 		this.callParent(arguments);
+		this.alias = 'target-target-interactions';
+		/*
+		 this.evName = 'operationComplete';
+		 this.result = null;
+		 this.threshold = null;
+
+		 this.mixins.observable.constructor.call(this, config);
+		 this.addEvents({
+		 'operationCompleted': true
+		 }),
+
+		 this.listeners = config.listeners;
+		 this.callParent(arguments);
+		 */
 
 	},
 
@@ -57,17 +59,17 @@ Ext.define('HT.lib.RuleOperation', {
 				threshold: (threshold === undefined || threshold == null)? 0.0: threshold
 			},
 
-//			callback: function (opts, resp) {
-//			},
+			callback: function (opts, resp) {
+				console.log('ajax callback');
+			},
 
 			failure: function (resp, opts) {
 				funcObj.result = -1;
 			},
 
 			success: function (resp, opts) {
-				me.resumeEvents();
 				var jsonObj = resp;
-				var result = jsonObj.totalCount;
+				var result;
 				var sumConfVal = 0;
 				if (jsonObj.totalCount > 0) {
 					Ext.each(jsonObj.interactions, function (inter, index, interactions) {
@@ -76,14 +78,15 @@ Ext.define('HT.lib.RuleOperation', {
 					result = sumConfVal / jsonObj.totalCount;
 				}
 
-				funcObj.result = result;
+				funcObj.result = result === undefined? -1: result;
+				var hypothesiseResult = result !== undefined;
+
 				console.log('Operation finished!!!: '+funcObj.result);
-				me.fireEvent('operationComplete', {result: result});
-				me.suspendEvents();
+				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis: hypothesiseResult});
 			},
 
 			scope: me
-		})
+		})// EO JsonP request
 	}
 
 });

@@ -185,6 +185,16 @@ puts "Getting interactions for '#{params[:target]}' from Intact with conf_val=#{
 
 
 
+	def get_bioactivities_from_accession (target_acc = params[:acc])
+		proxy = TdguiProxy.new
+		return '[]' unless target_acc != nil && target_acc != ''
+
+		entry_hash = proxy.get_bioactivities_from_acc(target_acc)
+
+		render :json => entry_hash.to_json, :layout => false
+	end
+
+
 
 # Sends an email feedback to admin from the feedback window on GUI
 # @param [String] from the sender
@@ -210,7 +220,7 @@ puts "Getting interactions for '#{params[:target]}' from Intact with conf_val=#{
 
 
 
-	def get_pharm_by_target_page (uri = params[:uri], page = params[:_page], num_results=params[:_pageSize])
+	def get_pharm_by_target_page (uri = params[:uri], page = params[:page], num_results=params[:pagesize])
 		pharm_proxy = TdguiProxy.new
 
 		resp = pharm_proxy.get_pharm_results_by_page(uri, page, num_results)

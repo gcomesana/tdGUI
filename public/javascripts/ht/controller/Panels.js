@@ -80,7 +80,8 @@ Ext.define('HT.controller.Panels', {
 			id: newId.toString(),
 			label: evOpts.value,
 			// entity: HT.lib.CytoscapeActions.shape2entity[shape], // this is a Number
-			entity: entityWidget.shape2entity[shape],
+			// entity: entityWidget.shape2entity[shape],
+			entity: evOpts.meta,
 			payloadValue: evOpts.value
 		};
 

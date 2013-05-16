@@ -15,6 +15,7 @@ class APIProxy
 	CHEMBL_TARGET_ACTIVITY = 'https://www.ebi.ac.uk/chemblws/targets/xxxx/bioactivities'
 
 	OMIM_APIKEY = '7630D3726122E8FDCFD9465523A059918CA1258B'
+	OMIN_DISEASE_LOOKUP = 'http://api.europe.omim.org/api/entry/search?search=xxxx&filter=&fields=&retrieve=&start=0&limit=10&sort=&operator=&format=json&apiKey='
 	OMIM_ENTRY_SEARCH = 'http://api.omim.org/api/entry/search?search=xxxx&filter=&fields=&retrieve=&start=0&limit=10&sort=&operator=&include=geneMap&format=xml&apiKey='
 	OMIM_GENEMAP_SEARCH = 'http://api.omim.org/api/geneMap/search?search=xxxx&filter=&fields=&start=0&limit=&sort=&operator=&format=xml&apiKey='
 
@@ -42,6 +43,15 @@ class APIProxy
 		'IEA'=> 'Inferred from Electronic Annotation',
 		'NR'=> 'No recorded'
 	}
+
+
+
+	def get_genes_by_name (term)
+
+
+
+	end
+
 
 # Retrieves information about the biological processes the target is involved in
 # @param [String] target_acc the uniprot target accession
@@ -222,8 +232,44 @@ class APIProxy
 
 			{:omim => {:query_term => disease, :phenotype_list => entry_list}}
 		end
+	end # EO get_omim4disease method
 
-	end
+
+
+	# Search diseases based on a term in OMIM
+	def omim_disease_lookup (disease, limit)
+
+		disease = disease.gsub(/ /, '+')
+		url = OMIN_DISEASE_LOOKUP.gsub(/xxxx/, disease)
+		url = url.gsub(/&limit=/, "&limit=#{limit}")
+		url = url + OMIM_APIKEY
+
+		response = LibUtil.request(url, {})
+		if response.code.to_i != 200
+			puts err_msg("method get_omim4disease; param: #{disease}")
+			nil
+
+		else
+			resp_array = Array.new
+			resp_hash = Hash.new
+			resp_hash[:query_term] = disease
+			# omim_hash = Hash.from_xml(response.body)
+			omim_hash = JSON.parse(response.body)
+			entries = omim_hash['omim']['searchResponse']['entryList']
+
+			entries.each { |item|
+				item_hash = Hash.new
+				item_hash['pref_label'] = item['entry']['titles']['preferredTitle']
+				item_hash['match'] = item['entry']['matches']
+				item_hash['uuid'] = item['entry']['mimNumber']
+				item_hash['pref_url'] = 'http://www.omim.org/entry/'+item['entry']['mimNumber']
+
+				resp_array << item_hash
+			}
+
+			resp_array
+		end
+	end # EO omim_disease_lookup
 
 
 

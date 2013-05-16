@@ -36,11 +36,12 @@ describe TdguiProxyController do
 
 
 	describe "single target retrieval methods" do
-		it "should retrieve an uniprot result from a name" do
+		it "should retrieve an uniprot result from a name for a non Human species" do
 	#		thelabel = 'TP53-regulated inhibitor of apoptosis 1'
 	#		thelabel = 'Next to BRCA1 gene 1 protein (Homo sapiens)'
-			params = {:thelabel => 'TP53-regulating kinase',
-								:uuid => '2e7a6477-b144-4911-942d-4ccd3ecfbb1a'}
+
+			params = {:thelabel =>'Protein BREAST CANCER SUSCEPTIBILITY 1 homolog',
+								:uuid	=> 'c57e4021-279b-49fb-b5e8-3f1cc7ed933e'}
 			thelabel = params[:thelabel]
 			uuid = params[:uuid]
 			get :get_uniprot_by_name, :label => thelabel, :uuid => uuid
@@ -53,8 +54,29 @@ describe TdguiProxyController do
 			json_resp['accessions'].length.should be > 0
 			json_resp['proteinFullName'].should_not be_empty
 			json_resp['proteinFullName'].index(thelabel).should_not be_nil
+			json_resp['organismSciName'].should_not be == 'Homo sapiens'
 		end
 
+
+		it "should retrieve a uniprot entry for a name" do
+			params = {:thelabel => 'TP53-regulating kinase',
+								:uuid => '2e7a6477-b144-4911-942d-4ccd3ecfbb1a'}
+
+			thelabel = params[:thelabel]
+			uuid = params[:uuid]
+			get :get_uniprot_by_name, :label => thelabel, :uuid => uuid
+
+			# puts "result from name:\n#{response.body}\n"
+			json_resp = JSON.parse(response.body)
+			json_resp.should_not be_nil
+			json_resp.length.should be > 0
+
+			json_resp['accessions'].length.should be > 0
+			json_resp['proteinFullName'].should_not be_empty
+			json_resp['proteinFullName'].index(thelabel).should_not be_nil
+			json_resp['organismSciName'].should be == 'Homo Sapiens'
+
+		end
 
 		it "should retrieve an uniprot result from an uuid and no label" do
 	#		thelabel = 'TP53-regulated inhibitor of apoptosis 1'
@@ -239,7 +261,8 @@ describe TdguiProxyController do
 			uri = 'http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
 			#		uri = 'http://www.conceptwiki.org/concept/59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
 
-			get :get_pharmtarget_page_results, :uri => uri, :page => 1, :pagesize => 50
+			# get :get_pharmtarget_page_results, :uri => uri, :page => 1, :pagesize => 50
+			get :get_pharm_by_target_page, :uri => uri, :page => 1, :pagesize => 50
 
 			response.should_not be_nil
 			response.code.to_i.should be == 200

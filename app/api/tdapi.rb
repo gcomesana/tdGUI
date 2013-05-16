@@ -58,7 +58,8 @@ module TargetDossierApi
 
 				if is_accession
 					protein_tag = 'eeaec894-d856-4106-9fa1-662b1dc6c6f1'
-					concept_proxy = ConceptWikiApiCall.new
+					# concept_proxy = ConceptWikiApiCall.new
+					concept_proxy = OpsWikiApiCall.new
 					resp = concept_proxy.search_by_tag(protein_tag, params[:protein_id], {})
 					uuid = resp[0][:uuid]
 					prot_uri = resp[0][:ops_uri]
@@ -130,6 +131,25 @@ module TargetDossierApi
 				end
 			end # nextprot_req helper
 
+
+			# Convert source format into a format to be processed by extjs custom component
+			# @param [Array] array_targets is an array of hashes
+			def convert_by_disease (array_targets)
+				result = Array.new
+
+				array_targets.each { |target|
+					target_hash = Hash.new
+
+					target_hash[:pref_label] = target['name']
+					target_hash[:match] = ''
+					target_hash[:pref_url] = 'http://www.uniprot.org/uniprot'+target['acc']
+					target_hash[:uuid] = ''
+
+					result << target_hash
+				}
+				result
+			end
+
 		end # helpers
 
 
@@ -149,7 +169,29 @@ module TargetDossierApi
 				proxy.test(params[:param_test])
 			end
 
+
+
+			desc 'Return gene names from a text search on Uniprot'
+			params do
+				requires :term, :type => String, :desc => 'The term search'
+				optional :offset, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
+				optional :limit, :type => Integer, :desc => 'The max number of results to send back'
+				optional :callback, :type => String, :desc => 'A callback function for JSONP requests'
+			end
+			get '/gene/lookup' do
+				proxy = TdguiProxy.new
+				res = proxy.gene_lookup(params[:term], params[:limit])
+
+				res
+			end
+
+
+
+
+
+
 		end
+
 
 
 ## target ##################################################################
@@ -172,13 +214,57 @@ module TargetDossierApi
 				 :entries => resp['ops_records']}
 			end
 
+=begin
+			desc 'Check the API status to see if the API functions are reachable', {
+				:notes => 'Returns an simple JSON object. If a param (/api/status?param_test=xxx) is passed in, it will be included in the response'
+			}
+			params do
+				optional :param_test, :type => String, :desc => 'A ping string. It will be returned in the response'
+			end
+			get '/status' do
+				logger.info "/api/status?param_test=#{params[:param_test]}"
+				proxy = TdguiProxy.new
+
+				proxy.test(params[:param_test])
+			end
+=end
+
+
+
+			desc "Retrieve a gene json from a gene name"
+			params do
+				requires :genename, :type => String, :desc => 'A gene name, for example, runx1'
+			end
+			get '/by_gene' do
+				proxy = TdguiProxy.new
+
+				genehash = proxy.get_uniprot_by_gene(params[:genename])
+				genehash
+			end
+
+
+
+
+			desc "Gets a set of targets involved in a disease"
+			params do
+				requires :disease, :type => String, :desc => 'A disease name'
+				optional :offset, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
+				optional :limit, :type => Integer, :desc => 'The max number of results to send back'
+				optional :callback, :type => String, :desc => 'A callback function for JSONP requests'
+			end
+			get '/by_disease' do
+				targethash = @proxy.get_targets4disease(params[:disease], params[:offset], params[:limit])
+				targethash
+			end
+
+
 
 			# /td/api/v1/uniprot/byname/<name>[.json]?uuid=<uuid>
 			desc 'Gets target info from a name. Append .xml to the request to get XML output', {
 				:notes => 'byname'
 			}
 			params do
-				requires :name, :type => String, :desc => "A name like 'adenosine recpetor...'"
+				requires :name, :type => String, :desc => "A name like 'adenosine receptor...'"
 				optional :uuid, :type => String
 			end
 			get '/byname/:name' do
@@ -213,7 +299,7 @@ module TargetDossierApi
 			end
 
 
-
+=begin
 			desc 'Return information about the target related to the gene name'
 			params do
 				requires :gene, :type => String, :desc => 'A gene name'
@@ -224,6 +310,7 @@ module TargetDossierApi
 
 				uniprot_hash
 			end
+=end
 
 
 
@@ -319,7 +406,8 @@ module TargetDossierApi
 				requires :term, :type => String
 			end
 			get '/lookup/:type/:term' do
-				proxy = ConceptWikiApiCall.new
+				# proxy = ConceptWikiApiCall.new
+				proxy = OpsWikiApiCall.new
 				resp = nil
 				compound_tag = '07a84994-e464-4bbf-812a-a4b96fa3d197'
 				protein_tag = 'eeaec894-d856-4106-9fa1-662b1dc6c6f1'
@@ -341,18 +429,21 @@ module TargetDossierApi
 			end
 
 
-			# /td/api/v1/ops/protein/<[uuid|accession]>
-			desc 'Gets a json representing the protein_info got from OPS API. Param can be either a uniprot accession or a concept uuid'
+			# /api/ops/protein/<uuid>
+			desc 'Gets a json representing the protein_info got from OPS API. Param can be a concetp uuid' # either a uniprot accession or a concept uuid'
 			params do
 				requires :protein_id, :type => String, :regexp => /^([0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12})|([A-Z][A-Z0-9]{5})$/
 			end
 			get '/protein/:protein_id' do
 				prot_uuid = protein_concept_uuid(params[:protein_id])
 				prot_uri = "http://ops.conceptwiki.org/wiki/#/concept/#{prot_uuid}/view"
-				core_proxy = CoreApiCall.new
+				prot_uri = "http://www.conceptwiki.org/concept/#{prot_uuid}"
+				# core_proxy = CoreApiCall.new
+				core_proxy = OpsApiCall.new
 				options = Hash.new
 				api_method = 'proteinInfo'
-				options[:uri] = '<' + prot_uri + '>'
+				options[:uri] = prot_uri
+				options[:format] = 'json'
 #				options[:limit] =  params[:limit]
 #				options[:offset] = params[:offset]
 				resp = core_proxy.request( api_method, options)
@@ -361,7 +452,7 @@ module TargetDossierApi
 			end
 
 
-			desc 'Gets a json representing the protein pharmacology info got from OPS API. Param can be either a uniprot accession or a concept uuid'
+			desc 'Gets a json representing the protein pharmacology info got from OPS API. Param can be a concetp uuid' # either a uniprot accession or a concept uuid'
 			params do
 				requires :protein_id, :type => String, :regexp => /^([0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12})|([A-Z][A-Z0-9]{5})$/
 			end
@@ -376,7 +467,7 @@ module TargetDossierApi
 			end
 
 
-			desc 'Gets a json representing the protein pharmacology info got from OPS API. Param can be either a uniprot accession or a concept uuid', {
+			desc 'Gets a json representing the protein pharmacology info got from OPS API. Param can be a concetp uuid', { # either a uniprot accession or a concept uuid'
 				:notes => 'Request is like /td/api/ops/protein/pharma/uuid[?page=number]'
 			}
 			params do

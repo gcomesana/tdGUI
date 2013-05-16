@@ -22,10 +22,15 @@ class TdguiProxy
 
 
 	OLD_DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch/uniprotkb/xxxx/uniprotxml'
-	UNIPROT_BY_NAME = 'http://www.uniprot.org/uniprot/?query=xxxx+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
+	UNIPROT_BY_NAME = 'http://www.uniprot.org/uniprot/?query=name:"xxxx"+AND+reviewed:yes&limit=25&offset=0&sort=score&format=xml'
+	UNIPROT_BY_NAME_HUMAN = 'http://www.uniprot.org/uniprot/?query=name:"xxxx"+AND+organism:"Human+[9606]"+AND+reviewed:yes&limit=25&offset=0&sort=score&format=xml'
+
 	UNIPROT_BY_GENE = 'http://www.uniprot.org/uniprot/?query=gene:xxxx+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
 
 	DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=uniprotkb&id=xxxx&format=xml'
+
+	CHEMBL_TARGET_URL = 'https://www.ebi.ac.uk/chemblws/targets/uniprot/xxxx'
+	CHEMBL_BIOACT_URL = 'https://www.ebi.ac.uk/chemblws/targets/xxxx/bioactivities'
 
 # Proxy/Model constructor
 	def initialize
@@ -39,6 +44,45 @@ class TdguiProxy
 		{:resp => "TdguiProxy.test method. testParam is: #{string_param}"}
 	end
 
+
+
+# Gets a list of genes from a term search on Uniprot
+# @param [String] term the search term
+# @param [Number] limit the maximun number of results returned
+	def gene_lookup (term, limit = 25)
+		url = UNIPROT_BY_NAME.gsub(/xxxx/, term)
+		url = url.gsub(/format=xml/, 'format=tab')
+		url_human = UNIPROT_BY_NAME_HUMAN.gsub(/xxxx/, term)
+		url_human = url_human.gsub(/format=xml/, 'format=tab')
+
+		if limit != 25
+			url = url.gsub(/limit=25/, "limit=#{limit}")
+			url_human = url_human.gsub(/limit=25/, "limit=#{limit}")
+		end
+
+		url = "#{url}&columns=id,protein names,citation,comments,genes"
+		url_human = "#{url_human}&columns=id,protein names,citation,comments,genes"
+		puts "gene_lookup url: #{url}"
+		options = {}
+
+	#		url =  URI.encode(url)
+	# puts "the url encoded: #{url}"
+		results = LibUtil.request(url_human, options)
+		if results.body == ''
+			results = LibUtil.request(url, options)
+		end
+
+		if results.code.to_i != 200
+			puts "Uniprot fetch service not working properly right now!"
+			return nil
+
+		else
+			lines = results.body.split(/\n/)
+			lookup_arr = LibUtil.decode_tab_uniprot4gene(lines, term)
+			lookup_arr
+		end
+
+	end
 
 # Builds up a graph (array of hashes) for the uniprot accession taking into account
 # a maximun number of nodes in the graph and a minimum score the interactions have to accomplish.
@@ -196,10 +240,18 @@ puts "get_multiple_entries: #{entries}"
 
 		if uuid.nil? == false && uuid.empty? == false # we have uuid
 			concept_hash = get_target_by_uuid(uuid)
-			url = concept_hash[:uniprot_url]+'.xml'
+			if concept_hash[:uniprot_url] != ''
+				url = concept_hash[:uniprot_url]+'.xml'
+				url_human = url
+			else
+				url = UNIPROT_BY_NAME.gsub(/xxxx/, name)
+				url_human = UNIPROT_BY_NAME_HUMAN.gsub(/xxxx/, name)
+
+			end
 
 		else
 			url = UNIPROT_BY_NAME.gsub(/xxxx/, name)
+			url_human = UNIPROT_BY_NAME_HUMAN.gsub(/xxxx/, name)
 		end
 
 puts "the url: #{url}"
@@ -207,7 +259,11 @@ puts "the url: #{url}"
 
 #		url =  URI.encode(url)
 # puts "the url encoded: #{url}"
-		results = LibUtil.request(url, options)
+		results = LibUtil.request(url_human, options)
+		if results.body == ''
+			results = LibUtil.request(url, options)
+		end
+
 		if results.code.to_i != 200
 			puts "Uniprot fetch service not working properly right now!"
 			return nil
@@ -221,6 +277,57 @@ puts "the url: #{url}"
 			entry_hash
 		end
 
+	end
+
+
+
+# it queries chembl in order to get the bioactivities for a target
+# @oaram [String] acc the accession or chemblId
+# @return the compounds and chemblId for the target
+# which are involved in the bioactivities...
+	def get_bioactivities_from_acc(acc)
+		is_accession = (protein_id =~ /[A-Z][A-Z0-9]{5}/) == 0
+
+		chemblId = ''
+		if is_accession
+			chemblId = get_chemblid_from_acc(acc)
+		end
+
+		url = CHEMBL_BIOACT_URL.gsub(/xxxx/, chemblId)
+		results = LibUtil.request(url, [])
+		if results.code.to_i != 200
+			puts "CHEMBL fetch service not working properly right now!"
+			nil
+
+		else # here we get a json
+			jsonObj = JSON.parse(results.body)
+			bioactivities = jsonObj['bioactivities']
+
+			result = bioactivities.collect {|act|
+				{:compound => act['ingredient_cmpd_chemblid'], :target_chembl_id => chemblId}
+			}
+			result
+		end
+	end
+
+
+
+
+	def get_chemblid_from_acc (acc)
+
+		url = CHEMBL_TARGET_URL.gsub(/xxxx/, acc)
+		options = {}
+
+		results = LibUtil.request(url, [])
+		if results.code.to_i != 200
+			puts "CHEMBL fetch service not working properly right now!"
+			nil
+
+		else # here we get a json
+			obj = JSON.parse(results.body)
+			chemblId = obj['target']['chemblId']
+			chemblId
+		end
 	end
 
 
@@ -250,8 +357,8 @@ puts "the url: #{url}"
 			result[:pref_label] = pref_label[0]['text']
 
 			urls = json_hash['urls']
-			uniprot_url = urls.select { |url| url['value'] =~ /uniprot/ }
-			result[:uniprot_url] = uniprot_url[0]['value']
+			uniprot_url = urls.select { |url| url['value'] =~ /uniprot/ } rescue []
+			result[:uniprot_url] = uniprot_url[0]['value'] rescue ''
 
 			result
 		end
@@ -314,7 +421,8 @@ puts "the url: #{url}"
 
 		uri_unencoded = CGI::unescape(uri) == uri
 		esc_uri = uri_unencoded ? CGI::escape(uri) : uri
-		url = inner_proxy.ops_api_count_pharma + "?uri=#{esc_uri}&_format=json"
+		url = inner_proxy.ops_api_count_pharma + "?app_id=#{inner_proxy.get_app_id}"
+		url = url + "&app_key=#{inner_proxy.get_app_key}&uri=#{esc_uri}&_format=json"
 		response = LibUtil.request(url, [])
 		if response.code.to_i != 200
 			puts "ConceptWiki get service not working properly right now!"
@@ -330,10 +438,13 @@ puts "the url: #{url}"
 	def get_pharm_results_by_page (concept_uri, page, pageSize)
 		inner_proxy = InnerProxy.new
 
+		page = page.nil? ? 1: page
+		pageSize = pageSize.nil? ? 10: pageSize
 		uri_unencoded = CGI::unescape(concept_uri) == concept_uri
 		esc_uri = uri_unencoded ? CGI::escape(concept_uri) : concept_uri
 		url = inner_proxy.ops_api_pharma_page_results + "?_format=json&uri=#{esc_uri}"
 		url = url + "&_page=#{page}&_pageSize=#{pageSize}"
+		url = url + "&app_id=#{inner_proxy.get_app_id}&app_key=#{inner_proxy.get_app_key}"
 		response = LibUtil.request(url, [])
 
 		if response.code.to_i != 200

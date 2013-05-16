@@ -6,7 +6,7 @@ describe TargetDossierApi::TDApi do
 
 	describe "GET /td/api/v1/ops/lookup" do
     it "returns an empty array of statuses" do
-      get "/td/api/v1/ops/lookup?type=protein&term=Q13362"
+      get "/api/ops/lookup?type=protein&term=Q13362"
       response.status.should == 200
 #      JSON.parse(response.body).should == []
     end

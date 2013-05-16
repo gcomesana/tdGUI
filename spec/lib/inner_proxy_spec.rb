@@ -19,13 +19,17 @@ puts "concept_wiki ok? #{concept_wiki_check}\n"
 
 		end
 
-
+# Not applicable for the new API
+=begin
 		it "should conceptWiki endpoint not be nil" do
 			@inner_proxy.core_endpoint_ready.should_not be_nil
 			@inner_proxy.core_endpoint_ready.should include('conceptwiki')
 
 		end
+=end
 
+# Not applicable. Replace by check_ops_api
+=begin
 		it "should check coreAPI endpoints" do
 			core_api_chk = @inner_proxy.checkCoreAPI()
 			core_api_chk.should_not be_nil
@@ -34,6 +38,7 @@ puts "concept_wiki ok? #{concept_wiki_check}\n"
 			}
 
 		end
+=end
 
 
 		it "should get a valid json string from a uniprot tab list" do

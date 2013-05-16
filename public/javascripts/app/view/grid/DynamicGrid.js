@@ -1,6 +1,7 @@
 
 Ext.Loader.setConfig({enabled:true});
-Ext.Loader.setPath('Ext.ux.grid', 'javascripts/extjs4.0.7/examples/ux/grid');
+// Ext.Loader.setPath('Ext.ux.grid', 'javascripts/extjs4.0.7/examples/ux/grid');
+Ext.Loader.setPath('Ext.ux.grid', 'javascripts/extjs4.1/examples/ux/grid');
 
 
 /**

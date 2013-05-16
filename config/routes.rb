@@ -49,7 +49,7 @@ TdGUI::Application.routes.draw do
 		end
 	end
 
-
+=begin
   resources :concept_wiki_api_calls do
     collection do
       get :protein_lookup
@@ -57,12 +57,36 @@ TdGUI::Application.routes.draw do
 			get :test
     end
 	end
+=end
 
-
+	resources :ops_wiki_api_calls do
+		collection do
+			get :status
+			get :protein_lookup
+			get :compound_lookup
+			get :test
+		end
+	end
+=begin
 	resources :core_api_calls do
 		collection do
 			get :protein_info
 #			get :protein_lookup
+			get :pharm_by_protein_name
+			get :wiki_pathway_protein_lookup
+			get :wiki_pathways_by_protein
+
+			get :test
+			get :check
+		end
+	end
+=end
+
+	resource :ops_api_calls do
+		collection do
+			get :status
+			get :protein_info
+	#			get :protein_lookup
 			get :pharm_by_protein_name
 			get :wiki_pathway_protein_lookup
 			get :wiki_pathways_by_protein

@@ -144,7 +144,7 @@ Ext.define('HT.view.common.EntityLookup', {
 			queryParam: queryParam,
 			comboStore: comboStore,
 			comboDislayField: 'pref_label',
-			comboValueField: 'uuid',
+			comboValueField: 'uuid' /*,
 			btnCallback: function (btn, evOpts) {
 				console.info('combo btnCallback!!!');
 				var thisCmp = btn.up();
@@ -152,6 +152,7 @@ Ext.define('HT.view.common.EntityLookup', {
 				var selValue = theCombo.getValue();
 				console.info("After clicking button, value from combo is: "+selValue);
 			}
+			*/
 		});
 
 

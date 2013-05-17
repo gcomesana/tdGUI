@@ -7,71 +7,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac4d959b-7041-4845-b29b-39d7db68b813" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/initializers/swaggers.rb.tar.gz" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/ht/store/CWEntries.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/ht/view/common/ComboLookupButton.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/ops_api_call.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/spec/models/ops_api_call_spec.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/ops_api_calls_controller.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/spec/controllers/ops_api_calls_controller_spec.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/ops_endpoints_proxy.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/spec/lib/ops_endpoints_proxy_spec.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/ops_wiki_api_call.rb" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/spec/models/ops_wiki_api_call_spec.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/ops_wiki_api_calls_controller.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/spec/controllers/ops_wiki_api_calls_controller_spec.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/spec/requests/target_lookup_info_spec.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/spec/api/tdapi_pharma_spec.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml.orig" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/spec/api/api_interactions.rb" afterPath="$PROJECT_DIR$/spec/api/api_interactions_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.generators" afterPath="$PROJECT_DIR$/.idea/.generators" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/store/AttributesTargets.js" afterPath="$PROJECT_DIR$/public/javascripts/app/store/AttributesTargets.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/dropdowns/tdgui/CheckboxComboProteinLookup.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/dropdowns/tdgui/CheckboxComboProteinLookup.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/view/common/ComboLookupButton.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/view/common/ComboLookupButton.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/view/panels/CytoPanel.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/view/panels/CytoPanel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/grid/DynamicGrid.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/grid/DynamicGrid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/grid/DynamicGrid3.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/grid/DynamicGrid3.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/lib/CytoscapeActions.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/lib/CytoscapeActions.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/view/common/EntityLookup.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/view/common/EntityLookup.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/controller/panels/MultiTarget.js" afterPath="$PROJECT_DIR$/public/javascripts/app/controller/panels/MultiTarget.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/common/ItemMultilist.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/common/ItemMultilist.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/LogosPanel.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/LogosPanel.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/controller/Panels.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/controller/Panels.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/controller/SearchPanel.js" afterPath="$PROJECT_DIR$/public/javascripts/app/controller/SearchPanel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/controller/panels/TargetInfo.js" afterPath="$PROJECT_DIR$/public/javascripts/app/controller/panels/TargetInfo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/store/Targets.js" afterPath="$PROJECT_DIR$/public/javascripts/app/store/Targets.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/lib/Util.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/lib/Util.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/util/Utils.js" afterPath="$PROJECT_DIR$/public/javascripts/app/util/Utils.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/api_proxy.rb" afterPath="$PROJECT_DIR$/lib/api_proxy.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/app_settings.yml" afterPath="$PROJECT_DIR$/config/app_settings.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/dropdowns/conceptWikiProteinLookup.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/dropdowns/conceptWikiProteinLookup.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/concept_wiki_api_call.rb" afterPath="$PROJECT_DIR$/app/models/concept_wiki_api_call.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/concept_wiki_api_call_spec.rb" afterPath="$PROJECT_DIR$/spec/models/concept_wiki_api_call_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/inner_proxy.rb" afterPath="$PROJECT_DIR$/lib/inner_proxy.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/lib/inner_proxy_spec.rb" afterPath="$PROJECT_DIR$/spec/lib/inner_proxy_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/lib_util.rb" afterPath="$PROJECT_DIR$/lib/lib_util.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/initializers/swagger.rb" afterPath="$PROJECT_DIR$/config/initializers/swagger.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/tdGUI.iml" afterPath="$PROJECT_DIR$/.idea/tdGUI.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/api/tdapi.rb" afterPath="$PROJECT_DIR$/app/api/tdapi.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/api/tdapi_pharma.rb" afterPath="$PROJECT_DIR$/app/api/tdapi_pharma.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/api/tdapi_spec.rb" afterPath="$PROJECT_DIR$/spec/api/tdapi_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/lib/api/tdapi_spec.rb" afterPath="$PROJECT_DIR$/spec/lib/api/tdapi_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/tdgui_proxy.rb" afterPath="$PROJECT_DIR$/app/models/tdgui_proxy.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/tdgui_proxy_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/tdgui_proxy_controller.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/controllers/tdgui_proxy_controller_spec.rb" afterPath="$PROJECT_DIR$/spec/controllers/tdgui_proxy_controller_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/models/tdgui_proxy_spec.rb" afterPath="$PROJECT_DIR$/spec/models/tdgui_proxy_spec.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/lib/RuleFunctions.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/lib/RuleFunctions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/lib/RuleOperation.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/lib/RuleOperation.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/intact/intact_dao.rb" afterPath="$PROJECT_DIR$/lib/intact/intact_dao.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/lib/intact_proxy_spec.rb" afterPath="$PROJECT_DIR$/spec/lib/intact_proxy_spec.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tdGUI.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368546539218" ignored="false" />
+    <file path="/Dummy.txt" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368704783282" ignored="false" />
     <file path="/a.rxml" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366717189295" ignored="false" />
     <file path="/a.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366716993284" ignored="false" />
     <file path="/a.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366717085203" ignored="false" />
     <file path="/concept_wiki_api_call.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366802942033" ignored="false" />
     <file path="/ops_wiki_api_call.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368008622617" ignored="false" />
-    <file path="/a.dummy" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368465397164" ignored="false" />
+    <file path="/a.dummy" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368714064969" ignored="false" />
     <file path="/ops_endpoints_proxy.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366965055947" ignored="false" />
     <file path="/inner_proxy.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368465294357" ignored="false" />
     <file path="/ops_endpoints_proxy_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366817187288" ignored="false" />
@@ -84,7 +42,7 @@
     <file path="/ops_wiki_api_calls_controller_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368008707545" ignored="false" />
     <file path="/routes.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1367934739518" ignored="false" />
     <file path="/ops_api_calls_controller.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1367934633132" ignored="false" />
-    <file path="/fragment.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368525374037" ignored="false" />
+    <file path="/fragment.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368719698362" ignored="false" />
     <file path="/ops_api_calls_controller_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1367928070678" ignored="false" />
     <file path="/tdgui_proxy_controller_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368007731269" ignored="false" />
     <file path="/tdgui_proxy.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368525333520" ignored="false" />
@@ -93,7 +51,7 @@
     <file path="/api_interactions_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1367920487313" ignored="false" />
     <file path="/target_lookup_info_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1367943108951" ignored="false" />
     <file path="/conceptWikiProteinLookup.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1367945588507" ignored="false" />
-    <file path="/SearchPanel.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368009039466" ignored="false" />
+    <file path="/SearchPanel.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368694575228" ignored="false" />
     <file path="/application.html.erb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368014017883" ignored="false" />
     <file path="/MultiTarget.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368013548232" ignored="false" />
     <file path="/CheckboxComboProteinLookup.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368003342753" ignored="false" />
@@ -108,6 +66,16 @@
     <file path="/tdapi_pharma_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368461723278" ignored="false" />
     <file path="/lib_util.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368525983950" ignored="false" />
     <file path="/tdgui_proxy_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368526476230" ignored="false" />
+    <file path="/CytoPanel.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368693571042" ignored="false" />
+    <file path="/ItemMultilist.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368695026486" ignored="false" />
+    <file path="/ComboLookupButton.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368695975263" ignored="false" />
+    <file path="/Panels.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368696008725" ignored="false" />
+    <file path="/CytoscapeActions.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368721570573" ignored="false" />
+    <file path="/RuleOperation.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368714857531" ignored="false" />
+    <file path="/intact_proxy_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368720614709" ignored="false" />
+    <file path="/intact_dao.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368720554344" ignored="false" />
+    <file path="/RuleFunctions.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368721087361" ignored="false" />
+    <file path="/InteractionsRuleOperation.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368721489437" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,6 +88,10 @@
   </component>
   <component name="DaemonCodeAnalyzer">
     <disable_hints />
+  </component>
+  <component name="DatabaseView">
+    <flatten value="false" />
+    <groupTables value="false" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -136,18 +108,65 @@
       <file leaf-file-name="ComboLookupButton.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/ht/view/common/ComboLookupButton.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="30" selection-start="2070" selection-end="2070" vertical-scroll-proportion="0.0">
+            <state line="32" column="62" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.0">
               <folding>
-                <marker date="1368548659000" expanded="false" signature="2496:2531" placeholder="..." />
+                <marker date="1368722076000" expanded="false" signature="2547:2582" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EntityLookup.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/ht/view/common/EntityLookup.js">
+      <file leaf-file-name="Panels.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/ht/controller/Panels.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="147" column="50" selection-start="3699" selection-end="3699" vertical-scroll-proportion="0.49061033">
+            <state line="112" column="38" selection-start="2958" selection-end="2958" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ItemMultilist.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/ItemMultilist.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="52" column="23" selection-start="1356" selection-end="1356" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RuleOperation.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/RuleOperation.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="33" selection-start="600" selection-end="600" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InteractionsRuleOperation.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/InteractionsRuleOperation.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="84" column="8" selection-start="2292" selection-end="2292" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RuleFunctions.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/RuleFunctions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="84" column="57" selection-start="2533" selection-end="2533" vertical-scroll-proportion="0.64173704">
+              <folding>
+                <element signature="e#1083#2038#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CytoscapeActions.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/CytoscapeActions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="190" column="40" selection-start="5014" selection-end="5014" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -160,6 +179,9 @@
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
   </component>
+  <component name="GeneratorOptions">
+    <option name="VCS_SHOW_CONFIRMATION" value="true" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -171,30 +193,59 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/public/javascripts/app/util/Utils.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/controller/panels/TargetInfo.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js" />
-        <option value="$PROJECT_DIR$/app/controllers/tdgui_proxy_controller.rb" />
-        <option value="$PROJECT_DIR$/spec/models/ops_wiki_api_call_spec.rb" />
-        <option value="$PROJECT_DIR$/app/api/tdapi_pharma.rb" />
-        <option value="$PROJECT_DIR$/spec/api/tdapi_pharma_spec.rb" />
-        <option value="$PROJECT_DIR$/lib/inner_proxy.rb" />
-        <option value="$PROJECT_DIR$/lib/api_proxy.rb" />
-        <option value="$PROJECT_DIR$/app/models/tdgui_proxy.rb" />
-        <option value="$PROJECT_DIR$/lib/lib_util.rb" />
         <option value="$PROJECT_DIR$/spec/models/tdgui_proxy_spec.rb" />
-        <option value="$PROJECT_DIR$/app/api/tdapi.rb" />
         <option value="$PROJECT_DIR$/spec/api/tdapi_spec.rb" />
-        <option value="$PROJECT_DIR$/public/javascripts/ht/view/common/ComboLookupButton.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/ht/view/panels/CytoPanel.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/LogosPanel.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js" />
         <option value="$PROJECT_DIR$/public/javascripts/ht/view/common/EntityLookup.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/ht/view/common/ComboLookupButton.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/ht/controller/Panels.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/common/ItemMultilist.js" />
+        <option value="$PROJECT_DIR$/app/api/tdapi.rb" />
+        <option value="$PROJECT_DIR$/lib/intact/intact_dao.rb" />
+        <option value="$PROJECT_DIR$/spec/lib/intact_proxy_spec.rb" />
+        <option value="$PROJECT_DIR$/public/javascripts/ht/lib/RuleOperation.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/ht/lib/InteractionsRuleOperation.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/ht/lib/CytoscapeActions.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/ht/lib/RuleFunctions.js" />
       </list>
     </option>
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="92" />
     <option name="y" value="22" />
     <option name="width" value="1321" />
     <option name="height" value="990" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+          <State>
+            <id>Ruby</id>
+          </State>
+          <State>
+            <id>SQL</id>
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>RubyInstanceVariableToStringInspection</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -222,26 +273,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="RailsProjectView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -313,10 +344,6 @@
               <option name="myItemId" value="ht" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -340,11 +367,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
+              <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -358,15 +381,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ht" />
+              <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -382,6 +397,58 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="api" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="RailsProjectView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -419,114 +486,23 @@
     <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
   </component>
-  <component name="RunManager" selected="RSpec.tdapi_spec">
-    <configuration default="false" name="tdapi_pharma_spec" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
-      <predefined_log_file id="RUBY_RSPEC" enabled="true" />
-      <module name="tdGUI" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
-      <envs>
-        <env name="RAILS_ENV" value="test" />
-        <env name="JRUBY_OPTS" value="-X+O" />
-      </envs>
-      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
-        <COVERAGE_PATTERN ENABLED="true">
-          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
-        </COVERAGE_PATTERN>
-      </EXTENSION>
-      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/api/tdapi_pharma_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
-      <RunnerSettings RunnerId="RubyRunner" />
-      <ConfigurationWrapper RunnerId="RubyRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="TdguiProxy model gene_lookup should return an array of 25 fomatting objects after looking up uniprot" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
-      <predefined_log_file id="RUBY_RSPEC" enabled="true" />
-      <module name="tdGUI" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
-      <envs>
-        <env name="RAILS_ENV" value="test" />
-        <env name="JRUBY_OPTS" value="-X+O" />
-      </envs>
-      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
-        <COVERAGE_PATTERN ENABLED="true">
-          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
-        </COVERAGE_PATTERN>
-      </EXTENSION>
-      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/models/tdgui_proxy_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="TdguiProxy model gene_lookup should return an array of 25 fomatting objects after looking up uniprot" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
-      <RunnerSettings RunnerId="RubyDebugRunner" />
-      <RunnerSettings RunnerId="RubyRunner" />
-      <ConfigurationWrapper RunnerId="RubyDebugRunner" />
-      <ConfigurationWrapper RunnerId="RubyRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="TdguiProxy model gene_lookup should return 35 resuls as limit was passed in as parameter" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
-      <predefined_log_file id="RUBY_RSPEC" enabled="true" />
-      <module name="tdGUI" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
-      <envs>
-        <env name="RAILS_ENV" value="test" />
-        <env name="JRUBY_OPTS" value="-X+O" />
-      </envs>
-      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
-      <EXTENSION ID="JRubyRunConfigurationExtension" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
-        <COVERAGE_PATTERN ENABLED="true">
-          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
-        </COVERAGE_PATTERN>
-      </EXTENSION>
-      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/models/tdgui_proxy_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="TdguiProxy model gene_lookup should return 35 resuls as limit was passed in as parameter" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
-      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
-      <RunnerSettings RunnerId="RubyRunner" />
-      <ConfigurationWrapper RunnerId="RubyRunner" />
-      <method />
-    </configuration>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/spec/request" />
+      <recent name="$PROJECT_DIR$/public/javascripts/extjs4.0.7" />
+      <recent name="$PROJECT_DIR$/public/javascripts/app/util" />
+      <recent name="$PROJECT_DIR$/public/javascripts/test" />
+      <recent name="$PROJECT_DIR$/public/javascripts/lib" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/spec/models" />
+      <recent name="$PROJECT_DIR$/spec/lib" />
+      <recent name="$PROJECT_DIR$/lib" />
+      <recent name="$PROJECT_DIR$/lib/api" />
+      <recent name="$PROJECT_DIR$/public/javascripts" />
+    </key>
+  </component>
+  <component name="RunManager" selected="RSpec.Intact proxy retrieves target interations from Intact should get no interaction for targets P38398 &amp; Q9HCU9">
     <configuration default="false" name="TargetDossierApi Uniprot API &quot;#{@api_prefix}/lookup/gene.json?term=&lt;term&gt; should return a list of entries for combos with matching genes&quot;" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
       <predefined_log_file id="RUBY_RSPEC" enabled="true" />
       <module name="tdGUI" />
@@ -587,6 +563,113 @@
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="intact_proxy_spec" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
+      <predefined_log_file id="RUBY_RSPEC" enabled="true" />
+      <module name="tdGUI" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs>
+        <env name="RAILS_ENV" value="test" />
+        <env name="JRUBY_OPTS" value="-X+O" />
+      </envs>
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/lib/intact_proxy_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Intact proxy retrieves target interations from Intact should get one interaction for targets P38398 &amp; Q9HCU9" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
+      <predefined_log_file id="RUBY_RSPEC" enabled="true" />
+      <module name="tdGUI" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs>
+        <env name="RAILS_ENV" value="test" />
+        <env name="JRUBY_OPTS" value="-X+O" />
+      </envs>
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/lib/intact_proxy_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="Intact proxy retrieves target interations from Intact should get one interaction for targets P38398 &amp; Q9HCU9" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="USE_CUSTOM_SPEC_RUNNER" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="DRB" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="FULL_BACKTRACE" VALUE="false" />
+      <RunnerSettings RunnerId="RubyDebugRunner" />
+      <RunnerSettings RunnerId="RubyRunner" />
+      <ConfigurationWrapper RunnerId="RubyDebugRunner" />
+      <ConfigurationWrapper RunnerId="RubyRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Intact proxy retrieves target interations from Intact should get no interaction for targets P38398 &amp; Q9HCU9" type="RSpecRunConfigurationType" factoryName="RSpec" temporary="true">
+      <predefined_log_file id="RUBY_RSPEC" enabled="true" />
+      <module name="tdGUI" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$PROJECT_DIR$" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
+      <envs>
+        <env name="RAILS_ENV" value="test" />
+        <env name="JRUBY_OPTS" value="-X+O" />
+      </envs>
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="true" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" track_test_folders="true" runner="rcov">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <EXTENSION ID="org.jetbrains.plugins.ruby.motion.run.MotionSimulatorRunExtension" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TESTS_FOLDER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_SCRIPT_PATH" VALUE="$PROJECT_DIR$/spec/lib/intact_proxy_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_RUNNER_PATH" VALUE="" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_FILE_MASK" VALUE="**/*_spec.rb" />
+      <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_EXAMPLE_NAME" VALUE="Intact proxy retrieves target interations from Intact should get no interaction for targets P38398 &amp; Q9HCU9" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="TEST_TEST_TYPE" VALUE="TEST_SCRIPT" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="SPEC_ARGS" VALUE="" />
       <RSPEC_RUN_CONFIG_SETTINGS_ID NAME="RUNNER_VERSION" VALUE="" />
@@ -844,19 +927,19 @@
       <item index="1" class="java.lang.String" itemvalue="Rails.Production: tdGUI" />
       <item index="2" class="java.lang.String" itemvalue="Rake.spec" />
       <item index="3" class="java.lang.String" itemvalue="Rake.test" />
-      <item index="4" class="java.lang.String" itemvalue="RSpec.tdapi_pharma_spec" />
-      <item index="5" class="java.lang.String" itemvalue="RSpec.TdguiProxy model gene_lookup should return an array of 25 fomatting objects after looking up uniprot" />
-      <item index="6" class="java.lang.String" itemvalue="RSpec.TdguiProxy model gene_lookup should return 35 resuls as limit was passed in as parameter" />
-      <item index="7" class="java.lang.String" itemvalue="RSpec.TargetDossierApi Uniprot API &quot;#{@api_prefix}/lookup/gene.json?term=&lt;term&gt; should return a list of entries for combos with matching genes&quot;" />
-      <item index="8" class="java.lang.String" itemvalue="RSpec.tdapi_spec" />
+      <item index="4" class="java.lang.String" itemvalue="RSpec.TargetDossierApi Uniprot API &quot;#{@api_prefix}/lookup/gene.json?term=&lt;term&gt; should return a list of entries for combos with matching genes&quot;" />
+      <item index="5" class="java.lang.String" itemvalue="RSpec.tdapi_spec" />
+      <item index="6" class="java.lang.String" itemvalue="RSpec.intact_proxy_spec" />
+      <item index="7" class="java.lang.String" itemvalue="RSpec.Intact proxy retrieves target interations from Intact should get one interaction for targets P38398 &amp; Q9HCU9" />
+      <item index="8" class="java.lang.String" itemvalue="RSpec.Intact proxy retrieves target interations from Intact should get no interaction for targets P38398 &amp; Q9HCU9" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="RSpec.tdapi_spec" />
-        <item index="1" class="java.lang.String" itemvalue="RSpec.tdapi_spec" />
-        <item index="2" class="java.lang.String" itemvalue="RSpec.tdapi_spec" />
-        <item index="3" class="java.lang.String" itemvalue="RSpec.TargetDossierApi Uniprot API &quot;#{@api_prefix}/lookup/gene.json?term=&lt;term&gt; should return a list of entries for combos with matching genes&quot;" />
-        <item index="4" class="java.lang.String" itemvalue="RSpec.TdguiProxy model gene_lookup should return 35 resuls as limit was passed in as parameter" />
+        <item index="0" class="java.lang.String" itemvalue="RSpec.Intact proxy retrieves target interations from Intact should get no interaction for targets P38398 &amp; Q9HCU9" />
+        <item index="1" class="java.lang.String" itemvalue="RSpec.Intact proxy retrieves target interations from Intact should get one interaction for targets P38398 &amp; Q9HCU9" />
+        <item index="2" class="java.lang.String" itemvalue="RSpec.intact_proxy_spec" />
+        <item index="3" class="java.lang.String" itemvalue="RSpec.tdapi_spec" />
+        <item index="4" class="java.lang.String" itemvalue="RSpec.tdapi_spec" />
       </list>
     </recent_temporary>
     <configuration default="false" name="test_should_get_ping" type="TestUnitRunConfigurationType" factoryName="Test::Unit/Shoulda" temporary="true">
@@ -896,6 +979,24 @@
     <option name="ACTIVE_ACTIONS" value="SHOW_INHERITED_FROM_OBJECT,SHOW_INHERITED" />
     <option name="SHOW_TOOLBAR" value="true" />
   </component>
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="DETECT_NESTED_COPIES" value="true" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <configuration useDefault="true">$USER_HOME$/.subversion_IDEA</configuration>
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="ac4d959b-7041-4845-b29b-39d7db68b813" name="Default" comment="" />
@@ -904,15 +1005,36 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView" selected-index="1">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="92" y="22" width="1321" height="990" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23964165" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19484882" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23058824" sideWeight="0.79283315" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26666668" sideWeight="0.79283315" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27607843" sideWeight="0.79283315" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2206047" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="319" y="518" width="1355" height="431" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26632047" sideWeight="0.18820861" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22396417" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
@@ -923,7 +1045,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19484882" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3281075" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -1016,108 +1137,125 @@
           <line>212</line>
           <option name="timeStamp" value="73" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="ruby-line">
+          <url>file://$PROJECT_DIR$/lib/intact_proxy.rb</url>
+          <line>86</line>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="76" />
+      <option name="time" value="77" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/resources/datatest/omim-asthma.xml">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.06755127" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/api/api_interactions_spec.rb">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/extjs4.1/examples/ux/form/MultiSelect.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="7" selection-start="0" selection-end="725" vertical-scroll-proportion="0.43908322" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spec/api/tdapi_pharma_spec.rb">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="14" selection-start="494" selection-end="494" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/endpoints_proxy.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.11821472" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/api/tdapi_pharma.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="31" selection-start="2953" selection-end="2953" vertical-scroll-proportion="0.76357055" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/inner_proxy.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="122" column="6" selection-start="3589" selection-end="3589" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/ops_wiki_api_call.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="198" column="44" selection-start="5455" selection-end="5569" vertical-scroll-proportion="0.1863354">
+        <state line="248" column="24" selection-start="8843" selection-end="8843" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/lib_util.rb">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/view/common/EntityLookup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="217" column="50" selection-start="7936" selection-end="7936" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/api/tdapi_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="46" selection-start="2366" selection-end="2366" vertical-scroll-proportion="0.4053076">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/api/tdapi.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="306" column="16" selection-start="9147" selection-end="9151" vertical-scroll-proportion="0.016887818">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/api_proxy.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="307" column="30" selection-start="10100" selection-end="10100" vertical-scroll-proportion="0.556338">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/tdgui_proxy.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="0" selection-start="2434" selection-end="2434" vertical-scroll-proportion="0.016431924">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spec/models/tdgui_proxy_spec.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="236" column="48" selection-start="6775" selection-end="6775" vertical-scroll-proportion="0.6220657">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/ops_endpoints_proxy.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="30" selection-start="1427" selection-end="1455" vertical-scroll-proportion="0.016431924">
+        <state line="154" column="8" selection-start="3942" selection-end="3942" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/ht/view/common/ComboLookupButton.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="30" selection-start="2070" selection-end="2070" vertical-scroll-proportion="0.0">
+        <state line="32" column="62" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.0">
           <folding>
-            <marker date="1368548659000" expanded="false" signature="2496:2531" placeholder="..." />
+            <marker date="1368722076000" expanded="false" signature="2547:2582" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/view/common/EntityLookup.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/controller/Panels.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="147" column="50" selection-start="3699" selection-end="3699" vertical-scroll-proportion="0.49061033">
+        <state line="112" column="38" selection-start="2958" selection-end="2958" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/api/tdapi.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="384" column="43" selection-start="12281" selection-end="12281" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/ItemMultilist.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="23" selection-start="1356" selection-end="1356" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/intact/intact_dao.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="56" selection-start="2180" selection-end="2180" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/lib/intact_proxy_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="34" selection-start="1224" selection-end="1224" vertical-scroll-proportion="0.8019324">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/intact_proxy.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="32" selection-start="3629" selection-end="3629" vertical-scroll-proportion="0.18478261">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/tdgui_proxy.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="121" column="46" selection-start="4105" selection-end="4105" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/RuleOperation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="33" selection-start="600" selection-end="600" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/InteractionsRuleOperation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="8" selection-start="2292" selection-end="2292" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/CytoscapeActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="190" column="40" selection-start="5014" selection-end="5014" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/RuleFunctions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="57" selection-start="2533" selection-end="2533" vertical-scroll-proportion="0.64173704">
+          <folding>
+            <element signature="e#1083#2038#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

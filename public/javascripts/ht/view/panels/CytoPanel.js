@@ -239,39 +239,58 @@ Ext.define('HT.view.panels.CytoPanel', {
 			}
 		}, {
 			xtype: 'container',
+			// border: false,
+			margin: '20 0 0 0',
 			style: {
 				marginTop: 20,
-				backgroundColor: 'yellow'
+				borderTopWidth: '1px',
+				borderTopColor: 'black',
+				borderTop: true
+				// backgroundColor: 'yellow'
 			},
 
-			layout: 'column',
-
+			// layout: 'column',
+			layout: {
+        type: 'hbox',
+        padding:'10',
+        pack:'end'
+        // align:'middle'
+      },
 			width: '100%',
-			items: [ {
-				columnWidth: 0.7,
+			items: [{
+				xtype: 'button',
+				text: 'Enact',
+
+				id: 'btnEnact'
+			}]
+			/*
+			items: [{
+				// columnWidth: 0.5,
+				margin: '0 0 0 20',
+				*
 				items:[{
 					xtype: 'button',
 					text: 'Enact',
 
 					id: 'btnEnact'
 				}]
-				/*style: {
-					marginLeft: 15
-				} */
-			}, {
-				columnWidth: 0.3,
+				*
+			},
+			{
+				// columnWidth: 0.5,
 				items: [{
 					xtype: 'button',
 					text: 'Enact selected',
 
 					id: 'btnEnactSel'
-				}]
-			}, {
+				}] 
+			} *,
+			{
 				xtype: 'label',
 				id: 'labelResult',
 				text: 'result: labelresult',
 				margin: '0 0 0 10'
-			}]
+			} *] */
 		} // EO container
 		] // EO UPPER container items
 

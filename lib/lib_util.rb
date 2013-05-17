@@ -218,8 +218,8 @@ class LibUtil
 			hash[:match].gsub!(/(#{term})/i, '<b>\1</b>')
 			# hash[:match].gsub!(/<\/em>/, '</b>')
 			hash[:pref_url] = 'http://www.uniprot.org/uniprot/'+fields[0]
-			hash[:pref_label] = fields[1] + ' (' + fields[4] + ')'
-			hash[:uuid] = fields[0]
+			hash[:pref_label] = '(' + fields[4] + ') ' + fields[1]
+			hash[:uuid] = fields[0] + '|' + fields[4]
 
 			result << hash
 		}

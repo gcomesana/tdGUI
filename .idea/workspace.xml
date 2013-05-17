@@ -7,23 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac4d959b-7041-4845-b29b-39d7db68b813" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/view/common/ComboLookupButton.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/view/common/ComboLookupButton.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/view/panels/CytoPanel.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/view/panels/CytoPanel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/lib/CytoscapeActions.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/lib/CytoscapeActions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/view/common/EntityLookup.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/view/common/EntityLookup.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/common/ItemMultilist.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/common/ItemMultilist.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/LogosPanel.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/LogosPanel.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/controller/Panels.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/controller/Panels.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/lib/RuleFunctions.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/lib/RuleFunctions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/lib/RuleOperation.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/lib/RuleOperation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/intact/intact_dao.rb" afterPath="$PROJECT_DIR$/lib/intact/intact_dao.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/lib/intact_proxy_spec.rb" afterPath="$PROJECT_DIR$/spec/lib/intact_proxy_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/lib_util.rb" afterPath="$PROJECT_DIR$/lib/lib_util.rb" />
     </list>
     <ignored path="tdGUI.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368704783282" ignored="false" />
+    <file path="/Dummy.txt" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368799406655" ignored="false" />
     <file path="/a.rxml" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366717189295" ignored="false" />
     <file path="/a.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366716993284" ignored="false" />
     <file path="/a.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366717085203" ignored="false" />
@@ -64,7 +54,7 @@
     <file path="/tdapi_pharma.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368460326729" ignored="false" />
     <file path="/api_proxy.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368466124914" ignored="false" />
     <file path="/tdapi_pharma_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368461723278" ignored="false" />
-    <file path="/lib_util.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368525983950" ignored="false" />
+    <file path="/lib_util.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368800660225" ignored="false" />
     <file path="/tdgui_proxy_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368526476230" ignored="false" />
     <file path="/CytoPanel.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368693571042" ignored="false" />
     <file path="/ItemMultilist.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368695026486" ignored="false" />
@@ -105,68 +95,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ComboLookupButton.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/ht/view/common/ComboLookupButton.js">
+      <file leaf-file-name="tdapi.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/api/tdapi.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="62" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1368695977000" expanded="false" signature="2547:2582" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Panels.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/ht/controller/Panels.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="112" column="38" selection-start="2958" selection-end="2958" vertical-scroll-proportion="0.0">
+            <state line="182" column="28" selection-start="5363" selection-end="5363" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ItemMultilist.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/ItemMultilist.js">
+      <file leaf-file-name="tdgui_proxy.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/tdgui_proxy.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="52" column="23" selection-start="1356" selection-end="1356" vertical-scroll-proportion="0.0">
+            <state line="80" column="42" selection-start="2747" selection-end="2747" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RuleOperation.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/RuleOperation.js">
+      <file leaf-file-name="lib_util.rb" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/lib_util.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="33" selection-start="600" selection-end="600" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InteractionsRuleOperation.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/InteractionsRuleOperation.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="8" selection-start="2292" selection-end="2292" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RuleFunctions.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/RuleFunctions.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="36" selection-start="2264" selection-end="2264" vertical-scroll-proportion="0.47285888">
-              <folding>
-                <element signature="e#1083#2038#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CytoscapeActions.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/CytoscapeActions.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="190" column="40" selection-start="5014" selection-end="5014" vertical-scroll-proportion="0.0">
+            <state line="231" column="60" selection-start="8231" selection-end="8231" vertical-scroll-proportion="0.59624416">
               <folding />
             </state>
           </provider>
@@ -193,7 +143,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/spec/models/tdgui_proxy_spec.rb" />
         <option value="$PROJECT_DIR$/spec/api/tdapi_spec.rb" />
         <option value="$PROJECT_DIR$/public/javascripts/ht/view/panels/CytoPanel.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/LogosPanel.js" />
@@ -209,6 +158,7 @@
         <option value="$PROJECT_DIR$/public/javascripts/ht/lib/InteractionsRuleOperation.js" />
         <option value="$PROJECT_DIR$/public/javascripts/ht/lib/CytoscapeActions.js" />
         <option value="$PROJECT_DIR$/public/javascripts/ht/lib/RuleFunctions.js" />
+        <option value="$PROJECT_DIR$/lib/lib_util.rb" />
       </list>
     </option>
   </component>
@@ -433,22 +383,22 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="RailsProjectView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
             <PATH_ELEMENT USER_OBJECT="Root">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="RailsProjectView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="org.jetbrains.plugins.ruby.rails.projectView.v2.nodes.RailsProjectNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -460,15 +410,15 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="123" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="132" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="128" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="recentsLimit" value="5" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/public/javascripts/extjs4.1" />
-    <property name="RakeTaksPopup.undocumentedIncluded" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="135" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="928" />
+    <property name="RakeTaksPopup.undocumentedIncluded" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="929" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="928" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="133" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="130" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -483,8 +433,8 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
     <property name="options.lastSelected" value="Errors" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -923,15 +873,15 @@
       <method />
     </configuration>
     <list size="9">
-      <item index="0" class="java.lang.String" itemvalue="Rails.Development: tdGUI" />
-      <item index="1" class="java.lang.String" itemvalue="Rails.Production: tdGUI" />
-      <item index="2" class="java.lang.String" itemvalue="Rake.spec" />
-      <item index="3" class="java.lang.String" itemvalue="Rake.test" />
-      <item index="4" class="java.lang.String" itemvalue="RSpec.TargetDossierApi Uniprot API &quot;#{@api_prefix}/lookup/gene.json?term=&lt;term&gt; should return a list of entries for combos with matching genes&quot;" />
-      <item index="5" class="java.lang.String" itemvalue="RSpec.tdapi_spec" />
-      <item index="6" class="java.lang.String" itemvalue="RSpec.intact_proxy_spec" />
-      <item index="7" class="java.lang.String" itemvalue="RSpec.Intact proxy retrieves target interations from Intact should get one interaction for targets P38398 &amp; Q9HCU9" />
-      <item index="8" class="java.lang.String" itemvalue="RSpec.Intact proxy retrieves target interations from Intact should get no interaction for targets P38398 &amp; Q9HCU9" />
+      <item index="0" class="java.lang.String" itemvalue="RSpec.TargetDossierApi Uniprot API &quot;#{@api_prefix}/lookup/gene.json?term=&lt;term&gt; should return a list of entries for combos with matching genes&quot;" />
+      <item index="1" class="java.lang.String" itemvalue="RSpec.tdapi_spec" />
+      <item index="2" class="java.lang.String" itemvalue="RSpec.intact_proxy_spec" />
+      <item index="3" class="java.lang.String" itemvalue="RSpec.Intact proxy retrieves target interations from Intact should get one interaction for targets P38398 &amp; Q9HCU9" />
+      <item index="4" class="java.lang.String" itemvalue="RSpec.Intact proxy retrieves target interations from Intact should get no interaction for targets P38398 &amp; Q9HCU9" />
+      <item index="5" class="java.lang.String" itemvalue="Rails.Development: tdGUI" />
+      <item index="6" class="java.lang.String" itemvalue="Rails.Production: tdGUI" />
+      <item index="7" class="java.lang.String" itemvalue="Rake.spec" />
+      <item index="8" class="java.lang.String" itemvalue="Rake.test" />
     </list>
     <recent_temporary>
       <list size="5">
@@ -976,7 +926,7 @@
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="StructureViewFactory">
     <option name="AUTOSCROLL_MODE" value="false" />
-    <option name="ACTIVE_ACTIONS" value="SHOW_INHERITED_FROM_OBJECT,SHOW_INHERITED" />
+    <option name="ACTIVE_ACTIONS" value="SHOW_INHERITED_FROM_OBJECT" />
     <option name="SHOW_TOOLBAR" value="true" />
   </component>
   <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false">
@@ -1031,10 +981,9 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23964165" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19484882" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23058824" sideWeight="0.79283315" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27607843" sideWeight="0.79283315" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2807843" sideWeight="0.79283315" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2206047" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="319" y="518" width="1355" height="431" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26632047" sideWeight="0.18820861" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22396417" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
@@ -1045,6 +994,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19484882" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3281075" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -1147,11 +1097,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/extjs4.1/examples/ux/form/MultiSelect.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -1159,60 +1104,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/west/SearchPanel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="248" column="24" selection-start="8843" selection-end="8843" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="248" column="24" selection-start="8843" selection-end="8843" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/ht/view/common/EntityLookup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="154" column="8" selection-start="3942" selection-end="3942" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/view/common/ComboLookupButton.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="62" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1368695977000" expanded="false" signature="2547:2582" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/controller/Panels.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="38" selection-start="2958" selection-end="2958" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/api/tdapi.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="384" column="43" selection-start="12281" selection-end="12281" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/ItemMultilist.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="23" selection-start="1356" selection-end="1356" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="154" column="8" selection-start="3942" selection-end="3942" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/intact/intact_dao.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="56" selection-start="2180" selection-end="2180" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="55" column="56" selection-start="2180" selection-end="2180" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/spec/lib/intact_proxy_spec.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="34" selection-start="1224" selection-end="1224" vertical-scroll-proportion="0.8019324">
-          <folding />
-        </state>
+        <state line="43" column="34" selection-start="1224" selection-end="1224" vertical-scroll-proportion="0.8019324" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/intact_proxy.rb">
@@ -1222,40 +1129,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/tdgui_proxy.rb">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/RuleFunctions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="121" column="46" selection-start="4105" selection-end="4105" vertical-scroll-proportion="0.0">
+        <state line="74" column="36" selection-start="2264" selection-end="2264" vertical-scroll-proportion="0.016887818">
+          <folding>
+            <element signature="e#1083#2038#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/InteractionsRuleOperation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="86" column="8" selection-start="2372" selection-end="2372" vertical-scroll-proportion="0.76357055">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/RuleOperation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="33" selection-start="600" selection-end="600" vertical-scroll-proportion="0.0">
+        <state line="23" column="33" selection-start="531" selection-end="531" vertical-scroll-proportion="0.016887818">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/InteractionsRuleOperation.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/ItemMultilist.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="8" selection-start="2292" selection-end="2292" vertical-scroll-proportion="0.0">
+        <state line="52" column="23" selection-start="1356" selection-end="1356" vertical-scroll-proportion="0.016431924">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/controller/Panels.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="120" column="38" selection-start="3118" selection-end="3118" vertical-scroll-proportion="0.016431924">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/view/common/ComboLookupButton.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="62" selection-start="1043" selection-end="1043" vertical-scroll-proportion="0.016431924">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/CytoscapeActions.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="190" column="40" selection-start="5014" selection-end="5014" vertical-scroll-proportion="0.0">
+        <state line="176" column="40" selection-start="4938" selection-end="4938" vertical-scroll-proportion="0.016431924">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/RuleFunctions.js">
+    <entry file="file://$PROJECT_DIR$/app/api/tdapi.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="36" selection-start="2264" selection-end="2264" vertical-scroll-proportion="0.47285888">
-          <folding>
-            <element signature="e#1083#2038#0" expanded="false" />
-          </folding>
+        <state line="182" column="28" selection-start="5363" selection-end="5363" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/tdgui_proxy.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="42" selection-start="2747" selection-end="2747" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/lib_util.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="231" column="60" selection-start="8231" selection-end="8231" vertical-scroll-proportion="0.59624416">
+          <folding />
         </state>
       </provider>
     </entry>

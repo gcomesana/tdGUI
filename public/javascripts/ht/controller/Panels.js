@@ -75,11 +75,19 @@ Ext.define('HT.controller.Panels', {
 
 
 		var newId = vis.nodes().length+1;
+		var i = 1;
+		var existsNode = vis.node(newId);
+		while (existsNode != null) {
+			i++;
+			newId = vis.nodes().length+i;
+			existsNode = vis.node(newId);
+		}
+
 		// OUR NODE definition!!!
 		var nodeOpts = {
 			id: newId.toString(),
 			label: evOpts.label,
-			// entity: HT.lib.CytoscapeActions.shape2entity[shape], // this is a Number
+			// entity: APP.lib.CytoscapeActions.shape2entity[shape], // this is a Number
 			// entity: entityWidget.shape2entity[shape],
 			entity: evOpts.meta,
 			payloadValue: evOpts.value

@@ -60,8 +60,15 @@ Ext.define('HT.view.cytoscape.CytoScape', {
 			});
 
 
+			// Delete a node
+			me.vis.addContextMenuItem('Delete node', 'nodes', function (ev) {
+				me.vis.visualStyleBypass(null);
+				me.vis.removeNode(ev.target.data.id, true);
+			});
+
 			// Delete an edge
 			me.vis.addContextMenuItem('Delete edge', "edges", function(ev) {
+				me.vis.visualStyleBypass(null);
 				var numEdges = me.vis.edges().length;
 				me.vis.removeEdge(ev.target.data.id, true);
 				console.log('edges before: '+numEdges+'; and later: '+me.vis.edges().length);

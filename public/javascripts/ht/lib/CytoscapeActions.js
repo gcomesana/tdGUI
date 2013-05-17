@@ -94,29 +94,6 @@ Ext.define('HT.lib.CytoscapeActions', {
 
 				label: 'from '+nodeOneId+' to '+nodeTwoId,
         rule: edgeRule
-				/*
-				nodes[0].data = {
-					id
-					payloadValue
-					label
-					entity
-				}
-				rule: Ext.create('EdgeRule', {
-					edgeSource: nodes[0].data,
-					edgeTarget: nodes[1].data,
-					ruleFunctions: [{
-						alias: 'myFunc',
-						result: undefined,
-						threshold: undefined,
-						func: function (a,b,thr) {
-							var res = somethingToDoWith(a,b);
-							res.match(thr) == true;
-						}
-					}]
-				} // EO function object
-				) // EO rule
-				*/
-//				color: '#FF0300'
 			};
 			console.log('Edge AFTER edgeData...');
 
@@ -155,25 +132,30 @@ Ext.define('HT.lib.CytoscapeActions', {
 
 			// This is to paint the edge on operation completion
 			vis.visualStyleBypass(null);
+			var bypassedEdges = [];
 			var bypassEdge = function (edge, color) {
 				// var cytovis = vis;
+				bypassedEdges.push({edge:edge, color: color});
 				var bypass = {
 					nodes: {},
 					edges: {
 					}
 				};
 
-				bypass.edges[edge.id] = {
-					color: color
-				};
-
+				for (i=0; i<bypassedEdges.length; i++) {
+					var edge = bypassedEdges[i].edge;
+					bypass.edges[edge.data.id] = {
+						color: bypassedEdges[i].color
+					};
+				}
 				vis.visualStyleBypass(bypass);
-				// console.info('suppossedly only callback funcion for every rule...');
 			}
 
 			// There are several paths in a graph, with several edges for every path
 			// and one rule for every edges, with several function every rule
+			vis.visualStyleBypass(null); // remove bypass; reset the graph colors
 			Ext.each(paths, function(path, index, pathList) {
+				var edgeIndex = 0;
 				Ext.each(path, function(edge, indexBis, edgeList) {
 					var rule = edge.rule;
 					var aliases = rule.ruleAliases;
@@ -182,13 +164,15 @@ Ext.define('HT.lib.CytoscapeActions', {
 						var opObj = HT.lib.RuleFunctions.getOperationFromAlias(aliasObj.alias);
 
 						opObj.clearListeners();
+						// Result is like {result: result, hypothesis: true|false, edge: theedge}
 						opObj.on('operationComplete', function (result) {
-							console.log('operationComplete:'+aliasObj.result+ ' vs '+result.result);
+							var myEdge = vis.edge(result.edgeId);
+							console.log('operationComplete:'+aliasObj.result+ ' vs '+result.result+' for edge '+myEdge.label);
 
 							if (result.hypothesis)
-								bypassEdge(edge, 'green');
+								bypassEdge(myEdge, 'green');
 							else
-								bypassEdge(edge, 'red');
+								bypassEdge(myEdge, 'red');
 
 							var labelResult = Ext.getCmp('labelResult');
 							if (labelResult == null)
@@ -201,11 +185,11 @@ Ext.define('HT.lib.CytoscapeActions', {
 								labelResult.setText('result: '+aliasObj.result);
 
 						});
-						opObj.operation(rule.edgeSource.payloadValue,
-							rule.edgeTarget.payloadValue, aliasObj.threshold, aliasObj);
+						opObj.operation(rule.edgeSource, rule.edgeTarget, aliasObj.threshold, aliasObj);
 
 						// actualFunc(rule.edgeSource.payloadValue, rule.edgeTarget.payloadValue, aliasObj.threshold, aliasObj)
 					})
+					edgeIndex++;
 					/*
 					Ext.each(functionObjs, function(aliasObj, indexFunc, functionsList) {
 						var actualFunc = HT.lib.RuleFunctions.getFunctionFromAlias(aliasObj.alias);
@@ -214,7 +198,8 @@ Ext.define('HT.lib.CytoscapeActions', {
           */
 				})
 			});
-
+			if (vis.selected().length > 0)
+				vis.deselect();
 //			runner.pathsToString();
 		},
 

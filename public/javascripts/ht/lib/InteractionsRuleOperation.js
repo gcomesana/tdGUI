@@ -42,15 +42,15 @@ Ext.define('HT.lib.InteractionsRuleOperation', {
 	/**
 	 * Gets interactions and evaluates the result to provide a value to decide if
 	 * the two targets (in this particular case) interact each other
-	 * @param valSrc, the payloadValue object for the source node
-	 * @param valTrg, the payloadValue object for the target node
+	 * @param edgeSrc, the edge object for the source node
+	 * @param edgeTrg, the edge object for the target node
 	 * @param threshold, the value threshold
 	 * @param funcObj, the function object {alias, threshold, result} to hold the result
 	 */
-	operation: function (valSrc, valTrg, threshold, funcObj) {
+	operation: function (edgeSrc, edgeTrg, threshold, funcObj) {
 		var me = this;
-		var accSrc = valSrc.acc;
-		var accTrg = valTrg.acc;
+		var accSrc = edgeSrc.payloadValue.acc;
+		var accTrg = edgeTrg.payloadValue.acc;
 		var url = 'http://localhost:3003/api/interactions/'+accSrc+'/'+accTrg+'.jsonp';
 
 		Ext.data.JsonP.request({
@@ -81,8 +81,10 @@ Ext.define('HT.lib.InteractionsRuleOperation', {
 				funcObj.result = result === undefined? -1: result;
 				var hypothesiseResult = result !== undefined;
 
-				console.log('Operation finished!!!: '+funcObj.result);
-				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis: hypothesiseResult});
+				var edgeId = 'e'+edgeSrc.id+'-'+edgeTrg.id;
+				console.log('Operation finished!!!: '+funcObj.result+' for '+edgeId);
+
+				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis: hypothesiseResult, edgeId: edgeId});
 			},
 
 			scope: me

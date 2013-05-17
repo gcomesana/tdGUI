@@ -40,12 +40,13 @@ Ext.define('HT.lib.RuleOperation', {
 	/**
 	 * Gets interactions and evaluates the result to provide a value to decide if
 	 * the two targets (in this particular case) interact each other
-	 * @param valSrc, the payloadValue object for the source node
-	 * @param valTrg, the payloadValue object for the target node
+	 * @param edgeSrc, the object for the source node
+	 * @param edgeTrg, the object for the target node
 	 * @param threshold, the value threshold
 	 * @param funcObj, the function object {alias, threshold, result} to hold the result
 	 */
-	operation: function (valSrc, valTrg, threshold, funcObj) {
+	operation: function (edgeSrc, edgeTrg, threshold, funcObj) {
+		/*
 		var me = this;
 		var accSrc = valSrc.acc;
 		var accTrg = valTrg.acc;
@@ -56,9 +57,6 @@ Ext.define('HT.lib.RuleOperation', {
 			params: {
 				threshold: (threshold === undefined || threshold == null)? 0.0: threshold
 			},
-
-//			callback: function (opts, resp) {
-//			},
 
 			failure: function (resp, opts) {
 				funcObj.result = -1;
@@ -84,6 +82,7 @@ Ext.define('HT.lib.RuleOperation', {
 
 			scope: me
 		})
+		*/
 	}
 
 });

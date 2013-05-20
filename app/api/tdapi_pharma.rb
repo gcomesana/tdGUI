@@ -75,14 +75,17 @@ module TargetDossierPharmaApi
 		desc 'Gets OMIM information about a disease. Information retrieved from OMIM is related to its phenotypical traits and genes for it'
 		params do
 			requires :disease, :type => String, :desc => 'The disease, disorder or phenotypical trait to be search for'
+			optional :start, :type => Integer, :desc => 'The offset of the result set'
 			optional :limit, :type => Integer, :desc => 'The number of entries to be retrieved (default is 10)'
+			optional :callback, :type => String, :desc => 'The callback for JSONP requests'
 		end
 		get '/disease/traits/:disease' do
-			omim_data = @proxy.get_omim4disease(params[:disease], params[:limit])
+			omim_data = @proxy.get_omim4disease(params[:disease], params[:start], params[:limit])
+			omim_data
 		end
 
 
-		desc 'GETS a list of diseases from OMIM.'
+		desc 'Gets a list of diseases from OMIM.'
 		params do
 			requires :disease, :type => String, :desc => 'A disease name'
 			optional :offset, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
@@ -90,11 +93,22 @@ module TargetDossierPharmaApi
 			optional :callback, :type => String, :desc => 'A callback function for JSONP requests'
 		end
 		get '/disease/by_name' do
-			resp = @proxy.omim_disease_lookup(params[:disease], params[:limit])
+			resp = @proxy.omim_disease_lookup(params[:disease], params[:start], params[:limit])
 
 			resp
 		end
 
+
+		desc 'Gets genotype map for a disease from its OMIM number'
+		params do
+			requires :mim_number, :type => String, :desc => 'A OMIM number for a disease or trait'
+			optional :callback, :type => String, :desc => 'A callback function for JSONP requests'
+		end
+		get '/disease/genemap' do
+			resp = @proxy.omim_entry_info(params[:mim_number])
+
+			resp
+		end
 
 	end # PharmaAPI class
 

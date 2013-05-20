@@ -83,10 +83,19 @@ Ext.define('HT.controller.Panels', {
 			existsNode = vis.node(newId);
 		}
 
-		// OUR NODE definition!!!
+		// OUR NODE definition, depends on the entity!!!
+		var nodeLabel = '';
+		if (evOpts.meta == 'gene') {
+			var startIndex = evOpts.label.indexOf('(');
+			var endIndex = evOpts.label.indexOf(')');
+			nodeLabel = evOpts.label.substring(startIndex+1, endIndex-1).split(' ').join(', ');
+		}
+		else if (evOpts.meta == 'protein')
+			nodeLabel = evOpts.label;
+
 		var nodeOpts = {
 			id: newId.toString(),
-			label: evOpts.label,
+			label: nodeLabel,
 			// entity: APP.lib.CytoscapeActions.shape2entity[shape], // this is a Number
 			// entity: entityWidget.shape2entity[shape],
 			entity: evOpts.meta,

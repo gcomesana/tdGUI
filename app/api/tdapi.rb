@@ -314,7 +314,7 @@ module TargetDossierApi
 
 
 
-			desc 'Gets the targets involved in the given disease according to http://www.uniprot.org/faq/19'
+			desc 'Gets the targets and genes involved in the given disease according to http://www.uniprot.org/faq/19'
 			params do
 				requires :disease, :type => String, :desc => 'A disease/disorder name, like asthma or anemia'
 				optional :callback, :type => String, :desc => 'A callback function for JSONP requests'
@@ -554,6 +554,27 @@ module TargetDossierApi
 			end
 
 		end
+
+
+=begin
+		resource 'omim' do
+
+			desc 'Gets a list of entries from a disease name'
+			params do
+				requires :search, :type => String, :desc => 'The disease or disorder search term'
+				optional :start, :type => Integer, :desc => 'The offset to start to get entries'
+				optional :limit, :type => Integer, :desc => 'The number of entries to retrieve'
+				optional :callback, :type => String, :desc => 'The callback for JSONP requests'
+			end
+			get '/diseases' do
+				disease_list = @proxy.omim_disease_lookup(params[:search], params[:start], params[:limit])
+
+				disease_list
+			end
+
+		end
+=end
+
 	end # EO class TDApi
 
 

@@ -15,7 +15,11 @@ class APIProxy
 	CHEMBL_TARGET_ACTIVITY = 'https://www.ebi.ac.uk/chemblws/targets/xxxx/bioactivities'
 
 	OMIM_APIKEY = '7630D3726122E8FDCFD9465523A059918CA1258B'
-	OMIN_DISEASE_LOOKUP = 'http://api.europe.omim.org/api/entry/search?search=xxxx&filter=&fields=&retrieve=&start=0&limit=10&sort=&operator=&format=json&apiKey='
+	OMIN_DISEASE_LOOKUP =
+		'http://api.omim.org/api/entry/search?search=xxxx&start=0&limit=10&format=json&apiKey='
+	# 'http://api.omim.org/api/entry/search?search=avian+flu&start=0&limit=20&format=json&apiKey='
+	OMIM_ENTRY_INFO = 'http://api.europe.omim.org/api/entry?mimNumber=xxxx&include=geneMap&format=json&apiKey='
+
 	OMIM_ENTRY_SEARCH = 'http://api.omim.org/api/entry/search?search=xxxx&filter=&fields=&retrieve=&start=0&limit=10&sort=&operator=&include=geneMap&format=xml&apiKey='
 	OMIM_GENEMAP_SEARCH = 'http://api.omim.org/api/geneMap/search?search=xxxx&filter=&fields=&start=0&limit=&sort=&operator=&format=xml&apiKey='
 
@@ -184,7 +188,7 @@ class APIProxy
 	#							]
 	#					}
 	# }
-	def get_omim4disease (disease, limit)
+	def get_omim4disease (disease, start, limit)
 		disease = disease.gsub(/ /, '+')
 		url = OMIM_GENEMAP_SEARCH.gsub(/xxxx/, disease)
 		url = url.gsub(/&limit=/, "&limit=#{limit}")
@@ -237,13 +241,15 @@ class APIProxy
 
 
 	# Search diseases based on a term in OMIM
-	def omim_disease_lookup (disease, limit)
+	def omim_disease_lookup (disease, start, limit)
 
 		disease = disease.gsub(/ /, '+')
 		url = OMIN_DISEASE_LOOKUP.gsub(/xxxx/, disease)
-		url = url.gsub(/&limit=/, "&limit=#{limit}")
+		url = url.gsub(/&start=0/, "&start=#{start}")
+		url = url.gsub(/&limit=10/, "&limit=#{limit}")
 		url = url + OMIM_APIKEY
 
+		# url = 'http://api.omim.org/api/entry/search?search=avian+flu&start=0&limit=20&format=json&apiKey=7630D3726122E8FDCFD9465523A059918CA1258B'
 		response = LibUtil.request(url, {})
 		if response.code.to_i != 200
 			puts err_msg("method get_omim4disease; param: #{disease}")
@@ -270,6 +276,48 @@ class APIProxy
 			resp_array
 		end
 	end # EO omim_disease_lookup
+
+
+
+	# Gets the genes related to the traits of a disease from OMIM. The mimNumber is
+	# that got from a disease lookup
+	# @param [String] disease_mim_number a 6 digit OMIM number
+	# @return [Hash] a hash object with a label and an array of gene information objects
+	def omim_entry_info (disease_mim_number)
+		url = OMIM_ENTRY_INFO.gsub(/xxxx/, disease_mim_number)
+		url = url + OMIM_APIKEY
+
+		response = LibUtil.request(url, {})
+		if response.code.to_i != 200
+			puts err_msg("method get_omim4disease; param: #{disease}")
+			nil
+
+		else
+			resp_hash = Hash.new
+			json_resp = JSON.parse(response.body)
+			entry_hash = json_resp['omim']['entryList'][0]['entry']
+
+			resp_hash['label'] = entry_hash['titles']['preferredTitle']
+			resp_hash['genes'] = Array.new
+			if entry_hash['phenotypeMapList'].nil? == false
+				entry_hash['phenotypeMapList'].each { |phenoMap|
+					gene_hash = {'mim_number' => phenoMap['phenotypeMap']['mimNumber'],
+											 'gene_symbol' => phenoMap['phenotypeMap']['geneSymbols']} # comma separated gene symbols!!!!!
+
+					resp_hash['genes'] << gene_hash
+				}
+
+			else # entry_hash['geneMap'] shouldn't be nil
+				gene_hash = {'mim_number' => entry_hash['geneMap']['mimNumber'],
+							'gene_symbol' => entry_hash['geneMap']['geneSymbols']}
+
+				resp_hash['genes'] << gene_hash
+			end
+
+			resp_hash
+		end
+
+	end
 
 
 

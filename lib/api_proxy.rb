@@ -49,14 +49,6 @@ class APIProxy
 	}
 
 
-
-	def get_genes_by_name (term)
-
-
-
-	end
-
-
 # Retrieves information about the biological processes the target is involved in
 # @param [String] target_acc the uniprot target accession
 	def get_process4target (target_acc)
@@ -316,8 +308,9 @@ class APIProxy
 
 			resp_hash
 		end
-
 	end
+
+
 
 
 

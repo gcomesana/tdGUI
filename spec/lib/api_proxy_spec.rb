@@ -13,9 +13,11 @@ describe APIProxy do
 		resp = @apiproxy.get_targets4disease(disease, 0, 10)
 		resp.should be_kind_of Hash
 		resp[:query_term].should be == disease
-		resp[:targets].should have_at_least(1).items
+		resp[:targets].should have_at_least(10).items
 
 		resp[:targets][0].should be_kind_of Hash
+		resp[:targets][1][:acc].should be_kind_of String
+		resp[:targets][1][:genes].should be_kind_of Array
 
 	end
 

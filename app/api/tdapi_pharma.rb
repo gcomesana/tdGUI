@@ -92,11 +92,12 @@ module TargetDossierPharmaApi
 			optional :limit, :type => Integer, :desc => 'The max number of results to send back'
 			optional :callback, :type => String, :desc => 'A callback function for JSONP requests'
 		end
-		get '/disease/by_name' do
+		get '/disease/lookup' do
 			resp = @proxy.omim_disease_lookup(params[:disease], params[:start], params[:limit])
 
 			resp
 		end
+
 
 
 		desc 'Gets genotype map for a disease from its OMIM number'
@@ -109,6 +110,22 @@ module TargetDossierPharmaApi
 
 			resp
 		end
+
+
+
+		desc 'Gets a set of proteins involved in a disease'
+		params do
+			requires :disease, :type => String, :desc => 'A disease name'
+			optional :offset, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
+			optional :limit, :type => Integer, :desc => 'The max number of results to send back'
+			optional :callback, :type => String, :desc => 'A callback function for JSONP requests'
+		end
+		get '/disease/targets' do
+			resp = @proxy.get_targets4disease(params[:disease], params[:start], params[:limit])
+
+			resp # should be a hash or nil
+		end
+
 
 	end # PharmaAPI class
 

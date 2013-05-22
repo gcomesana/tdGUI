@@ -49,6 +49,8 @@ class APIProxy
 	}
 
 
+
+# BIOLOGICAL PROCESSES STUFF ################################################
 # Retrieves information about the biological processes the target is involved in
 # @param [String] target_acc the uniprot target accession
 	def get_process4target (target_acc)
@@ -90,8 +92,10 @@ class APIProxy
 		end
 
 	end
+# EO BIOLOGICAL PROCESSES STUFF ################################################
 
 
+# BIOACTIVITIES (PHARMA-COMPOUND ACTIVITIES, CHEMBL) ###########################
 
 # Get CHEMBL information out of an uniprot accession
 # @param [String] target_acc a uniprot accession
@@ -125,14 +129,15 @@ class APIProxy
 		end
 		chembl_target_id = chembl_entry['target']['chemblId']
 
-		url = CHEMBL_TARGET_ACTIVITY.gsub(/xxxx/, chembl_target_id)
+		url = CHEMBL_TARGET_ACTIVITY.gsub(/xxxx/, chembl_target_id)+".json"
 		response = LibUtil.request(url, {})
 		if response.code.to_i != 200
 			puts err_msg("method activities4target; param: #{chembl_target_id}")
 			nil
 
 		else
-			acts_hash = Hash.from_xml(response.body)
+			# acts_hash = Hash.from_xml(response.body)
+			acts_hash = JSON.parse(response.body)
 			res_hash = Hash.new
 			activities = Array.new
 			acts_hash['list']['bioactivity'].each { |activity|
@@ -154,9 +159,13 @@ class APIProxy
 			res_hash
 		end
 	end
+# EO BIOACTIVITIES (PHARMA-COMPOUND ACTIVITIES, CHEMBL) ########################
 
 
 
+
+
+# OMIM RELATED STUFF #########################################################
 	def get_targets4disease(disease, offset, limit)
 		disease = disease.gsub(/ /, '+')
 		url = TARGETS_4_DISEASE.gsub(/xxxx/, disease)
@@ -320,7 +329,7 @@ class APIProxy
 			resp_hash
 		end
 	end
-
+# EO OMIM RELATED STUFF #######################################################
 
 
 

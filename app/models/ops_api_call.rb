@@ -69,6 +69,9 @@ class OpsApiCall
 
 			elsif api_method == 'proteinPharmacology'
 				the_url = the_url + "target/pharmacology/pages?app_id=#{OPS_API_ID}&app_key=#{OPS_API_KEY}"
+
+			elsif api_method == 'compoundInfo'
+				the_url = the_url + "compound?app_id=#{OPS_API_ID}&app_key=#{OPS_API_KEY}"
 			end
 
 		else

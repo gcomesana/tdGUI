@@ -49,6 +49,8 @@ class APIProxy
 	}
 
 
+
+# BIOLOGICAL PROCESSES STUFF ################################################
 # Retrieves information about the biological processes the target is involved in
 # @param [String] target_acc the uniprot target accession
 	def get_process4target (target_acc)
@@ -90,9 +92,14 @@ class APIProxy
 		end
 
 	end
+# EO BIOLOGICAL PROCESSES STUFF ################################################
 
 
+# BIOACTIVITIES (PHARMA-COMPOUND ACTIVITIES, CHEMBL) ###########################
 
+# Get CHEMBL information out of an uniprot accession
+# @param [String] target_acc a uniprot accession
+# @return [Hash] a hash object with data retrieved from chembl for the target accession
 	def uniprot2chembl (target_acc)
 		url = CHEMBL_TARGET.gsub(/xxxx/, target_acc)
 		response = LibUtil.request(url, {})
@@ -108,6 +115,13 @@ class APIProxy
 	end
 
 
+
+
+# Get the bioactivites for a target out of a uniprot accession.
+# It first gets the chemblId by requesting that information from chembl. After
+# that request the bioactivities
+# @param [String] target_acc an uniprot accession
+# @return [Hash] a hash structure with the list of bioactivities.
 	def activities4target(target_acc)
 		chembl_entry = uniprot2chembl(target_acc)
 		if chembl_entry.nil?
@@ -115,14 +129,15 @@ class APIProxy
 		end
 		chembl_target_id = chembl_entry['target']['chemblId']
 
-		url = CHEMBL_TARGET_ACTIVITY.gsub(/xxxx/, chembl_target_id)
+		url = CHEMBL_TARGET_ACTIVITY.gsub(/xxxx/, chembl_target_id)+".json"
 		response = LibUtil.request(url, {})
 		if response.code.to_i != 200
 			puts err_msg("method activities4target; param: #{chembl_target_id}")
 			nil
 
 		else
-			acts_hash = Hash.from_xml(response.body)
+			# acts_hash = Hash.from_xml(response.body)
+			acts_hash = JSON.parse(response.body)
 			res_hash = Hash.new
 			activities = Array.new
 			acts_hash['list']['bioactivity'].each { |activity|
@@ -139,13 +154,18 @@ class APIProxy
 			res_hash[:chemblid] = chembl_target_id
 			res_hash[:pref_name] = chembl_entry['target']['preferredName']
 			res_hash[:description] = chembl_entry['target']['description']
+			res_hash[:activities] = activities
 
 			res_hash
 		end
 	end
+# EO BIOACTIVITIES (PHARMA-COMPOUND ACTIVITIES, CHEMBL) ########################
 
 
 
+
+
+# OMIM RELATED STUFF #########################################################
 	def get_targets4disease(disease, offset, limit)
 		disease = disease.gsub(/ /, '+')
 		url = TARGETS_4_DISEASE.gsub(/xxxx/, disease)
@@ -299,7 +319,7 @@ class APIProxy
 					resp_hash['genes'] << gene_hash
 				}
 
-			else # entry_hash['geneMap'] shouldn't be nil
+			elsif entry_hash['geneMap'].nil? == false
 				gene_hash = {'mim_number' => entry_hash['geneMap']['mimNumber'],
 							'gene_symbol' => entry_hash['geneMap']['geneSymbols']}
 
@@ -309,7 +329,7 @@ class APIProxy
 			resp_hash
 		end
 	end
-
+# EO OMIM RELATED STUFF #######################################################
 
 
 
@@ -319,18 +339,26 @@ class APIProxy
 	# Yields a ruby hash / array (ready to be converted into either xml or json) from
 	# the tab output sent back by go
 	# @param [String] acc the accession
-	# @param [Object] resp the http response object with code == 200
+	# @param [String] content the http response content or body
+	# @return [Hash] a hash structure with the list of process as a member
 	def parse_go_tsv (acc, content)
 		lines = content.split(/\n/)
 
-		parsed_hash = {:target => acc, :gene => lines[0].split(/\t/)[1]}
+		the_gene = lines.length > 1? lines[1].split(/\t/)[1]: ''
+		parsed_hash = {:target => acc, :gene => the_gene}
 		processes = Array.new
-		lines.each { |line|
+		old_evidence = nil, old_goid = nil
+		lines[1..lines.length].each { |line| # skip the first line which is the header
 			props = line.split(/\t/)
+			next if props[2] == old_evidence && props[3] == old_goid
+
 			ev_desc = GO_EVIDENCE_MAP[props[2]]
-			process = {:goid => props[3], :go_name => props[4], :evidence => props[2], :evidence_desc => ev_desc}
+			process = {:goid => props[3], :go_name => props[4],
+								 :evidence => props[2], :evidence_desc => ev_desc}
 
 			processes << process
+			old_goid = props[3]
+			old_evidence = props[2]
 		}
 
 		parsed_hash[:processes] = processes

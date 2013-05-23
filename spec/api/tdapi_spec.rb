@@ -27,6 +27,25 @@ describe TargetDossierApi do
 		end
 
 
+		it "/api/target/lookup.json should return a list of conceptWiki entries for targets" do
+			term = 'mtor'
+			get "#{@api_prefix}/target/lookup.json?term=#{term}"
+
+			response.status.should == 200
+			response.body.should_not be_empty
+			parsed_resp = JSON.parse(response.body)
+			parsed_resp.should_not be_nil
+			parsed_resp.should be_kind_of(Array)
+			parsed_resp.should have_at_least(1).items
+			parsed_resp.each { |entry|
+				entry.should be_kind_of(Hash)
+				entry['match'].should_not be_nil
+				entry['match'].downcase.should include(term.downcase)
+				puts "* #{entry.to_s}"
+			}
+		end
+
+
 		it "/.../multiple.<acc_1,acc_2,...>.json should return a json ready to use with ExtJs grid" do
 			accs = @accs_only
 			get "#{@api_prefix}/target/multiple/#{accs}.json"

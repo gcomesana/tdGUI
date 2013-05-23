@@ -56,4 +56,20 @@ describe OpsWikiApiCallsController do
 	end
 
 
+	it "compound_lookup should return a list of compound entries" do
+		@substring = 'histidine'
+
+		get :compound_lookup, :query => @substring
+
+		response.code.to_i.should be == 200
+		expect { JSON.parse(response.body) }.to_not raise_error
+
+		JSON.parse(response.body).should be_kind_of Array
+		parsed_resp = JSON.parse(response.body)
+		parsed_resp.each {|item|
+			item.should be_kind_of(Hash)
+		}
+		puts "\n#{response.body}"
+	end
+
 end

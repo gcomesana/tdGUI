@@ -197,6 +197,25 @@ module TargetDossierApi
 ## target ##################################################################
 		resource 'target' do # formerly uniprot, /td/api/v1/uniprot...
 
+
+			desc "Gets a list of conceptWiki entries for targets based on a query term"
+			params do
+				requires :term, :type => String, :desc => 'The term search'
+				# optional :offset, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
+				optional :limit, :type => Integer, :desc => 'The max number of results to send back'
+				optional :callback, :type => String, :desc => 'A callback function for JSONP requests'
+			end
+			get '/lookup' do
+				api_call = OpsWikiApiCall.new
+				substring = params[:term]
+				results = api_call.search_by_tag('eeaec894-d856-4106-9fa1-662b1dc6c6f1',
+																				 substring, options)  # this is the 'Pharmacologic Substance'Amino Acid, Peptide, or Protein' tag
+
+				results
+			end
+
+
+
 			# /td/api/v1/uniprot/multiple?entries=<acc_1,acc_2, ..., acc_i>
 			desc "Retrieve multiple UniprotKB entries", {
 				:notes => 'Return a json array with information about the targets related to the parameters'

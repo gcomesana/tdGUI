@@ -96,9 +96,10 @@ Ext.define('HT.view.common.EntityLookup', {
 				break;
 
 			case 'compound':
-				remoteUrl = 'http://localhost:3003/ops_wiki_api_calls/compound_lookup.jsonp';
+				// remoteUrl = 'http://localhost:3003/ops_wiki_api_calls/compound_lookup.jsonp';
+				remoteUrl = 'http://localhost:3003/pharma/compound/lookup.jsonp';
 				comboStore.storeId = 'comboStore-compound';
-				queryParam = 'query';
+				queryParam = 'term';
 				break;
 
 			case 'gene':
@@ -109,13 +110,14 @@ Ext.define('HT.view.common.EntityLookup', {
 
 			case 'disease':
 				// remoteUrl = 'http://localhost:3003/api/target/by_disease.jsonp'; // idem
-				remoteUrl = 'http://localhost:3003/pharma/disease/by_name.jsonp';
+				remoteUrl = 'http://localhost:3003/pharma/disease/lookup.jsonp';
 				comboStore.storeId = 'comboStore-disease';
 				queryParam = 'disease';
 				break;
 
 			default:
-				remoteUrl = 'http://localhost:3003/ops_wiki_api_calls/protein_lookup.jsonp';
+				// remoteUrl = 'http://localhost:3003/ops_wiki_api_calls/protein_lookup.jsonp';
+				remoteUrl = 'http://localhost:3003/api/target/lookup.jsonp';
 				comboStore.storeId = 'comboStore-target';
 				queryParam = 'query';
 				break;

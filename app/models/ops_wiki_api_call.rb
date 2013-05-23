@@ -71,6 +71,7 @@ class OpsWikiApiCall
 		if options[:limit].nil? then
 			options[:limit] = @limit
 		end
+
 		options[:q] = substring.strip   # + '*'
 		options[:query] = substring.strip
 		options[:uuid] = tag_uuid

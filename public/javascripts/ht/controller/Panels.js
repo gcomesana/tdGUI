@@ -63,16 +63,16 @@ Ext.define('HT.controller.Panels', {
 	 * Callback for the event when clicking a button in a textbox-btn component
 	 * contained in a entity-lookup widget
 	 * @param comp, a textbox-btn widget
-	 * @param evOpts the event options
+	 * @param evOpts the event options like: {id, label, meta, value}
 	 */
 	onClickTextbox: function (comp, evOpts) {
 		console.log('Panels.onClickTextBox: got value '+evOpts.value+' for '+evOpts.meta);
+
 
 		var cytoscape = this.getCytoscape();
 		var vis = cytoscape.vis;
 		var entityWidget = comp.up();
 		var shape = entityWidget.getShape().type;
-
 
 		var newId = vis.nodes().length+1;
 		var i = 1;
@@ -83,15 +83,38 @@ Ext.define('HT.controller.Panels', {
 			existsNode = vis.node(newId);
 		}
 
-		// OUR NODE definition, depends on the entity!!!
+		// OUR NODE definition and the endpoint to get info on the selected 'thing'!!!
 		var nodeLabel = '';
+		var theUrl = '';
 		if (evOpts.meta == 'gene') {
 			var startIndex = evOpts.label.indexOf('(');
 			var endIndex = evOpts.label.indexOf(')');
-			nodeLabel = evOpts.label.substring(startIndex+1, endIndex-1).split(' ').join(', ');
+			nodeLabel = evOpts.label.substring(startIndex+1, endIndex);
+			var labelArray = nodeLabel.split(' ');
+			nodeLabel = labelArray.join(', ');
+
+			theUrl = "http://lady-qu.cnio.es:3003/api/target/by_gene.jsonp?genename=";
+			var genename = nodeLabel.split(',')[0].trim();
+			theUrl += genename;
 		}
-		else if (evOpts.meta == 'protein')
+		else if (evOpts.meta == 'protein') {
 			nodeLabel = evOpts.label;
+			// Get Uniprot accession from label
+			theUrl = "http://lady-qu.cnio.es:3003/api/target/byname/"+evOpts.label+".jsonp";
+		}
+
+		else if (evOpts.meta == 'compound') {
+			nodeLabel = evOpts.label;
+			theUrl = "http://lady-qu.cnio.es:3003/pharma/compound/info.jsonp?uri=http://www.conceptwiki.org/concept/"+evOpts.value;
+		}
+
+		else if (evOpts.meta == 'disease') {
+			var endIndex = evOpts.label.lastIndexOf(';');
+			nodeLabel = evOpts.label.substring(0, endIndex);
+			theUrl = 'http://lady-qu.cnio.es:3003/pharma/disease/genemap.jsonp?mim_number='+evOpts.value;
+		}
+		else
+			theUrl = "http://lady-qu.cnio.es:3003/api/target/byname/"+evOpts.label+".jsonp";
 
 		var nodeOpts = {
 			id: newId.toString(),
@@ -102,40 +125,90 @@ Ext.define('HT.controller.Panels', {
 			payloadValue: evOpts.value
 		};
 
-		if (evOpts.meta == "protein") {
-// Get Uniprot accession from label
-			var theUrl = "http://lady-qu.cnio.es:3003/api/target/byname/"+evOpts.label+".jsonp";
-			Ext.data.JsonP.request({
-				url: theUrl,
 
-				callback: function (opts, resp) {
-					console.log('ajax callback for uniprot info');
-				},
+		/*
+		 if (evOpts.meta == "protein")
+		 theUrl = "http://lady-qu.cnio.es:3003/api/target/byname/"+evOpts.label+".jsonp";
 
-				failure: function (resp, opts) {
-					return false;
-				},
+		 else if (evOpts.meta == 'gene') {
+		 theUrl = "http://lady-qu.cnio.es:3003/api/target/by_gene.jsonp?genename=";
+		 var genename = nodeLabel.split(',')[0].trim();
+		 theUrl += genename;
+		 }
 
-				success: function (resp, opts) {
-					var jsonObj = resp;
-					var uniprotUrl = jsonObj.accessions[0];
-					var initIdx = uniprotUrl.indexOf('>');
-					var endIdx = uniprotUrl.indexOf('<', initIdx);
-					var acc = uniprotUrl.substring(initIdx+1, endIdx);
+		 else
+		 // APP.lib.CytoscapeActions.createNode(cytoscape.vis, nodeOpts);
+		 theUrl = "http://lady-qu.cnio.es:3003/api/target/byname/"+evOpts.label+".jsonp";
+		 */
+		Ext.data.JsonP.request({
+			url: theUrl,
 
-					var payload = {
-						uuid: evOpts.value,
-						acc: acc
+			callback: function (opts, resp) {
+				console.log('ajax callback for uniprot info');
+			},
+
+			failure: function (resp, opts) {
+				return false;
+			},
+
+			success: function (resp, opts) {
+				var jsonObj = resp;
+				var getNodeOpts = function () {
+					// nodeOpts, jsonObj is a free variable
+					var payload = {};
+					if (jsonObj.accessions !== undefined && jsonObj.accessions != null) { // uniprot response on proteinInfo
+						var uniprotUrl = jsonObj.accessions[0];
+						var initIdx = uniprotUrl.indexOf('>');
+						var endIdx = uniprotUrl.indexOf('<', initIdx);
+						var acc = uniprotUrl.substring(initIdx+1, endIdx);
+
+						payload = {
+							uuid: evOpts.value, // when gene, here will be literal -> acc|gene id list
+							acc: acc
+						}
+					}
+					else if (jsonObj.genes != null && jsonObj.genes.length > 0) { // for omim response
+						// check the object to see whether or not include the list of genes
+						payload = {
+							uuid: jsonObj.genes[0].mim_number,
+							acc: jsonObj.genes[0].gene_symbol
+						}
+					}
+					else if (jsonObj.result._about.match(/compound/) != null) { // compound info requested
+						var conceptUri = jsonObj.result.primaryTopic._about;
+						var uuid = conceptUri.substring(conceptUri.lastIndexOf('/')+1, conceptUri.length);
+						var matches = jsonObj.result.primaryTopic.exactMatch;
+						var chemblId = null, chemSpiderId = null;
+						Ext.each(matches, function (entry, index, entries) {
+							if (entry._about) {
+								if (entry._about.indexOf('CHEMBL') != -1){
+									chemblId = entry._about.substring(entry._about.lastIndexOf('/')+1, entry._about.length);
+								}
+								if (entry._about.indexOf('chemspider') != -1) {
+									chemSpiderId = entry._about.substring(entry._about.lastIndexOf('/')+1, entry._about.length);	
+								}
+							} // EO if entry._about
+						});
+
+						payload = {
+							uuid: uuid,
+							acc: undefined,
+							chemblId: chemblId,
+							chemSpiderId: chemSpiderId
+						}
 					}
 					nodeOpts.payloadValue = payload;
-					HT.lib.CytoscapeActions.createNode(cytoscape.vis, nodeOpts);
+				} // EO auxiliary conversion function
+				
+				if (jsonObj != null)
+					getNodeOpts();
+				else
+					nodeOpts = nodeLabel;
 
-				}
-			})
+				HT.lib.CytoscapeActions.createNode(cytoscape.vis, nodeOpts);
+			} // EO success
 
-		}
-		else
-			HT.lib.CytoscapeActions.createNode(cytoscape.vis, nodeOpts);
+		}) // EO JSONP req
 
 //		vis.addNode(20, 20, nodeOpts);
 	},
@@ -154,16 +227,20 @@ Ext.define('HT.controller.Panels', {
 			nodes = nm.data.nodes;
 		}
 		else if (btnId == 'btnEnactSel') { // only for selected nodes (a subgraph)
-			var selModel;
-			selModel = Ext.Array.map(cytoscape.selectionModel, function (item) {
+			var selNodeModel, selEdgeModel;
+			selNodeModel = Ext.Array.map(cytoscape.nodesSelectionModel, function (item) {
 				return item.data;
 			});
 
+			selEdgeModel = Ext.Array.map(cytoscape.edgesSelectionModel, function (edge) {
+				return edge.data;
+			});
+
 			var nm = vis.networkModel();
-			nodes = selModel;
-			edges = nm.data.edges;
+			nodes = selNodeModel;
+			edges = selEdgeModel; // nm.data.edges;
 		}
-		// functionEvent = HT.lib.RuleFunctions.getFunctionFromAlias(alias)
+		// functionEvent = APP.lib.RuleFunctions.getFunctionFromAlias(alias)
 		// functionEvent.addListener('operationComplete', this.onOperationComplete, this)
 		HT.lib.CytoscapeActions.runGraph(vis, nodes, edges);
 	},

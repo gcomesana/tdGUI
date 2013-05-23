@@ -8,17 +8,14 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 	 * Template for a function object. The alias will be the value which will be
 	 * assigned to the rules. When the rule have to be run, the actual function will
 	 * be get from the alias
-	 * @type {{alias: string, func: Function}}
+	 * @type {{alias: string}}
 	 */
 	var interactionFunc = {
 		// result: undefined,
 		// threshold: undefined,
-		alias: 'target-target-interactions',
+		alias: 'target-target-interactions'
 
-
-
-
-		/**
+		/*
 		 * Template function Object to get along a rule
 		 * Gets interactions among the two values
 		 * Call the API at localhost:<rails_port>/api/interactions/target1/target2?conf_val=val
@@ -27,13 +24,11 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 		 * @param {Number} threshold the confidence value to filter the interactions
 		 * @param {Object} funcObj the javascript object containing result, threshold and alias properties
 		 * @return {Object} an object with information about the found interactions
-		 */
+		 /
+		*
 		func: function (valSrc, valTrg, threshold, funcObj) {
 			// console.log('calling interactionFunc.interaction: '+valSrc+', '+valTrg);
 			var url = 'http://localhost:3003/api/interactions/'+valSrc+'/'+valTrg+'.jsonp';
-			/* url = (threshold === undefined || threshold == null)? url: url+
-				'?threshold='+threshold;
-      */
 
 			Ext.data.JsonP.request({
 				url: url,
@@ -65,17 +60,17 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 
 			})
 		} // EO func member
+		*/
 	}; // EO interactionFunc object
 
 // TODO functions should be kept in a store, with members result, threshold, result, func
-	var ruleFunctionsStore = [interactionFunc];
+//	var ruleFunctionsStore = [interactionFunc];
 
 
-
-	var interactionOp = Ext.create('HT.lib.InteractionsRuleOperation', {});
-	var operationStore = [interactionOp]; // Actual logic for rule operations come from here!!!!
-
-
+	var interactionOp = Ext.create('HT.lib.operation.InteractionsRuleOperation', {});
+	var geneProteinOp = Ext.create('HT.lib.operation.GeneProteinOperation', {});
+	var proteinGeneOp = Ext.create('HT.lib.operation.ProteinGeneOperation', {});
+	var operationStore = [interactionOp, geneProteinOp, proteinGeneOp]; // Actual logic for rule operations come from here!!!!
 
 	var notImplementedYet = function (valSrc, valTrg, threshold, funcObj) {
 		console.error('Not implemented yet...');
@@ -86,44 +81,50 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 
 	return {
 
-		requires: ['HT.lib.Util', 'HT.lib.RuleOperation', 'HT.lib.InteractionsRuleOperation'],
-
+		requires: ['HT.lib.Util', 'HT.lib.operation.RuleOperation',
+			'HT.lib.operation.InteractionsRuleOperation', 'HT.lib.operation.GeneProteinOperation'],
+/*
 		constructor: function () {
+			console.log("RuleFunctions constructor!!!");
 			this.callParent(arguments);
 
 			// var op = Ext.create('HT.lib.RuleOperation', {});
-			var op = Ext.create('HT.lib.InteractionsRuleOperation', {});
+			var opInteractions = Ext.create('HT.lib.operation.InteractionsRuleOperation', {});
+			var opGeneProtein = Ext.create('HT.lib.operation.GeneProteinOperation', {});
 			console.log('op.alias: '+op.alias);
-			operationStore.push(op);
+			operationStore.push(opInteractions);
+			operationStore.push(opGeneProtein);
 		},
-
+*/
 		statics: {
+			/*
 			getFunctionsRule: function (entitySrc, entityTarget) {
 				var funcArray = [];
+				var clonedFunc;
 
 				switch (entitySrc) {
 					case HT.lib.CytoscapeActions.PROTEIN:
 						switch (entityTarget) {
 							case HT.lib.CytoscapeActions.PROTEIN:
-								var clonedFunc = HT.lib.Util.clone(interactionFunc);
+								clonedFunc = HT.lib.Util.clone(interactionFunc);
 								funcArray.push(clonedFunc);
 								break;
 
 							default:
-								var clonedFunc = HT.lib.Util.clone(interactionFunc);
+								clonedFunc = HT.lib.Util.clone(interactionFunc);
 								funcArray.push(clonedFunc);
 								break;
 						}
 						break;
 
 					default:
-						var clonedFunc = HT.lib.Util.clone(interactionFunc);
+						clonedFunc = HT.lib.Util.clone(interactionFunc);
 						funcArray.push(clonedFunc);
 						break;
 				}
 				return funcArray;
 			}, // EO getFunctionsRule
-
+			*/
 
 			/**
 			 * Gets a list of function aliases matching with source and target entities.
@@ -139,16 +140,39 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 					threshold: undefined
 				};
 
-				switch (entitySrc) {
+				var srcEntityCode = HT.lib.CytoscapeActions.convert2entity(entitySrc);
+				var trgEntityCode = HT.lib.CytoscapeActions.convert2entity(entityTarget);
+
+				// switch (entitySrc) {
+				switch (srcEntityCode) {
 					case HT.lib.CytoscapeActions.PROTEIN:
-						switch (entityTarget) {
+						switch (trgEntityCode) {
 							case HT.lib.CytoscapeActions.PROTEIN:
 								aliasObj.alias =  interactionFunc.alias;
 								aliasArray.push(aliasObj);
 								break;
 
+							case HT.lib.CytoscapeActions.GENE:
+								aliasObj.alias = 'protein-gene-operation';
+								aliasArray.push(aliasObj);
+								break;
+
 							default:
 								aliasObj.alias =  interactionFunc.alias;
+								aliasArray.push(aliasObj);
+								break;
+						}
+						break;
+
+					case HT.lib.CytoscapeActions.GENE:
+						switch (trgEntityCode) {
+							case HT.lib.CytoscapeActions.PROTEIN:
+								aliasObj.alias = 'gene-protein-operation';
+								aliasArray.push(aliasObj);
+								break;
+
+							default:
+								aliasObj.alias = 'gene-protein-operation';
 								aliasArray.push(aliasObj);
 								break;
 						}
@@ -166,7 +190,9 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 
 
 			/**
-			 * It gets the operation from the alias.
+			 * It gets the operation from the alias. In the edge, no function are held,
+			 * just the alias to get the operation represented by the alias from here when
+			 * running the graph
 			 * @param {String} alias the alias of the operation
 			 * @return {HT.lib.RuleOperation} the operation object
 			 */
@@ -183,6 +209,7 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 			},
 
 
+			/*
 			getFunctionFromAlias: function (alias) {
 				var theFunc = null;
 				Ext.each(ruleFunctionsStore, function (ruleFunc, index, functionSet) {
@@ -194,7 +221,7 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 
 				return theFunc
 			},
-
+			*/
 
 			test: function (param) {
 				return 'RuleFunctions.test('+param+') was called'

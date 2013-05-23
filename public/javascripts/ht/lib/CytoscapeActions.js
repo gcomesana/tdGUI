@@ -2,12 +2,13 @@
  * This is a lib with static methods to operate on a cytoscape instance
  */
 Ext.define('HT.lib.CytoscapeActions', {
-	requires: ['HT.lib.EdgeRuleFactory', 'HT.lib.EdgeRule', 'HT.lib.RuleOperation',
+	requires: ['HT.lib.EdgeRuleFactory', 'HT.lib.EdgeRule', 'HT.lib.operation.RuleOperation',
 					'HT.lib.RuleFunctions', 'HT.lib.HypothesisRunner'],
 	statics: {
 
 		GENE: 1,
 		PROTEIN: 2,
+		COMPOUND: 3,
 		COMPOUND: 3,
 		DISEASE: 4,
 
@@ -24,11 +25,31 @@ Ext.define('HT.lib.CytoscapeActions', {
 		/**
 		 * Converts from an entity string into an entity code
 		 */
-		convert2entity: {
-			'protein': undefined,
-			'compound': undefined,
-			'disease': undefined,
-			'gene':  undefined
+		convert2entity: function (entityName) {
+			var entity = -1;
+			switch (entityName) {
+				case 'protein':
+					entity = HT.lib.CytoscapeActions.PROTEIN;
+					break;
+
+				case 'compound':
+					entity = HT.lib.CytoscapeActions.COMPOUND;
+					break;
+
+				case 'disease':
+					entity = HT.lib.CytoscapeActions.DISEASE;
+					break;
+
+				case 'gene':
+					entity = HT.lib.CytoscapeActions.GENE;
+					break;
+
+				default:
+					entity = HT.lib.CytoscapeActions.PROTEIN;
+					break;
+			}
+
+			return entity;
 		},
 
 
@@ -39,12 +60,22 @@ Ext.define('HT.lib.CytoscapeActions', {
 		 * @param nodeData the json object with the node data, such that {id: 'id', label: 'label', payloadValue: whatever}
 		 */
 		createNode: function (vis, nodeData) {
+			if (nodeData.payloadValue == null || nodeData.payloadValue === undefined) {
+				Ext.MessageBox.show ({
+					title: 'Information',
+					msg: "No information found for '"+nodeData+"'",
+					buttons: Ext.Msg.OK,
+					icon: Ext.window.MessageBox.WARNING
+				});
+				return false;
+			}
+
 			var newId = vis.nodes().length+1;
 			var nodeLabel, nodeId;
 			var nodeOpts;
 			if (Ext.isObject(nodeData)) {
-			//	nodeLabel = nodeData.label;
-			//	nodeId = nodeData.id;
+				//	nodeLabel = nodeData.label;
+				//	nodeId = nodeData.id;
 				nodeOpts = nodeData;
 			}
 			else {
@@ -93,7 +124,7 @@ Ext.define('HT.lib.CytoscapeActions', {
 				target: nodeTwoId.toString(),
 
 				label: 'from '+nodeOneId+' to '+nodeTwoId,
-        rule: edgeRule
+				rule: edgeRule
 			};
 			console.log('Edge AFTER edgeData...');
 
@@ -109,10 +140,10 @@ Ext.define('HT.lib.CytoscapeActions', {
 		 * @param {String} shape an string representing the shape
 		 * @return the entity who is represented by that shape
 		 *
-		shape2entity: function (shape) {
+		 shape2entity: function (shape) {
 
-		},
-    */
+		 },
+		 */
 
 
 
@@ -121,7 +152,7 @@ Ext.define('HT.lib.CytoscapeActions', {
 		 * Run the rules based on the edges on the graph. As the graph can have several
 		 * paths, in order to walk all paths, after walking one edge, the next edge
 		 *
- 		 * @param vis
+		 * @param vis
 		 * @param nodes
 		 * @param edges
 		 */
@@ -191,17 +222,18 @@ Ext.define('HT.lib.CytoscapeActions', {
 					})
 					edgeIndex++;
 					/*
-					Ext.each(functionObjs, function(aliasObj, indexFunc, functionsList) {
-						var actualFunc = HT.lib.RuleFunctions.getFunctionFromAlias(aliasObj.alias);
-						actualFunc(rule.edgeSource.payloadValue, rule.edgeTarget.payloadValue, aliasObj.threshold, aliasObj)
-					})
-          */
+					 Ext.each(functionObjs, function(aliasObj, indexFunc, functionsList) {
+					 var actualFunc = HT.lib.RuleFunctions.getFunctionFromAlias(aliasObj.alias);
+					 actualFunc(rule.edgeSource.payloadValue, rule.edgeTarget.payloadValue, aliasObj.threshold, aliasObj)
+					 })
+					 */
 				})
 			});
 			if (vis.selected().length > 0)
 				vis.deselect();
+
 //			runner.pathsToString();
-		},
+		}, // EO rungraph
 
 
 		/**
@@ -248,9 +280,9 @@ Ext.define('HT.lib.CytoscapeActions', {
 		 */
 		this.self.shape2entity = {
 			'circle': this.self.PROTEIN,
-				'square': this.self.COMPOUND,
-				'triangle': this.self.DISEASE,
-				'diamond':  this.self.GENE
+			'square': this.self.COMPOUND,
+			'triangle': this.self.DISEASE,
+			'diamond':  this.self.GENE
 		};
 
 		/**
@@ -258,9 +290,9 @@ Ext.define('HT.lib.CytoscapeActions', {
 		 */
 		this.self.convert2entity = {
 			'protein': this.self.PROTEIN,
-				'compound': this.self.COMPOUND,
-				'disease': this.self.DISEASE,
-				'gene':  this.self.GENE
+			'compound': this.self.COMPOUND,
+			'disease': this.self.DISEASE,
+			'gene':  this.self.GENE
 		};
 
 		return this;

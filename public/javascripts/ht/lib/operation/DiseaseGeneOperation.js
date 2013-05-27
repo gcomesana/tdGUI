@@ -13,7 +13,7 @@
  * /////
  * rfe.fireEvent('operationComplete');
  */
-Ext.define('HT.lib.operation.DiseaseProteinOperation', {
+Ext.define('HT.lib.operation.DiseaseGeneOperation', {
 	extend: 'HT.lib.operation.RuleOperation',
 	mixins: {
 		observable: 'Ext.util.Observable'
@@ -22,11 +22,12 @@ Ext.define('HT.lib.operation.DiseaseProteinOperation', {
 	constructor: function (config) {
 		// this.initConfig(config);
 		this.callParent(arguments);
-		this.alias = 'gene-protein-operation';
+		this.alias = 'disease-gene-operation';
 	},
 
 	/**
-	 * Query uniprot to get the proteins involved in the disease
+	 * Starting out of a OMIMid for a disease/trait, make a request to get the gene_symbols for the disease/trati.
+	 * At least one of the gene should be in the target to assert the rule.
 	 * @param edgeSrc, the edge object for the source node
 	 * @param edgeTrg, the edge object for the target node
 	 * @param threshold, the value threshold
@@ -34,16 +35,13 @@ Ext.define('HT.lib.operation.DiseaseProteinOperation', {
 	 */
 	operation: function (edgeSrc, edgeTrg, threshold, funcObj) {
 		var me = this;
-		var accSrc = edgeSrc.payloadValue.acc;
-		var accTrg = edgeTrg.payloadValue.acc;
+		var payloadSrc = edgeSrc.payloadValue;
+		var payloadTrg = edgeTrg.payloadValue;
 		var genename = edgeSrc.label.split(',')[0].trim();
-		var url = 'http://localhost:3003/api/target/by_gene.jsonp?genename='+genename;
+		var url = 'http://localhost:3003/pharma/disease/genemap.json?mim_number='+edgeSrc.payloadValue.uuid; // OMIMid when entity = disease
 
 		Ext.data.JsonP.request({
 			url: url,
-			params: {
-				threshold: (threshold === undefined || threshold == null)? 0.0: threshold
-			},
 
 			callback: function (opts, resp) {
 				console.log('ajax callback');
@@ -53,24 +51,24 @@ Ext.define('HT.lib.operation.DiseaseProteinOperation', {
 				funcObj.result = -1;
 			},
 
+			// In this case, we just check if the gene names match
 			success: function (resp, opts) {
 				var jsonObj = resp;
 				var result = false;
 
-				// To evaluate the hypothesis, search an entry in uniprot for the gene
-				// and check if any of the accessions matches with the target accession
-				Ext.each(jsonObj.accessions, function (acc, index, accessions) {
-					var init = acc.indexOf('>');
-					var end = acc.lastIndexOf('<');
-					var acc = acc.substring(init+1, end);
-
-					if (acc == accTrg) {
-						result = true;
-						return false;
-					}
+				var geneList = jsonObj.genes; // an array of {mim_number, gene_symbol} objects
+				Ext.each(geneList, function (geneObj, index, genesItself) {
+					var genes = geneObj.gene_symbol.split(',');
+					Ext.each(gene, function (genename, indexBis, geneArr) {
+						if (payloadTrg.genes.indexOf(genename) != -1) {
+							result = true;
+							return false;
+						}
+					});
+					if (result = true)
+						return false; // finish outer each loop
 				});
-
-
+				
 				funcObj.result = result;
 				var hypothesiseResult = result !== false;
 

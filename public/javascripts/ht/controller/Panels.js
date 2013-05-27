@@ -110,6 +110,7 @@ Ext.define('HT.controller.Panels', {
 
 		else if (evOpts.meta == 'disease') {
 			var endIndex = evOpts.label.lastIndexOf(';');
+			endIndex = endIndex == -1? evOpts.label.length: endIndex;
 			nodeLabel = evOpts.label.substring(0, endIndex);
 			theUrl = 'http://lady-qu.cnio.es:3003/pharma/disease/genemap.jsonp?mim_number='+evOpts.value;
 		}
@@ -153,6 +154,7 @@ Ext.define('HT.controller.Panels', {
 
 			success: function (resp, opts) {
 				var jsonObj = resp;
+
 				var getNodeOpts = function () {
 					// nodeOpts, jsonObj is a free variable
 					var payload = {};
@@ -161,17 +163,26 @@ Ext.define('HT.controller.Panels', {
 						var initIdx = uniprotUrl.indexOf('>');
 						var endIdx = uniprotUrl.indexOf('<', initIdx);
 						var acc = uniprotUrl.substring(initIdx+1, endIdx);
+						var genes = null;
+						if (jsonObj.genes != null && jsonObj.genes.length > 0)
+							genes = jsonObj.genes.join(',');
 
 						payload = {
 							uuid: evOpts.value, // when gene, here will be literal -> acc|gene id list
-							acc: acc
+							acc: acc,
+							genes: genes,
+							chemblId: null,
+							chemSpiderId: null
 						}
 					}
 					else if (jsonObj.genes != null && jsonObj.genes.length > 0) { // for omim response
 						// check the object to see whether or not include the list of genes
 						payload = {
 							uuid: jsonObj.genes[0].mim_number,
-							acc: jsonObj.genes[0].gene_symbol
+							acc: jsonObj.genes[0].gene_symbol,
+							chemblId: null,
+							genes: null,
+							chemSpiderId: null
 						}
 					}
 					else if (jsonObj.result._about.match(/compound/) != null) { // compound info requested
@@ -192,7 +203,8 @@ Ext.define('HT.controller.Panels', {
 
 						payload = {
 							uuid: uuid,
-							acc: undefined,
+							acc: null,
+							genes: null,
 							chemblId: chemblId,
 							chemSpiderId: chemSpiderId
 						}

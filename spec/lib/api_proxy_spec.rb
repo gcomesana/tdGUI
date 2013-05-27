@@ -149,13 +149,14 @@ describe APIProxy do
 
 	it "should get a list of bioactivities for the target accession P38398" do
 		acc = 'P38398'
+		acc = 'Q13936'
 
 		resp = @apiproxy.activities4target(acc)
 		resp.should_not be_nil
 		resp.should be_kind_of(Hash)
 		resp[:accession].should be == acc
 		resp[:activities].should be_kind_of(Array)
-		(resp[:activities][0][:assay_chemblid] == resp[:activities][0][:assay_chemblid]).should be_false
+#		(resp[:activities][0][:assay_chemblid] == resp[:activities][1][:assay_chemblid]).should be_false
 
 		resp[:chemblid].should include('CHEMBL')
 

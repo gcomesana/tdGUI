@@ -140,7 +140,8 @@ class APIProxy
 			acts_hash = JSON.parse(response.body)
 			res_hash = Hash.new
 			activities = Array.new
-			acts_hash['list']['bioactivity'].each { |activity|
+			activity_count = 0
+			acts_hash['bioactivities'].each { |activity|
 				my_act = {:ingredient_cmpd_chemblid => activity['ingredient_cmpd_chemblid']}
 				my_act[:bioactivity_type] = activity['bioactivity_type']
 				my_act[:assay_chemblid] = activity['assay_chemblid']
@@ -148,6 +149,11 @@ class APIProxy
 				my_act[:assay_description] = activity['assay_description']
 
 				activities << my_act
+				if activity_count == 200
+					break;
+				else
+					activity_count = activity_count + 1
+				end
 			}
 
 			res_hash[:accession] = target_acc

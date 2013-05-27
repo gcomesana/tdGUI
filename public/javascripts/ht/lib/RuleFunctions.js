@@ -14,53 +14,7 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 		// result: undefined,
 		// threshold: undefined,
 		alias: 'target-target-interactions'
-
-		/*
-		 * Template function Object to get along a rule
-		 * Gets interactions among the two values
-		 * Call the API at localhost:<rails_port>/api/interactions/target1/target2?conf_val=val
-		 * @param {String} valSrc the accession of one target
-		 * @param {String} valTrg the accession for the other target
-		 * @param {Number} threshold the confidence value to filter the interactions
-		 * @param {Object} funcObj the javascript object containing result, threshold and alias properties
-		 * @return {Object} an object with information about the found interactions
-		 /
-		*
-		func: function (valSrc, valTrg, threshold, funcObj) {
-			// console.log('calling interactionFunc.interaction: '+valSrc+', '+valTrg);
-			var url = 'http://localhost:3003/api/interactions/'+valSrc+'/'+valTrg+'.jsonp';
-
-			Ext.data.JsonP.request({
-				url: url,
-				params: {
-					threshold: (threshold === undefined || threshold == null)? 0.0: threshold
-				},
-
-				callback: function (opts, resp) {
-					console.log('ajax callback');
-				},
-
-				failure: function (resp, opts) {
-					funcObj.result = -1;
-				},
-
-				success: function (resp, opts) {
-					var jsonObj = resp;
-					var result = jsonObj.totalCount;
-					var sumConfVal = 0;
-					if (jsonObj.totalCount > 0) {
-						Ext.each(jsonObj.interactions, function (inter, index, interactions) {
-							sumConfVal += inter.conf_value;
-						})
-						result = sumConfVal / jsonObj.totalCount;
-					}
-
-					funcObj.result = result;
-				}
-
-			})
-		} // EO func member
-		*/
+		
 	}; // EO interactionFunc object
 
 // TODO functions should be kept in a store, with members result, threshold, result, func
@@ -70,7 +24,8 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 	var interactionOp = Ext.create('HT.lib.operation.InteractionsRuleOperation', {});
 	var geneProteinOp = Ext.create('HT.lib.operation.GeneProteinOperation', {});
 	var proteinGeneOp = Ext.create('HT.lib.operation.ProteinGeneOperation', {});
-	var operationStore = [interactionOp, geneProteinOp, proteinGeneOp]; // Actual logic for rule operations come from here!!!!
+	var diseaseGeneOp = Ext.create('HT.lib.operation.DiseaseGeneOperation', {});
+	var operationStore = [interactionOp, geneProteinOp, proteinGeneOp, diseaseGeneOp]; // Actual logic for rule operations come from here!!!!
 
 	var notImplementedYet = function (valSrc, valTrg, threshold, funcObj) {
 		console.error('Not implemented yet...');
@@ -82,7 +37,8 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 	return {
 
 		requires: ['HT.lib.Util', 'HT.lib.operation.RuleOperation',
-			'HT.lib.operation.InteractionsRuleOperation', 'HT.lib.operation.GeneProteinOperation'],
+			'HT.lib.operation.InteractionsRuleOperation', 'HT.lib.operation.GeneProteinOperation',
+			'HT.lib.operation.DiseaseGeneOperation'],
 /*
 		constructor: function () {
 			console.log("RuleFunctions constructor!!!");
@@ -161,7 +117,7 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 								aliasObj.alias =  interactionFunc.alias;
 								aliasArray.push(aliasObj);
 								break;
-						}
+						} // EO switch
 						break;
 
 					case HT.lib.CytoscapeActions.GENE:
@@ -175,7 +131,21 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 								aliasObj.alias = 'gene-protein-operation';
 								aliasArray.push(aliasObj);
 								break;
-						}
+						} // EO switch
+						break;
+
+					case HT.lib.CytoscapeActions.DISEASE: 
+						switch (trgEntityCode) {
+							case HT.lib.CytoscapeActions.GENE:
+								aliasObj.alias = 'disease-gene-operation';
+								aliasArray.push(aliasObj);
+								break;
+
+							default:
+								aliasObj.alias = 'disease-gene-operation';
+								aliasArray.push(aliasObj);
+								break;
+						} // EO switch
 						break;
 
 					default:

@@ -40,4 +40,21 @@ puts "\nAll interactions normalized\n"
 	end
 
 
+	it "should get no interaction for targets P38398 & Q9HCU9" do
+		accOne = 'Q9HCU9'
+		accTwo = 'P38398'
+
+		resp = @proxy.get_interactions_for(accOne, accTwo, 0.2)
+		resp.should_not be_nil
+		resp.should be_kind_of(Hash)
+
+		resp[:totalCount].should_not be_nil
+		resp[:totalCount].should be == 0
+		resp[:interactions].should be_kind_of(Array)
+		resp[:interactions].length.should be == 0
+		# (resp[:interactions][0][:interactor1] == resp[:interactions][0][:interactor2]).should be_false
+
+
+	end
+
 end

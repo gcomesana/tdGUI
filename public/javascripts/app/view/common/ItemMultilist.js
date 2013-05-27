@@ -48,46 +48,52 @@ Ext.define ('TDGUI.view.common.ItemMultilist', {
 		var me = this
 
 		this.items = [{
-      fieldLabel: me.listName,
-      labelAlign: 'top',
-      labelSeparator: '',
-      labelCls: 'targetlist-font-label',
+			xtype: 'label',
+			forId: 'multiselect-field',
+			text: me.listName
+		},{
+				// fieldLabel: me.listName,
+				// labelAlign: 'top',
+				labelSeparator: '',
+				labelCls: 'targetlist-font-label',
 
-			xtype: 'multiselect',
-			msgTarget: 'none',
+
+				xtype: 'multiselect',
+				msgTarget: 'none',
 //			fieldLabel: 'Multiselect',
-			name: 'multiselect',
-			id: 'multiselect-field',
+				name: 'multiselect',
+				id: 'multiselect-field',
 //			allowBlank: false,
-			anchor: '100%',
-      border: false,
-      height: 350,
+				anchor: '100%',
+				border: false,
+				height: 350,
+			  margin: '5 0 0 0',
+				store: me.store,
+				displayField: me.displayField,
+				valueField: me.valueField
 
-      store: me.store,
-      displayField: me.displayField,
-      valueField: me.valueField
-
-/*
-			store: [
-				[123, 'One Hundred Twenty Three'],
-				['1', 'One'],
-				['2', 'Two'],
-				['3', 'Three'],
-				['4', 'Four'],
-				['5', 'Five'],
-				['6', 'Six'],
-				['7', 'Seven'],
-				['8', 'Eight'],
-				['9', 'Nine'],
-				['5', 'Five'],
-				['6', 'Six'],
-				['7', 'Seven'],
-				['8', 'Eight'],
-				['9', 'Nine']
-			],
-			value: ['3', '4', '6']
-*/
-		}],
+				/*
+				 store: [
+				 [123, 'One Hundred Twenty Three'],
+				 ['1', 'One'],
+				 ['2', 'Two'],
+				 ['3', 'Three'],
+				 ['4', 'Four'],
+				 ['5', 'Five'],
+				 ['6', 'Six'],
+				 ['7', 'Seven'],
+				 ['8', 'Eight'],
+				 ['9', 'Nine'],
+				 ['5', 'Five'],
+				 ['6', 'Six'],
+				 ['7', 'Seven'],
+				 ['8', 'Eight'],
+				 ['9', 'Nine']
+				 ],
+				 value: ['3', '4', '6']
+				 */
+			}
+	],
 
 
 

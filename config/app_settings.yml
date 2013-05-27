@@ -1,7 +1,7 @@
 # config/application.yml
 defaults: &defaults
   mail:
-    :to = ["gcomesana@cnio.es", "vdelatorre@cnio.es",]
+    :to = ["gcomesana@cnio.es", "vdelatorre@cnio.es"]
     :password = "Run3ks_3"
     :user = "gcomesana@cnio.es"
     :address = "webmail.cnio.es"
@@ -14,8 +14,8 @@ defaults: &defaults
     enzyme_path: "/target/enzyme/pharmacology/pages"
     tsv_rails_host: "localhost"
     tsv_rails_port: "3003"
-    tsv_rails_path: "/core_api_calls/protein_info"
-    tsv_pharm_rails_path: "/core_api_calls/pharm_by_protein_name"
+    tsv_rails_path: "/ops_api_calls/protein_info"
+    tsv_pharm_rails_path: "/ops_api_calls/pharm_by_protein_name"
     tsv_pharm_page_results: "/tdgui_proxy/get_pharm_by_target_page"
 
 

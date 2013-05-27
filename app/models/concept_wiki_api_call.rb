@@ -12,13 +12,17 @@ class ConceptWikiApiCall
 	#CONCEPT_WIKI_API_BY_TAG_URL = "http://staging.conceptwiki.org/web-ws/concept/search/byTag"
 	#CONCEPT_WIKI_API_FOR_URL_URL = "http://staging.conceptwiki.org/web-ws/concept/search/forUrl"
 
+	OPS_API_ID = '86bb218b'
+	OPS_API_KEY = '29493600307b1fbd0cec49cbee447073'
+
 	CONCEPT_WIKI_API_SEARCH_URL = "http://ops.conceptwiki.org/web-ws/concept/search/"
 	CONCEPT_WIKI_API_GET_URL = "http://ops.conceptwiki.org/web-ws/concept/search/get"
-	CONCEPT_WIKI_API_BY_TAG_URL = "http://ops.conceptwiki.org/web-ws/concept/search/byTag"
+	# CONCEPT_WIKI_API_BY_TAG_URL = "http://ops.conceptwiki.org/web-ws/concept/search/byTag"
+	CONCEPT_WIKI_API_BY_TAG_URL = "https://beta.openphacts.org/search/byTag?app_id=#{OPS_API_ID}&app_key=#{OPS_API_KEY}&q=xxxx&limit=5&uuid=eeaec894-d856-4106-9fa1-662b1dc6c6f1&_format=json"
 	CONCEPT_WIKI_API_FOR_URL_URL = "http://ops.conceptwiki.org/web-ws/concept/search/forUrl"
 
 
-	def initialize()
+	def initialize
 		# For timing the transaction
 		@request_time = nil
 		@response_time = nil

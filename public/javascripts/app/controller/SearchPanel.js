@@ -251,8 +251,10 @@ Ext.define('TDGUI.controller.SearchPanel', {
             listStore.add(target)
 
             labelCount++
-            if (labelCount == labels.length)
-              me.myMask.hide()
+            if (labelCount == labels.length) {
+							// console.log("clickAddProteins: Ajax request finished");
+              me.myMask.hide();
+						}
           }
         }) // EO Ajax request
       } // EO if

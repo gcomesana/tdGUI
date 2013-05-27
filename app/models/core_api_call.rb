@@ -102,9 +102,16 @@ puts ("coreAPi.request(#{api_method.to_s}, opts=#{options.to_s})")
 		response = EndpointsProxy.make_request(api_method, options)
 # below would be EndpointsProxy.make_request ('proteinInfo', {protein_uri:...} )
 #		response = EndpointsProxy.make_request(api_method, options)
+
+# Check for error when the returned value is not the response itself but a
+# negative number as timeout got a kind of connection error
+		if response.is_a?(Fixnum)
+# See the log as InnerProxy class spits out the error there
+			return nil
+		end
 		status = case response.code.to_i
 							 when 100..199 then
-								 @http_error = "HTTP #{status.to_s}-error"
+								 @http_error = "HTTP #{response.msg.to_s}-error"
 								 puts @http_error
 								 return nil
 							 when 200 then #HTTPOK => Success
@@ -112,7 +119,7 @@ puts ("coreAPi.request(#{api_method.to_s}, opts=#{options.to_s})")
 
 								 return response.body
 							 when 201..407 then
-								 @http_error = "HTTP #{status.to_s}-error"
+								 @http_error = "HTTP #{response.msg.to_s}-error"
 								 puts @http_error
 								 return nil
 							 when 408 then
@@ -121,7 +128,7 @@ puts ("coreAPi.request(#{api_method.to_s}, opts=#{options.to_s})")
 								 return nil
 							 when 409..600 then
 								 puts @http_error
-								 @http_error = "HTTP #{status.to_s}-error"
+								 @http_error = "HTTP #{response.msg.to_s}-error"
 								 return nil
 						 end
 		#    rescue StandardError => the_exception

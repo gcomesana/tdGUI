@@ -18,6 +18,8 @@ class IntactDao
 		@server = dbserver
 		@port = dbport
 		@db = dbname
+		@dbuser = dbuser
+		@dbpasswd = dbpasswd
 
 		@result_set = Array.new
 		@interaction_net = Array.new
@@ -45,6 +47,15 @@ print "IntactDao() conn_str: #{conn_str}"
 		multitarget_qry += "order by conf_value desc"
 		@multitarget_qry = multitarget_qry
 
+
+		interactions_qry = "select id, uniprot1id, uniprot2id, interactionid, interaction_type, detection_method, conf_value, pubmed " 
+		interactions_qry += "from interactions "
+		# interactions_qry += "where (uniprot1id = ? or uniprot1id = ?) "
+		# interactions_qry += "and (uniprot2id = ? or uniprot2id = ?) "
+		interactions_qry += "where (uniprot1id = ? and uniprot2id = ?) "
+		interactions_qry += "or (uniprot2id = ? and uniprot1id = ?) "
+		interactions_qry += "and conf_value > ? order by conf_value desc;"
+		@interactions_qry = interactions_qry
 
 	end
 
@@ -128,7 +139,7 @@ puts "Disconnecting #{@db}...\n"
 # among themselves
 # @param [Array] nodes, uniprot accessions for the target nodes
 # @param [Float] conf_val, the confidence value to screen weak interactions
-# @return [Array] an array with the interactin rows
+# @return [Integer] the number of rows retrieve (number of neighbours)
 	def fetch_neighbours_interactions (neighbours, conf_val = 5)
 		neighbours.map! {|name|
 			"'"+name+"'"
@@ -144,7 +155,7 @@ puts "Disconnecting #{@db}...\n"
 		qm_index = @multitarget_qry.index('?')
 		@multitarget_qry[qm_index] = conf_val.to_s
 
-		open_conn(@server, @port, @db, 'intact', '1ntakt')
+		open_conn(@server, @port, @db, @dbuser, @dbpasswd)
 
 		row_count = 0
 
@@ -153,7 +164,7 @@ puts "Disconnecting #{@db}...\n"
 #		rows = sth.fetch_all
 		sth.fetch do |row|
 			row_count += 1
-			@interaction_net << Marshal.load(Marshal.dump(row))
+			@interaction_net << Marshal.load(Marshal.dump(row)) # this has to be so in order to get the object from another object :-S
 
 		end
 		sth.finish
@@ -162,6 +173,30 @@ puts "Disconnecting #{@db}...\n"
 		row_count
 	end
 
+
+# Search on interactions database for interactions involving target1 and target2 with a minimun confidence value
+# Then, the interactions retrieved are held in the interaction_net member, marshalled to be retrieved from
+# another 'script' (a patch, TBH, see Marshal in any ruby docs)
+# @param [String] target1 an interactor
+# @param [String] target2 another interactor
+# @param [Float] conf_val the confidence value threshold for filtering the interactions
+# @return [Integer] the number of interactions retrieved
+	def fetch_interactions_for (target1, target2, conf_val)
+		open_conn(@server, @port, @db, @dbuser, @dbpasswd)
+# puts "interactions query:\n#{@interactions_qry} for #{target1}, #{target2} and cv=#{conf_val}\n"
+		sth = @conn.execute(@interactions_qry, target1, target2, target1, target2, conf_val)
+		row_cont = 0
+
+		rs_clear()
+		sth.fetch do |row|
+			row_cont += 1
+			@interaction_net << Marshal.load(Marshal.dump(row))
+
+		end
+		sth.finish
+
+		row_cont
+	end
 
 
 

@@ -13,6 +13,10 @@ class APIProxy
 
 	CHEMBL_TARGET = 'https://www.ebi.ac.uk/chemblws/targets/uniprot/xxxx'
 	CHEMBL_TARGET_ACTIVITY = 'https://www.ebi.ac.uk/chemblws/targets/xxxx/bioactivities'
+	CHEMBL_COMPOUND_ACTIVITY = 'https://www.ebi.ac.uk/chemblws/compounds/xxxx/bioactivities'
+
+	CHEMBLID_TARGET_INFO = 'https://www.ebi.ac.uk/chemblws/targets/xxxx'
+	MAX_CHEMBL_ACTIVITIES = 250
 
 	OMIM_APIKEY = '7630D3726122E8FDCFD9465523A059918CA1258B'
 	OMIN_DISEASE_LOOKUP =
@@ -116,6 +120,26 @@ class APIProxy
 
 
 
+	# Gets information about a target based on a chemblid
+	# @param [String] chembl_id_target chemblId for a target
+	# @return [Hash] a hash structure with the Chembl info for the target
+	def get_chemblid_target_info (chembl_id_target)
+		url = CHEMBLID_TARGET_INFO.gsub(/xxxx/, chembl_id_target.upcase)+'.json'
+
+		response = LibUtil.request(url, {})
+		if response.code.to_i != 200
+			puts err_msg("method get_chemblid_target_info; param: #{chembl_id_target}")
+			nil
+
+		else
+		  chembl_target_hash = JSON.parse(response.body)
+			chembl_target_hash
+		end
+
+	end
+
+
+
 
 # Get the bioactivites for a target out of a uniprot accession.
 # It first gets the chemblId by requesting that information from chembl. After
@@ -149,7 +173,7 @@ class APIProxy
 				my_act[:assay_description] = activity['assay_description']
 
 				activities << my_act
-				if activity_count == 200
+				if activity_count == MAX_CHEMBL_ACTIVITIES
 					break;
 				else
 					activity_count = activity_count + 1
@@ -165,6 +189,83 @@ class APIProxy
 			res_hash
 		end
 	end
+
+
+
+	# Get the activities where a compuound is involved. Contains a target_chemblid
+	# useful to see a target the assay revealed
+	# @param [String] chembl_cmpd_id the id for the compound
+	# @return [Array] an array with the activities the compound is involved in
+	def get_compound_activities(chembl_cmpd_id)
+
+		url = CHEMBL_COMPOUND_ACTIVITY.gsub(/xxxx/, chembl_cmpd_id)+".json"
+		response = LibUtil.request(url, {})
+		if response.code.to_i != 200
+			puts err_msg("method get_compund_activities; param: #{chembl_cmpd_id}")
+			nil
+
+		else
+			# acts_hash = Hash.from_xml(response.body)
+			acts_hash = JSON.parse(response.body)
+			res_hash = Hash.new
+			activities = Array.new
+			activity_count = 0
+			organisms = Array.new
+			acts_hash['bioactivities'].each { |activity|
+				# first, check if the entry is an organism and is in the organisms array
+				isOrganism = false
+				accessions = nil
+				organisms.each { |organism|
+					if organism[:chembl_id] == activity['target_chemblid']
+						isOrganism == true
+						break;
+					end
+				}
+				# if not in organisms array, request to see if it is an organism
+				# add to organisms and set isOrganism true
+				if isOrganism == false
+					json_obj = get_chemblid_target_info(activity['target_chemblid'])
+					type = json_obj['target']['targetType']
+					if type.downcase == 'organism'
+						organism_hash = {:name => json_obj['target']['preferredName'],
+														 :chembl_id => json_obj['target']['chemblId']}
+						organisms << organism_hash
+						isOrganism = true
+					else
+						isOrganism = false
+						accessions = json_obj['target']['proteinAccession']
+					end
+				end
+
+				if isOrganism == false
+					my_act = {'target_chemblid' => activity['target_chemblid']}
+					my_act['bioactivity_type'] = activity['bioactivity_type']
+					my_act['assay_chemblid'] = activity['assay_chemblid']
+					my_act['assay_type'] = activity['assay_type']
+					my_act['assay_description'] = activity['assay_description']
+					my_act['target_confidence'] = activity['target_confidence']
+					my_act['target_accessions'] = accessions # comma-separated accessions
+
+					activities << my_act
+					if activity_count == MAX_CHEMBL_ACTIVITIES
+						break;
+					else
+						activity_count = activity_count + 1
+					end
+				end
+			} # EO bioactivities loop
+
+			res_hash['chemblid'] = chembl_cmpd_id
+#			res_hash[:pref_name] = chembl_entry['target']['preferredName']
+#			res_hash[:description] = chembl_entry['target']['description']
+			res_hash['activities'] = activities
+
+			res_hash
+		end
+
+	end
+
+
 # EO BIOACTIVITIES (PHARMA-COMPOUND ACTIVITIES, CHEMBL) ########################
 
 

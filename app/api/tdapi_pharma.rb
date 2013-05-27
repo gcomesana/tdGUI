@@ -156,6 +156,17 @@ module TargetDossierPharmaApi
 		end
 
 
+		desc 'Gets activities for a compound out of its chemblId'
+		params do
+			requires :chembl_id, :type => String, :regexp => /CHEMBL\d+/, :desc => 'A Chembl id'
+			optional :callback, :type => String, :desc => 'A callback function for JSONP requests'
+		end
+		get '/compound/activities/:chembl_id' do
+			resp = @proxy.get_compound_activities(params[:chembl_id])
+
+			resp
+		end
+
 	end # PharmaAPI class
 
 end

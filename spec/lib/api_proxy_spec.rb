@@ -163,6 +163,43 @@ describe APIProxy do
 	end
 
 
+	it "should get information about a target out of a chemblId, resulting an organism" do
+		chembl_id = 'chembl372'
+
+		resp = @apiproxy.get_chemblid_target_info(chembl_id)
+		resp.should_not be_nil
+		resp.should be_kind_of(Hash)
+		resp['target']['targetType'].downcase.should be == 'organism'
+		resp['target']['chemblId'].should be == chembl_id.upcase
+		resp['target']['proteinAccession'].downcase.should be == 'unspecified'
+	end
+
+
+	it "should get information about a target out of a chemblId, resulting a protein" do
+		chembl_id = 'CHEMBL2093864'
+
+		resp = @apiproxy.get_chemblid_target_info(chembl_id)
+		resp.should_not be_nil
+		resp.should be_kind_of(Hash)
+#		resp['target']['targetType'].downcase.should be != 'organism'
+		resp['target']['chemblId'].should be == chembl_id.upcase
+		(resp['target']['proteinAccession'] =~ /[A-Z]\d{5}/).should_not be_nil
+	end
+
+
+
+	it "should get a set of activitis for a compound out of a chemblId for a compound" do
+		chembl_id = 'CHEMBL1'
+
+		resp = @apiproxy.get_compound_activities(chembl_id)
+		resp.should_not be_nil
+		resp.should be_kind_of(Hash)
+		resp['activities'].should be_kind_of(Array)
+		resp['activities'].each {|activ|
+			activ['ingredient_cmpd_chemblid'].should be == chembl_id
+		}
+
+	end
 
 
 =begin
@@ -178,6 +215,7 @@ describe APIProxy do
 
 	end
 =end
+
 
 	it "should get a ruby hash from a OMIM number for a disease" do
 		mim_number = '600807'

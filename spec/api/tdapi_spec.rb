@@ -14,7 +14,7 @@ describe TargetDossierApi do
 	end
 
 
-	describe "Uniprot API" do
+	# describe "Uniprot API" do
 		it "/api/status.json should return the simplest json possible on request" do
 			get "#{@api_prefix}/status.json?param_test=thisisaparamTest"
 
@@ -75,6 +75,7 @@ describe TargetDossierApi do
 
 		it "#{@api_prefix}/gene/lookup.json?term=<term> should return a list of entries for combos with matching genes" do
 			mock_term = 'breast'
+			mock_term = 'polymerase'
 			get "#{@api_prefix}/gene/lookup.json?term=#{mock_term}"
 
 			response.status.should == 200
@@ -135,10 +136,10 @@ describe TargetDossierApi do
 			xmlDoc.should_not be_nil
 
 		end
-	end
+	# end
 
 
-	describe "OPS API" do
+	# describe "OPS API" do
 
 		it "lookup should get a list of entries from a term" do
 			lookup_concept = 'protein'
@@ -191,6 +192,6 @@ describe TargetDossierApi do
 			parse_resp['pref_label'].should_not be_nil
 		end
 =end
-	end
+	# end
 
 end

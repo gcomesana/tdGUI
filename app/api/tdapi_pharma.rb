@@ -127,6 +127,30 @@ module TargetDossierPharmaApi
 		end
 
 
+		desc 'Gets a list of diseases a gene is involved in'
+		params do
+			requires :ident, :type => String, :desc => 'A gene symbol'
+		end
+		get '/gene/diseases' do
+			resp = @proxy.swissvar_genes4disease(params[:ident])
+
+			resp
+		end
+
+
+
+		desc 'Gets a list of diseases a protein is involved in'
+		params do
+			requires :accession, :type => String, :regexp => /[A-Z][A-Z0-9]{5}/, :desc => 'An Uniprot accession'
+		end
+		get '/target/diseases' do
+			resp = @proxy.swissvar_genes4disease(params[:accession])
+
+			resp
+		end
+
+
+
 		desc 'Gets a list of compounds based on a search term'
 		params do
 			requires :term, :type => String, :desc => 'A term to lookup for compounds'

@@ -326,6 +326,16 @@ module OpsEndpointsProxy
 				url = url + "&uri=#{esc_uri}"
 			end
 
+			if opts[:q].nil? == false
+				query_term_encoded = CGI::unescape(opts[:q]) == opts[:q]
+				escaped_qry = query_term_encoded ? CGI::escape(opts[:q]): opts[:q]
+				url = url + "&q=#{escaped_qry}"
+
+			elsif opts[:query].nil? == false
+				query_term_encoded = CGI::unescape(opts[:query]) == opts[:query]
+				escaped_qry = query_term_encoded ? CGI::escape(opts[:query]): opts[:query]
+				url = url + "&q=#{escaped_qry}"
+			end
 
 			if the_url.index('_format').nil?
 				url = url + "&_format=#{opts[:format].nil? ? 'json': opts[:format]}"

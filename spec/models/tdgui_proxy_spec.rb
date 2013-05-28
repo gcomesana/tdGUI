@@ -206,6 +206,7 @@ puts "target ids: #{target_str}\n\n"
 
 	it "gene_lookup should return an array of 25 fomatting objects after looking up uniprot" do
 		mock_term = 'lung'
+		mock_term = 'polymerase'
 
 		td_proxy = TdguiProxy.new
 		res = td_proxy.gene_lookup(mock_term)

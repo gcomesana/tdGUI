@@ -51,6 +51,8 @@ describe TargetDossierApi do
 	describe "Compounds issues" do
 		it "/pharma/compound/lookup.json should return a list of compounds out of term" do
 			mock_term = 'etha'
+			mock_term = 'penicillin'
+			mock_term = 'Prednisolone'
 			get "#{@api_prefix}/compound/lookup.json?term=#{mock_term}"
 
 			response.status.should == 200

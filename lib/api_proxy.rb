@@ -18,6 +18,8 @@ class APIProxy
 	CHEMBLID_TARGET_INFO = 'https://www.ebi.ac.uk/chemblws/targets/xxxx'
 	MAX_CHEMBL_ACTIVITIES = 250
 
+	SWISS_VAR_URL = 'http://swissvar.expasy.org/cgi-bin/swissvar/result?format=tab&global_textfield=xxxx'
+
 	OMIM_APIKEY = '7630D3726122E8FDCFD9465523A059918CA1258B'
 	OMIN_DISEASE_LOOKUP =
 		'http://api.omim.org/api/entry/search?search=xxxx&start=0&limit=10&format=json&apiKey='
@@ -329,6 +331,7 @@ class APIProxy
 			entry_list = Array.new
 			entries.each { |entry|
 				ids = entry['geneSymbols'].split(',')
+				ids = ids.map {|id| id.strip }
 				name = entry['geneName']
 				chromo = {} # not filling by 03.2013, but ready for future filling
 				phenotypes = Array.new
@@ -353,7 +356,7 @@ class APIProxy
 				entry_list << this_entry
 			}
 
-			{:omim => {:query_term => disease, :phenotype_list => entry_list}}
+			{:omim => {:query_term => CGI::unescape(disease), :phenotype_list => entry_list}}
 		end
 	end # EO get_omim4disease method
 
@@ -436,6 +439,45 @@ class APIProxy
 			resp_hash
 		end
 	end
+
+
+	# Make a request to swissvar to get a tab result with, among other things,
+	# diseases for the uniprot accession or gene symbol/name related
+	# @param [String] an_id is the idenfier for the gene or protein. It should
+	# be an uniprot accession (P03372) or equivalent gene name (ESR1)
+	# @return [Array] with the results with the found diseases
+	def swissvar_genes4disease (an_id)
+		url = SWISS_VAR_URL.gsub(/xxxx/, an_id)
+
+		response = LibUtil.request(url, {})
+		if response.code.to_i != 200
+			puts err_msg("method swissvar_genes4disease; param: #{disease}")
+			nil
+
+		else
+			resp_hash = Hash.new
+			lines = response.body.split(/\n/)
+			lines.delete_at(0) # remove the header line
+			resp_hash = {'query_term' => CGI::unescape(an_id)}
+			if lines.length == 0
+				resp_hash['diseases'] = []
+				return resp_hash
+			end
+
+			resp_hash['accession'] = lines[0].split(/\t/)[0]
+			resp_hash['entry_name'] = lines[0].split(/\t/)[1]
+			diseases = Array.new
+			lines.each { |line|
+				parts = line.split(/\t/)
+				if parts[2].nil? == false && parts[2] != '' && diseases.index(parts[2]).nil?
+					diseases << parts[2]
+				end
+			}
+			resp_hash['diseases'] = diseases
+
+			resp_hash
+		end
+	end # EO swissvar....
 # EO OMIM RELATED STUFF #######################################################
 
 
@@ -478,7 +520,7 @@ class APIProxy
 		lines = content.split(/\n/)
 		lines.delete_at(0) # remove the header line
 
-		parsed_hash = {:query_term => process_term}
+		parsed_hash = {:query_term => CGI::unescape(process_term)}
 		targets = Array.new
 		lines.each { |line|
 			props = line.split(/\t/)

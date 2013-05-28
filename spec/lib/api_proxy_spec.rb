@@ -230,4 +230,20 @@ describe APIProxy do
 		resp['genes'][1]['mim_number'].should_not be_nil
 
 	end
+
+
+
+	it "should return a list with two diseases from a gene symbol" do
+		gen_symbol = 'ESR1'
+		resp = @apiproxy.swissvar_genes4disease(gen_symbol)
+
+		resp.should_not be_nil
+		resp.should be_kind_of(Hash)
+		resp['query_term'].should be == gen_symbol
+		resp['accession'].should match(/[A-Z][A-Z0-9]{5}/)
+
+		resp['diseases'].should be_kind_of(Array)
+		resp['diseases'].should_not be_nil
+		resp['diseases'].should have_at_least(1).items
+	end
 end

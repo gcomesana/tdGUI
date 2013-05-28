@@ -206,18 +206,22 @@ class LibUtil
 				first = false
 				next
 			end
-			hash = Hash.new
 
+			hash = Hash.new
 			hash[:match] = ''
 			hash[:pref_url] = ''
 			hash[:pref_label] = ''
 			hash[:uuid] = ''
 
 			fields = line.split(/\t/)
+			# This is a guard to avoid entries without gene symbols!!!
+			next if fields[4].nil?
+
 			hash[:match] = fields[1]
 			hash[:match].gsub!(/(#{term})/i, '<b>\1</b>')
 			# hash[:match].gsub!(/<\/em>/, '</b>')
 			hash[:pref_url] = 'http://www.uniprot.org/uniprot/'+fields[0]
+			# puts "f4: #{fields[4]} :: f1: #{fields[1]}"
 			hash[:pref_label] = '(' + fields[4] + ') ' + fields[1]
 			hash[:uuid] = fields[0] + '|' + fields[4]
 

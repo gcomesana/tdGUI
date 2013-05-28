@@ -66,14 +66,15 @@ class OpsWikiApiCall
 	# @substring [String] the string to query
 	# @options [Hash] a hash with the parameters to configure the search (like limit)
 	def search_by_tag(tag_uuid, substring, options = {})
+		substring = CGI::escape(substring.strip)
 		url = OPS_WIKI_API_BY_TAG_URL.gsub(/xxxx/, substring)
 
 		if options[:limit].nil? then
 			options[:limit] = @limit
 		end
 
-		options[:q] = substring.strip   # + '*'
-		options[:query] = substring.strip
+		options[:q] = substring   # + '*'
+		options[:query] = substring
 		options[:uuid] = tag_uuid
 		options[:_format] = 'json'
 

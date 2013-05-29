@@ -100,7 +100,7 @@ module TargetDossierPharmaApi
 
 
 
-		desc 'Gets genotype map for a disease from its OMIM number'
+		desc 'Gets genotype map (a list of genes found involved for a disease) from the OMIM number for the disease'
 		params do
 			requires :mim_number, :type => String, :desc => 'A OMIM number for a disease or trait'
 			optional :callback, :type => String, :desc => 'A callback function for JSONP requests'

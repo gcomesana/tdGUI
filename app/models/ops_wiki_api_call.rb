@@ -187,45 +187,38 @@ private
 	end
 
 
-
+	# Format the result to yield the right json for the client application
+	# KEEP IN MIND the results parameter can be either an Array or a Hash if the
+	# result is only one element...
+	# @param results, the results returned by OPS API
+	# @return [Array]
 	def format_result (results)
 		if results.nil?
 			@parsed_results = []
 			return
 		end
 
-		results.each do |concept|
+		if results.is_a?(Hash)
 			result = Hash.new
-			result[:match] = concept['match']
+			result[:match] = results['match']
 			result[:match].gsub!(/<em>/, '<b>')
 			result[:match].gsub!(/<\/em>/, '</b>')
-			# concept uuid
+
 			semanticTagHash = {}
-			if concept['semanticTag'].is_a?(Array)
-				semanticTagHash = concept['semanticTag'][0]
+			if results['semanticTag'].is_a?(Array)
+				semanticTagHash = results['semanticTag'][0]
 			else
-				semanticTagHash = concept['semanticTag']
+				semanticTagHash = results['semanticTag']
 			end
 
-			concept_uuid = concept['_about'][concept['_about'].rindex('/')+1..concept['_about'].length]
+			concept_uuid = results['_about'][results['_about'].rindex('/')+1..results['_about'].length]
 			result[:uuid] = concept_uuid
-			# construct concept uri to LDC
-			# result[:ops_uri] = "http://ops.conceptwiki.org/wiki/#/concept/#{(concept['uuid'] ? concept['uuid']: '')}/view"
 
-			# urls
-=begin
-			if concept['urls'].nil? then
-				next
-			else
-#				result[:define_url] = 'http://staging.conceptwiki.org/wiki/#/concept/' + concept['uuid'] + '/view'
-				result[:pref_url] = 'http://ops.conceptwiki.org/wiki/#/concept/' + concept['uuid'] + '/view'
-			end
-=end
 			result[:pref_url] = ""
-			if concept['_about'].nil? == false
-				result[:pref_url] = concept['_about']
+			if results['_about'].nil? == false
+				result[:pref_url] = results['_about']
 			else
-				concept['exactMatch'].each do |elem|
+				results['exactMatch'].each do |elem|
 					if elem['matchType'] == 'PREFERRED'
 						result[:pref_url] = elem['url']
 					end
@@ -234,45 +227,90 @@ private
 
 			# labels
 			# result[:pref_label] = semanticTagHash['prefLabel']
-			result[:pref_label] = concept['prefLabel_en']
+			result[:pref_label] = results['prefLabel_en']
 
 			alt_labels = Array.new
-			if concept['altLabel'].nil? == false and concept['altLabel'].is_a?(Array)
-				alt_labels << concept['altLabel']
+			if results['altLabel'].nil? == false and results['altLabel'].is_a?(Array)
+				alt_labels << results['altLabel']
 				alt_labels.flatten!
-=begin
-				concept['altLabel'].each do |label|
-					if not label['language']['code'] == 'en' then # only use english labels
-						next # we skip all non english labels
-					end
-					if result[:pref_label].nil? then
-						result[:pref_label] = label['text'] # In case there is no preferred label we use the first one
-					end
-					if label['type'] == "PREFERRED"
-						result[:pref_label] = label['text']
-					end
-					if label['type'] == "ALTERNATIVE"
-						#this line causes errors if the submitted string does not compile as a regex
-						#why are we returning html <b> tags to the UI anyway
-						#Can we not use javascript to do this regex work
-						alt_label = label['text'].gsub(Regexp.new(substring, true), "<b>#{substring}</b>")
-						alt_labels.push(alt_label)
-					end
-				end
-=end
+
 			else
-				alt_labels << concept['altLabel'] if concept['altLabel'].nil? == false
+				alt_labels << results['altLabel'] if results['altLabel'].nil? == false
 			end
 			result[:alt_labels] = alt_labels.join('; ') if alt_labels.length > 0
-
-
-			#tags
-## 			tag = concept['tags'].first
-			#			result[:tag_uuid] = tag['uuid']
-## 			result[:concept_type_tags] = tag['labels'].first['text']
 			@parsed_results.push(result)
 
-		end
+		else
+			results.each do |concept|
+				result = Hash.new
+				result[:match] = concept['match']
+				result[:match].gsub!(/<em>/, '<b>')
+				result[:match].gsub!(/<\/em>/, '</b>')
+				# concept uuid
+				semanticTagHash = {}
+				if concept['semanticTag'].is_a?(Array)
+					semanticTagHash = concept['semanticTag'][0]
+				else
+					semanticTagHash = concept['semanticTag']
+				end
+
+				concept_uuid = concept['_about'][concept['_about'].rindex('/')+1..concept['_about'].length]
+				result[:uuid] = concept_uuid
+
+
+				result[:pref_url] = ""
+				if concept['_about'].nil? == false
+					result[:pref_url] = concept['_about']
+				else
+					concept['exactMatch'].each do |elem|
+						if elem['matchType'] == 'PREFERRED'
+							result[:pref_url] = elem['url']
+						end
+					end
+				end
+
+				# labels
+				# result[:pref_label] = semanticTagHash['prefLabel']
+				result[:pref_label] = concept['prefLabel_en']
+
+				alt_labels = Array.new
+				if concept['altLabel'].nil? == false and concept['altLabel'].is_a?(Array)
+					alt_labels << concept['altLabel']
+					alt_labels.flatten!
+=begin
+					concept['altLabel'].each do |label|
+						if not label['language']['code'] == 'en' then # only use english labels
+							next # we skip all non english labels
+						end
+						if result[:pref_label].nil? then
+							result[:pref_label] = label['text'] # In case there is no preferred label we use the first one
+						end
+						if label['type'] == "PREFERRED"
+							result[:pref_label] = label['text']
+						end
+						if label['type'] == "ALTERNATIVE"
+							#this line causes errors if the submitted string does not compile as a regex
+							#why are we returning html <b> tags to the UI anyway
+							#Can we not use javascript to do this regex work
+							alt_label = label['text'].gsub(Regexp.new(substring, true), "<b>#{substring}</b>")
+							alt_labels.push(alt_label)
+						end
+					end
+=end
+				else
+					alt_labels << concept['altLabel'] if concept['altLabel'].nil? == false
+				end
+				result[:alt_labels] = alt_labels.join('; ') if alt_labels.length > 0
+
+				#tags
+	## 			tag = concept['tags'].first
+				#			result[:tag_uuid] = tag['uuid']
+	## 			result[:concept_type_tags] = tag['labels'].first['text']
+				@parsed_results.push(result)
+			end # EO results.each
+
+		end # EO if results.isa...
+
 		@parsed_results
 	end # EO format_results
 

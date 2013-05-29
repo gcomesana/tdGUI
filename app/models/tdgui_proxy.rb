@@ -24,6 +24,7 @@ class TdguiProxy
 	OLD_DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch/uniprotkb/xxxx/uniprotxml'
 	UNIPROT_BY_NAME = 'http://www.uniprot.org/uniprot/?query=name:"xxxx"+AND+reviewed:yes&limit=25&offset=0&sort=score&format=xml'
 	UNIPROT_BY_NAME_HUMAN = 'http://www.uniprot.org/uniprot/?query=name:"xxxx"+AND+organism:"Human+[9606]"+AND+reviewed:yes&limit=25&offset=0&sort=score&format=xml'
+	UNIPROT_BY_NAME_QRY_HUMAN = 'http://www.uniprot.org/uniprot/?query="xxxx"+AND+organism:"Human+[9606]"+AND+reviewed:yes&limit=25&offset=0&sort=score&format=xml'
 
 	UNIPROT_BY_GENE = 'http://www.uniprot.org/uniprot/?query=gene:xxxx+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
 
@@ -262,6 +263,10 @@ puts "the url: #{url}"
 		results = LibUtil.request(url_human, options)
 		if results.body == ''
 			results = LibUtil.request(url, options)
+			if results.code.to_i != 200 || results.body == ''
+				url = UNIPROT_BY_NAME_QRY_HUMAN.gsub(/xxxx/, name)
+				results = LibUtil.request(url, options) # this is a more relaxed search query
+			end
 		end
 
 		if results.code.to_i != 200
@@ -269,6 +274,7 @@ puts "the url: #{url}"
 			return nil
 
 		else
+
 			xmldoc = Document.new results.body
 			entries = xmldoc.elements.collect('uniprot/entry') { |ent| ent }
 			first_entry = entries[0]

@@ -24,7 +24,7 @@ class APIProxy
 	OMIN_DISEASE_LOOKUP =
 		'http://api.omim.org/api/entry/search?search=xxxx&start=0&limit=10&format=json&apiKey='
 	# 'http://api.omim.org/api/entry/search?search=avian+flu&start=0&limit=20&format=json&apiKey='
-	OMIM_ENTRY_INFO = 'http://api.europe.omim.org/api/entry?mimNumber=xxxx&include=geneMap&format=json&apiKey='
+	OMIM_ENTRY_INFO = 'http://api.europe.omim.org/api/entry?mimNumber=xxxx&include=geneMap&include=externalLinks&format=json&apiKey='
 
 	OMIM_ENTRY_SEARCH = 'http://api.omim.org/api/entry/search?search=xxxx&filter=&fields=&retrieve=&start=0&limit=10&sort=&operator=&include=geneMap&format=xml&apiKey='
 	OMIM_GENEMAP_SEARCH = 'http://api.omim.org/api/geneMap/search?search=xxxx&filter=&fields=&start=0&limit=&sort=&operator=&format=xml&apiKey='
@@ -420,6 +420,7 @@ class APIProxy
 			entry_hash = json_resp['omim']['entryList'][0]['entry']
 
 			resp_hash['label'] = entry_hash['titles']['preferredTitle']
+			# genes
 			resp_hash['genes'] = Array.new
 			if entry_hash['phenotypeMapList'].nil? == false
 				entry_hash['phenotypeMapList'].each { |phenoMap|
@@ -434,6 +435,13 @@ class APIProxy
 							'gene_symbol' => entry_hash['geneMap']['geneSymbols']}
 
 				resp_hash['genes'] << gene_hash
+			end
+
+			# adding uniprot accessions entries
+			if entry_hash['externalLinks'].nil? == false
+				accs_list = entry_hash['externalLinks']['swissProtIDs']
+				accs_list = accs_list.nil? ? []: accs_list
+				resp_hash['accessions'] = accs_list
 			end
 
 			resp_hash

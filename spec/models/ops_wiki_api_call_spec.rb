@@ -28,8 +28,8 @@ describe ConceptWikiApiCall do
 			:uuid => '07a84994-e464-4bbf-812a-a4b96fa3d197',
 			:limit => 20,
 			:offset => 0,
-			:query => 'etha',
-			:q => 'etha',
+			:query => 'nitroglycerine',
+			:q => 'nitroglycerine',
 			:format => 'json'
 		}
 
@@ -78,7 +78,11 @@ describe ConceptWikiApiCall do
 	it "make a lookup for compounds" do
 		res = @ops_wiki_api_call.search_by_tag(@opts_compound[:uuid], @opts_compound[:query], {})
 		res.should be_kind_of(Array)
-		res.length.should be > 10
+
+		res.each {|result|
+			result.should be_kind_of(Hash)
+			result[:pref_url].should_not be_nil
+		}
 	end
 
 

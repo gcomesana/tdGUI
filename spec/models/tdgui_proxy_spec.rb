@@ -85,6 +85,8 @@ puts "Fucking end\n\n"
 		proxy.should_not be_nil
 		target_uuid = 'd76e4a78-c06c-416e-a0fc-c073a69000d5'
 		target_label = 'Breast cancer type 2 susceptibility protein'
+		target_uuid = 'dac58899-7b85-4374-87b5-dd563236276b'
+		target_label = 'Estrogen receptor 2'
 
 #		target_label = 'Deleted in bladder cancer protein 1'
 		target_uuid = nil

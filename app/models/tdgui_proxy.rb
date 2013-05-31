@@ -22,9 +22,10 @@ class TdguiProxy
 
 
 	OLD_DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch/uniprotkb/xxxx/uniprotxml'
-	UNIPROT_BY_NAME = 'http://www.uniprot.org/uniprot/?query=name:"xxxx"+AND+reviewed:yes&limit=25&offset=0&sort=score&format=xml'
+	UNIPROT_BY_NAME = 'http://www.uniprot.org/uniprot/?query="xxxx"+AND+reviewed:yes&limit=25&offset=0&sort=score&format=xml'
 	UNIPROT_BY_NAME_HUMAN = 'http://www.uniprot.org/uniprot/?query=name:"xxxx"+AND+organism:"Human+[9606]"+AND+reviewed:yes&limit=25&offset=0&sort=score&format=xml'
 	UNIPROT_BY_NAME_QRY_HUMAN = 'http://www.uniprot.org/uniprot/?query="xxxx"+AND+organism:"Human+[9606]"+AND+reviewed:yes&limit=25&offset=0&sort=score&format=xml'
+	UNIPROT_QUERY_HUMAN = 'http://www.uniprot.org/uniprot/?query=xxxx+AND+organism:%22Human+[9606]%22+AND+reviewed:yes&limit=25&offset=0&sort=score&format=xml'
 
 	UNIPROT_BY_GENE = 'http://www.uniprot.org/uniprot/?query=gene:xxxx+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
 
@@ -232,13 +233,12 @@ puts "get_multiple_entries: #{entries}"
 # @param [String] name a name of a target (no accession, just a name)
 # @param [String uuid the uuid for the target as returned by conceptWiki]
 # @return [Hash] a hash object filled with uniprot properties
-# TODO it should be adapted to ops.conceptwiki.org/.../get?
-# TODO then uniprot again to get the properties!!
 	def get_uniprot_by_name (name, uuid)
 		@uniprot_name = name
 		concept_hash = nil
 		url = nil
 
+		name = CGI::escape(name) == name ? name: CGI::escape(name)
 		if uuid.nil? == false && uuid.empty? == false # we have uuid
 			concept_hash = get_target_by_uuid(uuid)
 			if concept_hash[:uniprot_url] != ''
@@ -265,7 +265,13 @@ puts "the url: #{url}"
 			results = LibUtil.request(url, options)
 			if results.code.to_i != 200 || results.body == ''
 				url = UNIPROT_BY_NAME_QRY_HUMAN.gsub(/xxxx/, name)
+				# puts "less strict url: #{url}"
 				results = LibUtil.request(url, options) # this is a more relaxed search query
+				if results.code.to_i != 200 || results.body == ''
+					url = UNIPROT_QUERY_HUMAN.gsub(/xxxx/, name)
+					puts "last url: #{url}"
+					results = LibUtil.request(url, options)
+				end
 			end
 		end
 

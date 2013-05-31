@@ -222,7 +222,8 @@ class LibUtil
 			# hash[:match].gsub!(/<\/em>/, '</b>')
 			hash[:pref_url] = 'http://www.uniprot.org/uniprot/'+fields[0]
 			# puts "f4: #{fields[4]} :: f1: #{fields[1]}"
-			hash[:pref_label] = '(' + fields[4] + ') ' + fields[1]
+			commaGenes = fields[4].gsub(/ /, ', ')
+			hash[:pref_label] = '(' + commaGenes + ') ' + fields[1]
 			hash[:uuid] = fields[0] + '|' + fields[4]
 
 			result << hash
@@ -253,16 +254,21 @@ class LibUtil
 		res = nil
 		if url.index('https').nil?
 			req = Net::HTTP::Get.new(my_url.request_uri)
-			res = Net::HTTP.start(my_url.host, my_url.port) { |http|
-				http.request(req)
-			}
+			begin
+				res = Net::HTTP.start(my_url.host, my_url.port) { |http|
+					http.request(req)
+				}
+			end while res.nil?
+
 		else
 			http = Net::HTTP.new(my_url.host, my_url.port)
 			http.use_ssl = true
 			http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 			request = Net::HTTP::Get.new(my_url.request_uri)
-			res = http.request(request)
+			begin
+				res = http.request(request)
+			end while res.nil?
 		end
 
 

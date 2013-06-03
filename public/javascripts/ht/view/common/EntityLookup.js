@@ -90,9 +90,10 @@ Ext.define('HT.view.common.EntityLookup', {
 
 		switch (myEntity) {
 			case 'protein':
-				remoteUrl = 'http://localhost:3003/ops_wiki_api_calls/protein_lookup.jsonp';
+				// remoteUrl = 'http://localhost:3003/ops_wiki_api_calls/protein_lookup.jsonp';
+				remoteUrl = 'http://localhost:3003/api/target/lookup.jsonp';
 				comboStore.storeId = 'comboStore-target';
-				queryParam = 'query';
+				queryParam = 'term';
 				break;
 
 			case 'compound':
@@ -116,8 +117,7 @@ Ext.define('HT.view.common.EntityLookup', {
 				break;
 
 			default:
-				// remoteUrl = 'http://localhost:3003/ops_wiki_api_calls/protein_lookup.jsonp';
-				remoteUrl = 'http://localhost:3003/api/target/lookup.jsonp';
+				remoteUrl = 'http://localhost:3003/ops_wiki_api_calls/protein_lookup.jsonp';
 				comboStore.storeId = 'comboStore-target';
 				queryParam = 'query';
 				break;
@@ -130,15 +130,16 @@ Ext.define('HT.view.common.EntityLookup', {
 				type: 'json'
 			}
 		});
+		/*
 		comboStore.on('beforeload', function (store, op, evOpts) {
 			console.log('loading from: '+store.storeId);
 			console.log('using remote: '+store.getProxy().url);
 		});
-
+		*/
 
 		var comboLookup = Ext.create('HT.view.common.ComboLookupButton', {
 			metaInfo: this.getEntity(),
-			columnWidth: 0.8,
+			columnWidth: 0.7,
 			margin: '3 5 0 5',
 			btnText: this.getBtnText(),
 			// id: 'txtBtnId',
@@ -164,9 +165,9 @@ Ext.define('HT.view.common.EntityLookup', {
 			xtype: 'draw',
 			autoSize: false,
 			viewBox: false,
-			columnWidth: 0.2,
+			columnWidth: 0.3,
 			height: 40,
-			// width: 50,
+			width: 50,
 			style: {
 				// backgroundColor: 'lightgray',
 				paddingLeft: 10,

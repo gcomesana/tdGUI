@@ -212,31 +212,35 @@ class APIProxy
 			res_hash = Hash.new
 			activities = Array.new
 			activity_count = 0
-			organisms = Array.new
+			organisms = Hash.new
+			chembl_target_ids = Hash.new
 			acts_hash['bioactivities'].each { |activity|
 				# first, check if the entry is an organism and is in the organisms array
-				isOrganism = false
 				accessions = nil
-				organisms.each { |organism|
-					if organism[:chembl_id] == activity['target_chemblid']
-						isOrganism == true
-						break;
-					end
-				}
+				isOrganism = organisms[activity['target_chemblid']].nil? == false
+				isTarget = chembl_target_ids[activity['target_chemblid']].nil? == false
+
 				# if not in organisms array, request to see if it is an organism
 				# add to organisms and set isOrganism true
-				if isOrganism == false
+				if isOrganism == false && isTarget == false
+					# if chembl_target_ids.index(activity['target_chemblid']).nil?
+					#	chembl_target_ids << activity['target_chemblid']
 					json_obj = get_chemblid_target_info(activity['target_chemblid'])
 					type = json_obj['target']['targetType']
 					if type.downcase == 'organism'
 						organism_hash = {:name => json_obj['target']['preferredName'],
 														 :chembl_id => json_obj['target']['chemblId']}
-						organisms << organism_hash
+						organisms[activity['target_chemblid']] = organism_hash
 						isOrganism = true
 					else
 						isOrganism = false
 						accessions = json_obj['target']['proteinAccession']
+						chembl_target_ids[activity['target_chemblid']] = accessions
 					end
+				end
+
+				if isTarget
+					accessions = chembl_target_ids[activity['target_chemblid']]
 				end
 
 				if isOrganism == false

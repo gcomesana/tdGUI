@@ -27,7 +27,6 @@ Ext.define('HT.controller.Panels', {
 	],
 
 	init: function () {
-		console.info('HT.controller.Panels.init...');
 		this.control({
 			'imglist':{
 				render: this.onRenderImg
@@ -60,174 +59,193 @@ Ext.define('HT.controller.Panels', {
 	},
 
 	/**
-	 * Callback for the event when clicking a button in a textbox-btn component
-	 * contained in a entity-lookup widget
+	 * Callback for the event when clicking a button in a textbox-btn component.
+	 * contained in a entity-lookup widget. Main function is adding a node
 	 * @param comp, a textbox-btn widget
 	 * @param evOpts the event options like: {id, label, meta, value}
 	 */
 	onClickTextbox: function (comp, evOpts) {
-		console.log('Panels.onClickTextBox: got value '+evOpts.value+' for '+evOpts.meta);
+			console.log('Panels.onClickTextBox: got value '+evOpts.value+' for '+evOpts.meta);
 
 
-		var cytoscape = this.getCytoscape();
-		var vis = cytoscape.vis;
-		var entityWidget = comp.up();
-		var shape = entityWidget.getShape().type;
+			var cytoscape = this.getCytoscape();
+			var vis = cytoscape.vis;
+			var entityWidget = comp.up();
+			var shape = entityWidget.getShape().type;
 
-		var newId = vis.nodes().length+1;
-		var i = 1;
-		var existsNode = vis.node(newId);
-		while (existsNode != null) {
-			i++;
-			newId = vis.nodes().length+i;
-			existsNode = vis.node(newId);
-		}
+			var newId = vis.nodes().length+1;
+			var i = 1;
+			var existsNode = vis.node(newId);
+			while (existsNode != null) {
+				i++;
+				newId = vis.nodes().length+i;
+				existsNode = vis.node(newId);
+			}
 
-		// OUR NODE definition and the endpoint to get info on the selected 'thing'!!!
-		var nodeLabel = '';
-		var theUrl = '';
-		if (evOpts.meta == 'gene') {
-			var startIndex = evOpts.label.indexOf('(');
-			var endIndex = evOpts.label.indexOf(')');
-			nodeLabel = evOpts.label.substring(startIndex+1, endIndex);
-			var labelArray = nodeLabel.split(' ');
-			nodeLabel = labelArray.join(', ');
+			cytoscape.setLoading(true);
 
-			theUrl = "http://lady-qu.cnio.es:3003/api/target/by_gene.jsonp?genename=";
-			var genename = nodeLabel.split(',')[0].trim();
-			theUrl += genename;
-		}
-		else if (evOpts.meta == 'protein') {
-			nodeLabel = evOpts.label;
-			// Get Uniprot accession from label
-			theUrl = "http://lady-qu.cnio.es:3003/api/target/byname/"+evOpts.label+".jsonp";
-		}
+			// OUR NODE definition and the endpoint to get info on the selected 'thing'!!!
+			var nodeLabel = '';
+			var theUrl = '';
+			if (evOpts.meta == 'gene') {
+				var startIndex = evOpts.label.indexOf('(');
+				var endIndex = evOpts.label.indexOf(')');
+				nodeLabel = evOpts.label.substring(startIndex+1, endIndex);
+				// var labelArray = nodeLabel.split(' ');
+				// nodeLabel = labelArray.join(', ');
 
-		else if (evOpts.meta == 'compound') {
-			nodeLabel = evOpts.label;
-			theUrl = "http://lady-qu.cnio.es:3003/pharma/compound/info.jsonp?uri=http://www.conceptwiki.org/concept/"+evOpts.value;
-		}
+				theUrl = "http://lady-qu.cnio.es:3003/api/target/by_gene.jsonp?genename=";
+				var genename = nodeLabel.split(',')[0].trim();
+				theUrl += genename;
+			}
+			else if (evOpts.meta == 'protein') {
+				nodeLabel = evOpts.label;
+				// Get Uniprot accession from label
+				theUrl = "http://lady-qu.cnio.es:3003/api/target/byname/"+evOpts.label+".jsonp";
+			}
 
-		else if (evOpts.meta == 'disease') {
-			var endIndex = evOpts.label.lastIndexOf(';');
-			endIndex = endIndex == -1? evOpts.label.length: endIndex;
-			nodeLabel = evOpts.label.substring(0, endIndex);
-			theUrl = 'http://lady-qu.cnio.es:3003/pharma/disease/genemap.jsonp?mim_number='+evOpts.value;
-		}
-		else
-			theUrl = "http://lady-qu.cnio.es:3003/api/target/byname/"+evOpts.label+".jsonp";
+			else if (evOpts.meta == 'compound') {
+				nodeLabel = evOpts.label;
+				theUrl = "http://lady-qu.cnio.es:3003/pharma/compound/info.jsonp?uri=http://www.conceptwiki.org/concept/"+evOpts.value;
+			}
 
-		var nodeOpts = {
-			id: newId.toString(),
-			label: nodeLabel,
-			// entity: APP.lib.CytoscapeActions.shape2entity[shape], // this is a Number
-			// entity: entityWidget.shape2entity[shape],
-			entity: evOpts.meta,
-			payloadValue: evOpts.value
-		};
+			else if (evOpts.meta == 'disease') {
+				var endIndex = evOpts.label.lastIndexOf(';');
+				endIndex = endIndex == -1? evOpts.label.length: endIndex;
+				nodeLabel = evOpts.label.substring(0, endIndex);
+				theUrl = 'http://lady-qu.cnio.es:3003/pharma/disease/genemap.jsonp?mim_number='+evOpts.value;
+			}
+			else
+				theUrl = "http://lady-qu.cnio.es:3003/api/target/byname/"+evOpts.label+".jsonp";
+
+			var nodeOpts = {
+				id: newId.toString(),
+				label: nodeLabel,
+				// entity: HT.lib.CytoscapeActions.shape2entity[shape], // this is a Number
+				// entity: entityWidget.shape2entity[shape],
+				entity: evOpts.meta,
+				tags: evOpts.match,
+				payloadValue: evOpts.value
+			};
 
 
-		/*
-		 if (evOpts.meta == "protein")
-		 theUrl = "http://lady-qu.cnio.es:3003/api/target/byname/"+evOpts.label+".jsonp";
+			Ext.data.JsonP.request({
+				url: theUrl,
 
-		 else if (evOpts.meta == 'gene') {
-		 theUrl = "http://lady-qu.cnio.es:3003/api/target/by_gene.jsonp?genename=";
-		 var genename = nodeLabel.split(',')[0].trim();
-		 theUrl += genename;
-		 }
+				callback: function (opts, resp) {
+					console.log('ajax callback for uniprot info');
+				},
 
-		 else
-		 // APP.lib.CytoscapeActions.createNode(cytoscape.vis, nodeOpts);
-		 theUrl = "http://lady-qu.cnio.es:3003/api/target/byname/"+evOpts.label+".jsonp";
-		 */
-		Ext.data.JsonP.request({
-			url: theUrl,
+				failure: function (resp, opts) {
+					return false;
+				},
 
-			callback: function (opts, resp) {
-				console.log('ajax callback for uniprot info');
-			},
+				success: function (resp, opts) {
+					var jsonObj = resp;
 
-			failure: function (resp, opts) {
-				return false;
-			},
-
-			success: function (resp, opts) {
-				var jsonObj = resp;
-
-				var getNodeOpts = function () {
-					// nodeOpts, jsonObj is a free variable
-					var payload = {};
-					if (jsonObj.accessions !== undefined && jsonObj.accessions != null) { // uniprot response on proteinInfo
-						var uniprotUrl = jsonObj.accessions[0];
-						var initIdx = uniprotUrl.indexOf('>');
-						var endIdx = uniprotUrl.indexOf('<', initIdx);
-						var acc = uniprotUrl.substring(initIdx+1, endIdx);
-						var genes = null;
-						if (jsonObj.genes != null && jsonObj.genes.length > 0)
-							genes = jsonObj.genes.join(',');
-
-						payload = {
-							uuid: evOpts.value, // when gene, here will be literal -> acc|gene id list
-							acc: acc,
-							genes: genes,
-							chemblId: null,
-							chemSpiderId: null
+					var getNodeOpts = function () {
+						// nodeOpts, jsonObj is a free variable
+						var payload = {};
+						// for omim response, so far we check for presence of accessions and genes
+						//if ((jsonObj.genes != null && jsonObj.genes.length > 0) &&
+							//	(jsonObj.accessions !== undefined && jsonObj.accessions != null)) {
+						if (evOpts.meta == 'disease') {
+							// check the object to see whether or not include the list of genes
+							payload = {
+								uuid: jsonObj.genes[0].mim_number,
+								acc: jsonObj.accessions, // comma-separated list of accessions from OMIM
+								chemblId: null,
+								genes: jsonObj.genes[0].gene_symbol,
+								chemSpiderId: null
+							}
 						}
-					}
-					else if (jsonObj.genes != null && jsonObj.genes.length > 0) { // for omim response
-						// check the object to see whether or not include the list of genes
-						payload = {
-							uuid: jsonObj.genes[0].mim_number,
-							acc: jsonObj.genes[0].gene_symbol,
-							chemblId: null,
-							genes: null,
-							chemSpiderId: null
+
+						else if (jsonObj.accessions !== undefined && jsonObj.accessions != null) { // uniprot response on proteinInfo
+							var uniprotUrl = jsonObj.accessions[0];
+							var initIdx = uniprotUrl.indexOf('>');
+							var endIdx = uniprotUrl.indexOf('<', initIdx);
+							var acc = uniprotUrl.substring(initIdx+1, endIdx);
+							var genes = '';
+							if (jsonObj.genes != null && jsonObj.genes.length > 0)
+								genes = jsonObj.genes.join(',');
+
+							if (jsonObj.allgenes != null && jsonObj.allgenes.length > 0) {
+								Ext.each(jsonObj.allgenes, function (gene, index, allgenes) {
+									genes += gene.name + ",";
+								});
+								genes = genes.substring(0, genes.length-1);
+							}
+
+							payload = {
+								uuid: evOpts.value, // when gene, here will be literal -> acc|gene id list
+								acc: acc,
+								genes: genes,
+								chemblId: null,
+								chemSpiderId: null
+							}
 						}
+
+						// else if (jsonObj.result._about.match(/compound/) != null) { // compound info requested
+						else if (evOpts.meta.match(/compound/) != null) {
+							var conceptUri = jsonObj.result.primaryTopic._about;
+							var uuid = conceptUri.substring(conceptUri.lastIndexOf('/')+1, conceptUri.length);
+							var matches = jsonObj.result.primaryTopic.exactMatch;
+							var chemblId = null, chemSpiderId = null;
+							Ext.each(matches, function (entry, index, entries) {
+								if (entry._about) {
+									if (entry._about.indexOf('CHEMBL') != -1){
+										chemblId = entry._about.substring(entry._about.lastIndexOf('/')+1, entry._about.length);
+									}
+									if (entry._about.indexOf('chemspider') != -1) {
+										chemSpiderId = entry._about.substring(entry._about.lastIndexOf('/')+1, entry._about.length);
+									}
+								} // EO if entry._about
+							});
+
+							payload = {
+								uuid: uuid,
+								acc: null,
+								genes: null,
+								chemblId: chemblId,
+								chemSpiderId: chemSpiderId
+							}
+						}
+						nodeOpts.payloadValue = payload;
+					} // EO auxiliary conversion function
+
+					if (jsonObj != null)
+						getNodeOpts();
+					else
+						nodeOpts.label = nodeLabel;
+
+					var nodeOptsType = Object.prototype.toString.call(nodeOpts.payloadValue).match(/\s([a-zA-Z]+)/)[1];
+					if (nodeOptsType == 'Object') {
+						HT.lib.CytoscapeActions.createNode(cytoscape.vis, nodeOpts);
+						cytoscape.setLoading(false);
 					}
-					else if (jsonObj.result._about.match(/compound/) != null) { // compound info requested
-						var conceptUri = jsonObj.result.primaryTopic._about;
-						var uuid = conceptUri.substring(conceptUri.lastIndexOf('/')+1, conceptUri.length);
-						var matches = jsonObj.result.primaryTopic.exactMatch;
-						var chemblId = null, chemSpiderId = null;
-						Ext.each(matches, function (entry, index, entries) {
-							if (entry._about) {
-								if (entry._about.indexOf('CHEMBL') != -1){
-									chemblId = entry._about.substring(entry._about.lastIndexOf('/')+1, entry._about.length);
-								}
-								if (entry._about.indexOf('chemspider') != -1) {
-									chemSpiderId = entry._about.substring(entry._about.lastIndexOf('/')+1, entry._about.length);	
-								}
-							} // EO if entry._about
+					else {
+						Ext.Msg.show({
+							title: 'Warning!',
+							msg: "No data found for '"+nodeOpts.label+"'",
+							width: 300,
+							buttons: Ext.MessageBox.OK,
+							icon: Ext.MessageBox.WARNING,
+							fn: function (btnId, text, evOpts) {
+								cytoscape.setLoading(false);
+							}
 						});
-
-						payload = {
-							uuid: uuid,
-							acc: null,
-							genes: null,
-							chemblId: chemblId,
-							chemSpiderId: chemSpiderId
-						}
 					}
-					nodeOpts.payloadValue = payload;
-				} // EO auxiliary conversion function
-				
-				if (jsonObj != null)
-					getNodeOpts();
-				else
-					nodeOpts = nodeLabel;
 
-				HT.lib.CytoscapeActions.createNode(cytoscape.vis, nodeOpts);
-			} // EO success
+				} // EO success
 
-		}) // EO JSONP req
+			}) // EO JSONP req
 
-//		vis.addNode(20, 20, nodeOpts);
-	},
+		}, // EO onClickTextbox
+
 
 
 	onRunGraph: function (comp, evOpts) {
-		console.log('Panels.onRunGraph: got value '+evOpts.value+' for '+evOpts.meta);
+		// console.log('Panels.onRunGraph: got value '+evOpts.value+' for '+evOpts.meta);
 		var btnId = comp.getId();
 		var cytoscape = this.getCytoscape();
 		var vis = cytoscape.vis;
@@ -252,7 +270,7 @@ Ext.define('HT.controller.Panels', {
 			nodes = selNodeModel;
 			edges = selEdgeModel; // nm.data.edges;
 		}
-		// functionEvent = APP.lib.RuleFunctions.getFunctionFromAlias(alias)
+		// functionEvent = HT.lib.RuleFunctions.getFunctionFromAlias(alias)
 		// functionEvent.addListener('operationComplete', this.onOperationComplete, this)
 		HT.lib.CytoscapeActions.runGraph(vis, nodes, edges);
 	},

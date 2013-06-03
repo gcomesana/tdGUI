@@ -49,8 +49,18 @@ Ext.define('HT.lib.operation.InteractionsRuleOperation', {
 	 */
 	operation: function (edgeSrc, edgeTrg, threshold, funcObj) {
 		var me = this;
-		var accSrc = edgeSrc.payloadValue.acc;
-		var accTrg = edgeTrg.payloadValue.acc;
+		var payloadSrc = edgeSrc.payloadValue;
+		var payloadTrg = edgeTrg.payloadValue;
+		var accSrc = payloadSrc.acc[0]; // this is the list of uniprot urls
+		var accTrg = payloadTrg.acc[0]; // have to extract the accesssions
+		accSrc = accSrc.substring(accSrc.indexOf('>')+1, accSrc.lastIndexOf('<'));
+		accTrg = accTrg.substring(accTrg.indexOf('>')+1, accTrg.lastIndexOf('<'));
+
+		/*
+		var initIdx = uniprotUrl.indexOf('>');
+		var endIdx = uniprotUrl.indexOf('<', initIdx);
+		var acc = uniprotUrl.substring(initIdx+1, endIdx);
+		*/
 		var url = 'http://localhost:3003/api/interactions/'+accSrc+'/'+accTrg+'.jsonp';
 
 		Ext.data.JsonP.request({

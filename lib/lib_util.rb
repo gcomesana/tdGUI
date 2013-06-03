@@ -239,6 +239,7 @@ class LibUtil
 # @param [Hash] options parameters and other options for the request
 # @return [Net::HTTPResponse] the object response
 	def self.request(url, options)
+		time_ini = Time.now
 		my_url = URI.parse(URI.encode(url))
 
 		begin
@@ -270,7 +271,8 @@ class LibUtil
 				res = http.request(request)
 			end while res.nil?
 		end
-
+		time_end = Time.now
+		# puts "LibUtil for #{url} took: #{time_end-time_ini}"
 
 		#http_session = proxy.new(my_url.host, my_url.port)
 		#

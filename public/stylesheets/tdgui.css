@@ -374,6 +374,11 @@ sub {
 	border: none;
 }
 
+
+.img-app-logo {
+	top: 10px;
+}
+
 /* Interactions panel */
 .app-interactions-help-div {
 

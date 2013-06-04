@@ -78,6 +78,7 @@ class OpsApiCall
 			the_url = options[:uri] # it should be uniprot uri...
 		end
 
+		# puts "OpsApiCall.request for: #{the_url}"
 		response = OpsEndpointsProxy.make_request(the_url, options)
 
 # below would be EndpointsProxy.make_request ('proteinInfo', {protein_uri:...} )

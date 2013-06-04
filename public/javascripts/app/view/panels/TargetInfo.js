@@ -49,7 +49,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 	initComponent: function() {
 // set concept_uuid and uniprot_acc from
 // "http://www.conceptwiki.org/concept/ec79efff-65cb-45b1-a9f5-dddfc1c4025c,http://www.uniprot.org/uniprot/Q14596"
-    var qparams = this.queryParam.split(',')
+    var qparams = this.queryParam.split(',');
     this.uniprot_acc = qparams[1].substring(qparams[1].lastIndexOf('/')+1, qparams[1].length)
     this.concept_uuid = qparams[0].substring(qparams[0].lastIndexOf('/')+1, qparams[0].length)
 
@@ -228,7 +228,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
     var store = Ext.create ('TDGUI.store.lda.TargetStore');
     this.targetInfoStore = store;
 //		store.addListener('load', this.showData, this);
-    this.targetInfoStore.addListener('load', this.showData, this);
+    this.targetInfoStore.addListener('load', this.showData, this); // load is in TargetInfo controller:afterrender
 //    this.targetInfoStore.addListener('load', this.displayData, this);
 		this.callParent(arguments);
 	},
@@ -403,6 +403,8 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
    * @param successful
    */
   showData: function (store, records, successful) {
+  	var me = this;
+
     if (successful) {
       var td = store.first().data;
 
@@ -418,15 +420,56 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
       else {
         this.showMessage('No records found within OPS for this search');
       }
+      this.endLoading();
     }
     else {
-      this.showMessage('Server did not respond properly');
-    }
+    	// try uniprot_by_acc
+    	var url = 'http://localhost:3003/api/target/'+this.uniprot_acc+'.jsonp';
+    	Ext.data.JsonP.request({
+    		url: url,
 
+    		failure: function (resp, opts) {
+					me.showMessage ('Unable to get information for protein with accession '+me.uniprot_acc);
+					me.endLoading();
+				},
 
-    this.endLoading();
-//    this.up('TargetInfo').setLoading(false);
-//    var searchButton = Ext.ComponentQuery.query('#TargetByNameSubmit_id')[0].enable();
+				// In this case, we just check if the gene names match
+				success: function (resp, opts) {
+					var jsonObj = resp;
+
+					if (jsonObj == null)
+						me.showMessage ('Unable to get iformation for protein with accession '+me.uniprot_acc);
+					else {
+						var dp = me.down('#dp');
+		        var msg = me.down('#msg');
+		        msg.setVisible(false);
+		        // me.setValues(jsonObj);
+		        var pharmButton = me.down('#pharmTargetButton');
+		        pharmButton.disable();
+		        dp.setVisible(true);
+
+		        me.addSynonyms(jsonObj.genes);
+				    me.addOrganism(jsonObj.organismSciName);
+						me.addPDBImage(jsonObj.pdbimg);
+
+						var specFuncField = me.down('#specific_function');
+						specFuncField.setValue(jsonObj.function);
+						specFuncField.show();
+						specFuncField.setVisible(true);
+
+						var labelFuncField = me.down('#prefLabel');
+						labelFuncField.setValue(jsonObj.proteinFullName);
+						labelFuncField.show();
+						labelFuncField.setVisible(true);
+
+						me.endLoading();
+					}
+				} // EO success
+    	}); // EO jsonp request
+      
+    } // EO else
+//    this.endLoading();
+
   },
 
 
@@ -502,7 +545,12 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
    * @param {Array} synonyms
    */
 	addSynonyms: function(synonyms) {
-		var bits = synonyms.split('; ');
+		var bits;
+		if (Object.prototype.toString.call(synonyms).match(/\s([a-zA-Z]+)/) == 'String')
+			bits = synonyms.split('; ');
+		else
+			bits = synonyms;
+
 		var synonymsField = this.down('#synonyms');
 		var bodyEl = synonymsField.bodyEl;
 		var domElem = bodyEl.dom;
@@ -528,8 +576,8 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 	addPDBImage: function(pdbIdPage) {
 		//example http://www.pdb.org/pdb/explore/explore.do?structureId=1HOF
 		//        http://www.rcsb.org/pdb/images/1HOF_asr_r_250.jpg
-    if (pdbIdPage.length == 0)
-      return
+    if (pdbIdPage.length == 0 || pdbIdPage.indexOf('http') == -1)
+      return;
 
 		var stringURL = new String(pdbIdPage);
 		var img = this.down('#target_image');

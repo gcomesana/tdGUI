@@ -39,7 +39,7 @@ Ext.define('HT.lib.operation.GeneDiseaseOperation', {
 	},
 
 	/**
-	 * Get if the compound has any sort of relationship with the gene (target node)
+	 * Sets if the gene is related to the disease
 	 * @param {Object} edgeSrc the edge object for the source node (compound)
 	 * @param {Object} edgeTrg the edge object for the target node (gene)
 	 * @param {Float} threshold the value threshold
@@ -68,11 +68,13 @@ Ext.define('HT.lib.operation.GeneDiseaseOperation', {
 
 				var diseaseList = jsonObj.diseases; // array of activities involving the protein
 				var diseaseTrgTags = edgeTrg.tags.split(',');
+				var tagDiseases = [];
 				Ext.each(diseaseList, function (disease, index, diseases) {
 
 					Ext.each(diseaseTrgTags, function (tag, index, tagList) {
 						if (tag !== '' && disease.indexOf(tag) != -1) {
 							positiveCount++;
+							tagDiseases.push(tag);
 							result = result || true;
 						}
 					})
@@ -88,8 +90,13 @@ Ext.define('HT.lib.operation.GeneDiseaseOperation', {
 
 				var edgeId = 'e' + edgeSrc.id + '-' + edgeTrg.id;
 				console.log('Operation finished!!!: ' + funcObj.result + ' for ' + edgeId);
-
-				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis: hypothesiseResult, edgeId: edgeId});
+				var msg = "<span style=\"font-weight: bold;\">Gene -> Disease</span> operation<br/>('";
+				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
+				msg += "')<br/>";
+				msg += "Related diseases were found where the gene is involved in ";
+				msg += "(<span style=\"font-style: italic;\">"+tagDiseases.join(', ')+"</span>)";
+				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
+									hypothesiseResult, edgeId: edgeId, msg: msg});
 			},
 
 			scope: me

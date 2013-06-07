@@ -196,10 +196,8 @@ Ext.define('HT.lib.CytoscapeActions', {
 				var cytoscapePanel = Ext.ComponentQuery.query('cytoscape')[0];
 
 				cytoscapePanel.setLoading(true);
-				Ext.getCmp('btnEnact').disable();
-				Ext.getCmp('btnEnactSel').disable();
-				Ext.getCmp('btnReset').disable();
-				Ext.getCmp('btnClear').disable();
+				Ext.getCmp('actionsBtn').disable();
+				Ext.getCmp('clearBtn').disable();
 
 				Ext.each(path, function(edge, indexBis, edgeList) {
 					var rule = edge.rule;
@@ -209,7 +207,7 @@ Ext.define('HT.lib.CytoscapeActions', {
 						var opObj = HT.lib.RuleFunctions.getOperationFromAlias(aliasObj.alias);
 
 						opObj.clearListeners();
-						// Result is like {result: result, hypothesis: true|false, edge: theedge}
+						// Result is like {result: result, hypothesis: true|false, edge: theedge, msg: aMessage}
 						opObj.on('operationComplete', function (result) {
 							var myEdge = vis.edge(result.edgeId);
 							console.log('operationComplete:'+aliasObj.result+ ' vs '+result.result+' for edge '+myEdge.label);
@@ -219,32 +217,23 @@ Ext.define('HT.lib.CytoscapeActions', {
 							else
 								bypassEdge(myEdge, 'red');
 
-							var labelResult = Ext.getCmp('labelResult');
-							if (labelResult == null)
-								console.log('No component was found');
-
-							else if (labelResult === undefined)
-								console.log('A "class" was found...'+labelResult.toString());
-
-							else // labelResult is an object
-								labelResult.setText('result: '+aliasObj.result);
+							// var labelResult = Ext.getCmp('labelResult');
+							var resultsPanel = Ext.getCmp('resultsPanel');
+							resultsPanel.update(result.msg);
 
 							// Hide the mask...
 							if (indexFunc == functionsList.length-1 &&
 									indexBis == edgeList.length-1 && indexPath == pathList.length-1) {
 								cytoscapePanel.setLoading(false);
 
-								Ext.getCmp('btnEnact').enable();
-								Ext.getCmp('btnEnactSel').enable();
-								Ext.getCmp('btnReset').enable();
-								Ext.getCmp('btnClear').enable();
+								Ext.getCmp('actionsBtn').enable();
+								Ext.getCmp('clearBtn').enable();
 							}
 
 						});
 						opObj.operation(rule.edgeSource, rule.edgeTarget, aliasObj.threshold, aliasObj);
 
-						// actualFunc(rule.edgeSource.payloadValue, rule.edgeTarget.payloadValue, aliasObj.threshold, aliasObj)
-					})
+					}) // EO each
 					edgeIndex++;
 
 					/*

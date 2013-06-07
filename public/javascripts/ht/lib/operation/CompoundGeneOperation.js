@@ -65,13 +65,14 @@ Ext.define('HT.lib.operation.CompoundGeneOperation', {
 				var jsonObj = resp;
 				var result = false;
 
-				var activityList = jsonObj.activities; // array of activities involving the protein
-
+				var activityList = jsonObj.activities; // array of activities involving the compound
+				var activityCount = 0;
 				Ext.each(activityList, function (activity, index, activities) {
 					var activity_accesions = activity.target_accessions.split(',');
 					if (activity_accesions.indexOf(payloadTrg.acc) != -1) {
 						result = true;
-						return false;
+						activityCount++;
+						// return false;
 					}
 					/*
 					Ext.each(activity_accesions, function (accs, index, accs_list) {
@@ -85,13 +86,18 @@ Ext.define('HT.lib.operation.CompoundGeneOperation', {
 					*/
 				});
 
-				funcObj.result = result;
+				funcObj.result = activityCount;
 				var hypothesiseResult = result !== false;
 
 				var edgeId = 'e' + edgeSrc.id + '-' + edgeTrg.id;
 				console.log('Operation finished!!!: ' + funcObj.result + ' for ' + edgeId);
 
-				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis: hypothesiseResult, edgeId: edgeId});
+				var msg = "<span style=\"font-weight: bold;\">Compound -> Gene</span> operation<br/>('";
+				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
+				msg += "')<br/>"+activityCount;
+				msg += " activities for the compound where found involving the gene";
+				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
+					hypothesiseResult, edgeId: edgeId, msg: msg});
 			},
 
 			scope: me

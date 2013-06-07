@@ -31,7 +31,7 @@ Ext.define('HT.lib.EdgeRuleFactory', {
 		 * @param {Object} target the same for the target node.
 		 */
 		createRule: function (source, target) {
-
+/*
 			var ruleFunctions = function (source, target) {
 				var srcEntity = source.entity, trgEntity = target.entity;
 				var functionsArray = [];
@@ -40,7 +40,7 @@ Ext.define('HT.lib.EdgeRuleFactory', {
 
 				return functionsArray;
 			};
-
+*/
 
 			var ruleAliases = function (source, target) {
 				var srcEntity = source.entity, trgEntity = target.entity;

@@ -40,16 +40,15 @@ Ext.define('HT.lib.operation.RuleOperation', {
 	/**
 	 * Gets interactions and evaluates the result to provide a value to decide if
 	 * the two targets (in this particular case) interact each other
-	 * @param edgeSrc, the object for the source node
-	 * @param edgeTrg, the object for the target node
+	 * @param edgeSrc, the edge object for the source node
+	 * @param edgeTrg, the edge object for the target node
 	 * @param threshold, the value threshold
 	 * @param funcObj, the function object {alias, threshold, result} to hold the result
 	 */
 	operation: function (edgeSrc, edgeTrg, threshold, funcObj) {
-		/*
 		var me = this;
-		var accSrc = valSrc.acc;
-		var accTrg = valTrg.acc;
+		var accSrc = edgeSrc.payloadValue.acc;
+		var accTrg = edgeTrg.payloadValue.acc;
 		var url = 'http://localhost:3003/api/interactions/'+accSrc+'/'+accTrg+'.jsonp';
 
 		Ext.data.JsonP.request({
@@ -57,6 +56,9 @@ Ext.define('HT.lib.operation.RuleOperation', {
 			params: {
 				threshold: (threshold === undefined || threshold == null)? 0.0: threshold
 			},
+
+//			callback: function (opts, resp) {
+//			},
 
 			failure: function (resp, opts) {
 				funcObj.result = -1;
@@ -76,13 +78,12 @@ Ext.define('HT.lib.operation.RuleOperation', {
 
 				funcObj.result = result;
 				console.log('Operation finished!!!: '+funcObj.result);
-				me.fireEvent('operationComplete', {result: result});
+				me.fireEvent('operationComplete', {result: result, edge: edge});
 				me.suspendEvents();
 			},
 
 			scope: me
 		})
-		*/
 	}
 
 });

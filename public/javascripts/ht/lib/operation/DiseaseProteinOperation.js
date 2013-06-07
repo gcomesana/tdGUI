@@ -79,7 +79,12 @@ Ext.define('HT.lib.operation.DiseaseProteinOperation', {
 				var edgeId = 'e'+edgeSrc.id+'-'+edgeTrg.id;
 				console.log('Operation finished!!!: '+funcObj.result+' for '+edgeId);
 
-				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis: hypothesiseResult, edgeId: edgeId});
+				var msg = "<span style=\"font-weight: bold;\">Compound -> Protein</span> operation<br/>('";
+				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
+				msg += "')<br/>"+activityCount;
+				msg += " activities for the compound where found involving the protein";
+				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
+										hypothesiseResult, edgeId: edgeId, msg: msg});
 			},
 
 			scope: me

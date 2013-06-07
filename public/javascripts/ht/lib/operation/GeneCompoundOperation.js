@@ -38,7 +38,7 @@ Ext.define('HT.lib.operation.GeneCompoundOperation', {
 	},
 
 	/**
-	 * From the gene name or symbol, get if interacts with target compound in any way
+	 * From the gene name or symbol, gets whether or not interacts with target compound in any way
 	 * @param edgeSrc, the edge object for the source node
 	 * @param edgeTrg, the edge object for the target node
 	 * @param threshold, the value threshold
@@ -65,21 +65,26 @@ Ext.define('HT.lib.operation.GeneCompoundOperation', {
 				var result = false;
 
 				var activityList = jsonObj.activities; // array of activities involving the protein
-
+				var activityCount = 0;
 				Ext.each(activityList, function (activity, index, activities) {
 					if (activity.ingredient_cmpd_chemblid == payloadTrg.chemblId) {
 						result = true;
-						return false;
+						activityCount++;
 					}
 				});
 
-				funcObj.result = result;
+				funcObj.result = activityCount;
 				var hypothesiseResult = result !== false;
 
 				var edgeId = 'e' + edgeSrc.id + '-' + edgeTrg.id;
 				console.log('Operation finished!!!: ' + funcObj.result + ' for ' + edgeId);
 
-				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis: hypothesiseResult, edgeId: edgeId});
+				var msg = "<span style=\"font-weight: bold;\">Gene -> Compound</span> operation<br/>('";
+				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
+				msg += "')<br/>"+activityCount;
+				msg += " activities for the gene where found involving the compound";
+				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
+								hypothesiseResult, edgeId: edgeId, msg: msg});
 			},
 
 			scope: me

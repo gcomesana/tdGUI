@@ -70,7 +70,7 @@ Ext.define('HT.lib.operation.DiseaseCompoundOperation', {
 		cmpdChemblId = 'CHEMBL714'; // salbutamol
 		cmpdChemblId = payloadTrg.chemblId;
 
-
+		// Function to run an action after the concurrent request are finished
 		var action = function () {
 			// hold here the accessions found with assays for the compound
 			var accessions4cmpd = [];
@@ -81,19 +81,26 @@ Ext.define('HT.lib.operation.DiseaseCompoundOperation', {
 
 			// it is suppossed that if accessions4cmpd is empty,
 			// there is not connectin btw accessions and compound
-			var result = accessions4cmpd.length > 0
+			var result = accessions4cmpd.length; //  > 0
 			funcObj.result = result;
-			var hypothesiseResult = result !== false;
+			var hypothesiseResult = result > 0;
 
 			var edgeId = 'e' + edgeSrc.id + '-' + edgeTrg.id;
 			console.log('Operation finished!!!: ' + funcObj.result + ' for ' + edgeId);
 
-			me.fireEvent('operationComplete', {result: funcObj.result, hypothesis: hypothesiseResult, edgeId: edgeId});
+			var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Disease -> Compound</span> operation<br/>('";
+			msg += edgeSrc.label+"' -> '"+edgeTrg.label;
+			msg += "')<br/>" + result;
+			msg += " activities where found for proteins related to the disease ";
+			msg += "("+payloadSrc.acc+") ";
+			msg += "involving the compound</p>";
+			me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
+					hypothesiseResult, edgeId: edgeId, msg: msg});
 		} // EO action function
 
 
 		Ext.each(accs_arr, function (acc, index, accessions) {
-			var url = 'http://lady-qu.cnio.es:3003/pharma/xxxx/bioactivities.jsonp';
+			var url = 'http://localhost:3003/pharma/xxxx/bioactivities.jsonp';
 			url = url.replace('xxxx', acc);
 			// get activities for every accession
 			Ext.data.JsonP.request({

@@ -67,32 +67,28 @@ Ext.define('HT.lib.operation.CompoundProteinOperation', {
 				var result = false;
 
 				var activityList = jsonObj.activities; // array of activities involving the protein
-
+				var activityCount = 0;
 				Ext.each(activityList, function (activity, index, activities) {
 					var activity_accesions = activity.target_accessions.split(',');
 					if (activity_accesions.indexOf(payloadTrg.acc) != -1) {
 						result = true;
-						return false;
+						activityCount++;
+						// return false;
 					}
-					/*
-					Ext.each(activity_accesions, function (accs, index, accs_list) {
-						if (payloadTrg.indexOf(accs) != -1) {
-							result = true;
-							return false;
-						}
 
-					});
-					return !result; // if result is false, continue, otherwise break the loop
-					*/
 				});
 
-				funcObj.result = result;
+				funcObj.result = activityCount;
 				var hypothesiseResult = result !== false;
 
 				var edgeId = 'e' + edgeSrc.id + '-' + edgeTrg.id;
 				console.log('Operation finished!!!: ' + funcObj.result + ' for ' + edgeId);
-
-				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis: hypothesiseResult, edgeId: edgeId});
+				var msg = "<span style=\"font-weight: bold;\">Compound -> Protein</span> operation<br/>('";
+				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
+				msg += "')<br/>"+activityCount;
+				msg += " activities for the compound where found involving the protein";
+				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
+						hypothesiseResult, edgeId: edgeId, msg: msg});
 			},
 
 			scope: me

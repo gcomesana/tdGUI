@@ -12,7 +12,7 @@ This file may be used under the terms of the GNU General Public License version 
 If you are unsure which license is appropriate for your use, please contact the sales department at http://www.sencha.com/contact.
 
 */
-Ext.define('APP.lib.FeedValidator', {
+Ext.define('HT.lib.FeedValidator', {
     singleton: true,
     
     /**
@@ -22,7 +22,7 @@ Ext.define('APP.lib.FeedValidator', {
     
     /**
      * Validates a given feed's formating by fetching it and ensuring it is well formed
-     * @param {APP.model.Feed} feed The feed to validate
+     * @param {HT.model.Feed} feed The feed to validate
      */
     validate: function(feed, options) {
         options = options || {};

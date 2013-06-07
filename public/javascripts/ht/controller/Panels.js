@@ -45,10 +45,10 @@ Ext.define('HT.controller.Panels', {
 				click: this.onClickTextbox
 			},
 //			'cytopanel > container > container > container > button': {
-			'button#btnEnact': {
+			'#btnEnact': {
 				click: this.onRunGraph
 			},
-			'button#btnEnactSel': {
+			'#btnEnactSel': {
 				click: this.onRunGraph
 			},
 			'cytopanel > container > textbox-btn#txtBtnDisease > button': {

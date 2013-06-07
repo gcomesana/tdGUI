@@ -37,8 +37,7 @@ Ext.define('HT.lib.operation.ProteinDiseaseOperation', {
 		var me = this;
 		var payloadSrc = edgeSrc.payloadValue;
 		var payloadTrg = edgeTrg.payloadValue;
-		var accSrc = payloadSrc.acc[0].substring(payloadSrc.acc[0].indexOf('>')+1,
-																				payloadSrc.acc[0].lastIndexOf('<'));
+		var accSrc = payloadSrc.acc; // here is the accession for the protein/target
 
 		var url = 'http://localhost:3003/pharma/target/diseases.jsonp?accession='+accSrc;
 
@@ -62,10 +61,12 @@ Ext.define('HT.lib.operation.ProteinDiseaseOperation', {
 				// check if jsonObj.diseases contains some diseases in
 				var tags = edgeTrg.tags.split(',');
 				var diseases = jsonObj.diseases; // an array of strings with the diseases
+				var tagDiseases = [];
 				Ext.each(diseases, function (disease, index, diseaseList) {
 
 					Ext.each(tags, function (tag, index, tagList) {
 						if (tag !== '' && disease.indexOf(tag) != -1) {
+							tagDiseases.push(tag);
 							positiveCount++;
 							result = result || true;
 						}
@@ -78,8 +79,13 @@ Ext.define('HT.lib.operation.ProteinDiseaseOperation', {
 				var edgeId = 'e'+edgeSrc.id+'-'+edgeTrg.id;
 				console.log('Operation finished!!!: '+funcObj.result+' for '+edgeId);
 
-				me.fireEvent('operationComplete', {result: funcObj.result,
-					hypothesis: hypothesiseResult, edgeId: edgeId});
+				var msg = "<span style=\"font-weight: bold;\">Protein -> Disease</span> operation<br/>('";
+				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
+				msg += "')<br/>";
+				msg += "Related diseases were found where the protein is involved in ";
+				msg += "(<span style=\"font-style: italic;\">"+tagDiseases.join(', ')+"</span>)";
+				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
+									hypothesiseResult, edgeId: edgeId, msg: msg});
 			},
 
 			scope: me

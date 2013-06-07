@@ -76,8 +76,13 @@ Ext.define('HT.lib.operation.DiseaseGeneOperation', {
 
 				var edgeId = 'e'+edgeSrc.id+'-'+edgeTrg.id;
 				console.log('Operation finished!!!: '+funcObj.result+' for '+edgeId);
-
-				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis: hypothesiseResult, edgeId: edgeId});
+				var msg = "<span style=\"font-weight: bold;\">Disease -> Gene</span> operation<br/>('";
+				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
+				msg += "')<br/>";
+				msg += "The gene was found to be related to the disease according to OMIM ";
+				msg += "(after requesting the genemap for the disease)";
+				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
+								hypothesiseResult, edgeId: edgeId, msg: msg});
 			},
 
 			scope: me

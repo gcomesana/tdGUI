@@ -14,6 +14,9 @@ var graphModel = {
 		}, {
 			name: 'entity',
 			type: 'string' // type: 'number'
+		}, {
+			name: 'tags', // comma-separated match terms, like tags here
+			type: 'string'
 		}],
 
 		edges: [{
@@ -240,7 +243,7 @@ Ext.define('HT.view.panels.CytoPanel', {
 		}, {
 			xtype: 'container',
 			// border: false,
-			margin: '20 0 0 0',
+			margin: '15 0 0 0',
 			style: {
 				marginTop: 20,
 				borderTopWidth: '1px',
@@ -251,48 +254,122 @@ Ext.define('HT.view.panels.CytoPanel', {
 
 			// layout: 'column',
 			layout: {
-        type: 'hbox',
-        padding:'10',
-        pack:'end'
-        // align:'middle'
+				type: 'hbox',
+				padding:'5',
+				pack:'end',
+				align:'middle'
       },
+
 			width: '100%',
+			defaults: {
+				margin: '0 5 0 5'
+			},
+
 			items: [{
 				xtype: 'button',
-				text: 'Enact',
+				text: 'Actions',
+				id: 'actionsBtn',
+				menu: [{
+					text: 'Enact',
+					id: 'btnEnact'
+				}, {
+					text: 'Enact selected',
+					id: 'btnEnactSel'
 
-				id: 'btnEnact'
-			}]
-			/*
-			items: [{
-				// columnWidth: 0.5,
-				margin: '0 0 0 20',
-				*
+				}]
+			}, {
+				xtype: 'button',
+				text: 'Clear',
+				id: 'clearBtn',
+				menu: [{
+					text: 'Reset fields',
+					listeners: {
+						click: {
+							fn: function (btn, evOpts) {
+								console.log('clicked reset: id: '+btn.getId());
+								// var items = this.up().up().items.items;
+								var items = Ext.ComponentQuery.query('entity-lookup');
+								Ext.each(items, function (item, index, itemList) {
+									if (item.xtype == 'entity-lookup')
+										item.items.items[1].items.items[0].reset(); // reset the combo!!
+								});
+
+							}
+						}
+					}
+				}, {
+					text: 'Clear graph',
+					listeners: {
+						click: {
+							fn: function (btn, evOpts) {
+								var cytoscape = Ext.ComponentQuery.query('cytoscape')[0];
+								cytoscape.vis.removeElements();
+								cytoscape.vis.visualStyleBypass(null);
+							}
+						}
+					}
+				}] // EO menu
+			}] // EO items
+
+/*
+			style: {
+				marginTop: 20,
+				backgroundColor: 'yellow'
+			},
+
+			layout: 'column',
+
+			width: '100%',
+			items: [ {
+				columnWidth: 0.7,
 				items:[{
 					xtype: 'button',
 					text: 'Enact',
 
 					id: 'btnEnact'
 				}]
-				*
-			},
-			{
-				// columnWidth: 0.5,
+				*style: {
+					marginLeft: 15
+				} *
+			}, {
+				columnWidth: 0.3,
 				items: [{
 					xtype: 'button',
 					text: 'Enact selected',
 
 					id: 'btnEnactSel'
-				}] 
-			} *,
-			{
+				}]
+			}, {
 				xtype: 'label',
 				id: 'labelResult',
 				text: 'result: labelresult',
 				margin: '0 0 0 10'
-			} *] */
-		} // EO container
-		] // EO UPPER container items
+			}]
+			*/
+		}, { // EO container
+			xtype: 'container',
+			width: '100%',
+			style: {
+				backgroundColor: 'lightgray',
+				padding: '5px 5px 5px 5px',
+				margin: '50px 0px 0px 0px'
+			},
+			html: '<span style="font-family: Arial; font-size: 24px; font-weight: bold">Results</span>'
+		}, { 
+			xtype: 'panel',
+			id: 'resultsPanel',
+			// title: 'Enactment results',
+			html: 'Run a graph to see here the results',
+			border: false,
+			cls: 'msg-panel',
+			bodyCls: 'msg-panel-content',
+			width: '100%',
+			style: {
+				padding: '5px 5px 5px 5px'
+			}
+			
+			// EO container
+		}] // EO UPPER container items
 
 	}],
 

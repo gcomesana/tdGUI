@@ -190,14 +190,20 @@ describe APIProxy do
 
 	it "should get a set of activitis for a compound out of a chemblId for a compound" do
 		chembl_id = 'CHEMBL1'
+		chembl_id = 'CHEMBL83'
 
+		init_time = Time.now
 		resp = @apiproxy.get_compound_activities(chembl_id)
 		resp.should_not be_nil
 		resp.should be_kind_of(Hash)
 		resp['activities'].should be_kind_of(Array)
 		resp['activities'].each {|activ|
-			activ['ingredient_cmpd_chemblid'].should be == chembl_id
+			activ['target_accessions'].should be_a_kind_of(String)
+			activ['target_accessions'].should_not be_empty
 		}
+		end_time = Time.now
+
+		puts "#{chembl_id} took #{end_time - init_time}"
 
 	end
 

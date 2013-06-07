@@ -70,14 +70,24 @@ Ext.define('HT.lib.operation.GeneProteinOperation', {
 					}
 				});
 
-
 				funcObj.result = result;
 				var hypothesiseResult = result !== false;
 
 				var edgeId = 'e'+edgeSrc.id+'-'+edgeTrg.id;
 				console.log('Operation finished!!!: '+funcObj.result+' for '+edgeId);
-
-				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis: hypothesiseResult, edgeId: edgeId});
+				var msg = "<span style=\"font-weight: bold;\">Gene -> Protein</span> operation<br/>('";
+				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
+				msg += "')<br/>";
+				if (result === true) {
+					msg += "Protein "+edgeTrg.label+" was identified as a product of ";
+					msg += edgeSrc.label+" after querying Uniprot";
+				}
+				else {
+					msg += "It wasn't found the protein '"+edgeTrg.label;
+					msg += "' is a product of the gene '"+genename+"'";
+				}
+				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
+						hypothesiseResult, edgeId: edgeId, msg: msg});
 			},
 
 			scope: me

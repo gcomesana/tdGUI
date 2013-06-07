@@ -1,3 +1,4 @@
+
 /**
  * A custom event to fire every time a function in a rule is completed (as all
  * of them will be asynchronous).
@@ -38,7 +39,7 @@ Ext.define('HT.lib.operation.DiseaseGeneOperation', {
 		var payloadSrc = edgeSrc.payloadValue;
 		var payloadTrg = edgeTrg.payloadValue;
 		var genename = edgeSrc.label.split(',')[0].trim();
-		var url = 'http://localhost:3003/pharma/disease/genemap.json?mim_number='+edgeSrc.payloadValue.uuid; // OMIMid when entity = disease
+		var url = 'http://localhost:3003/pharma/disease/genemap.jsonp?mim_number='+edgeSrc.payloadValue.uuid; // OMIMid when entity = disease
 
 		Ext.data.JsonP.request({
 			url: url,
@@ -59,7 +60,8 @@ Ext.define('HT.lib.operation.DiseaseGeneOperation', {
 				var geneList = jsonObj.genes; // an array of {mim_number, gene_symbol} objects
 				Ext.each(geneList, function (geneObj, index, genesItself) {
 					var genes = geneObj.gene_symbol.split(',');
-					Ext.each(gene, function (genename, indexBis, geneArr) {
+					Ext.each(genes, function (genename, indexBis, geneArr) {
+						// if a genename is in the genes list, then result is true
 						if (payloadTrg.genes.indexOf(genename) != -1) {
 							result = true;
 							return false;
@@ -74,8 +76,13 @@ Ext.define('HT.lib.operation.DiseaseGeneOperation', {
 
 				var edgeId = 'e'+edgeSrc.id+'-'+edgeTrg.id;
 				console.log('Operation finished!!!: '+funcObj.result+' for '+edgeId);
-
-				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis: hypothesiseResult, edgeId: edgeId});
+				var msg = "<span style=\"font-weight: bold;\">Disease -> Gene</span> operation<br/>('";
+				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
+				msg += "')<br/>";
+				msg += "The gene was found to be related to the disease according to OMIM ";
+				msg += "(after requesting the genemap for the disease)";
+				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
+								hypothesiseResult, edgeId: edgeId, msg: msg});
 			},
 
 			scope: me

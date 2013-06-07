@@ -53,9 +53,9 @@
       info_rails_path = '<%= AppSettings.config["tsv"]["tsv_rails_path"] -%>',
       pharm_rails_path = '<%= AppSettings.config["tsv"]["tsv_pharm_rails_path"] -%>';
 
-    var proteinInfoBaseUrl = "http://" + host + ':' + port + info_rails_path;
+    var proteinInfoBaseUrl = info_rails_path; // "http://" + host + ':' + port + info_rails_path;
     proteinInfoBase = info_rails_path;
-    var proteinPharmBaseUrl = "http://" + host + ':' + port + pharm_rails_path;
+    var proteinPharmBaseUrl = pharm_rails_path; // "http://" + host + ':' + port + pharm_rails_path;
     proteinPharmBaseUrl = '<%= AppSettings.config["tsv"]["tsv_pharm_page_results"] -%>';
   </script>
 

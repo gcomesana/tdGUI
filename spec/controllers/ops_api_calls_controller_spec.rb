@@ -27,6 +27,7 @@ describe OpsApiCallsController do
 
 	describe "protein_info action" do
 		it "should make a request to coreApi for proteinInfo" do
+
 			get :protein_info, :protein_uri => @coreApi_uri
 			puts "**==> coreAPI protein_info: #{response.body}"
 			response.code.to_i.should be == 200
@@ -42,6 +43,13 @@ describe OpsApiCallsController do
 
 		end
 
+
+		it "should return nil from OPS, then diff from nil from uniprot" do
+			concept_uri = 'http://www.conceptwiki.org/concept/eeaec894-d856-4106-9fa1-662b1dc6c6f1'
+
+
+
+		end
 
 
 		it "should make a protein_info request with no result despite conceptWiki uri" do

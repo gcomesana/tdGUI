@@ -8,7 +8,7 @@ Ext.define('HT.view.common.ComboLookupButton', {
 	alias: 'widget.combo-lookup-btn',
 
 	// bodyPadding: '0 0 10 0',
-	margin: '6 0 0 0',
+	margin: '5 0 0 0',
 	// padding: '0 5 0 15',
 	border: false,
 	layout: 'column',
@@ -28,6 +28,7 @@ Ext.define('HT.view.common.ComboLookupButton', {
 			var thisComp = btn.up();
 			btn.suspendEvents();
 			var myEvOpts = {
+				match: thisComp.getMatches(),
 				value: thisComp.getComponent(0).getValue(),
 				label: thisComp.getComponent(0).getRawValue(),
 				meta: thisComp.getMetaInfo(),
@@ -62,6 +63,8 @@ Ext.define('HT.view.common.ComboLookupButton', {
 		this.initConfig(config);
 
 		this.superclass.constructor.call(this, config);
+
+		this.matchTerm = []; // should keep the match term for the selected element
 	},
 
 
@@ -88,7 +91,7 @@ Ext.define('HT.view.common.ComboLookupButton', {
 
 			listConfig: {
 				loadingText: 'Searching...',
-				emptyText: 'Nothing was found for the term.',
+				emptyText: 'No matching posts found.',
 
 				// Custom rendering template for each item
 				getInnerTpl: function() {
@@ -97,6 +100,23 @@ Ext.define('HT.view.common.ComboLookupButton', {
 						'<a href="{pref_url}" target="_blank">(definition)</a>' +
 						'</p>';
 				}
+			},
+
+			listeners: {
+				select: {
+					fn: function (combo, selRecs, evOpts) {
+						console.log('num of records: '+selRecs.length);
+						Ext.each (selRecs, function (rec, index, recs) {
+							me.matchTerm += rec.data.match + ",";
+							/*
+							var matches = rec.data.match.split(',');
+							Ext.each(matches, function (matchWord, index, terms) {
+								me.matchTerm.push(matchWord.trim());
+							})
+							*/
+						})
+					}
+				} // select
 			}
 			// width: 700,
 			// fieldLabel: 'Protein name',
@@ -120,6 +140,11 @@ Ext.define('HT.view.common.ComboLookupButton', {
 
 		this.callParent(arguments);
 		console.log("store-read for combo: "+this.getComponent(0).store.getProxy().url);
+	},
+
+
+	getMatches: function () {
+		return this.matchTerm;
 	},
 
 	getTextbox: function () {

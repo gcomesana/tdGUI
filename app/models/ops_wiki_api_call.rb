@@ -25,6 +25,8 @@ class OpsWikiApiCall
 	TARGET_SEMANTIC_TAG = 'eeaec894-d856-4106-9fa1-662b1dc6c6f1'
 	COMPOUND_SEMANTIC_TAG = '07a84994-e464-4bbf-812a-a4b96fa3d197'
 
+	TIMEOUT_SECONDS = 40
+
 	def initialize
 		# For timing the transaction
 		@request_time = nil
@@ -129,10 +131,15 @@ private
 #		@response = Net::HTTP.post_form(url, options)
 # url="http://ops.conceptwiki.org/web-ws/concept/search/byTag"
 # opttions=[uuid:tolchurro, query:term, limit, offset]
-		@response = OpsEndpointsProxy.make_request(url, options)
-		if @response.is_a?(Fixnum)
-			@response = OpsEndpointsProxy.make_request(url, options) # preventing connection errors
-		end	
+
+		end_req = Time.now + TIMEOUT_SECONDS
+		begin
+			@response = OpsEndpointsProxy.make_request(url, options)
+			if @response.is_a?(Fixnum)
+				@response = OpsEndpointsProxy.make_request(url, options) # preventing connection errors
+			end
+		end while Time.now < end_req && @response == -1
+
 		@response_time = Time.now
 		@query_time = @response_time - @request_time
 		puts "Call tooooooook #{@query_time} seconds"

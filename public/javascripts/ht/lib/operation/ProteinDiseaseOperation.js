@@ -13,7 +13,7 @@
  * /////
  * rfe.fireEvent('operationComplete');
  */
-Ext.define('HT.lib.operation.DiseaseProteinOperation', {
+Ext.define('HT.lib.operation.ProteinDiseaseOperation', {
 	extend: 'HT.lib.operation.RuleOperation',
 	mixins: {
 		observable: 'Ext.util.Observable'
@@ -22,26 +22,24 @@ Ext.define('HT.lib.operation.DiseaseProteinOperation', {
 	constructor: function (config) {
 		// this.initConfig(config);
 		this.callParent(arguments);
-		this.alias = 'disease-protein-operation';
+		this.alias = 'protein-disease-operation';
 	},
 
 	/**
 	 * From the disease information from OMIM, gets if there is a relationship
 	 * between disease and target. Similar to disease-gene
-	 * @param edgeSrc, the edge object for the source node
-	 * @param edgeTrg, the edge object for the target node
-	 * @param threshold, the value threshold
-	 * @param funcObj, the function object {alias, threshold, result} to hold the result
+	 * @param {Object} edgeSrc the edge object for the source node
+	 * @param {Object} edgeTrg the edge object for the target node
+	 * @param {float} threshold the value threshold
+	 * @param {Function} funcObj the function object {alias, threshold, result} to hold the result
 	 */
 	operation: function (edgeSrc, edgeTrg, threshold, funcObj) {
 		var me = this;
-		var accSrc = edgeSrc.payloadValue.acc;
-
-		var accTrg = edgeTrg.payloadValue.acc;
+		var payloadSrc = edgeSrc.payloadValue;
 		var payloadTrg = edgeTrg.payloadValue;
+		var accSrc = payloadSrc.acc; // here is the accession for the protein/target
 
-		var genename = edgeSrc.label.split(',')[0].trim();
-		var url = 'http://localhost:3003/pharma/disease/genemap.jsonp?mim_number='+edgeSrc.payloadValue.uuid; // OMIMid when entity = disease
+		var url = 'http://localhost:3003/pharma/target/diseases.jsonp?accession='+accSrc;
 
 		Ext.data.JsonP.request({
 			url: url,
@@ -58,33 +56,36 @@ Ext.define('HT.lib.operation.DiseaseProteinOperation', {
 			success: function (resp, opts) {
 				var jsonObj = resp;
 				var result = false;
+				var positiveCount = 0; // counter for positive matches
 
-				var geneList = jsonObj.genes; // an array of {mim_number, gene_symbol} objects
-				Ext.each(geneList, function (geneObj, index, genesItself) {
-					var genes = geneObj.gene_symbol.split(',');
-					Ext.each(genes, function (genename, indexBis, geneArr) {
-						// if a genename is in the genes list, then result is true
-						if (payloadTrg.genes.indexOf(genename) != -1) {
-							result = true;
-							return false;
+				// check if jsonObj.diseases contains some diseases in
+				var tags = edgeTrg.tags.split(',');
+				var diseases = jsonObj.diseases; // an array of strings with the diseases
+				var tagDiseases = [];
+				Ext.each(diseases, function (disease, index, diseaseList) {
+
+					Ext.each(tags, function (tag, index, tagList) {
+						if (tag !== '' && disease.indexOf(tag) != -1) {
+							tagDiseases.push(tag);
+							positiveCount++;
+							result = result || true;
 						}
-					});
-					if (result = true)
-						return false; // finish outer each loop
+					})
 				});
 
-				funcObj.result = result;
+				funcObj.result = positiveCount;
 				var hypothesiseResult = result !== false;
 
 				var edgeId = 'e'+edgeSrc.id+'-'+edgeTrg.id;
 				console.log('Operation finished!!!: '+funcObj.result+' for '+edgeId);
 
-				var msg = "<span style=\"font-weight: bold;\">Compound -> Protein</span> operation<br/>('";
+				var msg = "<span style=\"font-weight: bold;\">Protein -> Disease</span> operation<br/>('";
 				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
-				msg += "')<br/>"+activityCount;
-				msg += " activities for the compound where found involving the protein";
+				msg += "')<br/>";
+				msg += "Related diseases were found where the protein is involved in ";
+				msg += "(<span style=\"font-style: italic;\">"+tagDiseases.join(', ')+"</span>)";
 				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
-										hypothesiseResult, edgeId: edgeId, msg: msg});
+									hypothesiseResult, edgeId: edgeId, msg: msg});
 			},
 
 			scope: me

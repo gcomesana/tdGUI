@@ -374,6 +374,7 @@ sub {
 	border: none;
 }
 
+
 /* Interactions panel */
 .app-interactions-help-div {
 
@@ -417,4 +418,32 @@ a, a:hover {
 	padding-bottom: 3px !important;
 	text-align: center;
 	top: 20%;
+}
+
+.msg-panel {
+	width: 98%;
+	/* background-color: azure; */
+	margin-top: 20px;
+	height: 120px;
+}
+
+.msg-panel-content {
+	padding: 2px 2px 2px 2px;
+}
+
+
+.wordwrap { 
+  white-space: pre-wrap;      /* CSS3 */   
+  white-space: -moz-pre-wrap; /* Firefox */    
+  white-space: -pre-wrap;     /* Opera <7 */   
+  white-space: -o-pre-wrap;   /* Opera 7 */    
+  word-wrap: break-word;      /* IE */
+}
+
+
+.img-logo {
+	border-width: 0px; 
+	left: 8px; 
+	top: 10px; 
+	margin: 0px;
 }

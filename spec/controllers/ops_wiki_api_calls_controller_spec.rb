@@ -58,6 +58,7 @@ describe OpsWikiApiCallsController do
 
 	it "compound_lookup should return a list of compound entries" do
 		@substring = 'histidine'
+		@substring = 'tamoxifen'
 
 		get :compound_lookup, :query => @substring
 

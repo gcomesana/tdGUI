@@ -208,7 +208,7 @@ console.info ("Viewport.initComponent starting...")
 // EO //////////////////////////////////////////////// PANEL COMPONENTS //////
 */
 
-    var logosPanel = Ext.create ('TDGUI.view.panels.LogosPanel')
+    var logosPanel = Ext.create ('TDGUI.view.panels.LogosPanel');
     me.items = [
       {
         region: 'north',
@@ -254,9 +254,9 @@ console.info ("Viewport.initComponent starting...")
         split: false
       }
 
-    ]
+    ];
 
-    this.callParent (arguments)
+    this.callParent (arguments);
   }
 
 })

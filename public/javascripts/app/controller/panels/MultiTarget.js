@@ -63,6 +63,8 @@ Ext.define("TDGUI.controller.panels.MultiTarget", {
 
 					var qParam = conceptURI+','+uniprotParam;
 					var dcParam = '&dc='+Math.random();
+					// var targetAcc = record.data.accessions[0];
+					// var targetParam = '&acc='+targetAcc;
 					Ext.History.add('!xt=tdgui-targetinfopanel&qp=' + qParam + dcParam);
 				} // itemdoblclick
 

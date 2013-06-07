@@ -38,7 +38,7 @@ Ext.define('TDGUI.view.dropdowns.conceptWikiProteinLookup', {
 			api: {
 				// read: '/concept_wiki_api_calls/protein_lookup.json'
 				// read: '/ops_wiki_api_calls/protein_lookup.json'
-				read: 'http://localhost:3003/ops_wiki_api_calls/protein_lookup.jsonp'
+				read: '/ops_wiki_api_calls/protein_lookup.jsonp' // 'http://localhost:3003/ops_wiki_api_calls/protein_lookup.jsonp';
 			},
 			reader: {
 				type: 'json'

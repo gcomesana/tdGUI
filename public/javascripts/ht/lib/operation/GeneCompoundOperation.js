@@ -13,7 +13,7 @@
  * /////
  * rfe.fireEvent('operationComplete');
  */
-Ext.define('HT.lib.operation.RuleOperation', {
+Ext.define('HT.lib.operation.GeneCompoundOperation', {
 	// extend: 'Ext.util.Observable',
 	mixins: {
 		observable: 'Ext.util.Observable'
@@ -23,7 +23,7 @@ Ext.define('HT.lib.operation.RuleOperation', {
 		// this.initConfig(config);
 
 		this.evName = 'operationComplete';
-		this.alias = 'operation-alias';
+		this.alias = 'gene-compound-operation';
 		this.result = null;
 		this.threshold = null;
 
@@ -38,8 +38,7 @@ Ext.define('HT.lib.operation.RuleOperation', {
 	},
 
 	/**
-	 * Gets interactions and evaluates the result to provide a value to decide if
-	 * the two targets (in this particular case) interact each other
+	 * From the gene name or symbol, gets whether or not interacts with target compound in any way
 	 * @param edgeSrc, the edge object for the source node
 	 * @param edgeTrg, the edge object for the target node
 	 * @param threshold, the value threshold
@@ -47,15 +46,12 @@ Ext.define('HT.lib.operation.RuleOperation', {
 	 */
 	operation: function (edgeSrc, edgeTrg, threshold, funcObj) {
 		var me = this;
-		var accSrc = edgeSrc.payloadValue.acc;
-		var accTrg = edgeTrg.payloadValue.acc;
-		var url = 'http://localhost:3003/api/interactions/'+accSrc+'/'+accTrg+'.jsonp';
+		var payloadSrc = edgeSrc.payloadValue;
+		var payloadTrg = edgeTrg.payloadValue;
+		var url = 'http://localhost:3003/pharma/' + payloadSrc.acc + '/bioactivities.jsonp';
 
 		Ext.data.JsonP.request({
 			url: url,
-			params: {
-				threshold: (threshold === undefined || threshold == null)? 0.0: threshold
-			},
 
 //			callback: function (opts, resp) {
 //			},
@@ -65,21 +61,30 @@ Ext.define('HT.lib.operation.RuleOperation', {
 			},
 
 			success: function (resp, opts) {
-				me.resumeEvents();
 				var jsonObj = resp;
-				var result = jsonObj.totalCount;
-				var sumConfVal = 0;
-				if (jsonObj.totalCount > 0) {
-					Ext.each(jsonObj.interactions, function (inter, index, interactions) {
-						sumConfVal += inter.conf_value;
-					})
-					result = sumConfVal / jsonObj.totalCount;
-				}
+				var result = false;
 
-				funcObj.result = result;
-				console.log('Operation finished!!!: '+funcObj.result);
-				me.fireEvent('operationComplete', {result: result, edge: edge});
-				me.suspendEvents();
+				var activityList = jsonObj.activities; // array of activities involving the protein
+				var activityCount = 0;
+				Ext.each(activityList, function (activity, index, activities) {
+					if (activity.ingredient_cmpd_chemblid == payloadTrg.chemblId) {
+						result = true;
+						activityCount++;
+					}
+				});
+
+				funcObj.result = activityCount;
+				var hypothesiseResult = result !== false;
+
+				var edgeId = 'e' + edgeSrc.id + '-' + edgeTrg.id;
+				console.log('Operation finished!!!: ' + funcObj.result + ' for ' + edgeId);
+
+				var msg = "<span style=\"font-weight: bold;\">Gene -> Compound</span> operation<br/>('";
+				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
+				msg += "')<br/>"+activityCount;
+				msg += " activities for the gene where found involving the compound";
+				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
+								hypothesiseResult, edgeId: edgeId, msg: msg});
 			},
 
 			scope: me

@@ -99,7 +99,8 @@ Ext.define("TDGUI.controller.panels.GraphTabPanel", {
     var myMask = new Ext.LoadMask(Ext.getBody(), {msg: 'Loading data...'})
     myMask.show()
     Ext.Ajax.request({
-      url: '/concept_wiki_api_calls/protein_lookup',
+      // url: '/concept_wiki_api_calls/protein_lookup',
+      url: '/ops_wiki_api_calls/protein_lookup',
       method: 'GET',
       params: {
         query: nodename
@@ -119,38 +120,38 @@ console.info('Unable to get response from concept_wiki.')
       },
 
       success: function (resp, opts) {
+        var onlyAccs = Ext.Array.map(uniprotAcc, function (acc, index, accs) {
+          var matches = [];
+          matches = acc.match(/[A-Z0-9]{6}/);
+          return matches[0];
+        })
 
-        if (resp.responseText == '{}') {
+        var listItem = {
+          name: nodename, // target_name for conceptWiki or /uniprot/protein/recommendedname/fullname
+          concept_uuid: undefined,
+          concept_uri: undefined,
+          uniprot_acc: onlyAccs,
+          uniprot_id: onlyAccs[0],
+          uniprot_name: nodename
+        };
+
+        if (resp.responseText == '[]' || resp.responseText == '{}') {
 //          console.info("Nothing found for: " + item)
           Ext.Msg.show({
              title:'Target information',
-             msg: "No information about the chosen target was found in ConceptWiki. Some features won't be available.",
+             msg: "No information about the chosen target was found in OPS. Some features won't be available.",
              buttons: Ext.Msg.OK,
              icon: Ext.Msg.WARNING
           });
         }
         else {
-          var onlyAccs = Ext.Array.map(uniprotAcc, function (acc, index, accs) {
-            var matches = [];
-            matches = acc.match(/[A-Z0-9]{6}/);
-            return matches[0];
-          })
-
-          var listItem = {
-            name: nodename, // target_name for conceptWiki or /uniprot/protein/recommendedname/fullname
-            concept_uuid: undefined,
-            concept_uri: undefined,
-            uniprot_acc: onlyAccs,
-            uniprot_id: onlyAccs[0],
-            uniprot_name: undefined
-          };
-
           var jsonResp = Ext.JSON.decode(resp.responseText);
           var conceptMatch = jsonResp[0];
 
-          listItem.concept_uuid = conceptMatch.concept_uuid;
-          listItem.concept_uri = conceptMatch.concept_uri;
-          listItem.name = conceptMatch.concept_label;
+          listItem.concept_uuid = conceptMatch.uuid; // conceptMatch.concept_uuid;
+          listItem.concept_uri = conceptMatch.pref_uri; // conceptMatch.concept_uri;
+          listItem.name = (listItem.name == '' || listItem.name === undefined || listItem.name == null) ? 
+                          conceptMatch.pref_label: listItem.name;
         }
 
         var target = Ext.create('TDGUI.model.ListTarget', listItem);

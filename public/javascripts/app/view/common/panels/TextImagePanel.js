@@ -43,7 +43,6 @@ Ext.define('TDGUI.view.common.panels.TextImagePanel', {
 //  height:150,
   bodyPadding:'2 2 2 2',
 
-
   respondNodeEnter: undefined,
   respondEdgeEnter: undefined,
 
@@ -65,7 +64,7 @@ console.info("TextImagePanel initComponent: "+this.tpl);
         border: false,
         tpl: me.tpl,
         data: me.data,
-        height:'97%',
+        // height:'97%',
         autoScroll:true,
         flex:2
       }
@@ -83,8 +82,6 @@ console.info("TextImagePanel initComponent: "+this.tpl);
 //    this.myMask = new Ext.LoadMask(me.getEl(), {msg:"Please wait..."});
     this.callParent(arguments)
   },
-
-
 
 
   listeners: {

@@ -64,7 +64,7 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
     );
 
     var targetTpl = new Ext.XTemplate(
-      '<div style="margin: 5px 5px 5px 5px; padding: 2px 2px 2px 2px">',
+      '<div style="margin: 5px 5px 5px 5px; padding: 2px 2px 2px 2px" id="targetTplDiv-'+me.targetAcc+'">',
       '<div style="margin-bottom:10px">{pdbimg}</div>',
       '<div><span style="font-weight: bold;">{proteinFullName}</span> ({organismSciName})</div>',
       '<div>Uniprot:<br/>' +
@@ -97,9 +97,9 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
     );
 
     var interactionTpl = new Ext.XTemplate (
-      '<div style="background-color: green; margin: 5px 5px 5px 5px; padding: 2px 2px 2px 2px">',
-        '<div>Edge between targets {nodeFromAcc} - {nodeToAcc}</div>',
-          '<div>Found on experiments:<br>',
+      '<div style="margin: 5px 5px 5px 5px; padding: 2px 2px 2px 2px">',
+        '<div>Edge connecting targets <b>{nodeFromAcc}</b> and <b>{nodeToAcc}</b></div><br/>',
+          '<div>Found on experiments:<br/>',
             '<tpl for="experiments">',
               '<a href="http://www.ebi.ac.uk/intact/interaction/{intactid}" target="_blank">{intactid}</a> (Confidence value: {confidenceVal})<br/>',
             '</tpl>',
@@ -108,6 +108,10 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
       '</div>');
 
 
+/**
+ * This is the callback function to display information IN the TextImagePanel context
+ * when the mouse pointer hover on a graph node.
+ */
     var onNodeEnter = function (nodeName, targetStore) {
       console.log("infoPanel.onNodeEnter: "+nodeName)
 
@@ -126,10 +130,12 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
       var nodeRec = targetStore.getAt(idxNode);
       console.log("nodeRec found?: "+nodeRec.get('proteinFullName'));
 
-      var panel = this.items.getAt(0);
+      // 'this0 is the instance of TextImagePanel; so panel is the first item in the panel
+      var panel = this.items.getAt(0); 
 
       this.tplList[1].overwrite(panel.body, nodeRec.raw);
       this.tplList[1].onClickButton(nodeRec);
+      panel.setHeight(this.getHeight());
     };
 
 
@@ -142,13 +148,15 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
 
       var edgeRec = interactionStore.getAt(indexEdge);
       console.log ("Edge: ("+edgeRec.get('nodeFromAcc')+") "+nodeFromId+" -> "+nodeToId);
+      /*
       Ext.Array.forEach(edgeRec.get('experiments'), function (exp, ind, exps) {
         console.log('cv:'+exp.confidenceVal+' - intactId: '+exp.intactid +
                   ' - pubmed: '+exp.pubmed+" - iref: "+exp.iref);
       })
-
+      */
       var panel = this.items.getAt(0);
       this.tplList[2].overwrite(panel.body, edgeRec.data);
+      panel.setHeight(this.getHeight());
     };
 
 
@@ -161,6 +169,7 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
       respondNodeEnter: onNodeEnter,
       respondEdgeEnter: onEdgeEnter
     });
+
     infoPanel.tpl = welcomeTpl;
     infoPanel.tplList = [
       welcomeTpl,
@@ -169,6 +178,6 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
     ];
 
     return infoPanel;
-  } // EO private
+  } // EO createInfoPanel
 
 })

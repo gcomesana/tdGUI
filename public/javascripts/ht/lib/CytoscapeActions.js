@@ -9,7 +9,6 @@ Ext.define('HT.lib.CytoscapeActions', {
 		GENE: 1,
 		PROTEIN: 2,
 		COMPOUND: 3,
-		COMPOUND: 3,
 		DISEASE: 4,
 
 		/**
@@ -60,22 +59,12 @@ Ext.define('HT.lib.CytoscapeActions', {
 		 * @param nodeData the json object with the node data, such that {id: 'id', label: 'label', payloadValue: whatever}
 		 */
 		createNode: function (vis, nodeData) {
-			if (nodeData.payloadValue == null || nodeData.payloadValue === undefined) {
-				Ext.MessageBox.show ({
-					title: 'Information',
-					msg: "No information found for '"+nodeData+"'",
-					buttons: Ext.Msg.OK,
-					icon: Ext.window.MessageBox.WARNING
-				});
-				return false;
-			}
-
 			var newId = vis.nodes().length+1;
 			var nodeLabel, nodeId;
 			var nodeOpts;
 			if (Ext.isObject(nodeData)) {
-				//	nodeLabel = nodeData.label;
-				//	nodeId = nodeData.id;
+			//	nodeLabel = nodeData.label;
+			//	nodeId = nodeData.id;
 				nodeOpts = nodeData;
 			}
 			else {
@@ -106,6 +95,22 @@ Ext.define('HT.lib.CytoscapeActions', {
 		 * target objects as delivered by the Event object and stored in the selectionModel
 		 */
 		createEdge: function (vis, nodes) {
+			var entitySrc = nodes[0].data.entity, entityTrg = nodes[1].data.entity;
+
+			if ((entitySrc == 'disease' && entityTrg == 'disease') ||
+					(entitySrc == 'compound' && entityTrg == 'compound') ||
+					(entitySrc == 'gene' && entityTrg == 'gene')) {
+				Ext.Msg.show({
+					title: 'Relationship warning',
+					msg: "Relationship <b>"+entitySrc+"-"+entityTrg+ "</b> not suitable",
+					width: 350,
+					buttons: Ext.MessageBox.OK,
+					icon: Ext.MessageBox.WARNING
+				});
+				return;
+			}
+
+
 			var edges = vis.edges().length;
 			var nodeOneId = nodes[0].data.id, nodeTwoId = nodes[1].data.id;
 			var newEdge = undefined;
@@ -123,8 +128,9 @@ Ext.define('HT.lib.CytoscapeActions', {
 				source: nodeOneId.toString(),
 				target: nodeTwoId.toString(),
 
-				label: 'from '+nodeOneId+' to '+nodeTwoId,
-				rule: edgeRule
+				// label: 'from '+nodeOneId+' to '+nodeTwoId,
+				label: '',
+        rule: edgeRule
 			};
 			console.log('Edge AFTER edgeData...');
 
@@ -140,10 +146,10 @@ Ext.define('HT.lib.CytoscapeActions', {
 		 * @param {String} shape an string representing the shape
 		 * @return the entity who is represented by that shape
 		 *
-		 shape2entity: function (shape) {
+		shape2entity: function (shape) {
 
-		 },
-		 */
+		},
+    */
 
 
 
@@ -152,7 +158,7 @@ Ext.define('HT.lib.CytoscapeActions', {
 		 * Run the rules based on the edges on the graph. As the graph can have several
 		 * paths, in order to walk all paths, after walking one edge, the next edge
 		 *
-		 * @param vis
+ 		 * @param vis
 		 * @param nodes
 		 * @param edges
 		 */
@@ -185,8 +191,14 @@ Ext.define('HT.lib.CytoscapeActions', {
 			// There are several paths in a graph, with several edges for every path
 			// and one rule for every edges, with several function every rule
 			vis.visualStyleBypass(null); // remove bypass; reset the graph colors
-			Ext.each(paths, function(path, index, pathList) {
+			Ext.each(paths, function(path, indexPath, pathList) {
 				var edgeIndex = 0;
+				var cytoscapePanel = Ext.ComponentQuery.query('cytoscape')[0];
+
+				cytoscapePanel.setLoading(true);
+				Ext.getCmp('actionsBtn').disable();
+				Ext.getCmp('clearBtn').disable();
+
 				Ext.each(path, function(edge, indexBis, edgeList) {
 					var rule = edge.rule;
 					var aliases = rule.ruleAliases;
@@ -195,7 +207,7 @@ Ext.define('HT.lib.CytoscapeActions', {
 						var opObj = HT.lib.RuleFunctions.getOperationFromAlias(aliasObj.alias);
 
 						opObj.clearListeners();
-						// Result is like {result: result, hypothesis: true|false, edge: theedge}
+						// Result is like {result: result, hypothesis: true|false, edge: theedge, msg: aMessage}
 						opObj.on('operationComplete', function (result) {
 							var myEdge = vis.edge(result.edgeId);
 							console.log('operationComplete:'+aliasObj.result+ ' vs '+result.result+' for edge '+myEdge.label);
@@ -205,33 +217,36 @@ Ext.define('HT.lib.CytoscapeActions', {
 							else
 								bypassEdge(myEdge, 'red');
 
-							var labelResult = Ext.getCmp('labelResult');
-							if (labelResult == null)
-								console.log('No component was found');
+							// var labelResult = Ext.getCmp('labelResult');
+							var resultsPanel = Ext.getCmp('resultsPanel');
+							resultsPanel.update(result.msg);
 
-							else if (labelResult === undefined)
-								console.log('A "class" was found...'+labelResult.toString());
+							// Hide the mask...
+							if (indexFunc == functionsList.length-1 &&
+									indexBis == edgeList.length-1 && indexPath == pathList.length-1) {
+								cytoscapePanel.setLoading(false);
 
-							else // labelResult is an object
-								labelResult.setText('result: '+aliasObj.result);
+								Ext.getCmp('actionsBtn').enable();
+								Ext.getCmp('clearBtn').enable();
+							}
 
 						});
 						opObj.operation(rule.edgeSource, rule.edgeTarget, aliasObj.threshold, aliasObj);
 
-						// actualFunc(rule.edgeSource.payloadValue, rule.edgeTarget.payloadValue, aliasObj.threshold, aliasObj)
-					})
+					}) // EO each
 					edgeIndex++;
+
 					/*
-					 Ext.each(functionObjs, function(aliasObj, indexFunc, functionsList) {
-					 var actualFunc = HT.lib.RuleFunctions.getFunctionFromAlias(aliasObj.alias);
-					 actualFunc(rule.edgeSource.payloadValue, rule.edgeTarget.payloadValue, aliasObj.threshold, aliasObj)
-					 })
-					 */
+					Ext.each(functionObjs, function(aliasObj, indexFunc, functionsList) {
+						var actualFunc = HT.lib.RuleFunctions.getFunctionFromAlias(aliasObj.alias);
+						actualFunc(rule.edgeSource.payloadValue, rule.edgeTarget.payloadValue, aliasObj.threshold, aliasObj)
+					})
+          */
 				})
 			});
 			if (vis.selected().length > 0)
 				vis.deselect();
-
+			
 //			runner.pathsToString();
 		}, // EO rungraph
 
@@ -280,9 +295,9 @@ Ext.define('HT.lib.CytoscapeActions', {
 		 */
 		this.self.shape2entity = {
 			'circle': this.self.PROTEIN,
-			'square': this.self.COMPOUND,
-			'triangle': this.self.DISEASE,
-			'diamond':  this.self.GENE
+				'square': this.self.COMPOUND,
+				'triangle': this.self.DISEASE,
+				'diamond':  this.self.GENE
 		};
 
 		/**
@@ -290,9 +305,9 @@ Ext.define('HT.lib.CytoscapeActions', {
 		 */
 		this.self.convert2entity = {
 			'protein': this.self.PROTEIN,
-			'compound': this.self.COMPOUND,
-			'disease': this.self.DISEASE,
-			'gene':  this.self.GENE
+				'compound': this.self.COMPOUND,
+				'disease': this.self.DISEASE,
+				'gene':  this.self.GENE
 		};
 
 		return this;

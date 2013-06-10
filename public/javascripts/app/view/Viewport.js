@@ -213,14 +213,26 @@ console.info ("Viewport.initComponent starting...")
       {
         region: 'north',
         id: 'td-top',
-//        collapsible: true,
-//        title: 'North',
-//        split: true,
         height: 100,
-        minHeight: 60,
+        // minHeight: 60,
+        style: {
+          height: '100px'
+        },
         split: false,
         items: [
-          logosPanel
+          Ext.create ('Ext.Img', {
+            src: '/images/td-logo-new.png',
+            id: 'img-app-logo',
+            baseCls: 'img-app-logo',
+            listeners: {
+              afterrender:  {
+                fn: function (img, evOpts) {
+                  console.log('afterrender image');
+                  // img.addCls('img-app-logo');
+                }
+              }
+            }
+          })
         ]
 //        border: false
 //        html: 'north'

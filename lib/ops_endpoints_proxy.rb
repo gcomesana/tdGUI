@@ -342,6 +342,7 @@ module OpsEndpointsProxy
 			end
 
 			# limit_param = opts[:limit].nil? ? 10: opts[:limit]
+			url = url + (opts[:start].nil? == false ? "&start=#{opts[:start]}": '')
 			url = url + (opts[:limit].nil? == false ? "&limit=#{opts[:limit]}": '')
 
 		else # we gotta resort to uniprot and derivatives, this is only to get proteins

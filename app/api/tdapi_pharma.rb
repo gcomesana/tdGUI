@@ -88,7 +88,7 @@ module TargetDossierPharmaApi
 		desc 'Gets a list of diseases from OMIM.'
 		params do
 			requires :disease, :type => String, :desc => 'A disease name'
-			optional :offset, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
+			optional :start, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
 			optional :limit, :type => Integer, :desc => 'The max number of results to send back'
 			optional :callback, :type => String, :desc => 'A callback function for JSONP requests'
 		end
@@ -116,7 +116,7 @@ module TargetDossierPharmaApi
 		desc 'Gets a set of proteins involved in a disease'
 		params do
 			requires :disease, :type => String, :desc => 'A disease name'
-			optional :offset, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
+			optional :start, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
 			optional :limit, :type => Integer, :desc => 'The max number of results to send back'
 			optional :callback, :type => String, :desc => 'A callback function for JSONP requests'
 		end
@@ -151,23 +151,25 @@ module TargetDossierPharmaApi
 
 
 
-		desc 'Gets a list of compounds based on a search term'
+		desc 'Gets a list of compounds based on a search term (driven by conceptWiki)'
 		params do
 			requires :term, :type => String, :desc => 'A term to lookup for compounds'
-			optional :offset, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
+			optional :start, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
 			optional :limit, :type => Integer, :desc => 'The max number of results to send back'
 			optional :callback, :type => String, :desc => 'A callback function for JSONP requests'
 		end
 		get '/compound/lookup' do
 			proxy = OpsWikiApiCall.new
-
-			resp = proxy.search_by_tag('07a84994-e464-4bbf-812a-a4b96fa3d197', params[:term])
+			options[:start] = params[:start]
+			options[:limit] = params[:limit]
+			resp = proxy.search_by_tag('07a84994-e464-4bbf-812a-a4b96fa3d197',
+																 params[:term], options)
 
 			resp
 		end
 
 
-		desc 'Gets info about a compound given its uuid/conceptWiki uri'
+		desc 'Gets info about a compound given its conceptWiki uri'
 		params do
 			requires :uri, :type => String, :desc => 'A conceptwiki uri for a compound. Can be got from a /pharma/compound/lookup.json?term request'
 			optional :callback, :type => String, :desc => 'A callback function for JSONP requests'

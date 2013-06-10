@@ -19,8 +19,6 @@ Ext.define('TDGUI.view.panels.LogosPanel', {
    * @cfg {Boolean} border see TDGUI.view.Viewport#border
    */
   border: false,
-  // height: 100,
-
   /**
    * @cfg {Object} layout the layout set for this panel
    * @cfg {String} [layout.type='hbox']
@@ -28,30 +26,44 @@ Ext.define('TDGUI.view.panels.LogosPanel', {
    */
   layout: {
     type: 'hbox',
-    align: 'middle'
+    align: 'top'
   },
+  
+  id: 'top-panel',
 
   initComponent: function () {
     var me = this;
 
-    this.items = [
+    this.items = [ // me.createLeftLogo()
+    
       Ext.create ('Ext.Img', {
-          src: '/images/td-logo-new.png',
-          id: 'img-app-logo',
-          // baseCls: 'img-app-logo'
+        src: '/images/td-logo-new.png',
+        id: 'img-app-logo',
+        // cls: 'img-app-logo',
+        baseCls: 'img-app-logo',
 //          bodyStyle: {background: ''}
-          listeners: {
-            afterrender:  {
-              fn: function (img, evOpts) {
-                console.log('afterrender image');
-                img.addCls('img-logo');
-              }
+        listeners: {
+          afterrender:  {
+            fn: function (img, evOpts) {
+              console.log('afterrender image');
+              img.addCls('img-app-logo');
             }
           }
-        })
+        }
+      })
       //this.createLeftLogo()
       // this.createRightLogos()
-    ]
+    
+    ];
+
+    this.listeners = {
+      afterrender: {
+        fn: function (comp, evOpts) {
+          console.log("afterrender image top panel");
+          comp.down('image').addCls('img-app-logo');
+        }
+      }
+    };
     this.callParent(arguments);
   },
 
@@ -61,14 +73,6 @@ Ext.define('TDGUI.view.panels.LogosPanel', {
    * @return {Ext.panel.Panel} a panel as a property of this class (leftpanel)
    */
   createLeftLogo: function () {
-/*
-    var td_logo = Ext.create('Ext.Img', {
-      src: '/images/TD-logo-web.png',
-//      bodyStyle:{background:'transparent'},
-      height: 70,
-      width: 194
-    })
-*/
     this.leftPanel = Ext.create('Ext.panel.Panel', {
       border: false,
       frame: false,
@@ -89,11 +93,14 @@ Ext.define('TDGUI.view.panels.LogosPanel', {
         }
         */
       },
+      style: {
+        backgroundColor: 'grey'
+      },
 
       items: [Ext.create ('Ext.Img', {
           src: '/images/td-logo-new.png',
           id: 'img-app-logo',
-          baseCls: 'img-app-logo'
+          cls: 'img-app-logo'
 //          bodyStyle: {background: ''}
         })
       ]

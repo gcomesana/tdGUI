@@ -22,12 +22,12 @@ class TdguiProxy
 
 
 	OLD_DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch/uniprotkb/xxxx/uniprotxml'
-	UNIPROT_BY_NAME = 'http://www.uniprot.org/uniprot/?query="xxxx"+AND+reviewed:yes&limit=25&offset=0&sort=score&format=xml'
-	UNIPROT_BY_NAME_HUMAN = 'http://www.uniprot.org/uniprot/?query=name:"xxxx"+AND+organism:"Human+[9606]"+AND+reviewed:yes&limit=25&offset=0&sort=score&format=xml'
-	UNIPROT_BY_NAME_QRY_HUMAN = 'http://www.uniprot.org/uniprot/?query="xxxx"+AND+organism:"Human+[9606]"+AND+reviewed:yes&limit=25&offset=0&sort=score&format=xml'
-	UNIPROT_QUERY_HUMAN = 'http://www.uniprot.org/uniprot/?query=xxxx+AND+organism:%22Human+[9606]%22+AND+reviewed:yes&limit=25&offset=0&sort=score&format=xml'
+	UNIPROT_BY_NAME = 'http://www.uniprot.org/uniprot/?query="xxxx"+AND+reviewed:yes&limit=20&offset=0&sort=score&format=xml'
+	UNIPROT_BY_NAME_HUMAN = 'http://www.uniprot.org/uniprot/?query=name:"xxxx"+AND+organism:"Human+[9606]"+AND+reviewed:yes&limit=20&offset=0&sort=score&format=xml'
+	UNIPROT_BY_NAME_QRY_HUMAN = 'http://www.uniprot.org/uniprot/?query="xxxx"+AND+organism:"Human+[9606]"+AND+reviewed:yes&limit=20&offset=0&sort=score&format=xml'
+	UNIPROT_QUERY_HUMAN = 'http://www.uniprot.org/uniprot/?query=xxxx+AND+organism:%22Human+[9606]%22+AND+reviewed:yes&limit=20&offset=0&sort=score&format=xml'
 
-	UNIPROT_BY_GENE = 'http://www.uniprot.org/uniprot/?query=gene:xxxx+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&format=xml'
+	UNIPROT_BY_GENE = 'http://www.uniprot.org/uniprot/?query=gene:xxxx+AND+organism:"Human+[9606]"+AND+reviewed:yes&sort=score&offset=0&limit=20&format=xml'
 
 	DBFETCH_URL = 'http://www.ebi.ac.uk/Tools/dbfetch/dbfetch?db=uniprotkb&id=xxxx&format=xml'
 
@@ -51,20 +51,33 @@ class TdguiProxy
 # Gets a list of genes from a term search on Uniprot
 # @param [String] term the search term
 # @param [Number] limit the maximun number of results returned
-	def gene_lookup (term, limit = 25)
+	def gene_lookup (term, start=0, limit = 25)
 		url = UNIPROT_BY_NAME.gsub(/xxxx/, term)
 		url = url.gsub(/format=xml/, 'format=tab')
+
+
 		url_human = UNIPROT_BY_NAME_HUMAN.gsub(/xxxx/, term)
 		url_human = url_human.gsub(/format=xml/, 'format=tab')
 
+
+		if limit.nil? == false
+			url = url.gsub(/limit=20/, "limit=#{limit}")
+			url_human = url_human.gsub(/limit=20/, "limit=#{limit}")
+		end
+		if start.nil? == false
+			url = url.gsub(/offset=0/, "offset=#{start}")
+			url_human = url_human.gsub(/offset=0/, "offset=#{start}")
+		end
+
+=begin
 		if limit != 25
 			url = url.gsub(/limit=25/, "limit=#{limit}")
 			url_human = url_human.gsub(/limit=25/, "limit=#{limit}")
 		end
-
+=end
 		url = "#{url}&columns=id,protein names,citation,comments,genes"
 		url_human = "#{url_human}&columns=id,protein names,citation,comments,genes"
-		puts "gene_lookup url: #{url}"
+		puts "start: #{start}-limit:#{limit}; gene_lookup url: #{url}"
 		options = {}
 
 	#		url =  URI.encode(url)

@@ -174,20 +174,16 @@ module TargetDossierApi
 			desc 'Return gene names from a text search on Uniprot'
 			params do
 				requires :term, :type => String, :desc => 'The term search'
-				optional :offset, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
+				optional :start, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
 				optional :limit, :type => Integer, :desc => 'The max number of results to send back'
 				optional :callback, :type => String, :desc => 'A callback function for JSONP requests'
 			end
 			get '/gene/lookup' do
 				proxy = TdguiProxy.new
-				res = proxy.gene_lookup(params[:term], params[:limit])
+				res = proxy.gene_lookup(params[:term], params[:start], params[:limit])
 
 				res
 			end
-
-
-
-
 
 
 		end
@@ -201,16 +197,17 @@ module TargetDossierApi
 			desc "Gets a list of conceptWiki entries for targets based on a query term"
 			params do
 				requires :term, :type => String, :desc => 'The term search'
-				# optional :offset, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
+				optional :start, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
 				optional :limit, :type => Integer, :desc => 'The max number of results to send back'
 				optional :callback, :type => String, :desc => 'A callback function for JSONP requests'
 			end
 			get '/lookup' do
 				api_call = OpsWikiApiCall.new
 				substring = params[:term]
+				# options[:start] = params[:start].nil? ? 0: params[:start]
+				options[:limit] = params[:limit].nil? ? 30: params[:limit]
 				results = api_call.search_by_tag('eeaec894-d856-4106-9fa1-662b1dc6c6f1',
 																				 substring, options)  # this is the 'Pharmacologic Substance'Amino Acid, Peptide, or Protein' tag
-
 				results
 			end
 
@@ -337,7 +334,7 @@ module TargetDossierApi
 			params do
 				requires :disease, :type => String, :desc => 'A disease/disorder name, like asthma or anemia'
 				optional :callback, :type => String, :desc => 'A callback function for JSONP requests'
-				optional :offset, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
+				optional :start, :type => Integer, :desc => 'The number of the first result to return of the whole list of results'
 				optional :limit, :type => Integer, :desc => 'The max number of results to send back'
 			end
 			get '/disease/:disease' do

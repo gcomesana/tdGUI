@@ -90,6 +90,6 @@ Ext.define("TDGUI.controller.panels.MultiTarget", {
 	},
 
 	onLaunch:function (app) {
-		myMask = new Ext.LoadMask (Ext.getBody(), {msg: 'It\'s ok...'})
+		// myMask = new Ext.LoadMask (Ext.getBody(), {msg: 'It\'s ok...'})
 	}
 })

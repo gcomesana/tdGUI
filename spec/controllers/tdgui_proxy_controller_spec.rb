@@ -243,6 +243,8 @@ describe TdguiProxyController do
 			uri = 'http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
 			uri = 'http://www.conceptwiki.org/concept/59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
 #			uri = 'http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F70dafe2f-2a08-43f7-b337-7e31fb1d67a8'
+			uri = 'http://www.conceptwiki.org/concept/979f02c6-3986-44d6-b5e8-308e89210c8d'
+
 			get :get_pharm_count, :uri => uri
 
 			response.should_not be_nil
@@ -257,12 +259,13 @@ describe TdguiProxyController do
 
 		end
 
-		it "to get pharma information results of drugs on a target" do
+		it "should get pharma information results of drugs on a target" do
 			uri = 'http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
 			#		uri = 'http://www.conceptwiki.org/concept/59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
 
 			# get :get_pharmtarget_page_results, :uri => uri, :page => 1, :pagesize => 50
-			get :get_pharm_by_target_page, :uri => uri, :page => 1, :pagesize => 50
+			uri = 'http://www.conceptwiki.org/concept/979f02c6-3986-44d6-b5e8-308e89210c8d'
+			get :get_pharm_by_target_page, :uri => uri, :page => 2, :pagesize => 20
 
 			response.should_not be_nil
 			response.code.to_i.should be == 200
@@ -272,11 +275,30 @@ describe TdguiProxyController do
 			json_resp.should be_kind_of Hash
 			json_resp['result'].should be_kind_of Hash
 			json_resp['result']['items'].should be_kind_of Array
-			json_resp['result']['items'].should have(50).items
-			json_resp['result']['itemsPerPage'].should be == 50
+			json_resp['result']['items'].should have(20).items
+			json_resp['result']['itemsPerPage'].should be == 20
 			json_resp['result']['items'].should have((json_resp['result']['itemsPerPage']).to_i).items
 		end
 	end
+
+
+	it "should get the number of total results for the target (no the results themselves)" do
+		uri = 'http://www.conceptwiki.org/concept/979f02c6-3986-44d6-b5e8-308e89210c8d'
+		get :get_pharm_count, :uri => uri
+
+		response.should_not be_nil
+		response.code.to_i.should be == 200
+		response.body.should_not be == ''
+
+		json_resp = JSON.parse(response.body)
+		json_resp['result'].should_not be_nil
+		json_resp['result'].should be_kind_of(Hash)
+		json_resp['result']['primaryTopic'].should_not be_nil
+		json_resp['result']['primaryTopic']['targetPharmacologyTotalResults'].should be > 2000
+
+
+	end
+
 
 
 	it "should send an email" do

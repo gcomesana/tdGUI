@@ -50,7 +50,7 @@ Ext.define('HT.lib.operation.CompoundProteinOperation', {
 		var me = this;
 		var payloadSrc = edgeSrc.payloadValue;
 		var payloadTrg = edgeTrg.payloadValue;
-		var url = 'http://localhost:3003/pharma/compound/activities/' + payloadSrc.chemblId + '.jsonp';
+		var url = 'http://lady-qu.cnio.es:3003/pharma/compound/activities/' + payloadSrc.chemblId + '.jsonp';
 
 		Ext.data.JsonP.request({
 			url: url,

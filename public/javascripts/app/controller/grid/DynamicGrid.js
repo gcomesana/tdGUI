@@ -145,8 +145,8 @@ console.info ("item double clicked!!!")
    */
   prepPharmaGrid: function (comp, opts) {
     console.info("Prepping pharmaGrid!!");
-    var grid_view = this.getPharmaGrid();
-    var grid_store = grid_view.getStore();
+    // var grid_view = this.getPharmaGrid(); // gets the grid, no the panel as a whole
+    // var grid_store = grid_view.getStore(); // gets the store which feed the grid, lda.TargetPharma...Store
 
 // it is suppossed gridParams has the configuration parameters needed
     comp.store.proxy.extraParams = comp.queryParams;
@@ -199,8 +199,9 @@ console.info ("item double clicked!!!")
 
 
   /**
-   * Initialize the grid mostly on regards to the grid's store
-   * @param comp
+   * Initialize the grid mostly on regards to the grid's store. This is only for the "generic" dynamicgrid3, not for
+   * another grid xtype.
+   * @param comp the grid component
    * @param opts the options to configure the proxy to set up the grid. It should
    * be something like { actionMethods: { read: 'GET' }, api-read: 'urlread', params: {param1:val1, param2: val2}}
    */

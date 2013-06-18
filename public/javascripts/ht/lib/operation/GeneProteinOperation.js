@@ -37,7 +37,7 @@ Ext.define('HT.lib.operation.GeneProteinOperation', {
 		var accSrc = edgeSrc.payloadValue.acc;
 		var accTrg = edgeTrg.payloadValue.acc;
 		var genename = edgeSrc.label.split(',')[0].trim();
-		var url = 'http://localhost:3003/api/target/by_gene.jsonp?genename='+genename;
+		var url = 'http://lady-qu.cnio.es:3003/api/target/by_gene.jsonp?genename='+genename;
 
 		Ext.data.JsonP.request({
 			url: url,

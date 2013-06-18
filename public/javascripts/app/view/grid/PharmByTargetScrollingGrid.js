@@ -11,7 +11,7 @@ Ext.define('TDGUI.view.grid.PharmByTargetScrollingGrid', {
 
   layout: 'fit',
   // verticalScrollerType:Ext.create('LDA.helper.DynamicPagingToolbar', {itemId:'pager_id'}),
-  verticalScrollerType: 'paginggridscroller',
+  // verticalScrollerType: 'paginggridscroller',
   loadMask: true,
   disableSelection: true,
   invalidateScrollerOnRefresh: false,

@@ -172,6 +172,7 @@ puts "target ids: #{target_str}\n\n"
 	it "get_pharm_resutls_by_page should return similar large json with 25 results" do
 		uri = 'http%3A%2F%2Fwww.conceptwiki.org%2Fconcept%2F59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
 		uri = 'http://www.conceptwiki.org/concept/59aabd64-bee9-45b7-bbe0-9533f6a1f6bc'
+		uri = 'http://www.conceptwiki.org/concept/979f02c6-3986-44d6-b5e8-308e89210c8d'
 
 		page_size = 25
 		page = 1

@@ -31,6 +31,7 @@ class OpsWikiApiCallsController < ApplicationController
 		options = Hash.new
 		options[:limit] =  params[:limit]
 		options[:offset] = params[:offset]
+		options[:branch] = '3'
 		api_call = OpsWikiApiCall.new
 		substring = CGI.escape(substring)
 		results = api_call.search_by_tag('eeaec894-d856-4106-9fa1-662b1dc6c6f1', substring, options)  # this is the 'Amino Acid, Peptide, or Protein' tag

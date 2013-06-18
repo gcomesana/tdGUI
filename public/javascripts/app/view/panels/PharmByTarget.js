@@ -28,13 +28,14 @@ Ext.define ('TDGUI.view.panels.PharmByTarget', {
    */
   gridParams: null, // an object to set/add grid.proxy.extraParams
   closable: true,
+  numOfResults: 0, // number of results for this target
 
   initComponent:function () {
     var me = this
 
 //    this.theGrid = this.createGrid()
 
-    this.testStores();
+    // this.testStores();
 
     this.theGrid = this.createPharmGrid();
     this.items = [this.theGrid];
@@ -46,7 +47,7 @@ Ext.define ('TDGUI.view.panels.PharmByTarget', {
    * Creates an instance of dynamicgrid3 grid component an returns it.
    * (see TDGUI.view.panels.MultiTarget#createGrid)
    * @return {TDGUI.view.grid.DynamicGrid3} an instance of {@link TDGUI.view.grid.DynamicGrid3}
-   */
+   *
   createGrid: function (config) {
     var myConfig = config || {
       title:'Pharmacology for target '+window.decodeURI(this.targetName),
@@ -71,38 +72,26 @@ Ext.define ('TDGUI.view.panels.PharmByTarget', {
 
     return theGrid;
   },
-
+  */
 
   createPharmGrid: function () {
     var me = this;
 
     console.log('creating LDA pharmaGrid...');
-    var myConfig = {
+    var theGrid = Ext.create('widget.tdgui-pharmbytargetscroll-grid', {
       title:'Pharmacology for target '+window.decodeURI(this.targetName),
       gridBaseTitle:'Pharmacology compounds for '+window.decodeURI(this.targetName),
       margin:'5 5 5 5',
-      //      border: '1 1 1 1',
       flex:1, // needed to fit all container
       store: Ext.create('TDGUI.store.lda.TargetPharmacologyStore'),
-      protein_uri: this.gridParams.protein_uri,
+      // protein_uri: this.gridParams.protein_uri,
+      protein_uri: this.gridParams.uri,
       queryParams: this.gridParams
 
-    };
-
-    var theGrid = Ext.create('widget.tdgui-pharmbytargetscroll-grid', {
-          title:'Pharmacology for target '+window.decodeURI(this.targetName),
-          gridBaseTitle:'Pharmacology compounds for '+window.decodeURI(this.targetName),
-          margin:'5 5 5 5',
-          //      border: '1 1 1 1',
-          flex:1, // needed to fit all container
-          store: Ext.create('TDGUI.store.lda.TargetPharmacologyStore'),
-          protein_uri: this.gridParams.protein_uri,
-          queryParams: this.gridParams
-
-        });
+    });
 
     return theGrid;
-  },
+  }, // EO createPharmGrid
 
 
 

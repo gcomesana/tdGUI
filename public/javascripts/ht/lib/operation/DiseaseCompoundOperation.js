@@ -52,7 +52,7 @@ Ext.define('HT.lib.operation.DiseaseCompoundOperation', {
 		var payloadSrc = edgeSrc.payloadValue; // contains OMIM number, accessions and genes
 		var payloadTrg = edgeTrg.payloadValue; // contains ids for the compound
 		var geneParam = payloadSrc.genes.split(',')[0];
-		// var url = 'http://localhost:3003/pharma/gene/diseases.jsonp?ident=' + geneParam;
+		// var url = 'http://lady-qu.cnio.es:3003/pharma/gene/diseases.jsonp?ident=' + geneParam;
 
 
 		// Method:
@@ -100,7 +100,7 @@ Ext.define('HT.lib.operation.DiseaseCompoundOperation', {
 
 
 		Ext.each(accs_arr, function (acc, index, accessions) {
-			var url = 'http://localhost:3003/pharma/xxxx/bioactivities.jsonp';
+			var url = 'http://lady-qu.cnio.es:3003/pharma/xxxx/bioactivities.jsonp';
 			url = url.replace('xxxx', acc);
 			// get activities for every accession
 			Ext.data.JsonP.request({

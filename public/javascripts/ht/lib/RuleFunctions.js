@@ -16,7 +16,7 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 		/*
 		 * Template function Object to get along a rule
 		 * Gets interactions among the two values
-		 * Call the API at localhost:<rails_port>/api/interactions/target1/target2?conf_val=val
+		 * Call the API at lady-qu.cnio.es:<rails_port>/api/interactions/target1/target2?conf_val=val
 		 * @param {String} valSrc the accession of one target
 		 * @param {String} valTrg the accession for the other target
 		 * @param {Number} threshold the confidence value to filter the interactions
@@ -26,7 +26,7 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 		 *
 		 func: function (valSrc, valTrg, threshold, funcObj) {
 		 // console.log('calling interactionFunc.interaction: '+valSrc+', '+valTrg);
-		 var url = 'http://localhost:3003/api/interactions/'+valSrc+'/'+valTrg+'.jsonp';
+		 var url = 'http://lady-qu.cnio.es:3003/api/interactions/'+valSrc+'/'+valTrg+'.jsonp';
 
 		 Ext.data.JsonP.request({
 		 url: url,

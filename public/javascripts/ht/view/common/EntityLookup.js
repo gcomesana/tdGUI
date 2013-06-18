@@ -90,34 +90,34 @@ Ext.define('HT.view.common.EntityLookup', {
 
 		switch (myEntity) {
 			case 'protein':
-				// remoteUrl = 'http://localhost:3003/ops_wiki_api_calls/protein_lookup.jsonp';
-				remoteUrl = 'http://localhost:3003/api/target/lookup.jsonp';
+				// remoteUrl = 'http://lady-qu.cnio.es:3003/ops_wiki_api_calls/protein_lookup.jsonp';
+				remoteUrl = 'http://lady-qu.cnio.es:3003/api/target/lookup.jsonp';
 				comboStore.storeId = 'comboStore-target';
 				queryParam = 'term';
 				break;
 
 			case 'compound':
-				// remoteUrl = 'http://localhost:3003/ops_wiki_api_calls/compound_lookup.jsonp';
-				remoteUrl = 'http://localhost:3003/pharma/compound/lookup.jsonp';
+				// remoteUrl = 'http://lady-qu.cnio.es:3003/ops_wiki_api_calls/compound_lookup.jsonp';
+				remoteUrl = 'http://lady-qu.cnio.es:3003/pharma/compound/lookup.jsonp';
 				comboStore.storeId = 'comboStore-compound';
 				queryParam = 'term';
 				break;
 
 			case 'gene':
-				remoteUrl = 'http://localhost:3003/api/gene/lookup.jsonp'; // need to complete the url
+				remoteUrl = 'http://lady-qu.cnio.es:3003/api/gene/lookup.jsonp'; // need to complete the url
 				comboStore.storeId = 'comboStore-gene';
 				queryParam = 'term';
 				break;
 
 			case 'disease':
-				// remoteUrl = 'http://localhost:3003/api/target/by_disease.jsonp'; // idem
-				remoteUrl = 'http://localhost:3003/pharma/disease/lookup.jsonp';
+				// remoteUrl = 'http://lady-qu.cnio.es:3003/api/target/by_disease.jsonp'; // idem
+				remoteUrl = 'http://lady-qu.cnio.es:3003/pharma/disease/lookup.jsonp';
 				comboStore.storeId = 'comboStore-disease';
 				queryParam = 'disease';
 				break;
 
 			default:
-				remoteUrl = 'http://localhost:3003/ops_wiki_api_calls/protein_lookup.jsonp';
+				remoteUrl = 'http://lady-qu.cnio.es:3003/ops_wiki_api_calls/protein_lookup.jsonp';
 				comboStore.storeId = 'comboStore-target';
 				queryParam = 'query';
 				break;

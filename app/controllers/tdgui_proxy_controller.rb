@@ -219,7 +219,10 @@ puts "Getting interactions for '#{params[:target]}' from Intact with conf_val=#{
 	end
 
 
-
+# Gets a list of pharma compounds from OPS. 
+# @params [String] uri the uri to make the request.
+# @params [String] page the number of page to return. To convert to the start param, start = page*pagesize+1
+# @params [String] pagesize the number of results to return for this request.
 	def get_pharm_by_target_page (uri = params[:uri], page = params[:page], num_results=params[:pagesize])
 		pharm_proxy = TdguiProxy.new
 

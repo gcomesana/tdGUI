@@ -154,10 +154,11 @@ console.log("listStoreMain size: "+listStoreMain.getCount());
         newPanel = Ext.createByAlias('widget.'+xtype, {
           closeable: true,
           gridParams: {
-            protein_uri: tokenObj.qp,
-            limit: 10,
-            start: 0,
-            page: 1
+            // protein_uri: tokenObj.qp,
+            uri: tokenObj.qp
+            // limit: 10,
+            // start: 0,
+            // page: 1
           },
           targetName: tokenObj.tg,
           title: "Pharmacology for "+ window.decodeURI(tokenObj.tg)

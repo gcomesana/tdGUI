@@ -38,7 +38,7 @@ Ext.define('HT.lib.operation.ProteinGeneOperation', {
 		// target is a gene entity, and in its payloadValue.uuid the gene ids and accessin are held
 		var accTrg = edgeTrg.payloadValue.uuid;
 		var genename = edgeSrc.label.split(',')[0].trim();
-		var url = 'http://localhost:3003/api/target/'+accSrc+'.jsonp';
+		var url = 'http://lady-qu.cnio.es:3003/api/target/'+accSrc+'.jsonp';
 
 		Ext.data.JsonP.request({
 			url: url,

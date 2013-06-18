@@ -104,7 +104,7 @@ Ext.define('HT.lib.EdgeRule', {
 
 		/**
 		 * Gets interactions among the two values
-		 * Call the API at localhost:<rails_port>/api/interactions/target1/target2?conf_val=val
+		 * Call the API at lady-qu.cnio.es:<rails_port>/api/interactions/target1/target2?conf_val=val
 		 * @param {String} valSrc the accession of one target
 		 * @param {String} valTrg the accession for the other target
 		 * @param {float} threshold the confidence value to filter the interactions
@@ -112,7 +112,7 @@ Ext.define('HT.lib.EdgeRule', {
 		 * @return {Object} an object with information about the found interactions
  		 */
 		var interactionFunc = function (valSrc, valTrg, threshold, funcObj) {
-			var url = 'http://localhost:3003/api/interactions/'+valSrc+'/'+valTrg;
+			var url = 'http://lady-qu.cnio.es:3003/api/interactions/'+valSrc+'/'+valTrg;
 			url = (threshold === undefined || threshold == null)? url: url+
 				'?threshold='+threshold;
 

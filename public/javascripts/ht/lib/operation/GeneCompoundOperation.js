@@ -48,7 +48,7 @@ Ext.define('HT.lib.operation.GeneCompoundOperation', {
 		var me = this;
 		var payloadSrc = edgeSrc.payloadValue;
 		var payloadTrg = edgeTrg.payloadValue;
-		var url = 'http://localhost:3003/pharma/' + payloadSrc.acc + '/bioactivities.jsonp';
+		var url = 'http://lady-qu.cnio.es:3003/pharma/' + payloadSrc.acc + '/bioactivities.jsonp';
 
 		Ext.data.JsonP.request({
 			url: url,

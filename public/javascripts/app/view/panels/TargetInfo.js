@@ -462,6 +462,8 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 						labelFuncField.show();
 						labelFuncField.setVisible(true);
 
+						me.addPDBImage(jsonObj.pdbimg);
+
 						me.endLoading();
 					}
 				} // EO success
@@ -574,16 +576,27 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
    * @param {String} pdbIdPage a pdb url for the image
    */
 	addPDBImage: function(pdbIdPage) {
-		//example http://www.pdb.org/pdb/explore/explore.do?structureId=1HOF
-		//        http://www.rcsb.org/pdb/images/1HOF_asr_r_250.jpg
+		// example http://www.pdb.org/pdb/explore/explore.do?structureId=1HOF
+		//         http://www.rcsb.org/pdb/images/1HOF_asr_r_250.jpg
+		// for Uniprot retrieved info: <img src=\"http://www.rcsb.org/pdb/images/2Y6E_asr_r_80.jpg\" width=\"80\" height=\"80\" />
     if (pdbIdPage.length == 0 || pdbIdPage.indexOf('http') == -1)
       return;
 
 		var stringURL = new String(pdbIdPage);
 		var img = this.down('#target_image');
-		var pdbID = stringURL.substr(stringURL.lastIndexOf('=') + 1);
-    if (pdbID == pdbIdPage)
-      pdbID = stringURL.substr(stringURL.lastIndexOf('/') + 1);
+		var pdbID;
+		if (stringURL.indexOf('<img') == 0) {
+			var initPdbId = stringURL.indexOf('s/');
+			var endPdbId = stringURL.indexOf('_asr', initPdbId);
+			pdbID = stringURL.substring(initPdbId+2, endPdbId);
+
+			pdbIdPage = 'http://www.pdb.org/pdb/explore.do?structureId='+pdbID;			
+		}
+		else {
+			var pdbID = stringURL.substr(stringURL.lastIndexOf('=') + 1);
+	    if (pdbID == pdbIdPage)
+	      pdbID = stringURL.substr(stringURL.lastIndexOf('/') + 1);
+	  }
 
 		var pdbField = this.down('#pdb_id_page');
 		pdbField.setRawValue('<a target=\'_blank\' href=\'' + pdbIdPage + '\'>' + pdbID + '</a>');
@@ -619,7 +632,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
         this.addPDBImage(value);
 		}
     else {
-console.log('standard field: '+fieldId+' -> '+value);
+// console.log('standard field: '+fieldId+' -> '+value);
 			var field = this.down('#' + fieldId);
 			if (field != null) {
         field.setValue(value);

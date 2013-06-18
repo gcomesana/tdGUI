@@ -10,16 +10,19 @@ Ext.define('TDGUI.store.lda.TargetPharmacologyStore', {
   REQUEST_TYPE: 'pharma',
 
   pageSize: 25,
-//  buffered: true,
+  // buffered: true,
 
 // [start|limit|page]Param, parameters for paging
+// like ...page=5&start=400&size=100
   proxy: {
     type: 'ajax',
     noCache: false,
     // both are query string params
     startParam: undefined, // the start to get the results, set to undefined if the beginning
-    limitParam: '_pageSize', // the number of the records to fetch/prefetch
-    pageParam: '_page' // the number of page, this should be varying on every req
+    // limitParam: '_pageSize', // the number of the records to fetch/prefetch
+    limitParam: 'pagesize',
+    // pageParam: '_page' // the number of page, this should be varying on every req
+    pageParam: 'page'
 //    url: this.BASE_URL
   },
 

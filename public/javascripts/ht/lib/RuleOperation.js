@@ -50,7 +50,7 @@ Ext.define('HT.lib.RuleOperation', {
 		var me = this;
 		var accSrc = valSrc.acc;
 		var accTrg = valTrg.acc;
-		var url = 'http://localhost:3003/api/interactions/'+accSrc+'/'+accTrg+'.jsonp';
+		var url = 'http://lady-qu.cnio.es:3003/api/interactions/'+accSrc+'/'+accTrg+'.jsonp';
 
 		Ext.data.JsonP.request({
 			url: url,

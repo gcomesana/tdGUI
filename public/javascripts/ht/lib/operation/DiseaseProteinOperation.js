@@ -41,7 +41,7 @@ Ext.define('HT.lib.operation.DiseaseProteinOperation', {
 		var payloadTrg = edgeTrg.payloadValue;
 
 		var genename = edgeSrc.label.split(',')[0].trim();
-		var url = 'http://localhost:3003/pharma/disease/genemap.jsonp?mim_number='+edgeSrc.payloadValue.uuid; // OMIMid when entity = disease
+		var url = 'http://lady-qu.cnio.es:3003/pharma/disease/genemap.jsonp?mim_number='+edgeSrc.payloadValue.uuid; // OMIMid when entity = disease
 
 		Ext.data.JsonP.request({
 			url: url,
@@ -58,6 +58,7 @@ Ext.define('HT.lib.operation.DiseaseProteinOperation', {
 			success: function (resp, opts) {
 				var jsonObj = resp;
 				var result = false;
+				var hits = [];
 
 				var geneList = jsonObj.genes; // an array of {mim_number, gene_symbol} objects
 				Ext.each(geneList, function (geneObj, index, genesItself) {
@@ -66,11 +67,12 @@ Ext.define('HT.lib.operation.DiseaseProteinOperation', {
 						// if a genename is in the genes list, then result is true
 						if (payloadTrg.genes.indexOf(genename) != -1) {
 							result = true;
-							return false;
+							hits.push(genename);
+							// return false;
 						}
 					});
-					if (result = true)
-						return false; // finish outer each loop
+					// if (result)
+						// return false; // finish outer each loop
 				});
 
 				funcObj.result = result;
@@ -79,10 +81,12 @@ Ext.define('HT.lib.operation.DiseaseProteinOperation', {
 				var edgeId = 'e'+edgeSrc.id+'-'+edgeTrg.id;
 				console.log('Operation finished!!!: '+funcObj.result+' for '+edgeId);
 
-				var msg = "<span style=\"font-weight: bold;\">Compound -> Protein</span> operation<br/>('";
+				var msg = "<span style=\"font-weight: bold;\">Disease -> Protein</span> operation<br/>('";
 				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
-				msg += "')<br/>"+activityCount;
-				msg += " activities for the compound where found involving the protein";
+				msg += "')<br/>";
+				msg += hits.length+" relationships between disease and protein where found in OMIM";
+				if (hits.length > 0)
+					msg += ': '+hits.join(',');
 				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
 										hypothesiseResult, edgeId: edgeId, msg: msg});
 			},

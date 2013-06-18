@@ -80,12 +80,13 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
 //      '<tpl if="function != &quot;&quot;">',
       '<div>Function:<br/>{function}</div>',
 //      '</tpl>',
-      '<div><button id="btnAdd" class="x-btn x-toolbar-item x-btn-default-small x-noicon x-btn-noicon x-btn-default-small-noicon">Add to list</button></div>',
+      '<div><button id="btnAdd-'+me.targetAcc+'" class="x-btn x-toolbar-item x-btn-default-small x-noicon x-btn-noicon x-btn-default-small-noicon">Add to list</button></div>',
       '</div>', {
         onClickButton: function (nodeRec) {
-          var myBtn = Ext.get('btnAdd');
-          Ext.get('btnAdd').on('click', function (e) {
-            e.stopEvent();
+          var myBtn = Ext.get('btnAdd-'+me.targetAcc);
+          console.log("myBtn is: "+myBtn);
+          var btn = myBtn.on('click', function (e) {
+            // e.stopEvent();
             console.info ("button clicked: "+nodeRec.get('proteinFullName'));
             var parentComp = Ext.ComponentQuery.query('tdgui-graphtabpanel');
             var myComp = parentComp[0].down('tdgui-textimagepanel');
@@ -94,6 +95,12 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
 
         }
       }
+    );
+
+    var emptyTpl = new Ext.XTemplate(
+      '<div style="margin: 5px 5px 5px 5px; padding: 2px 2px 2px 2px">',
+      '{msg}',
+      '</div>'
     );
 
     var interactionTpl = new Ext.XTemplate (
@@ -128,13 +135,18 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
       });
 
       var nodeRec = targetStore.getAt(idxNode);
-      console.log("nodeRec found?: "+nodeRec.get('proteinFullName'));
-
-      // 'this0 is the instance of TextImagePanel; so panel is the first item in the panel
       var panel = this.items.getAt(0); 
+      if (nodeRec) {
+        console.log("nodeRec found?: "+nodeRec.get('proteinFullName'));
 
-      this.tplList[1].overwrite(panel.body, nodeRec.raw);
-      this.tplList[1].onClickButton(nodeRec);
+        // 'this is the instance of TextImagePanel; so panel is the first item in the panel
+        this.tplList[1].overwrite(panel.body, nodeRec.raw);
+        this.tplList[1].onClickButton(nodeRec);
+      }
+      else {
+        var msgObj = {msg: "No data was found for the node labeled with <span style=\"color:red;\">'"+nodeName+"'</span>"};
+        this.tplList[3].overwrite(panel.body, msgObj);
+      }
       panel.setHeight(this.getHeight());
     };
 
@@ -174,8 +186,19 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
     infoPanel.tplList = [
       welcomeTpl,
       targetTpl,
-      interactionTpl
+      interactionTpl,
+      emptyTpl
     ];
+
+    infoPanel.on({
+      destroy: function (panel, evOpts) {
+        console.log ('GraphTabPanel destroyed...');
+        panel.tpl = null;
+        Ext.each(panel.tplList, function (tpl, index,tplList) {
+          tpl = null;
+        });
+      }
+    });
 
     return infoPanel;
   } // EO createInfoPanel

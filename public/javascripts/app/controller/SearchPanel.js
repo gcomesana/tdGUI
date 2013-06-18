@@ -112,22 +112,27 @@ Ext.define('TDGUI.controller.SearchPanel', {
   retrieveBtnClick: function (btn, ev, opts) {
 //    var txtArea = btn.up('tdgui-west-search').down('tdgui-textarea')
 //    var uniprotIds = txtArea.getRawValue().split('\n').join(',')
-    var me = this
-    var uniprotIds = this.getItemList().getStoreItems('uniprot_acc')
-    var concept_uuids = this.getItemList().getStoreItems('concept_uuid')
-    var accessions = []
+    var me = this;
+    var uniprotIds = this.getItemList().getStoreItems('uniprot_acc');
+    var concept_uuids = this.getItemList().getStoreItems('concept_uuid');
+    var accessions = [];
 /*
     Ext.each (uniprotIds, function (accs, index, theIds) {
       accessions.push(accs[0])
     })
 */
-    Ext.each (concept_uuids, function (uuid, index, uuids) {
-      accessions.push(uniprotIds[index][0]+';'+uuid)
-    })
+    if (concept_uuids.length > uniprotIds.length)
+      Ext.each (concept_uuids, function (uuid, index, uuids) {
+        accessions.push(uniprotIds[index][0]+';'+uuid);
+      })
+    else {
+      Ext.each (uniprotIds, function (uniprotSet, index, uuids) {
+        accessions.push(uniprotSet[0]+';'+concept_uuids[index]);
+      })
+    }
 
-
-    var dc = Math.random()
-    Ext.History.add('!xt=tdgui-multitargetpanel&qp=' + accessions.join(',') + '&dc=' + dc)
+    var dc = Math.random();
+    Ext.History.add('!xt=tdgui-multitargetpanel&qp=' + accessions.join(',') + '&dc=' + dc);
 
     /*
      if (btn.getId() == 'panelBtnLeft')

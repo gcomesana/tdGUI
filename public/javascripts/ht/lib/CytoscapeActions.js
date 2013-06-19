@@ -219,7 +219,11 @@ Ext.define('HT.lib.CytoscapeActions', {
 
 							// var labelResult = Ext.getCmp('labelResult');
 							var resultsPanel = Ext.getCmp('resultsPanel');
-							resultsPanel.update(result.msg);
+							// resultsPanel.update(result.msg);
+							var oldHtml = resultsPanel.body.dom.innerHTML;
+							resultsPanel.update(oldHtml + '<br/><br/>'+result.msg);
+
+
 
 							// Hide the mask...
 							if (indexFunc == functionsList.length-1 &&

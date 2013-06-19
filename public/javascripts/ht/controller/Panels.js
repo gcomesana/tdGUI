@@ -151,11 +151,13 @@ Ext.define('HT.controller.Panels', {
 							//	(jsonObj.accessions !== undefined && jsonObj.accessions != null)) {
 						if (evOpts.meta == 'disease') {
 							// check the object to see whether or not include the list of genes
+							var myUuid = jsonObj.genes.length == 0? '': jsonObj.genes[0].mim_number;
+							var myGenes = jsonObj.genes.length == 0? '': jsonObj.genes[0].gene_symbol;
 							payload = {
-								uuid: jsonObj.genes[0].mim_number,
+								uuid: myUuid,
 								acc: jsonObj.accessions, // comma-separated list of accessions from OMIM
 								chemblId: null,
-								genes: jsonObj.genes[0].gene_symbol,
+								genes: myGenes,
 								chemSpiderId: null
 							}
 						}
@@ -250,11 +252,14 @@ Ext.define('HT.controller.Panels', {
 		var cytoscape = this.getCytoscape();
 		var vis = cytoscape.vis;
 		var edges, nodes;
+		var resultsPanel = Ext.getCmp('resultsPanel');
 
 		if (btnId == 'btnEnact') { // for the whole graph
 			var nm = vis.networkModel();
 			edges = nm.data.edges; // should be an array
 			nodes = nm.data.nodes;
+
+			resultsPanel.update('');
 		}
 		else if (btnId == 'btnEnactSel') { // only for selected nodes (a subgraph)
 			var selNodeModel, selEdgeModel;
@@ -269,6 +274,8 @@ Ext.define('HT.controller.Panels', {
 			var nm = vis.networkModel();
 			nodes = selNodeModel;
 			edges = selEdgeModel; // nm.data.edges;
+
+			resultsPanel.update('');
 		}
 		// functionEvent = HT.lib.RuleFunctions.getFunctionFromAlias(alias)
 		// functionEvent.addListener('operationComplete', this.onOperationComplete, this)

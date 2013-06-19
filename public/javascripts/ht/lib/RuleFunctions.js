@@ -77,12 +77,14 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 
 	var diseaseCompOp = Ext.create('HT.lib.operation.DiseaseCompoundOperation', {});
 	var compoundProtOp = Ext.create('HT.lib.operation.CompoundProteinOperation', {});
+	var compoundDisOp = Ext.create('HT.lib.operation.CompoundDiseaseOperation', {});
 
 
 	var operationStore = [interactionOp, geneProteinOp, proteinGeneOp,
 				diseaseGeneOp, diseaseProteinOp, geneDiseaseOp, diseaseCompOp,
 				geneCompoundOp, compoundGeneOp, proteinDiseasdOp,
-				compoundProtOp]; // Actual logic for rule operations come from here!!!!
+				compoundProtOp, compoundDisOp
+	]; // Actual logic for rule operations come from here!!!!
 
 
 	return {
@@ -235,6 +237,11 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 
 							case HT.lib.CytoscapeActions.PROTEIN:
 								aliasObj.alias = 'compound-protein-operation';
+								aliasArray.push(aliasObj);
+								break;
+
+							case HT.lib.CytoscapeActions.DISEASE:
+								aliasObj.alias = 'compound-disease-operation';
 								aliasArray.push(aliasObj);
 								break;
 

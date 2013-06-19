@@ -9,6 +9,8 @@ class LibUtil
 	include REXML
 	include EndpointsProxy
 
+
+	NUM_REQ_ATTEMPTS = 5
 # Filter and translate to json an uniprotxml response from EBI upon request for
 # multiple uniprot entries retrieval based on accessions
 # @param [String] xmlRes the body of the request performed elsewhere
@@ -267,6 +269,7 @@ class LibUtil
 			http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
 			request = Net::HTTP::Get.new(my_url.request_uri)
+
 			begin
 				res = http.request(request)
 			end while res.nil?

@@ -172,7 +172,7 @@ Ext.define('HT.view.panels.CytoPanel', {
 			width: '100%',
 			style: {
 				backgroundColor: 'lightgray',
-				padding: '10 10 10 10',
+				padding: '5px 5px 5px 5px',
 				marginBottom: 20
 			},
 			html: '<span style="font-family: Arial; font-size: 24px; font-weight: bold">Entities</span>'
@@ -305,6 +305,9 @@ Ext.define('HT.view.panels.CytoPanel', {
 								var cytoscape = Ext.ComponentQuery.query('cytoscape')[0];
 								cytoscape.vis.removeElements();
 								cytoscape.vis.visualStyleBypass(null);
+
+								var resultsPanel = Ext.getCmp('resultsPanel');
+								resultsPanel.update('');
 							}
 						}
 					}

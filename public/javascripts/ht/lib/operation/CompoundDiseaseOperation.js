@@ -13,7 +13,7 @@
  * /////
  * rfe.fireEvent('operationComplete');
  */
-Ext.define('HT.lib.operation.DiseaseCompoundOperation', {
+Ext.define('HT.lib.operation.CompoundDiseaseOperation', {
 	// extend: 'Ext.util.Observable',
 	mixins: {
 		observable: 'Ext.util.Observable'
@@ -23,7 +23,7 @@ Ext.define('HT.lib.operation.DiseaseCompoundOperation', {
 		// this.initConfig(config);
 
 		this.evName = 'operationComplete';
-		this.alias = 'disease-compound-operation';
+		this.alias = 'compound-disease-operation';
 		this.result = null;
 		this.threshold = null;
 

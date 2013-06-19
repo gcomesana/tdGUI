@@ -38,7 +38,7 @@ Ext.define('TDGUI.view.panels.LogosPanel', {
     
       Ext.create ('Ext.Img', {
         src: '/images/td-logo-new.png',
-        id: 'img-app-logo',
+        id: 'img-app-logo-old',
         // cls: 'img-app-logo',
         baseCls: 'img-app-logo',
 //          bodyStyle: {background: ''}
@@ -71,7 +71,7 @@ Ext.define('TDGUI.view.panels.LogosPanel', {
   /**
    * Creates the lef panel for the logos.
    * @return {Ext.panel.Panel} a panel as a property of this class (leftpanel)
-   */
+   *
   createLeftLogo: function () {
     this.leftPanel = Ext.create('Ext.panel.Panel', {
       border: false,
@@ -84,14 +84,14 @@ Ext.define('TDGUI.view.panels.LogosPanel', {
         padding: '0 8 0 8',
 //        pack: 'end',
         align: 'middle'
-        /*
+        *
         defaultMargins: {
           top: 0, // 10,
           right: 20,
           bottom: 10,
           left: 0
         }
-        */
+        *
       },
       style: {
         backgroundColor: 'grey'
@@ -108,7 +108,7 @@ Ext.define('TDGUI.view.panels.LogosPanel', {
 
     return this.leftPanel
   },
-
+*/
 
   /**
    * As #createLeftLogo, creates the right panel for the logos

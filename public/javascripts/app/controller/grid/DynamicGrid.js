@@ -189,7 +189,8 @@ console.info ("item double clicked!!!")
 //      grid_view.setTitle(grid_view.gridBaseTitle + ' ---- There was an error retrieving some of the records ----');
       Ext.MessageBox.show({
           title: 'Info',
-          msg: 'We are sorry but the OPS system returned an error.',
+          // msg: 'We are sorry but the OPS system returned an error.',
+          msg: 'No pharmacology data was found for the target in the OPS system',
           buttons: Ext.MessageBox.OK,
           icon: Ext.MessageBox.INFO
       });

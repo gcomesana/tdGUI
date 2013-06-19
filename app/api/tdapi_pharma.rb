@@ -160,7 +160,7 @@ module TargetDossierPharmaApi
 		end
 		get '/compound/lookup' do
 			proxy = OpsWikiApiCall.new
-			options[:start] = params[:start]
+			# options[:start] = params[:start]
 			options[:limit] = params[:limit]
 			resp = proxy.search_by_tag('07a84994-e464-4bbf-812a-a4b96fa3d197',
 																 params[:term], options)

@@ -11,6 +11,11 @@ class LibUtil
 
 
 	NUM_REQ_ATTEMPTS = 5
+	TIMEOUT = 3.5
+
+
+
+
 # Filter and translate to json an uniprotxml response from EBI upon request for
 # multiple uniprot entries retrieval based on accessions
 # @param [String] xmlRes the body of the request performed elsewhere
@@ -241,7 +246,7 @@ class LibUtil
 # @param [Hash] options parameters and other options for the request
 # @return [Net::HTTPResponse] the object response
 	def self.request(url, options)
-		time_ini = Time.now
+		puts "LibUtil.request...#{Time.now}"
 		my_url = URI.parse(URI.encode(url))
 
 		begin
@@ -251,15 +256,16 @@ class LibUtil
 		end
 
 		start_time = Time.now
-		proxy_host = 'ubio.cnio.es'
-		proxy_port = 3128
 		#		res = Net::HTTP.start(my_url.host, my_url.port, proxy_host, proxy_port) { |http|
 		res = nil
+=begin
 		if url.index('https').nil?
 			req = Net::HTTP::Get.new(my_url.request_uri)
 			begin
 				res = Net::HTTP.start(my_url.host, my_url.port) { |http|
-					http.request(req)
+					Timeout::timeout(2.5) do
+						http.request(req)
+					end
 				}
 			end while res.nil?
 
@@ -274,35 +280,56 @@ class LibUtil
 				res = http.request(request)
 			end while res.nil?
 		end
-		time_end = Time.now
-		# puts "LibUtil for #{url} took: #{time_end-time_ini}"
+=end
+		response = Rails.cache.fetch my_url do
 
-		#http_session = proxy.new(my_url.host, my_url.port)
-		#
-		#res = nil
-		#proxy.new(my_url.host, my_url.port).start { |http|
-		#Net::HTTP::Proxy(proxy_host, proxy_port).start(my_url.host) { |http|
-		#	req = Net::HTTP::Get.new(my_url.request_uri)
-		#	res, data = http.request(req)
-		#
-		#	puts "shitting data: #{data}\n"
-		#	puts "res.code: #{res.code}\n"
-		#}
-		#
-		#
-		#res = Net::HTTP.start(my_url.host, my_url.port) { |http|
-		#	req = Net::HTTP::Get.new(my_url.request_uri)
-		#	http.request(req)
-		#}
+			puts "LibUtil.request for: #{url}"
+			http = Net::HTTP.new(my_url.host, my_url.port)
+			if url.index('https').nil? == false # it is an secure connection
+				http.use_ssl = true
+				http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+			end
+			#		http.verify_mode = OpenSSL::SSL::VERIFY_NONE # read into this
+			req = Net::HTTP::Get.new(my_url.request_uri)
+			count_attempts = 0
+			begin
+				count_attempts = count_attempts + 1
+				begin
+					res = Timeout::timeout(TIMEOUT) {
+						http.request(req)
+					}
+				rescue Timeout::Error => exc
+					@requestErrMsg = "ERROR: #{exc.message}"
+					puts "#{@requestErrMsg}"
+					-1
 
+				rescue Errno::ETIMEDOUT => exc
+					@requestErrMsg = "ERROR: #{exc.message}"
+					puts "#{@requestErrMsg}"
+					-2
 
-		#end_time = Time.now
-		#elapsed_time = (end_time - start_time) * 1000
-		#puts "***=> Time elapsed for #{url}: #{elapsed_time} ms\n"
-		#
-		#puts "response code: #{res ? res.code: 'res not available here'}"
+				rescue Errno::ECONNREFUSED => exc
+					@requestErrMsg = "ERROR: #{exc.message}"
+					puts "#{@requestErrMsg}"
+					-3
 
-		res
-	end
+				else
+					res
+				end
+			end while count_attempts < NUM_REQ_ATTEMPTS && res.nil?
+=begin
+			else
+				#    puts "Response is..."
+				#    puts response.code.to_i
+				response
+			end
+
+			time_end = Time.now
+=end
+			res
+		end # cache
+
+		response
+	end # request method
 
 end

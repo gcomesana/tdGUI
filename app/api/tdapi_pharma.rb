@@ -28,8 +28,8 @@ module TargetDossierPharmaApi
 			requires :acc, :type => String, :regexp => /[A-Z][A-Z0-9]{5}/, :desc => 'Uniprot accession of the target'
 		end
 		get '/bio_process/target/:acc' do
-			proxy = APIProxy.new
-			process_obj = proxy.get_process4target(params[:acc])
+			# proxy = APIProxy.new
+			process_obj = @proxy.get_process4target(params[:acc])
 
 			process_obj
 		end
@@ -41,8 +41,8 @@ module TargetDossierPharmaApi
 			optional :term, :type => String, :desc => 'A (process9)term for searching. It is optional as the query works anyway, but actually it will/should be set always'
 		end
 		get '/bio_process/process/:term' do
-			proxy = APIProxy.new
-			targets_obj = proxy.get_targets4process(params[:term])
+			# proxy = APIProxy.new
+			targets_obj = @proxy.get_targets4process(params[:term])
 
 			targets_obj
 		end

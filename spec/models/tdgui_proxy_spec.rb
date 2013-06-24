@@ -225,7 +225,7 @@ puts "target ids: #{target_str}\n\n"
 
 
 
-	it "gene_lookup should return 35 resuls as limit was passed in as parameter" do
+	it "gene_lookup should return as much as 35 resuls as limit was passed in as parameter" do
 		mock_term = 'lung'
 		mock_limit = 35
 
@@ -233,7 +233,7 @@ puts "target ids: #{target_str}\n\n"
 		res = td_proxy.gene_lookup(mock_term, mock_limit)
 
 		res.should be_kind_of(Array)
-		res.length.should be == mock_limit
+		res.length.should be <= mock_limit
 		res[0].should be_kind_of(Hash)
 		res[0][:match].downcase.should include(mock_term.downcase)
 		res[1][:pref_url].should include('uniprot')

@@ -194,4 +194,29 @@ describe TargetDossierApi do
 =end
 	# end
 
+
+		it "gets a list from nextprot based on the query term" do
+			mock_term = 'breast'
+
+			get "#{@api_prefix}/nextprot/list/#{mock_term}.json"
+			response.status.should == 200
+			parsed_resp = JSON.parse(response.body)
+			parsed_resp.should_not be_nil
+			parsed_resp.should be_kind_of(Array)
+			parsed_resp.length.should be >= 0
+
+		end
+
+
+		it "gets a hash with info on a target" do
+			mock_term = 'NX_O00534'
+
+			get "#{@api_prefix}/nextprot/#{mock_term}.json"
+			response.status.should == 200
+			parsed_resp = JSON.parse(response.body)
+			parsed_resp.should be_kind_of(Hash)
+#			parsed_resp['accession'].should_not be_nil
+#			parsed_resp['accession'].should be == mock_term
+		end
+
 end

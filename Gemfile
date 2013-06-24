@@ -19,6 +19,8 @@ gem 'grape'
 gem 'nokogiri', '~> 1.5.4'
 gem 'grape-swagger'
 
+gem 'dalli'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

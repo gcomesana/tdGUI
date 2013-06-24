@@ -153,9 +153,12 @@ public
 #		url = URI.parse(prot_uri) rescue prot_uri
 #		 url = checkEndpoints()
 		result = nil
+	  result = LibUtil.request(prot_uri, {})
+=begin
 		Timeout::timeout (TIMEOUT) do
 			result = request(prot_uri)
 		end
+=end
 
 # OJO
 #		@endpoint_ready = @urlMap[CONCEPT_WIKI_API_SEARCH_URL]

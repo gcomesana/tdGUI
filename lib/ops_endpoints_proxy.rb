@@ -79,6 +79,9 @@ module OpsEndpointsProxy
 	def self.protein_info_req (uuid)
 		url = @myProxy.conceptwiki_ep+"/get?uuid=#{uuid}"
 		url = URI.parse(url) rescue url
+		response = LibUtil.request(url, {})
+		response
+=begin
 		http = Net::HTTP.new(url.host, url.port)
 		req = Net::HTTP::Get.new(url.request_uri)
 		begin
@@ -89,6 +92,7 @@ module OpsEndpointsProxy
 		rescue Timeout::Error
 			nil
 		end
+=end
 	end
 
 
@@ -149,7 +153,8 @@ module OpsEndpointsProxy
 		alive = 0
 		@endpoint_ready = nil
 
-		result = @myProxy.request(ops_api_fulluri)
+		# result = @myProxy.request(ops_api_fulluri)
+		result = LibUtil.request(ops_api_fulluri, {})
 		alive = result.code.to_i
 		if alive > 0
 			@endpoint_ready = OPSAPI_TARGET_URL # any of them from 83 to 87
@@ -297,8 +302,10 @@ module OpsEndpointsProxy
 
 
 
-	# Make a request
+	# Make a request. Builds up a right request based on the endpoint and
+	# opts params.
 	# @param the_url will be an REST url...
+	# @param opts options and parameters to add to the main url endpoint
 	def self.make_request(the_url, opts)
 		concept_wiki_ok = true
 		ops_api_ok = check_ops_api()
@@ -355,7 +362,8 @@ module OpsEndpointsProxy
 		end
 
 		puts "ops_endpoints_proxy.make_request is #{url}"
-		resp = @myProxy.request(url)
+		# resp = @myProxy.request(url)
+		resp = LibUtil.request(url, {})
 		resp
 =begin
 		if the_url.index('uniprot').nil? == false

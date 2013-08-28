@@ -19,7 +19,7 @@ class FeedbackController < ApplicationController
 
 
 	def feedback
-
+		puts Dir.pwd
 		respond_to do |format|
 			user_from = params[:userEmail]
 			msg_issue = params[:feedbackText]

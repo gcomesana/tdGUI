@@ -19,7 +19,7 @@ gem 'grape'
 gem 'nokogiri', '~> 1.5.4'
 gem 'grape-swagger'
 
-gem 'dalli'
+gem 'dalli' # client to access to a memcached server from rails
 
 # Gems used only for assets and not required
 # in production environments by default.

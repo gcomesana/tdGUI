@@ -246,8 +246,8 @@ class LibUtil
 # @param [Hash] options parameters and other options for the request
 # @return [Net::HTTPResponse] the object response
 	def self.request(url, options)
-		puts "LibUtil.request...#{Time.now}"
 		my_url = URI.parse(URI.encode(url))
+		puts "LibUtil.request...#{url} vs #{my_url}"
 
 		begin
 			my_url = URI.parse(url)
@@ -283,7 +283,7 @@ class LibUtil
 =end
 		response = Rails.cache.fetch my_url do
 
-			puts "LibUtil.request for: #{url}"
+			puts "LibUtil.request (cache fault) for: #{url} vs #{my_url}"
 			http = Net::HTTP.new(my_url.host, my_url.port)
 			if url.index('https').nil? == false # it is an secure connection
 				http.use_ssl = true

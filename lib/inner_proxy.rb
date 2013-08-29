@@ -148,7 +148,8 @@ public
 		options[:q] = 'tp53' # default test
 		options[:uuid] = CONCEPT_WIKI_TP53_UUID
 
-		prot_uri = prot_uri+ "?uuid=#{options[:uuid]}&q=#{options[:q]}"
+		# prot_uri = prot_uri+ "?uuid=#{options[:uuid]}&q=#{options[:q]}"
+		prot_uri = prot_uri+ "?q=#{options[:q]}"
 		prot_uri = prot_uri + "&app_id=#{OPS_API_ID}&app_key=#{OPS_API_KEY}"
 #		url = URI.parse(prot_uri) rescue prot_uri
 #		 url = checkEndpoints()

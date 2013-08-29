@@ -112,8 +112,17 @@ class TdguiProxy
 			nil
 
 		else
-			intact_proxy = IntactProxy.new
-			target_graph = intact_proxy.get_interaction_graph(target_id, conf_val, max_nodes)
+			cache_key = 'interactions'+target_id
+			target_graph = Rails.cache.fetch cache_key do
+				intact_proxy = IntactProxy.new
+				res = intact_proxy.get_interaction_graph(target_id, conf_val, max_nodes)
+
+				res
+			end # EO block...
+
+#			intact_proxy = IntactProxy.new
+#			target_graph = intact_proxy.get_interaction_graph(target_id, conf_val, max_nodes)
+
 #			target_graph = intact_proxy.get_super_interaction_graph(target_id, max_nodes, conf_val)
 		end
 	puts "target_graph length: #{target_graph.size()}\n"
@@ -169,6 +178,8 @@ puts "get_multiple_entries: #{entries}"
 		options[:q] = substring
 
 #		url = URI.parse(req_url)
+		time_ini = Time.now
+		puts "** MultipleEntriesRetrieval at #{time_ini}"
 		results = LibUtil.request(url, options)
 		if results.body == "" then # no concept found
 			puts "No concept found!"
@@ -181,7 +192,15 @@ puts "get_multiple_entries: #{entries}"
 
 		else
 			# from dbfetch service, what we get is xml
-			LibUtil.uniprotxml2hash (results.body)
+			time_med = Time.now - time_ini
+			puts "** lag after requesting is #{time_med}"
+			time_med = Time.now
+			uniprotHash = LibUtil.uniprotxml2hash (results.body)
+
+			time_end = Time.now - time_med
+			puts "** lag after uniprotxml2hash is #{time_end}"
+
+			uniprotHash
 #			return true
 		end
 

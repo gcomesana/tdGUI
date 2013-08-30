@@ -11,7 +11,7 @@ class LibUtil
 
 
 	NUM_REQ_ATTEMPTS = 5
-	TIMEOUT = 3.5
+	TIMEOUT = 9.5 # this is a large value as there are some chembl requests which takes that long
 
 
 
@@ -244,8 +244,9 @@ class LibUtil
 # This method does a get request to an uri
 # @param [String] url the target url
 # @param [Hash] options parameters and other options for the request
+# @param [boolean] cache if cache or not the request (default true, do cache)
 # @return [Net::HTTPResponse] the object response
-	def self.request(url, options)
+	def self.request(url, options, cache = true)
 		my_url = URI.parse(URI.encode(url))
 		puts "LibUtil.request...#{url} vs #{my_url}"
 
@@ -257,32 +258,18 @@ class LibUtil
 
 		start_time = Time.now
 		#		res = Net::HTTP.start(my_url.host, my_url.port, proxy_host, proxy_port) { |http|
-		res = nil
-=begin
-		if url.index('https').nil?
-			req = Net::HTTP::Get.new(my_url.request_uri)
-			begin
-				res = Net::HTTP.start(my_url.host, my_url.port) { |http|
-					Timeout::timeout(2.5) do
-						http.request(req)
-					end
-				}
-			end while res.nil?
+		response = nil
+
+		if (cache)
+			response = Rails.cache.fetch my_url do
+				do_request(url, my_url)
+			end
 
 		else
-			http = Net::HTTP.new(my_url.host, my_url.port)
-			http.use_ssl = true
-			http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-			request = Net::HTTP::Get.new(my_url.request_uri)
-
-			begin
-				res = http.request(request)
-			end while res.nil?
+			response = do_request(url, my_url)
 		end
-=end
-		response = Rails.cache.fetch my_url do
 
+=begin
 			puts "LibUtil.request (cache fault) for: #{url} vs #{my_url}"
 			http = Net::HTTP.new(my_url.host, my_url.port)
 			if url.index('https').nil? == false # it is an secure connection
@@ -317,19 +304,58 @@ class LibUtil
 					res
 				end
 			end while count_attempts < NUM_REQ_ATTEMPTS && res.nil?
-=begin
-			else
-				#    puts "Response is..."
-				#    puts response.code.to_i
-				response
-			end
-
-			time_end = Time.now
-=end
 			res
 		end # cache
-
+=end
 		response
 	end # request method
 
+
+
+
+	# Do a request out of a url. Nothing else
+	# @param [String] url the url as it was passed into the request method
+	# @param [URL] my_url the url after being parsed
+	# @return a response object
+	def self.do_request (url, my_url)
+		puts "LibUtil.do_request (cache fault) for: #{my_url}"
+		http = Net::HTTP.new(my_url.host, my_url.port)
+		if url.index('https').nil? == false # it is an secure connection
+			http.use_ssl = true
+			http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+		end
+		#		http.verify_mode = OpenSSL::SSL::VERIFY_NONE # read into this
+		req = Net::HTTP::Get.new(my_url.request_uri)
+		count_attempts = 0
+		res = nil
+		begin
+			count_attempts = count_attempts + 1
+			begin
+				res = Timeout::timeout(TIMEOUT) {
+					http.request(req)
+				}
+			rescue Timeout::Error => exc
+				@requestErrMsg = "ERROR: #{exc.message}"
+				puts "#{@requestErrMsg}"
+				-1
+
+			rescue Errno::ETIMEDOUT => exc
+				@requestErrMsg = "ERROR: TIMEDOUT: #{exc.message}"
+				puts "#{@requestErrMsg}"
+				-2
+
+			rescue Errno::ECONNREFUSED => exc
+				@requestErrMsg = "ERROR: CONNREFUSED: #{exc.message}"
+				puts "#{@requestErrMsg}"
+				-3
+
+			else
+				res
+			end
+		end while count_attempts < NUM_REQ_ATTEMPTS && res.nil?
+		res
+
+	end
+
+	private_class_method :do_request
 end

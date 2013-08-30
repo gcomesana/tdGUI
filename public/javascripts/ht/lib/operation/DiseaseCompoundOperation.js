@@ -48,10 +48,11 @@ Ext.define('HT.lib.operation.DiseaseCompoundOperation', {
 	 */
 	operation: function (edgeSrc, edgeTrg, threshold, funcObj) {
 		var me = this;
-		var diseaseName = edgeTrg.label;
+		var diseaseName = edgeSrc.label;
+		var compName = edgeTrg.label;
 		var payloadSrc = edgeSrc.payloadValue; // contains OMIM number, accessions and genes
 		var payloadTrg = edgeTrg.payloadValue; // contains ids for the compound
-		var geneParam = payloadSrc.genes.split(',')[0];
+		// var geneParam = payloadSrc.genes.split(',')[0];
 		// var url = 'http://lady-qu.cnio.es:3003/pharma/gene/diseases.jsonp?ident=' + geneParam;
 
 
@@ -91,9 +92,8 @@ Ext.define('HT.lib.operation.DiseaseCompoundOperation', {
 			var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Disease -> Compound</span> operation<br/>('";
 			msg += edgeSrc.label+"' -> '"+edgeTrg.label;
 			msg += "')<br/>" + result;
-			msg += " activities where found for proteins related to the disease ";
-			msg += "("+payloadSrc.acc+") ";
-			msg += "involving the compound</p>";
+			msg += " activities where found for proteins related to the '<i>" + diseaseName +"</i>' ";
+			msg += "involving the compound '<i>"+compName+"</i>'</div>";
 			me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
 					hypothesiseResult, edgeId: edgeId, msg: msg});
 		} // EO action function

@@ -78,12 +78,13 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 	var diseaseCompOp = Ext.create('HT.lib.operation.DiseaseCompoundOperation', {});
 	var compoundProtOp = Ext.create('HT.lib.operation.CompoundProteinOperation', {});
 	var compoundDisOp = Ext.create('HT.lib.operation.CompoundDiseaseOperation', {});
+	var protCompOp = Ext.create('HT.lib.operation.ProteinCompoundOperation', {});
 
 
 	var operationStore = [interactionOp, geneProteinOp, proteinGeneOp,
 				diseaseGeneOp, diseaseProteinOp, geneDiseaseOp, diseaseCompOp,
 				geneCompoundOp, compoundGeneOp, proteinDiseasdOp,
-				compoundProtOp, compoundDisOp
+				compoundProtOp, compoundDisOp, protCompOp
 	]; // Actual logic for rule operations come from here!!!!
 
 
@@ -172,7 +173,7 @@ Ext.define('HT.lib.RuleFunctions', (function () {
 								break;
 
 							default:
-								aliasObj.alias = interactionFunc.alias;
+								aliasObj.alias = 'protein-compound-operation';
 								aliasArray.push(aliasObj);
 								break;
 						} // EO switch

@@ -156,40 +156,44 @@ class APIProxy
 		chembl_target_id = chembl_entry['target']['chemblId']
 
 		url = CHEMBL_TARGET_ACTIVITY.gsub(/xxxx/, chembl_target_id)+".json"
-		response = LibUtil.request(url, {})
-		if response.code.to_i != 200
-			puts err_msg("method activities4target; param: #{chembl_target_id}")
-			nil
 
-		else
-			# acts_hash = Hash.from_xml(response.body)
-			acts_hash = JSON.parse(response.body)
-			res_hash = Hash.new
-			activities = Array.new
-			activity_count = 0
-			acts_hash['bioactivities'].each { |activity|
-				my_act = {:ingredient_cmpd_chemblid => activity['ingredient_cmpd_chemblid']}
-				my_act[:bioactivity_type] = activity['bioactivity_type']
-				my_act[:assay_chemblid] = activity['assay_chemblid']
-				my_act[:assay_type] = activity['assay_type']
-				my_act[:assay_description] = activity['assay_description']
+		resp_hash = Rails.cache.fetch url do
+			response = LibUtil.request(url, {}, false)
+			if response.code.to_i != 200
+				puts err_msg("method activities4target; param: #{chembl_target_id}")
+				nil
 
-				activities << my_act
-				if activity_count == MAX_CHEMBL_ACTIVITIES
-					break;
-				else
-					activity_count = activity_count + 1
-				end
-			}
+			else
+				# acts_hash = Hash.from_xml(response.body)
+				acts_hash = JSON.parse(response.body)
+				res_hash = Hash.new
+				activities = Array.new
+				activity_count = 0
+				acts_hash['bioactivities'].each { |activity|
+					my_act = {:ingredient_cmpd_chemblid => activity['ingredient_cmpd_chemblid']}
+					my_act[:bioactivity_type] = activity['bioactivity_type']
+					my_act[:assay_chemblid] = activity['assay_chemblid']
+					my_act[:assay_type] = activity['assay_type']
+					my_act[:assay_description] = activity['assay_description']
 
-			res_hash[:accession] = target_acc
-			res_hash[:chemblid] = chembl_target_id
-			res_hash[:pref_name] = chembl_entry['target']['preferredName']
-			res_hash[:description] = chembl_entry['target']['description']
-			res_hash[:activities] = activities
+					activities << my_act
+					if activity_count == MAX_CHEMBL_ACTIVITIES
+						break;
+					else
+						activity_count = activity_count + 1
+					end
+				}
 
-			res_hash
-		end
+				res_hash[:accession] = target_acc
+				res_hash[:chemblid] = chembl_target_id
+				res_hash[:pref_name] = chembl_entry['target']['preferredName']
+				res_hash[:description] = chembl_entry['target']['description']
+				res_hash[:activities] = activities
+
+				res_hash
+			end
+		end # EO cache issue management block
+
 	end
 
 
@@ -201,73 +205,76 @@ class APIProxy
 	def get_compound_activities(chembl_cmpd_id)
 
 		url = CHEMBL_COMPOUND_ACTIVITY.gsub(/xxxx/, chembl_cmpd_id)+".json"
-		response = LibUtil.request(url, {})
-		if response.code.to_i != 200
-			puts err_msg("method get_compund_activities; param: #{chembl_cmpd_id}")
-			nil
 
-		else
-			# acts_hash = Hash.from_xml(response.body)
-			acts_hash = JSON.parse(response.body)
-			res_hash = Hash.new
-			activities = Array.new
-			activity_count = 0
-			organisms = Hash.new
-			chembl_target_ids = Hash.new
-			acts_hash['bioactivities'].each { |activity|
-				# first, check if the entry is an organism and is in the organisms array
-				accessions = nil
-				isOrganism = organisms[activity['target_chemblid']].nil? == false
-				isTarget = chembl_target_ids[activity['target_chemblid']].nil? == false
+		resp_hash = Rails.cache.fetch url do
+			response = LibUtil.request(url, {})
+			if response.code.to_i != 200
+				puts err_msg("method get_compund_activities; param: #{chembl_cmpd_id}")
+				nil
 
-				# if not in organisms array, request to see if it is an organism
-				# add to organisms and set isOrganism true
-				if isOrganism == false && isTarget == false
-					# if chembl_target_ids.index(activity['target_chemblid']).nil?
-					#	chembl_target_ids << activity['target_chemblid']
-					json_obj = get_chemblid_target_info(activity['target_chemblid'])
-					type = json_obj['target']['targetType']
-					if type.downcase == 'organism'
-						organism_hash = {:name => json_obj['target']['preferredName'],
-														 :chembl_id => json_obj['target']['chemblId']}
-						organisms[activity['target_chemblid']] = organism_hash
-						isOrganism = true
-					else
-						isOrganism = false
-						accessions = json_obj['target']['proteinAccession']
-						chembl_target_ids[activity['target_chemblid']] = accessions
+			else
+				# acts_hash = Hash.from_xml(response.body)
+				acts_hash = JSON.parse(response.body)
+				res_hash = Hash.new
+				activities = Array.new
+				activity_count = 0
+				organisms = Hash.new
+				chembl_target_ids = Hash.new
+				acts_hash['bioactivities'].each { |activity|
+					# first, check if the entry is an organism and is in the organisms array
+					accessions = nil
+					isOrganism = organisms[activity['target_chemblid']].nil? == false
+					isTarget = chembl_target_ids[activity['target_chemblid']].nil? == false
+
+					# if not in organisms array, request to see if it is an organism
+					# add to organisms and set isOrganism true
+					if isOrganism == false && isTarget == false
+						# if chembl_target_ids.index(activity['target_chemblid']).nil?
+						#	chembl_target_ids << activity['target_chemblid']
+						json_obj = get_chemblid_target_info(activity['target_chemblid'])
+						type = json_obj['target']['targetType']
+						if type.downcase == 'organism'
+							organism_hash = {:name => json_obj['target']['preferredName'],
+															 :chembl_id => json_obj['target']['chemblId']}
+							organisms[activity['target_chemblid']] = organism_hash
+							isOrganism = true
+						else
+							isOrganism = false
+							accessions = json_obj['target']['proteinAccession']
+							chembl_target_ids[activity['target_chemblid']] = accessions
+						end
 					end
-				end
 
-				if isTarget
-					accessions = chembl_target_ids[activity['target_chemblid']]
-				end
-
-				if isOrganism == false
-					my_act = {'target_chemblid' => activity['target_chemblid']}
-					my_act['bioactivity_type'] = activity['bioactivity_type']
-					my_act['assay_chemblid'] = activity['assay_chemblid']
-					my_act['assay_type'] = activity['assay_type']
-					my_act['assay_description'] = activity['assay_description']
-					my_act['target_confidence'] = activity['target_confidence']
-					my_act['target_accessions'] = accessions # comma-separated accessions
-
-					activities << my_act
-					if activity_count == MAX_CHEMBL_ACTIVITIES
-						break;
-					else
-						activity_count = activity_count + 1
+					if isTarget
+						accessions = chembl_target_ids[activity['target_chemblid']]
 					end
-				end
-			} # EO bioactivities loop
 
-			res_hash['chemblid'] = chembl_cmpd_id
-#			res_hash[:pref_name] = chembl_entry['target']['preferredName']
-#			res_hash[:description] = chembl_entry['target']['description']
-			res_hash['activities'] = activities
+					if isOrganism == false
+						my_act = {'target_chemblid' => activity['target_chemblid']}
+						my_act['bioactivity_type'] = activity['bioactivity_type']
+						my_act['assay_chemblid'] = activity['assay_chemblid']
+						my_act['assay_type'] = activity['assay_type']
+						my_act['assay_description'] = activity['assay_description']
+						my_act['target_confidence'] = activity['target_confidence']
+						my_act['target_accessions'] = accessions # comma-separated accessions
 
-			res_hash
-		end
+						activities << my_act
+						if activity_count == MAX_CHEMBL_ACTIVITIES
+							break;
+						else
+							activity_count = activity_count + 1
+						end
+					end
+				} # EO bioactivities loop
+
+				res_hash['chemblid'] = chembl_cmpd_id
+	#			res_hash[:pref_name] = chembl_entry['target']['preferredName']
+	#			res_hash[:description] = chembl_entry['target']['description']
+				res_hash['activities'] = activities
+
+				res_hash
+			end
+		end # EO cache issue management block
 
 	end
 

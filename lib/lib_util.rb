@@ -11,8 +11,8 @@ class LibUtil
 
 
 	NUM_REQ_ATTEMPTS = 5
-	TIMEOUT = 9.5 # this is a large value as there are some chembl requests which takes that long
-
+	# TIMEOUT = 9.5  this is a large value as there are some chembl requests which takes that long
+	TIMEOUT = AppSettings.config["req_timeout"]
 
 
 
@@ -248,7 +248,7 @@ class LibUtil
 # @return [Net::HTTPResponse] the object response
 	def self.request(url, options, cache = true)
 		my_url = URI.parse(URI.encode(url))
-		puts "LibUtil.request...#{url} vs #{my_url}"
+		puts "LibUtil.request...#{url}: # cache # #{cache}"
 
 		begin
 			my_url = URI.parse(url)
@@ -260,7 +260,7 @@ class LibUtil
 		#		res = Net::HTTP.start(my_url.host, my_url.port, proxy_host, proxy_port) { |http|
 		response = nil
 
-		if (cache)
+		if cache == true
 			response = Rails.cache.fetch my_url do
 				do_request(url, my_url)
 			end

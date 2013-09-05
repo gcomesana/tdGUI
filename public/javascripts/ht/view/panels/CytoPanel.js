@@ -160,7 +160,7 @@ Ext.define('HT.view.panels.CytoPanel', {
 		flex: 7,
 		visualStyle: myVisualStyle
 	}, {
-		xtype: 'container',
+		xtype: 'container', // right side of the application
 		// html: 'controls here',
 		flex: 3,
 		layout: {
@@ -312,43 +312,8 @@ Ext.define('HT.view.panels.CytoPanel', {
 						}
 					}
 				}] // EO menu
-			}] // EO items
+			}] // EO items for button container!!!
 
-/*
-			style: {
-				marginTop: 20,
-				backgroundColor: 'yellow'
-			},
-
-			layout: 'column',
-
-			width: '100%',
-			items: [ {
-				columnWidth: 0.7,
-				items:[{
-					xtype: 'button',
-					text: 'Enact',
-
-					id: 'btnEnact'
-				}]
-				*style: {
-					marginLeft: 15
-				} *
-			}, {
-				columnWidth: 0.3,
-				items: [{
-					xtype: 'button',
-					text: 'Enact selected',
-
-					id: 'btnEnactSel'
-				}]
-			}, {
-				xtype: 'label',
-				id: 'labelResult',
-				text: 'result: labelresult',
-				margin: '0 0 0 10'
-			}]
-			*/
 		}, { // EO container
 			xtype: 'container',
 			width: '100%',
@@ -362,13 +327,16 @@ Ext.define('HT.view.panels.CytoPanel', {
 			xtype: 'panel',
 			id: 'resultsPanel',
 			// title: 'Enactment results',
-			html: 'Run a graph to see here the results',
+			// html: '<div style="overflow-y:auto;height:80%;border: 1px solid red;" id="resultsPanelDiv">Run a graph to see here the results</div>',
+			html: "Run a graph to see the results here",
 			border: false,
+			autoScroll: true,
 			cls: 'msg-panel',
 			bodyCls: 'msg-panel-content',
 			width: '100%',
-			style: {
-				padding: '5px 5px 5px 5px'
+			bodyStyle: {
+				padding: '5px 5px 5px 5px',
+				backgroundColor: 'lightblue'
 			}
 			
 			// EO container
@@ -376,6 +344,9 @@ Ext.define('HT.view.panels.CytoPanel', {
 
 	}],
 
+	clearResults: function () {
+		
+	},
 
 	initComponent: function () {
 		this.networkModel = graphModel;

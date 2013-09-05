@@ -220,8 +220,15 @@ Ext.define('HT.lib.CytoscapeActions', {
 							// var labelResult = Ext.getCmp('labelResult');
 							var resultsPanel = Ext.getCmp('resultsPanel');
 							// resultsPanel.update(result.msg);
+							var resultsPanelDiv = Ext.get('resultsPanelDiv');
 							var oldHtml = resultsPanel.body.dom.innerHTML;
-							resultsPanel.update(oldHtml + '<br/><br/>'+result.msg);
+							// oldHtml = resultsPanelDiv.dom.innerHTML;
+							resultsPanel.update('');
+							if (oldHtml != "")
+								resultsPanel.update(oldHtml + '<br/><br/>'+result.msg);
+								// resultsPanelDiv.update(oldHtml + '<br/><br/>'+result.msg);
+							else
+								resultsPanel.update('<br/>'+result.msg);
 
 
 

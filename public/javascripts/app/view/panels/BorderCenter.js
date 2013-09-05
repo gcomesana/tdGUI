@@ -43,7 +43,7 @@ Ext.define ('TDGUI.view.panels.BorderCenter', {
 
   initComponent: function () {
   	var me = this
-console.info ("Initializing panels.BorderCenter comp..." + this.nombre)
+// console.info ("Initializing panels.BorderCenter comp..." + this.nombre)
 
     me.items = [{
       xtype: 'tdgui-welcomepanel'

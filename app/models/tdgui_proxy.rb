@@ -112,7 +112,8 @@ class TdguiProxy
 			nil
 
 		else
-			cache_key = 'interactions'+target_id
+			cache_key = 'interactions:'+target_id+'-conf_val:'+conf_val.to_s+'-max_nodes:'+max_nodes.to_s
+			puts "GET_INTERACTIONS_TARGET cacheKey=#{cache_key}"
 			target_graph = Rails.cache.fetch cache_key do
 				intact_proxy = IntactProxy.new
 				res = intact_proxy.get_interaction_graph(target_id, conf_val, max_nodes)

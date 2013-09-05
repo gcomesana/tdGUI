@@ -1,5 +1,6 @@
 # config/application.yml
 defaults: &defaults
+  req_timeout: 9.5
   mail:
     :to = ["gcomesana@cnio.es", "vdelatorre@cnio.es"]
     :password = "Run3ks_3"
@@ -8,7 +9,7 @@ defaults: &defaults
     :port = 587
 
   tsv:
-    tsv_url: "api.openphacts.org" #without the http:// bit and no trailing slash
+    tsv_url: "api.openphacts.org" # without the http:// bit and no trailing slash
     target_path : "/target/pharmacology/pages"
     compound_path: "/compound/pharmacology/pages"
     enzyme_path: "/target/enzyme/pharmacology/pages"
@@ -27,3 +28,4 @@ test:
 
 production:
   <<: *defaults
+  req_timeout: 11

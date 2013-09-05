@@ -253,6 +253,7 @@ Ext.define('HT.controller.Panels', {
 		var vis = cytoscape.vis;
 		var edges, nodes;
 		var resultsPanel = Ext.getCmp('resultsPanel');
+		// var resultsPanelDiv = Ext.get('resultsPanelDiv');
 
 		if (btnId == 'btnEnact') { // for the whole graph
 			var nm = vis.networkModel();
@@ -260,6 +261,7 @@ Ext.define('HT.controller.Panels', {
 			nodes = nm.data.nodes;
 
 			resultsPanel.update('');
+			// resultsPanelDiv.update('');
 		}
 		else if (btnId == 'btnEnactSel') { // only for selected nodes (a subgraph)
 			var selNodeModel, selEdgeModel;
@@ -276,6 +278,7 @@ Ext.define('HT.controller.Panels', {
 			edges = selEdgeModel; // nm.data.edges;
 
 			resultsPanel.update('');
+			// resultsPanelDiv.update('');
 		}
 		// functionEvent = HT.lib.RuleFunctions.getFunctionFromAlias(alias)
 		// functionEvent.addListener('operationComplete', this.onOperationComplete, this)

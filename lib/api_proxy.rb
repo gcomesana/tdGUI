@@ -207,7 +207,7 @@ class APIProxy
 		url = CHEMBL_COMPOUND_ACTIVITY.gsub(/xxxx/, chembl_cmpd_id)+".json"
 
 		resp_hash = Rails.cache.fetch url do
-			response = LibUtil.request(url, {})
+			response = LibUtil.request(url, {}, false)
 			if response.code.to_i != 200
 				puts err_msg("method get_compund_activities; param: #{chembl_cmpd_id}")
 				nil
@@ -420,42 +420,44 @@ class APIProxy
 		url = OMIM_ENTRY_INFO.gsub(/xxxx/, disease_mim_number)
 		url = url + OMIM_APIKEY
 
-		response = LibUtil.request(url, {})
-		if response.code.to_i != 200
-			puts err_msg("method get_omim4disease; param: #{disease}")
-			nil
+		resp = Rails.cache.fetch url do
+			response = LibUtil.request(url, {}, false)
+			if response.code.to_i != 200
+				puts err_msg("method get_omim4disease; param: #{disease}")
+				nil
 
-		else
-			resp_hash = Hash.new
-			json_resp = JSON.parse(response.body)
-			entry_hash = json_resp['omim']['entryList'][0]['entry']
+			else
+				resp_hash = Hash.new
+				json_resp = JSON.parse(response.body)
+				entry_hash = json_resp['omim']['entryList'][0]['entry']
 
-			resp_hash['label'] = entry_hash['titles']['preferredTitle']
-			# genes
-			resp_hash['genes'] = Array.new
-			if entry_hash['phenotypeMapList'].nil? == false
-				entry_hash['phenotypeMapList'].each { |phenoMap|
-					gene_hash = {'mim_number' => phenoMap['phenotypeMap']['mimNumber'],
-											 'gene_symbol' => phenoMap['phenotypeMap']['geneSymbols']} # comma separated gene symbols!!!!!
+				resp_hash['label'] = entry_hash['titles']['preferredTitle']
+				# genes
+				resp_hash['genes'] = Array.new
+				if entry_hash['phenotypeMapList'].nil? == false
+					entry_hash['phenotypeMapList'].each { |phenoMap|
+						gene_hash = {'mim_number' => phenoMap['phenotypeMap']['mimNumber'],
+												 'gene_symbol' => phenoMap['phenotypeMap']['geneSymbols']} # comma separated gene symbols!!!!!
+
+						resp_hash['genes'] << gene_hash
+					}
+
+				elsif entry_hash['geneMap'].nil? == false
+					gene_hash = {'mim_number' => entry_hash['geneMap']['mimNumber'],
+								'gene_symbol' => entry_hash['geneMap']['geneSymbols']}
 
 					resp_hash['genes'] << gene_hash
-				}
+				end
 
-			elsif entry_hash['geneMap'].nil? == false
-				gene_hash = {'mim_number' => entry_hash['geneMap']['mimNumber'],
-							'gene_symbol' => entry_hash['geneMap']['geneSymbols']}
+				# adding uniprot accessions entries
+				if entry_hash['externalLinks'].nil? == false
+					accs_list = entry_hash['externalLinks']['swissProtIDs']
+					accs_list = accs_list.nil? ? []: accs_list
+					resp_hash['accessions'] = accs_list
+				end
 
-				resp_hash['genes'] << gene_hash
+				resp_hash
 			end
-
-			# adding uniprot accessions entries
-			if entry_hash['externalLinks'].nil? == false
-				accs_list = entry_hash['externalLinks']['swissProtIDs']
-				accs_list = accs_list.nil? ? []: accs_list
-				resp_hash['accessions'] = accs_list
-			end
-
-			resp_hash
 		end
 	end
 

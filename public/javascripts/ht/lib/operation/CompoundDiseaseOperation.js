@@ -52,96 +52,95 @@ Ext.define('HT.lib.operation.CompoundDiseaseOperation', {
 		var diseaseName = edgeTrg.label;
 		var payloadSrc = edgeSrc.payloadValue; // contains OMIM number, accessions and genes
 		var payloadTrg = edgeTrg.payloadValue; // contains ids for the compound
-		// var geneParam = payloadSrc.genes.split(',')[0];
-		// var url = 'http://lady-qu.cnio.es:3003/pharma/gene/diseases.jsonp?ident=' + geneParam;
-
 
 		// Method:
-		// take the accessions got for the disease
-		// get the bioactivites for all of them from Chembl
-		// select the chembl ingredients involved on the bioactivities for the accessions
-		// check if among the selected compounds (ingredients) is the target compound
-		// accs = 'Q8N608,Q13093,P36222,Q9BZ11,Q9Y616,Q8TAX7,Q6W5P4,Q8N138,Q13258,Q9UL17';
-
-		var accs_arr = payloadSrc.acc != null && payloadSrc.acc != "" > 0? payloadSrc.acc.split(','): [];
-		var numReqs = accs_arr.length;
-		var countReqs = 0;
+		// take the chemblId of the source payload
+		// get the bioactivites for it from Chembl
+		// check if any of the target_accessions of the activities match with the disease involved accessions
+		// [accs = 'Q8N608,Q13093,P36222,Q9BZ11,Q9Y616,Q8TAX7,Q6W5P4,Q8N138,Q13258,Q9UL17';]
 		var data = [];
 		var cmpdChemblId = 'CHEMBL786';
 		cmpdChemblId = 'CHEMBL714'; // salbutamol
-		cmpdChemblId = payloadTrg.chemblId;
+		cmpdChemblId = payloadSrc.chemblId;
+		var diseaseAcc = payloadTrg.acc;
+		var result = 0;
 
 		// Function to run an action after the concurrent request are finished
 		var action = function () {
-			// hold here the accessions found with assays for the compound
-			var accessions4cmpd = [];
-			Ext.each(data, function (compoundsAcc, index, dataItself) {
-				if (compoundsAcc.compounds.indexOf(cmpdChemblId) != -1)
-					accessions4cmpd.push({'acc': compoundsAcc.acc});
-			});
-
-			// it is suppossed that if accessions4cmpd is empty,
-			// there is not connectin btw accessions and compound
-			var result = accessions4cmpd.length; //  > 0
 			funcObj.result = result;
 			var hypothesiseResult = result > 0;
 
 			var edgeId = 'e' + edgeSrc.id + '-' + edgeTrg.id;
 			console.log('Operation finished!!!: ' + funcObj.result + ' for ' + edgeId);
 
-			var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Disease -> Compound</span> operation<br/>('";
-			msg += edgeSrc.label+"' -> '"+edgeTrg.label;
-			msg += "')<br/>" + result;
-			msg += " activities where found for proteins related to the '<i>" + diseaseName +"</i>' ";
-			msg += "involving the compound '<i>"+compName+"</i>'</div>";
+			var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Compound -> Disease</span> operation<br/>('";
+						msg += edgeSrc.label+"' -> '"+edgeTrg.label;
+						msg += "')<br/>" + result;
+						msg += " activities where found for proteins related to the '<i>" + diseaseName +"</i>' ";
+						msg += "involving the compound '<i>"+compName+"</i>'</div>";
+					
 			me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
-					hypothesiseResult, edgeId: edgeId, msg: msg});
+										hypothesiseResult, edgeId: edgeId, msg: msg});
 		} // EO action function
+		
 
-
-		if (accs_arr.length == 0)
+		if (cmpdChemblId == '' || cmpdChemblId === undefined)
 			action();
+
 		else {
-			Ext.each(accs_arr, function (acc, index, accessions) {
-				var url = 'http://lady-qu.cnio.es:3003/pharma/xxxx/bioactivities.jsonp';
-				url = url.replace('xxxx', acc);
-				// get activities for every accession
-				Ext.data.JsonP.request({
-					url: url,
+			var url = 'http://lady-qu.cnio.es:3003/pharma/compound/activities/xxxx.jsonp';
+			url = url.replace('xxxx', cmpdChemblId);
+			// get activities for every accession
+			Ext.data.JsonP.request({
+				url: url,
 
-					failure: function (resp, opts) {
-						funcObj.result = -1;
-					},
+				failure: function (resp, opts) {
+					funcObj.result = -1;
+				},
 
-					success: function (resp, opts) {
-						var jsonObj = resp;
-						var ingredientsChembl = [];
+				success: function (resp, opts) {
+					var jsonObj = resp;
+					var accessionsActivities = [];
 
-						if (jsonObj != null) {
-							Ext.each(jsonObj.activities, function (actv, index, activities) {
-								ingredientsChembl.push(actv.ingredient_cmpd_chemblid);
-							});
-							data.push({'acc': jsonObj.accession, 'compounds': ingredientsChembl});
-						}
+					if (jsonObj != null) {
+						Ext.each(jsonObj.activities, function (actv, index, activities) {
+							var accessions = actv.target_accessions.split(',');
+							accessionsActivities.push.apply(accessionsActivities, accessions);
 
-						countReqs++;
-						if (countReqs == numReqs)
-							action();
+							if (accessions.indexOf(diseaseAcc) != -1)
+								result++;
+						});
+					}
 
-						/*
-						 funcObj.result = result;
-						 var hypothesiseResult = result !== false;
+					action();
+/*
+					countReqs++;
+					if (countReqs == numReqs)
+						action();
+*/
 
-						 var edgeId = 'e' + edgeSrc.id + '-' + edgeTrg.id;
-						 console.log('Operation finished!!!: ' + funcObj.result + ' for ' + edgeId);
+					/* result = accessionsActivities.indexOf(diseaseAcc) != -1;					
+					funcObj.result = result;
+					var hypothesiseResult = result != 0;
 
-						 me.fireEvent('operationComplete', {result: funcObj.result, hypothesis: hypothesiseResult, edgeId: edgeId});
-						 */
-					},
+					var edgeId = 'e' + edgeSrc.id + '-' + edgeTrg.id;
+					console.log('Operation finished!!!: ' + funcObj.result + ' for ' + edgeId);
 
-					scope: me
-				})
-			}) // EO Ext.each...
+					var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Disease -> Compound</span> operation<br/>('";
+						msg += edgeSrc.label+"' -> '"+edgeTrg.label;
+						msg += "')<br/>" + result;
+						msg += " activities where found for proteins related to the '<i>" + diseaseName +"</i>' ";
+						msg += "involving the compound '<i>"+compName+"</i>'</div>";
+					
+					me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
+												hypothesiseResult, edgeId: edgeId, msg: msg});
+
+					 // me.fireEvent('operationComplete', {result: funcObj.result, hypothesis: hypothesiseResult, edgeId: edgeId});
+					*/
+				}, // EO success
+
+				scope: me
+			}); // EO JsonP request
 		} // EO else
 	}
 

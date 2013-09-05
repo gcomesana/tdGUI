@@ -139,13 +139,13 @@ puts "json_entries: #{json_entries}\n"
 # This parameter is used to screen interactions below this threshold (defautl is 0.5)
 # @return [String] the json object to feed the javascript graph
 	def interactions_retrieval (target_id = params[:target], max_nodes = params[:max_nodes],
-		conf_val = params[:conf_val])
+				conf_val = params[:conf_val])
 		intact_proxy = TdguiProxy.new
 
 		conf_param = params[:conf_val] # string!!!
 		conf_val = conf_param.to_f
 		max_nodes_param = params[:max_nodes] ? params[:max_nodes].to_i : 0
-puts "Getting interactions for '#{params[:target]}' from Intact with conf_val=#{params[:conf_val]} & max_nodes=#{params[:max_nodes]}\n"
+# puts "INTERACTIOOOOOOOOONS for '#{params[:target]}' from Intact with conf_val=#{conf_val} & max_nodes=#{max_nodes_param}\n"
 		return '[]' unless params[:target] != nil && params[:target] != ''
 #		graph = stringdb_proxy.get_target_interactions(target_id)
 		graph = intact_proxy.get_target_interactions(params[:target], conf_val,

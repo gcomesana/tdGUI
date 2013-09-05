@@ -22,9 +22,12 @@ Ext.create('Ext.app.Application', {
 // Ext.Application ({
   name: 'TDGUI',
   appFolder: 'javascripts/app',
-//  requires: ['LDA.helper.LDAConstants'],
   requires: ['TDGUI.util.LDAConstants'],
-
+/*
+  requires: ['TDGUI.util.LDAConstants','TDGUI.view.panels.BorderSouth','TDGUI.view.panels.BorderCenter',
+              'TDGUI.view.panels.BorderEast','TDGUI.view.panels.LogosPanel',
+              'TDGUI.view.panels.west.SearchPanel','TDGUI.view.panels.StatusBarPanel'],
+*/
 // Define all the controllers that should initialize at boot up of your application
 
   controllers: [
@@ -66,71 +69,92 @@ Ext.create('Ext.app.Application', {
 
     Ext.History.init()
 
-    /*
-     Ext.Loader.setConfig({
-     enabled:true,
-     paths: { 'CS':'chemspider/lib' }
-     });
-     }
+    Ext.create ('Ext.container.Viewport', {
+      layout: {
+        type: 'border',
+        padding: 1
+      },
+
+    /**
+     * @cfg {Object} defaults the default properties' value for the items contained in this viewport
+     * @cfg {Boolean} [defaults.split=true]
      */
+      defaults: {
+        split: true
+      },
 
-//    var myStore = Ext.create ('TDGUI.store.UniprotEntries')
-//    myStore.load ()
-/*    myStore.on ('load', function (store, recs, success, op, opts) {
-      var fieldValue;
-      myStore.each (function (record) {
-        record.fields.each (function (field) {
-          fieldValue = record.get (field.name);
+      /**
+       * @cfg {Boolean} [border=false] the presence or absence of the border around the viewport
+       */
+      border: false,
 
-          if (Ext.isArray(fieldValue))
-            console.info ('Array: '+field.name +' => '+ fieldValue)
-          else
-            console.info (field.name +' => '+ fieldValue)
-        });
-      });
+      initComponent: function () {
+    console.info ("Viewport.initComponent starting...")
+        var me = this
 
-    })
+        var logosPanel = Ext.create ('TDGUI.view.panels.LogosPanel');
+        me.items = [
+          {
+            region: 'north',
+            id: 'td-top',
+            height: 100,
+            // minHeight: 60,
+            style: {
+              height: '100px'
+            },
+            split: false,
+            items: [
+              Ext.create ('Ext.Img', {
+                src: '/images/td-logo-new.png',
+                id: 'img-app-logo',
+                baseCls: 'img-app-logo',
+                listeners: {
+                  afterrender:  {
+                    fn: function (img, evOpts) {
+                      console.log('afterrender image');
+                      // img.addCls('img-app-logo');
+                    }
+                  }
+                }
+              })
+            ]
+    //        border: false
+    //        html: 'north'
+          },
+          {
+            region: 'west',
+            id: 'td-left',
+            collapsible: true,
+            split: true,
+            width: '20%',
+            minWidth: 320,
+            frame: false,
 
-/*    myStore.on ('load', function (store, recs, success, op, opts) {
-      console.info ('on load event and autoload true!!')
-      console.info ("records: "+store.getCount())
-      console.info ("recs: "+recs.length)
-    }, this)
- */
- /*
-    var loaded = myStore.load ({
-      scope: this,
-      callback: function (records, op, success) {
+            layout: 'anchor',
+    //        layout: 'hbox',
+            items: [{
+              xtype: 'tdgui-west-search',
+              split: false,
+              frame: false
+            }]
+          },
+          { xtype: 'tdgui-border-center',
+            id: 'td-main'
+          },
+    //      theCenter,
+    //      theEast,
+    //      { xtype: 'tdgui-border-east'},
 
-  console.info ("checking myStore after loading..."+myStore.getTotalCount()+' records loaded')
-        var fieldValue;
-        myStore.each (function (record) {
-          record.fields.each (function (field) {
-            fieldValue = record.get (field.name);
+          { xtype: 'tdgui-statusbar',
+            region: 'south',
+            split: false
+          }
 
-            if (Ext.isArray(fieldValue))
-              console.info ('Array: '+field.name +' => '+ fieldValue)
-            else
-              console.info (field.name +' => '+ fieldValue)
-          });
-        });
-      }
-    })
+        ];
 
-    */
-/*
-    var loopOnmyStore = function (store, records, options) {
-console.info ("checking myStore after loading...")
-      var fieldValue;
-      myStore.each (function (record) {
-        myStore.fields.each (function (field) {
-          fieldValue = record.get (field.name);
-console.info (field.name +' => '+ fieldValue)
-        });
-      }, this);
-    }
-*/
+        this.callParent (arguments);
+      } // EO initComponent
 
-
-  }
+    }); // EO Ext.create
+  } // EO launch function
 });

@@ -330,14 +330,17 @@ Ext.define('HT.view.panels.CytoPanel', {
 			// html: '<div style="overflow-y:auto;height:80%;border: 1px solid red;" id="resultsPanelDiv">Run a graph to see here the results</div>',
 			html: "Run a graph to see the results here",
 			border: false,
-			autoScroll: true,
+			overflowY: 'auto',
 			cls: 'msg-panel',
 			bodyCls: 'msg-panel-content',
 			width: '100%',
+			styleHtmlContent: true,
+			// height: '100%',
 			bodyStyle: {
 				padding: '5px 5px 5px 5px',
 				backgroundColor: 'lightblue',
-				overflow: 'auto'
+				overflowY: 'auto',
+				height: '75%'
 			}
 			
 			// EO container

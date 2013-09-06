@@ -81,10 +81,10 @@ Ext.define('HT.lib.operation.DiseaseProteinOperation', {
 				var edgeId = 'e'+edgeSrc.id+'-'+edgeTrg.id;
 				console.log('Operation finished!!!: '+funcObj.result+' for '+edgeId);
 
-				var msg = "<span style=\"font-weight: bold;\">Disease -> Protein</span> operation<br/>('";
+				var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Disease -> Protein</span> operation<br/>('";
 				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
 				msg += "')<br/>";
-				msg += hits.length+" relationships between disease and protein where found in OMIM";
+				msg += hits.length+" relationships between disease and protein where found in OMIM</div>";
 				if (hits.length > 0)
 					msg += ': '+hits.join(',');
 				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:

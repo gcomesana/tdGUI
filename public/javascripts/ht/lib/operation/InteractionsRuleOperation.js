@@ -93,11 +93,12 @@ Ext.define('HT.lib.operation.InteractionsRuleOperation', {
 
 				var edgeId = 'e'+edgeSrc.id+'-'+edgeTrg.id;
 				console.log('Operation finished!!!: '+funcObj.result+' for '+edgeId);
-				var msg = "<span style=\"font-weight: bold;\">Compound -> Protein</span> operation<br/>('";
+				var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Compound -> Protein</span> operation<br/>('";
 				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
 				msg += "')<br/>"+activityCount;
 				msg += " interactions where found in IntactDB for both proteins<br/>";
 				msg += "The averager confidence value for them is "+result;
+				msg += "</div>";
 				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
 						hypothesiseResult, edgeId: edgeId, msg: msg});
 

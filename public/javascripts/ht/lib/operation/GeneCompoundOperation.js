@@ -79,10 +79,10 @@ Ext.define('HT.lib.operation.GeneCompoundOperation', {
 				var edgeId = 'e' + edgeSrc.id + '-' + edgeTrg.id;
 				console.log('Operation finished!!!: ' + funcObj.result + ' for ' + edgeId);
 
-				var msg = "<span style=\"font-weight: bold;\">Gene -> Compound</span> operation<br/>('";
+				var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Gene -> Compound</span> operation<br/>('";
 				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
 				msg += "')<br/>"+activityCount;
-				msg += " activities for the gene where found involving the compound";
+				msg += " activities for the gene '<i>"+edgeSrc.label+"</i>' where found involving the compound <i>'"+edgeTrg.label+"'</i></div>";
 				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
 								hypothesiseResult, edgeId: edgeId, msg: msg});
 			},

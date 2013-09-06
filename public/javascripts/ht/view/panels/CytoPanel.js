@@ -336,7 +336,8 @@ Ext.define('HT.view.panels.CytoPanel', {
 			width: '100%',
 			bodyStyle: {
 				padding: '5px 5px 5px 5px',
-				backgroundColor: 'lightblue'
+				backgroundColor: 'lightblue',
+				overflow: 'auto'
 			}
 			
 			// EO container

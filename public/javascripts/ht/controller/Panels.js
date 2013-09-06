@@ -67,7 +67,6 @@ Ext.define('HT.controller.Panels', {
 	onClickTextbox: function (comp, evOpts) {
 			console.log('Panels.onClickTextBox: got value '+evOpts.value+' for '+evOpts.meta);
 
-
 			var cytoscape = this.getCytoscape();
 			var vis = cytoscape.vis;
 			var entityWidget = comp.up();

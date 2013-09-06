@@ -72,7 +72,7 @@ Ext.define('HT.lib.operation.ProteinGeneOperation', {
 
 				var edgeId = 'e'+edgeSrc.id+'-'+edgeTrg.id;
 				console.log('Operation finished!!!: '+funcObj.result+' for '+edgeId);
-				var msg = "<span style=\"font-weight: bold;\">Protein -> Gene</span> operation<br/>('";
+				var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Protein -> Gene</span> operation<br/>('";
 				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
 				msg += "')<br/>";
 				if (result === true) {
@@ -83,6 +83,7 @@ Ext.define('HT.lib.operation.ProteinGeneOperation', {
 					msg += "No relationship was found between the protein with accession'";
 					msg += accSrc +"' and the gene '"+genename+"'";
 				}
+				msg += "</div>";
 				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
 									hypothesiseResult, edgeId: edgeId, msg: msg});
 			},

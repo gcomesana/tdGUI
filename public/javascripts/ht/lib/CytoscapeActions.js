@@ -191,6 +191,7 @@ Ext.define('HT.lib.CytoscapeActions', {
 			// There are several paths in a graph, with several edges for every path
 			// and one rule for every edges, with several function every rule
 			vis.visualStyleBypass(null); // remove bypass; reset the graph colors
+			var edgesVisited = [];
 			Ext.each(paths, function(path, indexPath, pathList) {
 				var edgeIndex = 0;
 				var cytoscapePanel = Ext.ComponentQuery.query('cytoscape')[0];
@@ -198,10 +199,22 @@ Ext.define('HT.lib.CytoscapeActions', {
 				cytoscapePanel.setLoading(true);
 				Ext.getCmp('actionsBtn').disable();
 				Ext.getCmp('clearBtn').disable();
-
+/*
+				var pathStr = "";
+				Ext.each(path, function (e, i, el) {
+					pathStr += e.id +" -> ";
+				});
+				console.log("Current path: "+pathStr);
+*/
 				Ext.each(path, function(edge, indexBis, edgeList) {
 					var rule = edge.rule;
 					var aliases = rule.ruleAliases;
+
+					console.log (edge.id + " vs [" + edgesVisited.join(',')+"]");
+					if (Ext.Array.contains(edgesVisited, edge.id))
+						return 1;
+					else
+						edgesVisited.push(edge.id);
 
 					Ext.each(aliases, function(aliasObj, indexFunc, functionsList) {
 						var opObj = HT.lib.RuleFunctions.getOperationFromAlias(aliasObj.alias);
@@ -229,8 +242,6 @@ Ext.define('HT.lib.CytoscapeActions', {
 								// resultsPanelDiv.update(oldHtml + '<br/><br/>'+result.msg);
 							else
 								resultsPanel.update('<br/>'+result.msg);
-
-
 
 							// Hide the mask...
 							if (indexFunc == functionsList.length-1 &&

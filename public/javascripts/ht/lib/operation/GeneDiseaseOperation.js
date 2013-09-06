@@ -90,11 +90,11 @@ Ext.define('HT.lib.operation.GeneDiseaseOperation', {
 
 				var edgeId = 'e' + edgeSrc.id + '-' + edgeTrg.id;
 				console.log('Operation finished!!!: ' + funcObj.result + ' for ' + edgeId);
-				var msg = "<span style=\"font-weight: bold;\">Gene -> Disease</span> operation<br/>('";
+				var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Gene -> Disease</span> operation<br/>('";
 				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
 				msg += "')<br/>";
 				msg += "Related diseases were found where the gene is involved in ";
-				msg += "(<span style=\"font-style: italic;\">"+tagDiseases.join(', ')+"</span>)";
+				msg += "(<span style=\"font-style: italic;\">"+tagDiseases.join(', ')+"</span>)</div>";
 				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
 									hypothesiseResult, edgeId: edgeId, msg: msg});
 			},

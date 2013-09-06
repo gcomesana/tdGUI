@@ -114,7 +114,8 @@ Ext.define('HT.view.common.ComboLookupButton', {
 								me.matchTerm.push(matchWord.trim());
 							})
 							*/
-						})
+						});
+						me.items.getAt(1).enable();
 					}
 				} // select
 			}
@@ -126,7 +127,8 @@ Ext.define('HT.view.common.ComboLookupButton', {
 			text: this.getBtnText(),
 			columnWidth: .20,
 			handler: this.getBtnCallback(),
-			margin: '5 0 0 10 '
+			margin: '5 0 0 10 ',
+			disabled: true
 		}]; // EO items
 
 

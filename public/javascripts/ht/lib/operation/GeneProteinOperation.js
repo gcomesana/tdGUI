@@ -75,7 +75,7 @@ Ext.define('HT.lib.operation.GeneProteinOperation', {
 
 				var edgeId = 'e'+edgeSrc.id+'-'+edgeTrg.id;
 				console.log('Operation finished!!!: '+funcObj.result+' for '+edgeId);
-				var msg = "<span style=\"font-weight: bold;\">Gene -> Protein</span> operation<br/>('";
+				var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Gene -> Protein</span> operation<br/>('";
 				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
 				msg += "')<br/>";
 				if (result === true) {
@@ -86,6 +86,7 @@ Ext.define('HT.lib.operation.GeneProteinOperation', {
 					msg += "It wasn't found the protein '"+edgeTrg.label;
 					msg += "' is a product of the gene '"+genename+"'";
 				}
+				msg += "</div>";
 				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
 						hypothesiseResult, edgeId: edgeId, msg: msg});
 			},

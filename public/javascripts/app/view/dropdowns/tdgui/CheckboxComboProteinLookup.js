@@ -77,7 +77,7 @@ Ext.define ('TDGUI.view.dropdowns.tdgui.CheckboxComboProteinLookup', {
           Ext.select('input[type=checkbox]').each (function (el, elemList, index) {
             console.info ("element id: "+el.id)
           })
-          console.info ("hasta aquí llego")
+          // console.info ("hasta aquí llego")
         },
 
         toString: function () {
@@ -95,47 +95,53 @@ Ext.define ('TDGUI.view.dropdowns.tdgui.CheckboxComboProteinLookup', {
   listeners: {
     beforeselect: function (combo, recs, index, opts) {
 // console.info ('#'+index+'. '+recs.data.concept_url)
-      var urlDef = recs.data.pref_url
-      var uniprotAcc
+      var urlDef = recs.data.pref_url;
+      var uniprotAcc;
       if (urlDef.indexOf ('uniprot') != -1)
-        uniprotAcc = urlDef.substring(urlDef.lastIndexOf('/') + 1)
+        uniprotAcc = urlDef.substring(urlDef.lastIndexOf('/') + 1);
 
-      var checkBoxId = recs.data.uuid
+      var checkBoxId = recs.data.uuid;
 // Image treatment
-      var img = Ext.get('img'+checkBoxId)
+      var img = Ext.get('img'+checkBoxId);
 
 //      var checkBox = Ext.get (checkBoxId)
 //      checkBox.dom.click()
 //      var theEl = new Ext.Element (checkBox)
 //      theEl.dom.click()
-      var recIndex = this.store.find('uuid', checkBoxId)
-      var recSel = this.store.getAt(recIndex)
+      var recIndex = this.store.find('uuid', checkBoxId);
+      var recSel = this.store.getAt(recIndex);
 
 // concept_uuid is better solution to further filtering
       if (Ext.Array.contains (this.listSelected, recIndex)) {
-        this.listSelected = Ext.Array.remove (this.listSelected, recIndex)
-        img.dom.className = 'combo-iconbox-unchecked'
+        this.listSelected = Ext.Array.remove (this.listSelected, recIndex);
+        img.dom.className = 'combo-iconbox-unchecked';
       }
       else {
-        this.listSelected.push(recIndex)
-        img.dom.className = 'combo-iconbox-checked'
+        this.listSelected.push(recIndex);
+        img.dom.className = 'combo-iconbox-checked';
       }
 
-      return false
+      var btnAdd = this.up().down('button[action=query-protein-info]');
+      if (this.listSelected.length > 0)
+        btnAdd.enable();
+      else
+        btnAdd.disable();
+
+      return false;
     },
 
 
     select: function (combo, recs, opts) {
-      console.info ("selected something...")
+      console.info ("selected something...");
     },
 
 
     beforequery: function (qryEv, opts) {
-      console.info ('beforequery: qryEv: '+qryEv.query)
+      console.info ('beforequery: qryEv: '+qryEv.query);
 
-      delete qryEv.combo.lastQuery
+      delete qryEv.combo.lastQuery;
       while (this.listSelected.length > 0)
-        this.listSelected.pop()
+        this.listSelected.pop();
     }
 
   },
@@ -148,15 +154,15 @@ Ext.define ('TDGUI.view.dropdowns.tdgui.CheckboxComboProteinLookup', {
  * @return {Array} An array with the objects selected.
  */
   getSelectedItems: function () {
-    var listChoices = new Array()
-    var me = this
+    var listChoices = new Array();
+    var me = this;
     Ext.Array.each (this.listSelected, function (selItem, index, selItems) {
-      var rec = me.store.getAt (selItem)
-      var objData = rec.data
-      listChoices.push(objData)
+      var rec = me.store.getAt (selItem);
+      var objData = rec.data;
+      listChoices.push(objData);
     })
 
-    return listChoices
+    return listChoices;
   }
 
 })

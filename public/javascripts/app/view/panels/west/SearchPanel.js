@@ -141,8 +141,8 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
             xtype: 'button',
             text: ' Add ',
             columnWidth: .15,
-            action: 'query-protein-info'
-//            disabled: false
+            action: 'query-protein-info',
+            disabled: true
         }] // EO items
 
       }]

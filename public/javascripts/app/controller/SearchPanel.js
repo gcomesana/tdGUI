@@ -225,10 +225,10 @@ Ext.define('TDGUI.controller.SearchPanel', {
             var jsonResp = Ext.JSON.decode(resp.responseText)
             var accessions = jsonResp.accessions
             Ext.each(accessions, function (acc, index, accsItself) {
-              var ini = acc.indexOf('>')
-              var end = acc.lastIndexOf('<')
-              acc = acc.substring(ini + 1, end)
-              accsItself[index] = acc
+              var ini = acc.indexOf('>');
+              var end = acc.lastIndexOf('<');
+              acc = acc.substring(ini + 1, end);
+              accsItself[index] = acc;
             })
 
             var listItem = {
@@ -265,7 +265,7 @@ Ext.define('TDGUI.controller.SearchPanel', {
       } // EO if
     })
 
-
+    btn.disable();
 //    var txtArea = protLookup.up('panel').up('panel').up('panel').down('tdgui-textarea')
 
     /*

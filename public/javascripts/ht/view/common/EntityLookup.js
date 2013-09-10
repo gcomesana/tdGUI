@@ -139,7 +139,7 @@ Ext.define('HT.view.common.EntityLookup', {
 
 		var comboLookup = Ext.create('HT.view.common.ComboLookupButton', {
 			metaInfo: this.getEntity(),
-			columnWidth: 0.7,
+			columnWidth: 0.8, // 0.7,
 			margin: '3 5 0 5',
 			btnText: this.getBtnText(),
 			// id: 'txtBtnId',
@@ -165,7 +165,7 @@ Ext.define('HT.view.common.EntityLookup', {
 			xtype: 'draw',
 			autoSize: false,
 			viewBox: false,
-			columnWidth: 0.3,
+			columnWidth: 0.2, // 0.3,
 			height: 40,
 			width: 50,
 			style: {

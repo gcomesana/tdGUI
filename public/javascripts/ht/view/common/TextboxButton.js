@@ -39,13 +39,13 @@ Ext.define('HT.view.common.TextboxButton', {
 
 		this.items = [{
 			xtype: 'textfield',
-			columnWidth: .80,
+			columnWidth: .70, // .80,
 			enableKeyEvents: true,
 			emptyText: this.getEmptyText()
 		}, {
 			xtype: 'button',
 			text: this.getBtnText(),
-			columnWidth: .20,
+			columnWidth: .30,
 			handler: this.getBtnCallback()
 		}]; // EO items
 

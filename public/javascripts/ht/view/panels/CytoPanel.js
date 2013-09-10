@@ -135,7 +135,8 @@ Ext.define('HT.view.panels.CytoPanel', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.cytopanel',
 	requires: ['HT.view.cytoscape.CytoScape', 'HT.view.common.TextboxButton',
-						'HT.view.common.EntityLookup'],
+						'HT.view.common.EntityLookup', 'HT.store.ResultsMessages',
+						'HT.view.common.ListResults'],
 
 	networkModel: undefined,
 
@@ -274,7 +275,14 @@ Ext.define('HT.view.panels.CytoPanel', {
 					id: 'btnEnact'
 				}, {
 					text: 'Enact selected',
-					id: 'btnEnactSel'
+					id: 'btnEnactSel',
+					listeners: {
+						click: {
+							fn: function (btn, evOpts) {
+
+							}
+						}
+					}
 
 				}]
 			}, {
@@ -283,6 +291,7 @@ Ext.define('HT.view.panels.CytoPanel', {
 				id: 'clearBtn',
 				menu: [{
 					text: 'Reset fields',
+					id: 'btnClearFields',
 					listeners: {
 						click: {
 							fn: function (btn, evOpts) {
@@ -290,8 +299,10 @@ Ext.define('HT.view.panels.CytoPanel', {
 								// var items = this.up().up().items.items;
 								var items = Ext.ComponentQuery.query('entity-lookup');
 								Ext.each(items, function (item, index, itemList) {
-									if (item.xtype == 'entity-lookup')
+									if (item.xtype == 'entity-lookup') {
 										item.items.items[1].items.items[0].reset(); // reset the combo!!
+										item.items.items[1].items.items[1].disable(); // disable the button
+									}
 								});
 
 							}
@@ -299,6 +310,7 @@ Ext.define('HT.view.panels.CytoPanel', {
 					}
 				}, {
 					text: 'Clear graph',
+					id: 'btnClearGraph',
 					listeners: {
 						click: {
 							fn: function (btn, evOpts) {
@@ -326,23 +338,48 @@ Ext.define('HT.view.panels.CytoPanel', {
 		}, { 
 			xtype: 'panel',
 			id: 'resultsPanel',
-			// title: 'Enactment results',
-			// html: '<div style="overflow-y:auto;height:80%;border: 1px solid red;" id="resultsPanelDiv">Run a graph to see here the results</div>',
-			html: "Run a graph to see the results here",
-			border: false,
-			overflowY: 'auto',
-			cls: 'msg-panel',
-			bodyCls: 'msg-panel-content',
-			width: '100%',
-			styleHtmlContent: true,
-			// height: '100%',
-			bodyStyle: {
-				padding: '5px 5px 5px 5px',
-				backgroundColor: 'lightblue',
+      maxHeight: 300,
+      width: '100%',
+      style: {
+				backgroundColor: 'lightgray'
+      },
+      layout: {
+        type: 'hbox',
+        align: 'stretch',
+        pack: 'end'
+      },
+
+			items: [{
+        xtype: 'listresults',
+        id: 'resultsList',
+        // title: 'Enactment results',                                                                              
+        store: Ext.create('HT.store.ResultsMessages'),
+        width: '100%',
+
+        // height: '80%'                                                                                            
+      }]
+/*
+			items: [{
+				xtype: 'panel',
+				id: 'resultsPanel',
+				// title: 'Enactment results',
+				// html: '<div style="overflow-y:auto;height:80%;border: 1px solid red;" id="resultsPanelDiv">Run a graph to see here the results</div>',
+				html: "Run a graph to see the results here",
+				border: false,
 				overflowY: 'auto',
-				height: '75%'
-			}
-			
+				cls: 'msg-panel',
+				bodyCls: 'msg-panel-content',
+				width: '100%',
+				
+				// height: '100%',
+				bodyStyle: {
+					padding: '5px 5px 5px 5px',
+					backgroundColor: 'lightblue',
+					overflowY: 'auto'
+					// height: '75%'
+				}
+			}]
+		*/
 			// EO container
 		}] // EO UPPER container items
 

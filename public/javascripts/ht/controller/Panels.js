@@ -259,8 +259,8 @@ Ext.define('HT.controller.Panels', {
 			edges = nm.data.edges; // should be an array
 			nodes = nm.data.nodes;
 
-			resultsPanel.update('');
-			// resultsPanelDiv.update('');
+			// resultsPanel.update('');
+			this.cleanResultList();
 		}
 		else if (btnId == 'btnEnactSel') { // only for selected nodes (a subgraph)
 			var selNodeModel, selEdgeModel;
@@ -271,17 +271,38 @@ Ext.define('HT.controller.Panels', {
 			selEdgeModel = Ext.Array.map(cytoscape.edgesSelectionModel, function (edge) {
 				return edge.data;
 			});
-
+			
 			var nm = vis.networkModel();
 			nodes = selNodeModel;
 			edges = selEdgeModel; // nm.data.edges;
-
-			resultsPanel.update('');
-			// resultsPanelDiv.update('');
+			
+			// resultsPanel.update('');
+			this.cleanResultList();
 		}
 		// functionEvent = HT.lib.RuleFunctions.getFunctionFromAlias(alias)
 		// functionEvent.addListener('operationComplete', this.onOperationComplete, this)
 		HT.lib.CytoscapeActions.runGraph(vis, nodes, edges);
+	},
+
+
+	cleanResultList: function () {
+		var resultsList = Ext.getCmp('resultsList');
+		var resultsStore = resultsList.getStore();
+		var recordCount = resultsStore.getCount();
+
+		resultsStore.remove(resultsStore.data.getRange(0, recordCount-1));
+		resultsList.getView().refresh();
+/*
+		var edgeSrcLabel = "White Chancro";
+		var edgeTrgLabel = "Radicamol (EEP, EVA, AIV, NSH, ESA)";
+		var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Compound -> Protein</span> operation<br/>('";
+		msg += edgeSrcLabel+"' -> '"+edgeTrgLabel;
+		msg += "')<br/>0";
+		msg += " activities for the compound where found involving the protein '<i>"+edgeTrgLabel+"</i>'</div>";
+		var messages = [{'msg': msg}, {'msg': msg}, {'msg': msg}, {'msg': msg}, {'msg': msg}];
+
+		resultsStore.loadData(messages);
+*/
 	},
 
 

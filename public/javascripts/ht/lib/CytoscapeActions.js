@@ -188,6 +188,18 @@ Ext.define('HT.lib.CytoscapeActions', {
 				vis.visualStyleBypass(bypass);
 			}
 
+			var addResult2List = function (result) {
+				var resultsList = Ext.getCmp('resultsList');
+				var resultsStore = resultsList.getStore();
+
+				var rec = Ext.create('HT.model.ResultMessage', {msg: result.msg});
+				resultsStore.add(rec);
+
+				resultsList.getView().refresh();
+			}
+
+
+
 			// There are several paths in a graph, with several edges for every path
 			// and one rule for every edges, with several function every rule
 			vis.visualStyleBypass(null); // remove bypass; reset the graph colors
@@ -221,39 +233,59 @@ Ext.define('HT.lib.CytoscapeActions', {
 
 						opObj.clearListeners();
 						// Result is like {result: result, hypothesis: true|false, edge: theedge, msg: aMessage}
-						opObj.on('operationComplete', function (result) {
-							var myEdge = vis.edge(result.edgeId);
-							console.log('operationComplete:'+aliasObj.result+ ' vs '+result.result+' for edge '+myEdge.label);
 
-							if (result.hypothesis)
-								bypassEdge(myEdge, 'green');
-							else
-								bypassEdge(myEdge, 'red');
+						try {
+							opObj.on('operationComplete', function (result) {
+								var myEdge = vis.edge(result.edgeId);
+								console.log('operationComplete:'+aliasObj.result+ ' vs '+result.result+' for edge '+myEdge.label);
 
-							// var labelResult = Ext.getCmp('labelResult');
-							var resultsPanel = Ext.getCmp('resultsPanel');
-							// resultsPanel.update(result.msg);
-							var resultsPanelDiv = Ext.get('resultsPanelDiv');
-							var oldHtml = resultsPanel.body.dom.innerHTML;
-							// oldHtml = resultsPanelDiv.dom.innerHTML;
-							resultsPanel.update('');
-							if (oldHtml != "")
-								resultsPanel.update(oldHtml + '<br/><br/>'+result.msg);
-								// resultsPanelDiv.update(oldHtml + '<br/><br/>'+result.msg);
-							else
-								resultsPanel.update('<br/>'+result.msg);
+								if (result.hypothesis)
+									bypassEdge(myEdge, 'green');
+								else
+									bypassEdge(myEdge, 'red');
 
-							// Hide the mask...
-							if (indexFunc == functionsList.length-1 &&
-									indexBis == edgeList.length-1 && indexPath == pathList.length-1) {
-								cytoscapePanel.setLoading(false);
+								addResult2List (result);
+								
+/*
+								var resultsPanel = Ext.getCmp('resultsPanel');
+								// resultsPanel.update(result.msg);
+								var resultsPanelDiv = Ext.get('resultsPanelDiv');
+								var oldHtml = resultsPanel.body.dom.innerHTML;
+								// oldHtml = resultsPanelDiv.dom.innerHTML;
+								resultsPanel.update('');
+								if (oldHtml != "")
+									resultsPanel.update(oldHtml + '<br/><br/>'+result.msg);
+									// resultsPanelDiv.update(oldHtml + '<br/><br/>'+result.msg);
+								else 
+									resultsPanel.update('<br/>'+result.msg);
 
-								Ext.getCmp('actionsBtn').enable();
-								Ext.getCmp('clearBtn').enable();
-							}
+								resultsPanel.setBodyStyle('height', '70%');
+*/
+								// Hide the mask...
+								if (indexFunc == functionsList.length-1 &&
+										indexBis == edgeList.length-1 && indexPath == pathList.length-1) {
+									cytoscapePanel.setLoading(false);
 
-						});
-						opObj.operation(rule.edgeSource, rule.edgeTarget, aliasObj.threshold, aliasObj);
+									Ext.getCmp('actionsBtn').enable();
+									Ext.getCmp('clearBtn').enable();
+								}
+
+							});
+							opObj.operation(rule.edgeSource, rule.edgeTarget, aliasObj.threshold, aliasObj);
+						}
+						catch (e) {
+							Ext.MessageBox.show({
+								title: 'Graph enactor',
+						    msg: 'There was an error while enacting the graph. Please, try again later.',
+						    closable: false,
+						    width: 300,
+						    buttons: Ext.Msg.OK,
+						    fn: function () {
+						    	cytoscapePanel.setLoading(false);
+						    },
+						    icon: Ext.window.MessageBox.INFO
+							})
+						} // EO try-catch
 
 					}) // EO each
 					edgeIndex++;
@@ -271,6 +303,7 @@ Ext.define('HT.lib.CytoscapeActions', {
 			
 //			runner.pathsToString();
 		}, // EO rungraph
+
 
 
 		/**

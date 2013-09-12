@@ -1,9 +1,16 @@
 
+require 'rubygems'
+require 'dbi'
+require 'mysql'
+require 'memcached'
+
 require 'rexml/document'
 require 'net/http'
 require 'net/https'
 require 'net/smtp'
 require 'uri'
+
+
 
 class LibUtil
 	include REXML
@@ -260,10 +267,37 @@ class LibUtil
 		#		res = Net::HTTP.start(my_url.host, my_url.port, proxy_host, proxy_port) { |http|
 		response = nil
 
+=begin
+		print "IntactDao mysql test!!\n"
+		dbh = DBI.connect("DBI:Mysql:tdcache:localhost", "root")
+		# get server version string and display it
+    row = dbh.select_one("SELECT VERSION()")
+    puts "MySql Server version: " + row[0] +"\n"
+
+    select_qry = "select thekey, value from cache";
+    sth = dbh.execute(select_qry)
+		row_cont = 0
+		sth.fetch do |row|
+#		  printf "ID: %d, Name: %s, Height: %.1f\n", row[0], row[1], row[2]
+#			printf "interactionid: %s, %s -> %s (%.2f)\n", row[11], row[1], row[6], row[12]
+			obj_hit = row[1]
+    	marshald_hit = Marshal.load(obj_hit.unpack('m')[0])
+			row_cont += 1
+			print "body size: #{marshald_hit.body.length}\n"
+			# @result_set << Marshal.load(Marshal.dump(row))
+		end
+		sth.finish
+    dbh.disconnect()
+=end
+
 		if cache == true
 			response = Rails.cache.fetch my_url do
+				# if cache hit, it does not get into here
+				# Could be included another call to see whether or not the my_url is on the db
+				# should sha2 'my_url' to get a hash key to see if any result is raised
 				do_request(url, my_url)
 			end
+			save_to_dbcache(url, response)
 
 		else
 			response = do_request(url, my_url)
@@ -312,6 +346,21 @@ class LibUtil
 
 
 
+	def self.save_to_dbcache (my_url, resp) 
+		dbh = DBI.connect("DBI:Mysql:tdcache:localhost", "root")
+		# get server version string and display it
+
+		dbresp = [Marshal.dump(resp)].pack('m*')
+		hashed_url = Digest::SHA2.hexdigest(my_url)
+		begin
+    	dbh.do("insert into cache (thekey, value, sha2hash) values (?, ?, ?)", my_url, dbresp, hashed_url)
+    rescue DBI::DatabaseError => ex
+    end
+    dbh.disconnect
+	end
+	# private_class_method :save_to_dbcache
+
+
 
 	# Do a request out of a url. Nothing else
 	# @param [String] url the url as it was passed into the request method
@@ -356,6 +405,6 @@ class LibUtil
 		res
 
 	end
-
 	private_class_method :do_request
+
 end

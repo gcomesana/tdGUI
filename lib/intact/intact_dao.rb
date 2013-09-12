@@ -3,6 +3,8 @@ require 'rubygems'
 require 'dbi'
 require 'pg'
 
+require 'mysql'
+
 require_relative 'interactions_util'
 # This is a very custom class to support connection an insertion of
 # interaction information into a database.

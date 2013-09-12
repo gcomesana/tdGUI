@@ -120,6 +120,7 @@ class TdguiProxy
 
 				res
 			end # EO block...
+			LibUtil.save_to_dbcache(cache_key, target_graph)
 
 #			intact_proxy = IntactProxy.new
 #			target_graph = intact_proxy.get_interaction_graph(target_id, conf_val, max_nodes)
@@ -373,6 +374,7 @@ puts "the url: #{url}"
 			chemblId = obj['target']['chemblId']
 			chemblId
 		end
+
 	end
 
 

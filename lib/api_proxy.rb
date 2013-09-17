@@ -194,7 +194,7 @@ class APIProxy
 			end
 		end # EO cache issue management block
 
-		LibUtil.save_to_cache(url, resp_hash)
+		LibUtil.save_to_dbcache(url, resp_hash)
 		resp_hash
 
 	end

@@ -26,7 +26,7 @@ The TD app essentially provides tools to satisfy two general use cases. In the f
 
 # Getting Started with TD webapp
 
-In the case you want to play around with the application located at http://td.bioinfo.cnio.es/, you just can start using the default examples, although the best deal is to try the Semantic Search. Through it, a concept-related search is performed via ConceptWiki (http://www.conceptwiki.org/) API and results are returned based on the concept. The results are a set of drug targets, which are strongly related to the input term.
+In the case you want to play around with the application located at http://td.inab.org/, you just can start using the default examples, although the best deal is to try the Semantic Search. Through it, a concept-related search is performed via ConceptWiki (http://www.conceptwiki.org/) API and results are returned based on the concept. The results are a set of drug targets, which are strongly related to the input term.
 
 Automatic results can be checked and added to the targets list (upon clicking the 'Add' button just beside). 
 

@@ -1,5 +1,16 @@
 Welcome to OpenPhacts - Target Dossier GUI Application
 ======================================================
+Until very recently the academic research community suffered from lack of access to large datasets containing curated bioactivity data. This issue has disconnected industry and academic drug discovery efforts directing academia mainly toward methods development. (Ecker, Kidd, & Williams-jones, n.d.) This situation however changed drastically after the creation of large public repositories containing screening data like PubChem (Wang et al., 2012) and ChEMBL (Gaulton et al., 2012). The current release of ChEMBL for example contains 10,129,256 activities described for 1,376,469 compounds. 
+
+Genomic data, information about the functional role of the genes, metabolic pathways, protein interaction networks, expression data, associations between disease phenotypes and molecular entities, etc. have proliferated however at an enormous rate in the academic domain. Indeed several tools exist that allow users to interconnect and manipulate this data. Workflow systems like Taverna (Hull et al., 2006), or Galaxy (Giardine et al., 2005) have succeeded on integrate data and computational methods from a large collection of different providers.    
+
+The aim of OpenPhacts project is precisely to connect these resources (i.e. academia/public and industry/private data) by introducing a novel approach in drug discovery, the use of Semantic Web Technology (SWT). This technology has been successfully applied before to integrate data from fields like health care and life sciences (Luciano et al., 2011). An open-source API grants access to this unified resource, assisting academia and SMEs to effectively contribute to drug discovery (Ecker et al., n.d.). This project founded by the Innovative Medicines Initiative (IMI) is an example of how open-innovation principles can be applied to reduce duplicated tasks through the use of a common open-source platform to access crucial data.   
+
+On top of this API several applications (exemplars) are being designed. In this document we present the Target Dossier application version 0.2; which has been released on August 2012 to the OPS consortium for testing.  
+
+
+Target Dossier App
+==================
 The Target Dossier (TD) goal is to provide a comprehensive view of pharmacologically relevant targets to answer questions regarding druggability, tissue expression profiles and implications in pathways, disease states and physiological mechanisms. 
 As the name indicates TD is mainly focused on drug targets allowing users to explore target relevant data that is gathered from very different resources. However it could be argued that several systems and databases sharing the same goal already exist (see for example (Gaulton et al., 2012) (Wu et al., 2009)), the complexity of this integration process justifies the co-existence of different tools/approaches. Particularly this integration entails two main challenges: the information technology challenge (how to combine the data in term of software, APIs, etc.) and the scientific challenge (which data should be taken into account and which methodologies must be followed to integrate the data and extract new knowledge).
 

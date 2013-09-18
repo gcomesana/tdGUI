@@ -317,7 +317,9 @@ module OpsEndpointsProxy
 		url = the_url
 
 # build up the requests, depending on guards above
+		puts "opts[uuid] is #{opts[:uuid]}"
 		if api_endpoints_ok && the_url.index('uniprot').nil? # API is on
+
 			if opts[:uuid].nil? == false
 				if the_url.index('&').nil?
 					url = the_url + "?uuid=#{opts[:uuid]}"

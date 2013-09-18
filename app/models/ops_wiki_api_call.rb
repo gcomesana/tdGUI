@@ -19,6 +19,7 @@ class OpsWikiApiCall
 	CONCEPT_WIKI_API_GET_URL = "http://ops.conceptwiki.org/web-ws/concept/search/get"
 	# CONCEPT_WIKI_API_BY_TAG_URL = "http://ops.conceptwiki.org/web-ws/concept/search/byTag"
 	OPS_WIKI_API_BY_TAG_URL = "https://beta.openphacts.org/search/byTag?app_id=#{OPS_API_ID}&app_key=#{OPS_API_KEY}&q=xxxx"
+	OPS_WIKI_API_FREETEXT_URL = "https://beta.openphacts.org/search/freetext?app_id=#{OPS_API_ID}&app_key=#{OPS_API_KEY}"
 	# "&limit=5&uuid=eeaec894-d856-4106-9fa1-662b1dc6c6f1&_format=json"
 	CONCEPT_WIKI_API_FOR_URL_URL = "http://ops.conceptwiki.org/web-ws/concept/search/forUrl"
 
@@ -69,7 +70,14 @@ class OpsWikiApiCall
 	# @options [Hash] a hash with the parameters to configure the search (like limit)
 	def search_by_tag(tag_uuid, substring, options = {})
 		substring = CGI::escape(substring.strip)
-		url = OPS_WIKI_API_BY_TAG_URL.gsub(/xxxx/, substring)
+
+		if tag_uuid.nil? then
+			url = OPS_WIKI_API_FREETEXT_URL.gsub(/xxxx/, substring)
+		else
+			url = OPS_WIKI_API_BY_TAG_URL.gsub(/xxxx/, substring)
+			options[:uuid] = tag_uuid
+		end
+
 
 		if options[:limit].nil? then
 			options[:limit] = @limit
@@ -77,9 +85,10 @@ class OpsWikiApiCall
 
 		options[:q] = substring   # + '*'
 		options[:query] = substring
-		options[:uuid] = tag_uuid
+
 		options[:_format] = 'json'
 
+		puts "fucking opts: #{options}"
 		results = request(url, options)
 
 		if results == [] then # no concept found

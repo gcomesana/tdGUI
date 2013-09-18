@@ -430,7 +430,8 @@ module TargetDossierApi
 
 				case params[:type]
 					when "protein"
-						resp = proxy.search_by_tag(protein_tag, params[:term], {})
+						# resp = proxy.search_by_tag(protein_tag, params[:term], {})
+						resp = proxy.search_by_tag(nil, params[:term], {})
 
 					when "compound"
 						resp = {:success => true, :msg => "This method is disallowed"}
@@ -439,7 +440,7 @@ module TargetDossierApi
 						resp = {:success => true, :msg => "This method is disallowed"} # proxy.search_concept(params[:term], {})
 
 					else # protein -target- by default
-						resp = proxy.search_by_tag(protein_tag, params[:term], {})
+						resp = proxy.search_by_tag(nil, params[:term], {})
 				end
 				resp
 			end

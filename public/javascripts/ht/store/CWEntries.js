@@ -47,7 +47,7 @@ Ext.define('HT.store.CWEntries', {
 		type: 'jsonp',
 		api: {
 			// read: '/concept_wiki_api_calls/protein_lookup.json'
-			read: 'http://lady-qu.cnio.es:3003/ops_wiki_api_calls/protein_lookup.json'
+			read: "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/ops_wiki_api_calls/protein_lookup.json"
 		},
 		reader: {
 			type: 'json'

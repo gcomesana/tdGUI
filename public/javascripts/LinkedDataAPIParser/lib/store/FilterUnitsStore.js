@@ -2,7 +2,7 @@ Ext.define('LDA.store.FilterUnitsStore', {
     extend: 'LDA.store.basestores.BaseStore',
     model: 'LDA.model.FilterUnitsModel',
     storeId: 'FilterUnitsStore',
-    BASE_URL: ldaBaseUrl + '/pharmacology/filters/units/',
+    BASE_URL: TDGUI.Globals.ldaBaseUrl + '/pharmacology/filters/units/',
     activity_type: undefined,
 
     constructor: function(config, arguments) {

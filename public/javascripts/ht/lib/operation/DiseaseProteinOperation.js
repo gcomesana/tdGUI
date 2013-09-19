@@ -41,7 +41,7 @@ Ext.define('HT.lib.operation.DiseaseProteinOperation', {
 		var payloadTrg = edgeTrg.payloadValue;
 
 		var genename = edgeSrc.label.split(',')[0].trim();
-		var url = 'http://lady-qu.cnio.es:3003/pharma/disease/genemap.jsonp?mim_number='+edgeSrc.payloadValue.uuid; // OMIMid when entity = disease
+		var url = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/pharma/disease/genemap.jsonp?mim_number="+edgeSrc.payloadValue.uuid; // OMIMid when entity = disease
 
 		Ext.data.JsonP.request({
 			url: url,

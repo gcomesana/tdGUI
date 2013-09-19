@@ -11,7 +11,7 @@ Ext.define('TDGUI.store.lda.TargetPharmacologyCountStore', {
   storeId: 'TargetPharmacologyCountStore',
   countNode: 'targetPharmacologyTotalResults',
   BASE_URL: '/tdgui_proxy/get_pharm_count',
-//  BASE_URL: ldaBaseUrl + '/tdgui_proxy/get_pharm_count',
+//  BASE_URL: TDGUI.Globals.ldaBaseUrl + '/tdgui_proxy/get_pharm_count',
 
 
 

@@ -52,7 +52,7 @@ Ext.define('HT.lib.operation.GeneDiseaseOperation', {
 		var payloadTrg = edgeTrg.payloadValue;
 		// var geneParam = payloadSrc.genes.split(',')[0];
 		var geneParam = edgeSrc.label.split(',')[0]; // first gene on label
-		var url = 'http://lady-qu.cnio.es:3003/pharma/gene/diseases.jsonp?ident=' + geneParam;
+		var url = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/pharma/gene/diseases.jsonp?ident=" + geneParam;
 
 		Ext.data.JsonP.request({
 			url: url,

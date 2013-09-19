@@ -14,8 +14,13 @@ Ext.Loader.setPath('Ext.ux', '/javascripts/extjs4.1/examples/ux');
 Ext.Loader.setPath('HT', '/javascripts/ht');
 // Ext.Loader.setPath('LDA', '/javascripts/LinkedDataAPIParser/lib');
 
+/*
 Ext.ns('TDGUI.Globals');
 TDGUI.Globals.firstTime = true;
+
+TDGUI.Globals.theServer = 'localhost';
+TDGUI.Globals.thePort = '3003';
+*/
 
 // Ext.Ajax.disableCaching = false
 Ext.create('Ext.app.Application', {

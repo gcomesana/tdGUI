@@ -111,7 +111,7 @@ describe('Searching for target information', function () {
 
 
   it ('using LDA API (jsonp) to get target information', function () {
-    console.log('targetStore base_url: '+ldaBaseUrl);
+    console.log('targetStore base_url: '+TDGUI.Globals.ldaBaseUrl);
     /*
     var myCrap = Ext.create('TDGUI.store.lda.TargetPharmacologyStore');
     myCrap = Ext.create('TDGUI.store.lda.TargetStore');

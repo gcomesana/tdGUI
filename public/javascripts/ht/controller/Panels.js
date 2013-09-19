@@ -93,29 +93,29 @@ Ext.define('HT.controller.Panels', {
 				// var labelArray = nodeLabel.split(' ');
 				// nodeLabel = labelArray.join(', ');
 
-				theUrl = "http://lady-qu.cnio.es:3003/api/target/by_gene.jsonp?genename=";
+				theUrl = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/api/target/by_gene.jsonp?genename=";
 				var genename = nodeLabel.split(',')[0].trim();
 				theUrl += genename;
 			}
 			else if (evOpts.meta == 'protein') {
 				nodeLabel = evOpts.label;
 				// Get Uniprot accession from label
-				theUrl = "http://lady-qu.cnio.es:3003/api/target/byname/"+evOpts.label+".jsonp";
+				theUrl = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/api/target/byname/"+evOpts.label+".jsonp";
 			}
 
 			else if (evOpts.meta == 'compound') {
 				nodeLabel = evOpts.label;
-				theUrl = "http://lady-qu.cnio.es:3003/pharma/compound/info.jsonp?uri=http://www.conceptwiki.org/concept/"+evOpts.value;
+				theUrl = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/pharma/compound/info.jsonp?uri=http://www.conceptwiki.org/concept/"+evOpts.value;
 			}
 
 			else if (evOpts.meta == 'disease') {
 				var endIndex = evOpts.label.lastIndexOf(';');
 				endIndex = endIndex == -1? evOpts.label.length: endIndex;
 				nodeLabel = evOpts.label.substring(0, endIndex);
-				theUrl = 'http://lady-qu.cnio.es:3003/pharma/disease/genemap.jsonp?mim_number='+evOpts.value;
+				theUrl = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/pharma/disease/genemap.jsonp?mim_number="+evOpts.value;
 			}
 			else
-				theUrl = "http://lady-qu.cnio.es:3003/api/target/byname/"+evOpts.label+".jsonp";
+				theUrl = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/api/target/byname/"+evOpts.label+".jsonp";
 
 			var nodeOpts = {
 				id: newId.toString(),

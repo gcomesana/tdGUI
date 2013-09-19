@@ -6,7 +6,7 @@ Ext.define('TDGUI.store.lda.TargetPharmacologyStore', {
   model: 'TDGUI.model.lda.TargetPharmacologyModel',
 
   storeId: 'TargetPharmacologyStore',
-  BASE_URL: proteinPharmBaseUrl, // + '/target/pharmacology/pages?',
+  BASE_URL: TDGUI.Globals.proteinPharmBaseUrl, // + '/target/pharmacology/pages?',
   REQUEST_TYPE: 'pharma',
 
   pageSize: 25,

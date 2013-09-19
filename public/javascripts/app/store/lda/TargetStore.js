@@ -9,7 +9,7 @@ Ext.define('TDGUI.store.lda.TargetStore', {
   model: 'TDGUI.model.lda.TargetModel',
   storeId: 'TDGUITargetStore',
 
-  BASE_URL: proteinInfoBaseUrl,
+  BASE_URL: TDGUI.Globals.proteinInfoBaseUrl,
 
 
   proxy: {

@@ -51,7 +51,7 @@ Ext.define('HT.lib.InteractionsRuleOperation', {
 		var me = this;
 		var accSrc = edgeSrc.payloadValue.acc;
 		var accTrg = edgeTrg.payloadValue.acc;
-		var url = 'http://lady-qu.cnio.es:3003/api/interactions/'+accSrc+'/'+accTrg+'.jsonp';
+		var url = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/api/interactions/"+accSrc+"/"+accTrg+".jsonp";
 
 		Ext.data.JsonP.request({
 			url: url,

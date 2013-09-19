@@ -1,0 +1,36 @@
+# config/application.yml
+defaults: &defaults
+  req_timeout: 9.5
+  mail:
+    :to = ["<destination1@mydomain.com>", "<destination2@mydomain.com>"]
+    :password = "<mypasswd>"
+    :user = "<sender@mydomain.com>"
+    :address = "<smtp.mailserver.com>"
+    :port = 587
+
+  tsv:
+    tsv_url: "api.openphacts.org" # without the http:// bit and no trailing slash
+    target_path : "/target/pharmacology/pages"
+    compound_path: "/compound/pharmacology/pages"
+    enzyme_path: "/target/enzyme/pharmacology/pages"
+    tsv_rails_host: "<rails_server_host>"
+    tsv_rails_port: "<rails_server_port>"
+    tsv_rails_path: "/ops_api_calls/protein_info"
+    tsv_pharm_rails_path: "/ops_api_calls/pharm_by_protein_name"
+    tsv_pharm_page_results: "/tdgui_proxy/get_pharm_by_target_page"
+
+  cache_database:
+    tdcache_db_user: "<mysql_tdcache_db_user>"
+    tdcache_db_passwd: "<mysql_tdcache_db_passwd>"
+    tdcache_db_host: "<mysql_host>"
+
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  req_timeout: 11

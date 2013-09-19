@@ -47,16 +47,24 @@
 
   <script type="text/javascript">
     var simSearchUrl;
-    var ldaBaseUrl = '<%= "http://" + AppSettings.config["tsv"]["tsv_url"] -%>';
-    var host = '<%= AppSettings.config["tsv"]["tsv_rails_host"] -%>',
-      port = '<%= AppSettings.config["tsv"]["tsv_rails_port"] -%>',
-      info_rails_path = '<%= AppSettings.config["tsv"]["tsv_rails_path"] -%>',
-      pharm_rails_path = '<%= AppSettings.config["tsv"]["tsv_pharm_rails_path"] -%>';
+    // var host = '<%= AppSettings.config["tsv"]["tsv_rails_host"] -%>',
+      // port = '<%= AppSettings.config["tsv"]["tsv_rails_port"] -%>',
+    var info_rails_path = '<%= AppSettings.config["tsv"]["tsv_rails_path"] -%>',
+        pharm_rails_path = '<%= AppSettings.config["tsv"]["tsv_pharm_rails_path"] -%>';
 
-    var proteinInfoBaseUrl = info_rails_path; // "http://" + host + ':' + port + info_rails_path;
-    proteinInfoBase = info_rails_path;
-    var proteinPharmBaseUrl = pharm_rails_path; // "http://" + host + ':' + port + pharm_rails_path;
-    proteinPharmBaseUrl = '<%= AppSettings.config["tsv"]["tsv_pharm_page_results"] -%>';
+
+    Ext.ns('TDGUI.Globals');
+    TDGUI.Globals.ldaBaseUrl = '<%= "http://" + AppSettings.config["tsv"]["tsv_url"] -%>';
+    TDGUI.Globals.proteinInfoBaseUrl = info_rails_path; // "http://" + host + ':' + port + info_rails_path;
+    TDGUI.Globals.proteinInfoBase = info_rails_path;
+
+    // var TDGUI.Globals.proteinPharmBaseUrl = pharm_rails_path; // "http://" + host + ':' + port + pharm_rails_path;
+    TDGUI.Globals.proteinPharmBaseUrl = '<%= AppSettings.config["tsv"]["tsv_pharm_page_results"] -%>';
+
+    TDGUI.Globals.firstTime = true;
+
+    TDGUI.Globals.theServer = '<%= AppSettings.config["tsv"]["tsv_rails_host"] -%>';
+    TDGUI.Globals.thePort = '<%= AppSettings.config["tsv"]["tsv_rails_port"] -%>';
   </script>
 
   <script type="text/javascript">

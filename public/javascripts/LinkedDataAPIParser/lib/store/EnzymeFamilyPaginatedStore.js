@@ -2,7 +2,7 @@ Ext.define('LDA.store.EnzymeFamilyPaginatedStore', {
     extend:'LDA.store.basestores.PaginatedFilteringStore',
     model:'LDA.model.PharmacologyPaginatedModel',
     storeId:'EnzymeFamilyPaginatedStore',
-    BASE_URL: ldaBaseUrl + '/target/enzyme/pharmacology/pages?',
+    BASE_URL: TDGUI.Globals.ldaBaseUrl + '/target/enzyme/pharmacology/pages?',
     REQUEST_TYPE: 'enzyme',
 
     constructor:function (config, arguments) {

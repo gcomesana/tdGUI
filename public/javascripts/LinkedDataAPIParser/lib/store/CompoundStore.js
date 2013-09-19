@@ -2,7 +2,7 @@ Ext.define('LDA.store.CompoundStore', {
     extend:'LDA.store.basestores.BaseStore',
     model:'LDA.model.CompoundModel',
     storeId:'CompoundStore',
-    BASE_URL: ldaBaseUrl + '/compound?',
+    BASE_URL: TDGUI.Globals.ldaBaseUrl + '/compound?',
 
     constructor:function (config, arguments) {
 		console.log('LDA.store.CompoundStore: constructor()');

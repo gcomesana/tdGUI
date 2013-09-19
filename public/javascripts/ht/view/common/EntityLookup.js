@@ -91,35 +91,35 @@ Ext.define('HT.view.common.EntityLookup', {
 		switch (myEntity) {
 			case 'protein':
 				// remoteUrl = 'http://lady-qu.cnio.es:3003/ops_wiki_api_calls/protein_lookup.jsonp';
-				remoteUrl = 'http://lady-qu.cnio.es:3003/api/target/lookup.jsonp';
-				comboStore.storeId = 'comboStore-target';
-				queryParam = 'term';
+				remoteUrl = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/api/target/lookup.jsonp";
+				comboStore.storeId = "comboStore-target";
+				queryParam = "term";
 				break;
 
-			case 'compound':
-				// remoteUrl = 'http://lady-qu.cnio.es:3003/ops_wiki_api_calls/compound_lookup.jsonp';
-				remoteUrl = 'http://lady-qu.cnio.es:3003/pharma/compound/lookup.jsonp';
-				comboStore.storeId = 'comboStore-compound';
-				queryParam = 'term';
+			case "compound":
+				// remoteUrl = "http://lady-qu.cnio.es:3003/ops_wiki_api_calls/compound_lookup.jsonp";
+				remoteUrl = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/pharma/compound/lookup.jsonp";
+				comboStore.storeId = "comboStore-compound";
+				queryParam = "term";
 				break;
 
-			case 'gene':
-				remoteUrl = 'http://lady-qu.cnio.es:3003/api/gene/lookup.jsonp'; // need to complete the url
-				comboStore.storeId = 'comboStore-gene';
-				queryParam = 'term';
+			case "gene":
+				remoteUrl = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/api/gene/lookup.jsonp"; // need to complete the url
+				comboStore.storeId = "comboStore-gene";
+				queryParam = "term";
 				break;
 
-			case 'disease':
-				// remoteUrl = 'http://lady-qu.cnio.es:3003/api/target/by_disease.jsonp'; // idem
-				remoteUrl = 'http://lady-qu.cnio.es:3003/pharma/disease/lookup.jsonp';
-				comboStore.storeId = 'comboStore-disease';
-				queryParam = 'disease';
+			case "disease":
+				// remoteUrl = "http://lady-qu.cnio.es:3003/api/target/by_disease.jsonp"; // idem
+				remoteUrl = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/pharma/disease/lookup.jsonp";
+				comboStore.storeId = "comboStore-disease";
+				queryParam = "disease";
 				break;
 
 			default:
-				remoteUrl = 'http://lady-qu.cnio.es:3003/ops_wiki_api_calls/protein_lookup.jsonp';
-				comboStore.storeId = 'comboStore-target';
-				queryParam = 'query';
+				remoteUrl = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/ops_wiki_api_calls/protein_lookup.jsonp";
+				comboStore.storeId = "comboStore-target";
+				queryParam = "query";
 				break;
 		}
 

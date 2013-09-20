@@ -52,6 +52,15 @@ Ext.define('HT.lib.operation.CompoundProteinOperation', {
 		var payloadTrg = edgeTrg.payloadValue;
 		var url = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/pharma/compound/activities/" + payloadSrc.chemblId + ".jsonp";
 
+		var buildUpMsg = function (theActivityCount) {
+			var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Compound -> Gene</span> operation<br/>('";
+			msg += edgeSrc.label+"' -> '"+edgeTrg.label;
+			msg += "')<br/>"+theActivityCount;
+			msg += " activities for the compound where found involving the gene '<i>"+edgeTrg.label+"'</i></div>";
+
+			return msg;
+		}
+
 		Ext.data.JsonP.request({
 			url: url,
 
@@ -60,6 +69,12 @@ Ext.define('HT.lib.operation.CompoundProteinOperation', {
 
 			failure: function (resp, opts) {
 				funcObj.result = -1;
+				var msg = buildUpMsg(0);
+				me.fireEvent('operationComplete', {result: funcObj.result, 
+					hypothesis: false, 
+					edgeId: 'e' + edgeSrc.id + '-' + edgeTrg.id, 
+					msg: msg
+				});
 			},
 
 			success: function (resp, opts) {
@@ -83,10 +98,7 @@ Ext.define('HT.lib.operation.CompoundProteinOperation', {
 
 				var edgeId = 'e' + edgeSrc.id + '-' + edgeTrg.id;
 				console.log('Operation finished!!!: ' + funcObj.result + ' for ' + edgeId);
-				var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Compound -> Protein</span> operation<br/>('";
-				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
-				msg += "')<br/>"+activityCount;
-				msg += " activities for the compound where found involving the protein '<i>"+edgeTrg.label+"</i>'</div>";
+				var msg = buildUpMsg(activityCount);
 				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
 						hypothesiseResult, edgeId: edgeId, msg: msg});
 			},

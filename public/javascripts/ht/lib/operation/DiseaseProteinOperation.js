@@ -43,6 +43,15 @@ Ext.define('HT.lib.operation.DiseaseProteinOperation', {
 		var genename = edgeSrc.label.split(',')[0].trim();
 		var url = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/pharma/disease/genemap.jsonp?mim_number="+edgeSrc.payloadValue.uuid; // OMIMid when entity = disease
 
+		var buildUpMsg = function (theActivityCount) {
+			var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Disease -> Protein</span> operation<br/>('";
+				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
+				msg += "')<br/>";
+				msg += theActivityCount+" relationships between disease and protein where found in OMIM</div>";
+
+			return msg;
+		}
+
 		Ext.data.JsonP.request({
 			url: url,
 
@@ -52,6 +61,12 @@ Ext.define('HT.lib.operation.DiseaseProteinOperation', {
 
 			failure: function (resp, opts) {
 				funcObj.result = -1;
+				var msg = buildUpMsg(0);
+				me.fireEvent('operationComplete', {result: funcObj.result, 
+					hypothesis: false, 
+					edgeId: 'e' + edgeSrc.id + '-' + edgeTrg.id, 
+					msg: msg
+				});
 			},
 
 			// In this case, we just check if the gene names match
@@ -81,10 +96,7 @@ Ext.define('HT.lib.operation.DiseaseProteinOperation', {
 				var edgeId = 'e'+edgeSrc.id+'-'+edgeTrg.id;
 				console.log('Operation finished!!!: '+funcObj.result+' for '+edgeId);
 
-				var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Disease -> Protein</span> operation<br/>('";
-				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
-				msg += "')<br/>";
-				msg += hits.length+" relationships between disease and protein where found in OMIM</div>";
+				var msg = buildUpMsg(hits.length);
 				if (hits.length > 0)
 					msg += ': '+hits.join(',');
 				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:

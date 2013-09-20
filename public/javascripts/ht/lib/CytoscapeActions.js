@@ -237,7 +237,7 @@ Ext.define('HT.lib.CytoscapeActions', {
 						try {
 							opObj.on('operationComplete', function (result) {
 								var myEdge = vis.edge(result.edgeId);
-								console.log('operationComplete:'+aliasObj.result+ ' vs '+result.result+' for edge '+myEdge.label);
+								console.log('operationComplete:'+aliasObj.result+ ' vs '+result.result+' for edge '+myEdge.data.id);
 
 								if (result.hypothesis)
 									bypassEdge(myEdge, 'green');

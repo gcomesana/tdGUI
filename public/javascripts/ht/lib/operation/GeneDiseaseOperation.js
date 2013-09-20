@@ -54,11 +54,28 @@ Ext.define('HT.lib.operation.GeneDiseaseOperation', {
 		var geneParam = edgeSrc.label.split(',')[0]; // first gene on label
 		var url = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/pharma/gene/diseases.jsonp?ident=" + geneParam;
 
+		var buildUpMsg = function (tagDiseasesLength) {
+			// console.log('Operation finished!!!: ' + funcObj.result + ' for ' + edgeId);
+			var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Gene -> Disease</span> operation<br/>('";
+			msg += edgeSrc.label+"' -> '"+edgeTrg.label;
+			msg += "')<br/>";
+			msg += tagDiseasesLength + " related diseases were found where the gene is involved in ";
+
+			return msg;
+		}
+
 		Ext.data.JsonP.request({
 			url: url,
 
 			failure: function (resp, opts) {
 				funcObj.result = -1;
+				var msg = buildUpMsg(0);
+
+				me.fireEvent('operationComplete', {result: funcObj.result, 
+					hypothesis:	hypothesiseResult, 
+					edgeId: 'e' + edgeSrc.id + '-' + edgeTrg.id, 
+					msg: msg
+				});
 			},
 
 			success: function (resp, opts) {
@@ -87,14 +104,12 @@ Ext.define('HT.lib.operation.GeneDiseaseOperation', {
 
 				// funcObj.result = result;
 				var hypothesiseResult = result !== false;
-
 				var edgeId = 'e' + edgeSrc.id + '-' + edgeTrg.id;
-				console.log('Operation finished!!!: ' + funcObj.result + ' for ' + edgeId);
-				var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Gene -> Disease</span> operation<br/>('";
-				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
-				msg += "')<br/>";
-				msg += "Related diseases were found where the gene is involved in ";
-				msg += "(<span style=\"font-style: italic;\">"+tagDiseases.join(', ')+"</span>)</div>";
+				var msg = buildUpMsg(tagDiseases.length);
+
+				if (tagDiseases.length > 0)
+					msg += "(<span style=\"font-style: italic;\">"+tagDiseases.join(', ')+"</span>)</div>";
+
 				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
 									hypothesiseResult, edgeId: edgeId, msg: msg});
 			},

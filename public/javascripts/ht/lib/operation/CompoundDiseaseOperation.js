@@ -59,8 +59,7 @@ Ext.define('HT.lib.operation.CompoundDiseaseOperation', {
 		// check if any of the target_accessions of the activities match with the disease involved accessions
 		// [accs = 'Q8N608,Q13093,P36222,Q9BZ11,Q9Y616,Q8TAX7,Q6W5P4,Q8N138,Q13258,Q9UL17';]
 		var data = [];
-		var cmpdChemblId = 'CHEMBL786';
-		cmpdChemblId = 'CHEMBL714'; // salbutamol
+		var cmpdChemblId = 'CHEMBL714'; // salbutamol
 		cmpdChemblId = payloadSrc.chemblId;
 		var diseaseAcc = payloadTrg.acc;
 		var result = 0;
@@ -91,56 +90,38 @@ Ext.define('HT.lib.operation.CompoundDiseaseOperation', {
 			var url = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/pharma/compound/activities/xxxx.jsonp";
 			url = url.replace('xxxx', cmpdChemblId);
 			// get activities for every accession
-			Ext.data.JsonP.request({
-				url: url,
+			try {
+				Ext.data.JsonP.request({
+					url: url,
 
-				failure: function (resp, opts) {
-					funcObj.result = -1;
-				},
-
-				success: function (resp, opts) {
-					var jsonObj = resp;
-					var accessionsActivities = [];
-
-					if (jsonObj != null) {
-						Ext.each(jsonObj.activities, function (actv, index, activities) {
-							var accessions = actv.target_accessions.split(',');
-							accessionsActivities.push.apply(accessionsActivities, accessions);
-
-							if (accessions.indexOf(diseaseAcc) != -1)
-								result++;
-						});
-					}
-
-					action();
-/*
-					countReqs++;
-					if (countReqs == numReqs)
+					failure: function (resp, opts) {
+						funcObj.result = -1;
 						action();
-*/
+					},
 
-					/* result = accessionsActivities.indexOf(diseaseAcc) != -1;					
-					funcObj.result = result;
-					var hypothesiseResult = result != 0;
+					success: function (resp, opts) {
+						var jsonObj = resp;
+						var accessionsActivities = [];
 
-					var edgeId = 'e' + edgeSrc.id + '-' + edgeTrg.id;
-					console.log('Operation finished!!!: ' + funcObj.result + ' for ' + edgeId);
+						if (jsonObj != null) {
+							Ext.each(jsonObj.activities, function (actv, index, activities) {
+								var accessions = actv.target_accessions.split(',');
+								accessionsActivities.push.apply(accessionsActivities, accessions);
 
-					var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Disease -> Compound</span> operation<br/>('";
-						msg += edgeSrc.label+"' -> '"+edgeTrg.label;
-						msg += "')<br/>" + result;
-						msg += " activities where found for proteins related to the '<i>" + diseaseName +"</i>' ";
-						msg += "involving the compound '<i>"+compName+"</i>'</div>";
-					
-					me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
-												hypothesiseResult, edgeId: edgeId, msg: msg});
+								if (accessions.indexOf(diseaseAcc) != -1)
+									result++;
+							});
+						}
 
-					 // me.fireEvent('operationComplete', {result: funcObj.result, hypothesis: hypothesiseResult, edgeId: edgeId});
-					*/
-				}, // EO success
+						action();
+					}, // EO success
 
-				scope: me
-			}); // EO JsonP request
+					scope: me
+				}); // EO JsonP request
+			}
+			catch (e) {
+				action ();
+			}
 		} // EO else
 	}
 

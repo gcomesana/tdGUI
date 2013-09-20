@@ -39,6 +39,24 @@ Ext.define('HT.lib.operation.GeneProteinOperation', {
 		var genename = edgeSrc.label.split(',')[0].trim();
 		var url = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/api/target/by_gene.jsonp?genename="+genename;
 
+		var buildUpMsg = function (result) {
+			var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Gene -> Protein</span> operation<br/>('";
+				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
+				msg += "')<br/>";
+				if (result === true) {
+					msg += "Protein "+edgeTrg.label+" was identified as a product of ";
+					msg += edgeSrc.label+" after querying Uniprot";
+				}
+				else {
+					msg += "It wasn't found the protein '"+edgeTrg.label;
+					msg += "' is a product of the gene '"+genename+"'";
+				}
+				msg += "</div>";
+
+			return msg;
+		}
+
+
 		Ext.data.JsonP.request({
 			url: url,
 			params: {
@@ -51,6 +69,13 @@ Ext.define('HT.lib.operation.GeneProteinOperation', {
 
 			failure: function (resp, opts) {
 				funcObj.result = -1;
+				var msg = buildUpMsg(false);
+				me.fireEvent('operationComplete', {
+					result: funcObj.result, 
+					hypothesis:	false, 
+					edgeId: 'e'+edgeSrc.id+'-'+edgeTrg.id, 
+					msg: msg
+				});
 			},
 
 			success: function (resp, opts) {
@@ -74,19 +99,8 @@ Ext.define('HT.lib.operation.GeneProteinOperation', {
 				var hypothesiseResult = result !== false;
 
 				var edgeId = 'e'+edgeSrc.id+'-'+edgeTrg.id;
-				console.log('Operation finished!!!: '+funcObj.result+' for '+edgeId);
-				var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Gene -> Protein</span> operation<br/>('";
-				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
-				msg += "')<br/>";
-				if (result === true) {
-					msg += "Protein "+edgeTrg.label+" was identified as a product of ";
-					msg += edgeSrc.label+" after querying Uniprot";
-				}
-				else {
-					msg += "It wasn't found the protein '"+edgeTrg.label;
-					msg += "' is a product of the gene '"+genename+"'";
-				}
-				msg += "</div>";
+				// console.log('Operation finished!!!: '+funcObj.result+' for '+edgeId);
+				var msg = buildUpMsg(result);
 				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
 						hypothesiseResult, edgeId: edgeId, msg: msg});
 			},

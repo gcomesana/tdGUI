@@ -51,83 +51,57 @@ Ext.define('HT.lib.operation.CompoundGeneOperation', {
 		var payloadTrg = edgeTrg.payloadValue;
 		var url = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/pharma/compound/activities/" + payloadSrc.chemblId + ".jsonp";
 
-		var buildUpMsg = function (theActivityCount) {
-			var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Compound -> Gene</span> operation<br/>('";
-			msg += edgeSrc.label+"' -> '"+edgeTrg.label;
-			msg += "')<br/>"+theActivityCount;
-			msg += " activities for the compound where found involving the gene '<i>"+edgeTrg.label+"'</i></div>";
+		Ext.data.JsonP.request({
+			url: url,
 
-			return msg;
-		}
+//			callback: function (opts, resp) {
+//			},
 
+			failure: function (resp, opts) {
+				funcObj.result = -1;
+			},
 
-		try {
-			Ext.data.JsonP.request({
-				url: url,
+			success: function (resp, opts) {
+				var jsonObj = resp;
+				var result = false;
 
-	//			callback: function (opts, resp) {
-	//			},
-
-				failure: function (resp, opts) {
-					funcObj.result = -1;
-					console.log('CompoundGeneOperation: JsonP operation failed!!!');
-
-					var msg = buildUpMsg(0);
-					me.fireEvent('operationComplete', {result: 0,
-						hypothesiseResult: false,
-						edgeId: 'e'+edgeSrc.id+'-'+edgeTrg.id,
-						msg: msg
-					});
-				},
-
-				success: function (resp, opts) {
-					var jsonObj = resp;
-					var result = false;
-
-					var activityList = jsonObj.activities; // array of activities involving the compound
-					var activityCount = 0;
-					Ext.each(activityList, function (activity, index, activities) {
-						var activity_accesions = activity.target_accessions.split(',');
-						if (activity_accesions.indexOf(payloadTrg.acc) != -1) {
+				var activityList = jsonObj.activities; // array of activities involving the compound
+				var activityCount = 0;
+				Ext.each(activityList, function (activity, index, activities) {
+					var activity_accesions = activity.target_accessions.split(',');
+					if (activity_accesions.indexOf(payloadTrg.acc) != -1) {
+						result = true;
+						activityCount++;
+						// return false;
+					}
+					/*
+					Ext.each(activity_accesions, function (accs, index, accs_list) {
+						if (payloadTrg.indexOf(accs) != -1) {
 							result = true;
-							activityCount++;
-							// return false;
+							return false;
 						}
-						/*
-						Ext.each(activity_accesions, function (accs, index, accs_list) {
-							if (payloadTrg.indexOf(accs) != -1) {
-								result = true;
-								return false;
-							}
 
-						});
-						return !result; // if result is false, continue, otherwise break the loop
-						*/
 					});
+					return !result; // if result is false, continue, otherwise break the loop
+					*/
+				});
 
-					funcObj.result = activityCount;
-					var hypothesiseResult = result !== false;
+				funcObj.result = activityCount;
+				var hypothesiseResult = result !== false;
 
-					var edgeId = 'e' + edgeSrc.id + '-' + edgeTrg.id;
-					console.log('Operation finished!!!: ' + funcObj.result + ' for ' + edgeId);
+				var edgeId = 'e' + edgeSrc.id + '-' + edgeTrg.id;
+				console.log('Operation finished!!!: ' + funcObj.result + ' for ' + edgeId);
 
-					var msg = buildUpMsg(activityCount);
-					me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
-						hypothesiseResult, edgeId: edgeId, msg: msg});
-				},
+				var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Compound -> Gene</span> operation<br/>('";
+				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
+				msg += "')<br/>"+activityCount;
+				msg += " activities for the compound where found involving the gene '<i>"+edgeTrg.label+"'</i></div>";
+				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
+					hypothesiseResult, edgeId: edgeId, msg: msg});
+			},
 
-				scope: me
-			})
-		}
-		catch (e) {
-			var msg = buildUpMsg(0);
-			me.fireEvent('operationComplete', {result: 0,
-				hypothesiseResult: false,
-				edgeId: 'e'+edgeSrc.id+'-'+edgeTrg.id,
-				msg: msg
-			});
-
-		}
+			scope: me
+		})
 	}
 
 });

@@ -111,7 +111,6 @@ Ext.define('HT.lib.operation.DiseaseCompoundOperation', {
 
 					failure: function (resp, opts) {
 						funcObj.result = -1;
-						action();
 					},
 
 					success: function (resp, opts) {

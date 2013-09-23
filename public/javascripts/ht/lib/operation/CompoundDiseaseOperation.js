@@ -93,9 +93,12 @@ Ext.define('HT.lib.operation.CompoundDiseaseOperation', {
 			// get activities for every accession
 			Ext.data.JsonP.request({
 				url: url,
+				timeout: 30000,
 
 				failure: function (resp, opts) {
+					console.log("This is impossible for..."+cmpdChemblId);
 					funcObj.result = -1;
+					action ();
 				},
 
 				success: function (resp, opts) {

@@ -222,6 +222,7 @@ Ext.define('HT.lib.CytoscapeActions', {
 					var rule = edge.rule;
 					var aliases = rule.ruleAliases;
 
+					// No repeat edges
 					console.log (edge.id + " vs [" + edgesVisited.join(',')+"]");
 					if (Ext.Array.contains(edgesVisited, edge.id))
 						return 1;
@@ -237,7 +238,11 @@ Ext.define('HT.lib.CytoscapeActions', {
 						try {
 							opObj.on('operationComplete', function (result) {
 								var myEdge = vis.edge(result.edgeId);
-								console.log('operationComplete:'+aliasObj.result+ ' vs '+result.result+' for edge '+myEdge.label);
+								console.log('operationComplete:'+aliasObj.result+ ' vs '+result.result+' for edge '+result.edgeId);
+
+								// remove the edge from the visited ones
+								var indexEdgeVis = edgesVisited.indexOf(result.edgeId);
+								edgesVisited.splice(indexEdgeVis, 1);
 
 								if (result.hypothesis)
 									bypassEdge(myEdge, 'green');
@@ -246,28 +251,23 @@ Ext.define('HT.lib.CytoscapeActions', {
 
 								addResult2List (result);
 								
-/*
-								var resultsPanel = Ext.getCmp('resultsPanel');
-								// resultsPanel.update(result.msg);
-								var resultsPanelDiv = Ext.get('resultsPanelDiv');
-								var oldHtml = resultsPanel.body.dom.innerHTML;
-								// oldHtml = resultsPanelDiv.dom.innerHTML;
-								resultsPanel.update('');
-								if (oldHtml != "")
-									resultsPanel.update(oldHtml + '<br/><br/>'+result.msg);
-									// resultsPanelDiv.update(oldHtml + '<br/><br/>'+result.msg);
-								else 
-									resultsPanel.update('<br/>'+result.msg);
-
-								resultsPanel.setBodyStyle('height', '70%');
-*/
 								// Hide the mask...
-								if (indexFunc == functionsList.length-1 &&
-										indexBis == edgeList.length-1 && indexPath == pathList.length-1) {
+								if (indexFunc == functionsList.length-1 && indexPath == pathList.length-1 && edgesVisited.length == 0) {
+										// indexBis == edgeList.length-1 && indexPath == pathList.length-1) {
 									cytoscapePanel.setLoading(false);
 
+									// Re-enable buttons
 									Ext.getCmp('actionsBtn').enable();
 									Ext.getCmp('clearBtn').enable();
+
+									var items = Ext.ComponentQuery.query('entity-lookup');
+									Ext.each(items, function (item, index, itemList) {
+										if (item.xtype == 'entity-lookup') {
+											var combo = item.items.items[1].items.items[0];
+											if (combo.getRawValue() != "")
+												item.items.items[1].items.items[1].enable(); // enable the button
+										}
+									});
 								}
 
 							});

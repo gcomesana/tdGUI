@@ -45,11 +45,18 @@ Ext.define('HT.lib.operation.DiseaseGeneOperation', {
 			url: url,
 
 			callback: function (opts, resp) {
-				console.log('ajax callback');
+				console.log('ajax callback for DiseaseGeneOperation');
 			},
 
 			failure: function (resp, opts) {
 				funcObj.result = -1;
+				console.log("DiseaseGeneOperation: impossible for "+edgeSrc.payloadValue.uuid);
+				me.fireEvent('operationComplete', {
+					result: funcObj.result, 
+					hypothesis:	false, 
+					edgeId: 'e' + edgeSrc.id + '-' + edgeTrg.id,
+					msg: 'Timeout: could not complete the operation. Can try again in few seconds'
+				});
 			},
 
 			// In this case, we just check if the gene names match

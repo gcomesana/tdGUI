@@ -280,6 +280,7 @@ class APIProxy
 		end # EO cache issue management block
 
 		LibUtil.save_to_dbcache(url, resp_hash)
+		puts "!!*** Finish the fucking compound-activities ***!!"
 		resp_hash
 	end
 

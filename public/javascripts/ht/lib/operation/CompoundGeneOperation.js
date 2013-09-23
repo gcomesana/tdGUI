@@ -59,6 +59,13 @@ Ext.define('HT.lib.operation.CompoundGeneOperation', {
 
 			failure: function (resp, opts) {
 				funcObj.result = -1;
+				console.log("CompoundGeneOperation: impossible for "+payloadSrc.chemblId);
+				me.fireEvent('operationComplete', {
+					result: funcObj.result, 
+					hypothesis:	false, 
+					edgeId: 'e' + edgeSrc.id + '-' + edgeTrg.id,
+					msg: 'Timeout: could not complete the operation. Can try again in few seconds'
+				});
 			},
 
 			success: function (resp, opts) {

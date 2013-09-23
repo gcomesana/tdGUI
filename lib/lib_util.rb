@@ -255,7 +255,7 @@ class LibUtil
 # @return [Net::HTTPResponse] the object response
 	def self.request(url, options, cache = true)
 		my_url = URI.parse(URI.encode(url))
-		puts "LibUtil.request...#{url}: # cache # #{cache}"
+		# puts "LibUtil.request...#{url}: # cache # #{cache}"
 
 		begin
 			my_url = URI.parse(url)
@@ -367,7 +367,7 @@ class LibUtil
 	# @param [URL] my_url the url after being parsed
 	# @return a response object
 	def self.do_request (url, my_url)
-		puts "LibUtil.do_request (cache fault) for: #{my_url}"
+		# puts "LibUtil.do_request (cache fault) for: #{my_url}"
 		http = Net::HTTP.new(my_url.host, my_url.port)
 		if url.index('https').nil? == false # it is an secure connection
 			http.use_ssl = true

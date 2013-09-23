@@ -260,7 +260,7 @@ Ext.define('HT.controller.Panels', {
 			nodes = nm.data.nodes;
 
 			// resultsPanel.update('');
-			this.cleanResultList();
+			// this.cleanResultList();
 		}
 		else if (btnId == 'btnEnactSel') { // only for selected nodes (a subgraph)
 			var selNodeModel, selEdgeModel;
@@ -277,8 +277,19 @@ Ext.define('HT.controller.Panels', {
 			edges = selEdgeModel; // nm.data.edges;
 			
 			// resultsPanel.update('');
-			this.cleanResultList();
+			// this.cleanResultList();
 		}
+
+		// Disable entity lookup buttons
+		var items = Ext.ComponentQuery.query('entity-lookup');
+		Ext.each(items, function (item, index, itemList) {
+			if (item.xtype == 'entity-lookup') {
+				item.items.items[1].items.items[1].disable(); // disable the button
+			}
+		});
+
+		this.cleanResultList();
+
 		// functionEvent = HT.lib.RuleFunctions.getFunctionFromAlias(alias)
 		// functionEvent.addListener('operationComplete', this.onOperationComplete, this)
 		HT.lib.CytoscapeActions.runGraph(vis, nodes, edges);

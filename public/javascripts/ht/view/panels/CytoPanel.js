@@ -318,8 +318,12 @@ Ext.define('HT.view.panels.CytoPanel', {
 								cytoscape.vis.removeElements();
 								cytoscape.vis.visualStyleBypass(null);
 
-								var resultsPanel = Ext.getCmp('resultsPanel');
-								resultsPanel.update('');
+								var resultsList = Ext.getCmp('resultsList');
+								var resultsStore = resultsList.getStore();
+								var recordCount = resultsStore.getCount();
+
+								resultsStore.remove(resultsStore.data.getRange(0, recordCount-1));
+								resultsList.getView().refresh();
 							}
 						}
 					}

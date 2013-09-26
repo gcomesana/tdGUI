@@ -60,9 +60,12 @@ module TdGUI
     config.assets.version = '1.0'
 
 		# IntAct db configuration for Postgres!!!
-		opts = {:intact_server => 'postgres_server', :intact_user => 'postgres_user',
-						:intact_pass => 'postgres_password', :intact_port => '5432'}
+		opts = {:intact_server => '<postgres_server>', :intact_user => '<postgres_user>',
+						:intact_pass => '<postgres_password>', :intact_port => '5432'}
+		opts_mysql = {:mysql_host => '<host>', :mysql_user => '<user>', :mysql_passwd => '<password>'}
+		
 		config.intactdb = OpenStruct.new(opts)
+		config.mysql_cache = OpenStruct.new(opts_mysql)
 
 		require File.expand_path(File.join(File.dirname(__FILE__), '../lib/app_settings'))
 		AppSettings.config = YAML.load_file("config/app_settings.yml")[Rails.env]

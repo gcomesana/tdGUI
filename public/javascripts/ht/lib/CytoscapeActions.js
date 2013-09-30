@@ -203,8 +203,9 @@ Ext.define('HT.lib.CytoscapeActions', {
 			// There are several paths in a graph, with several edges for every path
 			// and one rule for every edges, with several function every rule
 			vis.visualStyleBypass(null); // remove bypass; reset the graph colors
-			var edgesVisited = [];
+			var edgesVisited = [], highestIndexPath = 0;
 			Ext.each(paths, function(path, indexPath, pathList) {
+				highestIndexPath = indexPath > highestIndexPath? indexPath: highestIndexPath;
 				var edgeIndex = 0;
 				var cytoscapePanel = Ext.ComponentQuery.query('cytoscape')[0];
 
@@ -252,7 +253,10 @@ Ext.define('HT.lib.CytoscapeActions', {
 								addResult2List (result);
 								
 								// Hide the mask...
-								if (indexFunc == functionsList.length-1 && indexPath == pathList.length-1 && edgesVisited.length == 0) {
+								console.log("* first guard: "+indexFunc +" vs "+ (functionsList.length-1));
+								console.log("** second guard: "+highestIndexPath + " vs "+ (pathList.length-1));
+								console.log("*** third guard: "+edgesVisited.length);
+								if (indexFunc == functionsList.length-1 && highestIndexPath == pathList.length-1 && edgesVisited.length == 0) {
 										// indexBis == edgeList.length-1 && indexPath == pathList.length-1) {
 									cytoscapePanel.setLoading(false);
 

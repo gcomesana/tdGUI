@@ -424,7 +424,8 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
     }
     else {
     	// try uniprot_by_acc
-    	var url = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/api/target/"+this.uniprot_acc+".jsonp";
+    	// var url = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/api/target/"+this.uniprot_acc+".jsonp";
+    	var url = "http://"+TDGUI.Globals.Host+"/api/target/"+this.uniprot_acc+".jsonp";
     	Ext.data.JsonP.request({
     		url: url,
 

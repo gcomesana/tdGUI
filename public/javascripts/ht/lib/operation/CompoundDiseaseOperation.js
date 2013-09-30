@@ -88,7 +88,7 @@ Ext.define('HT.lib.operation.CompoundDiseaseOperation', {
 			action();
 
 		else {
-			var url = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/pharma/compound/activities/xxxx.jsonp";
+			var url = "http://"+TDGUI.Globals.Host+"/pharma/compound/activities/xxxx.jsonp";
 			url = url.replace('xxxx', cmpdChemblId);
 			// get activities for every accession
 			Ext.data.JsonP.request({

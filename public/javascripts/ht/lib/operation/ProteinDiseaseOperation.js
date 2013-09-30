@@ -39,7 +39,7 @@ Ext.define('HT.lib.operation.ProteinDiseaseOperation', {
 		var payloadTrg = edgeTrg.payloadValue;
 		var accSrc = payloadSrc.acc; // here is the accession for the protein/target
 
-		var url = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/pharma/target/diseases.jsonp?accession="+accSrc;
+		var url = "http://"+TDGUI.Globals.Host+"/pharma/target/diseases.jsonp?accession="+accSrc;
 
 		Ext.data.JsonP.request({
 			url: url,

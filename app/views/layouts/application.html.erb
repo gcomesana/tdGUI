@@ -33,10 +33,11 @@
     <%= javascript_include_tag '/javascripts/app.js' %>
 
   <% else %>
-    <%= javascript_include_tag '/ext/ext-all.js' %>
-    <%= javascript_include_tag 'prototype' %>
-    <%= javascript_include_tag '/all-classes.js' %>
-    <%= javascript_include_tag '/app-all.js' %>
+    <%= javascript_include_tag '/javascripts/extjs4.1/ext-all.js' %>
+
+    <%#= javascript_include_tag 'prototype' %>
+    <%= javascript_include_tag '/javascripts/lib/jit.js' %>
+    <%= javascript_include_tag '/javascripts/app.js' %>
   <% end %>
 
   <%#= javascript_include_tag '/app/view/ux/exporter/Exporter.js' %>
@@ -65,6 +66,8 @@
 
     TDGUI.Globals.theServer = '<%= AppSettings.config["tsv"]["tsv_rails_host"] -%>';
     TDGUI.Globals.thePort = '<%= AppSettings.config["tsv"]["tsv_rails_port"] -%>';
+
+    TDGUI.Globals.Host = '<%= AppSettings.config["tsv"]["tsv_rails_server"] -%>';
   </script>
 
   <script type="text/javascript">

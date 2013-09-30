@@ -61,7 +61,7 @@ Ext.define('HT.lib.operation.InteractionsRuleOperation', {
 		var endIdx = uniprotUrl.indexOf('<', initIdx);
 		var acc = uniprotUrl.substring(initIdx+1, endIdx);
 		*/
-		var url = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/api/interactions/"+accSrc+"/"+accTrg+".jsonp";
+		var url = "http://"+TDGUI.Globals.Host+"/api/interactions/"+accSrc+"/"+accTrg+".jsonp";
 
 		Ext.data.JsonP.request({
 			url: url,

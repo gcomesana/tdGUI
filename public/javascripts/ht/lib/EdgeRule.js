@@ -112,7 +112,7 @@ Ext.define('HT.lib.EdgeRule', {
 		 * @return {Object} an object with information about the found interactions
  		 */
 		var interactionFunc = function (valSrc, valTrg, threshold, funcObj) {
-			var url = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/api/interactions/"+valSrc+'/'+valTrg;
+			var url = "http://"+TDGUI.Globals.Host+"/api/interactions/"+valSrc+'/'+valTrg;
 			url = (threshold === undefined || threshold == null)? url: url+
 				'?threshold='+threshold;
 

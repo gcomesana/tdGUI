@@ -37,7 +37,7 @@ Ext.define('HT.lib.operation.GeneProteinOperation', {
 		var accSrc = edgeSrc.payloadValue.acc;
 		var accTrg = edgeTrg.payloadValue.acc;
 		var genename = edgeSrc.label.split(',')[0].trim();
-		var url = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/api/target/by_gene.jsonp?genename="+genename;
+		var url = "http://"+TDGUI.Globals.Host+"/api/target/by_gene.jsonp?genename="+genename;
 
 		Ext.data.JsonP.request({
 			url: url,

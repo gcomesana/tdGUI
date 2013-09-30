@@ -103,7 +103,7 @@ Ext.define('HT.lib.operation.DiseaseCompoundOperation', {
 			action();
 		else {
 			Ext.each(accs_arr, function (acc, index, accessions) {
-				var url = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/pharma/xxxx/bioactivities.jsonp";
+				var url = "http://"+TDGUI.Globals.Host+"/pharma/xxxx/bioactivities.jsonp";
 				url = url.replace('xxxx', acc);
 				// get activities for every accession
 				Ext.data.JsonP.request({

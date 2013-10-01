@@ -275,15 +275,7 @@ Ext.define('HT.view.panels.CytoPanel', {
 					id: 'btnEnact'
 				}, {
 					text: 'Enact selected',
-					id: 'btnEnactSel',
-					listeners: {
-						click: {
-							fn: function (btn, evOpts) {
-
-							}
-						}
-					}
-
+					id: 'btnEnactSel'
 				}]
 			}, {
 				xtype: 'button',

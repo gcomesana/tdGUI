@@ -263,6 +263,7 @@ Ext.define('HT.controller.Panels', {
 			// this.cleanResultList();
 		}
 		else if (btnId == 'btnEnactSel') { // only for selected nodes (a subgraph)
+			console.log('selected nodes+edges...');
 			var selNodeModel, selEdgeModel;
 			selNodeModel = Ext.Array.map(cytoscape.nodesSelectionModel, function (item) {
 				return item.data;

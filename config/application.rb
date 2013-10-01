@@ -61,10 +61,10 @@ module TdGUI
 
 		# IntAct db configuration
 		opts = {:intact_server => 'localhost', :intact_user => 'intact',
-						:intact_pass => '1ntakt', :intact_port => '5432'}
+						:intact_pass => '', :intact_port => '5432'}
 		# opts = {:intact_server => 'padme.cnio.es', :intact_user => 'gcomesana',
 		# 				:intact_pass => 'appform', :intact_port => '5432'}
-		opts_mysql = {:mysql_host => 'localhost', :mysql_user => 'root', :mysql_passwd => ''}
+		opts_mysql = {:mysql_host => 'localhost', :mysql_user => '', :mysql_passwd => ''}
 
     config.intactdb = OpenStruct.new(opts)
     config.mysql_cache = OpenStruct.new(opts_mysql)

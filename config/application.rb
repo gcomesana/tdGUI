@@ -64,7 +64,10 @@ module TdGUI
 						:intact_pass => '1ntakt', :intact_port => '5432'}
 		# opts = {:intact_server => 'padme.cnio.es', :intact_user => 'gcomesana',
 		# 				:intact_pass => 'appform', :intact_port => '5432'}
-		config.intactdb = OpenStruct.new(opts)
+		opts_mysql = {:mysql_host => 'localhost', :mysql_user => 'root', :mysql_passwd => ''}
+
+    config.intactdb = OpenStruct.new(opts)
+    config.mysql_cache = OpenStruct.new(opts_mysql)
 
 		require File.expand_path(File.join(File.dirname(__FILE__), '../lib/app_settings'))
 		AppSettings.config = YAML.load_file("config/app_settings.yml")[Rails.env]

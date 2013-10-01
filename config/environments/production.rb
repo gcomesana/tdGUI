@@ -1,8 +1,13 @@
+# -*- coding: utf-8 -*-
 TdGUI::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Code is not reloaded between requests
-  config.cache_classes = true
+  # config.cache_classes = true
+  config.cache_classes = false
+  config.cache_store = :dalli_store, {
+    :value_max_bytes => 1024 * 1042 * 12 # maximum stored object size is 12Mb                  
+  }
 
   # Full error reports are disabled and caching is turned on
   config.consider_all_requests_local       = false
@@ -59,11 +64,11 @@ TdGUI::Application.configure do
   config.active_support.deprecation = :notify
 
 	config.action_mailer.smtp_settings = {
-		:address              => "webmail.cnio.es",
+		:address              => "mail.cnio.es",
 		:port                 => 25, #587,
 		:domain								=> 'cnio.es',
 		:user_name            => 'gcomesana',
-		:password             => 'Run3ks_3',
+		:password             => '',
 		:authentication       => :login,
 #		:enable_starttls_auto => true
 	}

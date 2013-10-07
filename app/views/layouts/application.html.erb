@@ -24,6 +24,7 @@
 
   <!-- environment: <%= ENV['RAILS_ENV'] %> -->
   <% if ENV['RAILS_ENV'] != 'production' %>
+
 		<!-- using extjs 4.1 -->
     <%= javascript_include_tag '/javascripts/extjs4.1/ext-all-debug.js' %>
     <%#= javascript_include_tag "extjs4.0.7/bootstrap.js" %>
@@ -33,6 +34,12 @@
     <%= javascript_include_tag '/javascripts/app.js' %>
 
   <% else %>
+    <script type="text/javascript">
+      console.log('Rewriting console object in production');
+      var console = {};
+      console.log = function () {};
+      console.info = function () {};
+    </script>
     <%= javascript_include_tag '/javascripts/extjs4.1/ext-all.js' %>
 
     <%#= javascript_include_tag 'prototype' %>
@@ -68,6 +75,7 @@
     TDGUI.Globals.thePort = '<%= AppSettings.config["tsv"]["tsv_rails_port"] -%>';
 
     TDGUI.Globals.Host = '<%= AppSettings.config["tsv"]["tsv_rails_server"] -%>';
+    console.log('TDGUI.Globahs.Host: '+TDGUI.Globals.Host);
   </script>
 
   <script type="text/javascript">

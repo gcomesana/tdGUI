@@ -347,7 +347,9 @@ class LibUtil
 
 
 	def self.save_to_dbcache (my_url, resp) 
-		conn_string = "DBI:MySql:"+TdGUI::Application.config.mysql_cache.cache_db+":"+TdGUI::Application.config.mysql_cache.mysql_host
+		conn_string = "DBI:Mysql:"+TdGUI::Application.config.mysql_cache.cache_db+
+					":"+TdGUI::Application.config.mysql_cache.mysql_host
+		puts "save_to_dbcache: #{conn_string}"
 		dbh = DBI.connect(conn_string, TdGUI::Application.config.mysql_cache.mysql_user)
 		# get server version string and display it
 

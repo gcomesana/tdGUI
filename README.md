@@ -28,13 +28,7 @@ The TD app essentially provides tools to satisfy two general use cases. In the f
 In addition, an __API__ was built at the same time that the web application. The documentation for the API is reachable at [http://td.inab.org/tdapi](http://td.inab.org/tdapi). This API was implemented as a handy complement to the data provided by/retrieved from external sources. Some functions are just a wrapping over functions external providers have, but some others gather data from the remote sources to do further processing in order to reveal new information. At the [API URL](http://td.inab.org/tdapi) you can get documentation about the API functions and play around with them in order to see how they work regarding to input parameters, output results and the semantics for each function. No api key is needed so far.
 
 # Getting Started with TD webapp
-
-<<<<<<< HEAD
 In the case you want to play around with the application located at http://td.inab.org/, you just can start using the default examples, although the best deal is to try the Semantic Search. Through it, a concept-related search is performed via [ConceptWiki](http://www.conceptwiki.org/) API and results are returned based on the concept. The results are a set of drug targets, which are strongly related to the input term.
-=======
-In the case you want to play around with the application located at http://td.inab.org/, you just can start using the default examples, although the best deal is to try the Semantic Search. Through it, a concept-related search is performed via ConceptWiki (http://www.conceptwiki.org/) API and results are returned based on the concept. The results are a set of drug targets, which are strongly related to the input term.
-
->>>>>>> 97e078bad70490b00e4960dd06713b6f427818a9
 
 Automatic results can be checked and added to the targets list (upon clicking the 'Add' button just beside). 
 

@@ -232,10 +232,8 @@ Ext.define('HT.lib.CytoscapeActions', {
 
 					Ext.each(aliases, function(aliasObj, indexFunc, functionsList) {
 						var opObj = HT.lib.RuleFunctions.getOperationFromAlias(aliasObj.alias);
-
 						opObj.clearListeners();
 						// Result is like {result: result, hypothesis: true|false, edge: theedge, msg: aMessage}
-
 						try {
 							opObj.on('operationComplete', function (result) {
 								var myEdge = vis.edge(result.edgeId);
@@ -256,7 +254,8 @@ Ext.define('HT.lib.CytoscapeActions', {
 								console.log("* first guard: "+indexFunc +" vs "+ (functionsList.length-1));
 								console.log("** second guard: "+highestIndexPath + " vs "+ (pathList.length-1));
 								console.log("*** third guard: "+edgesVisited.length);
-								if (indexFunc == functionsList.length-1 && highestIndexPath == pathList.length-1 && edgesVisited.length == 0) {
+								if (indexFunc == functionsList.length-1 && highestIndexPath == pathList.length-1 && 
+										edgesVisited.length == 0) {
 										// indexBis == edgeList.length-1 && indexPath == pathList.length-1) {
 									cytoscapePanel.setLoading(false);
 

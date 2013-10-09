@@ -55,7 +55,7 @@ Ext.define('HT.lib.operation.DiseaseGeneOperation', {
 					result: funcObj.result, 
 					hypothesis:	false, 
 					edgeId: 'e' + edgeSrc.id + '-' + edgeTrg.id,
-					msg: 'Timeout: could not complete the operation. Can try again in few seconds'
+					msg: '<span style="color: red;font-weight: bold">[Timeout]</span> could not complete the operation. Can try again in few seconds'
 				});
 			},
 

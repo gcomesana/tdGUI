@@ -297,7 +297,7 @@ class LibUtil
 				# should sha2 'my_url' to get a hash key to see if any result is raised
 				do_request(url, my_url)
 			end
-			save_to_dbcache(url, response)
+			save_to_dbcache(url, response) if response.nil? == false
 
 		else
 			response = do_request(url, my_url)
@@ -349,16 +349,18 @@ class LibUtil
 	def self.save_to_dbcache (my_url, resp) 
 		conn_string = "DBI:Mysql:"+TdGUI::Application.config.mysql_cache.cache_db+
 					":"+TdGUI::Application.config.mysql_cache.mysql_host
-		puts "save_to_dbcache: #{conn_string}"
+		
 		dbh = DBI.connect(conn_string, TdGUI::Application.config.mysql_cache.mysql_user)
 		# get server version string and display it
 
 		dbresp = [Marshal.dump(resp)].pack('m*')
 		hashed_url = Digest::SHA2.hexdigest(my_url)
 		begin
+			# there is a unique index on sha2hash, so no duplicates are allowed here
     	dbh.do("insert into cache (thekey, value, sha2hash) values (?, ?, ?)", my_url, dbresp, hashed_url)
     rescue DBI::DatabaseError => ex
     end
+    # print "mysql insertion of #{my_url}\n"
     dbh.disconnect
 	end
 	# private_class_method :save_to_dbcache
@@ -387,7 +389,7 @@ class LibUtil
 					http.request(req)
 				}
 			rescue Timeout::Error => exc
-				@requestErrMsg = "ERROR: #{exc.message}"
+				@requestErrMsg = "ERROR: Timeout::Error: #{exc.message}"
 				puts "#{@requestErrMsg}"
 				-1
 

@@ -52,6 +52,13 @@ Ext.define('HT.lib.operation.DiseaseProteinOperation', {
 
 			failure: function (resp, opts) {
 				funcObj.result = -1;
+				console.log("DiseaseProteinOperation: impossible for "+edgeSrc.payloadValue.uuid);
+				me.fireEvent('operationComplete', {
+					result: funcObj.result, 
+					hypothesis:	false, 
+					edgeId: 'e' + edgeSrc.id + '-' + edgeTrg.id,
+					msg: '<span style="color:red;font-weight:bold">[Timeout]</span> Could not complete the operation. Can try again in few seconds'
+				});
 			},
 
 			// In this case, we just check if the gene names match

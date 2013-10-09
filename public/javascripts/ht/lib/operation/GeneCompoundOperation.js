@@ -58,6 +58,13 @@ Ext.define('HT.lib.operation.GeneCompoundOperation', {
 
 			failure: function (resp, opts) {
 				funcObj.result = -1;
+				console.log("GeneCompoundOperation: impossible for "+payloadSrc.acc);
+				me.fireEvent('operationComplete', {
+					result: funcObj.result, 
+					hypothesis:	false, 
+					edgeId: 'e' + edgeSrc.id + '-' + edgeTrg.id,
+					msg: '<span style="color:red;font-weight:bold">[Timeout]</span> Could not complete the operation. Can try again in few seconds'
+				});
 			},
 
 			success: function (resp, opts) {

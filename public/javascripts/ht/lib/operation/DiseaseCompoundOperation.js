@@ -73,6 +73,18 @@ Ext.define('HT.lib.operation.DiseaseCompoundOperation', {
 
 		// Function to run an action after the concurrent request are finished
 		var action = function () {
+
+			if (funcObj.result == -1) {
+				console.log("DiseaseCompoundOperation: impossible for "+payloadSrc.chemblId);
+				me.fireEvent('operationComplete', {
+					result: funcObj.result, 
+					hypothesis:	false, 
+					edgeId: 'e' + edgeSrc.id + '-' + edgeTrg.id,
+					msg: '<span style="color:red;font-weight:bold">[Timeout]</span> Could not complete the operation. Can try again in few seconds'
+				});
+				return;
+			}
+
 			// hold here the accessions found with assays for the compound
 			var accessions4cmpd = [];
 			Ext.each(data, function (compoundsAcc, index, dataItself) {
@@ -111,6 +123,7 @@ Ext.define('HT.lib.operation.DiseaseCompoundOperation', {
 
 					failure: function (resp, opts) {
 						funcObj.result = -1;
+						action();
 					},
 
 					success: function (resp, opts) {

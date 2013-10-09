@@ -68,11 +68,21 @@ Ext.define('HT.lib.operation.CompoundDiseaseOperation', {
 		// Function to run an action after the concurrent request are finished
 		var action = function () {
 			funcObj.result = result;
-			var hypothesiseResult = result > 0;
+			var hypothesisResult = result > 0;
+
+			if (result == -1) {
+				console.log("CompoundDiseaseOperation: impossible for "+payloadSrc.chemblId);
+				me.fireEvent('operationComplete', {
+					result: funcObj.result, 
+					hypothesis:	hypothesisResult, 
+					edgeId: 'e' + edgeSrc.id + '-' + edgeTrg.id,
+					msg: '<span style="color:red;font-weight:bold">[Timeout]</span> Could not complete the operation. Can try again in few seconds'
+				});
+				return;
+			}
 
 			var edgeId = 'e' + edgeSrc.id + '-' + edgeTrg.id;
 			console.log('Operation finished!!!: ' + funcObj.result + ' for ' + edgeId);
-
 			var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Compound -> Disease</span> operation<br/>('";
 						msg += edgeSrc.label+"' -> '"+edgeTrg.label;
 						msg += "')<br/>" + result;
@@ -80,8 +90,8 @@ Ext.define('HT.lib.operation.CompoundDiseaseOperation', {
 						msg += "involving the compound '<i>"+compName+"</i>'</div>";
 					
 			me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
-										hypothesiseResult, edgeId: edgeId, msg: msg});
-		} // EO action function
+										hypothesisResult, edgeId: edgeId, msg: msg});
+		} // EO action inner function
 		
 
 		if (cmpdChemblId == '' || cmpdChemblId === undefined)
@@ -97,7 +107,7 @@ Ext.define('HT.lib.operation.CompoundDiseaseOperation', {
 
 				failure: function (resp, opts) {
 					console.log("This is impossible for..."+cmpdChemblId);
-					funcObj.result = -1;
+					result = -1;
 					action ();
 				},
 

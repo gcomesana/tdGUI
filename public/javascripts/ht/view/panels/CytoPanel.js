@@ -273,10 +273,10 @@ Ext.define('HT.view.panels.CytoPanel', {
 				menu: [{
 					text: 'Enact',
 					id: 'btnEnact'
-				}, {
+				}/*, {
 					text: 'Enact selected',
 					id: 'btnEnactSel'
-				}]
+				}*/]
 			}, {
 				xtype: 'button',
 				text: 'Clear',

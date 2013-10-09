@@ -51,10 +51,10 @@ Ext.define('HT.lib.operation.InteractionsRuleOperation', {
 		var me = this;
 		var payloadSrc = edgeSrc.payloadValue;
 		var payloadTrg = edgeTrg.payloadValue;
-		var accSrc = payloadSrc.acc[0]; // this is the list of uniprot urls
-		var accTrg = payloadTrg.acc[0]; // have to extract the accesssions
-		accSrc = accSrc.substring(accSrc.indexOf('>')+1, accSrc.lastIndexOf('<'));
-		accTrg = accTrg.substring(accTrg.indexOf('>')+1, accTrg.lastIndexOf('<'));
+		var accSrc = typeof payloadSrc.acc == 'string'? payloadSrc.acc: payloadSrc.acc[0]; // this is the list of uniprot urls
+		var accTrg = typeof payloadTrg.acc == 'string'? payloadTrg.acc: payloadTrg.acc[0]; // have to extract the accesssions
+		accSrc = accSrc.indexOf('>') == -1? accSrc: accSrc.substring(accSrc.indexOf('>')+1, accSrc.lastIndexOf('<'));
+		accTrg = accTrg.indexOf('>') == -1? accTrg: accTrg.substring(accTrg.indexOf('>')+1, accTrg.lastIndexOf('<'));
 
 		/*
 		var initIdx = uniprotUrl.indexOf('>');
@@ -75,6 +75,13 @@ Ext.define('HT.lib.operation.InteractionsRuleOperation', {
 
 			failure: function (resp, opts) {
 				funcObj.result = -1;
+				console.log("InteractionsRuleOperation: impossible for "+payloadSrc.chemblId);
+				me.fireEvent('operationComplete', {
+					result: funcObj.result, 
+					hypothesis:	false, 
+					edgeId: 'e' + edgeSrc.id + '-' + edgeTrg.id,
+					msg: '<span style="color:red;font-weight:bold">[Timeout]</span> Could not complete the operation. Can try again in few seconds'
+				});
 			},
 
 			success: function (resp, opts) {
@@ -95,14 +102,12 @@ Ext.define('HT.lib.operation.InteractionsRuleOperation', {
 				console.log('Operation finished!!!: '+funcObj.result+' for '+edgeId);
 				var msg = "<div class=\"wordwrap\"><span style=\"font-weight: bold;\">Compound -> Protein</span> operation<br/>('";
 				msg += edgeSrc.label+"' -> '"+edgeTrg.label;
-				msg += "')<br/>"+activityCount;
+				msg += "')<br/>"+jsonObj.totalCount;
 				msg += " interactions where found in IntactDB for both proteins<br/>";
-				msg += "The averager confidence value for them is "+result;
+				msg += "The averager confidence value for them is "+funcObj.result;
 				msg += "</div>";
 				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis:
-						hypothesiseResult, edgeId: edgeId, msg: msg});
-
-				me.fireEvent('operationComplete', {result: funcObj.result, hypothesis: hypothesiseResult, edgeId: edgeId});
+								hypothesiseResult, edgeId: edgeId, msg: msg});
 			},
 
 			scope: me

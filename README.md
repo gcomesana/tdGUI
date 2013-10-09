@@ -20,7 +20,8 @@ To guarantee the coordination within the project several resources have ben esta
 
 # Application overview
 
-TD is a Web application built using state of the art standard compliant technologies. The application implements the MVC software design pattern and is mainly coded in Ruby on Rails and JavaScript. [Sencha ExtJS](http://www.sencha.com/products/extjs/), an advanced JavaScript framework, has been used for the construction of the views and components. ExtJS supports all modern Web browsers and offer a smoothly interactive experience to the users. TD application can be deployed in almost any Web server having Ruby installed just by following the standard procedures for the deployment of Ruby on Rails applications. The prototype version 0.2 is currently hosted in CNIO and is freely available at: [http://td.inab.org](http://td.inab.org). 
+TD is a Web application built using state of the art standard compliant technologies. The application implements the MVC software design pattern and is mainly coded in Ruby on Rails and JavaScript. [Sencha ExtJS](http://www.sencha.com/products/extjs/), an advanced JavaScript framework, has been used for the construction of the views and components. ExtJS supports all modern Web browsers and offer a smoothly interactive experience to the users. TD application can be deployed in almost any Web server having Ruby installed just by following the standard procedures for the deployment of Ruby on Rails applications. The stable version 1.0 is currently hosted in CNIO and is freely available at [http://td.inab.org](http://td.inab.org). 
+
 
 The TD app essentially provides tools to satisfy two general use cases. In the first case users can discover targets by entering keywords in the semantic search engine or by exploring the target interaction network. This process will be enhanced through the different versions allowing users to search targets by complex queries including filters or by browsing metabolic pathways. In the second use case the information about a list of targets is presented to the user in a compacted report. Through these two general uses cases the TD app attempts to provide answers to the research questions defined by the EFPIA partners at the beginning of the project.
 
@@ -28,7 +29,12 @@ In addition, an __API__ was built at the same time that the web application. The
 
 # Getting Started with TD webapp
 
+<<<<<<< HEAD
 In the case you want to play around with the application located at http://td.inab.org/, you just can start using the default examples, although the best deal is to try the Semantic Search. Through it, a concept-related search is performed via [ConceptWiki](http://www.conceptwiki.org/) API and results are returned based on the concept. The results are a set of drug targets, which are strongly related to the input term.
+=======
+In the case you want to play around with the application located at http://td.inab.org/, you just can start using the default examples, although the best deal is to try the Semantic Search. Through it, a concept-related search is performed via ConceptWiki (http://www.conceptwiki.org/) API and results are returned based on the concept. The results are a set of drug targets, which are strongly related to the input term.
+
+>>>>>>> 97e078bad70490b00e4960dd06713b6f427818a9
 
 Automatic results can be checked and added to the targets list (upon clicking the 'Add' button just beside). 
 

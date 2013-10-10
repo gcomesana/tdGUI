@@ -70,19 +70,23 @@ Ext.define('TDGUI.util.TargetReader', {
       drugbankLinkOut += drugbankUri.split('/').pop() + '?as=target';
     }
 
+    var seeAlsoItems = [];
+    var classifiedWithItems = [];
     if (uniprotData != null) {
       uniprot_src = uniprotData[TDGUI.util.LDAConstants.LDA_IN_DATASET];
       uniprotUri = uniprotData[TDGUI.util.LDAConstants.LDA_ABOUT];
+
+      seeAlsoItems = uniprotData.seeAlso;
+      classifiedWithItems = uniprotData.classifiedWith;
     }
 
     var conceptWikiUri = pt[TDGUI.util.LDAConstants.LDA_ABOUT];
 
-    var pdb = null;
-    pdb = uniprotData != null? uniprotData['seeAlso']: null;
+    var pdb = uniprotData != null? uniprotData['seeAlso']: null;
     var pdbLink;
     if (pdb) {
       //console.log(" PDB " + pdb[0]);
-      pdbLink = pdb[0];    // add first pdb_id
+      pdbLink = pdb // pdb[0];    // add first pdb_id
     }
 
 

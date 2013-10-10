@@ -511,10 +511,15 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 		});
 
     if (bits.length > 0) {
+    	var counter = 0;
       Ext.each(bits, function(keyword) {
+      	var myKw = keyword;
+      	if (counter < bits.length-1)	myKw += ', ';
+
         tpl.append(bodyEl, {
-          kw: keyword
+          kw: myKw
         });
+        counter++;
       }, this);
     }
 
@@ -563,11 +568,17 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 			cls: 'synonym',
 			html: '{syn}'
 		});
+		var counter = 0;
 		Ext.each(bits, function(synonym) {
+			var mySyn = synonym;
+      	if (counter < bits.length-1)	mySyn += ', ';
+
 			tpl.append(bodyEl, {
-				syn: synonym
+				syn: mySyn
 			});
+			counter ++;
 		}, this);
+
 		synonymsField.show();
 	},
 
@@ -580,8 +591,26 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 		// example http://www.pdb.org/pdb/explore/explore.do?structureId=1HOF
 		//         http://www.rcsb.org/pdb/images/1HOF_asr_r_250.jpg
 		// for Uniprot retrieved info: <img src=\"http://www.rcsb.org/pdb/images/2Y6E_asr_r_80.jpg\" width=\"80\" height=\"80\" />
-    if (pdbIdPage.length == 0 || pdbIdPage.indexOf('http') == -1)
+    if (pdbIdPage === undefined || pdbIdPage.length == 0)
       return;
+
+    var bits = new String(pdbIdPage);
+    var finalPDBValue = new String();
+    var pdbID, firstPDB;
+    bits = bits.split(",");
+
+    Ext.each(bits, function(item, index) {
+      //console.log(" item " + item);
+      pdbID = item.split('/').pop();
+      if (index == 0) {
+        firstPDB = pdbID;
+      }
+      finalPDBValue += '<a target=\'_blank\' href=\'' + item + '\'>' + pdbID + '</a>   '
+
+    }, this);
+    var pdbField = this.down('#pdb_id_page');
+    pdbField.setRawValue(finalPDBValue);
+    pdbField.show();
 
 		var stringURL = new String(pdbIdPage);
 		var img = this.down('#target_image');
@@ -598,12 +627,14 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 	    if (pdbID == pdbIdPage)
 	      pdbID = stringURL.substr(stringURL.lastIndexOf('/') + 1);
 	  }
-
+	  img.setSrc('http://www.rcsb.org/pdb/images/' + pdbID + '_asr_r_250.jpg');
+		img.show();
+/*
 		var pdbField = this.down('#pdb_id_page');
 		pdbField.setRawValue('<a target=\'_blank\' href=\'' + pdbIdPage + '\'>' + pdbID + '</a>');
 		pdbField.show();
-		img.setSrc('http://www.rcsb.org/pdb/images/' + pdbID + '_asr_r_250.jpg');
-		img.show();
+*/
+		
 	},
 
 

@@ -192,22 +192,22 @@
 }
 
 .keyword {
-	background: rgb(200, 200, 200);
-	color: rgb(0, 0, 0);
-	margin-top: 3px;
-	margin-bottom: 3px;
-	margin-right: 5px;
-	padding: 3px;
+	/* background: rgb(200, 200, 200); */
+	color: rgb(0, 0, 0); 
+	/* margin-top: 3px;
+	margin-bottom: 3px; 
+	margin-right: 5px; */
+	padding: 1px;
 	float: left;
 }
 
 .synonym {
-	background: rgb(200, 200, 200);
-	color: rgb(0, 0, 0);
-	margin-top: 3px;
-	margin-bottom: 3px;
-	margin-right: 5px;
-	padding: 3px;
+	/* background: rgb(200, 200, 200); */
+	color: rgb(0, 0, 0); 
+	/* margin-top: 3px;
+	margin-bottom: 3px; 
+	margin-right: 5px; */
+	padding: 1px;
 	float: left;
 }
 
@@ -386,11 +386,12 @@ a, a:hover {
 	text-decoration: none;
 }
 
+/*
 .synonym, .keyword {
 	color: #FFF;
 	background-color: #c64b34;
 }
-
+*/
 .well {
 	min-height: 20px;
 	/*	padding: 19px;

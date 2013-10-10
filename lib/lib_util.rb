@@ -267,29 +267,6 @@ class LibUtil
 		#		res = Net::HTTP.start(my_url.host, my_url.port, proxy_host, proxy_port) { |http|
 		response = nil
 
-=begin
-		print "IntactDao mysql test!!\n"
-		dbh = DBI.connect("DBI:Mysql:tdcache:localhost", "root")
-		# get server version string and display it
-    row = dbh.select_one("SELECT VERSION()")
-    puts "MySql Server version: " + row[0] +"\n"
-
-    select_qry = "select thekey, value from cache";
-    sth = dbh.execute(select_qry)
-		row_cont = 0
-		sth.fetch do |row|
-#		  printf "ID: %d, Name: %s, Height: %.1f\n", row[0], row[1], row[2]
-#			printf "interactionid: %s, %s -> %s (%.2f)\n", row[11], row[1], row[6], row[12]
-			obj_hit = row[1]
-    	marshald_hit = Marshal.load(obj_hit.unpack('m')[0])
-			row_cont += 1
-			print "body size: #{marshald_hit.body.length}\n"
-			# @result_set << Marshal.load(Marshal.dump(row))
-		end
-		sth.finish
-    dbh.disconnect()
-=end
-
 		if cache == true
 			response = Rails.cache.fetch my_url do
 				# if cache hit, it does not get into here

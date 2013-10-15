@@ -68,23 +68,6 @@ Ext.define("TDGUI.controller.panels.MultiTarget", {
 					Ext.History.add('!xt=tdgui-targetinfopanel&qp=' + qParam + dcParam);
 				} // itemdoblclick
 
-/*
-				'tdgui-multitargetpanel': {
-					afterrender: function (comp, opts) {
-						console.log('Multitarget controller afterrender');
-						var theGrid = comp.theGrid()
-
-						if (theGrid != null && theGrid !== undefined) {
-							var numColumns = theGrid.columns.length
-							Ext.each (theGrid.columns, function (col, index, cols) {
-
-							})
-
-						}
-
-					}
-				} // EO tdgui-multitargetpanel
-*/
 			}
 		})
 	},

@@ -50,11 +50,11 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 // set concept_uuid and uniprot_acc from
 // "http://www.conceptwiki.org/concept/ec79efff-65cb-45b1-a9f5-dddfc1c4025c,http://www.uniprot.org/uniprot/Q14596"
     var qparams = this.queryParam.split(',');
-    this.uniprot_acc = qparams[1].substring(qparams[1].lastIndexOf('/')+1, qparams[1].length)
-    this.concept_uuid = qparams[0].substring(qparams[0].lastIndexOf('/')+1, qparams[0].length)
+    this.uniprot_acc = qparams[1].substring(qparams[1].lastIndexOf('/')+1, qparams[1].length);
+    this.concept_uuid = qparams[0].substring(qparams[0].lastIndexOf('/')+1, qparams[0].length);
 
 
-    var me = this
+    var me = this;
 		this.items = [{
 			xtype: 'panel',
 			border: 0,
@@ -407,22 +407,64 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 
     if (successful) {
       var td = store.first().data;
-
+      // As we resort to uniprot uri to get target info, we have to get the actual concept_uuid
       if (records.length > 0 && td.hasOwnProperty('prefLabel')) { // TEMP FIX -- new coreAPI's returning an empty object
+        var targetInfoURI = '/ops_api_calls/protein_info?protein_uri='+td.cw_target_uri;
 
+      	Ext.Ajax.request({
+      		url: targetInfoURI,
+
+      		failure: function (resp, opts) {
+      			me.endLoading();
+      		},
+
+      		success: function (resp, opts) {
+      			var jsonObj = resp.responseText;
+      			jsonObj = JSON.parse(jsonObj);
+      			var primaryTopic = jsonObj.result.primaryTopic;
+      			var rec = store.first();
+      			var drugBankData = null;
+      			Ext.each(primaryTopic.exactMatch, function (match, index, list) {
+      				if (match['_about'] != undefined && match['_about'].indexOf('drugbank') != -1) {
+      					drugBankData = match;
+      					return false;
+      				}
+      			});
+
+      			var c_uuid = primaryTopic._about.lastIndexOf('/');
+      			me.concept_uuid = primaryTopic._about.substr(c_uuid+1, primaryTopic._about.length);
+      			if (drugBankData != null) {
+	      			rec.set({
+	      				cw_target_uri: primaryTopic._about,
+	      				molecular_weight: drugBankData['molecularWeight'],
+	      				number_of_residues: drugBankData != null ? drugBankData['numberOfResidues'] : null,
+	      				theoretical_pi: drugBankData != null ? drugBankData['theoreticalPi'] : null
+	      			});
+	      		}
+      			var dp = me.down('#dp');
+			      var msg = me.down('#msg');
+			      msg.setVisible(false);
+			      me.setValues(rec);
+			      dp.setVisible(true);
+
+			      me.endLoading();
+      		} // success
+      	}); // EO JSONP request
+/*
         var dp = this.down('#dp');
         var msg = this.down('#msg');
         msg.setVisible(false);
         this.setValues(store.first());
         dp.setVisible(true);
-
+*/
       }
       else {
         this.showMessage('No records found within OPS for this search');
+        this.endLoading();
       }
-      this.endLoading();
+//      this.endLoading();
     }
-    else {
+    else { // no success...
     	// try uniprot_by_acc
     	// var url = "http://"+TDGUI.Globals.theServer+":"+TDGUI.Globals.thePort+"/api/target/"+this.uniprot_acc+".jsonp";
     	var url = "http://"+TDGUI.Globals.Host+"/api/target/"+this.uniprot_acc+".jsonp";
@@ -687,7 +729,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 
 // Pharmacology data button initialization
     var pharmButton = this.down('#pharmTargetButton');
-    var protein_uri = target.store.proxy.extraParams.protein_uri
+    var protein_uri = target.store.proxy.extraParams.protein_uri;
 
 // get the concept_uri for pharma_button. it will be such as
 // conceptwiki.org/concept/<concept_uuid>
@@ -708,7 +750,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
       });
     }
     else
-      pharmButton.disable()
+      pharmButton.disable();
 
     pharmButton.show();
 

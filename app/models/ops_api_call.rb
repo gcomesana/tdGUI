@@ -60,7 +60,19 @@ class OpsApiCall
 
 # api_method is https://beta...
 # options is all parameters...
+# OPS API accepts for targets CW and uniprot URIs
+		the_url = CORE_API_URL
+		if api_method == 'proteinInfo'
+			the_url = the_url + "target?app_id=#{OPS_API_ID}&app_key=#{OPS_API_KEY}"
 
+		elsif api_method == 'proteinPharmacology'
+			the_url = the_url + "target/pharmacology/pages?app_id=#{OPS_API_ID}&app_key=#{OPS_API_KEY}"
+
+		elsif api_method == 'compoundInfo'
+			the_url = the_url + "compound?app_id=#{OPS_API_ID}&app_key=#{OPS_API_KEY}"
+		end
+
+=begin
 		if options[:uri].index('conceptwiki').nil? == false
 			# the_url = options[:uri] + "?app_id=#{OPS_API_ID}&app_key=#{OPS_API_KEY}" # it should be uniprot
 			the_url = CORE_API_URL
@@ -76,7 +88,9 @@ class OpsApiCall
 
 		else
 			the_url = options[:uri] # it should be uniprot uri...
+			
 		end
+=end
 
 		# puts "OpsApiCall.request for: #{the_url}"
 		response = OpsEndpointsProxy.make_request(the_url, options)

@@ -35,6 +35,7 @@ Ext.define('TDGUI.util.TargetReader', {
     var chemblData = null;
     var drugBankData = null;
     var uniprotData = null;
+    var cwData = null;
     Ext.each(em, function (match, index, matches) {
       var src = match[TDGUI.util.LDAConstants.LDA_IN_DATASET];
       if (TDGUI.util.LDAConstants.LDA_SRC_CLS_MAPPINGS[src] == 'chemblValue') {
@@ -45,6 +46,9 @@ Ext.define('TDGUI.util.TargetReader', {
       }
       else if (TDGUI.util.LDAConstants.LDA_SRC_CLS_MAPPINGS[src] == 'uniprotValue') {
         uniprotData = match;
+      }
+      else if (TDGUI.util.LDAConstants.LDA_SRC_CLS_MAPPINGS[src] == 'conceptWikiValue' && cwData == null) {
+        cwData = match;
       }
 
     });
@@ -91,11 +95,12 @@ Ext.define('TDGUI.util.TargetReader', {
 
 
     var record = Ext.create('TDGUI.model.lda.TargetModel', {
-      cw_target_uri: pt[TDGUI.util.LDAConstants.LDA_ABOUT],
+      // cw_target_uri: pt[TDGUI.util.LDAConstants.LDA_ABOUT],
+      cw_target_uri: cwData['_about'],
       chembl_target_uri: chemblData != null ? chemblData[TDGUI.util.LDAConstants.LDA_ABOUT] : null,
       drugbank_target_uri: drugBankData != null ? drugBankData[TDGUI.util.LDAConstants.LDA_ABOUT] : null,
 
-      prefLabel: pt['prefLabel'],
+      prefLabel: pt['prefLabel'] != undefined? pt['prefLabel']: (cwData['prefLabel'] != undefined? cwData['prefLabel']: uniprotData.alternativeName[0]),
       prefLabel_src: pt[TDGUI.util.LDAConstants.LDA_IN_DATASET],
       prefLabel_item: conceptWikiUri,
 

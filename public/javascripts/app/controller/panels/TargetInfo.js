@@ -116,7 +116,13 @@ console.info ("Initializing TargetInfo controller...")
 /**
  * Thisis is a method to initialize the {@link TDGUI.view.panels.TargetInfo TargetInfo} panel component
  * So, this method decodes the token param (uniprot,ops) to load the panel-associated-store by
- * requesting data to ops or uniprot if the latter is not working
+ * requesting data to ops or uniprot if the latter is not working.
+ * So, the flow to get a target information is:
+ * - protein lookup on a concept
+ * - get_uniprot_by_name when added to the list (access to uniprot, keep UUID)
+ * - multiple_entries_retrieval (uniprot)
+ * - proteinInfo with uniprot URI & proteinInfo with conceptUUID to get pharmaInfo and MW, ThePI, Residues
+ * 
  * @param {Ext.Component} comp the component which yields the event
  * @param {Object} opts options
  */
@@ -145,7 +151,7 @@ console.info ('TargetInfo.initTargetInfoPanel tokenParams: '+tokenParams);
 // get the uniprot accession from query string
 
 //    if (tokenParams[0] != store.proxy.extraParams.protein_uri) {
-      store.proxy.extraParams.protein_uri = tokenParams[0];
+      store.proxy.extraParams.protein_uri = tokenParams[1]; // tokenParams[0];
       //          this.getFormView().setLoading(true);
       store.load();
 //    }

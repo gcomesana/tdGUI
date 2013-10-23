@@ -147,10 +147,10 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 					}, {
 						xtype: 'displayfield',
 						anchor: '100%',
-//						itemId: 'cellularLocations',
-//						fieldLabel: 'Cellular Location(s)',
-            itemId: 'cellular_function',
-            fieldLabel: 'Cellular Function',
+						itemId: 'cellular_location',
+						fieldLabel: 'Cellular Location(s)',
+//            itemId: 'cellular_function',
+//            fieldLabel: 'Cellular Function',
 						cls: 'target-field-label'
 					}, {
 						xtype: 'displayfield',
@@ -407,7 +407,8 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 
     if (successful) {
       var td = store.first().data;
-      // As we resort to uniprot uri to get target info, we have to get the actual concept_uuid
+      // As we resort to uniprot uri to get target info,
+      // we have to get the actual concept_uuid
       if (records.length > 0 && td.hasOwnProperty('prefLabel')) { // TEMP FIX -- new coreAPI's returning an empty object
         var targetInfoURI = '/ops_api_calls/protein_info?protein_uri='+td.cw_target_uri;
 
@@ -433,12 +434,26 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 
       			var c_uuid = primaryTopic._about.lastIndexOf('/');
       			me.concept_uuid = primaryTopic._about.substr(c_uuid+1, primaryTopic._about.length);
+						var matches = primaryTopic.exactMatch;
+						var cellLocation = null;
+						Ext.each(matches, function (match, index, list) {
+							if (match.cellularLocation != undefined) {
+								if (match.cellularLocation instanceof String)
+									cellLocation = match.cellularLocation;
+								else
+									cellLocation = match.cellularLocation.join(', ');
+
+								return false;
+							}
+						});
+
       			if (drugBankData != null) {
 	      			rec.set({
 	      				cw_target_uri: primaryTopic._about,
 	      				molecular_weight: drugBankData['molecularWeight'],
 	      				number_of_residues: drugBankData != null ? drugBankData['numberOfResidues'] : null,
-	      				theoretical_pi: drugBankData != null ? drugBankData['theoreticalPi'] : null
+	      				theoretical_pi: drugBankData != null ? drugBankData['theoreticalPi'] : null,
+								cellular_location: cellLocation
 	      			});
 	      		}
       			var dp = me.down('#dp');
@@ -708,7 +723,9 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
     else {
 // console.log('standard field: '+fieldId+' -> '+value);
 			var field = this.down('#' + fieldId);
-			if (field != null) {
+			var noShowField = value == null || value === undefined || value.length == 0;
+			// if (field != null) {
+			if (!noShowField && field != null) {
         field.setValue(value);
         field.show();
         field.setVisible(true);

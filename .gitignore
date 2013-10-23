@@ -17,3 +17,14 @@
 # Ignore configuration files
 config/app_settings.yml
 config/application.rb
+
+public/resources/datatest
+
+public/javascripts/extjs4.0.7
+public/javascripts/extjs4.1/build
+public/javascripts/extjs4.1/builds
+public/javascripts/extjs4.1/pkgs
+public/javascripts/extjs4.1/welcome
+public/javascripts/extjs4.1/src
+public/javascripts/extjs4.1/cmd
+public/javascripts/extjs4.1/docs

@@ -10,7 +10,7 @@ Ext.define('TDGUI.store.lda.TargetPharmacologyStore', {
   REQUEST_TYPE: 'pharma',
 
   pageSize: 25,
-  // buffered: true,
+  buffered: true,
 
 // [start|limit|page]Param, parameters for paging
 // like ...page=5&start=400&size=100

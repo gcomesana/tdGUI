@@ -77,13 +77,16 @@ Ext.define ('TDGUI.view.panels.PharmByTarget', {
   createPharmGrid: function () {
     var me = this;
 
-    console.log('creating LDA pharmaGrid...');
+    console.log('init targerPharmacologyStore & creating LDA pharmaGrid...');
+		var pharmaStore = Ext.create('TDGUI.store.lda.TargetPharmacologyStore', {});
+		pharmaStore.proxy.extraParams = this.gridParams;
+
     var theGrid = Ext.create('widget.tdgui-pharmbytargetscroll-grid', {
-      title:'Pharmacology for target '+window.decodeURI(this.targetName),
+      title: 'Pharmacology for target '+window.decodeURI(this.targetName),
       gridBaseTitle:'Pharmacology compounds for '+window.decodeURI(this.targetName),
       margin:'5 5 5 5',
       flex:1, // needed to fit all container
-      store: Ext.create('TDGUI.store.lda.TargetPharmacologyStore'),
+      store: pharmaStore,
       // protein_uri: this.gridParams.protein_uri,
       protein_uri: this.gridParams.uri,
       queryParams: this.gridParams

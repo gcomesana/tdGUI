@@ -15,6 +15,15 @@ class TdguiProxyController < ApplicationController
 	end
 
 
+# Gets the concept wiki url for the uniprot url making use of the mapURL OPS API service
+# @param [String] uniprot_url an uniprot url
+	def map_uniprot_to_cw (uniprot_url = params[:uri])
+		tdgui_proxy = TdguiProxy.new
+		result = tdgui_proxy.uniprot2cw(uniprot_url)
+
+		render :json => result.to_json, :layout => false
+	end
+
 
 # Gets multiple entries from uniprot and renders a json document with the most
 # "interesting" attributes

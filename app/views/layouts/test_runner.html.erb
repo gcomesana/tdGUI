@@ -8,7 +8,7 @@
   <link href="/javascripts/app-test/lib/jasmine-standalone-1.2.0/lib/jasmine-1.2.0/jasmine.css" type="text/css" rel="stylesheet"/>
 
   <!-- ExtJS -->
-  <script type="text/javascript" src="/javascripts/extjs4.0.7/ext-all-dev.js"></script>
+  <script type="text/javascript" src="/javascripts/extjs4.0.7/ext-all-debug.js"></script>
 
   <!-- Set global js vars -->
   <script type="text/javascript">
@@ -30,6 +30,19 @@
     // from http://www.sencha.com/forum/showthread.php?253345-FF-18-problem
 
     Ext.onReady(function () {
+
+      console.log ('Testing synchronous connection');
+      var conn = new Ext.data.Connection();
+      conn.async = false;
+      var params = {'uri': 'http://www.uniprot.org/uniprot/P01308'};
+      var resp = conn.request({
+        url: "http://localhost:3003/tdgui_proxy/map_uniprot_to_cw",
+        method: 'GET',
+        params: params
+      });
+      console.log('the resp is: '+resp.status);
+      var jsonObj = JSON.parse(resp.responseText);
+      console.log('cw uri: '+jsonObj.cw_url);
 
       if (Ext.firefoxVersion >= 18) {
         var noArgs = [];

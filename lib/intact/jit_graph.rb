@@ -45,17 +45,17 @@ class JitGraph
 		interactors.each_index { |ix|
 			node = {:id => ix, :name => interactors[ix]}
 			my_color = get_random_color
-			node_type = interactors[ix] == uniprot_acc ? "star": "circle"
-			node_dim = interactors[ix] == uniprot_acc ? 10: 7
-			node_data = {"$color" => my_color, "$type" => node_type,
-									 "$dim" => node_dim, :node_desc => ""}
-
 			sub_interactions = get_interactions4node(interactions, interactors[ix])
 			adjacencies = build_graph_adjacencies(sub_interactions, interactors)
 
+			node_type = interactors[ix] == uniprot_acc ? "star": "circle"
+			node_dim = interactors[ix] == uniprot_acc ? 17: 10
+			node_dim = node_dim + adjacencies.length
+			node_data = {"$color" => my_color, "$type" => node_type,
+									 "$dim" => node_dim, :node_desc => ""}
+
 			interaction = {:id => (ix+1), :name => interactors[ix], :adjacencies => adjacencies,
 											:data => node_data}
-
 			interaction_net << interaction
 		}
 		interaction_net

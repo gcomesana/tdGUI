@@ -666,6 +666,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 
     }, this);
     var pdbField = this.down('#pdb_id_page');
+    console.log("TargetInfo pdb vale: " +finalPDBValue);
     pdbField.setRawValue(finalPDBValue);
     pdbField.show();
 

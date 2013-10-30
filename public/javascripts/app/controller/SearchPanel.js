@@ -123,7 +123,8 @@ Ext.define('TDGUI.controller.SearchPanel', {
 */
     if (concept_uuids.length > uniprotIds.length)
       Ext.each (concept_uuids, function (uuid, index, uuids) {
-        accessions.push(uniprotIds[index][0]+';'+uuid);
+        var uniprotParam = uniprotIds[index] === undefined? '-': uniprotIds[index][0];
+        accessions.push(uniprotParam+';'+uuid);
       })
     else {
       Ext.each (uniprotIds, function (uniprotSet, index, uuids) {
@@ -213,17 +214,17 @@ Ext.define('TDGUI.controller.SearchPanel', {
           params: params,
 
           failure: function (resp, opts) {
-            console.info('ajax failed for item number: ' + number + ' -> ' + resp.responseText)
-            labelCount++
+            console.info('ajax failed for item number: ' + number + ' -> ' + resp.responseText);
+            labelCount++;
             if (labelCount == labels.length)
-              me.myMask.hide()
+              me.myMask.hide();
           },
 
           success: function (resp, opts) {
 //            console.info('success for number ' + number + ' -> ' + resp.responseText)
 
-            var jsonResp = Ext.JSON.decode(resp.responseText)
-            var accessions = jsonResp.accessions
+            var jsonResp = Ext.JSON.decode(resp.responseText);
+            var accessions = jsonResp.accessions;
             Ext.each(accessions, function (acc, index, accsItself) {
               var ini = acc.indexOf('>');
               var end = acc.lastIndexOf('<');
@@ -246,13 +247,34 @@ Ext.define('TDGUI.controller.SearchPanel', {
               console.info("Nothing found for: " + item)
               Ext.Msg.show({
                  title:'Target information',
-                 msg: "No information about the chosen target was found in uniprot. Some features won't be available.",
+                 msg: "No information about the chosen target ("+params.label+") was found in uniprot. Some features won't be available.",
                  buttons: Ext.Msg.OK,
                  icon: Ext.Msg.WARNING
               });
-
             }
-            var target = Ext.create('TDGUI.model.ListTarget', listItem)
+            else { // as we got some response from uniprot, we try to get the right concept uuid by mapping uniprot url
+              var params = {"uri": TDGUI.Globals.uniprotUrlPrefix+'/'+accessions[0]};
+              var conn = new Ext.data.Connection();
+              conn.async = false;
+              var resp = conn.request ({
+                url: '/tdgui_proxy/map_uniprot_to_cw',
+                params: params,
+                method: 'GET'
+              });
+              
+              var newCWUri = null;
+              if (resp.status != 404 && resp.status != 304) {
+                var jsonObj = JSON.parse(resp.responseText);
+                newCWUri = jsonObj.cw_url;
+              }
+              if (newCWUri !== null && newCWUri !== undefined && newCWUri != '') {
+                listItem.concept_uri = newCWUri;
+                var uuid = newCWUri.split('/').pop();
+                listItem.concept_uuid = uuid;
+              }
+            } // EO else
+
+            var target = Ext.create('TDGUI.model.ListTarget', listItem);
             listStore.add(target)
 
             labelCount++
@@ -329,5 +351,7 @@ Ext.define('TDGUI.controller.SearchPanel', {
 
 
     Ext.History.add('TargetByNameForm=' + target_uri);
-  }
+  },
+
+
 });

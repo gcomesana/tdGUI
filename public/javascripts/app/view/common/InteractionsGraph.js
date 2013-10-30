@@ -5,7 +5,7 @@
 // Default confiration for the ForceDirect graph initialization
 // TODO estos cfgs hay que meterlos en una clase...
 
-var labelType
+var labelType;
 (function () {
   var ua = navigator.userAgent,
     iStuff = ua.match(/iPhone/i) || ua.match(/iPad/i),
@@ -18,7 +18,6 @@ var labelType
   nativeTextSupport = labelType == 'Native';
   useGradients = nativeCanvasSupport;
   animate = !(iStuff || !nativeCanvasSupport);
-  console.info('auto-caller function!!!')
 })();
 
 
@@ -221,7 +220,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
         Label: {
           type: labelType,
           //Native or HTML
-          size: 10,
+          size: 12,
           style: 'bold',
           color: 'darkblue'
         },

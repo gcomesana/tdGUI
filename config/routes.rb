@@ -42,6 +42,7 @@ TdGUI::Application.routes.draw do
 			get :interactions_retrieval
 			get :get_uniprot_by_name
 			get :get_uniprot_by_acc
+      get :map_uniprot_to_cw
 
 			get :get_pharm_count
 			get :get_pharm_by_target_page

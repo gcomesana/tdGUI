@@ -196,7 +196,7 @@ describe TdguiProxyController do
 		end
 =end
 
-# =begin
+=begin
 		it "should retrieve info from multiple targets, but the first of them does not have uniprot counterpart" do
 			accs = '-,P08913,Q14596,Q5H943,P29274'
 			uuids = '31dd02fa-3522-438e-bef5-da14902f6c1b,d593db45-e954-4e97-94f7-c039350f97f4,ec79efff-65cb-45b1-a9f5-dddfc1c4025c,eeaec894-d856-4106-9fa1-662b1dc6c6f1,979f02c6-3986-44d6-b5e8-308e89210c8d'
@@ -217,10 +217,10 @@ describe TdguiProxyController do
 			json_resp['ops_records'].should_not be_empty
 			json_resp['metaData']['fields'][0]['name'].should be == 'pdbimg'
 		end
-# =end
+=end
 	end
 
-
+=begin
 	describe "should deal with interactions" do
 
 		it "to get exactly a interaction network with 4 nodes" do
@@ -280,6 +280,25 @@ describe TdguiProxyController do
 			json_resp['result']['items'].should have((json_resp['result']['itemsPerPage']).to_i).items
 		end
 	end
+=end
+	describe "should map an URL" do
+		it "get a conceptwiki url from http://www.uniprot.org/uniprot/P01308" do
+			url = 'http://www.uniprot.org/uniprot/P01308'
+			get :map_uniprot_to_cw, :uri => url
+
+			response.should_not be_nil
+			response.code.to_i.should be == 200
+			response.body.should_not be == ''
+
+			json_resp = JSON.parse(response.body)
+			json_resp['cw_url'].should_not be_nil
+			
+			last_slash_index = json_resp['cw_url'].rindex('/')
+			json_resp['cw_url'].slice(last_slash_index+1, 36).should be == 'a14a3602-5bc5-40ee-95ac-d6fa0928501a'
+			puts "uuid: #{json_resp['cw_url'].slice(last_slash_index+1, 36)}"
+		end	
+
+	end
 
 
 	it "should get the number of total results for the target (no the results themselves)" do
@@ -295,10 +314,7 @@ describe TdguiProxyController do
 		json_resp['result'].should be_kind_of(Hash)
 		json_resp['result']['primaryTopic'].should_not be_nil
 		json_resp['result']['primaryTopic']['targetPharmacologyTotalResults'].should be > 2000
-
-
 	end
-
 
 
 	it "should send an email" do
@@ -315,8 +331,5 @@ describe TdguiProxyController do
 		json_resp['success'].should_not be_nil
 		json_resp['success'].should be_true
 	end
-
-
-
 
 end

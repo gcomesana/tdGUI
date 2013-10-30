@@ -34,6 +34,8 @@ class TdguiProxy
 	CHEMBL_TARGET_URL = 'https://www.ebi.ac.uk/chemblws/targets/uniprot/xxxx'
 	CHEMBL_BIOACT_URL = 'https://www.ebi.ac.uk/chemblws/targets/xxxx/bioactivities'
 
+	MAPPING_URL = 'https://beta.openphacts.org/mapURL'
+
 # Proxy/Model constructor
 	def initialize
 		@parsed_results = nil
@@ -44,6 +46,26 @@ class TdguiProxy
 	def test (test_param = nil)
 		string_param = test_param.nil? ? 'nil': test_param
 		{:resp => "TdguiProxy.test method. testParam is: #{string_param}"}
+	end
+
+
+# Maps an uniprot url, such as http://www.uniprot.org/uniprot/P12345 to http://www.conceptwiki.org/concept/<uuid>
+# @param [String] uniprot_url 
+	def uniprot2cw (uniprot_url)
+		app_id = TdGUI::Application.config.openphacts_api.app_id
+		app_key = TdGUI::Application.config.openphacts_api.app_key
+
+		map_url = MAPPING_URL + '?app_id='+app_id+'&app_key='+ app_key + '&URL=' + uniprot_url
+		map_url = map_url + '&targetURISpace=http://www.conceptwiki.org/concept/'
+
+		results = LibUtil.request(map_url, {})
+		hash = Hash.new
+		if (results.code.to_i == 200 || results.code.to_i == 304) && results.body != ''
+			jsonObj = JSON.parse(results.body)
+			hash['cw_url'] = jsonObj['result']['primaryTopic']['exactMatch'][0]
+		end
+
+		hash
 	end
 
 

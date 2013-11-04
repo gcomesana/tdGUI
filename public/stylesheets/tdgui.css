@@ -277,8 +277,8 @@ sub {
 
 /* Welcome style classes */
 .speech-tit {
-	font-size: x-large;
-	font-weight: bold;
+	font-size: 32px;
+	font-weight: bolder;
 	color: #c64b34;
 	margin-bottom: 10px;
 	margin-left: 40px;
@@ -288,6 +288,8 @@ sub {
 .speech-div {
 	padding: 10px 40px 10px 40px;
 	margin-bottom: 20px;
+	font-size: 14px;
+	line-height: 25px;
 }
 
 .feats-container-odd {
@@ -295,6 +297,34 @@ sub {
 	height: 230px;
 	float: left;
 	margin-left: 20px;
+}
+
+.video-container {
+	width: 100%;
+	margin: 10px 10px 10px 10px;
+	text-align: center;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+.video-tit {
+	font-weight: bold;
+	color: #c64b34;
+	font-size: 16px;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+.video-size-pos {
+	/*width: 640;
+	height: 360; */
+	margin: 0 auto;
+}
+
+.links {
+	text-align: center;
+  text-decoration: none;
+  color: rgb(#ff3410);
 }
 
 .welcome-img {
@@ -308,7 +338,10 @@ sub {
 .welcome-tit {
 	font-weight: bold;
 	color: #c64b34;
-	font-size: 12px;
+	font-size: 16px;
+	margin-bottom: 10px;
+	margin-left: 40px;
+	margin-top: 50px;
 }
 
 .welcome-text {

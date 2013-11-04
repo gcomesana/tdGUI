@@ -1,6 +1,8 @@
 
 
-var imgPath = '/images/welcome'
+var imgPath = '/images/welcome';
+var videoPath = '/videos';
+
 var imgListObj = [{
     src: imgPath + '/semantic-search.png',
     title: 'Semantic search',
@@ -27,9 +29,28 @@ var imgListObj = [{
     caption: 'Target Dossier underlying technology combines the OpenPhacts semantic web APIs with other bioinformatics resources available through web services'
   }]
 
-var speech = 'The Target Dossier (TD) is an application whose main goal is the integration of drug target’s data to identify the most productive points for therapeutic intervention. It is been developed within the context of the IMI project OpenPhacts (http://openphacts.org) and relies on the knowledge discovery platform and APIs developed by the consortium.'
- + 'The application is still on an early stage of development, current version 0.2 implements some of the features planed for the full application that will be released at the end of 2013.'
+var speech = 'The Target Dossier GUI (TDGUI) is an application whose main goal is the integration of drug target’s data to identify the most productive points for therapeutic intervention. It is been developed within the context of the IMI project OpenPhacts and relies on the knowledge discovery platform and APIs developed by the consortium.'
+ + 'The application is in stable version 1.0 but still in development as many features can and will be added shortly.'
 
+var wikiPages = 'Click on these links to get further documentation about the project<br/>';
+wikiPages += '<div class="links"><a href="http://www.github.com/inab/tdGUI" target="_blank">Github</a> * ';
+wikiPages += '<a href="http://www.github.com/inab/tdGUI/wiki" target="_blank">Home docs</a> * ';
+wikiPages += '<a href="http://www.github.com/inab/tdGUI/wiki/_pages" target="_blank">Wiki pages</a> * ';
+wikiPages += '<a href="http://www.inab.org" target="_blank">INB</a> * ';
+wikiPages += '<a href="http://www.openphacts.org" target="_blank">OpenPhacts</a>';
+wikiPages += '</div><br/>And check the videos below to get a quick intro about how to use this application';
+
+var videoListObj = [{
+  src: videoPath + '/TargetDossier.m4v',
+  title: 'Target Dossier GUI',
+  caption: 'This video shows the features and how to use the Target Dossier tool',
+  curtain: videoPath + '/TargetDossier.png'
+}, {
+  src: videoPath + '/HypothesisTester.m4v',
+  title: 'Hypothesis Tester',
+  caption: 'Watch this video to get introduced to the Hypothesis Tester tool',
+  curtain: videoPath + '/HypothesisTester.png'
+}];
 
 var imageTpl = new Ext.XTemplate (
   '<div class="speech-tit">Target Dossier</div>',
@@ -42,6 +63,23 @@ var imageTpl = new Ext.XTemplate (
   '<br/>{caption}',
 	'</div>',
 	'</tpl>'
+);
+
+var videoTpl = new Ext.XTemplate (
+  '<div class="speech-tit">Target Dossier</div>',
+  '<div class="speech-div">'+speech+'</div>',
+  '<div class="speech-tit">Get start</div>',
+  '<div class="speech-div">'+wikiPages+'</div>',
+  '<tpl for=".">',
+  '<span class="welcome-tit">{title}</span><br/>',
+  '<div class="video-container">',
+  '<video id="tutorial_video_{#}" class="video-js vjs-default-skin video-size-pos" controls preload="none" '+
+    'width="640" height="360" poster="{curtain}">',
+  '<source src="{src}" type="video/mp4" />',
+  '</video>',
+  '<br/>{caption}',
+  '</div>',
+  '</tpl>'
 );
 
 
@@ -57,7 +95,6 @@ Ext.define ('TDGUI.view.panels.WelcomePanel', {
 	extend: 'Ext.panel.Panel',
   alias: 'widget.tdgui-welcomepanel',
 
-
 	autoScroll: true,
   title: "Welcome",
 
@@ -69,16 +106,25 @@ Ext.define ('TDGUI.view.panels.WelcomePanel', {
 		padding: '15px 15px 15px 15px'
 	},
 
-
   /**
    * @cfg {Ext.XTemplate} the template used to show the welcome screen
    */
-	tpl: imageTpl,
+	tpl: videoTpl, // imageTpl,
 
 	listeners: {
 		render: function (comp, opts) {
 //			tpl = self.createInfoXTpl ()
-				this.tpl.overwrite(comp.body, imgListObj)
-		}
+			this.tpl.overwrite(comp.body, videoListObj)
+		},
+
+    afterrender: function (comp, opts) {
+      for (var i=0; i<videoListObj.length; i++) {
+        var videoId = "tutorial_video_"+(i+1);
+        videojs(videoId, {}, function() {
+          console.log(videoId + " (seems to be) initialized");
+        })
+      }
+
+    }
 	}
 })

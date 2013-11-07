@@ -87,14 +87,92 @@ Ext.define('TDGUI.controller.SearchPanel', {
       'tdgui-west-search > panel button[action=query-protein-info]': {
 //        click: this.clickGoProteinInfo
         click: this.clickAddProteins
+      },
+
+      'menu[id=listTargetMenu] menuitem[id=targetInfoMenuitem]': {
+        targetinfoMenuEv: this.onTargetInfoSelected
+      },
+
+      'menu[id=listTargetMenu] menuitem[id=targetInteractionsMenuitem]': {
+        targetinteractionsMenuEv: this.onTargetInteractionsSelected
       }
 
     });
+    
+  },
+
+
+  /**
+   * Callback after caching the context menu 'targetInfo' selection event. It opens a new tab with the target info for the
+   * target in evOpts.item.data.
+	 * @param [Object] evOpts, options for the event, actually the menuyitem selected plus
+	 * list element data
+   */ 
+  onTargetInfoSelected: function (evOpts) {
+    console.log('SearchPanel controller for info: '+evOpts.item.data.concept_uuid); // HERE item IS UNDEFINED, BUT CAUGHT THE EVENT!!!
+
+    var itemData = evOpts.item.data;
+    var primaryAcc = itemData.uniprot_acc[0];
+    var uniprotParam = 'http://www.uniprot.org/uniprot/'+primaryAcc;
+
+    var conceptUUID = itemData.concept_uuid;
+    var conceptURI = 'http://www.conceptwiki.org/concept/'+conceptUUID;
+
+// get the accession from the table/grid
+//          var accessions = record.data.accessions.join(',')
+
+    var qParam = conceptURI+','+uniprotParam;
+    var dcParam = '&dc='+Math.random();
+    // var targetAcc = record.data.accessions[0];
+    // var targetParam = '&acc='+targetAcc;
+    Ext.History.add('!xt=tdgui-targetinfopanel&qp=' + qParam + dcParam);    
+  },
+
+
+	/**
+	 * Callback after caching the context menu 'targetInfo' selection event. It opens a new tab with the target info for the
+	 * target in evOpts.item.data.
+	 * @param [Object] evOpts, options for the event, actually the menuyitem selected plus
+	 * list element data
+	 */
+  onTargetInteractionsSelected: function (evOpts) {
+    console.log('SearchPanel controller for interactions: '+evOpts.item.data.concept_uuid); // HERE item IS UNDEFINED, BUT CAUGHT THE EVENT!!!
+		var itemData = evOpts.item.data;
+		var primaryAcc = itemData.uniprot_acc[0];
+		var targetName = itemData.name;
+
+		var form = Ext.create('TDGUI.view.misc.InteractionsForm', {
+			uniprot_acc: primaryAcc,
+			targetTitle: targetName
+		});
+
+		var interactionDlgId = 'interactionsDlg';
+/*		var myInteractionsDlg = Ext.getCmp(interactionDlgId);
+		if (myInteractionsDlg !== undefined && this.interactionDlg === undefined)
+			this.interactionDlg = myInteractionsDlg;
+
+		else if (this.interactionDlg === undefined) {
+*/
+			this.interactionDlg = Ext.widget('window', {
+				title: 'Interactions parameters',
+				closeAction: 'destroy',
+				id: interactionDlgId,
+				width: 250,
+				height: 150,
+	//      height: 400,
+	//      minHeight: 400,
+				layout: 'fit',
+				resizable: true,
+				modal: true,
+				items: form
+			});
+
+		this.interactionDlg.show()
   },
 
 
   clickLookup: function () {
-    console.info('*** focus on lookup')
+    // console.info('*** focus on lookup')
   },
 
 

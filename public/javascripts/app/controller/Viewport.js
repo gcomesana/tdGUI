@@ -70,7 +70,7 @@ console.info ("A element was added to history: -> "+token)
 
     var mytoken = window.location.hash
     mytoken = mytoken.substr(2, mytoken.length)
-    if (mytoken.length != 0)
+    // if (mytoken.length != 0)
       this.handleHistoryToken(mytoken);
   },
 
@@ -78,7 +78,7 @@ console.info ("A element was added to history: -> "+token)
 
 
   onAfterrender: function (comp, opts) {
-//    console.log("onAfterrender: "+ comp.getId())
+    console.log("Viewport controller onAfterrender: "+ comp.getId());
   },
 
 
@@ -107,7 +107,7 @@ console.log("listStoreMain size: "+listStoreMain.getCount());
 
     console.log('handleHistoryToken -> TDGUI.Globals.firstTime: '+TDGUI.Globals.firstTime);
     // This is to check whether or not it is an external request
-    if (queryParams !== undefined && TDGUI.Globals.firstTime) {
+		if (TDGUI.Globals.firstTime) {
       TDGUI.Globals.firstTime = false;
 
       this.updateTargetList(queryParams, listStoreMain);
@@ -162,8 +162,8 @@ console.log("listStoreMain size: "+listStoreMain.getCount());
           },
           targetName: tokenObj.tg,
           title: "Pharmacology for "+ window.decodeURI(tokenObj.tg)
-        })
-        break
+        });
+        break;
 
       case 'tdgui-graphdatapanel':
       case 'tdgui-graphtabpanel':
@@ -173,12 +173,13 @@ console.info ("raising interactions for Target panel")
 //          fdDivName: 'xperimental-div',
 //          target_id: 'Q13362',
           targetAcc: uniprotAcc,
+					targetTitle: tokenObj.tg,
           confVal: tokenObj.cv,
           maxNodes: tokenObj.mn,
           closable: true,
           id: 'tdgui-graphtabpanel-'+uniprotAcc
-        })
-        break
+        });
+        break;
 
     }
 /*
@@ -230,6 +231,9 @@ console.info ("raising interactions for Target panel")
    * @param {Ext.data.Store} targetListStore the store with the targets
    */
   updateTargetList: function (qParams, targetListStore) {
+		if (qParams === undefined)
+			return;
+
     console.log('updating target list for: '+qParams.split(','));
     var targets = qParams.split(',');
     var theUrl = targets.length == 1? '/tdgui_proxy/get_uniprot_by_acc':

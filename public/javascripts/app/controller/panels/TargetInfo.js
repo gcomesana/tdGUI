@@ -39,10 +39,11 @@ console.info ("Initializing TargetInfo controller...")
 //        click: this.onClickInteractionsBtn
 
         click: function (comp, opts) {
-          var form = comp.up('form')
-          var formVals = form.getForm().getValues()
+          var form = comp.up('form');
+          var formVals = form.getForm().getValues();
+					var title = formVals.targetName;
 
-          this.onClickInteractionsBtn (formVals.uniprotAcc, formVals.conf_val, formVals.max_nodes)
+          this.onClickInteractionsBtn (formVals.uniprotAcc, formVals.conf_val, formVals.max_nodes, title)
           comp.up('window').close();
         }
 
@@ -87,11 +88,7 @@ console.info ("Initializing TargetInfo controller...")
  * @param {Event} confVal the confidence value to select the right interactions
  * @param {Object} maxNodes the maximun number of node for the interactions graph
  */
-  onClickInteractionsBtn: function (targetAcc, confVal, maxNodes) {
-
-    var theStore = this.getTargetinfopanel().targetInfoStore
-//    var targetAcc = theStore.proxy.extraParams.protein_uri
-//    var targetAcc = this.getTargetinfopanel().uniprot_acc
+  onClickInteractionsBtn: function (targetAcc, confVal, maxNodes, targetName) {
 /*
     if (targetAcc.indexOf ('uniprot') != -1)
       targetAcc = targetAcc.substring(targetAcc.lastIndexOf('/')+1)
@@ -101,7 +98,7 @@ console.info ("Initializing TargetInfo controller...")
 */
 //    var targetName = this.getTargetinfopanel().down('#target_name').getRawValue()
 
-    var targetName = this.getTargetinfopanel().down('#prefLabel').getRawValue();
+    // var targetName = this.getTargetinfopanel().down('#prefLabel').getRawValue();
     var historyParams = '!xt=tdgui-graphtabpanel&qp=' + targetAcc + '&cv=' + confVal +
                 '&mn=' + maxNodes + '&tg='+targetName;
 

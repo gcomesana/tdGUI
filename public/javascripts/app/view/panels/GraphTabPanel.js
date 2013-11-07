@@ -31,6 +31,7 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
   confVal: 0.43,
   maxNodes: 5,
   targetAcc: undefined,
+	targetTitle: undefined,
 
 
 	initComponent: function() {
@@ -39,6 +40,7 @@ Ext.define('TDGUI.view.panels.GraphTabPanel', {
 		var ivPanel = Ext.create('TDGUI.view.panels.GraphDataPanel', {
 			flex: 3,
       targetAcc: me.targetAcc,
+			targetTitle: me.targetTitle, 
       maxNodes: me.maxNodes,
       confVal: me.confVal,
       id: 'graphdiv-'+me.targetAcc

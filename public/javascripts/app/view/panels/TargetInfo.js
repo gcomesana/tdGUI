@@ -9,7 +9,7 @@
 Ext.define('TDGUI.view.panels.TargetInfo', {
 	extend: 'Ext.panel.Panel',
 	alias: 'widget.tdgui-targetinfopanel',
-  requires: ['TDGUI.store.lda.TargetStore', 'HT.lib.Util'],
+  requires: ['TDGUI.store.lda.TargetStore', 'HT.lib.Util', 'TDGUI.view.misc.InteractionsForm'],
   
 	title: 'Target Info',
 
@@ -247,6 +247,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 
     var me = panel;
     console.info('accession for targetinfo-panel: '+me.uniprot_acc);
+    /*
     var form = Ext.createWidget('form', {
       bodyPadding: 5,
       frame: true,
@@ -302,8 +303,15 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
         }
       ]
     });
+		*/
 
+		var textDataPanel = this.up('panel');
+		var targetTitle = textDataPanel.items.getAt(0).getRawValue();
 
+		var form = Ext.create('TDGUI.view.misc.InteractionsForm', {
+			uniprot_acc: me.uniprot_acc,
+			targetTitle: targetTitle
+		});
 		var interactionDlgId = 'interactionsDlg';
 /*		var myInteractionsDlg = Ext.getCmp(interactionDlgId);
 		if (myInteractionsDlg !== undefined && this.interactionDlg === undefined)

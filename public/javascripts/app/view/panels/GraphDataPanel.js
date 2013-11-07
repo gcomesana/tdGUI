@@ -51,6 +51,8 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
    */
   targetAcc: '',
 
+	targetTitle: '',
+
   /**
    * @cfg {Number} confVal the confidence value to select an interaction
    */
@@ -90,7 +92,7 @@ Ext.define('TDGUI.view.panels.GraphDataPanel', {
     var displayTit = Ext.create('Ext.form.field.Display', {
       itemId: 'title',
       fieldCls: 'target-title',
-      value: "Interactions for accession target '"+this.targetAcc+"'"
+      value: "Interactions for '"+decodeURI(this.targetTitle)+"'<br/> ("+this.targetAcc+")"
     });
 
 

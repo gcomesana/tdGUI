@@ -55,8 +55,8 @@ Ext.define('TDGUI.controller.SearchPanel', {
 
   init: function () {
 
-    console.info('SearchPanel controller initializing... ')
-    this.myMask = new Ext.LoadMask(Ext.getBody(), {msg: 'Loading data...'})
+    console.info('SearchPanel controller initializing... ');
+//    this.myMask = new Ext.LoadMask(Ext.getBody(), {msg: 'Loading data...'})
     this.control({
       'TargetByNameForm button[action=query_target_by_name]': {
         click: this.submitQuery

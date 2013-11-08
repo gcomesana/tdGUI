@@ -4,6 +4,7 @@
  * in it.
  * Loads ExtJs 4 application controllers and init tooltips and history components
  */
+
 Ext.Loader.setConfig({
   enabled:true,
   disableCaching: false
@@ -34,15 +35,14 @@ Ext.create('Ext.app.Application', {
               'TDGUI.view.panels.west.SearchPanel','TDGUI.view.panels.StatusBarPanel'],
 */
 // Define all the controllers that should initialize at boot up of your application
-
   controllers: [
-    'TDGUI.controller.SearchPanel', // not working in rails3 if not qualified
+		'TDGUI.controller.Viewport',
+		'TDGUI.controller.SearchPanel', // not working in rails3 if not qualified
     'TDGUI.controller.grid.DynamicGrid',
     'TDGUI.controller.panels.MultiTarget',
     'TDGUI.controller.panels.TargetInfo',
     'TDGUI.controller.panels.GraphTabPanel',
     'TDGUI.controller.common.panels.TextImagePanel',
-    'TDGUI.controller.Viewport',
     'HT.controller.Panels'
   ],
 

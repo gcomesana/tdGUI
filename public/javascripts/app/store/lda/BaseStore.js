@@ -78,6 +78,7 @@ Ext.define('TDGUI.store.lda.BaseStore', {
   // because prefetchData is stored by index
   // this invalidates all of the prefetchedData
   sort: function () {
+		console.log("BaseStore sort...");
     var me = this,
       prefetchData = me.pageMap;
 
@@ -87,7 +88,7 @@ Ext.define('TDGUI.store.lda.BaseStore', {
         //get the specific store to sort the column
         this.sortColumn(arguments);
         this.currentPage = 1;
-        this.guaranteeRange(0, 49);
+        this.guaranteeRange(0, 24);
       }
       else {
         me.callParent(arguments);

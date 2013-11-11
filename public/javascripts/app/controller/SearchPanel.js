@@ -56,7 +56,7 @@ Ext.define('TDGUI.controller.SearchPanel', {
   init: function () {
 
     console.info('SearchPanel controller initializing... ');
-//    this.myMask = new Ext.LoadMask(Ext.getBody(), {msg: 'Loading data...'})
+    this.myMask = new Ext.LoadMask(Ext.getBody(), {msg: 'Loading data...'})
     this.control({
       'TargetByNameForm button[action=query_target_by_name]': {
         click: this.submitQuery
@@ -325,7 +325,7 @@ Ext.define('TDGUI.controller.SearchPanel', {
               console.info("Nothing found for: " + item)
               Ext.Msg.show({
                  title:'Target information',
-                 msg: "No information about the chosen target ("+params.label+") was found in uniprot. Some features won't be available.",
+                 msg: "No information about the chosen target ("+item+") was found in uniprot. Some features won't be available.",
                  buttons: Ext.Msg.OK,
                  icon: Ext.Msg.WARNING
               });

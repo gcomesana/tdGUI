@@ -18,7 +18,7 @@ Ext.define('TDGUI.view.grid.PharmByTargetScrollingGrid', {
 
   listeners: {
     'sortchange': function (ct, column, direction, eOpts) {
-      console.log('PharmByTargetNameGrid: sortchange()');
+      console.log('PharmByTargetScrollingGrid: sortchange()');
       this.setLoading(true);
     }
   },

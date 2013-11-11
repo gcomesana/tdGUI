@@ -11,6 +11,7 @@
   <%= stylesheet_link_tag '/stylesheets/sbuttons.css' %>
   <%= stylesheet_link_tag '/stylesheets/jit.css' %>
   <%# stylesheet_link_tag '/stylesheets/clifton-theme-1.1/css/clifton-blue.css' %>
+  <%= stylesheet_link_tag '/javascripts/videojs-4.2.2/video-js-new.css' %>
   <%= stylesheet_link_tag '/stylesheets/tdgui.css' %>
 
   <%= javascript_include_tag "/javascripts/cytoscapeweb1.0.3/js/min/json2.min.js" %>
@@ -47,6 +48,8 @@
     <%= javascript_include_tag '/javascripts/app.js' %>
   <% end %>
 
+  <%= javascript_include_tag "/javascripts/videojs-4.2.2/video.js" %>
+
   <%#= javascript_include_tag '/app/view/ux/exporter/Exporter.js' %>
   <%#= javascript_include_tag '/downloadify/downloadify.min.js' %>
   <%#= javascript_include_tag '/downloadify/swfobject.js' %>
@@ -68,6 +71,7 @@
 
     // var TDGUI.Globals.proteinPharmBaseUrl = pharm_rails_path; // "http://" + host + ':' + port + pharm_rails_path;
     TDGUI.Globals.proteinPharmBaseUrl = '<%= AppSettings.config["tsv"]["tsv_pharm_page_results"] -%>';
+    TDGUI.Globals.uniprotUrlPrefix = 'http://www.uniprot.org/uniprot';
 
     TDGUI.Globals.firstTime = true;
 

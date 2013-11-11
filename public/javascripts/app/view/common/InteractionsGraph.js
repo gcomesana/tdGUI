@@ -5,7 +5,7 @@
 // Default confiration for the ForceDirect graph initialization
 // TODO estos cfgs hay que meterlos en una clase...
 
-var labelType
+var labelType;
 (function () {
   var ua = navigator.userAgent,
     iStuff = ua.match(/iPhone/i) || ua.match(/iPad/i),
@@ -18,7 +18,6 @@ var labelType
   nativeTextSupport = labelType == 'Native';
   useGradients = nativeCanvasSupport;
   animate = !(iStuff || !nativeCanvasSupport);
-  console.info('auto-caller function!!!')
 })();
 
 
@@ -141,23 +140,26 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
   initComponent: function () {
     var me = this
 
-    var helpText = '<div id="divIntrHelp" class="well well-small" style="width:50%;margin-bottom:5px">' +
-      'Click/hover over a node to get information about the target<br/>'
-    helpText += 'Click/hover over a edge to get information about the interaction between both two targets</div>'
+    var helpText = '<div id="divIntrHelp" class="well well-small" ' +
+			'style="width:50%;margin-bottom:5px;margin-left:50%">' +
+      'Click/hover over a node to get information about the target<br/>';
+    helpText += 'Click/hover over a edge to get information about the' +
+			' interaction between both two targets</div>';
 
 //    helpText = ''
     if (this.fdDivName != 'infovis-div') {
-      var cssRule = Ext.util.CSS.getRule('#infovis-div')
-      var cssRuleText = cssRule.style.cssText
-      var newRule = '#' + this.fdDivName + ' {' + cssRuleText + '}'
-      var newCSS = Ext.util.CSS.createStyleSheet(newRule, this.fdDivName + "-css")
-      this.fdDivName = this.fdDivName + '-' + this.targetId
+      var cssRule = Ext.util.CSS.getRule('#infovis-div');
+      var cssRuleText = cssRule.style.cssText;
+      var newRule = '#' + this.fdDivName + ' {' + cssRuleText + '}';
+      var newCSS = Ext.util.CSS.createStyleSheet(newRule, this.fdDivName + "-css");
+      this.fdDivName = this.fdDivName + '-' + this.targetId;
 
       this.html = '<div id="' + this.fdDivName + '" style="height:100%">' +
         helpText + '</div>';
 
-      this.html = '<div id="outerdiv-graph" style="height:100%">'+helpText+
-        '<div id="' + this.fdDivName + '" style="xborder:1px solid black;height:88%"></div></div>';
+      this.html = '<div id="outerdiv-graph" style="height:100%">'+
+        '<div id="' + this.fdDivName + '" style="xborder:1px solid black;height:88%"></div>' +
+				helpText+'</div>';
 
     }
     else
@@ -221,7 +223,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
         Label: {
           type: labelType,
           //Native or HTML
-          size: 10,
+          size: 12,
           style: 'bold',
           color: 'darkblue'
         },

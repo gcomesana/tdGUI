@@ -252,6 +252,49 @@ console.info ("Initializing panels.west.SearchPanel + Tabs comp...")
       valueField: 'uniprot_acc'
     });
 
+		// Add a context menu for this list
+		var theTargetList = this.targetList;
+		theTargetList.on('afterrender', function(comp, opts) {
+			var multilist = theTargetList.down('multiselect');
+			var corelist = multilist.boundList; // this is the boundlist which is the real list view component
+
+			// menu definition
+			var listContextMenu = Ext.create('Ext.menu.Menu', {
+				id: 'listTargetMenu',
+				style: {
+					overflow: 'visible' // Modifies the style
+				},
+				items: [{
+						text: 'Target <b>info</b>',
+						id: 'targetInfoMenuitem',
+						handler:  function (item, ev) {
+							ev.stopEvent();
+							var itemList = this.up('tdgui-item-multilist'); // bad
+							this.fireEvent('targetinfoMenuEv', {item: item});
+						}
+					}, {
+						text: 'Target <b>interactions</b>',
+						id: 'targetInteractionsMenuitem',
+						// menu: colorMenu // <-- submenu by reference
+						handler: function (item, ev) {
+							ev.stopEvent();
+							this.fireEvent('targetinteractionsMenuEv', {item: item});
+						}
+					}
+				]
+			});
+
+			// context menu show on right button click
+			corelist.on('beforeitemcontextmenu', function(comp, record, item, index, ev, opts) {
+				ev.stopEvent();
+				Ext.each(listContextMenu.items.keys, function(menuItemId, index, keys) {
+					var menuItem = listContextMenu.items.getByKey(menuItemId);
+					menuItem.data = record.raw;
+				})
+				listContextMenu.showAt(ev.getXY());
+			});
+		}); // afterrender
+
     this.targetList.addDockedItem({
       xtype: 'button',
       text: 'Search'

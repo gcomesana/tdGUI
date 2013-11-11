@@ -55,8 +55,8 @@ Ext.define('TDGUI.controller.SearchPanel', {
 
   init: function () {
 
-    console.info('SearchPanel controller initializing... ')
-    this.myMask = new Ext.LoadMask(Ext.getBody(), {msg: 'Loading data...'})
+    console.info('SearchPanel controller initializing... ');
+//    this.myMask = new Ext.LoadMask(Ext.getBody(), {msg: 'Loading data...'})
     this.control({
       'TargetByNameForm button[action=query_target_by_name]': {
         click: this.submitQuery
@@ -87,14 +87,92 @@ Ext.define('TDGUI.controller.SearchPanel', {
       'tdgui-west-search > panel button[action=query-protein-info]': {
 //        click: this.clickGoProteinInfo
         click: this.clickAddProteins
+      },
+
+      'menu[id=listTargetMenu] menuitem[id=targetInfoMenuitem]': {
+        targetinfoMenuEv: this.onTargetInfoSelected
+      },
+
+      'menu[id=listTargetMenu] menuitem[id=targetInteractionsMenuitem]': {
+        targetinteractionsMenuEv: this.onTargetInteractionsSelected
       }
 
     });
+    
+  },
+
+
+  /**
+   * Callback after caching the context menu 'targetInfo' selection event. It opens a new tab with the target info for the
+   * target in evOpts.item.data.
+	 * @param [Object] evOpts, options for the event, actually the menuyitem selected plus
+	 * list element data
+   */ 
+  onTargetInfoSelected: function (evOpts) {
+    console.log('SearchPanel controller for info: '+evOpts.item.data.concept_uuid); // HERE item IS UNDEFINED, BUT CAUGHT THE EVENT!!!
+
+    var itemData = evOpts.item.data;
+    var primaryAcc = itemData.uniprot_acc[0];
+    var uniprotParam = 'http://www.uniprot.org/uniprot/'+primaryAcc;
+
+    var conceptUUID = itemData.concept_uuid;
+    var conceptURI = 'http://www.conceptwiki.org/concept/'+conceptUUID;
+
+// get the accession from the table/grid
+//          var accessions = record.data.accessions.join(',')
+
+    var qParam = conceptURI+','+uniprotParam;
+    var dcParam = '&dc='+Math.random();
+    // var targetAcc = record.data.accessions[0];
+    // var targetParam = '&acc='+targetAcc;
+    Ext.History.add('!xt=tdgui-targetinfopanel&qp=' + qParam + dcParam);    
+  },
+
+
+	/**
+	 * Callback after caching the context menu 'targetInfo' selection event. It opens a new tab with the target info for the
+	 * target in evOpts.item.data.
+	 * @param [Object] evOpts, options for the event, actually the menuyitem selected plus
+	 * list element data
+	 */
+  onTargetInteractionsSelected: function (evOpts) {
+    console.log('SearchPanel controller for interactions: '+evOpts.item.data.concept_uuid); // HERE item IS UNDEFINED, BUT CAUGHT THE EVENT!!!
+		var itemData = evOpts.item.data;
+		var primaryAcc = itemData.uniprot_acc[0];
+		var targetName = itemData.name;
+
+		var form = Ext.create('TDGUI.view.misc.InteractionsForm', {
+			uniprot_acc: primaryAcc,
+			targetTitle: targetName
+		});
+
+		var interactionDlgId = 'interactionsDlg';
+/*		var myInteractionsDlg = Ext.getCmp(interactionDlgId);
+		if (myInteractionsDlg !== undefined && this.interactionDlg === undefined)
+			this.interactionDlg = myInteractionsDlg;
+
+		else if (this.interactionDlg === undefined) {
+*/
+			this.interactionDlg = Ext.widget('window', {
+				title: 'Interactions parameters',
+				closeAction: 'destroy',
+				id: interactionDlgId,
+				width: 250,
+				height: 150,
+	//      height: 400,
+	//      minHeight: 400,
+				layout: 'fit',
+				resizable: true,
+				modal: true,
+				items: form
+			});
+
+		this.interactionDlg.show()
   },
 
 
   clickLookup: function () {
-    console.info('*** focus on lookup')
+    // console.info('*** focus on lookup')
   },
 
 
@@ -123,7 +201,8 @@ Ext.define('TDGUI.controller.SearchPanel', {
 */
     if (concept_uuids.length > uniprotIds.length)
       Ext.each (concept_uuids, function (uuid, index, uuids) {
-        accessions.push(uniprotIds[index][0]+';'+uuid);
+        var uniprotParam = uniprotIds[index] === undefined? '-': uniprotIds[index][0];
+        accessions.push(uniprotParam+';'+uuid);
       })
     else {
       Ext.each (uniprotIds, function (uniprotSet, index, uuids) {
@@ -213,17 +292,17 @@ Ext.define('TDGUI.controller.SearchPanel', {
           params: params,
 
           failure: function (resp, opts) {
-            console.info('ajax failed for item number: ' + number + ' -> ' + resp.responseText)
-            labelCount++
+            console.info('ajax failed for item number: ' + number + ' -> ' + resp.responseText);
+            labelCount++;
             if (labelCount == labels.length)
-              me.myMask.hide()
+              me.myMask.hide();
           },
 
           success: function (resp, opts) {
 //            console.info('success for number ' + number + ' -> ' + resp.responseText)
 
-            var jsonResp = Ext.JSON.decode(resp.responseText)
-            var accessions = jsonResp.accessions
+            var jsonResp = Ext.JSON.decode(resp.responseText);
+            var accessions = jsonResp.accessions;
             Ext.each(accessions, function (acc, index, accsItself) {
               var ini = acc.indexOf('>');
               var end = acc.lastIndexOf('<');
@@ -246,13 +325,34 @@ Ext.define('TDGUI.controller.SearchPanel', {
               console.info("Nothing found for: " + item)
               Ext.Msg.show({
                  title:'Target information',
-                 msg: "No information about the chosen target was found in uniprot. Some features won't be available.",
+                 msg: "No information about the chosen target ("+params.label+") was found in uniprot. Some features won't be available.",
                  buttons: Ext.Msg.OK,
                  icon: Ext.Msg.WARNING
               });
-
             }
-            var target = Ext.create('TDGUI.model.ListTarget', listItem)
+            else { // as we got some response from uniprot, we try to get the right concept uuid by mapping uniprot url
+              var params = {"uri": TDGUI.Globals.uniprotUrlPrefix+'/'+accessions[0]};
+              var conn = new Ext.data.Connection();
+              conn.async = false;
+              var resp = conn.request ({
+                url: '/tdgui_proxy/map_uniprot_to_cw',
+                params: params,
+                method: 'GET'
+              });
+              
+              var newCWUri = null;
+              if (resp.status != 404 && resp.status != 304) {
+                var jsonObj = JSON.parse(resp.responseText);
+                newCWUri = jsonObj.cw_url;
+              }
+              if (newCWUri !== null && newCWUri !== undefined && newCWUri != '') {
+                listItem.concept_uri = newCWUri;
+                var uuid = newCWUri.split('/').pop();
+                listItem.concept_uuid = uuid;
+              }
+            } // EO else
+
+            var target = Ext.create('TDGUI.model.ListTarget', listItem);
             listStore.add(target)
 
             labelCount++
@@ -329,5 +429,7 @@ Ext.define('TDGUI.controller.SearchPanel', {
 
 
     Ext.History.add('TargetByNameForm=' + target_uri);
-  }
+  },
+
+
 });

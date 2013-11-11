@@ -9,8 +9,9 @@ class InnerProxy
 	include REXML
 
 private
-	OPS_API_ID = '86bb218b'
-	OPS_API_KEY = '29493600307b1fbd0cec49cbee447073'
+	OPS_API_ID = TdGUI::Application.config.openphacts_api.app_id # '86bb218b'
+	OPS_API_KEY = TdGUI::Application.config.openphacts_api.app_key # '29493600307b1fbd0cec49cbee447073'
+	INTACT_SERVER = TdGUI::Application.config.intactdb.intact_server
 
 # OPS
 	# Gets complete information about a target from its conceptWiki URI, such that

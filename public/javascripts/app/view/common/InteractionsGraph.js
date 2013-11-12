@@ -363,7 +363,7 @@ Ext.define('TDGUI.view.common.InteractionsGraph', {
         if (response.responseText == null || response.responseText == '' ||
           response.responseText == '[]') {
 // This window is not enough and pronbe to be removed
-          Ext.MessageBox.alert("No interactions for were found for target '" + me.targetId + '"')
+          Ext.MessageBox.alert("No interactions were found for target '" + me.targetId + '"')
           me.fireEvent('graphCompleted', me);
           return false;
         }

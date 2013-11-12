@@ -30,6 +30,7 @@ Ext.define('TDGUI.store.lda.FilteringStore', {
         //activity_value:this.activity_value,
         //activity_condition:this.activity_condition,
         _format: this._format,
+				_orderBy: this.sort_column,
         uri: this.uri
       });
 

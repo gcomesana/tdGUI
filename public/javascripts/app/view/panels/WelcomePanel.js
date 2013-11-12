@@ -26,18 +26,18 @@ var imgListObj = [{
   }, {
     src: imgPath + '/dual-system.png',
     title: 'Dual retrieval system',
-    caption: 'Target Dossier underlying technology combines the OpenPhacts semantic web APIs with other bioinformatics resources available through web services'
+    caption: 'Target Dossier underlying technology combines the OpenPHACTS semantic web APIs with other bioinformatics resources available through web services'
   }]
 
-var speech = 'The Target Dossier GUI (TDGUI) is an application whose main goal is the integration of drug target’s data to identify the most productive points for therapeutic intervention. It is been developed within the context of the IMI project OpenPhacts and relies on the knowledge discovery platform and APIs developed by the consortium.'
+var speech = 'The Target Dossier GUI (TDGUI) is an application whose main goal is the integration of drug target’s data to identify the most productive points for therapeutic intervention. It is been developed within the context of the IMI project OpenPHACTS and relies on the knowledge discovery platform and APIs developed by the consortium.'
  + 'The application is in stable version 1.0 but still in development as many features can and will be added shortly.'
 
 var wikiPages = 'Click on these links to get further documentation about the project<br/>';
-wikiPages += '<div class="links"><a href="http://www.github.com/inab/tdGUI" target="_blank">Github</a> * ';
 wikiPages += '<a href="http://www.github.com/inab/tdGUI/wiki" target="_blank">Home docs</a> * ';
 wikiPages += '<a href="http://www.github.com/inab/tdGUI/wiki/_pages" target="_blank">Wiki pages</a> * ';
+wikiPages += '<div class="links"><a href="http://www.github.com/inab/tdGUI" target="_blank">Github</a> * ';
 wikiPages += '<a href="http://www.inab.org" target="_blank">INB</a> * ';
-wikiPages += '<a href="http://www.openphacts.org" target="_blank">OpenPhacts</a>';
+wikiPages += '<a href="http://www.openphacts.org" target="_blank">OpenPHACTS</a>';
 wikiPages += '</div><br/>And check the videos below to get a quick intro about how to use this application';
 
 var videoListObj = [{
@@ -68,7 +68,7 @@ var imageTpl = new Ext.XTemplate (
 var videoTpl = new Ext.XTemplate (
   '<div class="speech-tit">Target Dossier</div>',
   '<div class="speech-div">'+speech+'</div>',
-  '<div class="speech-tit">Get start</div>',
+  '<div class="speech-tit">Docs and further links</div>',
   '<div class="speech-div">'+wikiPages+'</div>',
   '<tpl for=".">',
   '<span class="welcome-tit">{title}</span><br/>',
@@ -96,7 +96,7 @@ Ext.define ('TDGUI.view.panels.WelcomePanel', {
   alias: 'widget.tdgui-welcomepanel',
 
 	autoScroll: true,
-  title: "Welcome",
+  title: "Get started",
 
   /**
    * @cfg {Object} defaults see TDGUI.view.Viewport#defaults

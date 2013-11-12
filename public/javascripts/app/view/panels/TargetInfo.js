@@ -105,13 +105,13 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
             itemId:'stringdbTargetButton',
             cls:'target-pharm-button',
             handler: this.raiseInteractionParams
-          }, {
+          }, /*{
             xtype:'button',
             text:'Pathway Data',
             itemId:'pathwayTargetButton',
             cls:'target-pharm-button',
             disabled: true
-          }, {
+          }, */ {
 						xtype: 'displayfield',
 						anchor: '100%',
 						itemId: 'target_type',

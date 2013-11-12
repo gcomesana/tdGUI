@@ -25,7 +25,7 @@ Ext.define('TDGUI.store.lda.BaseStore', {
       fn: function () {
         var me = this;
         console.log('Proxy: ' + Ext.ClassManager.getName(this) + ' URL updated to: ' + this.proxy.url);
-//        me.updateProxyURL();
+        me.updateProxyURL();
       }
     },
 

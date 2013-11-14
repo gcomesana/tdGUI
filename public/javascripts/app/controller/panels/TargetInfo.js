@@ -31,8 +31,12 @@ console.info ("Initializing TargetInfo controller...")
       'tdgui-targetinfopanel': {
         afterrender: this.initTargetInfoPanel,
         render: this.handleMask,
-        opsFailed: this.retryTargetInfoPanel
+        opsFailed: this.retryTargetInfoPanel,
       },
+
+			'tdgui-targetinfopanel checkbox': {
+				change: this.onProvChange
+			},
 
 //      'tdgui-targetinfopanel #stringdbTargetButton': {
       'window#interactionsDlg form button#interactionSendBtn': {
@@ -166,7 +170,16 @@ console.info ('retryTargetInfoPanel from TargetInfo controller')
 
       store.load()
     }
+  },
 
-  }
+
+	onProvChange: function(field, newVal, oldVal) {
+		console.log("provenance changed");
+		var dg = this.getTargetinfopanel();
+		dg = field.up('tdgui-targetinfopanel');
+		// dg.toggleProv(newVal['prov']);
+		dg.toggleProvenance(dg, newVal);
+		dg.setValues(dg.recordData);
+	}
 
 })

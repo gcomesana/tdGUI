@@ -27,6 +27,11 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
    */
   targetInfoStore: null,
 
+	/**
+	 * Holds the data from the record retrieved!!
+	 */
+	recordData: undefined,
+
 // This config is used to count the numbers of requests in order to fill this
 // component with data.
 // As by 07.2012, only there will be two sources (coreAPI and uniprot) but
@@ -53,6 +58,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
     this.uniprot_acc = qparams[1].substring(qparams[1].lastIndexOf('/')+1, qparams[1].length);
     this.concept_uuid = qparams[0].substring(qparams[0].lastIndexOf('/')+1, qparams[0].length);
 
+		this.privates.target_name_provenance = false;
 
     var me = this;
 		this.items = [{
@@ -93,7 +99,13 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 						anchor: '100%',
 //						itemId: 'target_name',
             itemId: 'prefLabel',
+						renderer: this.privates.provenanceTargetSummaryRenderer,
 						fieldCls: 'target-title'
+					}, {
+						xtype: 'checkbox',
+						boxLabel: 'Provenance',
+						itemId: 'chkProvenance'
+						// cls: 'target-field-label'
 					}, {
             xtype:'button',
             text:'Pharmacology Data',
@@ -105,17 +117,19 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
             itemId:'stringdbTargetButton',
             cls:'target-pharm-button',
             handler: this.raiseInteractionParams
-          }, {
+          },
+           /*{
             xtype:'button',
             text:'Pathway Data',
             itemId:'pathwayTargetButton',
             cls:'target-pharm-button',
             disabled: true
-          }, {
+          }, */ {
 						xtype: 'displayfield',
 						anchor: '100%',
 						itemId: 'target_type',
 						fieldLabel: 'Target Type',
+						renderer: this.privates.provenanceTargetSummaryRenderer,
 						cls: 'target-field-label',
             hidden: true
 
@@ -123,12 +137,14 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 						xtype: 'displayfield',
 						anchor: '100%',
 						itemId: 'organism',
+						renderer: this.privates.provenanceTargetSummaryRenderer,
 						fieldLabel: 'Organism',
 						cls: 'target-field-label'
 					}, {
 						xtype: 'displayfield',
 						anchor: '100%',
 						itemId: 'description',
+						renderer: this.privates.provenanceTargetSummaryRenderer,
 						fieldLabel: 'Description',
 						cls: 'target-field-label',
             hidden: true
@@ -136,12 +152,14 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 						xtype: 'displayfield',
 						anchor: '100%',
 						itemId: 'synonyms',
+						renderer: this.privates.provenanceTargetSummaryRenderer,
 						fieldLabel: 'Synonyms',
 						cls: 'target-field-label'
 					}, {
 						xtype: 'displayfield',
 						anchor: '100%',
 						itemId: 'specific_function',
+						renderer: this.privates.provenanceTargetSummaryRenderer,
 						fieldLabel: 'Specific Function',
 						cls: 'target-field-label'
 					}, {
@@ -149,6 +167,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 						anchor: '100%',
 						itemId: 'cellular_location',
 						fieldLabel: 'Cellular Location(s)',
+						renderer: this.privates.provenanceTargetSummaryRenderer,
 //            itemId: 'cellular_function',
 //            fieldLabel: 'Cellular Function',
 						cls: 'target-field-label'
@@ -157,12 +176,14 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 						anchor: '100%',
 						itemId: 'keywords',
 						fieldLabel: 'Keywords',
+						renderer: this.privates.provenanceTargetSummaryRenderer,
 						cls: 'target-field-label'
 					}, {
 						xtype: 'displayfield',
 						anchor: '100%',
 						itemId: 'pdb_id_page',
 						fieldLabel: 'PDB Entry',
+						renderer: this.privates.provenanceTargetSummaryRenderer,
 						cls: 'target-field-label'
 					}, {
 						xtype: 'panel',
@@ -177,6 +198,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 							itemId: 'molecular_weight',
 							columnWidth: 0.33,
 							fieldLabel: 'Molecular Weight',
+							renderer: this.privates.provenanceTargetSummaryRenderer,
 							cls: 'target-field-bottom',
 							fieldCls: 'target-field-bottom-field',
 							labelAlign: 'top',
@@ -186,6 +208,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 							itemId: 'number_of_residues',
 							columnWidth: 0.33,
 							fieldLabel: 'Number of Residues',
+							renderer: this.privates.provenanceTargetSummaryRenderer,
 							cls: 'target-field-bottom',
 							fieldCls: 'target-field-bottom-field',
 							labelAlign: 'top',
@@ -195,6 +218,7 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 							itemId: 'theoretical_pi',
 							columnWidth: 0.33,
 							fieldLabel: 'Theoretical Pi',
+							renderer: this.privates.provenanceTargetSummaryRenderer,
 							cls: 'target-field-bottom',
 							fieldCls: 'target-field-bottom-field',
 							labelAlign: 'top',
@@ -242,68 +266,10 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
    * @param {Event} ev the event information
    */
   raiseInteractionParams: function (btn, ev) {
-
     var panel = btn.up('tdgui-targetinfopanel');
 
     var me = panel;
     console.info('accession for targetinfo-panel: '+me.uniprot_acc);
-    /*
-    var form = Ext.createWidget('form', {
-      bodyPadding: 5,
-      frame: true,
-      width: 200,
-
-
-      fieldDefaults: {
-        labelAlign: 'left',
-        labelWidth: 105,
-        anchor: '100%'
-      },
-
-      items: [
-        {
-          xtype: 'numberfield',
-          fieldLabel: 'Confidence value',
-          name: 'conf_val',
-          hideTrigger: true,
-          minValue: 0,
-          maxValue: 1,
-          allowDecimals: true,
-          decimalPrecision: 2,
-          value: 0.43
-        },
-        {
-          xtype: 'numberfield',
-          hideTrigger: true,
-          fieldLabel: 'Max neighbours',
-          name: 'max_nodes',
-          allowDecimals: false,
-          maxValue: 10,
-          minValue: 2,
-          value: 5
-        }, {
-          xtype: 'hiddenfield',
-          name: 'uniprotAcc',
-          value: me.uniprot_acc
-        }
-      ],
-
-      buttons: [
-        {
-          text: 'Cancel',
-          id: 'interactionCancelBtn',
-          handler: function () {
-            var me = this
-            me.up('form').getForm().reset();
-            me.up('window').close();
-          }
-        }, {
-          text: 'Send',
-          id: 'interactionSendBtn'
-        }
-      ]
-    });
-		*/
 
 		var textDataPanel = this.up('panel');
 		var targetTitle = textDataPanel.items.getAt(0).getRawValue();
@@ -455,13 +421,26 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 							}
 						});
 
+						var drugbankLinkOut = 'http://www.drugbank.ca/molecules/';
+
       			if (drugBankData != null) {
+							var drugBank_src = drugBankData[TDGUI.util.LDAConstants.LDA_IN_DATASET];
+							var drugbankUri = drugBankData[TDGUI.util.LDAConstants.LDA_ABOUT];
+							drugbankLinkOut += drugbankUri.split('/').pop() + '?as=target';
 	      			rec.set({
 	      				cw_target_uri: primaryTopic._about,
 	      				molecular_weight: drugBankData['molecularWeight'],
+								molecular_weight_src: drugBank_src,
+								molecular_weight_item: drugbankLinkOut,
 	      				number_of_residues: drugBankData != null ? drugBankData['numberOfResidues'] : null,
+								number_of_residues_src: drugBank_src,
+								number_of_residues_item: drugbankLinkOut,
 	      				theoretical_pi: drugBankData != null ? drugBankData['theoreticalPi'] : null,
-								cellular_location: cellLocation
+								theoretical_pi_src: drugBank_src,
+								theoretical_pi_item: drugbankLinkOut,
+								cellular_location: cellLocation,
+								cellular_location_src: drugBank_src,
+								cellular_location_item: drugbankLinkOut
 	      			});
 	      		}
       			var dp = me.down('#dp');
@@ -561,32 +540,39 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 	addKeywords: function(keywords) {
 		var bits;
 		if (HT.lib.Util.isClassOf(keywords, 'String'))
-			bits = keywords.split('; ');
-		else
 			bits = keywords;
+		else
+			bits = keywords.join(', '); // it is an array
 		
 		var keywordDisplayField = this.down('#keywords');
 		var bodyEl = keywordDisplayField.bodyEl;
 		var domElem = bodyEl.dom;
 		this.clearDomBelow(domElem);
+
+		var output;
+		if (this.privates.target_name_provenance) {
+			var source = this.recordData.data['keywords_src'];
+			var sourceItem = this.recordData.data['keywords_item']
+			var cls = TDGUI.util.LDAConstants.LDA_SRC_CLS_MAPPINGS[source];
+			cls += 'Icon';
+			cls = this.privates.provIconsPath + cls + '.png';
+
+			output = '{kw} <a href="' + sourceItem + '">' + '<img src="' + cls + '" title=' + source + ' height="15" width="15"/>' + '</a>';
+		}
+		else {
+			output = '{kw}'
+		}
+
 		var tpl = Ext.DomHelper.createTemplate({
 			tag: 'div',
 			cls: 'keyword',
-			html: '{kw}'
+			html: output
+			// html: '{kw}'
 		});
 
-    if (bits.length > 0) {
-    	var counter = 0;
-      Ext.each(bits, function(keyword) {
-      	var myKw = keyword;
-      	if (counter < bits.length-1)	myKw += ', ';
-
-        tpl.append(bodyEl, {
-          kw: myKw
-        });
-        counter++;
-      }, this);
-    }
+		tpl.append(bodyEl, {
+			kw: bits
+		});
 
 		keywordDisplayField.show();
 	},
@@ -601,11 +587,27 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 		var bodyEl = organismDisplayField.bodyEl;
 		var domElem = bodyEl.dom;
 		this.clearDomBelow(domElem);
+
+		var output;
+		if (this.privates.target_name_provenance) {
+			var sourceItem = this.recordData.data['organism_item'];
+			var source = this.recordData.data['organism_src'];
+			var cls = TDGUI.util.LDAConstants.LDA_SRC_CLS_MAPPINGS[source];
+			cls += 'Icon';
+			cls = this.privates.provIconsPath + cls + '.png';
+
+			output = '{org} <a href="' + sourceItem + '" target="_blank">' + '<img src="' + cls + '" title=' + source + ' height="15" width="15"/>' + '</a>';
+		}
+		else {
+			output = '{org}'
+		}
+
 		var tpl = Ext.DomHelper.createTemplate({
 			tag: 'div',
 			cls: 'organism',
-			html: '{org}'
+			html: output
 		});
+
 		tpl.append(bodyEl, {
 			org: organism
 		});
@@ -628,10 +630,25 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 		var bodyEl = synonymsField.bodyEl;
 		var domElem = bodyEl.dom;
 		this.clearDomBelow(domElem);
+
+		var output;
+		if (this.privates.target_name_provenance) {
+			var source = this.recordData.data['synonyms_src'];
+			var sourceItem = this.recordData.data['synonyms_item'];
+			var cls = TDGUI.util.LDAConstants.LDA_SRC_CLS_MAPPINGS[source];
+			cls += 'Icon';
+			cls = this.privates.provIconsPath + cls + '.png';
+
+			output = '{syn} <a href="' + sourceItem + '" target="_blank">' + '<img src="' + cls + '" title=' + source + ' height="15" width="15"/>' + '</a>';
+		}
+		else {
+			output = '{syn}'
+		}
+
 		var tpl = Ext.DomHelper.createTemplate({
 			tag: 'div',
 			cls: 'synonym',
-			html: '{syn}'
+			html: output
 		});
 		var counter = 0;
 		Ext.each(bits, function(synonym) {
@@ -752,6 +769,11 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 	setValues: function(target) {
 		this.resetAllFields();
 		var td = target.data;
+		this.recordData = target;
+
+// Set the provenance checkbox id and itemId to avoid id collisions
+		var chkBox = this.down('checkbox');
+
 
 // Pharmacology data button initialization
     var pharmButton = this.down('#pharmTargetButton');
@@ -787,36 +809,10 @@ Ext.define('TDGUI.view.panels.TargetInfo', {
 			}
 		}
 
-		//        if (td.target_name) {
-		//            this.setFieldValue('#tn', td.target_name);
-		//        }
-		//
-		//        if (td.target_type) {
-		//            this.setFieldValue('#tt', td.target_type);
-		//        }
-		//
-		//        var typeField = this.down('#tt');
-		//        typeField.setValue(td.target_type);
-		//
-		//        var descField = this.down('#desc');
-		//        descField.setValue(td.description);
-		//
-		//        var keyField = this.down('#key');
-		//        this.addKeywords(td.keywords, keyField);
-		//
-		//        var orgField = this.down('#org');
-		//        this.addOrganism(td.organism, orgField);
-		//
-		//        var synField = this.down('#syn');
-		//        this.addSynonyms(td.synonyms, synField);
-		//
-		//        if (td.cellularLocation) {
-		//            var cellLoc = this.down('#cl');
-		//            cellLoc.setValue(td.cellularLocation);
-		//            cellLoc.show();
-		//        }
 		this.doLayout();
 	},
+
+
 
 
 	startLoading: function() {
@@ -828,6 +824,65 @@ console.info ('TargetInfo.startLoading')
   endLoading: function() {
 console.info ('TargetInfo.endLoading')
 		this.setLoading(false);
-	}
+	},
+
+
+
+	toggleProvenance: function (thisComp, newVal) {
+		console.log('toggleProvenance newVal: '+newVal);
+		thisComp.privates.target_name_provenance = newVal;
+	},
+
+
+
+	privates: {
+		target_name_provenance: false,
+		provIconsPath: '/images/provenance/',
+
+		provenanceTargetSummaryRenderer: function (value, field) {
+			console.log("Target by name provenance renderer for field: "+field.itemId+"("+value+")");
+			var me = this.up('tdgui-targetinfopanel'); // this is the field!!
+
+			var sources = new Array();
+			sources['http://www.chemspider.com'] = "ChemSpider";
+			sources['http://data.kasabi.com/dataset/chembl-rdf'] = "Chembl";
+			sources['http://linkedlifedata.com/resource/drugbank'] = "DrugBank";
+			sources['http://www.conceptwiki.org'] = "ConceptWiki";
+			sources['http://purl.uniprot.org'] = "UniProt";
+
+			if (me.privates.target_name_provenance) {
+				console.log("Yielding provenance!!");
+				var recdata = field.itemId;
+				var itemdata = recdata + '_item';
+				recdata += '_src';
+
+				var source = me.recordData.data[recdata];
+				var cls = TDGUI.util.LDAConstants.LDA_SRC_CLS_MAPPINGS[source];
+				if (!cls) {
+					cls = 'defaultValue';
+				}
+				var iconCls = cls + 'Icon';
+				// iconCls = '/assets/' + iconCls + '.png';
+				iconCls = me.privates.provIconsPath + iconCls + '.png';
+
+				// cls += LDAProvenanceMode;
+				// cls += 'Summary';
+
+				var output = '';
+				// output =  '<div class="' + cls + '">' + value  + '   <a href="' + source + '">' + '<img class="' + iconCls + '" height="15" width="15"/>' + '</a>'+ '</div>';
+				output = '<div>' + value + '   <a href="' +
+					me.recordData.data[itemdata] + '" target="_blank">' +
+					'<img src="' + iconCls + '" title="' + sources[source] + '" height="15" width="15"/>' +
+					'</a>' + '</div>';
+
+				return output;
+			}
+			else {
+				return value;
+			} // EO if
+
+		} // EO provenanceTarget...
+	} // EO private(s) member(s)
+
 
 });

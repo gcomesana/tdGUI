@@ -33,9 +33,10 @@ var speech = 'The Target Dossier GUI (TDGUI) is an application whose main goal i
  + 'The application is in stable version 1.0 but still in development as many features can and will be added shortly.'
 
 var wikiPages = 'Click on these links to get further documentation about the project<br/>';
-wikiPages += '<a href="http://www.github.com/inab/tdGUI/wiki" target="_blank">Home docs</a> * ';
+wikiPages += '<div class="links">' +
+	'<a href="http://www.github.com/inab/tdGUI/wiki" target="_blank">Home docs</a> * ';
 wikiPages += '<a href="http://www.github.com/inab/tdGUI/wiki/_pages" target="_blank">Wiki pages</a> * ';
-wikiPages += '<div class="links"><a href="http://www.github.com/inab/tdGUI" target="_blank">Github</a> * ';
+wikiPages += '<a href="http://www.github.com/inab/tdGUI" target="_blank">Github</a> * ';
 wikiPages += '<a href="http://www.inab.org" target="_blank">INB</a> * ';
 wikiPages += '<a href="http://www.openphacts.org" target="_blank">OpenPHACTS</a>';
 wikiPages += '</div><br/>And check the videos below to get a quick intro about how to use this application';

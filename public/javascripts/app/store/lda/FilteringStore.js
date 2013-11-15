@@ -24,7 +24,10 @@ Ext.define('TDGUI.store.lda.FilteringStore', {
 
 
   updateProxyURL: function () {
-    this.proxy.url = this.BASE_URL + this.stringEncoder.toQueryString({
+
+    this.proxy.url = this.BASE_URL;
+		this.proxy.url += this.BASE_URL.indexOf('?') == -1? '?': '&';
+		this.proxy.url += this.stringEncoder.toQueryString({
         assay_organism: this.assay_organism,
         activity_type: this.activity_type,
         //activity_value:this.activity_value,
@@ -38,6 +41,36 @@ Ext.define('TDGUI.store.lda.FilteringStore', {
     console.log('Proxy: ' + Ext.ClassManager.getName(this) + ' URL updated to: ' + this.proxy.url);
   },
 
+
+	setAllConditions: function() {
+		 // add the conditions property to the url
+		switch(this.activity_condition)	{
+			case '>':
+					this.proxy.url = this.proxy.url + '&' + encodeURIComponent('minEx-activity_value') + '=' + encodeURIComponent(String(this.activity_value))
+																							+ '&' + encodeURIComponent('activity_unit') + '=' + encodeURIComponent(String(this.activity_unit));
+				break;
+
+			case '<':
+				this.proxy.url = this.proxy.url + '&' + encodeURIComponent('maxEx-activity_value') + '=' + encodeURIComponent(String(this.activity_value))
+															+ '&' + encodeURIComponent('activity_unit') + '=' + encodeURIComponent(String(this.activity_unit));
+				break;
+
+			case '=':
+				this.proxy.url = this.proxy.url + '&' + encodeURIComponent('activity_value') + '=' + encodeURIComponent(String(this.activity_value))
+											+ '&' + encodeURIComponent('activity_unit') + '=' + encodeURIComponent(String(this.activity_unit));
+				break;
+
+			case '<=':
+				this.proxy.url = this.proxy.url  + '&' + encodeURIComponent('max-activity_value') + '=' + encodeURIComponent(String(this.activity_value))
+											+ '&' + encodeURIComponent('activity_unit') + '=' + encodeURIComponent(String(this.activity_unit));
+				break;
+
+			case '>=':
+				this.proxy.url = this.proxy.url + '&' + encodeURIComponent('min-activity_value') + '=' + encodeURIComponent(String(this.activity_value))
+											+ '&' + encodeURIComponent('activity_unit') + '=' + encodeURIComponent(String(this.activity_unit));
+				break;
+		}
+	},
 
   // Setter methods 
   setSortColumn: function (sortColumn) {

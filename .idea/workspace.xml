@@ -7,19 +7,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac4d959b-7041-4845-b29b-39d7db68b813" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/provenance/chemblValueIcon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/provenance/chemspiderValueIcon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/provenance/conceptWikiValueIcon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/provenance/drugbankValueIcon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/images/provenance/uniprotValueIcon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/controller/panels/TargetInfo.js" afterPath="$PROJECT_DIR$/public/javascripts/app/controller/panels/TargetInfo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/view/panels/WelcomePanel.js" afterPath="$PROJECT_DIR$/public/javascripts/app/view/panels/WelcomePanel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/store/lda/FilteringStore.js" afterPath="$PROJECT_DIR$/public/javascripts/app/store/lda/FilteringStore.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tdGUI.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384425179632" ignored="false" />
+    <file path="/Dummy.txt" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384429121431" ignored="false" />
     <file path="/a.rxml" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366717189295" ignored="false" />
     <file path="/a.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366716993284" ignored="false" />
     <file path="/a.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366717085203" ignored="false" />
@@ -89,6 +82,7 @@
     <file path="$PROJECT_DIR$/app/models/tdgui_proxy.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384172820851" ignored="false" />
     <file path="/BaseStore.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384184879494" ignored="false" />
     <file path="/WelcomePanel.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384257844774" ignored="false" />
+    <file path="/FilteringStore.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384431040556" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,54 +112,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GraphDataPanel.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/GraphDataPanel.js">
+      <file leaf-file-name="FilteringStore.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/store/lda/FilteringStore.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="59" selection-start="384" selection-end="385" vertical-scroll-proportion="0.0">
+            <state line="33" column="53" selection-start="1093" selection-end="1093" vertical-scroll-proportion="0.5422535">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GraphTabPanel.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/GraphTabPanel.js">
+      <file leaf-file-name="BaseStore.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/app/store/lda/BaseStore.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="38" selection-start="1397" selection-end="1397" vertical-scroll-proportion="0.0">
-              <folding>
-                <marker date="1384172050000" expanded="false" signature="1668:1685" placeholder="..." />
-                <marker date="1384172050000" expanded="false" signature="1864:1913" placeholder="..." />
-                <marker date="1384172050000" expanded="false" signature="1972:1990" placeholder="..." />
-                <marker date="1384172050000" expanded="false" signature="2034:2052" placeholder="..." />
-                <marker date="1384172050000" expanded="false" signature="3245:3294" placeholder="..." />
-                <marker date="1384172050000" expanded="false" signature="3401:3450" placeholder="..." />
-                <marker date="1384172050000" expanded="false" signature="5008:5018" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TargetInfo.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="65" column="16" selection-start="2115" selection-end="2115" vertical-scroll-proportion="-12.966225">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TargetInfo.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/panels/TargetInfo.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="180" column="28" selection-start="5418" selection-end="5418" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TargetReader.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/app/util/TargetReader.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="132" column="6" selection-start="4635" selection-end="4675" vertical-scroll-proportion="0.0">
+            <state line="9" column="2" selection-start="180" selection-end="180" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -200,7 +159,6 @@
         <option value="$PROJECT_DIR$/public/javascripts/app.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/view/grid/PharmByTargetScrollingGrid.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/controller/SearchPanel.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/store/lda/FilteringStore.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/store/lda/BaseStore.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/GraphDataPanel.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/view/common/InteractionsGraph.js" />
@@ -208,6 +166,7 @@
         <option value="$PROJECT_DIR$/public/javascripts/app/util/LDAConstants.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/controller/panels/TargetInfo.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/store/lda/FilteringStore.js" />
       </list>
     </option>
   </component>
@@ -395,6 +354,62 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="store" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="store" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lda" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -923,7 +938,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32922733" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23964165" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22588235" sideWeight="0.806271" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2564706" sideWeight="0.806271" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26431373" sideWeight="0.806271" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21948488" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="241" y="881" width="1355" height="392" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26632047" sideWeight="0.18820861" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22396417" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
@@ -1016,19 +1031,9 @@
         <state line="313" column="24" selection-start="9620" selection-end="9624" vertical-scroll-proportion="0.016887818" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/store/lda/BaseStore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="7" selection-start="910" selection-end="910" vertical-scroll-proportion="0.3218391" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/grid/PharmByTargetScrollingGrid.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/store/lda/FilteringStore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="16" selection-start="720" selection-end="734" vertical-scroll-proportion="0.016887818" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/grid/DynamicGrid3.js">
@@ -1039,18 +1044,6 @@
     <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/grid/PharmByTargetScrollingGrid.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="41" selection-start="675" selection-end="675" vertical-scroll-proportion="0.016431924" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/util/QueryStringEncoder.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/GraphDataPanel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="59" selection-start="384" selection-end="385" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/InteractionsGraph.js">
@@ -1068,38 +1061,66 @@
         <state line="30" column="52" selection-start="1284" selection-end="1284" vertical-scroll-proportion="0.47285888" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="415" column="39" selection-start="12744" selection-end="12744" vertical-scroll-proportion="0.33293125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/GraphTabPanel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="38" selection-start="1397" selection-end="1397" vertical-scroll-proportion="0.0">
+        <state line="51" column="38" selection-start="1397" selection-end="1397" vertical-scroll-proportion="0.016887818">
           <folding>
-            <marker date="1384172050000" expanded="false" signature="1668:1685" placeholder="..." />
-            <marker date="1384172050000" expanded="false" signature="1864:1913" placeholder="..." />
-            <marker date="1384172050000" expanded="false" signature="1972:1990" placeholder="..." />
-            <marker date="1384172050000" expanded="false" signature="2034:2052" placeholder="..." />
-            <marker date="1384172050000" expanded="false" signature="3245:3294" placeholder="..." />
-            <marker date="1384172050000" expanded="false" signature="3401:3450" placeholder="..." />
-            <marker date="1384172050000" expanded="false" signature="5008:5018" placeholder="..." />
+            <marker date="1384172050000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1384172050000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1384172050000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1384172050000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1384172050000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1384172050000" expanded="false" signature="-1:-1" placeholder="..." />
+            <marker date="1384172050000" expanded="false" signature="-1:-1" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/GraphDataPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="59" selection-start="384" selection-end="385" vertical-scroll-proportion="0.016431924">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/panels/TargetInfo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="28" selection-start="5418" selection-end="5418" vertical-scroll-proportion="0.0">
+        <state line="180" column="28" selection-start="5418" selection-end="5418" vertical-scroll-proportion="0.8356807">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/app/util/TargetReader.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="132" column="6" selection-start="4635" selection-end="4675" vertical-scroll-proportion="0.0">
+        <state line="132" column="6" selection-start="4635" selection-end="4675" vertical-scroll-proportion="0.32629108">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/util/QueryStringEncoder.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="16" selection-start="2115" selection-end="2115" vertical-scroll-proportion="-12.966225">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/store/lda/BaseStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="2" selection-start="180" selection-end="180" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/store/lda/FilteringStore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="53" selection-start="1093" selection-end="1093" vertical-scroll-proportion="0.5422535">
           <folding />
         </state>
       </provider>

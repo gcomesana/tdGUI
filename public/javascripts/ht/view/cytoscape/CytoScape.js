@@ -15,6 +15,8 @@ Ext.define('HT.view.cytoscape.CytoScape', {
 	frame: false,
 	vis: undefined,
 	visualStyle: undefined,
+	visualStyleBypass: undefined,
+
 	selectionModel: [],
 
 	initComponent: function () {
@@ -42,8 +44,19 @@ Ext.define('HT.view.cytoscape.CytoScape', {
 			console.log('ready function for graph...');
 			var _srcId;
 
+			if (me.ownerCt.privates.backupNodes.length > 0) {
+				var myNodes = me.ownerCt.privates.backupNodes;
+				var myEdges = me.ownerCt.privates.backupEdges;
+
+				me.vis.addElements(myNodes.concat(myEdges), true);
+				me.ownerCt.resetBackupItems();
+			}
+
 			if (me.visualStyle !== undefined)
 				me.vis.visualStyle(me.visualStyle);
+
+			if (me.visualStyleBypass !== undefined)
+				me.vis.visualStyleBypass(me.visualStyleBypass);
 
 			// Connect nodes through right button click
 			me.vis.addContextMenuItem('Connect node...','nodes', function(evt) {
@@ -59,7 +72,6 @@ Ext.define('HT.view.cytoscape.CytoScape', {
 				me.vis.addListener("click", "nodes", clickNodeToAddEdge);
 			});
 
-
 			// Delete a node
 			me.vis.addContextMenuItem('Delete node', 'nodes', function (ev) {
 				me.vis.visualStyleBypass(null);
@@ -74,32 +86,38 @@ Ext.define('HT.view.cytoscape.CytoScape', {
 				console.log('edges before: '+numEdges+'; and later: '+me.vis.edges().length);
 			});
 
-// TODO modify this procedure to be able to select a path of nodes, something about modifying the if's
-// PROCEDURE FOR JOINING TWO NODES /////////////
-// select event for nodes. if two nodes selected, one after another, an arrow is displayed
-			me.vis.addListener('select', 'nodes', function(ev) {
-				me.selectionModel.push(ev.target[0]);
-				// console.log('select: event target: '+ev.target[0].data.id+'; selectionModel.length: '+me.selectionModel.length);
 
-				// THIS IS TO ADD AN EDGE JOINING THE NODES STRAIGHT AWAY
-				if (me.selectionModel.length == 2) {
-					// console.log('Adding edge and removing selected nodes');
-					var added = HT.lib.CytoscapeActions.createEdge(me.vis, me.selectionModel);
-					if (added !== undefined) {
-						var node1Id = me.selectionModel[0].data.id,
-								node2Id = me.selectionModel[1].data.id;
-						me.selectionModel.length = 0;
+			// PROCEDURE FOR JOINING TWO NODES /////////////
+			// select event for nodes. if two nodes selected, one after another, an arrow is displayed
+			if (!me.vis.hasListener('select', 'nodes')) {
+				me.vis.addListener('select', 'nodes', function(ev) {
+					me.selectionModel.push(ev.target[0]);
+					// console.log('select: event target: '+ev.target[0].data.id+'; selectionModel.length: '+me.selectionModel.length);
 
-						me.vis.deselect("nodes", [node1Id, node2Id]);
+					// THIS IS TO ADD AN EDGE JOINING THE NODES STRAIGHT AWAY
+					if (me.selectionModel.length == 2) {
+						// console.log('Adding edge and removing selected nodes');
+						var added = HT.lib.CytoscapeActions.createEdge(me.vis, me.selectionModel);
+						if (added !== undefined) {
+							var node1Id = me.selectionModel[0].data.id,
+									node2Id = me.selectionModel[1].data.id;
+							me.selectionModel.length = 0;
+
+							me.vis.deselect("nodes", [node1Id, node2Id]);
+							me.networkModel = me.vis.networkModel();
+						}
 					}
-				}
 
-			}); // EO addListener select!!
+				}); // EO addListener select!!
+			}
 
-			me.vis.addListener("deselect", 'nodes', function (ev) {
-				me.selectionModel.length = 0;
-				// console.log('deselect: event target: '+ev.target[0].data.id+'; selectionModel.length: '+me.selectionModel.length);
-			});
+
+			if (!me.vis.hasListener('deselect', 'nodes')) {
+				me.vis.addListener("deselect", 'nodes', function (ev) {
+					me.selectionModel.length = 0;
+					// console.log('deselect: event target: '+ev.target[0].data.id+'; selectionModel.length: '+me.selectionModel.length);
+				});
+			}
 // EO PROCEDURE FOR JOINING TWO NODES /////////////
 
 			/* a mousout should be programmed to hide the tip...

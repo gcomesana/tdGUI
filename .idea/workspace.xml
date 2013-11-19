@@ -7,18 +7,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac4d959b-7041-4845-b29b-39d7db68b813" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/app/store/lda/FilteringStore.js" afterPath="$PROJECT_DIR$/public/javascripts/app/store/lda/FilteringStore.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/view/panels/CytoPanel.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/view/panels/CytoPanel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/view/cytoscape/CytoScape.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/view/cytoscape/CytoScape.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/lib/CytoscapeActions.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/lib/CytoscapeActions.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/ht/controller/Panels.js" afterPath="$PROJECT_DIR$/public/javascripts/ht/controller/Panels.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tdGUI.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384429121431" ignored="false" />
+    <file path="/Dummy.txt" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384848602230" ignored="false" />
     <file path="/a.rxml" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366717189295" ignored="false" />
     <file path="/a.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366716993284" ignored="false" />
-    <file path="/a.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366717085203" ignored="false" />
+    <file path="/a.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384513162292" ignored="false" />
     <file path="/concept_wiki_api_call.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366802942033" ignored="false" />
     <file path="/ops_wiki_api_call.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1379434754668" ignored="false" />
-    <file path="/a.dummy" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384258176220" ignored="false" />
+    <file path="/a.dummy" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384770856517" ignored="false" />
     <file path="/ops_endpoints_proxy.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1379430176959" ignored="false" />
     <file path="/inner_proxy.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1377767705518" ignored="false" />
     <file path="/ops_endpoints_proxy_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1366817187288" ignored="false" />
@@ -45,7 +49,7 @@
     <file path="/MultiTarget.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1370283094054" ignored="false" />
     <file path="/CheckboxComboProteinLookup.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368003342753" ignored="false" />
     <file path="/swagger.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368014760839" ignored="false" />
-    <file path="/app_settings.yml" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1378226550738" ignored="false" />
+    <file path="/app_settings.yml" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384855283479" ignored="false" />
     <file path="/Util.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368022803906" ignored="false" />
     <file path="/Utils.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368022857828" ignored="false" />
     <file path="/TargetInfo.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384427276734" ignored="false" />
@@ -55,11 +59,11 @@
     <file path="/tdapi_pharma_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1369734238574" ignored="false" />
     <file path="/lib_util.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1381135879008" ignored="false" />
     <file path="/tdgui_proxy_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1371722272118" ignored="false" />
-    <file path="/CytoPanel.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368693571042" ignored="false" />
+    <file path="/CytoPanel.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384795319347" ignored="false" />
     <file path="/ItemMultilist.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368695026486" ignored="false" />
-    <file path="/ComboLookupButton.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368695975263" ignored="false" />
-    <file path="/Panels.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368696008725" ignored="false" />
-    <file path="/CytoscapeActions.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368721570573" ignored="false" />
+    <file path="/ComboLookupButton.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384514752187" ignored="false" />
+    <file path="/Panels.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384853516755" ignored="false" />
+    <file path="/CytoscapeActions.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384853626673" ignored="false" />
     <file path="/RuleOperation.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368714857531" ignored="false" />
     <file path="/intact_proxy_spec.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368720614709" ignored="false" />
     <file path="/intact_dao.rb" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1368720554344" ignored="false" />
@@ -83,6 +87,7 @@
     <file path="/BaseStore.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384184879494" ignored="false" />
     <file path="/WelcomePanel.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384257844774" ignored="false" />
     <file path="/FilteringStore.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384431040556" ignored="false" />
+    <file path="/CytoScape.js" changelist="ac4d959b-7041-4845-b29b-39d7db68b813" time="1384853653759" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,19 +117,48 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FilteringStore.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/app/store/lda/FilteringStore.js">
+      <file leaf-file-name="CytoPanel.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/ht/view/panels/CytoPanel.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="53" selection-start="1093" selection-end="1093" vertical-scroll-proportion="0.5422535">
+            <state line="403" column="53" selection-start="8490" selection-end="8537" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseStore.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/app/store/lda/BaseStore.js">
+      <file leaf-file-name="CytoScape.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/ht/view/cytoscape/CytoScape.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="2" selection-start="180" selection-end="180" vertical-scroll-proportion="0.0">
+            <state line="40" column="0" selection-start="1022" selection-end="1022" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1384853682000" expanded="false" signature="4809:4844" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Panels.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/ht/controller/Panels.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="296" column="46" selection-start="9339" selection-end="9339" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CytoscapeActions.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/CytoscapeActions.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="190" column="45" selection-start="4978" selection-end="4978" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app_settings.yml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/app_settings.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="36" selection-start="541" selection-end="541" vertical-scroll-proportion="0.22925764">
               <folding />
             </state>
           </provider>
@@ -151,14 +185,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/public/javascripts/app/view/common/ItemMultilist.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/controller/Viewport.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/GraphTabPanel.js" />
-        <option value="$PROJECT_DIR$/public/stylesheets/tdgui.css" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/view/misc/InteractionsForm.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/app.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/view/grid/PharmByTargetScrollingGrid.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/app/controller/SearchPanel.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/store/lda/BaseStore.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/GraphDataPanel.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/view/common/InteractionsGraph.js" />
@@ -167,6 +193,14 @@
         <option value="$PROJECT_DIR$/public/javascripts/app/controller/panels/TargetInfo.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js" />
         <option value="$PROJECT_DIR$/public/javascripts/app/store/lda/FilteringStore.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/app/view/panels/BorderCenter.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/ht/view/common/ComboLookupButton.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/ht/lib/CytoGraph.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/ht/view/panels/CytoPanel.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/ht/controller/Panels.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/ht/lib/CytoscapeActions.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/ht/view/cytoscape/CytoScape.js" />
+        <option value="$PROJECT_DIR$/config/app_settings.yml" />
       </list>
     </option>
   </component>
@@ -181,7 +215,7 @@
     <option name="x" value="67" />
     <option name="y" value="40" />
     <option name="width" value="1321" />
-    <option name="height" value="990" />
+    <option name="height" value="1077" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -225,6 +259,16 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -293,6 +337,196 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="ht" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ht" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="panels" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ht" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cytoscape" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ht" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ht" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ht" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ht" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tdGUI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -352,10 +586,6 @@
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="util" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -367,138 +597,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
+              <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="store" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="store" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lda" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tdGUI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="panels" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -520,15 +620,15 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="123" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="132" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="128" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="recentsLimit" value="5" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/public/javascripts/extjs4.1" />
-    <property name="RakeTaksPopup.undocumentedIncluded" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="135" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="928" />
+    <property name="RakeTaksPopup.undocumentedIncluded" value="false" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="929" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="928" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="133" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="130" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -541,11 +641,11 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.JavaScript" />
+    <property name="options.lastSelected" value="preferences.sourceCode.JavaScript" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
-    <property name="Ruby.ViewRefParam.DefaultExtension" value="html.erb" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
+    <property name="Ruby.ViewRefParam.DefaultExtension" value="html.erb" />
   </component>
   <component name="PublishConfig">
     <servers>
@@ -932,13 +1032,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="40" width="1321" height="990" extended-state="0" />
+    <frame x="67" y="40" width="1321" height="1077" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32922733" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23964165" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22588235" sideWeight="0.806271" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26431373" sideWeight="0.806271" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22588235" sideWeight="0.7653061" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2784314" sideWeight="0.7653061" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21948488" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="241" y="881" width="1355" height="392" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26632047" sideWeight="0.18820861" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22396417" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
@@ -950,7 +1050,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.193729" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23469388" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3281075" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -1021,106 +1121,98 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/grid/DynamicGrid.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="255" column="23" selection-start="8531" selection-end="8531" vertical-scroll-proportion="3.7490952" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/SearchPanel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="313" column="24" selection-start="9620" selection-end="9624" vertical-scroll-proportion="0.016887818" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/grid/PharmByTargetScrollingGrid.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/grid/DynamicGrid3.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/grid/PharmByTargetScrollingGrid.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="41" selection-start="675" selection-end="675" vertical-scroll-proportion="0.016431924" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/common/InteractionsGraph.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="363" column="42" selection-start="11885" selection-end="11885" vertical-scroll-proportion="0.23239437" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/WelcomePanel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="3" selection-start="2006" selection-end="2006" vertical-scroll-proportion="0.30036187" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/util/LDAConstants.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="52" selection-start="1284" selection-end="1284" vertical-scroll-proportion="0.47285888" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/TargetInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="415" column="39" selection-start="12744" selection-end="12744" vertical-scroll-proportion="0.33293125">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/GraphTabPanel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="38" selection-start="1397" selection-end="1397" vertical-scroll-proportion="0.016887818">
-          <folding>
-            <marker date="1384172050000" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1384172050000" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1384172050000" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1384172050000" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1384172050000" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1384172050000" expanded="false" signature="-1:-1" placeholder="..." />
-            <marker date="1384172050000" expanded="false" signature="-1:-1" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/GraphDataPanel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="59" selection-start="384" selection-end="385" vertical-scroll-proportion="0.016431924">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/app/controller/panels/TargetInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="180" column="28" selection-start="5418" selection-end="5418" vertical-scroll-proportion="0.8356807">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/app/util/TargetReader.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="132" column="6" selection-start="4635" selection-end="4675" vertical-scroll-proportion="0.32629108">
-          <folding />
-        </state>
+        <state line="132" column="6" selection-start="4635" selection-end="4675" vertical-scroll-proportion="0.32629108" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/app/util/QueryStringEncoder.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/app/store/lda/BaseStore.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="2" selection-start="180" selection-end="180" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="9" column="2" selection-start="180" selection-end="180" vertical-scroll-proportion="0.016431924" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/app/store/lda/FilteringStore.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="53" selection-start="1093" selection-end="1093" vertical-scroll-proportion="0.5422535">
+        <state line="33" column="53" selection-start="1093" selection-end="1093" vertical-scroll-proportion="0.016431924" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/Viewport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/view/panels/MainCenter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="13" selection-start="2474" selection-end="2498" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app/view/panels/BorderCenter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="72" selection-start="361" selection-end="361" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/view/common/ComboLookupButton.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="143" column="48" selection-start="3813" selection-end="3813" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/view/common/EntityLookup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-2.3028169">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="44" selection-start="1409" selection-end="1409" vertical-scroll-proportion="0.64173704" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/CytoGraph.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="20" selection-start="1296" selection-end="1296" vertical-scroll-proportion="1.2857143">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/view/panels/CytoPanel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="403" column="53" selection-start="8490" selection-end="8537" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/controller/Panels.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="296" column="46" selection-start="9339" selection-end="9339" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/view/cytoscape/CytoScape.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="0" selection-start="1022" selection-end="1022" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1384853682000" expanded="false" signature="4809:4844" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/ht/lib/CytoscapeActions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="190" column="45" selection-start="4978" selection-end="4978" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/app_settings.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="36" selection-start="541" selection-end="541" vertical-scroll-proportion="0.22925764">
           <folding />
         </state>
       </provider>

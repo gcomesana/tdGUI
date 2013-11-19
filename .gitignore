@@ -19,6 +19,8 @@ config/app_settings.yml
 config/application.rb
 
 public/resources/datatest
+public/javascripts/cytoscapeweb1.0.3/.DS_Store
+public/javascripts/cytoscapeweb1.0.3/js/.DS_Store
 
 public/javascripts/extjs4.0.7
 public/javascripts/extjs4.1/build

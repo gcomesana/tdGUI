@@ -83,6 +83,7 @@ Ext.define('HT.lib.CytoscapeActions', {
 			vis.addNode(50, 50, nodeOpts);
 
 			var nm = vis.networkModel();
+			return nm;
 
 		},
 
@@ -158,14 +159,15 @@ Ext.define('HT.lib.CytoscapeActions', {
 		 * Run the rules based on the edges on the graph. As the graph can have several
 		 * paths, in order to walk all paths, after walking one edge, the next edge
 		 *
- 		 * @param vis
-		 * @param nodes
-		 * @param edges
+ 		 * @param cytoscape, the container holding the visualization object
+		 * @param nodes, the node set
+		 * @param edges, the edge set
 		 */
-		runGraph: function (vis, nodes, edges) {
+		runGraph: function (cytoscape, nodes, edges) {
 
 			var runner = Ext.create('HT.lib.HypothesisRunner', edges, nodes);
 			var paths = runner.graphWalker();
+			var vis = cytoscape.vis;
 
 			// This is to paint the edge on operation completion
 			vis.visualStyleBypass(null);
@@ -179,13 +181,14 @@ Ext.define('HT.lib.CytoscapeActions', {
 					}
 				};
 
-				for (i=0; i<bypassedEdges.length; i++) {
+				for (var i=0; i<bypassedEdges.length; i++) {
 					var edge = bypassedEdges[i].edge;
 					bypass.edges[edge.data.id] = {
 						color: bypassedEdges[i].color
 					};
 				}
 				vis.visualStyleBypass(bypass);
+				cytoscape.visualStyleBypass = bypass;
 			}
 
 			var addResult2List = function (result) {

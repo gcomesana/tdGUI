@@ -221,7 +221,8 @@ Ext.define('HT.controller.Panels', {
 
 					var nodeOptsType = Object.prototype.toString.call(nodeOpts.payloadValue).match(/\s([a-zA-Z]+)/)[1];
 					if (nodeOptsType == 'Object') {
-						HT.lib.CytoscapeActions.createNode(cytoscape.vis, nodeOpts);
+						var networkModel = HT.lib.CytoscapeActions.createNode(cytoscape.vis, nodeOpts);
+						cytoscape.networkModel = networkModel;
 						cytoscape.setLoading(false);
 					}
 					else {
@@ -293,7 +294,7 @@ Ext.define('HT.controller.Panels', {
 
 		// functionEvent = HT.lib.RuleFunctions.getFunctionFromAlias(alias)
 		// functionEvent.addListener('operationComplete', this.onOperationComplete, this)
-		HT.lib.CytoscapeActions.runGraph(vis, nodes, edges);
+		HT.lib.CytoscapeActions.runGraph(cytoscape, nodes, edges);
 	},
 
 

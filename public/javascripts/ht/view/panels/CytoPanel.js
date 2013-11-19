@@ -155,6 +155,10 @@ Ext.define('HT.view.panels.CytoPanel', {
 		}
 	},
 
+	style: {
+		zIndex: 999
+	},
+
 	items: [{
 		xtype: 'cytoscape',
 		networkModel: graphModel,
@@ -350,32 +354,11 @@ Ext.define('HT.view.panels.CytoPanel', {
         id: 'resultsList',
         // title: 'Enactment results',                                                                              
         store: Ext.create('HT.store.ResultsMessages'),
-        width: '100%',
+        width: '100%'
 
         // height: '80%'                                                                                            
       }]
-/*
-			items: [{
-				xtype: 'panel',
-				id: 'resultsPanel',
-				// title: 'Enactment results',
-				// html: '<div style="overflow-y:auto;height:80%;border: 1px solid red;" id="resultsPanelDiv">Run a graph to see here the results</div>',
-				html: "Run a graph to see the results here",
-				border: false,
-				overflowY: 'auto',
-				cls: 'msg-panel',
-				bodyCls: 'msg-panel-content',
-				width: '100%',
-				
-				// height: '100%',
-				bodyStyle: {
-					padding: '5px 5px 5px 5px',
-					backgroundColor: 'lightblue',
-					overflowY: 'auto'
-					// height: '75%'
-				}
-			}]
-		*/
+
 			// EO container
 		}] // EO UPPER container items
 
@@ -387,71 +370,74 @@ Ext.define('HT.view.panels.CytoPanel', {
 
 	initComponent: function () {
 		this.networkModel = graphModel;
+		this.on ('beforedeactivate', this.onDeactivate, this);
+		this.on ('beforeactivate', this.onActivate, this);
 		this.callParent(arguments);
 
 		var controls = this.getComponent(1);
-		// var textbox = controls.down('textbox-btn');
-		// textbox.hide();
 
-		// controls.down('#txtBtnCanvas').hide();
-		/*
-		controls.on('afterrender', function (comp, evOpts) {
-			var drawComp = comp.down('drawing-canvas');
-			var controlsWidth = drawComp.getWidth();
-			var x = Math.floor(controlsWidth/2);
-			drawComp.surface.add({
-				type: 'circle',
-				fill: '#79BB3F',
-				radius: 20,
-
-				x: 20,
-				y: 50,
-				listeners: {
-					click: function (comp, evOpts) {
-						var drawCompSize = drawComp.getSize();
-						console.log ('click on drawComp ('+drawComp.$className+') measures -> w:'+drawCompSize.width+'; h: '+drawCompSize.height);
-						// this.suspendEvents(true);
-						// this.resumeEvents();
-
-						var textSprite = drawComp.surface.items.items[1];
-						drawComp.surface.setText(textSprite, 'got it!!!');
-
-						drawComp.hide();
-						controls.down('#txtBtnCanvas').show();
-					}
-				}
-			}).show(true);
-			drawComp.surface.add({
-				type: 'text',
-				text: 'this is only a test',
-				font: '18px Arial',
-				x: 20,
-				y: 70
-				// x: 100
-			}).show(true);
-
-			*/
+	},
 
 
 
-			/*
-			drawComp.on('resize', function (draw, width, height, oldWidth, oldHeight) {
-				console.log("drawComp resized...");
-				draw.surface.items.first().animate({
-					to: {
-						x: width / 2,
-						y: height / 2
-					},
-					duration: 50
-				})
-			});
+	onActivate: function (theComp, evOpts) {
+		var myNodes = this.privates.backupNodes;
+		if (this.privates.backupNodes.length > 0) {
+			myNodes = Ext.Array.map(myNodes, function (item) {
+				item.group = "nodes";
+				return item;
+			})
+		}
 
-			drawComp.on ('afterrender', function (comp, evOpts) {
-				console.log ('onAfterRender drawComp...');
-			});
+		var myEdges = this.privates.backupEdges;
+		if (this.privates.backupEdges > 0) {
+			myEdges = Ext.Array.map(myEdges, function (edge) {
+				edge.group = "edges";
+				return edge;
+			})
+		}
+
+		var cytoscape = this.items.getAt(0);
+		var vis = cytoscape.vis;
+/*
+		if (myNodes.length > 0)
+			vis.addElements(myNodes.concat(myEdges), true);
+*/
+	},
 
 
-		});*/
+
+	onDeactivate: function (theComp, evOpts) {
+		var cytoscape = this.items.getAt(0);
+		var vis = cytoscape.vis;
+//		var nm = cytoscape.networkModel;
+
+		this.privates.backupNodes = vis.nodes();
+		this.privates.backupEdges = vis.edges();
+
+		console.log("CytoPanel.onDeactivate...");
+	},
+
+
+	privates: {
+		backupNodes: [],
+		backupEdges: []
+	},
+
+
+	resetBackupItems: function () {
+		this.privates.backupNodes.length = 0;
+		this.privates.backupEdges.length = 0;
+	},
+
+
+	getBackupNodes: function () {
+		return this.privates.backupNodes;
+	},
+
+
+	getBackupEdges: function () {
+		return this.privates.backupEdges;
 	}
 
 })

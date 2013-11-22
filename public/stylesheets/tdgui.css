@@ -263,7 +263,7 @@ sub {
 .combo-iconbox-checked {
 	background: transparent url(/images/combo-boxchecked.gif);
 	width: 16px;
-	heigth: 16px;
+	height: 16px;
 	margin-right: 2px;
 	vertical-align: text-bottom;
 }
@@ -271,7 +271,7 @@ sub {
 .combo-iconbox-unchecked {
 	background: transparent url(/images/combo-boxunchecked.gif);
 	width: 16px;
-	heigth: 16px;
+	height: 16px;
 	margin-right: 2px;
 	vertical-align: text-bottom;
 }

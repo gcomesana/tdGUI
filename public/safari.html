@@ -1,0 +1,91 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--[if lt IE 9]> 
+		<script src="js/html5shiv.js"></script> 
+	<![endif]-->
+
+	<link rel="stylesheet" type="text/css" href="/stylesheets/statics.css">
+
+	<title>Target Dossier - Browser download</title>
+	<script type="text/javascript">
+		var browserName, browserVer;
+    var whichBrowserFull = (function(){
+      // var ua = s || navigator.userAgent, tem, 
+      var ua = navigator.userAgent, tem, 
+      M = ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*([\d\.]+)/i) || [];
+      if (/trident/i.test(M[1])) {
+          tem = /\brv[ :]+(\d+(\.\d+)?)/g.exec(ua) || [];
+          return 'IE '+(tem[1] || '');
+      }
+      M = M[2]? [M[1], M[2]]: [navigator.appName, navigator.appVersion, '-?'];
+      if((tem = ua.match(/version\/([\.\d]+)/i)) != null) 
+        M[2] = tem[1];
+      
+      //  browserName = 
+      console.log("M[0] is "+ M[0] + ', M[1] is '+ M[1]);
+      browserName = M[0];
+      browserVer = M[1];
+      return M.join(' ');
+    })();
+/*
+    var redirectIE = false, redirectFF = false, redirectCh = false, redirectOP = true, redirectSA = false;
+    redirectIE = (browserName.toLowerCase() == 'msie' && parseInt(browserVer, 10) < 9);
+    redirectFF = (browserName.toLowerCase() == 'firefox' && parseInt(browserVer, 10) < 15);
+    redirectSA = (browserName.toLowerCase() == 'safari' && parseFloat(M[2], 10) < 5.5);
+    redirectOP = browserName.toLowerCase() == 'opera';
+    redirectCh = (browserName.toLowerCase() == 'chrome' && parseInt(browserVer) < 23);
+*/
+    
+	</script>
+</head>
+
+<body>
+	<header style="border-style: solid; border-width: 0px 0px 1px 0px !important; border-bottom-color: #EAEAEA;
+				background: 0px 54px #7D8083 url(images/top-bg.gif); height: 100px; width:100%;">
+		<img class="img-app-logo img-app-logo-default" id="img-app-logo" src="images/td-logo-new.png">
+		<div id="td-top-clearEl" class="x-clear" role="presentation" 
+			style="overflow: hidden; clear: both;font-size: 0;line-height: 0;display: table;">
+		</div>
+	</header>
+
+	<section id="browser_ver" style="margin: 5em; text-align: center; color: darkblue;">
+		<h2>Your browser seems to be 
+			<span style="color: black;">'<script>document.write(whichBrowserFull);</script>'</span> which is not supported for this app
+		</h2>
+	</section>
+
+	<section id="browser_dl" style="margin: 5em; text-align: center; color: darkblue;">
+		In order to the app can be run in your environment, you must update your browser. To do this one:<br/>
+		<h3>If you are in a Mac</h3>
+		<div>
+			You shouldn't be reading this as you should have one of the last Safari versions (but the latest!). But, as this is not your case, you have to update to the latest version: run the Software Update pane from the System Preferences and if there is any version suitable for you OS X version, it will give you the latest version available. Follow the instructions to install.
+		</div>
+		<h3>If you are in Windows</h3>
+		<div>
+			You are a bit unlucky regarding to this issues as Safari has no updates for Windows since 5.1.7 version. Check and download and install another browser like <a href="http://ie.microsoft.com/" target="_blank">Internet Explorer</a>, <a href="http://chrome.google.com" target="_blank">Chrome</a> or <a href="http://www.mozilla.org/firefox" target="_blank">Mozilla Firefox</a>
+		</div>
+	</section>
+
+	<section id="links" class="links">
+		Meanwhile, you can click on these links to get further documentation about the project<br/>
+		<div>
+			<a href="http://www.github.com/inab/tdGUI/wiki" target="_blank">Home docs</a> * 
+			<a href="http://www.github.com/inab/tdGUI/wiki/_pages" target="_blank">Wiki pages</a> * 
+			<a href="http://www.github.com/inab/tdGUI" target="_blank">Github</a> * 
+			<a href="http://www.inab.org" target="_blank">INB</a> * 
+			<a href="http://www.openphacts.org" target="_blank">OpenPHACTS</a>
+		</div>
+	</section>
+
+	<footer id="footer" style="">
+		<a href="http://inab.org" target="_blank" style="text-decoration:none; margin-right: 10px">
+			<img src="images/inb-on.png" alt="INB" style="border: 0; height: 70px;">
+		</a>
+		<a href="http://www.openphacts.org/" target="_blank" style="text-decoration:none;">
+			<img src="images/ops-on.png" alt="OpenPHACTS" style="border: 0; height: 70px;">
+		</a>
+	</footer>
+</body>
+</html>

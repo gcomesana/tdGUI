@@ -59,18 +59,32 @@ Ext.define('HT.view.cytoscape.CytoScape', {
 				me.vis.visualStyleBypass(me.visualStyleBypass);
 
 			// Connect nodes through right button click
-			me.vis.addContextMenuItem('Connect node...','nodes', function(evt) {
+			me.vis.addContextMenuItem('Connect node...', 'nodes', function(evt) {
 				var clickNodeToAddEdge = function (evt) {
 					if (_srcId != null) {
 						me.vis.removeListener("click", "nodes", clickNodeToAddEdge);
-						var e = me.vis.addEdge({ source: _srcId, target: evt.target.data.id }, true);
-						_srcId = null;
+						// var e = me.vis.addEdge({ source: _srcId, target: evt.target.data.id }, true);
+						var added = HT.lib.CytoscapeActions.createEdge(me.vis, me.selectionModel);
+						if (added !== undefined) {
+							var node1Id = me.selectionModel[0].data.id,
+									node2Id = me.selectionModel[1].data.id;
+							me.selectionModel.length = 0;
+							_srcId = null;
+
+							me.vis.deselect("nodes", [node1Id, node2Id]);
+							me.networkModel = me.vis.networkModel();
+						}
+						// _srcId = null;
+						// me.selectionModel.length = 0;
 					}
 				};
 				_srcId = evt.target.data.id;
+				me.selectionModel.push(evt.target);
+
 				me.vis.removeListener("click", "nodes", clickNodeToAddEdge);
 				me.vis.addListener("click", "nodes", clickNodeToAddEdge);
-			});
+			}); // EO connect node
+
 
 			// Delete a node
 			me.vis.addContextMenuItem('Delete node', 'nodes', function (ev) {

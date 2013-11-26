@@ -240,6 +240,21 @@
 .fb-accordion {
 }
 
+/* Classes for pharma grid */
+.wrap .x-grid-cell-inner {
+    white-space: normal;
+    text-align: justify;
+}
+
+.gridRowPadding {
+    padding: 55px 0 0 0;
+}
+
+.gridDescriptiveRowPadding {
+    vertical-align: middle;
+}
+
+
 .menu-search-compound {
 	background-image: url(/images/magnifier.png) !important;
 }

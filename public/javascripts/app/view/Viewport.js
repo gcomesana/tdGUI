@@ -208,7 +208,7 @@ console.info ("Viewport.initComponent starting...")
 // EO //////////////////////////////////////////////// PANEL COMPONENTS //////
 */
 
-    var logosPanel = Ext.create ('TDGUI.view.panels.LogosPanel');
+    // var logosPanel = Ext.create ('TDGUI.view.panels.LogosPanel');
     me.items = [
       {
         region: 'north',
@@ -222,12 +222,12 @@ console.info ("Viewport.initComponent starting...")
         items: [
           Ext.create ('Ext.Img', {
             src: '/images/td-logo-new.png',
-            id: 'img-app-logo',
+            id: 'img-app-logo-vp',
             baseCls: 'img-app-logo',
             listeners: {
               afterrender:  {
                 fn: function (img, evOpts) {
-                  console.log('afterrender image');
+                  console.log('afterrender image img-app-logo-vp');
                   // img.addCls('img-app-logo');
                 }
               }

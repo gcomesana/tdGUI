@@ -29,11 +29,8 @@ Ext.create('Ext.app.Application', {
   name: 'TDGUI',
   appFolder: 'javascripts/app',
   requires: ['TDGUI.util.LDAConstants'],
-/*
-  requires: ['TDGUI.util.LDAConstants','TDGUI.view.panels.BorderSouth','TDGUI.view.panels.BorderCenter',
-              'TDGUI.view.panels.BorderEast','TDGUI.view.panels.LogosPanel',
-              'TDGUI.view.panels.west.SearchPanel','TDGUI.view.panels.StatusBarPanel'],
-*/
+
+
 // Define all the controllers that should initialize at boot up of your application
   controllers: [
 		'TDGUI.controller.Viewport',
@@ -97,7 +94,7 @@ Ext.create('Ext.app.Application', {
     console.info ("Viewport.initComponent starting...")
         var me = this
 
-        var logosPanel = Ext.create ('TDGUI.view.panels.LogosPanel');
+        // var logosPanel = Ext.create ('TDGUI.view.panels.LogosPanel');
         me.items = [
           {
             region: 'north',

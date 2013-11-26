@@ -31,7 +31,9 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
 
 
 	init: function () {
-		this.myMask = 'cagallon'
+		this.myMask = new Ext.LoadMask(Ext.getBody(), {
+			msg: 'Loading data...'
+		});
 		console.log("DynamicGrid3.Controller.init... myMask: " + this.myMask)
 		this.control({
 
@@ -79,10 +81,10 @@ Ext.define('TDGUI.controller.grid.DynamicGrid', {
 
 
 	onLaunch: function () {
-		console.log("DynamicGrid3.Controller.onLaunch")
+		console.log("DynamicGrid3.Controller.onLaunch");
 		this.myMask = new Ext.LoadMask(Ext.getBody(), {
 			msg: 'Loading data...'
-		})
+		});
 	},
 
 

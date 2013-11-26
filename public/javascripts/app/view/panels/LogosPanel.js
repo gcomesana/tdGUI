@@ -127,8 +127,7 @@ Ext.define('TDGUI.view.panels.LogosPanel', {
       src: '/images/inb-on.png',
       bodyStyle: {background: 'transparent'},
       height: 77,
-      width: 75,
-
+      width: 75
     })
 
     var cnio_logo = Ext.create('Ext.Img', {

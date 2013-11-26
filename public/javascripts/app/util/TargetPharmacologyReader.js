@@ -25,6 +25,10 @@ Ext.define('TDGUI.util.TargetPharmacologyReader', {
     }
     Ext.each(items, function (item, index, items) {
       var chembl_activity_uri = item[TDGUI.util.LDAConstants.LDA_ABOUT];
+			var pubmedId = item[TDGUI.util.LDAConstants.LDA_PUBMED];
+			var pubmedURI = '<a href="http://www.ncbi.nlm.nih.gov/pubmed/'+
+				pubmedId +'" target="_blank">'+ pubmedId + '</a>';
+
       var chembl_src = item[TDGUI.util.LDAConstants.LDA_IN_DATASET];
 
       //big bits
@@ -147,6 +151,8 @@ Ext.define('TDGUI.util.TargetPharmacologyReader', {
         compound_generic_name: compound_generic_name,
         target_title: target_title,
         target_concatenated_uris: target_concatenated_uris,
+
+				pubmed_id: pubmedURI, // pubmedId,
 
         compound_inchikey_src: cs_src,
         compound_drug_type_src: drugbank_src,

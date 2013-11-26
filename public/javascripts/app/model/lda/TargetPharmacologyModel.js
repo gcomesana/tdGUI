@@ -38,9 +38,11 @@ Ext.define('TDGUI.model.lda.TargetPharmacologyModel', {
     'compound_smiles',
     'chembl_assay_uri',
     'chembl_target_uri',
+
     //this is labelled assay_organism
     'target_organism',
     'target_pref_label',
+
     //this value is missing totally from compound pharmacology paginated
     'assay_organism',
     'assay_description',
@@ -61,6 +63,8 @@ Ext.define('TDGUI.model.lda.TargetPharmacologyModel', {
     'activity_standard_units_src',
     'activity_standard_value_src',
     'activity_activity_type_src',
+
+		'pubmed_id',
 
     // provenance items
     'target_title_item',

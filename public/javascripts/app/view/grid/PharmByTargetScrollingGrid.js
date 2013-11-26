@@ -18,7 +18,7 @@ Ext.define('TDGUI.view.grid.PharmByTargetScrollingGrid', {
 
   listeners: {
     'sortchange': function (ct, column, direction, eOpts) {
-      console.log('PharmByTargetScrollingGrid: sortchange()');
+      console.log('PharmByTargetNameGrid: sortchange()');
       this.setLoading(true);
     }
   },
@@ -104,8 +104,14 @@ Ext.define('TDGUI.view.grid.PharmByTargetScrollingGrid', {
         tdCls: 'wrap gridDescriptiveRowPadding',
         renderer: targetProvenanceRenderer
         //align:'center'
-      },
-      {
+      }, {
+				header: 'Pubmed',
+				dataIndex: 'pubmed_id',
+				width: 100,
+				tdCls: 'wrap gridRowPadding',
+				// renderer: targetProvenanceRenderer
+				align:'center'
+			}, {
         header: 'Activity Type',
         dataIndex: 'activity_activity_type',
         width: 72,
